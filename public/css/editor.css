@@ -1,0 +1,27 @@
+/* 編輯區塊設定 */
+.ck-editor__editable_inline {
+    /* 編輯區最小高度 */
+    min-height: 500px;
+}
+
+/* 文章總字體更新區塊的設定 */
+.update-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.update-characters {
+    flex-grow: 1;
+    opacity: 0.5;
+}
+
+/* 字數接近限制，將字體變成橘色 */
+.characters-limit-close {
+    color: #f75000;
+}
+
+/* 字數超過限制，將字體變成紅色 */
+.characters-limit-exceeded {
+    color: red;
+}

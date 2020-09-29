@@ -1,0 +1,189 @@
+// Fonts
+// @import url("https://fonts.googleapis.com/css?family=Nunito");
+@import url("https://fonts.googleapis.com/earlyaccess/notosanstc.css");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+// Fontawesome
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+
+// Laravel pagination
+.pagination {
+    justify-content: center;
+}
+
+// universal
+body {
+    font-family: Helvetica, "Noto Sans TC", Arial, sans-serif;
+    font-size: 16px;
+    background-image: linear-gradient(
+        120deg,
+        #74ebd5 0%,
+        #37ecba 33%,
+        #57c6e1 66%,
+        #009efd 100%
+    );
+}
+
+// header
+.navbar-static-top {
+    border-color: #e7e7e7;
+    background-color: #fff;
+    box-shadow: 0px 1px 11px 2px rgba(42, 42, 42, 0.1);
+    border-top: 5px solid #00b5ad;
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 40px;
+    margin-top: 0px;
+}
+
+// Sticky footer styles
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    // Margin bottom by footer height
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    width: 100%;
+    // Set the fixed height of the footer here
+    min-height: 60px;
+    background-color: #000;
+
+    .container {
+        padding-right: 15px;
+        padding-left: 15px;
+
+        p {
+            margin: 19px 0;
+            color: #c1c1c1;
+
+            a {
+                color: inherit;
+            }
+        }
+    }
+}
+
+// avatar
+.img-circle {
+    border-radius: 50%;
+}
+
+// Post Index Page
+.posts-index-page .categories-show-page .root-page {
+    .post-list {
+        .nav > li > a {
+            position: relative;
+            display: block;
+            padding: 5px 14px;
+            font-size: 0.9em;
+        }
+
+        a {
+            color: #444444;
+        }
+
+        .meta {
+            font-size: 0.9em;
+            color: #b3b3b3;
+
+            a {
+                color: #b3b3b3;
+            }
+        }
+
+        .badge {
+            background-color: #d8d8d8;
+        }
+
+        hr {
+            margin-top: 12px;
+            margin-bottom: 12px;
+            border: 0;
+            border-top: 1px solid #dcebf5;
+        }
+    }
+}
+
+// Tag
+.bgi-gradient {
+    background-image: linear-gradient(120deg, #04befe 0%, #4481eb 100%);
+}
+
+.badge-lg {
+    font-size: 0.9rem;
+}
+
+// bootstrap form-control
+.form-control {
+    font-size: 1em;
+}
+
+// Add container and footer space
+#app > div.container {
+    margin-bottom: 100px;
+    position: relative;
+    min-height: 100vh;
+}
+
+.posts-show-page {
+    .card {
+        padding: 15px;
+
+        h1 {
+            margin: 0.4em auto 0.6em;
+            font-size: 28px;
+            line-height: 38px;
+        }
+    }
+}
+
+// Reply List
+.post-reply {
+    a {
+        color: inherit;
+    }
+
+    .meta {
+        font-size: 0.9em;
+        color: #b3b3b3;
+    }
+}
+
+// Reply-box
+.reply-box {
+    overflow: auto;
+}
+
+// User Personal Page
+.empty-block {
+    margin-top: 50px;
+}
+
+// Notification
+.notification-badge {
+    .badge {
+        font-size: 12px;
+        margin-top: 14px;
+    }
+
+    .badge-secondary {
+        background-color: #ebe8e8;
+    }
+
+    .badge-hint {
+        background-color: #d15b47 !important;
+    }
+}

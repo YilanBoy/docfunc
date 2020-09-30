@@ -17,6 +17,11 @@ class CategoryController extends Controller
 
     public function show(Category $category, Request $request)
     {
+        // URL 修正，使用帶標籤名稱的網址
+        if (!empty($category->name) && $category->name != $request->name) {
+            return redirect($category->link(), 301);
+        }
+
         // 讀取分類 ID 關聯的話題，並按每 10 條分頁
         $posts = $this->post->withOrder($request->order)
             ->where('category_id', $category->id)

@@ -14,4 +14,10 @@ class Category extends Model
     protected $fillable = [
         'name', 'icon', 'description',
     ];
+
+    // 將連結加上標籤名稱
+    public function linkWithName()
+    {
+        return route('categories.show', ['category' => $this->id, 'name' => $this->name]);
+    }
 }

@@ -19,8 +19,8 @@
                 </li>
                 {{-- 這裡的 $categories 使用的是 View::share() 方法取得值，寫在 AppServiceProvider.php 中 --}}
                 @foreach ($categories as $category)
-                    <li class="nav-item @if (request()->url() == route('categories.show', $category->id)) active @endif">
-                        <a class="nav-link" href="{{ route('categories.show', $category->id) }}"><i class="{{ $category->icon }}"></i> {{ $category->name }}</a>
+                    <li class="nav-item @if (request()->url() == $category->linkWithName()) active @endif">
+                        <a class="nav-link" href="{{ $category->linkWithName() }}"><i class="{{ $category->icon }}"></i> {{ $category->name }}</a>
                     </li>
                 @endforeach
             </ul>

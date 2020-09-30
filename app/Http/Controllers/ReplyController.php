@@ -24,7 +24,7 @@ class ReplyController extends Controller
         $this->reply->user_id = Auth::id();
         $this->reply->save();
 
-        return redirect()->to($this->reply->post->link())->with('success', '成功新增評論！');
+        return redirect()->to($this->reply->post->linkWithSlug())->with('success', '成功新增評論！');
     }
 
     public function destroy(Reply $reply)
@@ -33,6 +33,6 @@ class ReplyController extends Controller
 
         $reply->delete();
 
-        return redirect()->to($reply->post->link())->with('success', '成功刪除評論！');
+        return redirect()->to($reply->post->linkWithSlug())->with('success', '成功刪除評論！');
     }
 }

@@ -42,7 +42,7 @@ class PostController extends Controller
     {
         // URL 修正，使用帶 slug 的網址
         if (!empty($post->slug) && $post->slug != $request->slug) {
-            return redirect($post->link(), 301);
+            return redirect($post->linkWithSlug(), 301);
         }
 
         return view('posts.show', ['post' => $post]);
@@ -73,7 +73,7 @@ class PostController extends Controller
         // 在關聯表新增關聯
         $this->post->tags()->attach($tagArray);
 
-        return redirect()->to($this->post->link())->with('success', '成功新增文章！');
+        return redirect()->to($this->post->linkWithSlug())->with('success', '成功新增文章！');
     }
 
     // 文章編輯頁面
@@ -107,7 +107,7 @@ class PostController extends Controller
         // 關聯表更新
         $post->tags()->sync($tagArray);
 
-        return redirect()->to($post->link())->with('success', '成功更新文章！');
+        return redirect()->to($post->linkWithSlug())->with('success', '成功更新文章！');
     }
 
     // 刪除文章

@@ -16,11 +16,11 @@
 
                     <div class="media-heading mt-0 mb-1">
                         <h5 class="font-weight-bold">
-                            <a href="{{ $post->link() }}" title="{{ $post->title }}">
+                            <a href="{{ $post->linkWithSlug() }}" title="{{ $post->title }}">
                                 {{ $post->title }}
                             </a>
                         </h5>
-                        <a class="float-right" href="{{ $post->link() }}">
+                        <a class="float-right" href="{{ $post->linkWithSlug() }}">
                             <span class="badge badge-secondary badge-pill"> {{ $post->reply_count }} </span>
                         </a>
                     </div>
@@ -41,7 +41,7 @@
                     <div class="media-body small text-secondary">
 
                         {{-- 文章分類資訊 --}}
-                        <a class="text-secondary" href="{{ route('categories.show', $post->category_id) }}" title="{{ $post->category->name }}">
+                        <a class="text-secondary" href="{{ $post->category->linkWithName() }}" title="{{ $post->category->name }}">
                             <i class="far fa-folder"></i>
                             {{ $post->category->name }}
                         </a>
@@ -57,7 +57,7 @@
                         <span> • </span>
 
                         {{-- 文章發佈時間 --}}
-                        <a class="text-secondary" href="{{ $post->link() }}" title="文章發佈於：{{ $post->created_at }}">
+                        <a class="text-secondary" href="{{ $post->linkWithSlug() }}" title="文章發佈於：{{ $post->created_at }}">
                             <i class="far fa-clock"></i>
                             {{ $post->created_at->diffForHumans() }}
                         </a>

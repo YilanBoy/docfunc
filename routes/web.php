@@ -65,7 +65,7 @@ Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.d
 Route::get('posts/{post}/{slug?}', [PostController::class, 'show'])->name('posts.show');
 
 // 文章分類
-Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('categories/{category}/{name?}', [CategoryController::class, 'show'])->name('categories.show');
 
 // 會員評論
 Route::post('replies', [ReplyController::class, 'store'])->name('replies.store');

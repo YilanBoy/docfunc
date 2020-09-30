@@ -5,7 +5,7 @@
             <li class="media">
 
                 {{-- 作者大頭貼 --}}
-                <div class="media-left mt-2">
+                <div class="media-left align-self-center">
                     <a href="{{ route('users.show', [$post->user_id]) }}">
                         <img class="media-object img-thumbnail mr-3" style="width: 52px; height: 52px;" src="{{ $post->user->gravatar() }}" title="{{ $post->user->name }}">
                     </a>

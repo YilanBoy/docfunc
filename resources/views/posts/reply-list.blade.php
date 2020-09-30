@@ -3,7 +3,7 @@
     @foreach ($replies as $index => $reply)
         <li class=" media" name="reply{{ $reply->id }}" id="reply{{ $reply->id }}">
 
-            <div class="media-left">
+            <div class="media-left align-self-center">
                 <a href="{{ route('users.show', [$reply->user_id]) }}">
                     <img class="media-object img-thumbnail mr-3" alt="{{ $reply->user->name }}" src="{{ $reply->user->gravatar() }}" style="width:48px;height:48px;" />
                 </a>

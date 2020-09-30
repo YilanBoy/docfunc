@@ -18,7 +18,7 @@
 
     @yield('css')
 
-    @yield('recaptchaScript')
+    @yield('scriptsInHead')
 </head>
 
 <body>

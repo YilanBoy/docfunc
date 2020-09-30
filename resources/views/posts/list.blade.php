@@ -73,7 +73,6 @@
 
         @endforeach
     </ul>
-
 @else
     <div class="empty-block">目前此分類下沒有文章喔 ~_~ </div>
 @endif

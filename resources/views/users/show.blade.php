@@ -6,7 +6,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-3 col-md-3 hidden-sm hidden-xs user-info">
-            <div class="card ">
+            <div class="card shadow">
                 <img class="card-img-top" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}">
                 <div class="card-body">
                     <h5><strong>個人簡介</strong></h5>
@@ -26,7 +26,7 @@
             <hr>
 
             {{-- 會員發布的內容 --}}
-            <div class="card ">
+            <div class="card shadow">
                 <div class="card-body">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">

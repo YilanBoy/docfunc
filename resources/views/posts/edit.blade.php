@@ -11,7 +11,7 @@
 @section('content')
     <div class="container">
         <div class="col-md-10 offset-md-1">
-            <div class="card ">
+            <div class="card shadow">
                 <div class="card-body">
                     <h2 class="">
                         <i class="far fa-edit"></i>

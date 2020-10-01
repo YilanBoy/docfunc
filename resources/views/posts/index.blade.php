@@ -21,7 +21,7 @@
                 </div>
             @endif
 
-            <div class="card mb-4">
+            <div class="card shadow-lg mb-4">
 
                 {{-- 文章排序選擇 --}}
                 <div class="card-header bg-transparent">

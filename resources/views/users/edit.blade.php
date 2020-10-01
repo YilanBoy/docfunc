@@ -5,7 +5,7 @@
     <div class="container">
         <div class="col-md-8 offset-md-2">
 
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header">
                     <h4>
                         <i class="glyphicon glyphicon-edit"></i> 編輯個人資料

@@ -14,7 +14,7 @@
     <div class="row">
         {{-- 文章 --}}
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 post-content">
-            <div class="card mb-4">
+            <div class="card shadow mb-4">
                 <div class="card-body">
                     <h1 class="text-center mt-3 mb-3">
                         {{ $post->title }}
@@ -73,7 +73,7 @@
             </div>
 
             {{-- 會員回覆列表 --}}
-            <div class="card post-reply mb-4">
+            <div class="card shadow post-reply mb-4">
                 <div class="card-body">
                     {{-- @includeWhen 可以依照條件來判斷要不要載入視圖 --}}
                     @includeWhen(Auth::check(), 'posts.reply-box', ['post' => $post])
@@ -89,7 +89,7 @@
 
         {{-- 側邊欄 --}}
         <div class="col-lg-3 col-md-3 hidden-sm hidden-xs author-info">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-body">
                     <div class="text-center">
                         作者：{{ $post->user->name }}

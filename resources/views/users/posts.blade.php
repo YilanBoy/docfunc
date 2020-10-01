@@ -1,6 +1,5 @@
 {{-- 會員發布文章區塊 --}}
-@if (count($posts))
-
+@if ($posts->count())
     <ul class="list-group mt-4 border-0">
         @foreach ($posts as $post)
             <li class="list-group-item pl-2 pr-2 border-right-0 border-left-0 @if($loop->first) border-top-0 @endif">
@@ -16,11 +15,10 @@
         @endforeach
     </ul>
 
+    {{-- 分頁 --}}
+    <div class="mt-4 pt-1">
+        {{ $posts->onEachSide(1)->links() }}
+    </div>
 @else
-    <div class="empty-block">目前沒有文章，該開始寫囉！</div>
+    <div class="d-flex justify-content-center p-5">目前沒有文章，該開始寫囉！</div>
 @endif
-
-{{-- 分頁 --}}
-<div class="mt-4 pt-1">
-    {{ $posts->onEachSide(1)->links() }}
-</div>

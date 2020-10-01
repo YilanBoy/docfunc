@@ -45,14 +45,18 @@
 
                 {{-- 文章列表區塊 --}}
                 <div class="card-body">
-                    @include('posts.list', ['posts' => $posts])
+                    @if ($posts->count())
+                        @include('posts.list', ['posts' => $posts])
 
-                    {{-- 分頁 --}}
-                    <div class="mt-5">
-                        {{-- onEachSide 會限制當前分頁左右顯示的分頁數目 --}}
-                        {{-- withQueryString 會把 Url 中所有的查詢參數值添加到分頁鏈接 --}}
-                        {{ $posts->onEachSide(1)->withQueryString()->links() }}
-                    </div>
+                        {{-- 分頁 --}}
+                        <div class="mt-5">
+                            {{-- onEachSide 會限制當前分頁左右顯示的分頁數目 --}}
+                            {{-- withQueryString 會把 Url 中所有的查詢參數值添加到分頁鏈接 --}}
+                            {{ $posts->onEachSide(1)->withQueryString()->links() }}
+                        </div>
+                    @else
+                        <div class="d-flex justify-content-center p-5">目前此分類下沒有文章喔 ~_~ </div>
+                    @endif
                 </div>
             </div>
         </div>

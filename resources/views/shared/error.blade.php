@@ -1,5 +1,5 @@
 {{-- 網頁錯誤訊息通知 --}}
-@if (count($errors) > 0)
+@if ($errors->count() > 0)
     <div class="alert alert-danger">
         <div class="mt-2"><b>有錯誤發生：</b></div>
         <ul class="mt-2 mb-2">

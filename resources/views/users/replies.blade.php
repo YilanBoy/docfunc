@@ -1,5 +1,5 @@
 {{-- 會員文章回覆區塊 --}}
-@if (count($replies))
+@if ($replies->count())
 
     <ul class="list-group mt-4 border-0">
         @foreach ($replies as $reply)
@@ -19,11 +19,10 @@
         @endforeach
     </ul>
 
+    {{-- 分頁 --}}
+    <div class="mt-4 pt-1">
+        {{ $replies->onEachSide(1)->withQueryString()->links() }}
+    </div>
 @else
-    <div class="empty-block">目前沒有回覆，快點找文章進行回覆吧！</div>
+    <div class="d-flex justify-content-center p-5">目前沒有回覆，快點找文章進行回覆吧！</div>
 @endif
-
-{{-- 分頁 --}}
-<div class="mt-4 pt-1">
-    {{ $replies->onEachSide(1)->withQueryString()->links() }}
-</div>

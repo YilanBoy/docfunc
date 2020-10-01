@@ -25,7 +25,7 @@
                             {{ $notifications->links() }}
                         </div>
                     @else
-                        <div class="empty-block">沒有消息通知！</div>
+                        <div class="d-flex justify-content-center p-5">沒有消息通知！</div>
                     @endif
 
                 </div>

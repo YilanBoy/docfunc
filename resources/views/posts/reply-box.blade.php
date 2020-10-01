@@ -1,7 +1,7 @@
 {{-- 評論回覆 --}}
 @include('shared.error')
 
-<div class="reply-box">
+<div class="reply-box overflow-auto">
     <form action="{{ route('replies.store') }}" method="POST" accept-charset="UTF-8">
         @csrf
         <input type="hidden" name="post_id" value="{{ $post->id }}">

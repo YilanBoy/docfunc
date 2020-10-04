@@ -17056,11 +17056,11 @@ readers do not read off random characters that represent icons */
 body {
   font-family: Helvetica, "Noto Sans TC", Arial, sans-serif;
   font-size: 16px;
-  background-image: linear-gradient(120deg, #74ebd5 0%, #37ecba 33%, #57c6e1 66%, #009efd 100%);
+  background-image: linear-gradient(120deg, #74ebd5 0%, #57c6e1 50%, #009efd 100%);
 }
 
 .navbar-static-top {
-  border-top: 5px solid #00b5ad;
+  border-top: 5px solid #009efd;
   margin-bottom: 40px;
   margin-top: 0px;
 }

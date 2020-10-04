@@ -26,15 +26,14 @@ body {
     background-image: linear-gradient(
         120deg,
         #74ebd5 0%,
-        #37ecba 33%,
-        #57c6e1 66%,
+        #57c6e1 50%,
         #009efd 100%
     );
 }
 
 // header
 .navbar-static-top {
-    border-top: 5px solid #00b5ad;
+    border-top: 5px solid #009efd;
     margin-bottom: 40px;
     margin-top: 0px;
 }

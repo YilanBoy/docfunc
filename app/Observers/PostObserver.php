@@ -5,12 +5,20 @@ namespace App\Observers;
 use App\Models\Post;
 use HTMLPurifier;
 use HTMLPurifier_Config;
+use App\Services\PostService;
 
 // creating, created, updating, updated, saving,
 // saved,  deleting, deleted, restoring, restored
 
 class PostObserver
 {
+    protected $postService;
+
+    public function __construct(PostService $postService)
+    {
+        $this->postService = $postService;
+    }
+
     public function saving(Post $post)
     {
         // 設定 XSS 過濾規則
@@ -55,7 +63,7 @@ class PostObserver
         $post->body = preg_replace('/{/', '<span class="braces">{</span>', $post->body);
         $post->body = preg_replace('/}/', '<span class="braces">}</span>', $post->body);
 
-        // 生成摘錄，make_excerpt() 方法定義寫在 app/helpers.php
-        $post->excerpt = make_excerpt($post->body);
+        // 生成摘錄
+        $post->excerpt = $this->postService->make_excerpt($post->body);
     }
 }

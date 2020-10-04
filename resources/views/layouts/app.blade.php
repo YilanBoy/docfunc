@@ -22,15 +22,11 @@
 </head>
 
 <body>
-    <div id="app" class="{{ route_class() }}-page">
+    <div id="app">
 
         @include('layouts.header')
 
-        <div class="container">
-
-            @yield('content')
-
-        </div>
+        @yield('content')
 
         @include('layouts.footer')
 

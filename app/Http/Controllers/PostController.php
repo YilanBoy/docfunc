@@ -8,23 +8,23 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use Auth;
-use App\Services\UrlService;
+use App\Services\PostService;
 use App\Services\DataTransService;
 
 class PostController extends Controller
 {
-    protected $post, $category, $urlService, $dataTransService;
+    protected $post, $category, $postService, $dataTransService;
 
     public function __construct(
         Post $post,
         Category $category,
-        UrlService $urlService,
+        PostService $postService,
         DataTransService $dataTransService
     ) {
         $this->middleware('auth', ['except' => ['index', 'show']]);
         $this->post = $post;
         $this->category = $category;
-        $this->urlService = $urlService;
+        $this->postService = $postService;
         $this->dataTransService = $dataTransService;
     }
 
@@ -64,7 +64,7 @@ class PostController extends Controller
 
         $this->post->fill($request->validated());
         $this->post->user_id = Auth::id();
-        $this->post->slug = $this->urlService->makeSlug($request->title);
+        $this->post->slug = $this->postService->makeSlug($request->title);
         $this->post->save();
 
         // 將傳過來的 JSON 資料轉成 array
@@ -99,7 +99,7 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
-        $post->slug = $this->urlService->makeSlug($request->title);
+        $post->slug = $this->postService->makeSlug($request->title);
         $post->update($request->validated());
 
         $tagArray = $this->dataTransService->tagJsonToArray($request->tags);

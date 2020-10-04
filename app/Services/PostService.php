@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
-class UrlService
+use Illuminate\Support\Str;
+
+class PostService
 {
     // 生成 Slug
     public function makeSlug(string $title)
@@ -15,5 +17,12 @@ class UrlService
 
         // 後面加個 '-post' 是為了避免 slug 只有 'edit' 時，會與編輯頁面的路由發生衝突
         return $title . '-post';
+    }
+
+    // 生成摘錄的方法
+    public function make_excerpt($value, $length = 200)
+    {
+        $excerpt = trim(preg_replace('/\r\n|\r|\n+/', ' ', strip_tags($value)));
+        return Str::limit($excerpt, $length);
     }
 }

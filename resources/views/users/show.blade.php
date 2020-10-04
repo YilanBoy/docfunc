@@ -50,9 +50,9 @@
                             </li>
                         </ul>
                         @if (str_contains(request()->getUri(), 'replies'))
-                            @include('users.replies', ['replies' => $user->replies()->with('post')->latest()->paginate(5)])
+                            @include('users.replies', ['replies' => $user->replies()->with('post')->latest()->paginate(10)])
                         @else
-                            @include('users.posts', ['posts' => $user->posts()->latest()->paginate(5)])
+                            @include('users.posts', ['posts' => $user->posts()->latest()->paginate(10)])
                         @endif
                     </div>
                 </div>

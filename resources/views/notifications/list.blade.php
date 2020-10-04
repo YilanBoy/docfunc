@@ -12,8 +12,7 @@
             評論了
             <a href="{{ $notification->data['post_link'] }}">{{ $notification->data['post_title'] }}</a>
 
-            {{-- 回覆刪除按鈕 --}}
-            <span class="meta float-right" title="{{ $notification->created_at }}">
+            <span class="float-right" title="{{ $notification->created_at }}">
                 <i class="far fa-clock"></i>
                 {{ $notification->created_at->diffForHumans() }}
             </span>

@@ -45,31 +45,13 @@ html {
     min-height: 100%;
 }
 
-body {
-    // Margin bottom by footer height
-    margin-bottom: 60px;
-}
-
 .footer {
     position: absolute;
+    bottom: 0;
     width: 100%;
     // Set the fixed height of the footer here
-    min-height: 60px;
-    background-color: #000;
-
-    .container {
-        padding-right: 15px;
-        padding-left: 15px;
-
-        p {
-            margin: 19px 0;
-            color: #c1c1c1;
-
-            a {
-                color: inherit;
-            }
-        }
-    }
+    min-height: 50px;
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
 }
 
 // avatar
@@ -78,32 +60,8 @@ body {
 }
 
 // Post Index Page
-.posts-index-page .categories-show-page .root-page {
+.post-index-page {
     .post-list {
-        .nav > li > a {
-            position: relative;
-            display: block;
-            padding: 5px 14px;
-            font-size: 0.9em;
-        }
-
-        a {
-            color: #444444;
-        }
-
-        .meta {
-            font-size: 0.9em;
-            color: #b3b3b3;
-
-            a {
-                color: #b3b3b3;
-            }
-        }
-
-        .badge {
-            background-color: #d8d8d8;
-        }
-
         hr {
             margin-top: 12px;
             margin-bottom: 12px;
@@ -130,31 +88,12 @@ body {
 // Add container and footer space
 #app > div.container {
     margin-bottom: 100px;
-    position: relative;
     min-height: 100vh;
 }
 
-.posts-show-page {
+.post-show-page {
     .card {
         padding: 15px;
-
-        h1 {
-            margin: 0.4em auto 0.6em;
-            font-size: 28px;
-            line-height: 38px;
-        }
-    }
-}
-
-// Reply List
-.post-reply {
-    a {
-        color: inherit;
-    }
-
-    .meta {
-        font-size: 0.9em;
-        color: #b3b3b3;
     }
 }
 

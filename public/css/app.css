@@ -17070,60 +17070,19 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
-}
-
 .footer {
   position: absolute;
+  bottom: 0;
   width: 100%;
-  min-height: 60px;
-  background-color: #000;
-}
-
-.footer .container {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
-.footer .container p {
-  margin: 19px 0;
-  color: #c1c1c1;
-}
-
-.footer .container p a {
-  color: inherit;
+  min-height: 50px;
+  background-image: linear-gradient(to right, #434343 0%, black 100%);
 }
 
 .img-circle {
   border-radius: 50%;
 }
 
-.posts-index-page .categories-show-page .root-page .post-list .nav > li > a {
-  position: relative;
-  display: block;
-  padding: 5px 14px;
-  font-size: 0.9em;
-}
-
-.posts-index-page .categories-show-page .root-page .post-list a {
-  color: #444444;
-}
-
-.posts-index-page .categories-show-page .root-page .post-list .meta {
-  font-size: 0.9em;
-  color: #b3b3b3;
-}
-
-.posts-index-page .categories-show-page .root-page .post-list .meta a {
-  color: #b3b3b3;
-}
-
-.posts-index-page .categories-show-page .root-page .post-list .badge {
-  background-color: #d8d8d8;
-}
-
-.posts-index-page .categories-show-page .root-page .post-list hr {
+.post-index-page .post-list hr {
   margin-top: 12px;
   margin-bottom: 12px;
   border: 0;
@@ -17144,27 +17103,11 @@ body {
 
 #app > div.container {
   margin-bottom: 100px;
-  position: relative;
   min-height: 100vh;
 }
 
-.posts-show-page .card {
+.post-show-page .card {
   padding: 15px;
-}
-
-.posts-show-page .card h1 {
-  margin: 0.4em auto 0.6em;
-  font-size: 28px;
-  line-height: 38px;
-}
-
-.post-reply a {
-  color: inherit;
-}
-
-.post-reply .meta {
-  font-size: 0.9em;
-  color: #b3b3b3;
 }
 
 .notification-badge .badge {

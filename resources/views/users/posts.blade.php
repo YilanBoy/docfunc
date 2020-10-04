@@ -6,7 +6,7 @@
                 <a href="{{ $post->linkWithSlug() }}">
                     {{ $post->title }}
                 </a>
-                <span class="meta float-right text-secondary">
+                <span class="float-right text-secondary">
                     {{ $post->reply_count }} 回覆
                     <span> ⋅ </span>
                     {{ $post->created_at->diffForHumans() }}

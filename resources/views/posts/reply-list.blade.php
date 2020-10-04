@@ -11,14 +11,14 @@
 
             <div class="media-body">
                 <div class="media-heading mt-0 mb-1 text-secondary">
-                    <a href="{{ route('users.show', [$reply->user_id]) }}" title="{{ $reply->user->name }}">
+                    <a class="text-secondary" href="{{ route('users.show', [$reply->user_id]) }}" title="{{ $reply->user->name }}">
                         {{ $reply->user->name }}
                     </a>
                     <span class="text-secondary"> • </span>
-                    <span class="meta text-secondary" title="{{ $reply->created_at }}">{{ $reply->created_at->diffForHumans() }}</span>
+                    <span class="text-secondary" title="{{ $reply->created_at }}">{{ $reply->created_at->diffForHumans() }}</span>
                     {{-- 回覆刪除按鈕 --}}
                     @can('destroy', $reply)
-                        <span class="meta float-right mt-2">
+                        <span class="float-right mt-2">
                             <form action="{{ route('replies.destroy', $reply->id) }}"
                             onsubmit="return confirm('確定刪除此評論？');"
                             method="post">

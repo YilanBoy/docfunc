@@ -20,4 +20,9 @@ mix.js("resources/js/app.js", "public/js")
     .copy(
         "node_modules/@yaireo/tagify/dist/tagify.css",
         "public/css/tagify.css"
-    );
+    )
+    .options({
+        terser: {
+            extractComments: false
+        }
+    });

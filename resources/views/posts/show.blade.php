@@ -99,7 +99,7 @@
                         <div class="media">
                             <div align="center">
                                 <a href="{{ route('users.show', $post->user->id) }}">
-                                <img class="thumbnail img-fluid" src="{{ $post->user->gravatar('300') }}" width="300px" height="300px">
+                                <img class="thumbnail img-fluid rounded-lg" src="{{ $post->user->gravatar('300') }}" width="300px" height="300px">
                                 </a>
                             </div>
                         </div>

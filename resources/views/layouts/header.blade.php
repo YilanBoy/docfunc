@@ -47,7 +47,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="{{ Auth::user()->gravatar() }}" class="img-responsive img-circle mr-2" width="30px" height="30px">
+                            <img src="{{ Auth::user()->gravatar() }}" class="rounded-circle mr-2" width="30px" height="30px">
                             {{ Auth::user()->name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">

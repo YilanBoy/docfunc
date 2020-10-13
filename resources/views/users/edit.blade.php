@@ -24,7 +24,7 @@
                         <div class="form-group">
                             <label for="" class="avatar-label">會員大頭貼由 Gravatar 技術提供</label>
                             <br>
-                            <img class="thumbnail img-responsive" src="{{ $user->gravatar('200') }}" alt="圖片連結已失效"  width="200">
+                            <img class="thumbnail rounded-lg" src="{{ $user->gravatar('200') }}" alt="圖片連結已失效"  width="200">
                         </div>
 
                         <div class="form-group">

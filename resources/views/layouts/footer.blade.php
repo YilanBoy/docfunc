@@ -2,7 +2,7 @@
 <footer class="footer">
     <div class="container mt-3">
         <p class="float-left text-white">
-            Icons made by
+            Logo made by
             <a href="https://www.flaticon.com/authors/freepik" title="Freepik" target="_blank" rel="nofollow noopener noreferrer">Freepik</a>
             from
             <a href="https://www.flaticon.com/" title="Flaticon" target="_blank" rel="nofollow noopener noreferrer">www.flaticon.com</a>

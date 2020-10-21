@@ -11,7 +11,7 @@
 </div>
 
 @if ($links->count())
-    <div class="card shadow">
+    <div class="card shadow mb-4">
         <div class="card-body pt-2">
             <div class="text-center mt-1 mb-0 text-dark"><strong>學習資源推薦</strong></div>
             <hr class="mt-2 mb-3">

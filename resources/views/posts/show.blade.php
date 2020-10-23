@@ -90,7 +90,7 @@
 
             {{-- 側邊欄 --}}
             <div class="col-lg-3 col-md-3 hidden-sm hidden-xs author-info">
-                <div class="card shadow">
+                <div class="card shadow mb-4">
                     <div class="card-body">
                         <div class="text-center">
                             作者：{{ $post->user->name }}

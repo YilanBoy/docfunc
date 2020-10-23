@@ -1,4 +1,4 @@
-var tagInput = document.querySelector("#tag-input");
+var tagInput = document.querySelector('#tag-input');
 var tagify = new Tagify(tagInput, {
     whitelist: tagArray,
     enforceWhitelist: true,
@@ -8,7 +8,7 @@ var tagify = new Tagify(tagInput, {
         enabled: 0,
         maxItems: 5,
         // place the dropdown near the typed text
-        position: "text",
+        position: 'text',
         // keep the dropdown open after selecting a suggestion
         closeOnSelect: false,
         highlightFirst: true

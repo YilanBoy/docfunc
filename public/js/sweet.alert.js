@@ -1,6 +1,6 @@
 swal.fire({
     toast: true,
-    position: "bottom-start",
+    position: 'bottom-start',
     title: sweetalert2Title,
     icon: sweetalert2Icon,
     showConfirmButton: false,

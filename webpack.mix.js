@@ -1,4 +1,4 @@
-const mix = require("laravel-mix");
+const mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,15 +11,15 @@ const mix = require("laravel-mix");
  |
  */
 
-mix.js("resources/js/app.js", "public/js")
-    .sass("resources/sass/app.scss", "public/css")
+mix.js('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
     .copy(
-        "node_modules/@yaireo/tagify/dist/tagify.min.js",
-        "public/js/tagify.min.js"
+        'node_modules/@yaireo/tagify/dist/tagify.min.js',
+        'public/js/tagify.min.js'
     )
     .copy(
-        "node_modules/@yaireo/tagify/dist/tagify.css",
-        "public/css/tagify.css"
+        'node_modules/@yaireo/tagify/dist/tagify.css',
+        'public/css/tagify.css'
     )
     .options({
         terser: {

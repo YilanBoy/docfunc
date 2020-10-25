@@ -54,8 +54,13 @@ document.getElementById('post-save').addEventListener('click', function() {
     saveButtonClicked = true;
 });
 
-window.onbeforeunload = function(event) {
+window.addEventListener('beforeunload', event => {
     if (!saveButtonClicked) {
-        event.returnValue = '您尚未儲存，是否離開編輯頁面？';
+        // 取消事件的標準做法，但是 Chrome 不支援
+        // event.preventDefault();
+
+        // 取消事件，Chrome 要求 returnValue 必須給一個值
+        // 以往這個值可以顯示在 alert 視窗上，現在已不再支援，因此給空值就好
+        event.returnValue = '';
     }
-};
+});

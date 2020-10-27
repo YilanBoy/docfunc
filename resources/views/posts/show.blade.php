@@ -12,17 +12,21 @@
 
 @section('content')
     <div class="container post-show-page">
-        <div class="row">
+        <div class="row justify-content-md-center">
             {{-- 文章 --}}
-            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 post-content">
+            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 post-content">
                 <div class="card shadow mb-4">
                     <div class="card-body">
                         <h3 class="text-center mt-3 mb-3">
                             {{ $post->title }}
                         </h3>
-                        <div class="article-meta text-center text-secondary">
+
+                        <div class="article-meta text-center text-secondary mb-2">
+                            <i class="far fa-user"></i>
+                            <a class="text-secondary" href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}</a>
+                            •
                             <i class="far fa-folder"></i>
-                            {{ $post->category->name }}
+                            <a class="text-secondary" href="{{ $post->category->linkWithName() }}">{{ $post->category->name }}</a>
                             •
                             <i class="far fa-clock"></i>
                             {{ $post->created_at->diffForHumans() }}
@@ -84,29 +88,6 @@
                         @else
                             <div class="mt-1 mb-1">目前沒有任何評論~</div>
                         @endif
-                    </div>
-                </div>
-            </div>
-
-            {{-- 側邊欄 --}}
-            <div class="col-lg-3 col-md-3 hidden-sm hidden-xs author-info">
-                <div class="card shadow mb-4">
-                    <div class="card-body">
-                        <div class="text-center">
-                            作者：{{ $post->user->name }}
-                        </div>
-                        <hr>
-                        <div class="media">
-                            <div align="center">
-                                <a href="{{ route('users.show', $post->user->id) }}">
-                                <img class="thumbnail img-fluid rounded-lg" src="{{ $post->user->gravatar('300') }}" width="300px" height="300px">
-                                </a>
-                            </div>
-                        </div>
-                        <hr>
-                        <div>
-                            {{ $post->user->introduction }}
-                        </div>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,8 @@
 {{-- 編輯個人資料 --}}
 @extends('layouts.app')
 
+@section('title', '編輯 ' . $user->name . ' 的個人資料')
+
 @section('content')
     <div class="container">
         <div class="col-md-8 offset-md-2">

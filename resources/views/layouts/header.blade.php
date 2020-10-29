@@ -4,7 +4,7 @@
         {{-- Branding Image --}}
         <a class="navbar-brand " href="{{ url('/') }}">
             <img src="{{ asset('icon/icon.png') }}" style="width:30px;height:30px;margin-top:-4px;margin-right:4px;">
-            RECODE
+            {{ config('app.name') }}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

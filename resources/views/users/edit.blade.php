@@ -22,7 +22,7 @@
                         @include('shared.error')
 
                         <div class="form-group">
-                            <label for="" class="avatar-label">會員大頭貼由 Gravatar 技術提供</label>
+                            <label for="" class="avatar-label">會員大頭貼由 <a href="https://zh-tw.gravatar.com/" target="_blank" rel="nofollow noopener noreferrer">Gravatar</a> 技術提供</label>
                             <br>
                             <img class="thumbnail rounded-lg" src="{{ $user->gravatar('200') }}" alt="圖片連結已失效"  width="200">
                         </div>

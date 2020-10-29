@@ -57,10 +57,11 @@ document.getElementById('post-save').addEventListener('click', function() {
 window.addEventListener('beforeunload', event => {
     if (!saveButtonClicked) {
         // 取消事件的標準做法，但是 Chrome 不支援
-        // event.preventDefault();
+        event.preventDefault();
 
+        // Firefox 不支援
         // 取消事件，Chrome 要求 returnValue 必須給一個值
-        // 以往這個值可以顯示在 alert 視窗上，現在已不再支援，因此給空值就好
+        // 以往這個值可以顯示在 alert 視窗上，現在已不再支援修改，因此給空值就好
         event.returnValue = '';
     }
 });

@@ -26,7 +26,7 @@
 
                 <div class="media-body mb-1">
                     {{-- 文章標籤--}}
-                    @if ($post->tags()->exists())
+                    @if ($post->tags->count() > 0)
                         <i class="fas fa-tags text-info"></i>
 
                         @foreach ($post->tags as $tag)

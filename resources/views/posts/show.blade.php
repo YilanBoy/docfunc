@@ -84,7 +84,7 @@
                         @includeWhen(Auth::check(), 'posts.reply-box', ['post' => $post])
                         @if ($post->replies->count() > 0)
                             {{-- latest() 等於 orderBy('created_at', 'desc') --}}
-                            @include('posts.reply-list', ['replies' => $post->replies()->latest()->with('user')->get()])
+                            @include('posts.reply-list', ['replies' => $post->replies()->latest()->with('user', 'post')->get()])
                         @else
                             <div class="mt-1 mb-1">目前沒有任何評論~</div>
                         @endif

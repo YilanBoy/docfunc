@@ -1,6 +1,6 @@
 /*
- * CKEditor 5 (v23.0.0) content styles.
- * Generated on Tue, 06 Oct 2020 14:16:46 GMT.
+ * CKEditor 5 (v23.1.0) content styles.
+ * Generated on Thu, 05 Nov 2020 14:09:30 GMT.
  * For more information, check out https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/content-styles.html
  */
 
@@ -17,6 +17,20 @@
 	--ck-todo-list-checkmark-size: 16px;
 }
 
+/* ckeditor5-image/theme/imageresize.css */
+.ck-content .image.image_resized {
+	max-width: 100%;
+	display: block;
+	box-sizing: border-box;
+}
+/* ckeditor5-image/theme/imageresize.css */
+.ck-content .image.image_resized img {
+	width: 100%;
+}
+/* ckeditor5-image/theme/imageresize.css */
+.ck-content .image.image_resized > figcaption {
+	display: block;
+}
 /* ckeditor5-image/theme/imagestyle.css */
 .ck-content .image-style-side {
 	float: right;
@@ -38,31 +52,6 @@
 	float: right;
 	margin-left: var(--ck-image-style-spacing);
 }
-/* ckeditor5-image/theme/imageresize.css */
-.ck-content .image.image_resized {
-	max-width: 100%;
-	display: block;
-	box-sizing: border-box;
-}
-/* ckeditor5-image/theme/imageresize.css */
-.ck-content .image.image_resized img {
-	width: 100%;
-}
-/* ckeditor5-image/theme/imageresize.css */
-.ck-content .image.image_resized > figcaption {
-	display: block;
-}
-/* ckeditor5-image/theme/imagecaption.css */
-.ck-content .image > figcaption {
-	display: table-caption;
-	caption-side: bottom;
-	word-break: break-word;
-	color: hsl(0, 0%, 20%);
-	background-color: hsl(0, 0%, 97%);
-	padding: .6em;
-	font-size: .75em;
-	outline-offset: -1px;
-}
 /* ckeditor5-image/theme/image.css */
 .ck-content .image {
 	display: table;
@@ -76,6 +65,17 @@
 	margin: 0 auto;
 	max-width: 100%;
 	min-width: 50px;
+}
+/* ckeditor5-image/theme/imagecaption.css */
+.ck-content .image > figcaption {
+	display: table-caption;
+	caption-side: bottom;
+	word-break: break-word;
+	color: hsl(0, 0%, 20%);
+	background-color: hsl(0, 0%, 97%);
+	padding: .6em;
+	font-size: .75em;
+	outline-offset: -1px;
 }
 /* ckeditor5-highlight/theme/highlight.css */
 .ck-content .marker-yellow {
@@ -173,6 +173,49 @@
 .ck-content[dir="ltr"] .table th {
 	text-align: left;
 }
+/* ckeditor5-page-break/theme/pagebreak.css */
+.ck-content .page-break {
+	position: relative;
+	clear: both;
+	padding: 5px 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+/* ckeditor5-page-break/theme/pagebreak.css */
+.ck-content .page-break::after {
+	content: '';
+	position: absolute;
+	border-bottom: 2px dashed hsl(0, 0%, 77%);
+	width: 100%;
+}
+/* ckeditor5-page-break/theme/pagebreak.css */
+.ck-content .page-break__label {
+	position: relative;
+	z-index: 1;
+	padding: .3em .6em;
+	display: block;
+	text-transform: uppercase;
+	border: 1px solid hsl(0, 0%, 77%);
+	border-radius: 2px;
+	font-family: Helvetica, Arial, Tahoma, Verdana, Sans-Serif;
+	font-size: 0.75em;
+	font-weight: bold;
+	color: hsl(0, 0%, 20%);
+	background: hsl(0, 0%, 100%);
+	box-shadow: 2px 2px 1px hsla(0, 0%, 0%, 0.15);
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+/* ckeditor5-media-embed/theme/mediaembed.css */
+.ck-content .media {
+	clear: both;
+	margin: 1em 0;
+	display: block;
+	min-width: 15em;
+}
 /* ckeditor5-list/theme/todolist.css */
 .ck-content .todo-list {
 	list-style: none;
@@ -240,55 +283,10 @@
 .ck-content .todo-list .todo-list__label .todo-list__label__description {
 	vertical-align: middle;
 }
-/* ckeditor5-page-break/theme/pagebreak.css */
-.ck-content .page-break {
-	position: relative;
-	clear: both;
-	padding: 5px 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-/* ckeditor5-page-break/theme/pagebreak.css */
-.ck-content .page-break::after {
-	content: '';
-	position: absolute;
-	border-bottom: 2px dashed hsl(0, 0%, 77%);
-	width: 100%;
-}
-/* ckeditor5-page-break/theme/pagebreak.css */
-.ck-content .page-break__label {
-	position: relative;
-	z-index: 1;
-	padding: .3em .6em;
-	display: block;
-	text-transform: uppercase;
-	border: 1px solid hsl(0, 0%, 77%);
-	border-radius: 2px;
-	font-family: Helvetica, Arial, Tahoma, Verdana, Sans-Serif;
-	font-size: 0.75em;
-	font-weight: bold;
-	color: hsl(0, 0%, 20%);
-	background: hsl(0, 0%, 100%);
-	box-shadow: 2px 2px 1px hsla(0, 0%, 0%, 0.15);
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-/* ckeditor5-media-embed/theme/mediaembed.css */
-.ck-content .media {
-	clear: both;
-	margin: 1em 0;
-	display: block;
+/* ckeditor5-html-embed/theme/htmlembed.css */
+.ck-content .raw-html-embed {
+	margin: 1em auto;
 	min-width: 15em;
-}
-/* ckeditor5-horizontal-line/theme/horizontalline.css */
-.ck-content hr {
-	margin: 15px 0;
-	height: 4px;
-	background: hsl(0, 0%, 87%);
-	border: 0;
 }
 /* ckeditor5-code-block/theme/codeblock.css */
 .ck-content pre {
@@ -309,6 +307,13 @@
 	background: unset;
 	padding: 0;
 	border-radius: 0;
+}
+/* ckeditor5-horizontal-line/theme/horizontalline.css */
+.ck-content hr {
+	margin: 15px 0;
+	height: 4px;
+	background: hsl(0, 0%, 87%);
+	border: 0;
 }
 /* ckeditor5-mention/theme/mention.css */
 .ck-content .mention {

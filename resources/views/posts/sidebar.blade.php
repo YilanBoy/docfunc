@@ -10,6 +10,20 @@
     </div>
 </div>
 
+@if ($popularTags->count())
+    <div class="card shadow mb-4">
+        <div class="card-body pt-2">
+            <div class="text-center mt-1 mb-0 text-dark"><strong>熱門標籤</strong></div>
+            <hr class="mt-2 mb-3">
+            @foreach ($popularTags as $popularTag)
+                <a class="badge badge-pill badge-lg bgi-gradient text-white" href="{{ route('tags.show', $popularTag->id) }}" title="{{ $popularTag->name }}">
+                    {{ $popularTag->name }}
+                </a>
+            @endforeach
+        </div>
+    </div>
+@endif
+
 @if ($links->count())
     <div class="card shadow mb-4">
         <div class="card-body pt-2">

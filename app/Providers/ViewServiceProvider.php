@@ -24,15 +24,22 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // 將分類的資料綁定至 View 中
+        // 將分類綁定至上方選單的 View 中
         View::composer(
             ['layouts.header', 'posts.create', 'posts.edit'], 'App\Http\View\Composers\CategoryComposer'
         );
 
+        // 熱門標籤
+        View::composer(
+            ['posts.sidebar'], 'App\Http\View\Composers\PopularTagComposer'
+        );
+
+        // 側邊欄學習資源推薦
         View::composer(
             ['posts.sidebar'], 'App\Http\View\Composers\LinkComposer'
         );
 
+        // 新增與編輯文章的 Tag
         View::composer(
             ['posts.create', 'posts.edit'], 'App\Http\View\Composers\TagComposer'
         );

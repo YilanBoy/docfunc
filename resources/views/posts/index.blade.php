@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="container post-index-page">
-        <div class="row mb-5">
+        <div class="row">
             <div class="col-lg-9 col-md-9 post-list">
 
                 {{-- 分類訊息區塊 --}}

@@ -51,6 +51,16 @@
                             {!! $post->body !!}
                         </div>
 
+                        <div class="bg-secondary d-flex justify-content-start" style="height: 120px;">
+                            <div class="align-self-center pl-4 mr-4">
+                                <img class="rounded-circle" src="{{ $post->user->gravatar() }}" width="60px" height="60px">
+                            </div>
+                            <div class="align-self-center d-flex flex-column">
+                                <h4><a class="text-white" href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}</a></h4>
+                                <span class="text-white">{{ $post->user->introduction }}</span>
+                            </div>
+                        </div>
+
                         @can('update', $post)
                             <div class="operate">
                                 <hr>

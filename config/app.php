@@ -176,6 +176,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         //視圖合成器
         App\Providers\ViewServiceProvider::class,
+        // Laravel Fortify
+        App\Providers\FortifyServiceProvider::class,
 
     ],
 

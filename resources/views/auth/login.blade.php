@@ -2,12 +2,6 @@
 
 @section('title', '登入')
 
-@section('scriptsInHead')
-    {{-- Google reCAPTCHA --}}
-    {{-- async defer 同時使用會優先使用 async，當瀏覽器不支援 async 才會使用 defer --}}
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-@endsection
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -16,6 +10,12 @@
                     <div class="card-header">{{ __('Login') }}</div>
 
                     <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
 
@@ -56,17 +56,6 @@
                                             {{ __('Remember Me') }}
                                         </label>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-md-4"></div>
-                                <div class="col-md-6">
-                                    <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha_site_key') }}"></div>
-
-                                    @error('g-recaptcha-response')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
                                 </div>
                             </div>
 

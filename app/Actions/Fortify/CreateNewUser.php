@@ -25,6 +25,7 @@ class CreateNewUser implements CreatesNewUsers
             'name' => [
                 'required',
                 'string',
+                'regex:/^[A-Za-z0-9\-\_]+$/u',
                 'between:3,25',
                 Rule::unique(User::class),
             ],

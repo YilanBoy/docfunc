@@ -50,7 +50,7 @@
                             @include('posts.list', ['posts' => $posts])
 
                             {{-- 分頁 --}}
-                            <div class="mt-5">
+                            <div class="d-flex justify-content-center mt-5">
                                 {{-- onEachSide 會限制當前分頁左右顯示的分頁數目 --}}
                                 {{-- withQueryString 會把 Url 中所有的查詢參數值添加到分頁鏈接 --}}
                                 {{ $posts->onEachSide(1)->withQueryString()->links() }}

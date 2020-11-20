@@ -10,18 +10,18 @@
                 <div class="card shadow mb-4">
                     <img class="card-img-top" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}">
                     <div class="card-body">
-                        <h5><strong>個人簡介</strong></h5>
-                        <p>{{ $user->introduction }}</p>
+                        <h2 class="mb-0">{{ $user->name }}</h2>
                         <hr>
-                        <h5><strong>註冊於</strong></h5>
-                        <p>{{ $user->created_at->diffForHumans() }}</p>
+                        <h4><strong>註冊於</strong></h4>
+                        <p>{{ $user->created_at->format('Y / m / d') . '（' . $user->created_at->diffForHumans() . '）' }}</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                 <div class="card ">
                     <div class="card-body">
-                        <h1 class="mb-0" style="font-size:22px;">{{ $user->name }}</h1>
+                        <h4><strong>個人簡介</strong></h4>
+                        <span>{{ $user->introduction }}</span>
                     </div>
                 </div>
                 <hr>

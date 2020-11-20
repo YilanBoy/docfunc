@@ -20,7 +20,7 @@
     </ul>
 
     {{-- 分頁 --}}
-    <div class="mt-4 pt-1">
+    <div class="d-flex justify-content-center mt-4 pt-1">
         {{ $replies->onEachSide(1)->withQueryString()->links() }}
     </div>
 @else

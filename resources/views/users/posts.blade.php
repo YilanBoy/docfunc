@@ -16,7 +16,7 @@
     </ul>
 
     {{-- 分頁 --}}
-    <div class="mt-4 pt-1">
+    <div class="d-flex justify-content-center mt-4 pt-1">
         {{ $posts->onEachSide(1)->links() }}
     </div>
 @else

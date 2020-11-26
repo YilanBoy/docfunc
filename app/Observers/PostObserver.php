@@ -59,10 +59,6 @@ class PostObserver
         $purifier = new HTMLPurifier($config);
         // 過濾文章內文
         $post->body = $purifier->purify($post->body);
-        // 過濾 Vue 的 Mustache 語法(雙大括弧)
-        $post->body = preg_replace('/{/', '<span class="braces">{</span>', $post->body);
-        $post->body = preg_replace('/}/', '<span class="braces">}</span>', $post->body);
-
         // 生成摘錄
         $post->excerpt = $this->postService->make_excerpt($post->body);
     }

@@ -41,7 +41,7 @@ class PostController extends Controller
     public function show(Request $request, Post $post)
     {
         // URL 修正，使用帶 slug 的網址
-        if (!empty($post->slug) && $post->slug != $request->slug) {
+        if (!empty($post->slug) && $post->slug !== $request->slug) {
             return redirect($post->linkWithSlug(), 301);
         }
 

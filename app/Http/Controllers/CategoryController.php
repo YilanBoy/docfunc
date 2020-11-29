@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function show(Category $category, Request $request)
     {
         // URL 修正，使用帶標籤名稱的網址
-        if (!empty($category->name) && $category->name != $request->name) {
+        if (!empty($category->name) && $category->name !== $request->name) {
             return redirect($category->linkWithName(), 301);
         }
 

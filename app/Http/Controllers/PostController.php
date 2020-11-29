@@ -34,6 +34,7 @@ class PostController extends Controller
         $posts = $this->post->withOrder($request->order)
             ->with('user', 'category', 'tags') // 預加載防止 N+1 問題
             ->paginate(10);
+
         return view('posts.index', ['posts' => $posts]);
     }
 

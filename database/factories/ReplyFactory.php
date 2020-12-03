@@ -12,13 +12,10 @@ class ReplyFactory extends Factory
 
     public function definition()
     {
-        // 隨機取一個月內的時間
-        $time = $this->faker->dateTimeThisMonth();
-
         return [
-            'content' => $this->faker->sentence(),
-            'created_at' => $time,
-            'updated_at' => $time,
+            'content' => $this->faker->sentence,
+            'created_at' => $this->faker->dateTimeThisMonth(now()),
+            'updated_at' => now(),
         ];
     }
 }

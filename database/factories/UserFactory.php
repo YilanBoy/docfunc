@@ -22,17 +22,15 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $date_time = $this->faker->date . ' ' . $this->faker->time;
-
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'remember_token' => Str::random(10),
             'email_verified_at' => now(),
             'password' => bcrypt('1qaz2wsx'),
-            'introduction' => $this->faker->sentence(),
-            'created_at' => $date_time,
-            'updated_at' => $date_time,
+            'introduction' => $this->faker->sentence,
+            'created_at' => $this->faker->dateTimeThisMonth(now()),
+            'updated_at' => now(),
         ];
     }
 }

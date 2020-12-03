@@ -12,20 +12,13 @@ class PostFactory extends Factory
 
     public function definition()
     {
-        $sentence = $this->faker->sentence();
-
-        // 隨機取一個月以內的時間
-        $updated_at = $this->faker->dateTimeThisMonth();
-
-        // 傳參為生成最大時間不超過，因為創建時間需永遠比更改時間要早
-        $created_at = $this->faker->dateTimeThisMonth($updated_at);
-
         return [
-            'title' => $sentence,
-            'body' => $this->faker->text(),
-            'excerpt' => $sentence,
-            'created_at' => $created_at,
-            'updated_at' => $updated_at,
+            'title' => $this->faker->sentence,
+            'body' => $this->faker->paragraph(10),
+            'excerpt' => $this->faker->sentence,
+            // 隨機取一個月以內，但早於現在的時間
+            'created_at' => $this->faker->dateTimeThisMonth(now()),
+            'updated_at' => now(),
         ];
     }
 }

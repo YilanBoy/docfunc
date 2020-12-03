@@ -38,9 +38,9 @@
                         <div class="article-meta text-center">
                             {{-- 文章標籤--}}
                             @if ($post->tags()->exists())
-                                <i class="fas fa-tags text-info"></i>
+                                <i class="fas fa-tags text-primary"></i>
                                 @foreach ($post->tags as $tag)
-                                    <a class="badge badge-pill badge-lg bgi-gradient text-white" href="{{ route('tags.show', $tag->id) }}" title="{{ $tag->name }}">
+                                    <a class="badge badge-pill badge-primary badge-lg" href="{{ route('tags.show', $tag->id) }}" title="{{ $tag->name }}">
                                         {{ $tag->name }}
                                     </a>
                                 @endforeach

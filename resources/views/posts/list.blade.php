@@ -15,7 +15,7 @@
 
                 <div class="media-heading mt-0 mb-1">
                     <h5 class="font-weight-bold">
-                        <a href="{{ $post->linkWithSlug() }}" title="{{ $post->title }}">
+                        <a class="text-dark" href="{{ $post->linkWithSlug() }}" title="{{ $post->title }}">
                             {{ $post->title }}
                         </a>
                     </h5>
@@ -27,10 +27,10 @@
                 <div class="media-body mb-1">
                     {{-- 文章標籤--}}
                     @if ($post->tags->count() > 0)
-                        <i class="fas fa-tags text-info"></i>
+                        <i class="fas fa-tags text-primary"></i>
 
                         @foreach ($post->tags as $tag)
-                            <a class="badge badge-pill badge-lg bgi-gradient text-white" href="{{ route('tags.show', $tag->id) }}" title="{{ $tag->name }}">
+                            <a class="badge badge-pill badge-primary badge-lg" href="{{ route('tags.show', $tag->id) }}" title="{{ $tag->name }}">
                                 {{ $tag->name }}
                             </a>
                         @endforeach

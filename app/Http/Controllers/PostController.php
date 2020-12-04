@@ -21,7 +21,6 @@ class PostController extends Controller
         PostService $postService,
         DataTransService $dataTransService
     ) {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
         $this->post = $post;
         $this->category = $category;
         $this->postService = $postService;

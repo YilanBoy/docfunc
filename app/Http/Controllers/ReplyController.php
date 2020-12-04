@@ -14,7 +14,6 @@ class ReplyController extends Controller
 
     public function __construct(Reply $reply)
     {
-        $this->middleware('auth');
         $this->reply = $reply;
     }
 

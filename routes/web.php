@@ -28,6 +28,8 @@ use CKSource\CKFinderBridge\Controller\CKFinderController;
 // 首頁
 Route::get('/', [PostController::class, 'index'])->name('root');
 
+require __DIR__ . '/auth.php';
+
 // 會員相關頁面
 Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
 Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
@@ -35,13 +37,23 @@ Route::put('users/{user}', [UserController::class, 'update'])->name('users.updat
 
 // 文章列表與內容
 Route::get('posts', [PostController::class, 'index'])->name('posts.index');
-Route::middleware(['post.limit'])->group(function () {
+
+Route::middleware(['post.limit', 'verified'])->group(function () {
     Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('posts', [PostController::class, 'store'])->name('posts.store');
 });
-Route::get('posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-Route::put('posts/{post}', [PostController::class, 'update'])->name('posts.update');
-Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+Route::get('posts/{post}/edit', [PostController::class, 'edit'])
+    ->middleware('verified')
+    ->name('posts.edit');
+
+Route::put('posts/{post}', [PostController::class, 'update'])
+    ->middleware('verified')
+    ->name('posts.update');
+
+Route::delete('posts/{post}', [PostController::class, 'destroy'])
+    ->middleware('verified')
+    ->name('posts.destroy');
 
 // {slug?} 當中的問號代表此參數可給可不給
 Route::get('posts/{post}/{slug?}', [PostController::class, 'show'])->name('posts.show');
@@ -50,8 +62,13 @@ Route::get('posts/{post}/{slug?}', [PostController::class, 'show'])->name('posts
 Route::get('categories/{category}/{name?}', [CategoryController::class, 'show'])->name('categories.show');
 
 // 會員評論
-Route::post('replies', [ReplyController::class, 'store'])->name('replies.store');
-Route::delete('replies/{reply}', [ReplyController::class, 'destroy'])->name('replies.destroy');
+Route::post('replies', [ReplyController::class, 'store'])
+    ->middleware('verified')
+    ->name('replies.store');
+
+Route::delete('replies/{reply}', [ReplyController::class, 'destroy'])
+    ->middleware('verified')
+    ->name('replies.destroy');
 
 // 通知列表
 Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');

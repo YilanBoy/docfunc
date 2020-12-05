@@ -23,14 +23,16 @@
 
                         @include('shared.error')
 
-                        <div class="form-group">
-                            <label for="" class="avatar-label">會員大頭貼由 <a href="https://zh-tw.gravatar.com/" target="_blank" rel="nofollow noopener noreferrer">Gravatar</a> 技術提供</label>
-                            <br>
-                            <img class="thumbnail rounded-lg" src="{{ $user->gravatar('200') }}" alt="圖片連結已失效"  width="200">
+                        <div class="form-group text-center">
+                            <img class="thumbnail rounded-circle" src="{{ $user->gravatar('200') }}" alt="圖片連結已失效"  width="200">
+                            <p></p>
+                            <label for="" class="avatar-label">
+                                會員大頭貼由 <a href="https://zh-tw.gravatar.com/" target="_blank" rel="nofollow noopener noreferrer">Gravatar</a> 技術提供
+                            </label>
                         </div>
 
                         <div class="form-group">
-                            <label for="name-field">會員名稱（只支持英文、數字、橫槓和底線）</label>
+                            <label for="name-field">會員名稱（請使用英文、數字、橫槓和底線）</label>
                             <input class="form-control" type="text" name="name" id="name-field" value="{{ old('name', $user->name) }}" />
                         </div>
 

@@ -21,6 +21,7 @@
                 <div class="card ">
                     <div class="card-body">
                         <h4><strong>個人簡介</strong></h4>
+                        <hr>
                         <span>{{ $user->introduction }}</span>
                     </div>
                 </div>

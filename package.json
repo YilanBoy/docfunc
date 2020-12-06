@@ -11,6 +11,7 @@
     },
     "devDependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
+        "@popperjs/core": "^2.5.4",
         "@yaireo/tagify": "^3.20.0",
         "axios": "^0.19",
         "bootstrap": "^4.5.3",
@@ -18,13 +19,11 @@
         "jquery": "^3.2",
         "laravel-mix": "^5.0.7",
         "lodash": "^4.17.20",
-        "popper.js": "^1.12",
         "resolve-url-loader": "^3.1.2",
         "sass": "^1.29.0",
         "sass-loader": "^8.0.0",
         "sweetalert2": "^9.17.2",
         "vue": "^2.6.12",
         "vue-template-compiler": "^2.6.12"
-    },
-    "dependencies": {}
+    }
 }

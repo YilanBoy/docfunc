@@ -38,21 +38,21 @@ Route::put('users/{user}', [UserController::class, 'update'])->name('users.updat
 // 文章列表與內容
 Route::get('posts', [PostController::class, 'index'])->name('posts.index');
 
-Route::middleware(['post.limit', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'post.limit'])->group(function () {
     Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('posts', [PostController::class, 'store'])->name('posts.store');
 });
 
 Route::get('posts/{post}/edit', [PostController::class, 'edit'])
-    ->middleware('verified')
+    ->middleware('auth', 'verified')
     ->name('posts.edit');
 
 Route::put('posts/{post}', [PostController::class, 'update'])
-    ->middleware('verified')
+    ->middleware('auth', 'verified')
     ->name('posts.update');
 
 Route::delete('posts/{post}', [PostController::class, 'destroy'])
-    ->middleware('verified')
+    ->middleware('auth', 'verified')
     ->name('posts.destroy');
 
 // {slug?} 當中的問號代表此參數可給可不給
@@ -63,11 +63,11 @@ Route::get('categories/{category}/{name?}', [CategoryController::class, 'show'])
 
 // 會員評論
 Route::post('replies', [ReplyController::class, 'store'])
-    ->middleware('verified')
+    ->middleware('auth', 'verified')
     ->name('replies.store');
 
 Route::delete('replies/{reply}', [ReplyController::class, 'destroy'])
-    ->middleware('verified')
+    ->middleware('auth', 'verified')
     ->name('replies.destroy');
 
 // 通知列表

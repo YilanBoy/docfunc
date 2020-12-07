@@ -5,7 +5,7 @@ The features of this blog include login and logout, registration, post publishin
 WYSIWYG editor use [CKEditor 5](https://ckeditor.com/), image upload use [CKFinder](https://ckeditor.com/ckfinder/)  
 You can upload image to AWS S3 in blog post.
 
-### Installation
+## Installation
 
 Clone the repository to your local machine, and change the current working directory to the repository
 
@@ -34,7 +34,7 @@ $ npm install
 Running laravel mix
 
 ```sh
-$ npm run dev
+$ npm run production
 ```
 
 Make a .env file.  

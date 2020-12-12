@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html class="min-vh-100 position-relative" lang="{{ app()->getLocale() }}">
 
 <head>
     <meta charset="utf-8">
@@ -22,15 +22,11 @@
 </head>
 
 <body>
-    <div id="app">
+    @include('layouts.header')
 
-        @include('layouts.header')
+    @yield('content')
 
-        @yield('content')
-
-        @include('layouts.footer')
-
-    </div>
+    {{-- @include('layouts.footer') --}}
 
     {{-- Scripts --}}
     <script src="{{ asset('js/app.js') }}"></script>

@@ -18,10 +18,7 @@
 
                     <form action="{{ route('users.update', $user->id) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                         @method('PUT')
-
                         @csrf
-
-                        @include('shared.error')
 
                         <div class="form-group text-center">
                             <img class="thumbnail rounded-circle" src="{{ $user->gravatar('200') }}" alt="圖片連結已失效"  width="200">

@@ -20,10 +20,7 @@
                         </h2>
                         <hr>
                         <form action="{{ route('posts.store') }}" method="POST" accept-charset="UTF-8">
-
                             @csrf
-
-                            @include('shared.error')
 
                             {{-- 文章標題 --}}
                             <div class="form-group">

@@ -4,8 +4,8 @@
         <div class="text-center mt-1 mb-0 text-dark"><strong>歡迎來到 {{ config('app.name') }} !</strong></div>
         <hr class="mt-2 mb-3">
         <p>用部落格來紀錄自己生活上大大小小的事情吧！此部落格使用 Laravel 與 Bootstrap 編寫而成。</p>
-        <a href="{{ route('posts.create') }}" class="btn btn-success btn-block" aria-label="Left Align">
-            <i class="fas fa-pen-nib mr-2"></i>新增文章
+        <a href="{{ route('posts.create') }}" class="btn btn-success w-100" aria-label="Left Align">
+            <i class="fas fa-pen-nib mr-2"></i> 新增文章
         </a>
     </div>
 </div>
@@ -16,7 +16,7 @@
             <div class="text-center mt-1 mb-0 text-dark"><strong>熱門標籤</strong></div>
             <hr class="mt-2 mb-3">
             @foreach ($popularTags as $popularTag)
-                <a class="badge badge-pill badge-primary badge-lg" href="{{ route('tags.show', $popularTag->id) }}" title="{{ $popularTag->name }}">
+                <a class="btn btn-primary btn-sm rounded-pill mb-1" href="{{ route('tags.show', $popularTag->id) }}" role="button">
                     {{ $popularTag->name }}
                 </a>
             @endforeach

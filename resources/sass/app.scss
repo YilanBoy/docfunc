@@ -2,9 +2,6 @@
 // @import url("https://fonts.googleapis.com/css?family=Nunito");
 @import url("https://fonts.googleapis.com/earlyaccess/notosanstc.css");
 
-// Variables
-@import "variables";
-
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
@@ -27,72 +24,74 @@ body {
 }
 
 // header
-.navbar-static-top {
+.navbar-border-top {
     border-top: 5px solid #009efd;
-    margin-bottom: 40px;
-    margin-top: 0px;
 }
 
-// sticky footer styles
-html {
-    position: relative;
-    min-height: 100%;
+.w-15 {
+    width: 15% !important;
 }
 
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    // set the fixed height of the footer here
-    min-height: 50px;
-    background-image: linear-gradient(to right, #434343 0%, black 100%);
+.w-70 {
+    width: 70% !important;
 }
 
-// post index page
-.post-index-page {
-    .post-list {
-        hr {
-            margin-top: 12px;
-            margin-bottom: 12px;
-            border: 0;
-            border-top: 1px solid #dcebf5;
-        }
-    }
-}
+// // sticky footer styles
+// html {
+//     position: relative;
+//     min-height: 100%;
+// }
 
-.badge-lg {
-    font-size: 0.9rem;
-}
+// .set-to-bottom {
+//     position: absolute;
+//     bottom: 0;
+// }
 
-// bootstrap form-control
-.form-control {
-    font-size: 1em;
-}
+// // post index page
+// .post-index-page {
+//     .post-list {
+//         hr {
+//             margin-top: 12px;
+//             margin-bottom: 12px;
+//             border: 0;
+//             border-top: 1px solid #dcebf5;
+//         }
+//     }
+// }
 
-// add container and footer space
-#app > div.container {
-    margin-bottom: 100px;
-    min-height: 100vh;
-}
+// .badge-lg {
+//     font-size: 0.9rem;
+// }
 
-.post-show-page {
-    .card {
-        padding: 15px;
-    }
-}
+// // bootstrap form-control
+// .form-control {
+//     font-size: 1em;
+// }
 
-// notification
-.notification-badge {
-    .badge {
-        font-size: 12px;
-        margin-top: 14px;
-    }
+// // add container and footer space
+// #app > div.container {
+//     margin-bottom: 100px;
+//     min-height: 100vh;
+// }
 
-    .badge-secondary {
-        background-color: #ebe8e8;
-    }
+// .post-show-page {
+//     .card {
+//         padding: 15px;
+//     }
+// }
 
-    .badge-hint {
-        background-color: #d15b47 !important;
-    }
-}
+// // notification
+// .notification-badge {
+//     .badge {
+//         font-size: 12px;
+//         margin-top: 14px;
+//     }
+
+//     .badge-secondary {
+//         background-color: #ebe8e8;
+//     }
+
+//     .badge-hint {
+//         background-color: #d15b47 !important;
+//     }
+// }

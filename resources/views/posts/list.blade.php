@@ -30,7 +30,7 @@
                         <i class="fas fa-tags text-primary"></i>
 
                         @foreach ($post->tags as $tag)
-                            <a class="badge badge-pill badge-primary badge-lg" href="{{ route('tags.show', $tag->id) }}" title="{{ $tag->name }}">
+                            <a class="btn btn-primary btn-sm rounded-pill" href="{{ route('tags.show', $tag->id) }}" role="button">
                                 {{ $tag->name }}
                             </a>
                         @endforeach

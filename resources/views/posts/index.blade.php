@@ -4,9 +4,9 @@
 @section('title', isset($category) ? $category->name : '所有文章')
 
 @section('content')
-    <div class="container post-index-page">
-        <div class="row">
-            <div class="col-lg-9 col-md-9 post-list">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-9 col-md-9">
 
                 {{-- 分類訊息區塊 --}}
                 @if (isset($category))

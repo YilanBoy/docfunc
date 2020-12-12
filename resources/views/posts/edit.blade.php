@@ -22,10 +22,7 @@
                         <hr>
                         <form action="{{ route('posts.update', $post->id) }}" method="POST" accept-charset="UTF-8">
                             @method('PUT')
-
                             @csrf
-
-                            @include('shared.error')
 
                             {{-- 文章標題 --}}
                             <div class="form-group">

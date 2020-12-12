@@ -1,43 +1,48 @@
 {{-- 回覆列表 --}}
-<ul class="list-unstyled">
+<ul class="list-group list-group-flush mt-4">
     @foreach ($replies as $index => $reply)
-        <li class=" media" name="reply{{ $reply->id }}" id="reply{{ $reply->id }}">
+        <li class="list-group-item d-flex justify-content-between align-items-center py-3"
+        name="reply{{ $reply->id }}" id="reply{{ $reply->id }}">
 
-            <div class="media-left align-self-center">
-                <a href="{{ route('users.show', [$reply->user_id]) }}">
-                    <img class="media-object img-thumbnail mr-3" alt="{{ $reply->user->name }}" src="{{ $reply->user->gravatar() }}" style="width:48px;height:48px;" />
-                </a>
-            </div>
-
-            <div class="media-body">
-                <div class="media-heading mt-0 mb-1 text-secondary">
-                    <a class="text-secondary" href="{{ route('users.show', [$reply->user_id]) }}" title="{{ $reply->user->name }}">
-                        {{ $reply->user->name }}
+            <div class="d-flex flex-row">
+                {{-- 作者大頭貼 --}}
+                <div class="d-flex justify-content-between align-items-center me-3">
+                    <a href="{{ route('users.show', [$reply->user_id]) }}">
+                        <img class="rounded-circle"
+                        alt="{{ $reply->user->name }}" src="{{ $reply->user->gravatar() }}""
+                        width="48px" height="48px">
                     </a>
-                    <span class="text-secondary"> • </span>
-                    <span class="text-secondary" title="{{ $reply->created_at }}">{{ $reply->created_at->diffForHumans() }}</span>
-                    {{-- 回覆刪除按鈕 --}}
-                    @can('destroy', $reply)
-                        <span class="float-right mt-2">
-                            <form action="{{ route('replies.destroy', $reply->id) }}"
-                            onsubmit="return confirm('確定刪除此評論？');"
-                            method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-default btn-xs pull-left text-secondary">
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
-                            </form>
-                        </span>
-                    @endcan
                 </div>
-                <div class="reply-content text-secondary">
-                    {!! $reply->content !!}
+
+                {{-- 回覆內容 --}}
+                <div class="d-flex flex-column">
+                    <div class="p-1">
+                        <a class="link-secondary text-decoration-none"
+                        href="{{ route('users.show', [$reply->user_id]) }}" title="{{ $reply->user->name }}">
+                            {{ $reply->user->name }}
+                        </a>
+                        <span class="text-secondary"> • </span>
+                        <span class="text-secondary" title="{{ $reply->created_at }}">{{ $reply->created_at->diffForHumans() }}</span>
+                    </div>
+
+                    <div class="card-text p-1">
+                        {!! $reply->content !!}
+                    </div>
                 </div>
             </div>
+
+            {{-- 回覆刪除按鈕 --}}
+            @can('destroy', $reply)
+                <form action="{{ route('replies.destroy', $reply->id) }}"
+                onsubmit="return confirm('確定刪除此評論？');"
+                method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </form>
+            @endcan
         </li>
-        @if (!$loop->last)
-            <hr>
-        @endif
     @endforeach
 </ul>

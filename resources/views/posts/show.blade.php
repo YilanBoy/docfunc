@@ -11,22 +11,22 @@
 @endsection
 
 @section('content')
-    <div class="container post-show-page">
-        <div class="row justify-content-md-center">
-            {{-- 文章 --}}
-            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 post-content">
+    <div class="container mb-5">
+        <div class="d-flex justify-content-center">
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                {{-- 文章 --}}
                 <div class="card shadow mb-4">
-                    <div class="card-body">
-                        <h3 class="text-center mt-3 mb-3">
-                            {{ $post->title }}
-                        </h3>
+                    <div class="card-body p-5">
+                        <h3 class="text-center mb-2">{{ $post->title }}</h3>
 
-                        <div class="article-meta text-center text-secondary mb-2">
+                        <div class="text-center text-secondary mb-2">
                             <i class="far fa-user"></i>
-                            <a class="text-secondary" href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}</a>
+                            <a class="link-secondary text-decoration-none"
+                            href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}</a>
                             •
                             <i class="far fa-folder"></i>
-                            <a class="text-secondary" href="{{ $post->category->linkWithName() }}">{{ $post->category->name }}</a>
+                            <a class="link-secondary text-decoration-none"
+                            href="{{ $post->category->linkWithName() }}">{{ $post->category->name }}</a>
                             •
                             <i class="far fa-clock"></i>
                             {{ $post->created_at->diffForHumans() }}
@@ -35,28 +35,33 @@
                             {{ $post->reply_count }}
                         </div>
 
-                        <div class="article-meta text-center">
+                        <div class="text-center mb-4">
                             {{-- 文章標籤--}}
                             @if ($post->tags()->exists())
                                 <i class="fas fa-tags text-primary"></i>
                                 @foreach ($post->tags as $tag)
-                                    <a class="badge badge-pill badge-primary badge-lg" href="{{ route('tags.show', $tag->id) }}" title="{{ $tag->name }}">
+                                    <a role="button" class="btn btn-primary btn-sm rounded-pill py-0 mb-1"
+                                    href="{{ route('tags.show', $tag->id) }}">
                                         {{ $tag->name }}
                                     </a>
                                 @endforeach
                             @endif
                         </div>
 
-                        <div class="ck-content mt-4 mb-4">
+                        <div class="ck-content mb-4">
                             {!! $post->body !!}
                         </div>
 
-                        <div class="bg-secondary d-flex justify-content-start" style="height: 120px;">
-                            <div class="align-self-center pl-4 mr-4">
+                        <div class="bg-secondary d-flex justify-content-start align-items-center p-4" style="height: 120px;">
+                            <div class="align-self-center me-4">
                                 <img class="rounded-circle" src="{{ $post->user->gravatar() }}" width="60px" height="60px">
                             </div>
-                            <div class="align-self-center d-flex flex-column">
-                                <h4><a class="text-white" href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}</a></h4>
+                            <div class="d-flex flex-column">
+                                <h4>
+                                    <a class="link-light text-decoration-none" href="{{ route('users.show', $post->user->id) }}">
+                                        {{ $post->user->name }}
+                                    </a>
+                                </h4>
                                 <span class="text-white">{{ $post->user->introduction }}</span>
                             </div>
                         </div>
@@ -65,8 +70,9 @@
                             <div class="operate">
                                 <hr>
 
-                                <div class="float-right">
-                                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-outline-secondary" role="button">
+                                <div class="d-flex justify-content-end">
+                                    <a role="button"  class="btn btn-outline-secondary me-2"
+                                    href="{{ route('posts.edit', $post->id) }}">
                                         <i class="far fa-edit mr-2"></i>編輯
                                     </a>
 
@@ -88,15 +94,14 @@
                 </div>
 
                 {{-- 會員回覆列表 --}}
-                <div class="card shadow post-reply mb-4">
-                    <div class="card-body">
+                <div class="card shadow mb-4">
+                    <div class="card-body p-5">
                         {{-- @includeWhen 可以依照條件來判斷要不要載入視圖 --}}
                         @includeWhen(Auth::check(), 'posts.reply-box', ['post' => $post])
+
                         @if ($post->replies->count() > 0)
                             {{-- latest() 等於 orderBy('created_at', 'desc') --}}
                             @include('posts.reply-list', ['replies' => $post->replies()->latest()->with('user', 'post')->get()])
-                        @else
-                            <div class="mt-1 mb-1">目前沒有任何評論~</div>
                         @endif
                     </div>
                 </div>

@@ -36,7 +36,7 @@
                                     <div class="form-floating mb-3">
                                         <input class="form-control @error('password') is-invalid @enderror" id="floatingInput" placeholder="password"
                                         type="password" name="password" required autofocus>
-                                        <label for="floatingInput">{{ __('Password') }}</label>
+                                        <label for="floatingInput">{{ __('Password') }}（最少 8 個字元）</label>
                                     </div>
 
                                     @error('password')

@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', 'RECODE')</title>
-    <meta name="description" content="@yield('description', 'Allen 的個人部落格')" />
+    <meta name="description" content="@yield('description', 'Allen 的個人部落格')">
     <link rel="shortcut icon" href="{{ asset('icon/icon.png') }}">
 
     {{-- Styles --}}

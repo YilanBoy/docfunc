@@ -3,7 +3,9 @@
     <div class="container">
         {{-- Branding Image --}}
         <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ asset('icon/icon.png') }}" style="width:30px;height:30px;margin-top:-4px;margin-right:4px;">
+            <img src="{{ asset('icon/icon.png') }}"
+            style="margin-top: -4px;margin-right: 4px;"
+            width="30px" height="30px">
             {{ config('app.name') }}
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

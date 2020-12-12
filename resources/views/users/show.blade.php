@@ -6,50 +6,65 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-3 hidden-sm hidden-xs user-info">
+
+            <div class="col-lg-3 col-md-3">
                 <div class="card shadow mb-4">
                     <img class="card-img-top" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}">
                     <div class="card-body">
-                        <h2 class="mb-0">{{ $user->name }}</h2>
+                        <h3 class="mb-0">{{ $user->name }}</h3>
                         <hr>
-                        <h4><strong>註冊於</strong></h4>
+                        <h5>註冊於</h5>
                         <p>{{ $user->created_at->format('Y / m / d') . '（' . $user->created_at->diffForHumans() . '）' }}</p>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                <div class="card ">
+                <div class="card p-3">
                     <div class="card-body">
-                        <h4><strong>個人簡介</strong></h4>
+                        <h4>個人簡介</h4>
                         <hr>
-                        <span>{{ $user->introduction }}</span>
+                        @if ($user->introduction)
+                            <p class="card-text">{{ $user->introduction }}</p>
+                        @else
+                            <p class="card-text">目前尚無個人簡介～</p>
+                        @endif
                     </div>
                 </div>
+
                 <hr>
 
                 {{-- 會員發布的內容 --}}
                 <div class="card shadow mb-4">
-                    <div class="card-body">
-                        <ul class="nav nav-tabs">
+
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
-                                <a class="nav-link bg-transparent
+                                <a href="{{ route('users.show', $user->id) }}"
                                 @if (!str_contains(request()->fullUrl(), 'replies'))
-                                    active
-                                @endif"
-                                href="{{ route('users.show', $user->id) }}">
-                                    文章
+                                    class="nav-link active" aria-current="true"
+                                @else
+                                    class="nav-link link-secondary"
+                                @endif
+                                >
+                                    <span class="fs-5">文章</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link bg-transparent
+                                <a href="{{ route('users.show', [$user->id, 'tab' => 'replies']) }}"
                                 @if (str_contains(request()->fullUrl(), 'replies'))
-                                    active
-                                @endif"
-                                href="{{ route('users.show', [$user->id, 'tab' => 'replies']) }}">
-                                    回覆
+                                    class="nav-link active" aria-current="true"
+                                @else
+                                    class="nav-link link-secondary"
+                                @endif
+                                >
+                                    <span class="fs-5">回覆</span>
                                 </a>
                             </li>
                         </ul>
+                    </div>
+
+                    <div class="card-body">
                         @if (str_contains(request()->getUri(), 'replies'))
                             @include('users.replies', ['replies' => $user->replies()->with('post')->latest()->paginate(10)])
                         @else

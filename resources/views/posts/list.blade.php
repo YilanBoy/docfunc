@@ -3,12 +3,12 @@
     @foreach ($posts as $post)
         <li class="list-group-item d-flex justify-content-between align-items-center">
 
-            {{-- 作者大頭貼 --}}
             <div class="d-flex flex-row">
+                {{-- 作者大頭貼 --}}
                 <div class="d-flex justify-content-between align-items-center me-4">
                     <a href="{{ route('users.show', [$post->user_id]) }}">
                         <img class="rounded-circle"
-                        src="{{ $post->user->gravatar() }}" title="{{ $post->user->name }}"
+                        alt="{{ $post->user->name }}" src="{{ $post->user->gravatar() }}"
                         width="52px" height="52px">
                     </a>
                 </div>

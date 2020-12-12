@@ -7,8 +7,8 @@
         <div class="d-flex justify-content-center">
             <div class="col-md-6">
 
-                <div class="card shadow py-3">
-                    <h5 class="card-header">{{ __('Verify Your Email Address') }}</h5>
+                <div class="card shadow">
+                    <h5 class="card-header py-3">{{ __('Verify Your Email Address') }}</h5>
 
                     <div class="card-body">
                         @if (session('resent'))
@@ -29,7 +29,7 @@
 
                         <form class="d-inline-flex" method="POST" action="{{ route('verification.send') }}">
                             @csrf
-                            <button type="submit" class="btn btn-link px-0 py-0 text-decoration-none">{{ __('click here to request another') }}</button>
+                            <button type="submit" class="btn btn-link p-0 text-decoration-none">{{ __('click here to request another') }}</button>
                         </form>
                     </div>
                 </div>

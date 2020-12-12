@@ -1,14 +1,18 @@
 {{-- 會員發布文章區塊 --}}
 @if ($posts->count())
-    <ul class="list-group mt-4 border-0">
+    <ul class="list-group list-group-flush mt-4">
         @foreach ($posts as $post)
-            <li class="list-group-item pl-2 pr-2 border-right-0 border-left-0 @if($loop->first) border-top-0 @endif">
-                <a href="{{ $post->linkWithSlug() }}">
+            <li class="list-group-item py-3 d-flex justify-content-between align-items-center">
+                {{-- 文章 --}}
+                <a class="text-decoration-none"
+                href="{{ $post->linkWithSlug() }}">
                     {{ $post->title }}
                 </a>
-                <span class="float-right text-secondary">
+
+                {{-- 文章發佈時間 --}}
+                <span class="text-secondary">
                     {{ $post->reply_count }} 回覆
-                    <span> ⋅ </span>
+                    <span> • </span>
                     {{ $post->created_at->diffForHumans() }}
                 </span>
             </li>
@@ -16,7 +20,7 @@
     </ul>
 
     {{-- 分頁 --}}
-    <div class="d-flex justify-content-center mt-4 pt-1">
+    <div class="d-flex justify-content-center mt-4">
         {{ $posts->onEachSide(1)->links() }}
     </div>
 @else

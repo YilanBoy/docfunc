@@ -30,7 +30,7 @@
                                 @if (!str_contains(request()->fullUrl(), 'recent'))
                                     class="nav-link active" aria-current="true"
                                 @else
-                                    class="nav-link"
+                                    class="nav-link link-secondary"
                                 @endif
                                 >
                                     <span class="fs-5">最新發佈</span>
@@ -41,7 +41,7 @@
                                 @if (str_contains(request()->fullUrl(), 'recent'))
                                     class="nav-link active" aria-current="true"
                                 @else
-                                    class="nav-link"
+                                    class="nav-link link-secondary"
                                 @endif
                                 >
                                     <span class="fs-5">最新回覆</span>

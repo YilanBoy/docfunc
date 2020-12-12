@@ -7,7 +7,7 @@
         <div class="d-flex justify-content-center">
             <div class="col-md-6">
 
-                <div class="card shadow">
+                <div class="card shadow py-3">
                     <h5 class="card-header">{{ __('Verify Your Email Address') }}</h5>
 
                     <div class="card-body">

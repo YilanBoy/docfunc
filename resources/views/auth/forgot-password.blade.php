@@ -13,7 +13,7 @@
                 @endif
 
                 <div class="card shadow">
-                    <h5 class="card-header">{{ __('Forgot Password') }}</h5>
+                    <h5 class="card-header py-3">{{ __('Forgot Password') }}</h5>
 
                     <div class="d-flex justify-content-center">
                         <div class="col-md-8">

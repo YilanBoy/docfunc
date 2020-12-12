@@ -14,7 +14,7 @@
             <div class="col-md-6">
 
                 <div class="card shadow">
-                    <h5 class="card-header">{{ __('Register') }}</h5>
+                    <h5 class="card-header py-3">{{ __('Register') }}</h5>
 
                     <div class="card-body">
                         <div class="d-flex justify-content-center">

@@ -1,5 +1,5 @@
 {{-- header --}}
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow navbar-border-top mb-5">
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow navbar-border-top py-3 mb-5">
     <div class="container">
         {{-- Branding Image --}}
         <a class="navbar-brand" href="{{ url('/') }}">
@@ -14,16 +14,26 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link @if (request()->url() == route('posts.index')) active"  aria-current="page" @else " @endif
-                    href="{{ route('posts.index') }}">
+                    <a href="{{ route('posts.index') }}"
+                    @if (request()->url() == route('posts.index'))
+                        class="nav-link active"  aria-current="page"
+                    @else
+                        class="nav-link"
+                    @endif
+                    >
                         <i class="fas fa-home"></i> 所有文章
                     </a>
                 </li>
                 {{-- 這裡的 $categories 使用的是 View::share() 方法取得值，寫在 AppServiceProvider.php 中 --}}
                 @foreach ($categories as $category)
                     <li class="nav-item">
-                        <a class="nav-link @if (request()->url() == $category->linkWithName()) active"  aria-current="page" @else " @endif
-                        href="{{ $category->linkWithName() }}">
+                        <a href="{{ $category->linkWithName() }}"
+                        @if (request()->url() == $category->linkWithName())
+                            class="nav-link active"  aria-current="page"
+                        @else
+                            class="nav-link"
+                        @endif
+                        >
                             <i class="{{ $category->icon }}"></i> {{ $category->name }}
                         </a>
                     </li>

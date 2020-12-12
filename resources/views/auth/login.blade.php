@@ -20,7 +20,7 @@
                 @endif
 
                 <div class="card shadow">
-                    <h5 class="card-header">{{ __('Login') }}</h5>
+                    <h5 class="card-header py-3">{{ __('Login') }}</h5>
 
                     <div class="card-body">
                         <div class="d-flex justify-content-center">

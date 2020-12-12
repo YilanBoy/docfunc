@@ -6,7 +6,8 @@
             <a href="{{ route('users.show', $notification->data['user_id']) }}">
                 <img class="rounded-circle"
                 alt="{{ $notification->data['user_name'] }}"
-                src="{{ $notification->data['user_avatar'] }}" width="48px" height="48px">
+                src="{{ $notification->data['user_avatar'] }}"
+                width="48px" height="48px">
             </a>
         </div>
 

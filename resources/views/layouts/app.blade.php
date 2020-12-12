@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="min-vh-100 position-relative" lang="{{ app()->getLocale() }}">
+<html class="min-vh-100" lang="{{ app()->getLocale() }}">
 
 <head>
     <meta charset="utf-8">
@@ -21,12 +21,12 @@
     @yield('scriptsInHead')
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     @include('layouts.header')
 
     @yield('content')
 
-    {{-- @include('layouts.footer') --}}
+    @include('layouts.footer')
 
     {{-- Scripts --}}
     <script src="{{ asset('js/app.js') }}"></script>

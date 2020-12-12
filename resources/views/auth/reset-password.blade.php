@@ -7,7 +7,7 @@
         <div class="d-flex justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow">
-                    <h5 class="card-header">{{ __('Reset Password') }}</h5>
+                    <h5 class="card-header py-3">{{ __('Reset Password') }}</h5>
 
                     <div class="card-body">
                         <div class="d-flex justify-content-center">

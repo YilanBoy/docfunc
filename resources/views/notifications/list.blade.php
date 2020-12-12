@@ -1,6 +1,6 @@
 {{-- 通知列表區塊 --}}
 <li class="list-group-item px-0">
-    <div class="d-flex">
+    <div class="d-flex p-2">
         {{-- 大頭貼 --}}
         <div class="flex-fill w-15 d-flex justify-content-center align-items-center me-1">
             <a href="{{ route('users.show', $notification->data['user_id']) }}">

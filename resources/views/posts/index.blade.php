@@ -5,8 +5,8 @@
 
 @section('content')
     <div class="container mb-5">
-        <div class="row g-4">
-            <div class="col-lg-9 col-md-9">
+        <div class="row justify-content-md-center g-4">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                 {{-- 分類訊息區塊 --}}
                 @if (isset($category))
                     <div class="alert alert-primary border border-primary" role="alert">

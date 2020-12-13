@@ -5,15 +5,15 @@
 
 @section('content')
     <div class="container mb-5">
-        <div class="d-flex justify-content-center">
-            <div class="col-md-6">
+        <div class="row justify-content-md-center">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
                 <div class="card shadow">
                     <h5 class="card-header py-3"><i class="fas fa-user-edit"></i> 編輯個人資料</h5>
 
-                    <div class="card-body">
+                    <div class="card-body px-3">
                         <div class="d-flex justify-content-center">
-                            <div class="col-md-11">
+                            <div class="w-100">
 
                                 <form action="{{ route('users.update', $user->id) }}" method="POST" accept-charset="UTF-8">
                                     @method('PUT')

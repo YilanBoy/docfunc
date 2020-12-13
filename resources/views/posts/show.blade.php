@@ -12,11 +12,12 @@
 
 @section('content')
     <div class="container mb-5">
-        <div class="d-flex justify-content-center">
-            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+        <div class="row justify-content-md-center">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
                 {{-- 文章 --}}
                 <div class="card shadow mb-4">
-                    <div class="card-body p-5">
+                    <div class="card-body p-4">
                         <h3 class="text-center mb-2">{{ $post->title }}</h3>
 
                         <div class="text-center text-secondary mb-2">
@@ -52,20 +53,6 @@
                             {!! $post->body !!}
                         </div>
 
-                        <div class="bg-secondary d-flex justify-content-start align-items-center p-4" style="height: 120px;">
-                            <div class="align-self-center me-4">
-                                <img class="rounded-circle" src="{{ $post->user->gravatar() }}" width="60px" height="60px">
-                            </div>
-                            <div class="d-flex flex-column">
-                                <h4>
-                                    <a class="link-light text-decoration-none" href="{{ route('users.show', $post->user->id) }}">
-                                        {{ $post->user->name }}
-                                    </a>
-                                </h4>
-                                <span class="text-white">{{ $post->user->introduction }}</span>
-                            </div>
-                        </div>
-
                         @can('update', $post)
                             <div class="operate">
                                 <hr>
@@ -90,6 +77,24 @@
 
                             </div>
                         @endcan
+                    </div>
+                </div>
+
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-start align-items-center p-4">
+                            <div class="align-self-center me-4">
+                                <img class="rounded-circle" src="{{ $post->user->gravatar() }}" width="60px" height="60px">
+                            </div>
+                            <div class="d-flex flex-column">
+                                <h4>
+                                    <a class="link-dark text-decoration-none" href="{{ route('users.show', $post->user->id) }}">
+                                        {{ $post->user->name }}
+                                    </a>
+                                </h4>
+                                <span class="text-dark">{{ $post->user->introduction }}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

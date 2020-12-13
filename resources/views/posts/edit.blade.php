@@ -10,12 +10,12 @@
 
 @section('content')
     <div class="container mb-5">
-        <div class="d-flex justify-content-center">
-            <div class="col-md-9">
+        <div class="row justify-content-md-center">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 
                 <div class="card shadow">
 
-                    <h3 class="card-header"><i class="far fa-edit"></i> 編輯文章</h3>
+                    <h3 class="card-header py-3"><i class="far fa-edit"></i> 編輯文章</h3>
 
                     <div class="card-body">
                         <form action="{{ route('posts.update', $post->id) }}" method="POST" accept-charset="UTF-8">

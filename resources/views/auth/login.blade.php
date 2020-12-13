@@ -9,9 +9,9 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="d-flex justify-content-center">
-            <div class="col-md-6">
+    <div class="container mb-5">
+        <div class="row justify-content-md-center">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
                 @if (session('status'))
                     <div class="alert alert-success border border-success" role="alert">
@@ -24,7 +24,7 @@
 
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
-                            <div class="col-md-8">
+                            <div class="w-75">
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
 

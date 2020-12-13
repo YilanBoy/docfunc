@@ -3,9 +3,10 @@
 @section('title', '忘記密碼')
 
 @section('content')
-    <div class="container">
-        <div class="d-flex justify-content-center">
-            <div class="col-md-6">
+    <div class="container mb-5">
+        <div class="row justify-content-md-center">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
                 @if (session('status'))
                     <div class="alert alert-success border border-success" role="alert">
                         {{ session('status') }}
@@ -15,10 +16,10 @@
                 <div class="card shadow">
                     <h5 class="card-header py-3">{{ __('Forgot Password') }}</h5>
 
-                    <div class="d-flex justify-content-center">
-                        <div class="col-md-8">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                            <div class="w-75">
 
-                            <div class="card-body">
                                 <form method="POST" action="{{ route('password.email') }}">
                                     @csrf
 

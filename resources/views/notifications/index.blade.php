@@ -4,9 +4,9 @@
 @section('title', '我的通知')
 
 @section('content')
-    <div class="container">
-        <div class="d-flex justify-content-center">
-            <div class="col-md-9">
+<div class="container mb-5">
+    <div class="row justify-content-md-center">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 
                 <div class="card shadow">
                     <h3 class="card-header py-3"><i class="far fa-bell" aria-hidden="true"></i> 我的通知</h3>

@@ -2,19 +2,29 @@
 @if ($posts->count())
     <ul class="list-group list-group-flush mt-4">
         @foreach ($posts as $post)
-            <li class="list-group-item py-3 d-flex justify-content-between align-items-center">
-                {{-- 文章 --}}
-                <a class="text-decoration-none"
-                href="{{ $post->linkWithSlug() }}">
-                    {{ $post->title }}
-                </a>
+            <li class="list-group-item py-3">
 
-                {{-- 文章發佈時間 --}}
-                <span class="text-secondary">
-                    {{ $post->reply_count }} 回覆
-                    <span> • </span>
-                    {{ $post->created_at->diffForHumans() }}
-                </span>
+                <div class="row">
+
+                    <div class="col-9">
+                        {{-- 文章 --}}
+                        <a class="text-decoration-none"
+                        href="{{ $post->linkWithSlug() }}">
+                            {{ $post->title }}
+                        </a>
+                    </div>
+
+                    <div class="col-3 d-flex justify-content-end align-items-center">
+                        {{-- 文章發佈時間 --}}
+                        <span class="text-secondary">
+                            {{ $post->reply_count }} 回覆
+                            <span> • </span>
+                            {{ $post->created_at->diffForHumans() }}
+                        </span>
+                    </div>
+
+                </div>
+
             </li>
         @endforeach
     </ul>

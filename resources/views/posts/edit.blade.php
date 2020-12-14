@@ -27,6 +27,14 @@
                                 <input class="form-control" type="text" name="title" value="{{ old('title', $post->title ) }}" placeholder="請填寫標題" required>
                             </div>
 
+                            @error('title')
+                                <div class="mb-3">
+                                    <span class="text-danger">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                </div>
+                            @enderror
+
                             {{-- 文章分類 --}}
                             <div class="mb-3">
                                 <select class="form-select" name="category_id" required>
@@ -40,6 +48,14 @@
                                 </select>
                             </div>
 
+                            @error('category_id')
+                                <div class="mb-3">
+                                    <span class="text-danger">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                </div>
+                            @enderror
+
                             {{-- 文章標籤 --}}
                             <div class="mb-3">
                                 <input class="form-control" type="text" id="tag-input" name="tags" value="{{ old('tags', $post->tags) }}" placeholder="輸入標籤（最多 5 個）">
@@ -49,6 +65,14 @@
                             <div class="mb-3">
                                 <textarea name="body" id="editor" placeholder="請填寫文章內容～">{{ old('body', $post->body ) }}</textarea>
                             </div>
+
+                            @error('body')
+                                <div class="mb-3">
+                                    <span class="text-danger">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                </div>
+                            @enderror
 
                             <div class="d-flex justify-content-between align-items-center">
                                 {{-- 顯示文章總字數 --}}

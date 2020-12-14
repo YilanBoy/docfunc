@@ -21,7 +21,7 @@
     @yield('scriptsInHead')
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100 bg-gradient-blue">
     @include('layouts.header')
 
     @yield('content')

@@ -33,7 +33,7 @@
                                     class="nav-link link-secondary"
                                 @endif
                                 >
-                                    <span class="fs-5">最新發佈</span>
+                                    <span class="fs-5">最新文章</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -44,7 +44,7 @@
                                     class="nav-link link-secondary"
                                 @endif
                                 >
-                                    <span class="fs-5">最新回覆</span>
+                                    <span class="fs-5">最近更新</span>
                                 </a>
                             </li>
                         </ul>

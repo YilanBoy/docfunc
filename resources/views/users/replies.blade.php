@@ -3,26 +3,31 @@
 
     <ul class="list-group list-group-flush mt-4">
         @foreach ($replies as $reply)
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{-- 回覆 --}}
-                <div class="d-flex flex-column">
-                    <div class="p-1">
-                        <a class="text-decoration-none"
-                        href="{{ $reply->post->linkWithSlug(['#reply' . $reply->id]) }}">
-                            {{ $reply->post->title }}
-                        </a>
+            <li class="list-group-item">
+
+                <div class="row">
+                    {{-- 回覆 --}}
+                    <div class="col-9 d-flex flex-column justify-content-start">
+                        <div class="p-1">
+                            <a class="text-decoration-none"
+                            href="{{ $reply->post->linkWithSlug(['#reply' . $reply->id]) }}">
+                                {{ $reply->post->title }}
+                            </a>
+                        </div>
+
+                        <div class="p-1">
+                            <p class="card-text">
+                                {!! $reply->content !!}
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="p-1">
-                        <p class="card-text">
-                            {!! $reply->content !!}
-                        </p>
+                    {{-- 回覆時間 --}}
+                    <div class="col-3 d-flex justify-content-end align-items-center">
+                        <span class="text-secondary">
+                            <i class="far fa-clock"></i> 回覆於 {{ $reply->created_at->diffForHumans() }}
+                        </span>
                     </div>
-                </div>
-
-                {{-- 回覆時間 --}}
-                <div class="text-secondary">
-                    <i class="far fa-clock"></i> 回覆於 {{ $reply->created_at->diffForHumans() }}
                 </div>
             </li>
         @endforeach

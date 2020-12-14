@@ -17,29 +17,31 @@
 
                 {{-- 文章 --}}
                 <div class="card shadow mb-4">
-                    <div class="card-body p-4">
+                    <div class="card-body px-4 py-5">
                         <h3 class="text-center mb-2">{{ $post->title }}</h3>
 
-                        <div class="text-center text-secondary mb-2">
-                            <i class="far fa-user"></i>
-                            <a class="link-secondary text-decoration-none"
-                            href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}</a>
-                            •
-                            <i class="far fa-folder"></i>
-                            <a class="link-secondary text-decoration-none"
-                            href="{{ $post->category->linkWithName() }}">{{ $post->category->name }}</a>
-                            •
-                            <i class="far fa-clock"></i>
-                            {{ $post->created_at->diffForHumans() }}
-                            •
-                            <i class="far fa-comment"></i>
-                            {{ $post->reply_count }}
+                        <div class="text-center mb-2">
+                            <span class="text-secondary">
+                                <i class="far fa-user"></i>
+                                <a class="link-secondary text-decoration-none"
+                                href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}</a>
+                                •
+                                <i class="far fa-folder"></i>
+                                <a class="link-secondary text-decoration-none"
+                                href="{{ $post->category->linkWithName() }}">{{ $post->category->name }}</a>
+                                •
+                                <i class="far fa-clock"></i>
+                                {{ $post->created_at->diffForHumans() }}
+                                •
+                                <i class="far fa-comment"></i>
+                                {{ $post->reply_count }}
+                            </span>
                         </div>
 
                         <div class="text-center mb-4">
                             {{-- 文章標籤--}}
                             @if ($post->tags()->exists())
-                                <i class="fas fa-tags text-primary"></i>
+                                <span class="text-primary"><i class="fas fa-tags"></i></span>
                                 @foreach ($post->tags as $tag)
                                     <a role="button" class="btn btn-primary btn-sm rounded-pill py-0 mb-1"
                                     href="{{ route('tags.show', $tag->id) }}">
@@ -55,6 +57,7 @@
 
                         @can('update', $post)
                             <div class="operate">
+
                                 <hr>
 
                                 <div class="d-flex justify-content-end">

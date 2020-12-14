@@ -26,7 +26,7 @@
                     <div class="p-1">
                         {{-- 文章標籤--}}
                         @if ($post->tags->count() > 0)
-                            <i class="fas fa-tags text-primary"></i>
+                            <span class="text-primary"><i class="fas fa-tags"></i></span>
 
                             @foreach ($post->tags as $tag)
                                 <a role="button" class="btn btn-primary btn-sm rounded-pill py-0" href="{{ route('tags.show', $tag->id) }}">

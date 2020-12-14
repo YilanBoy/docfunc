@@ -26,11 +26,13 @@
                                     </div>
 
                                     <div class="d-flex justify-content-center mb-3">
-                                        <span>會員大頭貼由</span>
-                                        <a class="text-decoration-none"
-                                        href="https://zh-tw.gravatar.com/"
-                                        target="_blank" rel="nofollow noopener noreferrer">Gravatar</a>
-                                        <span>技術提供</span>
+                                        <span>
+                                            會員大頭貼由
+                                            <a class="text-decoration-none"
+                                            href="https://zh-tw.gravatar.com/"
+                                            target="_blank" rel="nofollow noopener noreferrer"> Gravatar </a>
+                                            技術提供
+                                        </span>
                                     </div>
 
                                     {{-- E-mail --}}

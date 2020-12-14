@@ -103,7 +103,7 @@
 
                 {{-- 會員回覆列表 --}}
                 <div class="card shadow mb-4">
-                    <div class="card-body p-5">
+                    <div class="card-body p-4">
                         {{-- @includeWhen 可以依照條件來判斷要不要載入視圖 --}}
                         @includeWhen(Auth::check(), 'posts.reply-box', ['post' => $post])
 

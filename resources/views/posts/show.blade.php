@@ -11,13 +11,40 @@
 @endsection
 
 @section('content')
+    {{-- 返回頂部按鈕 --}}
+    <button  class="btn btn-danger d-none position-fixed"
+    style="bottom: 30px;right: 30px;z-index: 99;"
+    onclick="topFunction()" id="scroll-btn" title="Go to top">返回頂部</button>
+
     <div class="container mb-5">
         <div class="row justify-content-md-center">
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 
+                {{-- 編輯區塊 --}}
+                @can('update', $post)
+                    <div class="d-flex justify-content-end mb-2">
+                        <a role="button"  class="btn btn-outline-success me-2"
+                        href="{{ route('posts.edit', $post->id) }}">
+                            <i class="far fa-edit mr-2"></i> 編輯
+                        </a>
+
+                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
+                        style="display: inline-block;"
+                        onsubmit="return confirm('您確定要刪除嗎？')">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit" class="btn btn-outline-danger">
+                                <i class="far fa-trash-alt mr-2"></i> 刪除
+                            </button>
+                        </form>
+                    </div>
+                @endcan
+
                 {{-- 文章 --}}
                 <div class="card shadow mb-4">
-                    <div class="card-body px-4 py-5">
+                    <div class="card-body p-4">
+
                         <h3 class="text-center mb-2">{{ $post->title }}</h3>
 
                         <div class="text-center mb-2">
@@ -55,36 +82,8 @@
                             {!! $post->body !!}
                         </div>
 
-                        @can('update', $post)
-                            <div class="operate">
+                        <hr>
 
-                                <hr>
-
-                                <div class="d-flex justify-content-end">
-                                    <a role="button"  class="btn btn-outline-secondary me-2"
-                                    href="{{ route('posts.edit', $post->id) }}">
-                                        <i class="far fa-edit mr-2"></i>編輯
-                                    </a>
-
-                                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
-                                    style="display: inline-block;"
-                                    onsubmit="return confirm('您確定要刪除嗎？')">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button type="submit" class="btn btn-outline-secondary">
-                                            <i class="far fa-trash-alt mr-2"></i>刪除
-                                        </button>
-                                    </form>
-                                </div>
-
-                            </div>
-                        @endcan
-                    </div>
-                </div>
-
-                <div class="card shadow mb-4">
-                    <div class="card-body">
                         <div class="d-flex justify-content-start align-items-center p-4">
                             <div class="align-self-center me-4">
                                 <img class="rounded-circle" src="{{ $post->user->gravatar() }}" width="60px" height="60px">
@@ -101,24 +100,21 @@
                     </div>
                 </div>
 
-                {{-- 會員回覆列表 --}}
-                <div class="card shadow mb-4">
-                    <div class="card-body p-4">
-                        {{-- @includeWhen 可以依照條件來判斷要不要載入視圖 --}}
-                        @includeWhen(Auth::check(), 'posts.reply-box', ['post' => $post])
+                {{-- 回覆表單 --}}
+                {{-- @includeWhen 可以依照條件來判斷要不要載入視圖 --}}
+                @includeWhen(Auth::check(), 'posts.reply-box', ['post' => $post])
 
-                        @if ($post->replies->count() > 0)
-                            {{-- latest() 等於 orderBy('created_at', 'desc') --}}
-                            @include('posts.reply-list', ['replies' => $post->replies()->latest()->with('user', 'post')->get()])
-                        @endif
-                    </div>
-                </div>
+                {{-- 會員回覆列表 --}}
+                {{-- latest() 等於 orderBy('created_at', 'desc') --}}
+                @includeWhen($post->replies->count() > 0, 'posts.reply-list', ['replies' => $post->replies()->latest()->with('user', 'post')->get()])
+
             </div>
         </div>
     </div>
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('js/scroll.to.top.js') }}"></script>
     {{-- 文章中的嵌入影片顯示 --}}
     <script async charset="utf-8" src="{{ asset('js/platform.js') }}"></script>
     <script src="{{ asset('js/embedly.js') }}"></script>

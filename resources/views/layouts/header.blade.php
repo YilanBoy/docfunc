@@ -61,10 +61,11 @@
                             <i class="fas fa-plus"></i>
                         </a>
                     </li>
+
                     {{-- 通知顯示 --}}
                     <li class="nav-item d-flex justify-content-start align-items-center me-2">
                         <a class="nav-link" href="{{ route('notifications.index') }}">
-                            <span class="badge rounded-pill bg-{{ Auth::user()->notification_count > 0 ? 'danger' : 'secondary' }}">
+                            <span class="btn btn-{{ Auth::user()->notification_count > 0 ? 'danger' : 'secondary' }} btn-sm rounded-pill py-0">
                                 {{ Auth::user()->notification_count }}
                             </span>
                         </a>

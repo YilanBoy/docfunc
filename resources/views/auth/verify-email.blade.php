@@ -8,7 +8,9 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
                 <div class="card shadow">
-                    <h5 class="card-header py-3">{{ __('Verify Your Email Address') }}</h5>
+                    <h5 class="card-header py-3">
+                        <i class="fas fa-exclamation-triangle"></i> {{ __('Verify Your Email Address') }}
+                    </h5>
 
                     <div class="card-body">
                         @if (session('resent'))

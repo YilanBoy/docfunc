@@ -56,13 +56,13 @@
                 {{-- 已登入 --}}
                 @else
                     {{-- 新增文章 --}}
-                    <li class="nav-item me-2">
+                    <li class="nav-item d-flex justify-content-start align-items-center me-2">
                         <a class="nav-link" href="{{ route('posts.create') }}">
                             <i class="fas fa-plus"></i>
                         </a>
                     </li>
                     {{-- 通知顯示 --}}
-                    <li class="nav-item me-2">
+                    <li class="nav-item d-flex justify-content-start align-items-center me-2">
                         <a class="nav-link" href="{{ route('notifications.index') }}">
                             <span class="badge rounded-pill bg-{{ Auth::user()->notification_count > 0 ? 'danger' : 'secondary' }}">
                                 {{ Auth::user()->notification_count }}

@@ -14,7 +14,9 @@
     {{-- 返回頂部按鈕 --}}
     <button  class="btn btn-danger d-none position-fixed"
     style="bottom: 30px;right: 30px;z-index: 99;"
-    onclick="topFunction()" id="scroll-btn" title="Go to top">返回頂部</button>
+    onclick="topFunction()" id="scroll-btn" title="Go to top">
+        <i class="fas fa-arrow-up"></i> 返回頂部
+    </button>
 
     <div class="container mb-5">
         <div class="row justify-content-md-center">

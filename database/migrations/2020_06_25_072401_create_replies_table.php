@@ -9,15 +9,20 @@ class CreateRepliesTable extends Migration
     {
         Schema::create('replies', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('post_id')->unsigned()->default(0)->index();
-            $table->bigInteger('user_id')->unsigned()->default(0)->index();
             $table->text('content');
             $table->timestamps();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('post_id')->constrained()->onDelete('cascade');
         });
     }
 
     public function down()
     {
+        Schema::table('replies', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['post_id']);
+        });
+
         Schema::drop('replies');
     }
 }

@@ -6,7 +6,7 @@
 @section('content')
     <div class="container mb-5">
         <div class="row justify-content-md-center g-4">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
                 {{-- 分類訊息區塊 --}}
                 @if (isset($category))
                     <div class="alert alert-primary border border-primary" role="alert">
@@ -68,7 +68,7 @@
             </div>
 
             {{-- 文章列表側邊欄區塊 --}}
-            <div class="col-lg-3 col-md-3">
+            <div class="col-lg-3">
                 @include('posts.sidebar')
             </div>
         </div>

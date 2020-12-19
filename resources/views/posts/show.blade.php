@@ -20,7 +20,7 @@
 
     <div class="container mb-5">
         <div class="row justify-content-md-center">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
 
                 {{-- 編輯區塊 --}}
                 @can('update', $post)

@@ -5,7 +5,7 @@
 @section('content')
     <div class="container mb-5">
         <div class="row justify-content-md-center">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="col-12 col-xl-6">
 
                 @if (session('status'))
                     <div class="alert alert-success border border-success" role="alert">

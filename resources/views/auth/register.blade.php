@@ -11,7 +11,7 @@
 @section('content')
     <div class="container mb-5">
         <div class="row justify-content-md-center">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="col-12 col-xl-6">
 
                 <div class="card shadow">
                     <h5 class="card-header py-3"><i class="fas fa-user-plus"></i> {{ __('Register') }}</h5>

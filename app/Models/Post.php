@@ -34,17 +34,13 @@ class Post extends Model
         return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
     }
 
-    public function scopeWithOrder($query, $order)
+    public function scopeWithOrder($query, ?string $order)
     {
         // 不同的排序，使用不同的數據讀取邏輯
-        switch ($order) {
-            case 'recent':
-                $query->recentReplied();
-                break;
-
-            default:
-                $query->latest();
-                break;
+        if ($order === 'recent') {
+            $query->recentReplied();
+        } else {
+            $query->latest();
         }
     }
 
@@ -57,13 +53,13 @@ class Post extends Model
 
     // 將連結加上 slug
     // $params 設定為 array，是為了方便 merge
-    public function linkWithSlug($params = [])
+    public function linkWithSlug(array $params = [])
     {
         return route('posts.show', array_merge([$this->id, $this->slug], $params));
     }
 
     // 更新回覆數量
-    public function updateReplyCount()
+    public function updateReplyCount(): void
     {
         $this->reply_count = $this->replies->count();
         $this->save();

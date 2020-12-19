@@ -53,12 +53,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Reply::class);
     }
 
-    public function isAuthorOf($model)
+    public function isAuthorOf($model): bool
     {
         return $this->id == $model->user_id;
     }
 
-    public function postNotify($instance)
+    public function postNotify($instance): void
     {
         // 如果要通知的人是當前用戶，就不必通知了！
         if ($this->id == Auth::id()) {
@@ -69,14 +69,14 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->notify($instance);
     }
 
-    public function markAsRead()
+    public function markAsRead(): void
     {
         $this->notification_count = 0;
         $this->save();
         $this->unreadNotifications->markAsRead();
     }
 
-    public function gravatar($size = '100')
+    public function gravatar(string $size = '100'): string
     {
         $hash = md5(strtolower(trim($this->attributes['email'])));
         return 'https://www.gravatar.com/avatar/' . $hash . '?s=' . $size;

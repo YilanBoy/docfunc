@@ -116,7 +116,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/scroll.to.top.js') }}"></script>
+    <script src="{{ asset('js/scroll-to-top.js') }}"></script>
     {{-- 文章中的嵌入影片顯示 --}}
     <script async charset="utf-8" src="{{ asset('js/platform.js') }}"></script>
     <script src="{{ asset('js/embedly.js') }}"></script>

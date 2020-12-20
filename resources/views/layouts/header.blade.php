@@ -77,23 +77,31 @@
                             <img src="{{ Auth::user()->gravatar() }}" class="rounded-circle me-2" width="30px" height="30px">
                             {{ Auth::user()->name }}
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('users.show', Auth::id()) }}">
-                                    <i class="far fa-user me-2"></i>個人頁面
-                            </a>
-                            <a class="dropdown-item" href="{{ route('users.edit', Auth::id()) }}">
-                                <i class="far fa-edit me-2"></i>編輯資料
-                            </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('users.show', Auth::id()) }}">
+                                        <i class="far fa-user me-2"></i>個人頁面
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('users.edit', Auth::id()) }}">
+                                    <i class="far fa-edit me-2"></i>編輯資料
+                                </a>
+                            </li>
+
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">
-                                <div class="d-flex justify-content-center">
-                                    <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('您確定要登出？');">
-                                        @csrf
-                                        <button class="btn btn-danger" type="submit" name="button"><i class="fas fa-sign-out-alt"></i> 登出</button>
-                                    </form>
-                                </div>
-                            </a>
-                        </div>
+
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <div class="d-flex justify-content-center">
+                                        <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('您確定要登出？');">
+                                            @csrf
+                                            <button class="btn btn-danger" type="submit" name="button"><i class="fas fa-sign-out-alt"></i> 登出</button>
+                                        </form>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 @endguest
             </ul>

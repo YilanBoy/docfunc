@@ -1,9 +1,17 @@
 # Personal-Blog
 
+## Introduction
+
 This is a simple blog made by [Laravel](https://laravel.com/) and [Bootstrap](https://getbootstrap.com/)  
 The features of this blog include login and logout, registration, post publishing, tags, comments and personal pages  
 WYSIWYG editor use [CKEditor 5](https://ckeditor.com/), image upload use [CKFinder](https://ckeditor.com/ckfinder/)  
 You can upload image to AWS S3 in blog post.
+
+## Requirements
+
+[php](https://www.php.net/) >= 7.3  
+[composer](https://getcomposer.org/)  
+[npm](https://www.npmjs.com/)
 
 ## Installation
 

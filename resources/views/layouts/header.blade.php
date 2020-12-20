@@ -80,7 +80,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
                                 <a class="dropdown-item" href="{{ route('users.show', Auth::id()) }}">
-                                        <i class="far fa-user me-2"></i>個人頁面
+                                    <i class="far fa-user me-2"></i>個人頁面
                                 </a>
                             </li>
                             <li>

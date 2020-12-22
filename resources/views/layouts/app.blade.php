@@ -30,17 +30,18 @@
 
     {{-- Scripts --}}
     <script src="{{ asset('js/app.js') }}"></script>
+
+    @yield('scripts')
+
     @foreach (['warning', 'success', 'info'] as $msg)
         @if(session()->has($msg))
             <script>
                 var sweetalert2Title = '{{ session()->get($msg) }}';
                 var sweetalert2Icon = '{{ $msg }}';
             </script>
-            <script src="{{ asset('js/sweet.alert.js') }}"></script>
+            <script src="{{ asset('js/sweet-alert.js') }}"></script>
         @endif
     @endforeach
-
-    @yield('scripts')
 
 </body>
 

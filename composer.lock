@@ -64,16 +64,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.171.2",
+            "version": "3.171.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "742663a85ec84647f74dea454d2dc45bba180f9d"
+                "reference": "6c32f57bc381b46c783f70a20060fde1a95f4ab5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/742663a85ec84647f74dea454d2dc45bba180f9d",
-                "reference": "742663a85ec84647f74dea454d2dc45bba180f9d",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6c32f57bc381b46c783f70a20060fde1a95f4ab5",
+                "reference": "6c32f57bc381b46c783f70a20060fde1a95f4ab5",
                 "shasum": ""
             },
             "require": {
@@ -148,9 +148,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.171.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.171.7"
             },
-            "time": "2020-12-18T19:12:13+00:00"
+            "time": "2020-12-28T19:12:41+00:00"
         },
         {
             "name": "brick/math",
@@ -531,16 +531,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.24",
+            "version": "2.1.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "ca90a3291eee1538cd48ff25163240695bd95448"
+                "reference": "0dbf5d78455d4d6a41d186da50adc1122ec066f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/ca90a3291eee1538cd48ff25163240695bd95448",
-                "reference": "ca90a3291eee1538cd48ff25163240695bd95448",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/0dbf5d78455d4d6a41d186da50adc1122ec066f4",
+                "reference": "0dbf5d78455d4d6a41d186da50adc1122ec066f4",
                 "shasum": ""
             },
             "require": {
@@ -587,7 +587,7 @@
             ],
             "support": {
                 "issues": "https://github.com/egulias/EmailValidator/issues",
-                "source": "https://github.com/egulias/EmailValidator/tree/2.1.24"
+                "source": "https://github.com/egulias/EmailValidator/tree/2.1.25"
             },
             "funding": [
                 {
@@ -595,7 +595,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-14T15:56:27+00:00"
+            "time": "2020-12-29T14:50:06+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -1149,16 +1149,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.19.0",
+            "version": "v8.20.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "f5f331cee60f1bbe672503b7eb9ba5b22b2ceacb"
+                "reference": "b5d8573ab16027867eaa1ac148893833434f9b02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/f5f331cee60f1bbe672503b7eb9ba5b22b2ceacb",
-                "reference": "f5f331cee60f1bbe672503b7eb9ba5b22b2ceacb",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b5d8573ab16027867eaa1ac148893833434f9b02",
+                "reference": "b5d8573ab16027867eaa1ac148893833434f9b02",
                 "shasum": ""
             },
             "require": {
@@ -1312,7 +1312,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2020-12-15T16:16:31+00:00"
+            "time": "2020-12-22T21:21:19+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -5782,16 +5782,16 @@
         },
         {
             "name": "facade/ignition",
-            "version": "2.5.3",
+            "version": "2.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "d8dc4f90ed469f9f9313b976fb078c20585d5c99"
+                "reference": "8e907d81244649c5ea746e2ec30c32c5f59df472"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/d8dc4f90ed469f9f9313b976fb078c20585d5c99",
-                "reference": "d8dc4f90ed469f9f9313b976fb078c20585d5c99",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/8e907d81244649c5ea746e2ec30c32c5f59df472",
+                "reference": "8e907d81244649c5ea746e2ec30c32c5f59df472",
                 "shasum": ""
             },
             "require": {
@@ -5855,7 +5855,7 @@
                 "issues": "https://github.com/facade/ignition/issues",
                 "source": "https://github.com/facade/ignition"
             },
-            "time": "2020-12-09T20:25:45+00:00"
+            "time": "2020-12-29T09:12:55+00:00"
         },
         {
             "name": "facade/ignition-contracts",

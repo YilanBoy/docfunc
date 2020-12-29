@@ -61,15 +61,6 @@ Route::get('posts/{post}/{slug?}', [PostController::class, 'show'])->name('posts
 // 文章分類
 Route::get('categories/{category}/{name?}', [CategoryController::class, 'show'])->name('categories.show');
 
-// 會員評論
-Route::post('replies', [ReplyController::class, 'store'])
-    ->middleware('auth', 'verified')
-    ->name('replies.store');
-
-Route::delete('replies/{reply}', [ReplyController::class, 'destroy'])
-    ->middleware('auth', 'verified')
-    ->name('replies.destroy');
-
 // 通知列表
 Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
 

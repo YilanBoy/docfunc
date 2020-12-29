@@ -102,14 +102,8 @@
                     </div>
                 </div>
 
-                {{-- 回覆表單 --}}
-                {{-- @includeWhen 可以依照條件來判斷要不要載入視圖 --}}
-                @includeWhen(Auth::check(), 'posts.reply-box', ['post' => $post])
-
-                {{-- 會員回覆列表 --}}
-                {{-- latest() 等於 orderBy('created_at', 'desc') --}}
-                @includeWhen($post->replies->count() > 0, 'posts.reply-list', ['replies' => $post->replies()->latest()->with('user', 'post')->get()])
-
+                {{-- 回覆區塊 --}}
+                @livewire('replies', ['post' => $post])
             </div>
         </div>
     </div>

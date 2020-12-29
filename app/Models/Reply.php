@@ -9,7 +9,7 @@ class Reply extends Model
 {
     use HasFactory, Traits\SerializeDate;
 
-    protected $fillable = ['post_id', 'content'];
+    protected $fillable = ['user_id', 'post_id', 'content'];
 
     public function post()
     {

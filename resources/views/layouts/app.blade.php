@@ -18,6 +18,8 @@
 
     @yield('css')
 
+    @livewireStyles
+
     @yield('scriptsInHead')
 </head>
 
@@ -30,6 +32,8 @@
 
     {{-- Scripts --}}
     <script src="{{ asset('js/app.js') }}"></script>
+
+    @livewireScripts
 
     @yield('scripts')
 

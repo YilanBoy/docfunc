@@ -11,9 +11,10 @@
                     <label for="floatingTextarea">分享你的評論~</label>
                 </div>
 
-                @error('content') <span class="text-danger">{{ $message }}</span> @enderror
-
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-center align-items-center">
+                        @error('content') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
                     <button class="btn btn-primary" wire:click="store"><i class="fas fa-share"></i> 回覆</button>
                 </div>
             </div>

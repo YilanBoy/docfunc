@@ -12,7 +12,6 @@ class Replies extends Component
     use AuthorizesRequests;
 
     public $post;
-
     public $content;
 
     protected $rules = [
@@ -25,11 +24,13 @@ class Replies extends Component
         'content.max' => '回覆內容至多 400 個字元',
     ];
 
+    // 實時判斷表單內容是否符合 $rules
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
     }
 
+    // 儲存回覆
     public function store()
     {
         $this->validate();
@@ -40,9 +41,11 @@ class Replies extends Component
             'content' => $this->content,
         ]);
 
+        // 清空回覆表單的內容
         $this->content = '';
     }
 
+    // 刪除回覆
     public function destroy(Reply $reply)
     {
         $this->authorize('destroy', $reply);

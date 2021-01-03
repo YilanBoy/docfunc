@@ -113,6 +113,7 @@
 @endsection
 
 @section('scripts')
+    {{-- 至頂按鈕 --}}
     <script src="{{ asset('js/scroll-to-top-btn.js') }}"></script>
     {{-- 文章中的嵌入影片顯示 --}}
     <script async charset="utf-8" src="{{ asset('js/platform.js') }}"></script>

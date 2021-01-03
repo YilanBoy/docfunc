@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Reply;
-use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Replies extends Component

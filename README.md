@@ -33,6 +33,12 @@ download the ckfinder code
 $ php artisan ckfinder:download
 ```
 
+generate ide-helper
+
+```sh
+$ php artisan ide-helper:generate
+```
+
 Install the npm package
 
 ```sh

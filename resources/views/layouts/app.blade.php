@@ -11,7 +11,8 @@
 
     <title>@yield('title', 'RECODE')</title>
     <meta name="description" content="@yield('description', 'Allen 的個人部落格')">
-    <link rel="shortcut icon" href="{{ asset('icon/icon.png') }}">
+    {{-- Favicon --}}
+    <link rel="shortcut icon" href="{{ asset('icon/icon.png') }}" type="image/x-icon">
 
     {{-- Styles --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

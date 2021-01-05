@@ -17,7 +17,7 @@
 
                         <div class="p-1">
                             <p class="card-text">
-                                {!! $reply->content !!}
+                                {!! nl2br(e($reply->content)) !!}
                             </p>
                         </div>
                     </div>

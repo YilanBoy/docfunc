@@ -19,7 +19,7 @@
                 </div>
             </div>
 
-            <div class="col-12 col-md-9">
+            <div class="col-12 col-md-8">
                 <div class="card p-3">
                     <div class="card-body">
                         <h4>個人簡介</h4>
@@ -47,7 +47,7 @@
                                     class="nav-link link-secondary"
                                 @endif
                                 >
-                                    <span class="fs-5">文章</span>
+                                    <span class="fs-5">發布文章</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -58,7 +58,7 @@
                                     class="nav-link link-secondary"
                                 @endif
                                 >
-                                    <span class="fs-5">回覆</span>
+                                    <span class="fs-5">回覆紀錄</span>
                                 </a>
                             </li>
                         </ul>

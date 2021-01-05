@@ -27,7 +27,7 @@
             <div class="card-body p-4">
                 <ul class="list-group list-group-flush">
                     @foreach ($replies as $reply)
-                        <li class="list-group-item" name="reply{{ $reply->id }}" id="reply{{ $reply->id }}">
+                        <li class="list-group-item" name="reply-{{ $reply->id }}" id="reply-{{ $reply->id }}">
 
                             <div class="row">
                                 {{-- 作者大頭貼 --}}

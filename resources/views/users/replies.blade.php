@@ -10,7 +10,7 @@
                     <div class="col-9 d-flex flex-column justify-content-start">
                         <div class="p-1">
                             <a class="text-decoration-none"
-                            href="{{ $reply->post->linkWithSlug(['#reply' . $reply->id]) }}">
+                            href="{{ $reply->post->linkWithSlug(['#reply-' . $reply->id]) }}">
                                 {{ $reply->post->title }}
                             </a>
                         </div>

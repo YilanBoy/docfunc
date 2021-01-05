@@ -82,12 +82,13 @@
                                 @endif
                             </div>
 
+                            {{-- 文章內容 --}}
                             <div class="ck-content mb-4">
                                 {!! $post->body !!}
                             </div>
 
                             <hr>
-
+                            {{-- 作者 --}}
                             <div class="d-flex justify-content-start align-items-center p-4">
                                 <div class="align-self-center me-4">
                                     <img class="rounded-circle" src="{{ $post->user->gravatar() }}" width="60px" height="60px">
@@ -98,7 +99,7 @@
                                             {{ $post->user->name }}
                                         </a>
                                     </h4>
-                                    <span class="text-dark">{{ $post->user->introduction }}</span>
+                                    <span class="text-dark">{!! nl2br(e($post->user->introduction)) !!}</span>
                                 </div>
                             </div>
                         </div>

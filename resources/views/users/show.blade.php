@@ -25,7 +25,7 @@
                         <h4>個人簡介</h4>
                         <hr>
                         @if ($user->introduction)
-                            <p class="card-text">{{ $user->introduction }}</p>
+                            <p class="card-text">{!! nl2br(e($user->introduction)) !!}</p>
                         @else
                             <p class="card-text">目前尚無個人簡介～</p>
                         @endif

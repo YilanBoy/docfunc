@@ -4,8 +4,6 @@ namespace App\Observers;
 
 use App\Models\Reply;
 use App\Notifications\PostReplied;
-use HTMLPurifier;
-use HTMLPurifier_Config;
 
 // creating, created, updating, updated, saving,
 // saved,  deleting, deleted, restoring, restored
@@ -14,12 +12,7 @@ class ReplyObserver
 {
     public function creating(Reply $reply)
     {
-        // 設定 XSS 過濾規則
-        $config = HTMLPurifier_Config::createDefault();
-        // 設定 XSS 過濾器
-        $purifier = new HTMLPurifier($config);
-        // 過濾回覆內文
-        $reply->content = $purifier->purify($reply->content);
+        $reply->content = preg_replace('/(\\r\\n|\\r|\\n){3,}/u', PHP_EOL . PHP_EOL, $reply->content);
     }
 
     public function created(Reply $reply)

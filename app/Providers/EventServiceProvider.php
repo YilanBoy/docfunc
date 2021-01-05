@@ -8,6 +8,12 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Verified;
 use App\Listeners\EmailVerified;
+use App\Models\User;
+use App\Models\Post;
+use App\Models\Reply;
+use App\Observers\UserObserver;
+use App\Observers\PostObserver;
+use App\Observers\ReplyObserver;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -35,6 +41,9 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+        // 註冊 Observe
+        User::observe(UserObserver::class);
+        Post::observe(PostObserver::class);
+        Reply::observe(ReplyObserver::class);
     }
 }

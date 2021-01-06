@@ -6,9 +6,9 @@ use App\Models\User;
 
 class UserObserver
 {
-    // 將連續二個換行或以上，換成一個
-    public function saving(User $user)
+    public function updating(User $user)
     {
-        $user->introduction = preg_replace('/(\\r\\n|\\r|\\n){2,}/u', PHP_EOL, $user->introduction);
+        // 替換連續兩次以上空白與換行的混合
+        $user->introduction = preg_replace('/(\s*(\\r\\n|\\r|\\n)\s*){2,}/u', PHP_EOL, $user->introduction);
     }
 }

@@ -12,7 +12,7 @@ class ReplyObserver
 {
     public function creating(Reply $reply)
     {
-        $reply->content = preg_replace('/(\\r\\n|\\r|\\n){3,}/u', PHP_EOL . PHP_EOL, $reply->content);
+        $reply->content = preg_replace('/(\s*(\\r\\n|\\r|\\n)\s*){3,}/u', PHP_EOL . PHP_EOL, $reply->content);
     }
 
     public function created(Reply $reply)

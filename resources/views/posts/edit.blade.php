@@ -66,7 +66,7 @@
 
                                 {{-- 文章標籤 --}}
                                 <div class="mb-3">
-                                    <input class="form-control" type="text" id="tag-input" name="tags" value="{{ old('tags', $post->tags) }}" placeholder="輸入標籤（最多 5 個）">
+                                    <input class="form-control" type="text" id="tag-input" name="tags" value="{{ old('tags', $post->tagsJson) }}" placeholder="輸入標籤（最多 5 個）">
                                 </div>
 
                                 {{-- 文章內容 --}}

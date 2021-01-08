@@ -8,18 +8,17 @@ class DataTransService
     // 後面的 : array 為聲明這個 function 返回的值為 array 類型
     public function tagJsonToArray(?string $tagJson): array
     {
-        $tagArray = [];
-
         // 沒有設定標籤
         if (is_null($tagJson)) {
-            return $tagArray;
+            return [];
         }
 
         $tags = json_decode($tagJson);
-        // 使用 sync 同步關聯資料表的紀錄
-        foreach ($tags as $tag) {
-            array_push($tagArray, $tag->id);
-        }
+
+        // 生成由 tag ID 組成的 Array
+        $tagArray = collect($tags)->map(function ($tag) {
+            return $tag->id;
+        })->all();
 
         return $tagArray;
     }

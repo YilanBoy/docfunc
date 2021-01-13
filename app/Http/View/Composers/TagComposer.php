@@ -4,7 +4,7 @@ namespace App\Http\View\Composers;
 
 use App\Models\Tag;
 use Illuminate\View\View;
-use Cache;
+use Illuminate\Support\Facades\Cache;
 
 // Tag Input JSON Format
 class TagComposer
@@ -22,17 +22,16 @@ class TagComposer
     {
         // 這裡使用快取減少對資料庫的讀取，快取設定 86400 秒(一天)過期
         $inputTags = Cache::remember('inputTags', 86400, function () {
-            $tagArray = [];
-            foreach ($this->tag->all() as $tag) {
-                array_push($tagArray, ['id' => $tag->id, 'value' => $tag->name]);
-            }
+
+            $tagsArray = $this->tag->all()->map(function ($tag) {
+                return ['id' => $tag->id, 'value' => $tag->name];
+            })->all();
 
             // 傳過去的格式會長這樣
             // [{"id":"2","value":"C#"},{"id":"5","value":"Dart"}]
-            return json_encode($tagArray);
+            return json_encode($tagsArray);
         });
 
-        // 取得所有連結資料並放入變數 links
         $view->with('inputTags', $inputTags);
     }
 }

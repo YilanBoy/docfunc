@@ -7,24 +7,23 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
-use Auth;
 use App\Services\PostService;
-use App\Services\DataTransService;
+use App\Services\FormatTransferService;
 
 class PostController extends Controller
 {
-    protected $post, $category, $postService, $dataTransService;
+    protected $post, $category, $postService, $formatTransferService;
 
     public function __construct(
         Post $post,
         Category $category,
         PostService $postService,
-        DataTransService $dataTransService
+        FormatTransferService $formatTransferService
     ) {
         $this->post = $post;
         $this->category = $category;
         $this->postService = $postService;
-        $this->dataTransService = $dataTransService;
+        $this->formatTransferService = $formatTransferService;
     }
 
     // 文章列表
@@ -58,15 +57,15 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $this->post->fill($request->validated());
-        $this->post->user_id = Auth::id();
+        $this->post->user_id = auth()->user()->id;
         $this->post->slug = $this->postService->makeSlug($request->title);
         $this->post->save();
 
         // 將傳過來的 JSON 資料轉成 array
-        $tagArray = $this->dataTransService->tagJsonToArray($request->tags);
+        $tagIdsArray = $this->formatTransferService->tagsJsonToTagIdsArray($request->tags);
 
         // 在關聯表新增關聯
-        $this->post->tags()->attach($tagArray);
+        $this->post->tags()->attach($tagIdsArray);
 
         return redirect()->to($this->post->linkWithSlug())->with('success', '成功新增文章！');
     }
@@ -79,13 +78,13 @@ class PostController extends Controller
 
         // 生成包含 tag ID 與 tag name 的 Array
         // [["id" => "2","value" => "C#"], ["id" => "5","value" => "Dart"]]
-        $tagArray = collect($post->tags)->map(function ($tag) {
+        $tagsArray = $post->tags->map(function ($tag) {
             return ['id' => $tag->id, 'value' => $tag->name];
         })->all();
 
         // 轉成 tagify 的 JSON 格式
         // [{"id":"2","value":"C#"},{"id":"5","value":"Dart"}]
-        $post->tagsJson = json_encode($tagArray);
+        $post->tagsJson = json_encode($tagsArray);
 
         return view('posts.edit', ['post' => $post]);
     }
@@ -98,10 +97,10 @@ class PostController extends Controller
         $post->slug = $this->postService->makeSlug($request->title);
         $post->update($request->validated());
 
-        $tagArray = $this->dataTransService->tagJsonToArray($request->tags);
+        $tagIdsArray = $this->formatTransferService->tagsJsonToTagIdsArray($request->tags);
 
         // 關聯表更新
-        $post->tags()->sync($tagArray);
+        $post->tags()->sync($tagIdsArray);
 
         return redirect()->to($post->linkWithSlug())->with('success', '成功更新文章！');
     }

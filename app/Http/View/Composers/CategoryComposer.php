@@ -4,7 +4,7 @@ namespace App\Http\View\Composers;
 
 use App\Models\Category;
 use Illuminate\View\View;
-use Cache;
+use Illuminate\Support\Facades\Cache;
 
 class CategoryComposer
 {

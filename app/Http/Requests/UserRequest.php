@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Auth;
 
 class UserRequest extends FormRequest
 {
@@ -21,7 +20,7 @@ class UserRequest extends FormRequest
                 'string',
                 'regex:/^[A-Za-z0-9\-\_]+$/u',
                 'between:3,25',
-                'unique:users,name,' . Auth::id(),
+                'unique:users',
             ],
             'introduction' => ['max:80'],
         ];

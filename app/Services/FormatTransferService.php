@@ -2,24 +2,24 @@
 
 namespace App\Services;
 
-class DataTransService
+class FormatTransferService
 {
     // 將 tag 的 JSON 資料轉成 array，這裡的問號，代表允許參數為 null
     // 後面的 : array 為聲明這個 function 返回的值為 array 類型
-    public function tagJsonToArray(?string $tagJson): array
+    public function tagsJsonToTagIdsArray(?string $tagsJson): array
     {
         // 沒有設定標籤
-        if (is_null($tagJson)) {
+        if (is_null($tagsJson)) {
             return [];
         }
 
-        $tags = json_decode($tagJson);
+        $tags = json_decode($tagsJson);
 
         // 生成由 tag ID 組成的 Array
-        $tagArray = collect($tags)->map(function ($tag) {
+        $tagIdsArray = collect($tags)->map(function ($tag) {
             return $tag->id;
         })->all();
 
-        return $tagArray;
+        return $tagIdsArray;
     }
 }

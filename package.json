@@ -13,7 +13,7 @@
         "@fortawesome/fontawesome-free": "^5.15.1",
         "@popperjs/core": "^2.5.4",
         "@yaireo/tagify": "^3.20.0",
-        "axios": "^0.19",
+        "axios": "^0.21.1",
         "bootstrap": "^5.0.0-beta1",
         "cross-env": "^7.0",
         "laravel-mix": "^5.0.7",

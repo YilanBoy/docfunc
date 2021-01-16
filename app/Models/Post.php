@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
-    use HasFactory, Traits\SerializeDate;
+    use HasFactory, Traits\SerializeDate, Searchable;
 
     protected $fillable = [
         'title', 'body', 'category_id', 'excerpt', 'slug',
@@ -63,5 +64,24 @@ class Post extends Model
     {
         $this->reply_count = $this->replies->count();
         $this->save();
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     * 客製 Algolia 的欄位資料
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        // Applies Scout Extended default transformations:
+        $array = $this->transform($array);
+
+        // 加入文章作者欄位
+        $array['author_name'] = $this->user->name;
+
+        return $array;
     }
 }

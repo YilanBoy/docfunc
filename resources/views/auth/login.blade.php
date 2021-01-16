@@ -69,7 +69,7 @@
 
                                     {{-- reCAPTCHA --}}
                                     <div class="mb-3">
-                                        <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha_site_key') }}"></div>
+                                        <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
 
                                         @error('g-recaptcha-response')
                                             <span class="text-danger">

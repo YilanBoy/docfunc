@@ -16,6 +16,7 @@
 
     {{-- Styles --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/algolia.css') }}" rel="stylesheet">
 
     @yield('css')
 
@@ -33,6 +34,17 @@
 
     {{-- Scripts --}}
     <script src="{{ asset('js/app.js') }}"></script>
+    {{-- Include AlgoliaSearch JS Client v3 and autocomplete.js library --}}
+    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@3/dist/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+    <script>
+        const client = algoliasearch(
+            "{{ config('scout.algolia.id') }}",
+            "{{ Algolia\ScoutExtended\Facades\Algolia::searchKey(App\Models\Post::class) }}"
+        );
+        const posts = client.initIndex('posts');
+    </script>
+    <script src="{{ asset('js/algolia.js') }}"></script>
 
     @livewireScripts
 

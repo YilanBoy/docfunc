@@ -1,9 +1,13 @@
 autocomplete(
     '#aa-search-input',
     {
-        debug: true,
         templates: {
-            dropdownMenu: '<div class="aa-dataset-post"></div>'
+            dropdownMenu: '<div class="aa-dataset-post"></div>',
+            footer: `
+                <div style="text-align: right; display: block; font-size:16px; margin: 5px 5px 5px 5px;">
+                    Powered by <a href="http://www.algolia.com"><img src="https://www.algolia.com/assets/algolia128x40.png" style="height: 16px;" /></a>
+                </div>
+            `
         }
     },
     [
@@ -14,7 +18,6 @@ autocomplete(
             templates: {
                 header: '<div class="aa-suggestions-category">文章</div>',
                 suggestion({ _highlightResult }) {
-                    console.log(_highlightResult);
                     return `
                         <span>
                             <a href="${_highlightResult.url.value}">${_highlightResult.title.value}</a>

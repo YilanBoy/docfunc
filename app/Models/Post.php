@@ -67,8 +67,7 @@ class Post extends Model
     }
 
     /**
-     * Get the indexable data array for the model.
-     * 客製 Algolia 的欄位資料
+     * 調整匯入 Algolia 的 Model 資料
      *
      * @return array
      */
@@ -79,8 +78,8 @@ class Post extends Model
         // Applies Scout Extended default transformations:
         $array = $this->transform($array);
 
-        // 加入文章作者欄位
         $array['author_name'] = $this->user->name;
+        $array['url'] = $this->linkWithSlug();
 
         return $array;
     }

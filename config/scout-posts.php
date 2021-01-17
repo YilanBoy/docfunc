@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'searchableAttributes' => ['title', 'body', 'author_name'],
+    'searchableAttributes' => ['title', 'body', 'author_name', 'unordered(url)'],
 
     /*
     |--------------------------------------------------------------------------
@@ -155,4 +155,5 @@ return [
     | configuration, just use the command `scout:sync` to get remote settings in this file.
     |
     */
+    'attributesToRetrieve' => ['*'],
 ];

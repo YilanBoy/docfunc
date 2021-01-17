@@ -45,7 +45,7 @@
             {{-- 搜尋 --}}
             <div class="aa-input-container me-auto" id="aa-input-container">
                 <input type="search" id="aa-search-input" class="aa-input-search"
-                placeholder="搜尋" name="search" autocomplete="off" />
+                placeholder="搜尋文章" name="search" autocomplete="off" />
 
                 <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
                     <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5

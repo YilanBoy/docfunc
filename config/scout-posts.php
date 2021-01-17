@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'searchableAttributes' => ['title', 'body', 'author_name', 'unordered(url)'],
+    'searchableAttributes' => ['title', 'body', 'author_name'],
 
     /*
     |--------------------------------------------------------------------------

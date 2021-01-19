@@ -1,10 +1,25 @@
+function newHitsSource(index, params) {
+    return function doSearch(query, cb) {
+        index
+            .search(query, params)
+            .then(function(res) {
+                cb(res.hits, res);
+            })
+            .catch(function(err) {
+                console.error(err);
+                cb([]);
+            });
+    };
+}
+
 autocomplete(
     '#aa-search-input',
     {
+        hint: false,
         templates: {
             dropdownMenu: '<div class="aa-dataset-post"></div>',
             footer: `
-                <div style="text-align: right; display: block; font-size:16px; margin: 5px 5px 5px 5px;">
+                <div class="border-top fs-4 text-center d-block p-2">
                     <a href="https://www.algolia.com">
                         <svg xmlns="http://www.w3.org/2000/svg" width="168" height="24">
                             <g fill="none">
@@ -20,20 +35,21 @@ autocomplete(
     },
     [
         {
-            source: autocomplete.sources.hits(posts, { hitsPerPage: 10 }),
-            displayKey: 'name',
-            name: 'post',
+            source: newHitsSource(posts, { hitsPerPage: 10 }),
+            displayKey: 'title',
             templates: {
                 header: '<div class="aa-suggestions-category">文章</div>',
-                suggestion({ _highlightResult, url }) {
+                suggestion: function(suggestion) {
                     return `
-                        <span>
-                            <a class="text-decoration-none" href="${url}">${_highlightResult.title.value}</a>
+                        <span class="w-100">
+                            <a class="link-secondary text-decoration-none d-block w-100" href="${suggestion.url}">
+                                ${suggestion._highlightResult.title.value}
+                            </a>
                         </span>
-                        <span></span>
                     `;
                 },
-                empty: '<div class="aa-empty">No matching posts</div>'
+                empty:
+                    '<div class="d-flex justify-content-center align-items-center p-3">找不到符合搜尋字詞的文章</div>'
             }
         }
     ]

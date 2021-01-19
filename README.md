@@ -2,10 +2,19 @@
 
 ## Introduction
 
-This is a simple blog made by [Laravel](https://laravel.com/) and [Bootstrap](https://getbootstrap.com/)  
-The features of this blog include login and logout, registration, post publishing, tags, comments and personal pages  
-WYSIWYG editor use [CKEditor 5](https://ckeditor.com/), image upload use [CKFinder](https://ckeditor.com/ckfinder/)  
-You can upload image to AWS S3 in blog post.
+This is a simple blog made by [Laravel](https://laravel.com/) and [Bootstrap](https://getbootstrap.com/)
+
+The features of this blog include
+
+-   registration
+-   login and logout
+-   personal pages
+-   post publishing
+-   post tags
+-   comments
+
+Post editor use [CKEditor 5](https://ckeditor.com/), image upload use [CKFinder](https://ckeditor.com/ckfinder/), You can upload image to AWS S3 in blog post.  
+You can search post on blog by [Algolia](https://www.algolia.com/)
 
 ## Requirements
 
@@ -27,13 +36,13 @@ Install the composer package
 $ composer install
 ```
 
-download the ckfinder code
+Download the ckfinder code
 
 ```sh
 $ php artisan ckfinder:download
 ```
 
-generate ide-helper
+Generate ide-helper
 
 ```sh
 $ php artisan ide-helper:generate

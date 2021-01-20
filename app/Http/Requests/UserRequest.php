@@ -20,7 +20,7 @@ class UserRequest extends FormRequest
                 'string',
                 'regex:/^[A-Za-z0-9\-\_]+$/u',
                 'between:3,25',
-                'unique:users',
+                'unique:users,name,' . auth()->user()->id,
             ],
             'introduction' => ['max:80'],
         ];

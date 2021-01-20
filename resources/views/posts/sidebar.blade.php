@@ -15,7 +15,7 @@
         <h5 class="card-header text-center py-3">熱門標籤</h5>
         <div class="card-body">
             @foreach ($popularTags as $popularTag)
-                <a role="button" class="btn btn-primary btn-sm rounded-pill py-0 mb-1" href="{{ route('tags.show', $popularTag->id) }}">
+                <a role="button" class="btn btn-primary btn-sm rounded-pill py-0 mb-1" href="{{ route('tags.show', ['tag' => $popularTag->id]) }}">
                     {{ $popularTag->name }}
                 </a>
             @endforeach

@@ -3,7 +3,7 @@
     <div class="row p-2">
         {{-- 大頭貼 --}}
         <div class="col-2 d-flex justify-content-center align-items-center">
-            <a href="{{ route('users.show', $notification->data['user_id']) }}">
+            <a href="{{ route('users.show', ['user' => $notification->data['user_id']]) }}">
                 <img class="rounded-circle"
                 alt="{{ $notification->data['user_name'] }}"
                 src="{{ $notification->data['user_avatar'] }}"
@@ -15,7 +15,7 @@
         <div class="col-8">
             <div class="mb-1">
                 <a class="text-decoration-none"
-                href="{{ route('users.show', $notification->data['user_id']) }}">{{ $notification->data['user_name'] }}</a>
+                href="{{ route('users.show', ['user' => $notification->data['user_id']]) }}">{{ $notification->data['user_name'] }}</a>
                 回覆
                 <a class="text-decoration-none"
                 href="{{ $notification->data['post_link'] }}">{{ $notification->data['post_title'] }}</a>

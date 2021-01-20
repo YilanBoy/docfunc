@@ -40,7 +40,7 @@
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
-                                <a href="{{ route('users.show', $user->id) }}"
+                                <a href="{{ route('users.show', ['user' => $user->id]) }}"
                                 @if (!str_contains(request()->fullUrl(), 'replies'))
                                     class="nav-link active" aria-current="true"
                                 @else
@@ -51,7 +51,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('users.show', [$user->id, 'tab' => 'replies']) }}"
+                                <a href="{{ route('users.show', ['user' => $user->id, 'tab' => 'replies']) }}"
                                 @if (str_contains(request()->fullUrl(), 'replies'))
                                     class="nav-link active" aria-current="true"
                                 @else

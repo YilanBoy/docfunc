@@ -53,10 +53,9 @@ class Post extends Model
     }
 
     // 將連結加上 slug
-    // $params 設定為 array，是為了方便 merge
-    public function linkWithSlug(array $params = [])
+    public function linkWithSlug()
     {
-        return route('posts.show', array_merge([$this->id, $this->slug], $params));
+        return route('posts.show', ['post' => $this->id, 'slug' => $this->slug]);
     }
 
     // 更新回覆數量

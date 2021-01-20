@@ -26,7 +26,7 @@
                         <h3 class="card-header py-3"><i class="far fa-edit"></i> 編輯文章</h3>
 
                         <div class="card-body">
-                            <form action="{{ route('posts.update', $post->id) }}" method="POST" accept-charset="UTF-8">
+                            <form action="{{ route('posts.update', ['post' => $post->id]) }}" method="POST" accept-charset="UTF-8">
                                 @method('PUT')
                                 @csrf
 

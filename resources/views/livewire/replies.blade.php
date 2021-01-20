@@ -32,7 +32,7 @@
                             <div class="row">
                                 {{-- 作者大頭貼 --}}
                                 <div class="col-2 d-flex justify-content-center align-items-center">
-                                    <a href="{{ route('users.show', [$reply->user_id]) }}">
+                                    <a href="{{ route('users.show', ['user' => $reply->user_id]) }}">
                                         <img class="rounded-circle"
                                         alt="{{ $reply->user->name }}" src="{{ $reply->user->gravatar() }}""
                                         width="48px" height="48px">
@@ -44,7 +44,7 @@
                                     <div class="d-flex flex-column">
                                         <div class="p-1">
                                             <a class="link-secondary text-decoration-none"
-                                            href="{{ route('users.show', [$reply->user_id]) }}" title="{{ $reply->user->name }}">
+                                            href="{{ route('users.show', ['user' => $reply->user_id]) }}" title="{{ $reply->user->name }}">
                                                 {{ $reply->user->name }}
                                             </a>
                                             <span class="text-secondary"> • </span>

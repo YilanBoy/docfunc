@@ -6,7 +6,7 @@
             <div class="d-flex flex-row">
                 {{-- 作者大頭貼 --}}
                 <div class="d-flex justify-content-between align-items-center me-4">
-                    <a href="{{ route('users.show', [$post->user_id]) }}">
+                    <a href="{{ route('users.show', ['user' => $post->user_id]) }}">
                         <img class="rounded-circle"
                         alt="{{ $post->user->name }}" src="{{ $post->user->gravatar() }}"
                         width="52px" height="52px">
@@ -29,7 +29,7 @@
                             <span class="text-primary"><i class="fas fa-tags"></i></span>
 
                             @foreach ($post->tags as $tag)
-                                <a role="button" class="btn btn-primary btn-sm rounded-pill py-0" href="{{ route('tags.show', $tag->id) }}">
+                                <a role="button" class="btn btn-primary btn-sm rounded-pill py-0" href="{{ route('tags.show', ['tag' => $tag->id]) }}">
                                     {{ $tag->name }}
                                 </a>
                             @endforeach
@@ -48,7 +48,7 @@
 
                         {{-- 文章作者資訊 --}}
                         <a class="link-secondary text-decoration-none"
-                        href="{{ route('users.show', [$post->user_id]) }}"
+                        href="{{ route('users.show', ['user' => $post->user_id]) }}"
                         title="{{ $post->user->name }}">
                             <i class="far fa-user"></i> {{ $post->user->name }}
                         </a>

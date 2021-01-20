@@ -28,11 +28,11 @@
                     @can('update', $post)
                         <div class="d-flex justify-content-end mb-2">
                             <a role="button"  class="btn btn-success me-2"
-                            href="{{ route('posts.edit', $post->id) }}">
+                            href="{{ route('posts.edit', ['post' => $post->id]) }}">
                                 <i class="far fa-edit mr-2"></i> 編輯
                             </a>
 
-                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
+                            <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
                             style="display: inline-block;"
                             onsubmit="return confirm('您確定要刪除此文章嗎？')">
                                 @csrf
@@ -55,7 +55,7 @@
                                 <span class="text-secondary">
                                     <i class="far fa-user"></i>
                                     <a class="link-secondary text-decoration-none"
-                                    href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}</a>
+                                    href="{{ route('users.show', ['user' => $post->user->id]) }}">{{ $post->user->name }}</a>
                                     •
                                     <i class="far fa-folder"></i>
                                     <a class="link-secondary text-decoration-none"
@@ -75,7 +75,7 @@
                                     <span class="text-primary"><i class="fas fa-tags"></i></span>
                                     @foreach ($post->tags as $tag)
                                         <a role="button" class="btn btn-primary btn-sm rounded-pill py-0 mb-1"
-                                        href="{{ route('tags.show', $tag->id) }}">
+                                        href="{{ route('tags.show', ['tag' => $tag->id])}}">
                                             {{ $tag->name }}
                                         </a>
                                     @endforeach
@@ -95,7 +95,7 @@
                                 </div>
                                 <div class="d-flex flex-column">
                                     <h4>
-                                        <a class="link-dark text-decoration-none" href="{{ route('users.show', $post->user->id) }}">
+                                        <a class="link-dark text-decoration-none" href="{{ route('users.show', ['user' => $post->user->id]) }}">
                                             {{ $post->user->name }}
                                         </a>
                                     </h4>

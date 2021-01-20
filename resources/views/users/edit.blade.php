@@ -15,7 +15,7 @@
                         <div class="d-flex justify-content-center">
                             <div class="w-100">
 
-                                <form action="{{ route('users.update', $user->id) }}" method="POST" accept-charset="UTF-8">
+                                <form action="{{ route('users.update', ['user' => $user->id]) }}" method="POST" accept-charset="UTF-8">
                                     @method('PUT')
                                     @csrf
 

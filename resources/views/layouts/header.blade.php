@@ -94,12 +94,12 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item" href="{{ route('users.show', Auth::id()) }}">
+                                <a class="dropdown-item" href="{{ route('users.show', ['user' => Auth::id()]) }}">
                                     <i class="far fa-user me-2"></i>個人頁面
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ route('users.edit', Auth::id()) }}">
+                                <a class="dropdown-item" href="{{ route('users.edit', ['user' => Auth::id()]) }}">
                                     <i class="far fa-edit me-2"></i>編輯資料
                                 </a>
                             </li>

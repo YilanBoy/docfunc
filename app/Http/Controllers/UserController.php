@@ -40,6 +40,6 @@ class UserController extends Controller
         // 更新會員資料
         $user->update($request->validated());
 
-        return redirect()->route('users.show', $user->id)->with('success', '個人資料更新成功！');
+        return redirect()->route('users.show', ['user' => $user->id])->with('success', '個人資料更新成功！');
     }
 }

@@ -47,12 +47,6 @@ class PostController extends Controller
         return view('posts.show', ['post' => $post]);
     }
 
-    // 新增文章頁面
-    public function create()
-    {
-        return view('posts.create');
-    }
-
     // 新增文章
     public function store(PostRequest $request)
     {

@@ -17,7 +17,7 @@
             <ul class="navbar-nav me-2 mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a href="{{ route('posts.index') }}"
-                    @if (request()->url() == route('posts.index'))
+                    @if (request()->url() === route('posts.index'))
                         class="nav-link active"  aria-current="page"
                     @else
                         class="nav-link"
@@ -30,7 +30,7 @@
                 @foreach ($categories as $category)
                     <li class="nav-item">
                         <a href="{{ $category->linkWithName() }}"
-                        @if (request()->url() == $category->linkWithName())
+                        @if (request()->url() === $category->linkWithName())
                             class="nav-link active"  aria-current="page"
                         @else
                             class="nav-link"
@@ -71,11 +71,13 @@
                 {{-- 已登入 --}}
                 @else
                     {{-- 新增文章 --}}
-                    <li class="nav-item d-flex justify-content-start align-items-center me-2">
-                        <a class="nav-link" href="{{ route('posts.create') }}">
-                            <i class="fas fa-plus"></i>
-                        </a>
-                    </li>
+                    @if (request()->url() !== route('posts.create'))
+                        <li class="nav-item d-flex justify-content-start align-items-center me-2">
+                            <a class="nav-link" href="{{ route('posts.create') }}" title="新增文章">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </li>
+                    @endif
 
                     {{-- 通知顯示 --}}
                     <li class="nav-item d-flex justify-content-start align-items-center me-2">

@@ -33,7 +33,7 @@ Route::put('users/{user}', [UserController::class, 'update'])->name('users.updat
 Route::get('posts', [PostController::class, 'index'])->name('posts.index');
 
 Route::middleware(['auth', 'verified', 'post.limit'])->group(function () {
-    Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
+    Route::view('posts/create', 'posts/create')->name('posts.create');
     Route::post('posts', [PostController::class, 'store'])->name('posts.store');
 });
 

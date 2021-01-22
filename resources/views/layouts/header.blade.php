@@ -29,8 +29,8 @@
                 {{-- 這裡的 $categories 使用的是 View::share() 方法取得值，寫在 AppServiceProvider.php 中 --}}
                 @foreach ($categories as $category)
                     <li class="nav-item">
-                        <a href="{{ $category->linkWithName() }}"
-                        @if (request()->url() === $category->linkWithName())
+                        <a href="{{ $category->link_with_name }}"
+                        @if (request()->url() === $category->link_with_name)
                             class="nav-link active"  aria-current="page"
                         @else
                             class="nav-link"

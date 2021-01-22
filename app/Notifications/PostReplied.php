@@ -29,7 +29,7 @@ class PostReplied extends Notification
     public function toDatabase($notifiable)
     {
         $post = $this->reply->post;
-        $link = $post->linkWithSlug() . '#reply-' . $this->reply->id;
+        $link = $post->link_with_slug . '#reply-' . $this->reply->id;
 
         // 存入資料庫裡的數據
         return [

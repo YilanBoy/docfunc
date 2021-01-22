@@ -17,7 +17,7 @@
                 <div class="d-flex flex-column">
                     <div class="p-1">
                         <span class="fs-5">
-                            <a class="link-dark text-decoration-none" href="{{ $post->linkWithSlug() }}" title="{{ $post->title }}">
+                            <a class="link-dark text-decoration-none" href="{{ $post->link_with_slug }}" title="{{ $post->title }}">
                                 {{ $post->title }}
                             </a>
                         </span>
@@ -40,7 +40,7 @@
 
                         {{-- 文章分類資訊 --}}
                         <a class="link-secondary text-decoration-none"
-                        href="{{ $post->category->linkWithName() }}" title="{{ $post->category->name }}">
+                        href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
                             <i class="far fa-folder"></i> {{ $post->category->name }}
                         </a>
 
@@ -57,7 +57,7 @@
 
                         {{-- 文章發佈時間 --}}
                         <a class="link-secondary text-decoration-none"
-                        href="{{ $post->linkWithSlug() }}"
+                        href="{{ $post->link_with_slug }}"
                         title="文章發佈於：{{ $post->created_at }}">
                             <i class="far fa-clock"></i> {{ $post->created_at->diffForHumans() }}
                         </a>

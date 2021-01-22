@@ -16,7 +16,7 @@ class Category extends Model
     ];
 
     // 將連結加上標籤名稱
-    public function linkWithName()
+    public function getLinkWithNameAttribute()
     {
         return route('categories.show', ['category' => $this->id, 'name' => $this->name]);
     }

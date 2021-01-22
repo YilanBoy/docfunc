@@ -53,7 +53,7 @@ class Post extends Model
     }
 
     // 將連結加上 slug
-    public function linkWithSlug()
+    public function getLinkWithSlugAttribute()
     {
         return route('posts.show', ['post' => $this->id, 'slug' => $this->slug]);
     }
@@ -78,7 +78,7 @@ class Post extends Model
         $array = $this->transform($array);
 
         $array['author_name'] = $this->user->name;
-        $array['url'] = $this->linkWithSlug();
+        $array['url'] = $this->getLinkWithSlugAttribute();
 
         return $array;
     }

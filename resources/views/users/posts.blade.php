@@ -9,7 +9,7 @@
                     <div class="col-9">
                         {{-- 文章 --}}
                         <a class="text-decoration-none"
-                        href="{{ $post->linkWithSlug() }}">
+                        href="{{ $post->link_with_slug }}">
                             {{ $post->title }}
                         </a>
                     </div>

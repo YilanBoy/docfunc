@@ -59,7 +59,7 @@
                                     •
                                     <i class="far fa-folder"></i>
                                     <a class="link-secondary text-decoration-none"
-                                    href="{{ $post->category->linkWithName() }}">{{ $post->category->name }}</a>
+                                    href="{{ $post->category->link_with_name }}">{{ $post->category->name }}</a>
                                     •
                                     <i class="far fa-clock"></i>
                                     {{ $post->created_at->diffForHumans() }}

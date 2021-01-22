@@ -42,7 +42,7 @@
             "{{ config('scout.algolia.id') }}",
             "{{ Algolia\ScoutExtended\Facades\Algolia::searchKey(App\Models\Post::class) }}"
         );
-        const posts = client.initIndex('posts');
+        const posts = client.initIndex("{{ config('scout.prefix') }}");
     </script>
     <script src="{{ asset('js/algolia.js') }}"></script>
 

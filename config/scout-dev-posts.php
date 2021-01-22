@@ -14,7 +14,7 @@ return [
     | Supported: Null, Array
     | Example: ["name", "email", "unordered(city)"]
     |
-     */
+    */
 
     'searchableAttributes' => ['title', 'body', 'author_name'],
 
@@ -30,7 +30,7 @@ return [
     | Supported: Null, Array
     | Examples: ['desc(comments_count)', 'desc(views_count)']
     |
-     */
+    */
 
     'customRanking' => ['desc(reply_count)'],
 
@@ -45,7 +45,7 @@ return [
     |
     | Supported: Null, Boolean, Array
     |
-     */
+    */
 
     'removeStopWords' => null,
 
@@ -61,7 +61,7 @@ return [
     | Supported: Null, Array
     | Example: ['id', 'sku', 'reference', 'code']
     |
-     */
+    */
 
     'disableTypoToleranceOnAttributes' => null,
 
@@ -77,7 +77,7 @@ return [
     | Supported: Null, Array
     | Example: ['type', 'filterOnly(country)', 'searchable(city)',]
     |
-     */
+    */
 
     'attributesForFaceting' => null,
 
@@ -93,7 +93,7 @@ return [
     | Supported: Null, Array
     | Example: ['total_sales', 'permissions', 'stock_count',]
     |
-     */
+    */
 
     'unretrievableAttributes' => null,
 
@@ -108,7 +108,7 @@ return [
     |
     | Supported: Null, Boolean, Array
     |
-     */
+    */
 
     'ignorePlurals' => null,
 
@@ -124,7 +124,7 @@ return [
     | Supported: Null, Array
     | Example: ['en', 'fr',]
     |
-     */
+    */
 
     'queryLanguages' => null,
 
@@ -140,7 +140,7 @@ return [
     | Supported(distinct): Boolean
     | Supported(attributeForDistinct): Null, String
     | Example(attributeForDistinct): 'slug'
-     */
+    */
 
     'distinct' => null,
     'attributeForDistinct' => null,
@@ -154,6 +154,5 @@ return [
     | it has a nice UI and you can test the relevancy directly there. Once you fine-tuned your
     | configuration, just use the command `scout:sync` to get remote settings in this file.
     |
-     */
-    'attributesToRetrieve' => ['*'],
+    */
 ];

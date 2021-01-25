@@ -13,10 +13,10 @@ class PostSeeder extends Seeder
     public function run()
     {
         // 所有會員 ID 數組，如：[1,2,3,4]
-        $userIds = User::all()->pluck('id')->toArray();
+        $userIds = User::pluck('id')->toArray();
 
         // 所有分類 ID 數組，如：[1,2,3,4]
-        $categoryIds = Category::all()->pluck('id')->toArray();
+        $categoryIds = Category::pluck('id')->toArray();
 
         // 獲取 Faker 實例
         $faker = app(Faker::class);

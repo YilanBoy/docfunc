@@ -65,21 +65,13 @@ class Post extends Model
         $this->save();
     }
 
-    /**
-     * 設定匯入的 index 名稱
-     *
-     * @return void
-     */
+    // 設定 Algolia 匯入的 index 名稱
     public function searchableAs()
     {
         return config('scout.prefix');
     }
 
-    /**
-     * 調整匯入 Algolia 的 Model 資料
-     *
-     * @return array
-     */
+    // 調整匯入 Algolia 的 Model 資料
     public function toSearchableArray()
     {
         $array = $this->toArray();

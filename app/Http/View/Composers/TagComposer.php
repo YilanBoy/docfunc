@@ -29,7 +29,7 @@ class TagComposer
 
             // 傳過去的格式會長這樣
             // [{"id":"2","value":"C#"},{"id":"5","value":"Dart"}]
-            return json_encode($tagsArray);
+            return json_encode($tagsArray, JSON_UNESCAPED_UNICODE);
         });
 
         $view->with('inputTags', $inputTags);

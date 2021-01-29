@@ -78,7 +78,7 @@ class PostController extends Controller
 
         // 轉成 tagify 的 JSON 格式
         // [{"id":"2","value":"C#"},{"id":"5","value":"Dart"}]
-        $post->tagsJson = json_encode($tagsArray);
+        $post->tagsJson = json_encode($tagsArray, JSON_UNESCAPED_UNICODE);
 
         return view('posts.edit', ['post' => $post]);
     }

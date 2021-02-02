@@ -12,7 +12,7 @@ class PostReplied extends Notification
 {
     use Queueable;
 
-    public $reply;
+    protected $reply;
 
     public function __construct(Reply $reply)
     {

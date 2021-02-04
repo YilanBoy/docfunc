@@ -2,21 +2,17 @@
 <footer class="footer mt-auto py-3 bg-dark" id="footer">
     <div class="container">
         <div class="d-flex justify-content-between">
-            <div>
-                <span class="text-muted">
-                    This blog is made by Allen
-                </span>
-
-                <br>
-
-                <a class="link-secondary" href="https://twitter.com/bVK1uFaMvQkDyPR" target="_blank" rel="nofollow noopener noreferrer">
-                    Twitter
+            <div class="d-flex justify-content-start align-items-center">
+                <a class="link-secondary text-decoration-none me-3" href="https://github.com/YilanBoy" target="_blank" rel="nofollow noopener noreferrer">
+                    <i class="fab fa-github fa-2x"></i>
                 </a>
 
-                <br>
+                <a class="link-secondary text-decoration-none me-3" href="https://twitter.com/bVK1uFaMvQkDyPR" target="_blank" rel="nofollow noopener noreferrer">
+                    <i class="fab fa-twitter fa-2x"></i>
+                </a>
 
-                <a class="link-secondary" href="https://www.facebook.com/profile.php?id=100004204543711" target="_blank" rel="nofollow noopener noreferrer">
-                    Facebook
+                <a class="link-secondary text-decoration-none me-3" href="https://www.facebook.com/profile.php?id=100004204543711" target="_blank" rel="nofollow noopener noreferrer">
+                    <i class="fab fa-facebook-square fa-2x"></i>
                 </a>
             </div>
             <div>

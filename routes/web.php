@@ -25,32 +25,27 @@ Route::get('/', [PostController::class, 'index'])->name('root');
 require __DIR__ . '/auth.php';
 
 // 會員相關頁面
-Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
-Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
-
-// 文章列表與內容
-Route::get('posts', [PostController::class, 'index'])->name('posts.index');
-
-Route::middleware(['auth', 'verified', 'post.limit'])->group(function () {
-    Route::view('posts/create', 'posts/create')->name('posts.create');
-    Route::post('posts', [PostController::class, 'store'])->name('posts.store');
+Route::prefix('users')->group(function () {
+    Route::get('/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
 });
 
-Route::get('posts/{post}/edit', [PostController::class, 'edit'])
-    ->middleware('auth', 'verified')
-    ->name('posts.edit');
+// 文章列表與內容
+Route::prefix('posts')->group(function () {
+    Route::get('/', [PostController::class, 'index'])->name('posts.index');
 
-Route::put('posts/{post}', [PostController::class, 'update'])
-    ->middleware('auth', 'verified')
-    ->name('posts.update');
+    Route::middleware(['auth', 'verified'])->group(function () {
+        Route::view('/create', 'posts/create')->middleware('post.limit')->name('posts.create');
+        Route::post('/', [PostController::class, 'store'])->middleware('post.limit')->name('posts.store');
+        Route::get('/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+        Route::put('/{post}', [PostController::class, 'update'])->name('posts.update');
+        Route::delete('/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+    });
 
-Route::delete('posts/{post}', [PostController::class, 'destroy'])
-    ->middleware('auth', 'verified')
-    ->name('posts.destroy');
-
-// {slug?} 當中的問號代表此參數可給可不給
-Route::get('posts/{post}/{slug?}', [PostController::class, 'show'])->name('posts.show');
+    // {slug?} 當中的問號代表此參數可給可不給
+    Route::get('/{post}/{slug?}', [PostController::class, 'show'])->name('posts.show');
+});
 
 // 文章分類
 Route::get('categories/{category}/{name?}', [CategoryController::class, 'show'])->name('categories.show');
@@ -63,5 +58,3 @@ Route::get('tags/{tag}', [TagController::class, 'show'])->name('tags.show');
 
 // CKEditor 上傳圖片，使用 CKFinder 上傳至 S3
 Route::any('/ckfinder/connector', [CKFinderController::class, 'requestAction'])->name('ckfinder_connector');
-// 需要動態更改目錄，使用此連結上傳
-// Route::any('/ckfinder/connector', [ImageUploadController::class, 'requestAction'])->name('ckfinder_connector');

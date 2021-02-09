@@ -53,4 +53,6 @@ autocomplete(
             }
         }
     ]
-);
+).on('autocomplete:selected', function(event, suggestion) {
+    location.href = suggestion.url;
+});

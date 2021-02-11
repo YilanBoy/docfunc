@@ -19,11 +19,12 @@
                             </div>
                         @endif
 
-                        <pre style="margin-bottom: 0;"> ___  ___  _ __ _ __ _   _                 </pre>
-                        <pre style="margin-bottom: 0;">/ __|/ _ \| '__| '__| | | |                </pre>
-                        <pre style="margin-bottom: 0;">\__ \ (_) | |  | |  | |_| |  _   _   _     </pre>
-                        <pre style="margin-bottom: 0;">|___/\___/|_|  |_|   \__, | (_) (_) (_)    </pre>
-                        <pre style="margin-bottom: 0;">                     |___/                 </pre>
+                        <pre style="margin-bottom: 0;"> ____                                      </pre>
+                        <pre style="margin-bottom: 0;">/ ___|  ___  _ __ _ __ _   _               </pre>
+                        <pre style="margin-bottom: 0;">\___ \ / _ \| '__| '__| | | |              </pre>
+                        <pre style="margin-bottom: 0;"> ___) | (_) | |  | |  | |_| |  _   _   _   </pre>
+                        <pre style="margin-bottom: 0;">|____/ \___/|_|  |_|   \__, | (_) (_) (_)  </pre>
+                        <pre style="margin-bottom: 0;">                       |___/               </pre>
                         <br>
                         {{ __('Before proceeding, please check your email for a verification link.') }}
                         <p></p>

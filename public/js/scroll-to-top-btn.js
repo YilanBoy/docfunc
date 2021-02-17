@@ -9,7 +9,7 @@ function scrollToTop() {
 
 // 根據 header 是否出現在畫面上調整按鈕的樣式
 let headerObserver = new IntersectionObserver(
-    function(entries) {
+    function (entries) {
         // isIntersecting is true when element and viewport are overlapping
         // isIntersecting is false when element and viewport don't overlap
         if (entries[0].isIntersecting === true) {
@@ -29,7 +29,7 @@ headerObserver.observe(document.getElementById('header'));
 
 // 根據 footer 是否出現在畫面上調整按鈕的樣式
 let footerObserver = new IntersectionObserver(
-    function(entries) {
+    function (entries) {
         if (entries[0].isIntersecting === true) {
             // footer 在畫面上
             scrollToTopButton.classList.remove('position-fixed');

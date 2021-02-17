@@ -50,7 +50,7 @@ ClassicEditor.create(document.querySelector('#editor'), {
 
 // 若以非送出表單的方式離開編輯頁面，以 alert 視窗提醒使用者
 var saveButtonClicked = false;
-document.getElementById('post-save').addEventListener('click', function() {
+document.getElementById('post-save').addEventListener('click', function () {
     saveButtonClicked = true;
 });
 

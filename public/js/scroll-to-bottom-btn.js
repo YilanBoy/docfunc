@@ -8,7 +8,7 @@ function scrollToBottom() {
 
 // 根據 footer 是否出現在畫面上調整按鈕的樣式
 let footerObserver = new IntersectionObserver(
-    function(entries) {
+    function (entries) {
         if (entries[0].isIntersecting === true) {
             // footer 在畫面上
             scrollToBottomButton.classList.add('d-none');

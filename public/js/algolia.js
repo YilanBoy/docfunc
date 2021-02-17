@@ -2,10 +2,10 @@ function newHitsSource(index, params) {
     return function doSearch(query, cb) {
         index
             .search(query, params)
-            .then(function(res) {
+            .then(function (res) {
                 cb(res.hits, res);
             })
-            .catch(function(err) {
+            .catch(function (err) {
                 console.error(err);
                 cb([]);
             });
@@ -39,7 +39,7 @@ autocomplete(
             displayKey: 'title',
             templates: {
                 header: '<div class="aa-suggestions-category">文章</div>',
-                suggestion: function(suggestion) {
+                suggestion: function (suggestion) {
                     return `
                         <span class="w-100">
                             <a class="link-secondary text-decoration-none d-block w-100" href="${suggestion.url}">
@@ -53,6 +53,6 @@ autocomplete(
             }
         }
     ]
-).on('autocomplete:selected', function(event, suggestion) {
+).on('autocomplete:selected', function (event, suggestion) {
     location.href = suggestion.url;
 });

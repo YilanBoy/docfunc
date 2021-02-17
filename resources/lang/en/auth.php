@@ -11,7 +11,7 @@ return [
     | messages that we need to display to the user. You are free to modify
     | these language lines according to your application's requirements.
     |
-     */
+    */
 
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',

@@ -11,7 +11,7 @@
 @section('content')
     <div class="position-relative">
         {{-- 移至底部按鈕 --}}
-        <button  class="btn btn-primary d-block position-fixed"
+        <button  class="btn btn-primary shadow d-block position-fixed"
         style="bottom: 30px;right: 30px;z-index: 99;"
         onclick="scrollToBottom()" id="scroll-to-bottom-btn" title="Go to bottom">
             <i class="fas fa-arrow-down"></i> 移至底部
@@ -87,7 +87,7 @@
                                     <span class="update-characters"></span>
 
                                     {{-- 儲存文章 --}}
-                                    <button type="submit" id="post-save" class="btn btn-primary">
+                                    <button type="submit" id="post-save" class="btn btn-primary shadow">
                                         <i class="far fa-save mr-2" aria-hidden="true"></i> 儲存
                                     </button>
                                 </div>

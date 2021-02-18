@@ -73,7 +73,7 @@
                                     </div>
 
                                     <div class="d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary"><i class="far fa-save mr-2" aria-hidden="true"></i> 儲存</button>
+                                        <button type="submit" class="btn btn-primary shadow"><i class="far fa-save mr-2" aria-hidden="true"></i> 儲存</button>
                                     </div>
                                 </form>
 

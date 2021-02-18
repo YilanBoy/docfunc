@@ -113,7 +113,7 @@
                                     <div class="d-flex justify-content-center">
                                         <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('您確定要登出？');">
                                             @csrf
-                                            <button class="btn btn-danger" type="submit" name="button"><i class="fas fa-sign-out-alt"></i> 登出</button>
+                                            <button class="btn btn-danger shadow" type="submit" name="button"><i class="fas fa-sign-out-alt"></i> 登出</button>
                                         </form>
                                     </div>
                                 </a>

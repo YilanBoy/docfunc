@@ -14,7 +14,7 @@
     {{-- 返回頂部按鈕的 position 改為 absolute 時，上一層樣式需要設定 relative  --}}
     <div class="position-relative">
         {{-- 返回頂部按鈕 --}}
-        <button  class="btn btn-danger d-none position-fixed"
+        <button  class="btn btn-danger shadow d-none position-fixed"
         style="bottom: 30px;right: 30px;z-index: 99;"
         onclick="scrollToTop()" id="scroll-to-top-btn" title="Go to top">
             <i class="fas fa-arrow-up"></i> 返回頂部
@@ -27,7 +27,7 @@
                     {{-- 編輯區塊 --}}
                     @can('update', $post)
                         <div class="d-flex justify-content-end mb-2">
-                            <a role="button"  class="btn btn-success me-2"
+                            <a role="button"  class="btn btn-success shadow me-2"
                             href="{{ route('posts.edit', ['post' => $post->id]) }}">
                                 <i class="far fa-edit mr-2"></i> 編輯
                             </a>
@@ -38,7 +38,7 @@
                                 @csrf
                                 @method('DELETE')
 
-                                <button type="submit" class="btn btn-danger">
+                                <button type="submit" class="btn btn-danger shadow">
                                     <i class="far fa-trash-alt mr-2"></i> 刪除
                                 </button>
                             </form>

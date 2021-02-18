@@ -4,7 +4,7 @@
         <div class="text-center text-dark"><strong>歡迎來到 {{ config('app.name') }} !</strong></div>
         <hr>
         <p>用部落格來紀錄自己生活上大大小小的事情吧！此部落格使用 Laravel 與 Bootstrap 編寫而成。</p>
-        <a href="{{ route('posts.create') }}" class="btn btn-success w-100">
+        <a href="{{ route('posts.create') }}" class="btn btn-success shadow w-100">
             <i class="fas fa-pen-nib"></i> 新增文章
         </a>
     </div>

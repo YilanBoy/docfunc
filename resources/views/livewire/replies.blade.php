@@ -15,7 +15,7 @@
                     <div class="d-flex justify-content-center align-items-center">
                         @error('content') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
-                    <button class="btn btn-primary" wire:click="store"><i class="fas fa-share"></i> 回覆</button>
+                    <button class="btn btn-primary shadow" wire:click="store"><i class="fas fa-share"></i> 回覆</button>
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
                                 <div class="col-1 d-flex justify-content-center align-items-center">
                                     {{-- 回覆刪除按鈕 --}}
                                     @can('destroy', $reply)
-                                        <button class="btn btn-danger btn-sm"
+                                        <button class="btn btn-danger btn-sm shadow"
                                         onclick="confirm('您確定要刪除此回覆嗎？') || event.stopImmediatePropagation()"
                                         wire:click="destroy({{ $reply->id }})">
                                             <i class="far fa-trash-alt"></i>

@@ -12,7 +12,7 @@
 
 @if ($popularTags->count())
     <div class="card shadow mb-4">
-        <h5 class="card-header text-center py-3">熱門標籤</h5>
+        <h5 class="card-header text-center py-3"><i class="fas fa-tags"></i> 熱門標籤</h5>
         <div class="card-body">
             @foreach ($popularTags as $popularTag)
                 <a role="button" class="btn btn-primary btn-sm rounded-pill py-0 mb-1" href="{{ route('tags.show', ['tag' => $popularTag->id]) }}">
@@ -25,7 +25,7 @@
 
 @if ($links->count())
     <div class="card shadow mb-4">
-        <h5 class="card-header text-center py-3">學習資源推薦</h5>
+        <h5 class="card-header text-center py-3"><i class="fas fa-book-reader"></i> 學習資源推薦</h5>
         <div class="card-body">
             <ul class="list-group list-group-flush">
                 @foreach ($links as $link)

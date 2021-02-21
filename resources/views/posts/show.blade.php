@@ -74,7 +74,7 @@
                                 @if ($post->tags()->exists())
                                     <span class="text-primary"><i class="fas fa-tags"></i></span>
                                     @foreach ($post->tags as $tag)
-                                        <a role="button" class="btn btn-primary btn-sm rounded-pill py-0 mb-1"
+                                        <a role="button" class="btn btn-primary btn-sm rounded-pill py-0 shadow mb-1"
                                         href="{{ route('tags.show', ['tag' => $tag->id])}}">
                                             {{ $tag->name }}
                                         </a>

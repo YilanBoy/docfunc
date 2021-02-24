@@ -36,7 +36,7 @@ class Replies extends Component
 
         Reply::create([
             'post_id' => $this->post->id,
-            'user_id' => auth()->user()->id,
+            'user_id' => auth()->id(),
             'content' => $this->content,
         ]);
 
@@ -58,5 +58,4 @@ class Replies extends Component
             'replies' => $this->post->replies()->latest()->with('user', 'post')->get(),
         ]);
     }
-
 }

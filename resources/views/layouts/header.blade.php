@@ -82,8 +82,8 @@
                     {{-- 通知顯示 --}}
                     <li class="nav-item d-flex justify-content-start align-items-center me-2">
                         <a class="nav-link" href="{{ route('notifications.index') }}">
-                            <span class="btn btn-{{ Auth::user()->notification_count > 0 ? 'danger' : 'secondary' }} btn-sm rounded-pill py-0">
-                                {{ Auth::user()->notification_count }}
+                            <span class="btn btn-{{ auth()->user()->notification_count > 0 ? 'danger' : 'secondary' }} btn-sm rounded-pill py-0">
+                                {{ auth()->user()->notification_count }}
                             </span>
                         </a>
                     </li>
@@ -91,17 +91,17 @@
                     {{-- 會員大頭貼 --}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ Auth::user()->gravatar() }}" class="rounded-circle me-2" width="30px" height="30px">
-                            {{ Auth::user()->name }}
+                            <img src="{{ auth()->user()->gravatar() }}" class="rounded-circle me-2" width="30px" height="30px">
+                            {{ auth()->user()->name }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item" href="{{ route('users.show', ['user' => Auth::id()]) }}">
+                                <a class="dropdown-item" href="{{ route('users.show', ['user' => auth()->id()]) }}">
                                     <i class="far fa-user me-2"></i>個人頁面
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ route('users.edit', ['user' => Auth::id()]) }}">
+                                <a class="dropdown-item" href="{{ route('users.edit', ['user' => auth()->id()]) }}">
                                     <i class="far fa-edit me-2"></i>編輯資料
                                 </a>
                             </li>

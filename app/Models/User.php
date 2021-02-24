@@ -60,7 +60,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function postNotify($instance): void
     {
         // 如果要通知的人是當前用戶，就不必通知了！
-        if ($this->id === auth()->user()->id) {
+        if ($this->id === auth()->id()) {
             return;
         }
 
@@ -80,5 +80,4 @@ class User extends Authenticatable implements MustVerifyEmail
         $hash = md5(strtolower(trim($this->email)));
         return 'https://www.gravatar.com/avatar/' . $hash . '?s=' . $size;
     }
-
 }

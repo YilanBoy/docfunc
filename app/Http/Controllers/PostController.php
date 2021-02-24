@@ -51,7 +51,7 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $this->post->fill($request->validated());
-        $this->post->user_id = auth()->user()->id;
+        $this->post->user_id = auth()->id();
         $this->post->slug = $this->postService->makeSlug($request->title);
         $this->post->save();
 

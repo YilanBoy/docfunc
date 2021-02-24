@@ -15,10 +15,10 @@ class NotificationController extends Controller
     public function index()
     {
         // 獲取登入會員的所有通知
-        $notifications = Auth::user()->notifications()->paginate(20);
+        $notifications = auth()->user()->notifications()->paginate(20);
 
         // 標記為已讀，未讀數量歸零
-        Auth::user()->markAsRead();
+        auth()->user()->markAsRead();
 
         return view('notifications.index', ['notifications' => $notifications]);
     }

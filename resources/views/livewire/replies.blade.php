@@ -1,6 +1,6 @@
 <div>
     {{-- 評論回覆 --}}
-    @if (Auth::check())
+    @if (auth()->check())
         <div class="card shadow mb-4">
             <div class="card-body p-4">
 

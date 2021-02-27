@@ -34,9 +34,9 @@
 
     {{-- Scripts --}}
     <script src="{{ asset('js/app.js') }}"></script>
-    {{-- Include AlgoliaSearch JS Client v3 and autocomplete.js library --}}
-    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@3/dist/algoliasearchLite.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+    {{-- Include AlgoliaSearch JS Client and autocomplete.js library --}}
+    <script src="{{ asset('js/algoliasearch-lite.umd.js') }}"></script>
+    <script src="{{ asset('js/autocomplete.min.js') }}"></script>
     <script>
         const client = algoliasearch(
             "{{ config('scout.algolia.id') }}",

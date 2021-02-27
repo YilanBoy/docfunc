@@ -21,6 +21,14 @@ mix.js('resources/js/app.js', 'public/js')
         'node_modules/@yaireo/tagify/dist/tagify.css',
         'public/css/tagify.css'
     )
+    .copy(
+        'node_modules/algoliasearch/dist/algoliasearch-lite.umd.js',
+        'public/js/algoliasearch-lite.umd.js'
+    )
+    .copy(
+        'node_modules/autocomplete.js/dist/autocomplete.min.js',
+        'public/js/autocomplete.min.js'
+    )
     .options({
         terser: {
             extractComments: false

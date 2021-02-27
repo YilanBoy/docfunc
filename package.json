@@ -13,6 +13,8 @@
         "@fortawesome/fontawesome-free": "^5.15.1",
         "@popperjs/core": "^2.5.4",
         "@yaireo/tagify": "^3.20.0",
+        "algoliasearch": "^4.8.5",
+        "autocomplete.js": "^0.38.0",
         "axios": "^0.21.1",
         "bootstrap": "^5.0.0-beta1",
         "cross-env": "^7.0",

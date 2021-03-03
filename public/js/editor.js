@@ -1,5 +1,5 @@
 // 設定文章最多字數限制
-const maxCharacters = 5000;
+const maxCharacters = 10000;
 // 設定要更新字數顯示的區塊
 const wordsBox = document.querySelector('.update-characters');
 // 設定表單 submit 按鈕的區塊

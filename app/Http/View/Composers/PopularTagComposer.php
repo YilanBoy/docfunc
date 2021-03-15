@@ -20,8 +20,7 @@ class PopularTagComposer
 
     public function compose(View $view)
     {
-        // 這裡使用快取減少對資料庫的讀取，快取設定 86400 秒(一天)過期
-        $popularTags = Cache::remember('popularTags', 86400, function () {
+        $popularTags = Cache::remember('popularTags', now()->addDay(), function () {
 
             // 取出標籤使用次數前 20 名
             $tagsCount = $this->tag->withCount('posts')

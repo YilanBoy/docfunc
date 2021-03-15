@@ -20,8 +20,7 @@ class TagComposer
 
     public function compose(View $view)
     {
-        // 這裡使用快取減少對資料庫的讀取，快取設定 86400 秒(一天)過期
-        $inputTags = Cache::remember('inputTags', 86400, function () {
+        $inputTags = Cache::remember('inputTags', now()->addDay(), function () {
 
             $tagsArray = $this->tag->all()->map(function ($tag) {
                 return ['id' => $tag->id, 'value' => $tag->name];

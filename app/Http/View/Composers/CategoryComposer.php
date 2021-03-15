@@ -19,8 +19,8 @@ class CategoryComposer
 
     public function compose(View $view)
     {
-        // 因為分類不常調整，這裡使用快取減少對資料庫的讀取，快取設定 86400 秒(一天)過期
-        $categories = Cache::remember('categories', 86400, function () {
+        // 因為分類不常調整，這裡使用快取減少對資料庫的讀取，快取時效性設定 1 天
+        $categories = Cache::remember('categories', now()->addDay(), function () {
             return $this->category->all();
         });
         // 取得所有分類並放入變數 categories

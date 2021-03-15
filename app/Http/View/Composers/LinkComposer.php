@@ -19,8 +19,7 @@ class LinkComposer
 
     public function compose(View $view)
     {
-        // 這裡使用快取減少對資料庫的讀取，快取設定 86400 秒(一天)過期
-        $links = Cache::remember('links', 86400, function () {
+        $links = Cache::remember('links', now()->addDay(), function () {
             return $this->link->all();
         });
         // 取得所有連結資料並放入變數 links

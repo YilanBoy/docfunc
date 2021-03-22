@@ -9,20 +9,11 @@ use Illuminate\Support\Facades\Cache;
 // Tag Input JSON Format
 class TagComposer
 {
-    // 設定用來依賴注入的變數
-    protected $tag;
-
-    public function __construct(Tag $tag)
-    {
-        // 將 Tag Model 依賴注入到 TagComposer
-        $this->tag = $tag;
-    }
-
     public function compose(View $view)
     {
         $inputTags = Cache::remember('inputTags', now()->addDay(), function () {
 
-            $tagsArray = $this->tag->all()->map(function ($tag) {
+            $tagsArray = Tag::all()->map(function ($tag) {
                 return ['id' => $tag->id, 'value' => $tag->name];
             })->all();
 

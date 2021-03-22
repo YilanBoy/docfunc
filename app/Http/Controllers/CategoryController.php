@@ -8,13 +8,6 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    protected $post;
-
-    public function __construct(Post $post)
-    {
-        $this->post = $post;
-    }
-
     public function show(Category $category, Request $request)
     {
         // URL 修正，使用帶標籤名稱的網址
@@ -23,7 +16,7 @@ class CategoryController extends Controller
         }
 
         // 讀取分類 ID 關聯的話題，並按每 10 條分頁
-        $posts = $this->post->withOrder($request->order)
+        $posts = Post::withOrder($request->order)
             ->where('category_id', $category->id)
             ->with('user', 'category', 'tags') // 預加載防止 N+1 問題
             ->paginate(10);

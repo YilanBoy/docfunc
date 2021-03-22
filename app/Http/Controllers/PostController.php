@@ -12,16 +12,10 @@ use App\Services\FormatTransferService;
 
 class PostController extends Controller
 {
-    protected $post, $category, $postService, $formatTransferService;
+    protected $postService, $formatTransferService;
 
-    public function __construct(
-        Post $post,
-        Category $category,
-        PostService $postService,
-        FormatTransferService $formatTransferService
-    ) {
-        $this->post = $post;
-        $this->category = $category;
+    public function __construct(PostService $postService, FormatTransferService $formatTransferService)
+    {
         $this->postService = $postService;
         $this->formatTransferService = $formatTransferService;
     }
@@ -29,7 +23,7 @@ class PostController extends Controller
     // 文章列表
     public function index(Request $request)
     {
-        $posts = $this->post->withOrder($request->order)
+        $posts = Post::withOrder($request->order)
             ->with('user', 'category', 'tags') // 預加載防止 N+1 問題
             ->paginate(10);
 
@@ -48,20 +42,20 @@ class PostController extends Controller
     }
 
     // 新增文章
-    public function store(PostRequest $request)
+    public function store(PostRequest $request, Post $post)
     {
-        $this->post->fill($request->validated());
-        $this->post->user_id = auth()->id();
-        $this->post->slug = $this->postService->makeSlug($request->title);
-        $this->post->save();
+        $post->fill($request->validated());
+        $post->user_id = auth()->id();
+        $post->slug = $this->postService->makeSlug($request->title);
+        $post->save();
 
         // 將傳過來的 JSON 資料轉成 array
         $tagIdsArray = $this->formatTransferService->tagsJsonToTagIdsArray($request->tags);
 
         // 在關聯表新增關聯
-        $this->post->tags()->attach($tagIdsArray);
+        $post->tags()->attach($tagIdsArray);
 
-        return redirect()->to($this->post->link_with_slug)->with('success', '成功新增文章！');
+        return redirect()->to($post->link_with_slug)->with('success', '成功新增文章！');
     }
 
     // 文章編輯頁面

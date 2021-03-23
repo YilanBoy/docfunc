@@ -66,9 +66,9 @@ class PostController extends Controller
 
         // 生成包含 tag ID 與 tag name 的 Array
         // [["id" => "2","value" => "C#"], ["id" => "5","value" => "Dart"]]
-        $tagsArray = $post->tags->map(function ($tag) {
-            return ['id' => $tag->id, 'value' => $tag->name];
-        })->all();
+        $tagsArray = $post->tags
+            ->map(fn ($tag) => ['id' => $tag->id, 'value' => $tag->name])
+            ->all();
 
         // 轉成 tagify 的 JSON 格式
         // [{"id":"2","value":"C#"},{"id":"5","value":"Dart"}]

@@ -13,9 +13,9 @@ class TagComposer
     {
         $inputTags = Cache::remember('inputTags', now()->addDay(), function () {
 
-            $tagsArray = Tag::all()->map(function ($tag) {
-                return ['id' => $tag->id, 'value' => $tag->name];
-            })->all();
+            $tagsArray = Tag::all()
+                ->map(fn ($tag) => ['id' => $tag->id, 'value' => $tag->name])
+                ->all();
 
             // 傳過去的格式會長這樣
             // [{"id":"2","value":"C#"},{"id":"5","value":"Dart"}]

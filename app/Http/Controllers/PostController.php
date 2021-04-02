@@ -47,6 +47,10 @@ class PostController extends Controller
         $post->fill($request->validated());
         $post->user_id = auth()->id();
         $post->slug = $this->postService->makeSlug($request->title);
+        // XSS 過濾
+        $post->body = $this->postService->htmlPurifier($request->body);
+        // 生成摘錄
+        $post->excerpt = $this->postService->makeExcerpt($post->body);
         $post->save();
 
         // 將傳過來的 JSON 資料轉成 array
@@ -82,8 +86,11 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
+        $post->fill($request->validated());
         $post->slug = $this->postService->makeSlug($request->title);
-        $post->update($request->validated());
+        $post->body = $this->postService->htmlPurifier($request->body);
+        $post->excerpt = $this->postService->makeExcerpt($post->body);
+        $post->save();
 
         $tagIdsArray = $this->formatTransferService->tagsJsonToTagIdsArray($request->tags);
 

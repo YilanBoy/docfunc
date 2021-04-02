@@ -37,8 +37,12 @@ class UserController extends Controller
         $this->authorize('update', $user);
 
         // 取得 POST 的參數，validated 會根據 UserRequest 的規則取得對應的參數
+        $user->fill($request->validated());
+        // 替換連續兩次以上空白與換行的混合
+        $user->introduction = preg_replace('/(\s*(\\r\\n|\\r|\\n)\s*){2,}/u', PHP_EOL, $request->introduction);
+
         // 更新會員資料
-        $user->update($request->validated());
+        $user->save();
 
         return redirect()->route('users.show', ['user' => $user->id])->with('success', '個人資料更新成功！');
     }

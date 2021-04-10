@@ -36,8 +36,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        // 註冊 Observe
-        Reply::observe(ReplyObserver::class);
     }
 }

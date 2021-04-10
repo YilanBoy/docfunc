@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Reply;
+use App\Notifications\PostReplied;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Replies extends Component
@@ -34,11 +35,17 @@ class Replies extends Component
     {
         $this->validate();
 
-        Reply::create([
+        $reply = Reply::create([
             'post_id' => $this->post->id,
             'user_id' => auth()->id(),
-            'content' => $this->content,
+            'content' => preg_replace('/(\s*(\\r\\n|\\r|\\n)\s*){3,}/u', PHP_EOL . PHP_EOL, $this->content),
         ]);
+
+        // 更新文章留言數
+        $reply->post->updateReplyCount();
+
+        // 通知文章作者有新的評論
+        $reply->post->user->postNotify(new PostReplied($reply));
 
         // 清空回覆表單的內容
         $this->content = '';
@@ -50,6 +57,8 @@ class Replies extends Component
         $this->authorize('destroy', $reply);
 
         $reply->delete();
+
+        $reply->post->updateReplyCount();
     }
 
     public function render()

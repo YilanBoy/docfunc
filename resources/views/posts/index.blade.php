@@ -26,8 +26,8 @@
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
-                                <a href="{{ request()->url() }}?order=latest"
-                                @if (!str_contains(request()->fullUrl(), 'recent'))
+                                <a href="{{ request()->url() }}"
+                                @if (!str_contains(request()->fullUrl(), 'order='))
                                     class="nav-link active" aria-current="true"
                                 @else
                                     class="nav-link link-secondary"
@@ -38,13 +38,24 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ request()->url() }}?order=recent"
-                                @if (str_contains(request()->fullUrl(), 'recent'))
+                                @if (str_contains(request()->fullUrl(), 'order=recent'))
                                     class="nav-link active" aria-current="true"
                                 @else
                                     class="nav-link link-secondary"
                                 @endif
                                 >
                                     <span class="fs-5">最近更新</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ request()->url() }}?order=reply"
+                                @if (str_contains(request()->fullUrl(), 'order=reply'))
+                                    class="nav-link active" aria-current="true"
+                                @else
+                                    class="nav-link link-secondary"
+                                @endif
+                                >
+                                    <span class="fs-5">最多留言</span>
                                 </a>
                             </li>
                         </ul>

@@ -35,21 +35,19 @@ class Post extends Model
         return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
     }
 
+    // 文章排序
     public function scopeWithOrder($query, ?string $order)
     {
-        // 不同的排序，使用不同的數據讀取邏輯
-        if ($order === 'recent') {
-            $query->recentReplied();
-        } else {
-            $query->latest();
-        }
-    }
-
-    public function scopeRecentReplied($query)
-    {
-        // 當話題有新回覆時，我們將編寫邏輯來更新話題模型的 reply_count 屬性，
-        // 此時會自動觸发框架對數據模型 updated_at 時間戳的更新
-        return $query->orderBy('updated_at', 'desc');
+        return $query->when($order, function ($query, $order) {
+            switch ($order) {
+                case 'recent':
+                    return $query->orderBy('updated_at', 'desc');
+                case 'reply':
+                    return $query->orderBy('reply_count', 'desc');
+            }
+        }, function ($query) {
+            return $query->latest();
+        });
     }
 
     // 將連結加上 slug

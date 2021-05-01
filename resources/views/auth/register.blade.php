@@ -4,8 +4,9 @@
 
 @section('scriptsInHead')
     {{-- Google reCAPTCHA --}}
-    {{-- async defer 同時使用會優先使用 async，當瀏覽器不支援 async 才會使用 defer --}}
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    @if (app()->environment('production'))
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    @endif
 @endsection
 
 @section('content')
@@ -76,15 +77,17 @@
                                     </div>
 
                                     {{-- reCAPTCHA --}}
-                                    <div class="mb-3">
-                                        <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
+                                    @if (app()->environment('production'))
+                                        <div class="mb-3">
+                                            <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
 
-                                        @error('g-recaptcha-response')
-                                            <span class="text-danger">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+                                            @error('g-recaptcha-response')
+                                                <span class="text-danger">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    @endif
 
                                     <button type="submit" class="btn btn-primary w-100">
                                         {{ __('Register') }}

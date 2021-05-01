@@ -29,10 +29,18 @@ class LoginRequest extends FormRequest
      */
     public function rules()
     {
+        // 如果是正式環境，需要使用 reCAPTCHA
+        if (app()->environment('production')) {
+            return [
+                'email' => 'required|string|email',
+                'password' => 'required|string',
+                'g-recaptcha-response' => ['required', new Recaptcha],
+            ];
+        }
+
         return [
             'email' => 'required|string|email',
             'password' => 'required|string',
-            'g-recaptcha-response' => ['required', new Recaptcha],
         ];
     }
 
@@ -43,9 +51,13 @@ class LoginRequest extends FormRequest
      */
     public function messages()
     {
-        return [
-            'g-recaptcha-response.required' => '請完成驗證',
-        ];
+        if (app()->environment('production')) {
+            return [
+                'g-recaptcha-response.required' => '請完成驗證',
+            ];
+        }
+
+        return [];
     }
 
     /**

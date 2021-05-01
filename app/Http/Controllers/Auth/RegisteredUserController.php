@@ -33,14 +33,20 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $rules = [
             'name' => 'required|string|regex:/^[A-Za-z0-9\-\_]+$/u|between:3,25|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
-            'g-recaptcha-response' => ['required', new Recaptcha],
-        ], [
-            'g-recaptcha-response.required' => '請完成驗證',
-        ]);
+        ];
+
+        $messages = [];
+
+        if (app()->environment('production')) {
+            $rules['g-recaptcha-response'] = ['required', new Recaptcha];
+            $messages['g-recaptcha-response.required'] = '請完成驗證';
+        }
+
+        $request->validate($rules, $messages);
 
         Auth::login($user = User::create([
             'name' => $request->name,

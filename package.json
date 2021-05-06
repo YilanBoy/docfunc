@@ -16,7 +16,7 @@
         "algoliasearch": "^4.8.5",
         "autocomplete.js": "^0.38.0",
         "axios": "^0.21.1",
-        "bootstrap": "^5.0.0-beta1",
+        "bootstrap": "^5.0.0",
         "cross-env": "^7.0",
         "laravel-mix": "^6.0.11",
         "lodash": "^4.17.20",

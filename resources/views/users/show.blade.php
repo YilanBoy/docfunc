@@ -71,9 +71,9 @@
 
                     <div class="card-body">
                         @if (str_contains(request()->getUri(), 'replies'))
-                            @include('users.replies', ['replies' => $user->replies()->with('post')->latest()->paginate(10)])
+                            @include('users.replies', ['replies' => $replies])
                         @else
-                            @include('users.posts', ['posts' => $user->posts()->latest()->paginate(10)])
+                            @include('users.posts', ['posts' => $posts])
                         @endif
                     </div>
                 </div>

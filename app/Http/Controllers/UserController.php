@@ -17,8 +17,16 @@ class UserController extends Controller
     // 個人頁面
     public function show(User $user)
     {
-        // 頁面顯示 users/show.blade.php，並傳入 user 參數
-        return view('users.show', ['user' => $user]);
+        // 該會員的文章與留言
+        $posts = $user->posts()->latest()->paginate(10);
+        $replies = $user->replies()->with('post')->latest()->paginate(10);
+
+        // 頁面顯示 users/show.blade.php，並傳入參數
+        return view('users.show', [
+            'user' => $user,
+            'posts' => $posts,
+            'replies' => $replies,
+        ]);
     }
 
     // 編輯個人資料

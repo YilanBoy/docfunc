@@ -12,15 +12,22 @@
                     <img class="card-img-top" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}">
                     <div class="card-body">
                         <h3 class="mb-0">{{ $user->name }}</h3>
+
                         <hr>
-                        <h5>註冊於</h5>
-                        <p>{{ $user->created_at->format('Y / m / d') . '（' . $user->created_at->diffForHumans() . '）' }}</p>
+
+                        <label class="fs-5">撰寫文章</label>
+                        <p class="fs-3 fw-bold">{{ $user->posts->count() }} 篇</p>
+
+                        <label class="fs-5">文章留言</label>
+                        <p class="fs-3 fw-bold">{{ $user->replies->count() }} 次</p>
+
+                        <label>註冊於 {{ $user->created_at->format('Y / m / d') . '（' . $user->created_at->diffForHumans() . '）' }}</label>
                     </div>
                 </div>
             </div>
 
             <div class="col-12 col-md-8">
-                <div class="card p-3">
+                <div class="card p-3 mb-4">
                     <div class="card-body">
                         <h4>個人簡介</h4>
                         <hr>
@@ -31,8 +38,6 @@
                         @endif
                     </div>
                 </div>
-
-                <hr>
 
                 {{-- 會員發布的內容 --}}
                 <div class="card shadow mb-4">

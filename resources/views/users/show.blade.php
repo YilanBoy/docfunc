@@ -52,7 +52,7 @@
                                     class="nav-link link-secondary"
                                 @endif
                                 >
-                                    <span class="fs-5">發布文章</span>
+                                    <span>發布文章</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -63,7 +63,7 @@
                                     class="nav-link link-secondary"
                                 @endif
                                 >
-                                    <span class="fs-5">回覆紀錄</span>
+                                    <span>回覆紀錄</span>
                                 </a>
                             </li>
                         </ul>

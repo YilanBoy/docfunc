@@ -49,9 +49,9 @@
                     <div class="card shadow mb-4">
                         <div class="card-body p-4">
 
-                            <h1 class="text-center mb-2">{{ $post->title }}</h1>
+                            <h1 class="text-start mb-2">{{ $post->title }}</h1>
 
-                            <div class="text-center mb-2">
+                            <div class="text-start mb-2">
                                 <span class="text-secondary">
                                     <i class="far fa-user"></i>
                                     <a class="link-secondary text-decoration-none"
@@ -69,7 +69,7 @@
                                 </span>
                             </div>
 
-                            <div class="text-center mb-4">
+                            <div class="text-start mb-4">
                                 {{-- 文章標籤--}}
                                 @if ($post->tags()->exists())
                                     <span class="text-primary"><i class="fas fa-tags"></i></span>

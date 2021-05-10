@@ -9,7 +9,7 @@
         <div class="col-12 col-xl-8">
 
                 <div class="card shadow">
-                    <h3 class="card-header py-3"><i class="far fa-bell" aria-hidden="true"></i> 我的通知</h3>
+                    <h5 class="card-header py-3"><i class="far fa-bell" aria-hidden="true"></i> 我的通知</h5>
                     <div class="card-body">
                         @if ($notifications->count())
                             <ul class="list-group list-group-flush">
@@ -21,7 +21,7 @@
                             </ul>
                         @else
                             <div class="d-flex justify-content-center p-5">
-                                <h4>沒有消息通知！</h4>
+                                <label class="fs-3">沒有消息通知！</label>
                             </div>
                         @endif
                     </div>

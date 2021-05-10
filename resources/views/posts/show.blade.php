@@ -49,7 +49,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-body p-4">
 
-                            <h3 class="text-center mb-2">{{ $post->title }}</h3>
+                            <h1 class="text-center mb-2">{{ $post->title }}</h1>
 
                             <div class="text-center mb-2">
                                 <span class="text-secondary">
@@ -94,11 +94,11 @@
                                     <img class="rounded-circle" src="{{ $post->user->gravatar() }}" width="60px" height="60px">
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <h4>
+                                    <label class="fs-4">
                                         <a class="link-dark text-decoration-none" href="{{ route('users.show', ['user' => $post->user->id]) }}">
                                             {{ $post->user->name }}
                                         </a>
-                                    </h4>
+                                    </label>
                                     <span class="text-dark">{!! nl2br(e($post->user->introduction)) !!}</span>
                                 </div>
                             </div>

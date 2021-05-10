@@ -33,7 +33,7 @@
                                     class="nav-link link-secondary"
                                 @endif
                                 >
-                                    <span class="fs-5">最新文章</span>
+                                    <span>最新文章</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -44,7 +44,7 @@
                                     class="nav-link link-secondary"
                                 @endif
                                 >
-                                    <span class="fs-5">最近更新</span>
+                                    <span>最近更新</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -55,7 +55,7 @@
                                     class="nav-link link-secondary"
                                 @endif
                                 >
-                                    <span class="fs-5">最多留言</span>
+                                    <span>最多留言</span>
                                 </a>
                             </li>
                         </ul>

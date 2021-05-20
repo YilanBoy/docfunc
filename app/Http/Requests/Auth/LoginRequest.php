@@ -30,7 +30,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         // 如果是正式環境，需要使用 reCAPTCHA
-        if (app()->environment('production')) {
+        if (app()->isProduction()) {
             return [
                 'email' => 'required|string|email',
                 'password' => 'required|string',
@@ -51,7 +51,7 @@ class LoginRequest extends FormRequest
      */
     public function messages()
     {
-        if (app()->environment('production')) {
+        if (app()->isProduction()) {
             return [
                 'g-recaptcha-response.required' => '請完成驗證',
             ];

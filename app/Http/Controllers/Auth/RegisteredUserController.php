@@ -41,7 +41,7 @@ class RegisteredUserController extends Controller
 
         $messages = [];
 
-        if (app()->environment('production')) {
+        if (app()->isProduction()) {
             $rules['g-recaptcha-response'] = ['required', new Recaptcha];
             $messages['g-recaptcha-response.required'] = '請完成驗證';
         }

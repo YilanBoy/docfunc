@@ -4,7 +4,7 @@
 
 @section('scriptsInHead')
     {{-- Google reCAPTCHA --}}
-    @if (app()->environment('production'))
+    @if (app()->isProduction())
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     @endif
 @endsection
@@ -77,7 +77,7 @@
                                     </div>
 
                                     {{-- reCAPTCHA --}}
-                                    @if (app()->environment('production'))
+                                    @if (app()->isProduction())
                                         <div class="mb-3">
                                             <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
 

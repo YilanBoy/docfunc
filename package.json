@@ -7,7 +7,8 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production && npm run purgecss-app",
+        "purgecss-app": "purgecss --css  public/css/app.css --content resources/views/**/*.blade.php vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php storage/framework/views/*.php --output public/css/app.css"
     },
     "devDependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
@@ -20,6 +21,7 @@
         "cross-env": "^7.0",
         "laravel-mix": "^6.0.11",
         "lodash": "^4.17.20",
+        "purgecss": "^4.0.3",
         "resolve-url-loader": "^3.1.2",
         "sass": "^1.29.0",
         "sass-loader": "^8.0.0",

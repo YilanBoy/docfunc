@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/css/fontawesome.css": "/css/fontawesome.css",
     "/js/tagify.min.js": "/js/tagify.min.js",
     "/css/tagify.css": "/css/tagify.css",
     "/js/algoliasearch-lite.umd.js": "/js/algoliasearch-lite.umd.js",

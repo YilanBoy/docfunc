@@ -82,7 +82,7 @@
                     {{-- 通知顯示 --}}
                     <li class="nav-item d-flex justify-content-start align-items-center me-2">
                         <a class="nav-link" href="{{ route('notifications.index') }}">
-                            <span class="btn btn-{{ auth()->user()->notification_count > 0 ? 'danger' : 'secondary' }} btn-sm rounded-pill py-0">
+                            <span class="btn {{ auth()->user()->notification_count > 0 ? 'btn-danger' : 'btn-secondary' }} btn-sm rounded-pill py-0">
                                 {{ auth()->user()->notification_count }}
                             </span>
                         </a>

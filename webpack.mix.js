@@ -13,7 +13,6 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
-    .sass('resources/sass/fontawesome.scss', 'public/css')
     .copy(
         'node_modules/@yaireo/tagify/dist/tagify.min.js',
         'public/js/tagify.min.js'

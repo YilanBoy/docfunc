@@ -16,7 +16,6 @@
 
     {{-- Styles --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
     <link href="{{ asset('css/algolia.css') }}" rel="stylesheet">
 
     @yield('css')

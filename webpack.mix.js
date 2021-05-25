@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+require('laravel-mix-purgecss');
 
 /*
  |--------------------------------------------------------------------------
@@ -13,6 +14,11 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
+    .purgeCss({
+        extend: {
+            content: ['public/js/*.js', 'vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php', 'storage/framework/views/*.php'],
+        },
+    })
     .copy(
         'node_modules/@yaireo/tagify/dist/tagify.min.js',
         'public/js/tagify.min.js'

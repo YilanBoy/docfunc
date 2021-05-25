@@ -8,7 +8,7 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production && npm run purgecss-app",
-        "purgecss-app": "purgecss --css  public/css/app.css --content resources/views/**/*.blade.php vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php storage/framework/views/*.php --output public/css/app.css"
+        "purgecss-app": "purgecss --css  public/css/app.css --content resources/views/**/*.blade.php vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php storage/framework/views/*.php public/js/*.js --output public/css/app.css"
     },
     "devDependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",

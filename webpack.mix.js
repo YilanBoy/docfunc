@@ -16,7 +16,11 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .purgeCss({
         extend: {
-            content: ['public/js/*.js', 'vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php', 'storage/framework/views/*.php'],
+            content: [
+                'vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+                'storage/framework/views/*.php',
+                'public/js/*.js',
+            ],
         },
     })
     .copy(

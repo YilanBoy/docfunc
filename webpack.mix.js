@@ -14,6 +14,7 @@ require('laravel-mix-purgecss');
 
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/sweet-alert.js', 'public/js')
+    .js('resources/js/tagify.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .purgeCss({
         extend: {
@@ -24,10 +25,6 @@ mix.js('resources/js/app.js', 'public/js')
             ],
         },
     })
-    .copy(
-        'node_modules/@yaireo/tagify/dist/tagify.min.js',
-        'public/js/tagify.min.js'
-    )
     .copy(
         'node_modules/@yaireo/tagify/dist/tagify.css',
         'public/css/tagify.css'

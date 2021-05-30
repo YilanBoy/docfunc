@@ -109,8 +109,7 @@
     <script src="{{ asset('editor/build/ckeditor.js') }}"></script>
     <script src="{{ asset('js/editor.js') }}"></script>
     {{-- 載入 Tagify --}}
-    <script src="{{ asset('js/tagify.min.js') }}"></script>
-    <script src="{{ asset('js/tagify-input.js') }}"></script>
+    <script src="{{ asset('js/tagify.js') }}"></script>
     {{-- 至底按鈕 --}}
     <script src="{{ asset('js/scroll-to-bottom-btn.js') }}"></script>
 @endsection

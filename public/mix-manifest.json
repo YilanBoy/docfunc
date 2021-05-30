@@ -1,8 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/sweet-alert.js": "/js/sweet-alert.js",
+    "/js/tagify.js": "/js/tagify.js",
     "/css/app.css": "/css/app.css",
-    "/js/tagify.min.js": "/js/tagify.min.js",
     "/css/tagify.css": "/css/tagify.css",
     "/js/algoliasearch-lite.umd.js": "/js/algoliasearch-lite.umd.js",
     "/js/autocomplete.min.js": "/js/autocomplete.min.js"

@@ -1,3 +1,5 @@
+import Tagify from '@yaireo/tagify'
+
 var tagInput = document.querySelector('#tag-input');
 var tagify = new Tagify(tagInput, {
     whitelist: tagArray,

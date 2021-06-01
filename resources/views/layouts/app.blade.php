@@ -35,8 +35,7 @@
     {{-- Scripts --}}
     <script src="{{ asset('js/app.js') }}"></script>
     {{-- Include AlgoliaSearch JS Client and autocomplete.js library --}}
-    <script src="{{ asset('js/algoliasearch-lite.umd.js') }}"></script>
-    <script src="{{ asset('js/autocomplete.min.js') }}"></script>
+    <script src="{{ asset('js/algolia.js') }}"></script>
     <script>
         const client = algoliasearch(
             "{{ config('scout.algolia.id') }}",
@@ -44,7 +43,7 @@
         );
         const posts = client.initIndex("{{ config('scout.prefix') }}");
     </script>
-    <script src="{{ asset('js/algolia.js') }}"></script>
+    <script src="{{ asset('js/algolia-search-box.js') }}"></script>
 
     @livewireScripts
 

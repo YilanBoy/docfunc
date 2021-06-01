@@ -2,8 +2,8 @@
     "/js/app.js": "/js/app.js",
     "/js/sweet-alert.js": "/js/sweet-alert.js",
     "/js/tagify.js": "/js/tagify.js",
+    "/js/algolia.js": "/js/algolia.js",
+    "/js/algolia-search-box.js": "/js/algolia-search-box.js",
     "/css/app.css": "/css/app.css",
-    "/css/tagify.css": "/css/tagify.css",
-    "/js/algoliasearch-lite.umd.js": "/js/algoliasearch-lite.umd.js",
-    "/js/autocomplete.min.js": "/js/autocomplete.min.js"
+    "/css/tagify.css": "/css/tagify.css"
 }

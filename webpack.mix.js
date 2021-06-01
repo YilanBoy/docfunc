@@ -15,6 +15,8 @@ require('laravel-mix-purgecss');
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/sweet-alert.js', 'public/js')
     .js('resources/js/tagify.js', 'public/js')
+    .js('resources/js/algolia.js', 'public/js')
+    .js('resources/js/algolia-search-box.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .purgeCss({
         extend: {
@@ -28,14 +30,6 @@ mix.js('resources/js/app.js', 'public/js')
     .copy(
         'node_modules/@yaireo/tagify/dist/tagify.css',
         'public/css/tagify.css'
-    )
-    .copy(
-        'node_modules/algoliasearch/dist/algoliasearch-lite.umd.js',
-        'public/js/algoliasearch-lite.umd.js'
-    )
-    .copy(
-        'node_modules/autocomplete.js/dist/autocomplete.min.js',
-        'public/js/autocomplete.min.js'
     )
     .options({
         terser: {

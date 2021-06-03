@@ -1,6 +1,6 @@
 // Get the button
 let scrollToTopButton = document.getElementById('scroll-to-top-btn');
-scrollToTopButton.addEventListener('click', scrollToTop)
+scrollToTopButton.addEventListener('click', scrollToTop);
 
 // When the user clicks on the button, scroll to the top of the document
 function scrollToTop() {

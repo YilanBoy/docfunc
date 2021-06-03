@@ -1,6 +1,6 @@
 // Get the button
 let scrollToBottomButton = document.getElementById('scroll-to-bottom-btn');
-scrollToBottomButton.addEventListener('click', scrollToBottom)
+scrollToBottomButton.addEventListener('click', scrollToBottom);
 
 // When the user clicks on the button, scroll to the bottom
 function scrollToBottom() {

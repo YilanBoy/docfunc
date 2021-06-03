@@ -17,6 +17,8 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/tagify.js', 'public/js')
     .js('resources/js/algolia.js', 'public/js')
     .js('resources/js/algolia-search-box.js', 'public/js')
+    .js('resources/js/scroll-to-bottom-btn.js', 'public/js')
+    .js('resources/js/scroll-to-top-btn.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .purgeCss({
         extend: {

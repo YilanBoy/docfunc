@@ -11,9 +11,9 @@
 @section('content')
     <div class="position-relative">
         {{-- 移至底部按鈕 --}}
-        <button  class="btn btn-primary shadow d-block position-fixed"
+        <button id="scroll-to-bottom-btn" title="Go to bottom"
         style="bottom: 30px;right: 30px;z-index: 99;"
-        onclick="scrollToBottom()" id="scroll-to-bottom-btn" title="Go to bottom">
+        class="btn btn-primary shadow d-block position-fixed">
             <i class="fas fa-arrow-down"></i> 移至底部
         </button>
 

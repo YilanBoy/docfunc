@@ -14,9 +14,9 @@
     {{-- 返回頂部按鈕的 position 改為 absolute 時，上一層樣式需要設定 relative  --}}
     <div class="position-relative">
         {{-- 返回頂部按鈕 --}}
-        <button  class="btn btn-danger shadow d-none position-fixed"
+        <button id="scroll-to-top-btn" title="Go to top"
         style="bottom: 30px;right: 30px;z-index: 99;"
-        onclick="scrollToTop()" id="scroll-to-top-btn" title="Go to top">
+        class="btn btn-danger shadow d-none position-fixed">
             <i class="fas fa-arrow-up"></i> 返回頂部
         </button>
 

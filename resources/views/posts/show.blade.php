@@ -87,6 +87,18 @@
                                 {!! $post->body !!}
                             </div>
 
+                            {{-- 分享文章 --}}
+                            <div class="d-flex justify-content-end">
+                                <button type="button" title="分享此篇文章至 Facebook" data-sharer="facebook" data-url="{{ request()->fullUrl() }}"
+                                class="btn btn-link link-secondary text-decoration-none">
+                                    <i class="fab fa-facebook-square fa-2x"></i>
+                                </button>
+                                <button type="button" title="分享此篇文章至 Twitter" data-sharer="twitter" data-url="{{ request()->fullUrl() }}"
+                                class="btn btn-link link-secondary text-decoration-none">
+                                    <i class="fab fa-twitter fa-2x"></i>
+                                </button>
+                            </div>
+
                             <hr>
                             {{-- 作者 --}}
                             <div class="d-flex justify-content-start align-items-center p-4">
@@ -119,7 +131,8 @@
     {{-- 文章中的嵌入影片顯示 --}}
     <script async charset="utf-8" src="{{ asset('js/platform.js') }}"></script>
     <script src="{{ asset('js/embedly.js') }}"></script>
-
     {{-- 程式碼區塊高亮 --}}
     <script src="{{ asset('js/prism.js') }}"></script>
+    {{-- 社交分享按鈕 --}}
+    <script src="{{ asset('js/sharer.min.js') }}"></script>
 @endsection

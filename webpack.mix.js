@@ -19,6 +19,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/algolia-search-box.js', 'public/js')
     .js('resources/js/scroll-to-bottom-btn.js', 'public/js')
     .js('resources/js/scroll-to-top-btn.js', 'public/js')
+    .copy('node_modules/sharer.js/sharer.min.js', 'public/js/sharer.min.js')
     .sass('resources/sass/app.scss', 'public/css')
     .purgeCss({
         extend: {

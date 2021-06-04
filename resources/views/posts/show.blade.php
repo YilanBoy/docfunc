@@ -101,12 +101,12 @@
 
                             <hr>
                             {{-- 作者 --}}
-                            <div class="d-flex justify-content-start align-items-center p-4">
+                            <div class="d-flex justify-content-start align-items-center">
                                 <div class="align-self-center me-4">
                                     <img class="rounded-circle" src="{{ $post->user->gravatar() }}" width="60px" height="60px">
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <label class="fs-4">
+                                    <label class="fs-4 fw-bold">
                                         <a class="link-dark text-decoration-none" href="{{ route('users.show', ['user' => $post->user->id]) }}">
                                             {{ $post->user->name }}
                                         </a>

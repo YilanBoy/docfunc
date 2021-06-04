@@ -88,7 +88,7 @@
 
                                     {{-- 儲存文章 --}}
                                     <button type="submit" id="post-save" class="btn btn-primary shadow">
-                                        <i class="far fa-save mr-2" aria-hidden="true"></i> 儲存
+                                        <i class="far fa-save" aria-hidden="true"></i> 儲存
                                     </button>
                                 </div>
                             </form>

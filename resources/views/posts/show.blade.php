@@ -29,7 +29,7 @@
                         <div class="d-flex justify-content-end mb-2">
                             <a role="button"  class="btn btn-success shadow me-2"
                             href="{{ route('posts.edit', ['post' => $post->id]) }}">
-                                <i class="far fa-edit mr-2"></i> 編輯
+                                <i class="far fa-edit"></i> 編輯
                             </a>
 
                             <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
@@ -39,7 +39,7 @@
                                 @method('DELETE')
 
                                 <button type="submit" class="btn btn-danger shadow">
-                                    <i class="far fa-trash-alt mr-2"></i> 刪除
+                                    <i class="far fa-trash-alt"></i> 刪除
                                 </button>
                             </form>
                         </div>

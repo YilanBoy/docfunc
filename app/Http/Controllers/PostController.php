@@ -23,7 +23,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $posts = Post::withOrder($request->order)
-            ->with('user', 'category', 'tags') // 預加載防止 N+1 問題
+            ->with('user', 'category') // 預加載防止 N+1 問題
             ->paginate(10);
 
         return view('posts.index', ['posts' => $posts]);

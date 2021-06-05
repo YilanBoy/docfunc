@@ -23,19 +23,6 @@
                         </span>
                     </div>
 
-                    <div class="p-1">
-                        {{-- 文章標籤--}}
-                        @if ($post->tags->count() > 0)
-                            <span class="text-primary"><i class="fas fa-tags"></i></span>
-
-                            @foreach ($post->tags as $tag)
-                                <a role="button" class="btn btn-primary btn-sm rounded-pill py-0 shadow" href="{{ route('tags.show', ['tag' => $tag->id]) }}">
-                                    {{ $tag->name }}
-                                </a>
-                            @endforeach
-                        @endif
-                    </div>
-
                     <div class="small p-1">
 
                         {{-- 文章分類資訊 --}}

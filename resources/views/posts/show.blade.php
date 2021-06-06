@@ -57,7 +57,7 @@
                                     <a class="link-secondary text-decoration-none"
                                     href="{{ route('users.show', ['user' => $post->user->id]) }}">{{ $post->user->name }}</a>
                                     •
-                                    <i class="far fa-folder"></i>
+                                    <i class="{{ $post->category->icon }}"></i>
                                     <a class="link-secondary text-decoration-none"
                                     href="{{ $post->category->link_with_name }}">{{ $post->category->name }}</a>
                                     •

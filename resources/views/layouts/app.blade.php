@@ -35,15 +35,12 @@
     {{-- Scripts --}}
     <script src="{{ asset('js/app.js') }}"></script>
     {{-- Include AlgoliaSearch JS Client and autocomplete.js library --}}
-    <script src="{{ asset('js/algolia.js') }}"></script>
     <script>
-        const client = algoliasearch(
-            "{{ config('scout.algolia.id') }}",
-            "{{ Algolia\ScoutExtended\Facades\Algolia::searchKey(App\Models\Post::class) }}"
-        );
-        const posts = client.initIndex("{{ config('scout.prefix') }}");
+        const algoliaId = "{{ config('scout.algolia.id') }}";
+        const algoliaSearchKey = "{{ Algolia\ScoutExtended\Facades\Algolia::searchKey(App\Models\Post::class) }}";
+        const algoliaIndex = "{{ config('scout.prefix') }}";
     </script>
-    <script src="{{ asset('js/algolia-search-box.js') }}"></script>
+    <script src="{{ asset('js/algolia.js') }}"></script>
 
     @livewireScripts
 

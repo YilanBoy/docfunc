@@ -106,7 +106,7 @@
         const appUrl = "{{ config('app.url') }}";
     </script>
     {{-- 載入 Ckeditor --}}
-    <script src="{{ asset('editor/build/ckeditor.js') }}"></script>
+    <script src="{{ asset('js/editor/build/ckeditor.js') }}"></script>
     <script src="{{ asset('js/editor.js') }}"></script>
     {{-- 載入 Tagify --}}
     <script src="{{ asset('js/tagify.js') }}"></script>

@@ -28,7 +28,7 @@
                         {{-- 文章分類資訊 --}}
                         <a class="link-secondary text-decoration-none"
                         href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
-                            <i class="far fa-folder"></i> {{ $post->category->name }}
+                            <i class="{{ $post->category->icon }}"></i> {{ $post->category->name }}
                         </a>
 
                         <span> • </span>

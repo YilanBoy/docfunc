@@ -15,6 +15,7 @@ require('laravel-mix-purgecss');
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/sweet-alert.js', 'public/js')
     .js('resources/js/tagify.js', 'public/js')
+    .js('resources/js/editor.js', 'public/js')
     .js('resources/js/algolia.js', 'public/js')
     .js('resources/js/scroll-to-bottom-btn.js', 'public/js')
     .js('resources/js/scroll-to-top-btn.js', 'public/js')
@@ -25,7 +26,7 @@ mix.js('resources/js/app.js', 'public/js')
             content: [
                 'vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
                 'storage/framework/views/*.php',
-                'public/js/*.js',
+                'resources/js/*.js',
             ],
         },
     })

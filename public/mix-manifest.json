@@ -2,6 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/js/sweet-alert.js": "/js/sweet-alert.js",
     "/js/tagify.js": "/js/tagify.js",
+    "/js/editor.js": "/js/editor.js",
     "/js/algolia.js": "/js/algolia.js",
     "/js/scroll-to-bottom-btn.js": "/js/scroll-to-bottom-btn.js",
     "/js/scroll-to-top-btn.js": "/js/scroll-to-top-btn.js",

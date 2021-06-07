@@ -27,7 +27,7 @@ You can search post on blog by [Algolia](https://www.algolia.com/)
 Clone the repository to your local machine, and change the current working directory to the repository
 
 ```sh
-$ cd personal-blog
+$ cd simple-blog
 ```
 
 Install the composer package

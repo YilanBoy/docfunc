@@ -16,7 +16,7 @@
                 </a>
             </div>
             <div>
-                <a class="link-secondary" href="https://github.com/YilanBoy/personal-blog" target="_blank" rel="nofollow noopener noreferrer">
+                <a class="link-secondary" href="https://github.com/YilanBoy/simple-blog" target="_blank" rel="nofollow noopener noreferrer">
                     部落格壽司扣（GitHub）
                 </a>
 

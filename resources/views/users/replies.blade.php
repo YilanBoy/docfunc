@@ -25,7 +25,7 @@
                     {{-- 回覆時間 --}}
                     <div class="col-3 d-flex justify-content-end align-items-center">
                         <span class="text-secondary">
-                            <i class="far fa-clock"></i> 回覆於 {{ $reply->created_at->diffForHumans() }}
+                            <i class="fas fa-clock"></i> {{ $reply->created_at->diffForHumans() }}
                         </span>
                     </div>
                 </div>

@@ -37,7 +37,7 @@
                         <a class="link-secondary text-decoration-none"
                         href="{{ route('users.show', ['user' => $post->user_id]) }}"
                         title="{{ $post->user->name }}">
-                            <i class="far fa-user"></i> {{ $post->user->name }}
+                            <i class="fas fa-user"></i> {{ $post->user->name }}
                         </a>
 
                         <span> • </span>
@@ -46,7 +46,7 @@
                         <a class="link-secondary text-decoration-none"
                         href="{{ $post->link_with_slug }}"
                         title="文章發佈於：{{ $post->created_at }}">
-                            <i class="far fa-clock"></i> {{ $post->created_at->diffForHumans() }}
+                            <i class="fas fa-clock"></i> {{ $post->created_at->diffForHumans() }}
                         </a>
 
                     </div>
@@ -54,7 +54,9 @@
                 </div>
             </div>
 
-            <span class="badge bg-secondary rounded-pill"> {{ $post->reply_count }} </span>
+            <div class="text-secondary">
+                <i class="fas fa-comment"></i> {{ $post->reply_count }}
+            </div>
         </li>
     @endforeach
 </ul>

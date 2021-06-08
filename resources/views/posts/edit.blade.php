@@ -23,7 +23,7 @@
 
                     <div class="card shadow">
 
-                        <h5 class="card-header py-3"><i class="far fa-edit"></i> 編輯文章</h5>
+                        <h5 class="card-header py-3"><i class="fas fa-edit"></i> 編輯文章</h5>
 
                         <div class="card-body">
                             <form action="{{ route('posts.update', ['post' => $post->id]) }}" method="POST" accept-charset="UTF-8">

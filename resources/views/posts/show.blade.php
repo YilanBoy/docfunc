@@ -57,14 +57,14 @@
                                     <a class="link-secondary text-decoration-none"
                                     href="{{ $post->category->link_with_name }}">{{ $post->category->name }}</a>
                                     •
-                                    <i class="far fa-user"></i>
+                                    <i class="fas fa-user"></i>
                                     <a class="link-secondary text-decoration-none"
                                     href="{{ route('users.show', ['user' => $post->user->id]) }}">{{ $post->user->name }}</a>
                                     •
-                                    <i class="far fa-clock"></i>
+                                    <i class="fas fa-clock"></i>
                                     {{ $post->created_at->diffForHumans() }}
                                     •
-                                    <i class="far fa-comment"></i>
+                                    <i class="fas fa-comment"></i>
                                     {{ $post->reply_count }}
                                 </span>
                             </div>

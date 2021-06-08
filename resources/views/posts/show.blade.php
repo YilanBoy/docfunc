@@ -51,21 +51,23 @@
 
                             <h1 class="text-start mb-2">{{ $post->title }}</h1>
 
-                            <div class="text-start mb-2">
-                                <span class="text-secondary">
-                                    <i class="{{ $post->category->icon }}"></i>
-                                    <a class="link-secondary text-decoration-none"
-                                    href="{{ $post->category->link_with_name }}">{{ $post->category->name }}</a>
-                                    •
-                                    <i class="fas fa-user"></i>
-                                    <a class="link-secondary text-decoration-none"
-                                    href="{{ route('users.show', ['user' => $post->user->id]) }}">{{ $post->user->name }}</a>
-                                    •
-                                    <i class="fas fa-clock"></i>
-                                    {{ $post->created_at->diffForHumans() }}
-                                    •
-                                    <i class="fas fa-comment"></i>
-                                    {{ $post->reply_count }}
+                            <div class="d-flex justify-content-start text-secondary mb-2">
+                                <a href="{{ $post->category->link_with_name }}"
+                                class="d-block link-secondary text-decoration-none me-3">
+                                    <i class="{{ $post->category->icon }}"></i> {{ $post->category->name }}
+                                </a>
+
+                                <a href="{{ route('users.show', ['user' => $post->user->id]) }}"
+                                class="d-block link-secondary text-decoration-none me-3">
+                                    <i class="fas fa-user"></i> {{ $post->user->name }}
+                                </a>
+
+                                <span class="me-3">
+                                    <i class="fas fa-clock"></i> {{ $post->created_at->diffForHumans() }}
+                                </span>
+
+                                <span class="me-3">
+                                    <i class="fas fa-comment"></i> {{ $post->reply_count }}
                                 </span>
                             </div>
 

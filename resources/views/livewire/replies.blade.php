@@ -31,7 +31,7 @@
 
                             <div class="row">
                                 {{-- 作者大頭貼 --}}
-                                <div class="col-2 d-flex justify-content-center align-items-center">
+                                <div class="col-1 d-flex justify-content-center align-items-center">
                                     <a href="{{ route('users.show', ['user' => $reply->user_id]) }}">
                                         <img class="rounded-circle"
                                         alt="{{ $reply->user->name }}" src="{{ $reply->user->gravatar() }}""
@@ -39,7 +39,7 @@
                                     </a>
                                 </div>
 
-                                <div class="col-9 d-flex justify-content-start">
+                                <div class="col-10 d-flex justify-content-start">
                                     {{-- 回覆內容 --}}
                                     <div class="d-flex flex-column">
                                         <div class="p-1">

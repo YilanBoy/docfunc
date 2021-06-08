@@ -26,24 +26,20 @@
                     <div class="small p-1">
 
                         {{-- 文章分類資訊 --}}
-                        <a class="link-secondary text-decoration-none"
+                        <a class="link-secondary text-decoration-none me-3"
                         href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
                             <i class="{{ $post->category->icon }}"></i> {{ $post->category->name }}
                         </a>
 
-                        <span> • </span>
-
                         {{-- 文章作者資訊 --}}
-                        <a class="link-secondary text-decoration-none"
+                        <a class="link-secondary text-decoration-none me-3"
                         href="{{ route('users.show', ['user' => $post->user_id]) }}"
                         title="{{ $post->user->name }}">
                             <i class="fas fa-user"></i> {{ $post->user->name }}
                         </a>
 
-                        <span> • </span>
-
                         {{-- 文章發佈時間 --}}
-                        <a class="link-secondary text-decoration-none"
+                        <a class="link-secondary text-decoration-none me-3"
                         href="{{ $post->link_with_slug }}"
                         title="文章發佈於：{{ $post->created_at }}">
                             <i class="fas fa-clock"></i> {{ $post->created_at->diffForHumans() }}

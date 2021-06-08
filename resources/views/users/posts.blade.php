@@ -16,9 +16,10 @@
 
                     <div class="col-3 d-flex justify-content-end align-items-center">
                         {{-- 文章發佈時間 --}}
-                        <div class="text-secondary">
+                        <div class="text-secondary me-3">
                             <i class="fas fa-comment"></i> {{ $post->reply_count }}
-                            <span> • </span>
+                        </div>
+                        <div class="text-secondary">
                             <i class="fas fa-clock"></i> {{ $post->created_at->diffForHumans() }}
                         </div>
                     </div>

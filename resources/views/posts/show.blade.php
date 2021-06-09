@@ -49,7 +49,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-body p-4">
 
-                            <h1 class="text-start mb-2">{{ $post->title }}</h1>
+                            <h1 class="text-start fw-bold mb-2">{{ $post->title }}</h1>
 
                             <div class="d-flex justify-content-start text-secondary mb-2">
                                 <a href="{{ $post->category->link_with_name }}"

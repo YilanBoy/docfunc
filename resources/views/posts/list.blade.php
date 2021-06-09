@@ -16,7 +16,7 @@
                 {{-- 文章相關訊息 --}}
                 <div class="col-10">
                     <div class="p-1">
-                        <span class="fs-5">
+                        <span class="fs-5 fw-bold">
                             <a class="link-dark text-decoration-none" href="{{ $post->link_with_slug }}" title="{{ $post->title }}">
                                 {{ $post->title }}
                             </a>

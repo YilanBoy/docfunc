@@ -64,9 +64,8 @@ class PostService
     }
 
     // 生成摘錄的方法
-    public function makeExcerpt(string $body, int $length = 200)
+    public function makeExcerpt(string $body, int $length = 150)
     {
-        $excerpt = trim(preg_replace('/\r\n|\r|\n+/', ' ', strip_tags($body)));
-        return Str::limit($excerpt, $length);
+        return Str::limit(strip_tags($body), $length);
     }
 }

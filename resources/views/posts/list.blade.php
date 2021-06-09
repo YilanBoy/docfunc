@@ -1,11 +1,11 @@
 {{-- 文章列表區塊 --}}
 <ul class="list-group list-group-flush">
     @foreach ($posts as $post)
-        <li class="list-group-item d-flex justify-content-between align-items-center">
+        <li class="list-group-item">
 
-            <div class="d-flex flex-row">
+            <div class="row">
                 {{-- 作者大頭貼 --}}
-                <div class="d-flex justify-content-between align-items-center me-4">
+                <div class="col-1 d-flex justify-content-center align-items-center">
                     <a href="{{ route('users.show', ['user' => $post->user_id]) }}">
                         <img class="rounded-circle"
                         alt="{{ $post->user->name }}" src="{{ $post->user->gravatar() }}"
@@ -14,7 +14,7 @@
                 </div>
 
                 {{-- 文章相關訊息 --}}
-                <div class="d-flex flex-column">
+                <div class="col-10">
                     <div class="p-1">
                         <span class="fs-5">
                             <a class="link-dark text-decoration-none" href="{{ $post->link_with_slug }}" title="{{ $post->title }}">
@@ -23,8 +23,13 @@
                         </span>
                     </div>
 
-                    <div class="small p-1">
+                    <div class="p-1 small">
+                        <span class="text-secondary">
+                            {{ $post->excerpt }}
+                        </span>
+                    </div>
 
+                    <div class="p-1 small">
                         {{-- 文章分類資訊 --}}
                         <a class="link-secondary text-decoration-none me-2"
                         href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
@@ -48,10 +53,13 @@
                     </div>
 
                 </div>
-            </div>
 
-            <div class="text-secondary">
-                <i class="fas fa-comment"></i> {{ $post->reply_count }}
+                <div class="col-1 d-flex justify-content-end align-items-center">
+                    <span class="text-secondary">
+                        <i class="fas fa-comment"></i>
+                        {{ $post->reply_count }}
+                    </span>
+                </div>
             </div>
         </li>
     @endforeach

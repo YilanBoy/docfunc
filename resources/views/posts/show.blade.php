@@ -53,20 +53,26 @@
 
                             <div class="d-flex justify-content-start text-secondary mb-2">
                                 <a href="{{ $post->category->link_with_name }}"
-                                class="d-block link-secondary text-decoration-none me-3">
+                                class="d-block link-secondary text-decoration-none">
                                     <i class="{{ $post->category->icon }}"></i> {{ $post->category->name }}
                                 </a>
 
+                                <span class="text-secondary mx-2">&bull;</span>
+
                                 <a href="{{ route('users.show', ['user' => $post->user->id]) }}"
-                                class="d-block link-secondary text-decoration-none me-3">
+                                class="d-block link-secondary text-decoration-none">
                                     <i class="fas fa-user"></i> {{ $post->user->name }}
                                 </a>
 
-                                <span class="me-3">
+                                <span class="text-secondary mx-2">&bull;</span>
+
+                                <span>
                                     <i class="fas fa-clock"></i> {{ $post->created_at->diffForHumans() }}
                                 </span>
 
-                                <span class="me-3">
+                                <span class="text-secondary mx-2">&bull;</span>
+
+                                <span>
                                     <i class="fas fa-comment"></i> {{ $post->reply_count }}
                                 </span>
                             </div>

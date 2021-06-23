@@ -15,13 +15,7 @@ class CategoryController extends Controller
             return redirect($category->link_with_name, 301);
         }
 
-        // 讀取分類 ID 關聯的話題，並按每 10 條分頁
-        $posts = Post::withOrder($request->order)
-            ->where('category_id', $category->id)
-            ->with('user', 'category') // 預加載防止 N+1 問題
-            ->paginate(10);
-
         // 傳參變量文章和分類到模板中
-        return view('posts.index', ['posts' => $posts, 'category' => $category]);
+        return view('posts.index', ['category' => $category]);
     }
 }

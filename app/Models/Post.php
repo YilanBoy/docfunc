@@ -44,9 +44,9 @@ class Post extends Model
                     return $query->orderBy('updated_at', 'desc');
                 case 'reply':
                     return $query->orderBy('reply_count', 'desc');
+                default:
+                    return $query->latest();
             }
-        }, function ($query) {
-            return $query->latest();
         });
     }
 

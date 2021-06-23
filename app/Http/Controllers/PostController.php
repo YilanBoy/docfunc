@@ -22,11 +22,7 @@ class PostController extends Controller
     // 文章列表
     public function index(Request $request)
     {
-        $posts = Post::withOrder($request->order)
-            ->with('user', 'category') // 預加載防止 N+1 問題
-            ->paginate(10);
-
-        return view('posts.index', ['posts' => $posts]);
+        return view('posts.index');
     }
 
     // 文章內容

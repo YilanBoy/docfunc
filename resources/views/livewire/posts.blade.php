@@ -53,7 +53,7 @@
 
                         <div class="row">
                             {{-- 作者大頭貼 --}}
-                            <div class="col-1 d-flex justify-content-center align-items-center">
+                            <div class="d-none d-md-flex col-md-1 justify-content-center align-items-center">
                                 <a href="{{ route('users.show', ['user' => $post->user_id]) }}">
                                     <img class="rounded-circle"
                                     alt="{{ $post->user->name }}" src="{{ $post->user->gravatar() }}"
@@ -62,7 +62,7 @@
                             </div>
 
                             {{-- 文章相關訊息 --}}
-                            <div class="col-10">
+                            <div class="col-11 col-md-10">
                                 <div class="p-1">
                                     <span class="fs-5 fw-bold">
                                         <a class="link-dark text-decoration-none" href="{{ $post->link_with_slug }}" title="{{ $post->title }}">

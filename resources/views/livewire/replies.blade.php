@@ -23,7 +23,7 @@
 
     {{-- 回覆列表 --}}
     @if ($replies->count() > 0)
-        <div class="card shadow mb-4">
+        <div class="card shadow mb-4" id="replies-card">
             <div class="card-body p-4">
                 <ul class="list-group list-group-flush">
                     @foreach ($replies as $reply)

@@ -62,7 +62,7 @@
                             </div>
 
                             {{-- 文章相關訊息 --}}
-                            <div class="col-11 col-md-10">
+                            <div class="col-12 col-md-10">
                                 <div class="p-1">
                                     <span class="fs-5 fw-bold">
                                         <a class="link-dark text-decoration-none" href="{{ $post->link_with_slug }}" title="{{ $post->title }}">
@@ -102,15 +102,24 @@
                                         <i class="fas fa-clock"></i> {{ $post->created_at->diffForHumans() }}
                                     </a>
 
+                                    <span class="d-md-none text-secondary mx-1">&bull;</span>
+
+                                    {{-- 文章留言數 --}}
+                                    <a class="d-md-none link-secondary text-decoration-none"
+                                    href="{{ $post->link_with_slug }}#replies-card">
+                                        <i class="fas fa-comment"></i> {{ $post->reply_count }}
+                                    </a>
+
                                 </div>
 
                             </div>
 
-                            <div class="col-1 d-flex justify-content-end align-items-center">
-                                <span class="text-secondary">
+                            <div class="d-none d-md-flex col-md-1 justify-content-end align-items-center">
+                                <a class="link-secondary text-decoration-none"
+                                href="{{ $post->link_with_slug }}#replies-card">
                                     <i class="fas fa-comment"></i>
                                     {{ $post->reply_count }}
-                                </span>
+                                </a>
                             </div>
                         </div>
                     </li>

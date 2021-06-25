@@ -64,15 +64,15 @@
                                     <i class="fas fa-user"></i> {{ $post->user->name }}
                                 </a>
 
-                                <span class="text-secondary mx-2">&bull;</span>
+                                <span class="d-none d-md-block text-secondary mx-2">&bull;</span>
 
-                                <span>
+                                <span class="d-none d-md-block">
                                     <i class="fas fa-clock"></i> {{ $post->created_at->diffForHumans() }}
                                 </span>
 
-                                <span class="text-secondary mx-2">&bull;</span>
+                                <span class="d-none d-md-block text-secondary mx-2">&bull;</span>
 
-                                <span>
+                                <span class="d-none d-md-block">
                                     <i class="fas fa-comment"></i> {{ $post->reply_count }}
                                 </span>
                             </div>

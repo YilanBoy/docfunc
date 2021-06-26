@@ -24,10 +24,10 @@
     {{-- 回覆列表 --}}
     @if ($replies->count() > 0)
         <div class="card shadow mb-4" id="replies-card">
-            <div class="card-body p-4">
+            <div class="card-body p-3 p-md-4">
                 <ul class="list-group list-group-flush">
                     @foreach ($replies as $reply)
-                        <li class="list-group-item" name="reply-{{ $reply->id }}" id="reply-{{ $reply->id }}">
+                        <li class="list-group-item" id="reply-{{ $reply->id }}">
 
                             <div class="row">
                                 {{-- 作者大頭貼 --}}

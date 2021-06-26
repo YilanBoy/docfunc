@@ -47,7 +47,7 @@
 
                     {{-- 文章 --}}
                     <div class="card shadow mb-4">
-                        <div class="card-body p-4">
+                        <div class="card-body p-3 p-md-4">
 
                             <h1 class="text-start fw-bold mb-2">{{ $post->title }}</h1>
 
@@ -110,7 +110,7 @@
                             <hr>
                             {{-- 作者 --}}
                             <div class="d-flex justify-content-start align-items-center">
-                                <div class="align-self-center me-4">
+                                <div class="d-none d-md-block align-self-center me-4">
                                     <img class="rounded-circle" src="{{ $post->user->gravatar() }}" width="60px" height="60px">
                                 </div>
                                 <div class="d-flex flex-column">

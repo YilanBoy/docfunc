@@ -22,6 +22,7 @@
                 @endif
 
                 @livewire('posts', [
+                    'currentUrl' => url()->current(),
                     'category' => isset($category) ? $category : null,
                     'tag' => isset($tag) ? $tag : null,
                 ])

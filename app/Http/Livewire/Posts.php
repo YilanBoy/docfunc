@@ -10,6 +10,7 @@ class Posts extends Component
 {
     use WithPagination;
 
+    public $currentUrl;
     public $category;
     public $tag;
     public $order;

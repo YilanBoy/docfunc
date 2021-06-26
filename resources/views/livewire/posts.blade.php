@@ -6,7 +6,7 @@
             <li class="nav-item">
                 <a
                 wire:click.prevent="setOrder('latest')"
-                href=""
+                href="{{ $currentUrl . '?order=latest' }}"
                 @if ($order === 'latest')
                     class="nav-link active" aria-current="true"
                 @else
@@ -19,7 +19,7 @@
             <li class="nav-item">
                 <a
                 wire:click.prevent="setOrder('recent')"
-                href=""
+                href="{{ $currentUrl . '?order=recent' }}"
                 @if ($order === 'recent')
                     class="nav-link active" aria-current="true"
                 @else
@@ -32,7 +32,7 @@
             <li class="nav-item">
                 <a
                 wire:click.prevent="setOrder('reply')"
-                href=""
+                href="{{ $currentUrl . '?order=reply' }}"
                 @if ($order === 'reply')
                     class="nav-link active" aria-current="true"
                 @else

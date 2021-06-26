@@ -35,14 +35,14 @@ class Posts extends Component
     public function render()
     {
         if ($this->category) {
-            $postQuery = $this->category->posts();
+            $post = $this->category->posts();
         } elseif ($this->tag) {
-            $postQuery = $this->tag->posts();
+            $post = $this->tag->posts();
         } else {
-            $postQuery = Post::query();
+            $post = Post::query();
         }
 
-        $posts = $postQuery->withOrder($this->order)
+        $posts = $post->withOrder($this->order)
             ->with('user', 'category') // 預加載防止 N+1 問題
             ->paginate(10);
 

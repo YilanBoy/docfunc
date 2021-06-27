@@ -6,7 +6,7 @@
             <img src="{{ asset('icon/icon.png') }}"
             style="margin-top: -4px;margin-right: 4px;"
             width="30px" height="30px">
-            {{ config('app.name') }}
+            <span class="font-monospace fw-bold">{{ config('app.name') }}</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

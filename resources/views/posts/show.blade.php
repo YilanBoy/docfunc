@@ -15,33 +15,53 @@
     <div class="position-relative">
         {{-- 返回頂部按鈕 --}}
         <button id="scroll-to-top-btn" title="Go to top"
-        style="bottom: 30px;right: 30px;z-index: 99;"
-        class="btn btn-danger shadow d-none position-fixed">
-            <i class="fas fa-arrow-up"></i> 返回頂部
+        style="z-index: 99;bottom: 30px;right: 30px;"
+        class="btn btn-danger rounded-circle shadow d-none position-fixed">
+            <i class="fas fa-arrow-up"></i>
         </button>
 
         <div class="container mb-5">
             <div class="row justify-content-md-center">
-                <div class="col-12 col-xl-8">
+                <div class="position-relative col-12 col-xl-8">
 
                     {{-- 編輯區塊 --}}
                     @can('update', $post)
-                        <div class="d-flex justify-content-end mb-2">
+                        <div class="d-none d-xl-block position-absolute"
+                        style="
+                            z-index: 99;
+                            top:0;
+                            left: 101%;
+                            width: 90px;
+                            height: 100%;"
+                        >
+                            <div class="position-sticky" style="top: 30px">
+                                <a role="button"  class="btn btn-success w-100 shadow mb-2"
+                                href="{{ route('posts.edit', ['post' => $post->id]) }}">
+                                    <i class="far fa-edit"></i> 編輯
+                                </a>
+
+                                <form id="post-delete" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
+                                class="d-none"
+                                onsubmit="return confirm('您確定要刪除此文章嗎？')">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
+
+                                <button type="submit" form="post-delete" class="btn btn-danger w-100 shadow">
+                                    <i class="far fa-trash-alt"></i> 刪除
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="d-xl-none d-flex justify-content-end mb-2">
                             <a role="button"  class="btn btn-success shadow me-2"
                             href="{{ route('posts.edit', ['post' => $post->id]) }}">
                                 <i class="far fa-edit"></i> 編輯
                             </a>
 
-                            <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
-                            style="display: inline-block;"
-                            onsubmit="return confirm('您確定要刪除此文章嗎？')">
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit" class="btn btn-danger shadow">
-                                    <i class="far fa-trash-alt"></i> 刪除
-                                </button>
-                            </form>
+                            <button type="submit" form="post-delete" class="btn btn-danger shadow">
+                                <i class="far fa-trash-alt"></i> 刪除
+                            </button>
                         </div>
                     @endcan
 

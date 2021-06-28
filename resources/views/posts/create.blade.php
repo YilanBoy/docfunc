@@ -12,9 +12,9 @@
     <div class="position-relative">
         {{-- 移至底部按鈕 --}}
         <button id="scroll-to-bottom-btn" title="Go to bottom"
-        style="bottom: 30px;right: 30px;z-index: 99;"
-        class="btn btn-primary shadow d-block position-fixed">
-            <i class="fas fa-arrow-down"></i> 移至底部
+        style="z-index: 99;bottom: 30px;right: 30px;"
+        class="btn btn-primary rounded-circle shadow d-block position-fixed">
+            <i class="fas fa-arrow-down"></i>
         </button>
 
         <div class="container mb-5">

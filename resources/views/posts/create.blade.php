@@ -14,7 +14,7 @@
         <button id="scroll-to-bottom-btn" title="Go to bottom"
         style="z-index: 99;bottom: 30px;right: 30px;"
         class="btn btn-primary rounded-circle shadow d-block position-fixed">
-            <i class="fas fa-arrow-down"></i>
+            <i class="fas fa-arrow-down fa-2x"></i>
         </button>
 
         <div class="container mb-5">

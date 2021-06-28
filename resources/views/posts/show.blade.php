@@ -17,7 +17,7 @@
         <button id="scroll-to-top-btn" title="Go to top"
         style="z-index: 99;bottom: 30px;right: 30px;"
         class="btn btn-danger rounded-circle shadow d-none position-fixed">
-            <i class="fas fa-arrow-up"></i>
+            <i class="fas fa-arrow-up fa-2x"></i>
         </button>
 
         <div class="container mb-5">

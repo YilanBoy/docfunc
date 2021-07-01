@@ -85,12 +85,12 @@
                                 </div>
 
                                 {{-- 文章內容 --}}
-                                <div class="mb-3">
+                                <div class="mb-3 mb-xl-0">
                                     <textarea name="body" id="editor" placeholder="請填寫文章內容～">{{ old('body') }}</textarea>
                                 </div>
 
                                 @error('body')
-                                    <div class="mb-3">
+                                    <div class="mb-3 mb-xl-0 mt-xl-3">
                                         <span class="text-danger">
                                             <strong>{{ $message }}</strong>
                                         </span>

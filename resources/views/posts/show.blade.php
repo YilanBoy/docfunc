@@ -26,13 +26,14 @@
 
                     {{-- 編輯區塊 --}}
                     @can('update', $post)
-                        <div class="d-none d-xl-block position-absolute"
-                        style="
-                            z-index: 99;
-                            top:0;
-                            left: 101%;
-                            width: 90px;
-                            height: 100%;"
+                        <div
+                            class="d-none d-xl-block position-absolute"
+                            style="
+                                z-index: 99;
+                                top:0;
+                                left: 101%;
+                                width: 90px;
+                                height: 100%;"
                         >
                             <div class="position-sticky" style="top: 30px">
                                 <a role="button"  class="btn btn-success w-100 shadow mb-2"
@@ -40,14 +41,14 @@
                                     <i class="far fa-edit"></i> 編輯
                                 </a>
 
-                                <form id="post-delete" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
+                                <form id="delete-post" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
                                 class="d-none"
                                 onsubmit="return confirm('您確定要刪除此文章嗎？')">
                                     @csrf
                                     @method('DELETE')
                                 </form>
 
-                                <button type="submit" form="post-delete" class="btn btn-danger w-100 shadow">
+                                <button type="submit" form="delete-post" class="btn btn-danger w-100 shadow">
                                     <i class="far fa-trash-alt"></i> 刪除
                                 </button>
                             </div>
@@ -59,7 +60,7 @@
                                 <i class="far fa-edit"></i> 編輯
                             </a>
 
-                            <button type="submit" form="post-delete" class="btn btn-danger shadow">
+                            <button type="submit" form="delete-post" class="btn btn-danger shadow">
                                 <i class="far fa-trash-alt"></i> 刪除
                             </button>
                         </div>

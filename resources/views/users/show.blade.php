@@ -7,9 +7,9 @@
     <div class="container mb-5">
         <div class="row justify-content-md-center g-4">
 
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-xl-3">
                 <div class="card shadow mb-4">
-                    <img class="card-img-top" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}">
+                    <img class="d-none d-xl-block card-img-top" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}">
                     <div class="card-body">
                         <label class="fs-3 mb-0">{{ $user->name }}</label>
 
@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-xl-8">
                 <div class="card p-3 mb-4">
                     <div class="card-body">
                         <h5>個人簡介</h5>

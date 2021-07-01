@@ -1,9 +1,10 @@
 // 設定文章最多字數限制
 const maxCharacters = 10000;
 // 設定要更新字數顯示的區塊
-const wordsBox = document.querySelector('.update-characters');
+const wordsBoxs = document.querySelectorAll('.update-characters');
 // 設定表單 submit 按鈕的區塊
 const sendButton = document.querySelector('#post-save');
+const LargeScreenSendButton = document.querySelector('#lg-post-save');
 
 ClassicEditor.create(document.querySelector('#editor'), {
     // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
@@ -25,19 +26,20 @@ ClassicEditor.create(document.querySelector('#editor'), {
                 !isLimitExceeded && stats.characters > maxCharacters * 0.8;
 
             // 文章總字數更新
-            wordsBox.textContent = `文章總字數：${stats.characters} / ${maxCharacters}`;
-
-            // 如果字數接近限制，則將 wordsBox 的 class 加上一個 characters-limit-exceeded，使文字變成橘色
-            wordsBox.classList.toggle('characters-limit-close', isCloseToLimit);
-
-            // 如果字數超過限制，則將 wordsBox 的 class 加上一個 characters-limit-exceeded，使文字變成紅色
-            wordsBox.classList.toggle(
-                'characters-limit-exceeded',
-                isLimitExceeded
-            );
+            wordsBoxs.forEach(element => {
+                element.textContent = `${stats.characters} / ${maxCharacters}`;
+                // 如果字數接近限制，則將 wordsBox 的 class 加上一個 characters-limit-exceeded，使文字變成橘色
+                element.classList.toggle('characters-limit-close', isCloseToLimit);
+                // 如果字數超過限制，則將 wordsBox 的 class 加上一個 characters-limit-exceeded，使文字變成紅色
+                element.classList.toggle(
+                    'characters-limit-exceeded',
+                    isLimitExceeded
+                );
+            });
 
             // 如果字數超過最高限制，則將送出的按鈕 disable
             sendButton.toggleAttribute('disabled', isLimitExceeded);
+            LargeScreenSendButton.toggleAttribute('disabled', isLimitExceeded);
         }
     }
 })

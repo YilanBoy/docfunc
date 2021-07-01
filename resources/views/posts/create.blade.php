@@ -10,23 +10,39 @@
 
 @section('content')
     <div class="position-relative">
-        {{-- 移至底部按鈕 --}}
-        <button id="scroll-to-bottom-btn" title="Go to bottom"
-        style="z-index: 99;bottom: 30px;right: 30px;"
-        class="btn btn-primary rounded-circle shadow d-block position-fixed">
-            <i class="fas fa-arrow-down fa-2x"></i>
-        </button>
-
         <div class="container mb-5">
             <div class="row justify-content-md-center">
-                <div class="col-12 col-xl-8">
+                <div class="position-relative col-12 col-xl-8">
+
+                    <div
+                        class="d-none d-xl-block position-absolute"
+                        style="
+                        z-index: 99;
+                        top:0;
+                        left: 101%;
+                        width: 200px;
+                        height: 100%;"
+                    >
+                        <div class="position-sticky card" style="top: 30px">
+                            <div class="d-flex flex-column card-body">
+                                <span class="fw-bold">文章字數</span>
+                                {{-- 顯示文章總字數 --}}
+                                <span class="update-characters"></span>
+                                <hr>
+                                {{-- 儲存文章 --}}
+                                <button type="submit" id="lg-post-save" form="create-post" class="btn btn-primary shadow">
+                                    <i class="far fa-save" aria-hidden="true"></i> 儲存
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="card shadow">
 
                         <h5 class="card-header py-3"><i class="fas fa-edit"></i> 新建文章</h5>
 
                         <div class="card-body">
-                            <form action="{{ route('posts.store') }}" method="POST" accept-charset="UTF-8">
+                            <form id="create-post" action="{{ route('posts.store') }}" method="POST" accept-charset="UTF-8">
                                 @csrf
 
                                 {{-- 文章標題 --}}
@@ -81,7 +97,7 @@
                                     </div>
                                 @enderror
 
-                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex d-xl-none justify-content-between align-items-center">
                                     {{-- 顯示文章總字數 --}}
                                     <span class="update-characters"></span>
 
@@ -110,6 +126,4 @@
     <script src="{{ asset('js/editor.js') }}"></script>
     {{-- 載入 Tagify --}}
     <script src="{{ asset('js/tagify.js') }}"></script>
-    {{-- 至底按鈕 --}}
-    <script src="{{ asset('js/scroll-to-bottom-btn.js') }}"></script>
 @endsection

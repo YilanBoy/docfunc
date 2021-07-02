@@ -101,7 +101,10 @@
 
                                 <div class="d-flex d-xl-none justify-content-between align-items-center">
                                     {{-- 顯示文章總字數 --}}
-                                    <span class="update-characters"></span>
+                                    <div>
+                                        <span class="fw-bold">文章字數：</span>
+                                        <span class="update-characters"></span>
+                                    </div>
 
                                     {{-- 儲存文章 --}}
                                     <button type="submit" id="post-save" class="btn btn-primary shadow">

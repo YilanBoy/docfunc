@@ -30,7 +30,7 @@
                                 <span class="update-characters"></span>
                                 <hr>
                                 {{-- 儲存文章 --}}
-                                <button type="submit" id="lg-post-save" form="edit-post" class="btn btn-primary shadow">
+                                <button type="submit" id="lg-save-post" form="edit-post" class="btn btn-primary shadow">
                                     <i class="far fa-save" aria-hidden="true"></i> 儲存
                                 </button>
                             </div>
@@ -107,7 +107,7 @@
                                     </div>
 
                                     {{-- 儲存文章 --}}
-                                    <button type="submit" id="post-save" class="btn btn-primary shadow">
+                                    <button type="submit" id="save-post" class="btn btn-primary shadow">
                                         <i class="far fa-save" aria-hidden="true"></i> 儲存
                                     </button>
                                 </div>
@@ -122,7 +122,6 @@
 
 @section('scripts')
     <script>
-        const tagArray = {!! $inputTags !!};
         const appUrl = "{{ config('app.url') }}";
     </script>
     {{-- 載入 Ckeditor --}}

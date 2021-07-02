@@ -12,6 +12,7 @@
     "devDependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
         "@popperjs/core": "^2.5.4",
+        "@types/yaireo__tagify": "^4.3.0",
         "@yaireo/tagify": "^3.20.0",
         "algoliasearch": "^4.8.5",
         "autocomplete.js": "^0.38.0",

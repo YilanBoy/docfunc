@@ -3,8 +3,8 @@ const maxCharacters = 10000;
 // 設定要更新字數顯示的區塊
 const wordsBoxs = document.querySelectorAll('.update-characters');
 // 設定表單 submit 按鈕的區塊
-const sendButton = document.querySelector('#post-save');
-const LargeScreenSendButton = document.querySelector('#lg-post-save');
+const sendButton = document.querySelector('#save-post');
+const LargeScreenSendButton = document.querySelector('#lg-save-post');
 
 ClassicEditor.create(document.querySelector('#editor'), {
     // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
@@ -52,7 +52,10 @@ ClassicEditor.create(document.querySelector('#editor'), {
 
 // 若以非送出表單的方式離開編輯頁面，以 alert 視窗提醒使用者
 var saveButtonClicked = false;
-document.getElementById('post-save').addEventListener('click', function () {
+sendButton.addEventListener('click', function () {
+    saveButtonClicked = true;
+});
+LargeScreenSendButton.addEventListener('click', function () {
     saveButtonClicked = true;
 });
 

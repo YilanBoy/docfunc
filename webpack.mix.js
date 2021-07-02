@@ -17,7 +17,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/tagify.js', 'public/js')
     .js('resources/js/editor.js', 'public/js')
     .js('resources/js/algolia.js', 'public/js')
-    .ts('resources/js/scroll-to-top-btn.ts', 'public/js')
+    .ts('resources/ts/scroll-to-top-btn.ts', 'public/js')
     .copy('node_modules/sharer.js/sharer.min.js', 'public/js/sharer.min.js')
     .sass('resources/sass/app.scss', 'public/css')
     .purgeCss({

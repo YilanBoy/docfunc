@@ -16,7 +16,7 @@ class SeedCategoriesData extends Migration
             ],
             [
                 'name' => '程式技術',
-                'icon' => 'bi bi-code-slash',
+                'icon' => 'bi bi-terminal-fill',
                 'description' => '程式技術交流與分享',
             ],
             [

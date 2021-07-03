@@ -40,7 +40,7 @@
                     </span>
                 </div>
                 <div class="hidden sm:block sm:ml-6">
-                    <div class="flex space-x-4">
+                    <div class="flex space-x-3">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         <a
                             href="{{ route('posts.index') }}"
@@ -79,17 +79,14 @@
                 {{-- 未登入 --}}
                 @guest
 
-                <a
-                    href="{{ route('login') }}"
-                    class="mr-3 text-gray-400 hover:text-gray-700"
-                >
+                <a href="{{ route('login') }}"
+                class="mr-3 text-gray-400 hover:text-gray-700">
                     <i class="bi bi-box-arrow-in-right mr-2"></i><span>登入</span>
                 </a>
 
-                <a
-                    href="{{ route('register') }}"
-                    class="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                >
+                <a href="{{ route('register') }}"
+                class="bg-transparent hover:bg-blue-500 text-blue-700
+                hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                     註冊
                 </a>
 
@@ -105,7 +102,8 @@
 
                     {{-- 通知 --}}
                     <a href="{{ route('notifications.index') }}"
-                    class="p-1 mr-3 rounded-full {{ auth()->user()->notification_count > 0 ? 'text-red-400 hover:text-red-700' : 'text-gray-400 hover:text-gray-700' }}">
+                    class="p-1 mr-3 rounded-full
+                    {{ auth()->user()->notification_count > 0 ? 'text-red-400 hover:text-red-700' : 'text-gray-400 hover:text-gray-700' }}">
                         <span class="sr-only">View notifications</span>
                         <i class="text-lg bi bi-bell-fill"></i>
                     </a>
@@ -122,7 +120,8 @@
                                 x-on:click.away="profileIsOpen = false"
                                 x-on:keydown.escape.window="profileIsOpen = false"
                                 type="button"
-                                class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white"
+                                class="bg-gray-800 flex text-sm rounded-full
+                                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white"
                                 id="user-menu-button" aria-expanded="false" aria-haspopup="true"
                             >
                                 <span class="sr-only">Open user menu</span>
@@ -137,12 +136,14 @@
                             class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                         >
-                            <a href="{{ route('users.show', ['user' => auth()->id()]) }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-300 active:bg-gray-100"
-                            role="menuitem" tabindex="-1" id="user-menu-item-0">
+                            <a href="{{ route('users.show', ['user' => auth()->id()]) }}"
+                            role="menuitem" tabindex="-1" id="user-menu-item-0"
+                            class="block px-4 py-2 text-gray-700 hover:bg-gray-200 active:bg-gray-100">
                                 <i class="bi bi-person-fill mr-2"></i><span>個人頁面</span>
                             </a>
-                            <a href="{{ route('users.edit', ['user' => auth()->id()]) }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-300 active:bg-gray-100"
-                            role="menuitem" tabindex="-1" id="user-menu-item-1">
+                            <a href="{{ route('users.edit', ['user' => auth()->id()]) }}"
+                            role="menuitem" tabindex="-1" id="user-menu-item-1"
+                            class="block px-4 py-2 text-gray-700 hover:bg-gray-200 active:bg-gray-100">
                                 <i class="bi bi-person-lines-fill mr-2"></i><span>編輯資料</span>
                             </a>
                             <form id="logout" action="{{ route('logout') }}" method="POST" onsubmit="return confirm('您確定要登出？');"

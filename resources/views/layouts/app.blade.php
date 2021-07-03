@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="min-vh-100" lang="{{ app()->getLocale() }}">
+<html lang="{{ app()->getLocale() }}">
 
 <head>
     <meta charset="utf-8">

@@ -25,7 +25,7 @@
     @yield('scriptsInHead')
 </head>
 
-<body class="bg-gradient-to-br from-green-400 to-blue-400 text-gray-900 antialiased">
+<body class="flex flex-col min-h-screen justify-between bg-gradient-to-br from-green-400 to-blue-400 antialiased">
     @include('layouts.header')
 
     @yield('content')

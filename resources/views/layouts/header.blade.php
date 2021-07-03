@@ -18,24 +18,28 @@
                 >
                     <span class="sr-only">Open main menu</span>
                         {{-- 手機版關閉選單的 icon --}}
-                        <i
-                            :class="mobileMenuIsOpen ? 'hidden' : 'block'"
-                            class="text-3xl text-gray-400 hover:text-gray-700 bi bi-list"
-                        ></i>
-                        {{-- 手機版開啟選單的 icon --}}
-                        <i
-                            x-cloak
-                            :class="mobileMenuIsOpen ? 'block' : 'hidden'"
-                            class="text-xl text-gray-400 hover:text-gray-700 bi bi-x-lg"
-                        ></i>
+                    <div
+                        :class="mobileMenuIsOpen ? 'hidden' : 'block'"
+                        class="text-3xl text-gray-400 hover:text-gray-700"
+                    >
+                        <i class="bi bi-list"></i>
+                    </div>
+                    {{-- 手機版開啟選單的 icon --}}
+                    <div
+                        x-cloak
+                        :class="mobileMenuIsOpen ? 'block' : 'hidden'"
+                        class="text-xl text-gray-400 hover:text-gray-700"
+                    >
+                        <i class="bi bi-x-lg"></i>
+                    </div>
                 </button>
             </div>
             {{-- 電腦版選單 --}}
             <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div class="flex-shrink-0 flex items-center">
-                    <img class="block lg:hidden h-8 w-auto" src="{{ asset('icon/icon.png') }}" alt="{{ config('app.name') }}">
+                    <img class="block lg:hidden h-8 w-auto" src="{{ asset('images/icon/icon.png') }}" alt="{{ config('app.name') }}">
                     <span class="flex items-center justify-center">
-                        <img class="hidden lg:block h-8 w-auto" src="{{ asset('icon/icon.png') }}" alt="{{ config('app.name') }}">
+                        <img class="hidden lg:block h-8 w-auto" src="{{ asset('images/icon/icon.png') }}" alt="{{ config('app.name') }}">
                         <span class="hidden font-bold font-mono text-lg lg:block ml-2">{{ config('app.name') }}</span>
                     </span>
                 </div>
@@ -48,7 +52,7 @@
                             px-3 py-2 font-medium"
                             @if(request()->url() === route('posts.index')) aria-current="page" @endif
                         >
-                            <i class="bi bi-house-fill mr-2"></i><span>全部文章</span>
+                            <i class="bi bi-house-fill"></i><span class="ml-2">全部文章</span>
                         </a>
                         @foreach ($categories as $category)
                             <a
@@ -57,7 +61,7 @@
                                 px-3 py-2 font-medium"
                                 @if(request()->url() === $category->link_with_name) aria-current="page" @endif
                             >
-                                <i class="{{ $category->icon }} mr-2"></i> {{ $category->name }}
+                                <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>
                             </a>
                         @endforeach
 
@@ -81,7 +85,7 @@
 
                 <a href="{{ route('login') }}"
                 class="mr-3 text-gray-400 hover:text-gray-700">
-                    <i class="bi bi-box-arrow-in-right mr-2"></i><span>登入</span>
+                    <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
                 </a>
 
                 <a href="{{ route('register') }}"
@@ -133,18 +137,18 @@
                         <div
                             x-cloak
                             x-show.transition.duration.100ms.top.left="profileIsOpen"
-                            class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
+                            class="origin-top-right absolute right-0 p-2 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-20"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                         >
                             <a href="{{ route('users.show', ['user' => auth()->id()]) }}"
-                            role="menuitem" tabindex="-1" id="user-menu-item-0"
-                            class="block px-4 py-2 text-gray-700 hover:bg-gray-200 active:bg-gray-100">
-                                <i class="bi bi-person-fill mr-2"></i><span>個人頁面</span>
+                            role="menuitem" tabindex="-1"
+                            class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100">
+                                <i class="bi bi-person-fill"></i><span class="ml-2">個人頁面</span>
                             </a>
                             <a href="{{ route('users.edit', ['user' => auth()->id()]) }}"
-                            role="menuitem" tabindex="-1" id="user-menu-item-1"
-                            class="block px-4 py-2 text-gray-700 hover:bg-gray-200 active:bg-gray-100">
-                                <i class="bi bi-person-lines-fill mr-2"></i><span>編輯資料</span>
+                            role="menuitem" tabindex="-1"
+                            class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100">
+                                <i class="bi bi-person-lines-fill"></i><span class="ml-2">編輯資料</span>
                             </a>
                             <form id="logout" action="{{ route('logout') }}" method="POST" onsubmit="return confirm('您確定要登出？');"
                             class="hidden"
@@ -153,9 +157,9 @@
                             </form>
                             <button
                                 type="submit" form="logout" role="menuitem" tabindex="-1" id="user-menu-item-2"
-                                class="flex items-start w-full px-4 py-2 text-gray-700 hover:bg-gray-300 active:bg-gray-100"
+                                class="flex items-start w-full px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100"
                             >
-                                <i class="bi bi-box-arrow-left mr-2"></i><span>登出</span>
+                                <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
                             </button>
                         </div>
                     </div>
@@ -168,7 +172,7 @@
     <div
         x-cloak
         x-show.transition.duration.100ms.top.bottom="mobileMenuIsOpen"
-        class="sm:hidden" id="mobile-menu"
+        class="sm:hidden"
     >
         <div class="px-2 pt-2 pb-3 space-y-1">
             <a
@@ -177,7 +181,7 @@
                 block text-base px-3 py-2 rounded-md font-medium"
                 @if(request()->url() === route('posts.index')) aria-current="page" @endif
             >
-                <i class="bi bi-house-fill mr-2"></i><span>全部文章</span>
+                <i class="bi bi-house-fill"></i><span class="ml-2">全部文章</span>
             </a>
             @foreach ($categories as $category)
                 <a
@@ -186,7 +190,7 @@
                     block text-base px-3 py-2 rounded-md font-medium"
                     @if(request()->url() === $category->link_with_name) aria-current="page" @endif
                 >
-                    <i class="{{ $category->icon }} mr-2"></i><span>{{ $category->name }}</span>
+                    <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>
                 </a>
             @endforeach
         </div>

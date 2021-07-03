@@ -1,38 +1,92 @@
-{{-- footer --}}
-<footer class="footer mt-auto py-3 bg-dark" id="footer">
-    <div class="container">
-        <div class="d-flex justify-content-between">
-            <div class="d-flex justify-content-start align-items-center">
-                <a class="link-secondary text-decoration-none me-3" href="https://github.com/YilanBoy" target="_blank" rel="nofollow noopener noreferrer">
-                    <i class="fab fa-github fa-2x"></i>
-                </a>
-
-                <a class="link-secondary text-decoration-none me-3" href="https://twitter.com/bVK1uFaMvQkDyPR" target="_blank" rel="nofollow noopener noreferrer">
-                    <i class="fab fa-twitter fa-2x"></i>
-                </a>
-
-                <a class="link-secondary text-decoration-none me-3" href="https://www.facebook.com/profile.php?id=100004204543711" target="_blank" rel="nofollow noopener noreferrer">
-                    <i class="fab fa-facebook-square fa-2x"></i>
-                </a>
+<footer class="bg-gray-800 sm:mt-10 pt-10">
+    <div class="max-w-6xl m-auto text-gray-800 flex flex-wrap justify-left">
+        {{-- Col-1 --}}
+        <div class="p-5 w-1/2 sm:w-1/3 md:w-1/4">
+            {{-- Title --}}
+            <div class="text-lg uppercase text-gray-500 font-medium mb-6">
+                About
             </div>
-            <div>
-                <a class="link-secondary" href="https://github.com/YilanBoy/simple-blog" target="_blank" rel="nofollow noopener noreferrer">
-                    部落格壽司扣（GitHub）
+            {{-- Links --}}
+            <a href="https://github.com/YilanBoy/simple-blog" target="_blank" rel="nofollow noopener noreferrer"
+            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+                Source Code
+            </a>
+            <a href="https://github.com/YilanBoy" target="_blank" rel="nofollow noopener noreferrer"
+            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+                Auther
+            </a>
+        </div>
+
+        {{-- Col-2 --}}
+        <div class="p-5 w-1/2 sm:w-1/3 md:w-1/4">
+            {{-- Title --}}
+            <div class="text-lg uppercase text-gray-500 font-medium mb-6">
+                Learing
+            </div>
+
+            {{-- Links --}}
+            <a href="https://laracasts.com/" target="_blank" rel="nofollow noopener noreferrer"
+            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+                Laracasts
+            </a>
+        </div>
+
+        {{-- Col-3 --}}
+        <div class="p-5 w-1/2 sm:w-1/3 md:w-1/4">
+            {{-- Title --}}
+            <div class="text-lg uppercase text-gray-500 font-medium mb-6">
+                Special Thanks
+            </div>
+
+            {{-- Links --}}
+            <a href="https://laravel.com/" target="_blank" rel="nofollow noopener noreferrer"
+            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+                Laravel
+            </a>
+            <a href="https://learnku.com/laravel" target="_blank" rel="nofollow noopener noreferrer"
+            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+                Laravel China
+            </a>
+            <a href="https://www.facebook.com/groups/498481680220886" target="_blank" rel="nofollow noopener noreferrer"
+            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+                Laravel Taiwan
+            </a>
+            <a href="https://tailwindcss.com/" target="_blank" rel="nofollow noopener noreferrer"
+            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+                TailwindCSS
+            </a>
+            <a href="https://alpinejs.dev/" target="_blank" rel="nofollow noopener noreferrer"
+            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+                Alpine.js
+            </a>
+            <a href="https://www.flaticon.com/authors/freepik" target="_blank" rel="nofollow noopener noreferrer"
+            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+                Frepik from flaction
+            </a>
+        </div>
+    </div>
+
+    {{-- Copyright Bar --}}
+    <div class="pt-2">
+        <div class="flex flex-col md:flex-row max-w-6xl pb-5 px-3 m-auto pt-5
+        border-t border-gray-500">
+            <div class="flex justify-center items-center mb-2 md:mb-0 text-sm text-gray-400">
+                © Copyright 2020-{{ date('Y') }}. All Rights Reserved.
+            </div>
+
+            <div class="flex flex-row justify-center md:flex-auto md:justify-end space-x-4">
+                <a href="https://github.com/YilanBoy" target="_blank" rel="nofollow noopener noreferrer"
+                class="text-2xl text-gray-300 hover:text-gray-500 duration-300">
+                    <i class="bi bi-github"></i>
                 </a>
-
-                <br>
-
-                <span class="text-muted">特別感謝</span>
-                <a class="link-secondary" href="https://learnku.com/laravel" target="_blank" rel="nofollow noopener noreferrer">Laravel China</a>
-                <span class="text-muted">與</span>
-                <a class="link-secondary" href="https://www.facebook.com/groups/laravel.tw/" target="_blank" rel="nofollow noopener noreferrer">Laravel 台灣</a>
-
-                <br>
-
-                <span class="text-muted">Logo made by</span>
-                <a class="link-secondary" href="https://www.flaticon.com/authors/freepik" title="Freepik" target="_blank" rel="nofollow noopener noreferrer">Freepik</a>
-                <span class="text-muted">from</span>
-                <a class="link-secondary" href="https://www.flaticon.com/" title="Flaticon" target="_blank" rel="nofollow noopener noreferrer">www.flaticon.com</a>
+                <a href="https://twitter.com/bVK1uFaMvQkDyPR" target="_blank" rel="nofollow noopener noreferrer"
+                class="text-2xl text-gray-300 hover:text-gray-500 duration-300">
+                    <i class="bi bi-twitter"></i>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100004204543711" target="_blank" rel="nofollow noopener noreferrer"
+                class="text-2xl text-gray-300 hover:text-gray-500 duration-300">
+                    <i class="bi bi-facebook"></i>
+                </a>
             </div>
         </div>
     </div>

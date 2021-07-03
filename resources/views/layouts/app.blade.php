@@ -25,7 +25,7 @@
     @yield('scriptsInHead')
 </head>
 
-<body class="d-flex flex-column min-vh-100 bg-gradient-blue">
+<body class="bg-gradient-to-br from-green-400 to-blue-400 text-gray-900 antialiased">
     @include('layouts.header')
 
     @yield('content')
@@ -33,6 +33,7 @@
     @include('layouts.footer')
 
     {{-- Scripts --}}
+    @livewireScripts
     <script src="{{ asset('js/app.js') }}"></script>
     {{-- Include AlgoliaSearch JS Client and autocomplete.js library --}}
     <script>
@@ -41,8 +42,6 @@
         const algoliaIndex = "{{ config('scout.prefix') }}";
     </script>
     <script src="{{ asset('js/algolia.js') }}"></script>
-
-    @livewireScripts
 
     @yield('scripts')
 

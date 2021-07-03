@@ -11,17 +11,17 @@ class SeedCategoriesData extends Migration
         $categories = [
             [
                 'name' => '日常分享',
-                'icon' => 'fas fa-comments',
+                'icon' => 'bi bi-chat-dots-fill',
                 'description' => '想聊啥就聊啥',
             ],
             [
                 'name' => '程式技術',
-                'icon' => 'fas fa-code',
+                'icon' => 'bi bi-code-slash',
                 'description' => '程式技術交流與分享',
             ],
             [
                 'name' => '電玩遊戲',
-                'icon' => 'fas fa-gamepad',
+                'icon' => 'bi bi-controller',
                 'description' => '電玩遊戲話題與心得',
             ],
         ];

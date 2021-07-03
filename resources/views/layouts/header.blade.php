@@ -1,127 +1,193 @@
-{{-- header --}}
-<nav class="navbar navbar-expand-lg navbar-light bg-light py-3 mb-5 border-top border-info border-5 shadow" id="header">
-    <div class="container">
-        {{-- Branding Image --}}
-        <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ asset('icon/icon.png') }}"
-            style="margin-top: -4px;margin-right: 4px;"
-            width="30px" height="30px">
-            <span class="font-monospace fw-bold">{{ config('app.name') }}</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-2 mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a href="{{ route('posts.index') }}"
-                    @if (request()->url() === route('posts.index'))
-                        class="nav-link active"  aria-current="page"
-                    @else
-                        class="nav-link"
-                    @endif
-                    >
-                        <i class="fas fa-home"></i> 所有文章
-                    </a>
-                </li>
-                {{-- 這裡的 $categories 使用的是 View::share() 方法取得值，寫在 AppServiceProvider.php 中 --}}
-                @foreach ($categories as $category)
-                    <li class="nav-item">
-                        <a href="{{ $category->link_with_name }}"
-                        @if (request()->url() === $category->link_with_name)
-                            class="nav-link active"  aria-current="page"
-                        @else
-                            class="nav-link"
-                        @endif
-                        >
-                            <i class="{{ $category->icon }}"></i> {{ $category->name }}
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-
-            {{-- 搜尋 --}}
-            <div class="aa-input-container me-auto" id="aa-input-container">
-                <input type="search" id="aa-search-input" class="aa-input-search"
-                placeholder="搜尋文章" name="search" autocomplete="off" />
-
-                <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
-                    <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5
-                    C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5
-                    C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342
-                    c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332
-                    s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225
-                    S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
-                </svg>
+{{-- Header --}}
+<nav
+    x-data="{ mobileMenuIsOpen : false }"
+    class="bg-white border-blue-400 border-t-4 shadow-lg"
+>
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div class="relative flex items-center justify-between h-18">
+            <div
+                class="absolute inset-y-0 left-0 flex items-center sm:hidden"
+            >
+                {{-- 手機版選單按鈕 --}}
+                <button
+                    x-on:click="mobileMenuIsOpen = ! mobileMenuIsOpen"
+                    type="button"
+                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-700"
+                    aria-controls="mobile-menu"
+                    aria-expanded="false"
+                >
+                    <span class="sr-only">Open main menu</span>
+                        {{-- 手機版關閉選單的 icon --}}
+                        <i
+                            :class="mobileMenuIsOpen ? 'hidden' : 'block'"
+                            class="text-3xl text-gray-400 hover:text-gray-700 bi bi-list"
+                        ></i>
+                        {{-- 手機版開啟選單的 icon --}}
+                        <i
+                            x-cloak
+                            :class="mobileMenuIsOpen ? 'block' : 'hidden'"
+                            class="text-xl text-gray-400 hover:text-gray-700 bi bi-x-lg"
+                        ></i>
+                </button>
             </div>
+            {{-- 電腦版選單 --}}
+            <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                <div class="flex-shrink-0 flex items-center">
+                    <img class="block lg:hidden h-8 w-auto" src="{{ asset('icon/icon.png') }}" alt="{{ config('app.name') }}">
+                    <span class="flex items-center justify-center">
+                        <img class="hidden lg:block h-8 w-auto" src="{{ asset('icon/icon.png') }}" alt="{{ config('app.name') }}">
+                        <span class="hidden font-bold font-mono text-lg lg:block ml-2">{{ config('app.name') }}</span>
+                    </span>
+                </div>
+                <div class="hidden sm:block sm:ml-6">
+                    <div class="flex space-x-4">
+                        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                        <a
+                            href="{{ route('posts.index') }}"
+                            class="@if(request()->url() === route('posts.index')) text-gray-700 @else text-gray-400 hover:text-gray-700 @endif
+                            px-3 py-2 font-medium"
+                            @if(request()->url() === route('posts.index')) aria-current="page" @endif
+                        >
+                            <i class="bi bi-house-fill mr-2"></i><span>全部文章</span>
+                        </a>
+                        @foreach ($categories as $category)
+                            <a
+                                href="{{ $category->link_with_name }}"
+                                class="@if(request()->url() === $category->link_with_name) text-gray-700 @else text-gray-400 hover:text-gray-700 @endif
+                                px-3 py-2 font-medium"
+                                @if(request()->url() === $category->link_with_name) aria-current="page" @endif
+                            >
+                                <i class="{{ $category->icon }} mr-2"></i> {{ $category->name }}
+                            </a>
+                        @endforeach
 
-            <ul class="navbar-nav mb-2 mb-lg-0">
+                        {{-- 搜尋 --}}
+                        {{-- <div class="aa-input-container" id="aa-input-container">
+                            <input type="search" id="aa-search-input" class="aa-input-search"
+                            placeholder="搜尋文章" name="search" autocomplete="off" />
+
+                            <svg class="h-6 w-6 aa-input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                            </svg>
+                        </div> --}}
+
+                    </div>
+                </div>
+            </div>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+
                 {{-- 未登入 --}}
                 @guest
-                    <li class="nav-item me-2">
-                        <a class="nav-link" href="{{ route('posts.create') }}">
-                            <i class="fas fa-sign-in-alt"></i> 登入
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a role="button" href="{{ route('register') }}" class="btn btn-outline-success">註冊</a>
-                    </li>
+
+                <a
+                    href="{{ route('login') }}"
+                    class="mr-3 text-gray-400 hover:text-gray-700"
+                >
+                    <i class="bi bi-box-arrow-in-right mr-2"></i><span>登入</span>
+                </a>
+
+                <a
+                    href="{{ route('register') }}"
+                    class="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                >
+                    註冊
+                </a>
+
                 {{-- 已登入 --}}
                 @else
                     {{-- 新增文章 --}}
                     @if (request()->url() !== route('posts.create'))
-                        <li class="nav-item d-flex justify-content-start align-items-center me-2">
-                            <a class="nav-link" href="{{ route('posts.create') }}" title="新增文章">
-                                <i class="fas fa-plus"></i>
-                            </a>
-                        </li>
+                        <a href="{{ route('posts.create') }}" class="p-1 mr-3 rounded-full text-gray-400 hover:text-gray-700">
+                            <span class="sr-only">Create Post</span>
+                            <i class="bi bi-plus-lg"></i>
+                        </a>
                     @endif
 
-                    {{-- 通知顯示 --}}
-                    <li class="nav-item d-flex justify-content-start align-items-center me-2">
-                        <a class="nav-link" href="{{ route('notifications.index') }}">
-                            <span class="btn {{ auth()->user()->notification_count > 0 ? 'btn-danger' : 'btn-secondary' }} btn-sm rounded-pill py-0">
-                                {{ auth()->user()->notification_count }}
-                            </span>
-                        </a>
-                    </li>
+                    {{-- 通知 --}}
+                    <a href="{{ route('notifications.index') }}"
+                    class="p-1 mr-3 rounded-full {{ auth()->user()->notification_count > 0 ? 'text-red-400 hover:text-red-700' : 'text-gray-400 hover:text-gray-700' }}">
+                        <span class="sr-only">View notifications</span>
+                        <i class="text-lg bi bi-bell-fill"></i>
+                    </a>
 
-                    {{-- 會員大頭貼 --}}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ auth()->user()->gravatar() }}" class="rounded-circle me-2" width="30px" height="30px">
-                            {{ auth()->user()->name }}
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="{{ route('users.show', ['user' => auth()->id()]) }}">
-                                    <i class="far fa-user me-2"></i>個人頁面
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('users.edit', ['user' => auth()->id()]) }}">
-                                    <i class="far fa-edit me-2"></i>編輯資料
-                                </a>
-                            </li>
+                    {{-- 使用者選單 --}}
+                    <div
+                        x-data="{ profileIsOpen : false }"
+                        class="relative"
+                    >
+                        {{-- 使用者大頭貼 --}}
+                        <div>
+                            <button
+                                x-on:click="profileIsOpen = ! profileIsOpen"
+                                x-on:click.away="profileIsOpen = false"
+                                x-on:keydown.escape.window="profileIsOpen = false"
+                                type="button"
+                                class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white"
+                                id="user-menu-button" aria-expanded="false" aria-haspopup="true"
+                            >
+                                <span class="sr-only">Open user menu</span>
+                                <img class=" h-10 w-10 rounded-full" src="{{ auth()->user()->gravatar() }}" alt="">
+                            </button>
+                        </div>
 
-                            <div class="dropdown-divider"></div>
-
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    <div class="d-flex justify-content-center">
-                                        <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('您確定要登出？');">
-                                            @csrf
-                                            <button class="btn btn-danger shadow" type="submit" name="button"><i class="fas fa-sign-out-alt"></i> 登出</button>
-                                        </form>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                        {{-- 下拉式選單 --}}
+                        <div
+                            x-cloak
+                            x-show.transition.duration.100ms.top.left="profileIsOpen"
+                            class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
+                            role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
+                        >
+                            <a href="{{ route('users.show', ['user' => auth()->id()]) }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-300 active:bg-gray-100"
+                            role="menuitem" tabindex="-1" id="user-menu-item-0">
+                                <i class="bi bi-person-fill mr-2"></i><span>個人頁面</span>
+                            </a>
+                            <a href="{{ route('users.edit', ['user' => auth()->id()]) }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-300 active:bg-gray-100"
+                            role="menuitem" tabindex="-1" id="user-menu-item-1">
+                                <i class="bi bi-person-lines-fill mr-2"></i><span>編輯資料</span>
+                            </a>
+                            <form id="logout" action="{{ route('logout') }}" method="POST" onsubmit="return confirm('您確定要登出？');"
+                            class="hidden"
+                            >
+                                @csrf
+                            </form>
+                            <button
+                                type="submit" form="logout" role="menuitem" tabindex="-1" id="user-menu-item-2"
+                                class="flex items-start w-full px-4 py-2 text-gray-700 hover:bg-gray-300 active:bg-gray-100"
+                            >
+                                <i class="bi bi-box-arrow-left mr-2"></i><span>登出</span>
+                            </button>
+                        </div>
+                    </div>
                 @endguest
-            </ul>
+            </div>
+        </div>
+    </div>
+
+    {{-- 手機版選單 --}}
+    <div
+        x-cloak
+        x-show.transition.duration.100ms.top.bottom="mobileMenuIsOpen"
+        class="sm:hidden" id="mobile-menu"
+    >
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            <a
+                href="{{ route('posts.index') }}"
+                class="@if(request()->url() === route('posts.index')) bg-gray-200 text-gray-700 @else text-gray-400 hover:text-gray-700 hover:bg-gray-200 @endif
+                block text-base px-3 py-2 rounded-md font-medium"
+                @if(request()->url() === route('posts.index')) aria-current="page" @endif
+            >
+                <i class="bi bi-house-fill mr-2"></i><span>全部文章</span>
+            </a>
+            @foreach ($categories as $category)
+                <a
+                    href="{{ $category->link_with_name }}"
+                    class="@if(request()->url() === $category->link_with_name) bg-gray-200 text-gray-700 @else text-gray-400 hover:text-gray-700 hover:bg-gray-200 @endif
+                    block text-base px-3 py-2 rounded-md font-medium"
+                    @if(request()->url() === $category->link_with_name) aria-current="page" @endif
+                >
+                    <i class="{{ $category->icon }} mr-2"></i><span>{{ $category->name }}</span>
+                </a>
+            @endforeach
         </div>
     </div>
 </nav>

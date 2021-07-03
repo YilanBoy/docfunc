@@ -19,8 +19,6 @@ class Posts extends Component
         'order',
     ];
 
-    protected $paginationTheme = 'bootstrap';
-
     public function mount()
     {
         $this->order = request()->order ?? 'latest';

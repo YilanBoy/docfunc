@@ -95,7 +95,7 @@
                                 <div>
                                     <a class="hover:text-gray-700"
                                     href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
-                                        <i class="{{ $post->category->icon }}"></i><span class="hidden md:inline ml-1">{{ $post->category->name }}</span>
+                                        <i class="{{ $post->category->icon }}"></i><span class="hidden md:inline ml-2">{{ $post->category->name }}</span>
                                     </a>
                                 </div>
                                 <div>&bull;</div>
@@ -104,7 +104,7 @@
                                     <a class="hover:text-gray-700"
                                     href="{{ route('users.show', ['user' => $post->user_id]) }}"
                                     title="{{ $post->user->name }}">
-                                        <i class="bi bi-person-fill"></i><span class="hidden md:inline ml-1">{{ $post->user->name }}</span>
+                                        <i class="bi bi-person-fill"></i><span class="hidden md:inline ml-2">{{ $post->user->name }}</span>
                                     </a>
                                 </div>
                                 <div>&bull;</div>
@@ -113,7 +113,7 @@
                                     <a class="hover:text-gray-700"
                                     href="{{ $post->link_with_slug }}"
                                     title="文章發布於：{{ $post->created_at }}">
-                                        <i class="bi bi-clock-fill"></i><span class="hidden md:inline ml-1">{{ $post->created_at->diffForHumans() }}</span>
+                                        <i class="bi bi-clock-fill"></i><span class="hidden md:inline ml-2">{{ $post->created_at->diffForHumans() }}</span>
                                     </a>
                                 </div>
                                 <div>&bull;</div>
@@ -132,8 +132,8 @@
 
         @empty
         <div
-            class="post-container transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl bg-white rounded-xl
-            flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-5 h-36"
+            class="post-container transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
+            flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 h-36"
         >
             <span>Oops！此分類底下還沒有文章，趕緊寫一篇吧！</span>
         </div>

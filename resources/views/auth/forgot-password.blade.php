@@ -3,7 +3,7 @@
 @section('title', '忘記密碼')
 
 @section('content')
-    <div class="container mx-auto max-w-7xl">
+    <div class="container mx-auto max-w-7xl py-6">
         <div class="flex justify-center items-center px-4 xl:px-0">
             <div class="w-full lg:w-1/3 flex flex-col sm:justify-center items-center bg-gray-100 pb-12">
 

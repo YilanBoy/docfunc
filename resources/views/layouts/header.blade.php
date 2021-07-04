@@ -40,7 +40,7 @@
                     <img class="block lg:hidden h-8 w-auto" src="{{ asset('images/icon/icon.png') }}" alt="{{ config('app.name') }}">
                     <span class="flex items-center justify-center">
                         <img class="hidden lg:block h-8 w-auto" src="{{ asset('images/icon/icon.png') }}" alt="{{ config('app.name') }}">
-                        <span class="hidden font-bold font-mono text-lg lg:block ml-2">{{ config('app.name') }}</span>
+                        <span class="hidden font-bold font-mono text-xl lg:block ml-2">{{ config('app.name') }}</span>
                     </span>
                 </div>
                 <div class="hidden sm:block sm:ml-6">

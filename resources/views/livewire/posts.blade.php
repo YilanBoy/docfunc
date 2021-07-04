@@ -1,5 +1,5 @@
 <div>
-    <div class="space-y-6">
+    <div class="space-y-6 mb-6">
         {{-- 分類訊息區塊 --}}
         @if (isset($category))
             <div class="flex justify-center items-center text-lg bg-gradient-to-br from-blue-100 to-blue-300 text-blue-700 border-2 border-blue-700 p-4 rounded-xl">
@@ -42,7 +42,7 @@
                     <a
                         wire:click.prevent="setOrder('reply')"
                         href="{{ $currentUrl . '?order=reply' }}"
-                        class=" transition duration-150 ease-in border-b-4 px-4 sm:px-7 pb-3 hover:border-blue-500 hover:text-gray-700
+                        class=" transition duration-150 ease-in border-b-4 px-2 sm:px-7 pb-3 hover:border-blue-500 hover:text-gray-700
                         @if ($order === 'reply') border-blue-500 text-gray-700 @else text-gray-400 @endif"
                     >
                         <span>最多留言</span>
@@ -140,7 +140,7 @@
         @endforelse
     </div>
 
-    <div class="my-6">
+    <div>
         {{ $posts->onEachSide(1)->withQueryString()->links() }}
     </div>
 </div>

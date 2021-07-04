@@ -56,13 +56,14 @@
                 x-data
                 x-on:click="
                     const clicked = $event.target
+                    const target = clicked.tagName.toLowerCase()
                     const ignores = ['a']
 
                     if (!ignores.includes(target)) {
                         clicked.closest('.post-container').querySelector('.post-link').click()
                     }
                 "
-                class="post-container hover:shadow-xl transition duration-150 ease-in bg-white rounded-xl
+                class="post-container transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl bg-white rounded-xl
                 flex cursor-pointer ring-1 ring-black ring-opacity-5"
             >
                 <div class="flex flex-col md:flex-row flex-1 p-4">
@@ -130,7 +131,7 @@
 
         @empty
         <div
-            class="post-container hover:shadow-xl transition duration-150 ease-in bg-white rounded-xl
+            class="post-container transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl bg-white rounded-xl
             flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-5 h-36"
         >
             <span>Oops！此分類底下還沒有文章，趕緊寫一篇吧！</span>

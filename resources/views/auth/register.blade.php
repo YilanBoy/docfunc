@@ -10,96 +10,70 @@
 @endsection
 
 @section('content')
-    <div class="container mb-5">
-        <div class="row justify-content-md-center">
-            <div class="col-12 col-xl-6">
+    <main class="container mx-auto max-w-7xl">
+        <div class="flex justify-center items-center px-4 xl:px-0">
 
-                <div class="card shadow">
-                    <h5 class="card-header py-3"><i class="fas fa-user-plus"></i> {{ __('Register') }}</h5>
+            <div class="w-full lg:w-1/3 flex flex-col sm:justify-center items-center bg-gray-100 pb-12">
 
-                    <div class="card-body">
-                        <div class="d-flex justify-content-center">
-                            <div class="w-75">
-
-                                <form method="POST" action="{{ route('register') }}">
-                                    @csrf
-
-                                    {{-- 會員名稱 --}}
-                                    <div class="form-floating mb-3">
-                                        <input class="form-control @error('name') is-invalid @enderror" id="floatingInput" placeholder="name"
-                                        type="text" name="name" value="{{ old('name') }}" autocomplete="name" required autofocus>
-                                        <label for="floatingInput">{{ __('Name') }}（請使用英文、數字、橫槓和底線）</label>
-                                    </div>
-
-                                    @error('name')
-                                        <div class="mb-3">
-                                            <span class="text-danger">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        </div>
-                                    @enderror
-
-                                    {{-- Email --}}
-                                    <div class="form-floating mb-3">
-                                        <input class="form-control @error('email') is-invalid @enderror" id="floatingInput" placeholder="email"
-                                        type="email" name="email" value="{{ old('email') }}" autocomplete="email" required>
-                                        <label for="floatingInput">{{ __('E-Mail Address') }}</label>
-                                    </div>
-
-                                    @error('email')
-                                        <div class="mb-3">
-                                            <span class="text-danger">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        </div>
-                                    @enderror
-
-                                    {{-- 密碼 --}}
-                                    <div class="form-floating mb-3">
-                                        <input class="form-control @error('password') is-invalid @enderror" id="floatingInput" placeholder="password"
-                                        type="password" name="password" required>
-                                        <label for="floatingInput">{{ __('Password') }}（最少 8 個字元）</label>
-                                    </div>
-
-                                    @error('password')
-                                        <div class="mb-3">
-                                            <span class="text-danger">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        </div>
-                                    @enderror
-
-                                    {{-- 確認密碼 --}}
-                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="floatingInput" placeholder="password_confirmation"
-                                        type="password" name="password_confirmation" required>
-                                        <label for="floatingInput">{{ __('Confirm Password') }}</label>
-                                    </div>
-
-                                    {{-- reCAPTCHA --}}
-                                    @if (app()->isProduction())
-                                        <div class="mb-3">
-                                            <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
-
-                                            @error('g-recaptcha-response')
-                                                <span class="text-danger">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    @endif
-
-                                    <button type="submit" class="btn btn-primary w-100">
-                                        {{ __('Register') }}
-                                    </button>
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
+                {{-- Logo --}}
+                <div class="fill-current text-gray-700 text-2xl">
+                    <i class="bi bi-person-plus-fill"></i><span class="ml-4">註冊</span>
                 </div>
 
+                <div class="w-full sm:max-w-md mt-4 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+
+                    {{-- Validation Errors --}}
+                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
+
+                        {{-- Name --}}
+                        <div>
+                            <x-label for="name" :value="__('Name')" />
+
+                            <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                        </div>
+
+                        {{-- Email Address --}}
+                        <div class="mt-4">
+                            <x-label for="email" :value="__('Email')" />
+
+                            <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                        </div>
+
+                        {{-- Password --}}
+                        <div class="mt-4">
+                            <x-label for="password" :value="__('Password')" />
+
+                            <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                        </div>
+
+                        {{-- Confirm Password --}}
+                        <div class="mt-4">
+                            <x-label for="password_confirmation" :value="__('Confirm Password')" />
+
+                            <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required />
+                        </div>
+
+                        {{-- reCAPTCHA --}}
+                        @if (app()->isProduction())
+                            <x-recaptcha />
+                        @endif
+
+                        <div class="flex items-center justify-end mt-4">
+                            <a class="underline text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                                {{ __('Already registered?') }}
+                            </a>
+
+                            <x-button class="ml-4">
+                                {{ __('Register') }}
+                            </x-button>
+                        </div>
+                    </form>
+                </div>
             </div>
+
         </div>
-    </div>
+    </main>
 @endsection

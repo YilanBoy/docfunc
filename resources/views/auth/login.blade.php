@@ -11,53 +11,38 @@
 @endsection
 
 @section('content')
-    <main class="container mx-auto max-w-7xl mb-6">
+    <main class="container mx-auto max-w-7xl">
         <div class="flex justify-center items-center px-4 xl:px-0">
-            <div class="w-full lg:w-1/3 flex flex-col sm:justify-center items-center bg-gray-100">
+            <div class="w-full lg:w-1/3 flex flex-col sm:justify-center items-center bg-gray-100 pb-12">
                 {{-- Logo --}}
-                <div class="text-2xl">
+                <div class="fill-current text-gray-700 text-2xl">
                     <i class="bi bi-box-arrow-in-right"></i><span class="ml-4">登入</span>
                 </div>
 
                 {{-- Login Form --}}
                 <div class="w-full sm:max-w-md mt-4 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
 
-                    @if ($errors->any())
-                        <div class="mb-4">
-                            <div class="font-medium text-red-600">
-                                {{ __('Whoops! Something went wrong.') }}
-                            </div>
+                    {{-- Session Status --}}
+                    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-                            <ul class="mt-3 list-disc list-inside text-sm text-red-600">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                    {{-- Validation Errors --}}
+                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         {{-- Email Address --}}
                         <div>
-                            <label for="email" class="block font-medium text-sm text-gray-700">
-                                {{ __('Email') }}
-                            </label>
+                            <x-label for="email" :value="__('Email')" />
 
-                            <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
-                            class="block mt-1 w-full rounded-md shadow-sm border-gray-300
-                            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
                         </div>
 
                         {{-- Password --}}
                         <div class="mt-4">
-                            <label for="password" class="block font-medium text-sm text-gray-700">
-                                {{ __('Password') }}
-                            </label>
+                            <x-label for="password" :value="__('Password')" />
 
-                            <input id="password" type="password" name="password" required autocomplete="current-password"
-                            class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
                         </div>
 
                         {{-- Remember Me --}}
@@ -71,9 +56,7 @@
 
                         {{-- reCAPTCHA --}}
                         @if (app()->isProduction())
-                            <div class="mt-4">
-                                <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
-                            </div>
+                            <x-recaptcha />
                         @endif
 
                         <div class="flex items-center justify-end mt-4">
@@ -83,11 +66,9 @@
                                 </a>
                             @endif
 
-                            <button type="submit" class="ml-3 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md
-                            font-semibold text-sm text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none
-                            focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
+                            <x-button class="ml-3">
                                 {{ __('Log in') }}
-                            </button>
+                            </x-button>
                         </div>
                     </form>
                 </div>

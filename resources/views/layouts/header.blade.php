@@ -1,7 +1,7 @@
 {{-- Header --}}
 <nav
     x-data="{ mobileMenuIsOpen : false }"
-    class="bg-white border-blue-400 border-t-4 shadow-lg mb-7"
+    class="bg-white border-blue-400 border-t-4 shadow-lg"
 >
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between h-18">

@@ -7,7 +7,7 @@
     <div class="container mx-auto max-w-7xl mt-6">
         <div class="flex flex-col xl:flex-row justify-center px-4 xl:px-0">
             {{-- 文章列表 --}}
-            <div class="w-full xl:w-2/3 px-2 xl:px-0 mr-0 xl:mr-6">
+            <div class="w-full xl:w-2/3 mr-0 xl:mr-6">
                 @livewire('posts', [
                     'currentUrl' => url()->current(),
                     'category' => isset($category) ? $category : null,

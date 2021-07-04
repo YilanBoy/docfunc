@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="container mx-auto max-w-7xl mt-6">
-        <div class="flex flex-col xl:flex-row justify-center px-4 xl:px-0">
+        <div class="flex flex-col space-y-6 xl:space-y-0 xl:flex-row justify-center px-4 xl:px-0">
             {{-- 文章列表 --}}
             <div class="w-full xl:w-2/3 mr-0 xl:mr-6">
                 @livewire('posts', [
@@ -16,7 +16,7 @@
             </div>
 
             {{-- 文章列表側邊欄區塊 --}}
-            <div class="w-full xl:w-80 space-y-6 mb-6">
+            <div class="w-full xl:w-80 space-y-6">
                 {{-- 介紹 --}}
                 <div class="bg-white border-blue shadow-md rounded-xl ring-1 ring-black ring-opacity-20">
                     <div class="text-gray-600 p-5">

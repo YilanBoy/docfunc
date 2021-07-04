@@ -38,7 +38,6 @@ autocomplete(
             source: newHitsSource(posts, { hitsPerPage: 10 }),
             displayKey: 'title',
             templates: {
-                header: '<div class="aa-suggestions-category">文章</div>',
                 suggestion: function (suggestion) {
                     return `
                         <span class="w-full">

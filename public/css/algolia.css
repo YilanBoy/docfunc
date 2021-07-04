@@ -4,7 +4,6 @@
 .aa-dropdown-menu {
     background-color: #fff;
     border: 2px solid rgba(50, 50, 50, 0.6);
-    border-top-width: 0;
     width: 500px;
     margin-top: 10px;
     box-shadow: 4px 4px 0 rgba(241, 241, 241, 0.35);
@@ -31,13 +30,6 @@
 .aa-suggestion:hover,
 .aa-suggestion.aa-cursor {
     background-color: rgba(200, 200, 200, 0.35);
-}
-.aa-suggestions-category {
-    text-transform: uppercase;
-    border-bottom: 2px solid rgba(50, 50, 50, 0.6);
-    border-top: 2px solid rgba(50, 50, 50, 0.6);
-    padding: 6px 12px;
-    color: #333;
 }
 .aa-suggestion > span em {
     font-weight: 700;

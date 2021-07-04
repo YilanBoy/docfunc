@@ -4246,7 +4246,6 @@ autocomplete_js__WEBPACK_IMPORTED_MODULE_0___default()('#aa-search-input', {
   }),
   displayKey: 'title',
   templates: {
-    header: '<div class="aa-suggestions-category">文章</div>',
     suggestion: function suggestion(_suggestion) {
       return "\n                        <span class=\"w-full\">\n                            <a class=\"block text-gray-400 hover:text-gray-700 w-full\" href=\"".concat(_suggestion.url, "\">\n                                ").concat(_suggestion._highlightResult.title.value, "\n                            </a>\n                        </span>\n                    ");
     },

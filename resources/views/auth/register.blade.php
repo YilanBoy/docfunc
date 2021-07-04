@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    <main class="container mx-auto max-w-7xl">
+    <div class="container mx-auto max-w-7xl">
         <div class="flex justify-center items-center px-4 xl:px-0">
 
             <div class="w-full lg:w-1/3 flex flex-col sm:justify-center items-center bg-gray-100 pb-12">
@@ -20,7 +20,7 @@
                     <i class="bi bi-person-plus-fill"></i><span class="ml-4">註冊</span>
                 </div>
 
-                <div class="w-full sm:max-w-md mt-4 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                <div class="w-full sm:max-w-md mt-4 px-6 py-4 bg-white shadow-md overflow-hidden rounded-xl ring-1 ring-black ring-opacity-20">
 
                     {{-- Validation Errors --}}
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
@@ -75,5 +75,5 @@
             </div>
 
         </div>
-    </main>
+    </div>
 @endsection

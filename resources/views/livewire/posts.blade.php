@@ -64,7 +64,7 @@
                         clicked.closest('.post-container').querySelector('.post-link').click()
                     }
                 "
-                class="post-container transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl bg-white rounded-xl
+                class="post-container transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
                 flex cursor-pointer ring-1 ring-black ring-opacity-20"
             >
                 <div class="flex flex-col md:flex-row flex-1 p-4">

@@ -4,7 +4,7 @@
 @section('title', isset($category) ? $category->name : '所有文章')
 
 @section('content')
-    <main class="container mx-auto max-w-7xl mt-6">
+    <div class="container mx-auto max-w-7xl mt-6">
         <div class="flex flex-col xl:flex-row justify-center px-4 xl:px-0">
             {{-- 文章列表 --}}
             <div class="w-full xl:w-2/3 px-2 xl:px-0 mr-0 xl:mr-6">
@@ -18,7 +18,7 @@
             {{-- 文章列表側邊欄區塊 --}}
             <div class="w-full xl:w-80 space-y-6 mb-6">
                 {{-- 介紹 --}}
-                <div class="bg-white border-blue rounded-xl ring-1 ring-black ring-opacity-20">
+                <div class="bg-white border-blue shadow-md rounded-xl ring-1 ring-black ring-opacity-20">
                     <div class="text-gray-600 p-5">
                         <h3 class="font-semibold text-lg text-center mb-3">歡迎來到 <span class="font-mono">{{ config('app.name') }}</span>！</h3>
                         <p class="mt-2 pt-3 border-gray-600 border-t-2">
@@ -33,7 +33,7 @@
 
                 {{-- 熱門標籤 --}}
                 @if ($popularTags->count())
-                <div class="bg-white border-blue rounded-xl ring-1 ring-black ring-opacity-20">
+                <div class="bg-white border-blue shadow-md rounded-xl ring-1 ring-black ring-opacity-20">
                     <div class="text-gray-600 p-5">
                         <h3 class="font-semibold text-lg text-center mb-3"><i class="bi bi-tags-fill"></i> 熱門標籤</h3>
                         <div class="mt-2 pt-3 border-gray-600 border-t-2 flex flex-wrap">
@@ -51,7 +51,7 @@
 
                 {{-- 學習資源推薦 --}}
                 @if ($links->count())
-                    <div class="bg-white border-blue rounded-xl ring-1 ring-black ring-opacity-20">
+                    <div class="bg-white border-blue shadow-md rounded-xl ring-1 ring-black ring-opacity-20">
                         <div class="text-gray-600 p-5">
                             <h3 class="font-semibold text-lg text-center mb-3"><i class="bi bi-journal-code"></i> 學習資源推薦</h3>
                             <div class="mt-2 pt-3 border-gray-600 border-t-2 flex flex-col">
@@ -67,5 +67,5 @@
                 @endif
             </div>
         </div>
-    </main>
+    </div>
 @endsection

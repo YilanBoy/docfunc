@@ -38,7 +38,7 @@ return [
     'digits_between' => ':attribute 必須介於 :min 至 :max 位數字。',
     'dimensions'     => ':attribute 圖片尺寸不正確。',
     'distinct'       => ':attribute 已經存在。',
-    'email'          => ':attribute 必須是有效的 E-mail。',
+    'email'          => ':attribute 必須是有效的 Email。',
     'ends_with'      => ':attribute 結尾必須包含下列之一：:values',
     'exists'         => ':attribute 不存在。',
     'file'           => ':attribute 必須是有效的檔案。',
@@ -140,7 +140,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | The following language lines are used to swap our attribute placeholder
-    | with something more reader friendly such as "E-Mail Address" instead
+    | with something more reader friendly such as "Email Address" instead
     | of "email". This simply helps us make our message more expressive.
     |
     */
@@ -155,7 +155,7 @@ return [
         'date'                  => '日期',
         'day'                   => '天',
         'description'           => '描述',
-        'email'                 => 'E-mail',
+        'email'                 => 'Email',
         'excerpt'               => '摘要',
         'first_name'            => '名',
         'gender'                => '性別',

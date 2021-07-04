@@ -3,7 +3,7 @@
         {{-- 分類訊息區塊 --}}
         @if (isset($category))
             <div class="flex justify-center items-center bg-gradient-to-br from-blue-100 to-blue-300 text-blue-700 border-2 border-blue-700 p-4 rounded-xl">
-                <span class="font-extrabold">{{ $category->name }}：</span>
+                <span class="font-bold">{{ $category->name }}：</span>
                 <span>{{ $category->description }}</span>
             </div>
         @endif
@@ -11,7 +11,7 @@
         {{-- 標籤訊息區塊 --}}
         @if (isset($tag))
             <div class="flex justify-center items-center bg-gradient-to-br from-blue-100 to-blue-300 text-blue-700 border-2 border-blue-700 p-4 rounded-xl">
-                <span class="font-extrabold">{{ $tag->name }}</>
+                <span class="font-bold">{{ $tag->name }}</>
             </div>
         @endif
 
@@ -90,7 +90,7 @@
 
                         {{-- 文章相關資訊 --}}
                         <div class="flex flex-col md:flex-row md:items-center justify-between">
-                            <div class="flex items-center text-sm text-gray-400 font-semibold space-x-2">
+                            <div class="flex items-center text-sm text-gray-400 space-x-2">
                                 {{-- 文章分類資訊 --}}
                                 <div>
                                     <a class="hover:text-gray-700"

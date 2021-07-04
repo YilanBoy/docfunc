@@ -67,7 +67,7 @@
 
                         {{-- 搜尋 --}}
                         <div class="hidden relative xl:inline-block">
-                            <input type="search" id="aa-search-input" class="w-full rounded-xl bg-gray-100
+                            <input type="search" id="aa-search-input" class="w-3/4 rounded-xl bg-gray-100
                             border-gray-400 placeholder-gray-400 px-4 py-2 pl-8"
                             placeholder="Search" name="search" autocomplete="off" />
 
@@ -83,16 +83,16 @@
                 {{-- 未登入 --}}
                 @guest
 
-                <a href="{{ route('login') }}"
-                class="mr-3 text-gray-400 hover:text-gray-700">
-                    <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
-                </a>
+                    <a href="{{ route('login') }}"
+                    class="mr-3 text-gray-400 hover:text-gray-700">
+                        <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
+                    </a>
 
-                <a href="{{ route('register') }}"
-                class="bg-transparent hover:bg-blue-500 text-blue-700
-                hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    註冊
-                </a>
+                    <a href="{{ route('register') }}"
+                    class="bg-transparent hover:bg-blue-500 text-blue-700
+                    hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                        註冊
+                    </a>
 
                 {{-- 已登入 --}}
                 @else

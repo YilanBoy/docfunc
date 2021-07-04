@@ -12,6 +12,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                noto: "'Noto Sans TC', sans-serif"
             },
             height: {
                 18: '4.5rem',

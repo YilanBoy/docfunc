@@ -17,6 +17,10 @@
     {{-- Styles --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/algolia.css') }}" rel="stylesheet">
+    {{-- Font --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
 
     @yield('css')
 
@@ -25,7 +29,7 @@
     @yield('scriptsInHead')
 </head>
 
-<body class="flex flex-col min-h-screen justify-between bg-gray-100 antialiased">
+<body class="flex flex-col min-h-screen justify-between bg-gray-100 antialiased font-noto">
     @include('layouts.header')
 
     @yield('content')

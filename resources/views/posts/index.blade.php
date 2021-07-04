@@ -22,7 +22,7 @@
                     <div class="text-gray-600 p-5">
                         <h3 class="font-semibold text-lg text-center mb-3">歡迎來到 <span class="font-mono">{{ config('app.name') }}</span>！</h3>
                         <p class="mt-2 pt-3 border-gray-600 border-t-2">
-                            用部落格來紀錄自己生活上大大小小的事情吧！此部落格使用 Laravel 與 TailwindCSS 開發
+                            用部落格來紀錄自己生活上大大小小的事情吧！此部落格使用 Laravel 與 Tailwind CSS 開發
                         </p>
                         <a href="{{ route('posts.create') }}"
                         class="block w-full text-white bg-green-600 hover:bg-green-800 active:bg-green-600 rounded-md text-center py-2 mt-7 shadow-lg">

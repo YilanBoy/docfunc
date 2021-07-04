@@ -3,68 +3,55 @@
 @section('title', '重設密碼')
 
 @section('content')
-    <div class="container mb-5">
-        <div class="row justify-content-md-center">
-            <div class="col-12 col-xl-6">
+    <main class="container mx-auto max-w-7xl">
+        <div class="flex justify-center items-center px-4 xl:px-0">
+            <div class="w-full lg:w-1/3 flex flex-col sm:justify-center items-center bg-gray-100 pb-12">
 
-                <div class="card shadow">
-                    <h5 class="card-header py-3">{{ __('Reset Password') }}</h5>
-
-                    <div class="card-body">
-                        <div class="d-flex justify-content-center">
-                            <div class="w-75">
-                                <form method="POST" action="{{ route('password.update') }}">
-                                    @csrf
-
-                                    <input type="hidden" name="token" value="{{ $request->route('token') }}">
-
-                                    {{-- E-mail --}}
-                                    <div class="mb-3">
-                                        <input class="form-control"
-                                        value="{{ $request->email ?? old('email') }}"
-                                        type="email" name="email" required readonly>
-                                    </div>
-
-                                    @error('email')
-                                        <div class="mb-3">
-                                            <span class="text-danger">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        </div>
-                                    @enderror
-
-                                    {{-- 密碼 --}}
-                                    <div class="form-floating mb-3">
-                                        <input class="form-control @error('password') is-invalid @enderror" id="floatingInput" placeholder="password"
-                                        type="password" name="password" required autofocus>
-                                        <label for="floatingInput">{{ __('Password') }}（最少 8 個字元）</label>
-                                    </div>
-
-                                    @error('password')
-                                        <div class="mb-3">
-                                            <span class="text-danger">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        </div>
-                                    @enderror
-
-                                    {{-- 確認密碼 --}}
-                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="floatingInput" placeholder="password_confirmation"
-                                        type="password" name="password_confirmation" required>
-                                        <label for="floatingInput">{{ __('Confirm Password') }}</label>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary w-100">
-                                        {{ __('Reset Password') }}
-                                    </button>
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                {{-- Logo --}}
+                <div class="fill-current text-gray-700 text-2xl">
+                    <i class="bi bi-question-circle"></i><span class="ml-4">重設密碼</span>
                 </div>
+
+                <div class="w-full sm:max-w-md mt-4 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                    <!-- Validation Errors -->
+                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
+                    <form method="POST" action="{{ route('password.update') }}">
+                        @csrf
+
+                        <!-- Password Reset Token -->
+                        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+
+                        <!-- Email Address -->
+                        <div>
+                            <x-label for="email" :value="__('Email')" />
+
+                            <x-input id="email" class="block mt-1 w-full read-only:bg-gray-200" type="email" name="email" :value="$request->email ?? old('email')" required readonly />
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mt-4">
+                            <x-label for="password" :value="__('Password') . '（最少 8 個字元）'" />
+
+                            <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autofocus />
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="mt-4">
+                            <x-label for="password_confirmation" :value="__('Confirm Password')" />
+
+                            <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required />
+                        </div>
+
+                        <div class="flex items-center justify-end mt-4">
+                            <x-button>
+                                {{ __('Reset Password') }}
+                            </x-button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
-    </div>
+    </main>
 @endsection

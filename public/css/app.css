@@ -1117,7 +1117,19 @@ video {
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }.ease-in{
 	transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-}/* Bootstrap-icons *//* Alpine.js */[x-cloak] { display: none !important; }.hover\:-translate-x-2:hover{
+}/* Bootstrap-icons *//* Alpine.js */[x-cloak] { display: none !important; }.read-only\:bg-gray-500:-moz-read-only{
+	--tw-bg-opacity: 1;
+	background-color: rgba(107, 114, 128, var(--tw-bg-opacity));
+}.read-only\:bg-gray-500:read-only{
+	--tw-bg-opacity: 1;
+	background-color: rgba(107, 114, 128, var(--tw-bg-opacity));
+}.read-only\:bg-gray-200:-moz-read-only{
+	--tw-bg-opacity: 1;
+	background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
+}.read-only\:bg-gray-200:read-only{
+	--tw-bg-opacity: 1;
+	background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
+}.hover\:-translate-x-2:hover{
 	--tw-translate-x: -0.5rem;
 	transform: var(--tw-transform);
 }.hover\:border-transparent:hover{

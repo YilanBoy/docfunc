@@ -39,7 +39,8 @@
                         <div class="mt-2 pt-3 border-gray-600 border-t-2 flex flex-wrap">
                             @foreach ($popularTags as $popularTag)
                                 <a href="{{ route('tags.show', ['tag' => $popularTag->id]) }}"
-                                class="block text-sm text-white rounded-2xl py-1 px-3 m-1 bg-blue-500 hover:bg-blue-800 active:bg-blue-500 shadow-lg">
+                                class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 m-1
+                                bg-green-200 hover:bg-green-400 active:bg-green-200 text-green-700 rounded-full shadow-lg ring-1 ring-green-700">
                                     {{ $popularTag->name }}
                                 </a>
                             @endforeach
@@ -56,7 +57,7 @@
                             <div class="mt-2 pt-3 border-gray-600 border-t-2 flex flex-col">
                                 @foreach ($links as $link)
                                     <a href="{{ $link->link }}" target="_blank" rel="nofollow noopener noreferrer"
-                                    class="block text-base text-black rounded-md p-2 bg-white hover:bg-gray-200">
+                                    class="block text-black rounded-md p-2 bg-white hover:bg-gray-200">
                                         {{ $link->title }}
                                     </a>
                                 @endforeach

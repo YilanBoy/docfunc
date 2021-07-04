@@ -89,8 +89,7 @@
                     </a>
 
                     <a href="{{ route('register') }}"
-                    class="bg-transparent hover:bg-blue-500 text-blue-700
-                    hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    class="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                         註冊
                     </a>
 
@@ -178,7 +177,7 @@
             <a
                 href="{{ route('posts.index') }}"
                 class="@if(request()->url() === route('posts.index')) bg-gray-200 text-gray-700 @else text-gray-400 hover:text-gray-700 hover:bg-gray-200 @endif
-                block text-base px-3 py-2 rounded-md font-medium"
+                block px-3 py-2 rounded-md font-medium"
                 @if(request()->url() === route('posts.index')) aria-current="page" @endif
             >
                 <i class="bi bi-house-fill"></i><span class="ml-2">全部文章</span>
@@ -187,7 +186,7 @@
                 <a
                     href="{{ $category->link_with_name }}"
                     class="@if(request()->url() === $category->link_with_name) bg-gray-200 text-gray-700 @else text-gray-400 hover:text-gray-700 hover:bg-gray-200 @endif
-                    block text-base px-3 py-2 rounded-md font-medium"
+                    block px-3 py-2 rounded-md font-medium"
                     @if(request()->url() === $category->link_with_name) aria-current="page" @endif
                 >
                     <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>

@@ -2,7 +2,7 @@
     <div class="space-y-6">
         {{-- 分類訊息區塊 --}}
         @if (isset($category))
-            <div class="flex justify-center items-center bg-gradient-to-br from-blue-100 to-blue-300 text-blue-700 border-2 border-blue-700 p-4 rounded-xl">
+            <div class="flex justify-center items-center text-lg bg-gradient-to-br from-blue-100 to-blue-300 text-blue-700 border-2 border-blue-700 p-4 rounded-xl">
                 <span class="font-bold">{{ $category->name }}：</span>
                 <span>{{ $category->description }}</span>
             </div>
@@ -10,13 +10,13 @@
 
         {{-- 標籤訊息區塊 --}}
         @if (isset($tag))
-            <div class="flex justify-center items-center bg-gradient-to-br from-blue-100 to-blue-300 text-blue-700 border-2 border-blue-700 p-4 rounded-xl">
+            <div class="flex justify-center items-center text-lg bg-gradient-to-br from-green-100 to-green-300 text-green-700 border-2 border-green-700 p-4 rounded-xl">
                 <span class="font-bold">{{ $tag->name }}</>
             </div>
         @endif
 
         {{-- Post Sort --}}
-        <nav class="flex items-center justify-between text-base">
+        <nav class="flex items-center justify-between">
             <ul class="flex uppercase font-semibold pb-2">
                 <li>
                     <a

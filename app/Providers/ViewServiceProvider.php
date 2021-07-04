@@ -32,13 +32,13 @@ class ViewServiceProvider extends ServiceProvider
 
         // 熱門標籤
         View::composer(
-            ['posts.sidebar'],
+            ['posts.index'],
             'App\Http\View\Composers\PopularTagComposer'
         );
 
         // 側邊欄學習資源推薦
         View::composer(
-            ['posts.sidebar'],
+            ['posts.index'],
             'App\Http\View\Composers\LinkComposer'
         );
     }

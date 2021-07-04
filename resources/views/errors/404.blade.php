@@ -12,7 +12,7 @@
     <title>頁面不存在</title>
     <meta name="description" content="頁面不存在">
     {{-- Favicon --}}
-    <link rel="shortcut icon" href="{{ asset('icon/icon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/icon/icon.png') }}" type="image/x-icon">
 
     {{-- Styles --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

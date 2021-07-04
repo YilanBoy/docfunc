@@ -12,7 +12,7 @@
     <title>@yield('title', 'RECODE')</title>
     <meta name="description" content="@yield('description', 'Allen 的個人部落格')">
     {{-- Favicon --}}
-    <link rel="shortcut icon" href="{{ asset('icon/icon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/icon/icon.png') }}" type="image/x-icon">
 
     {{-- Styles --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -25,7 +25,7 @@
     @yield('scriptsInHead')
 </head>
 
-<body class="flex flex-col min-h-screen justify-between bg-gradient-to-br from-green-400 to-blue-400 antialiased">
+<body class="flex flex-col min-h-screen justify-between bg-gray-100 antialiased">
     @include('layouts.header')
 
     @yield('content')

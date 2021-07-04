@@ -1,139 +1,144 @@
+<div>
+    <div class="space-y-6">
+        {{-- Post Sort --}}
+        <nav class="flex items-center justify-between text-base">
+            <ul class="flex uppercase font-semibold pb-2">
+                <li>
+                    <a
+                        wire:click.prevent="setOrder('latest')"
+                        href="{{ $currentUrl . '?order=latest' }}"
+                        class="transition duration-150 ease-in border-b-4 px-2 sm:px-7 pb-3 hover:border-blue-500 hover:text-gray-700
+                        @if ($order === 'latest') border-blue-500 text-gray-700 @else text-gray-400 @endif"
+                    >
+                        <span>最新文章</span>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        wire:click.prevent="setOrder('recent')"
+                        href="{{ $currentUrl . '?order=recent' }}"
+                        class="transition duration-150 ease-in border-b-4 px-2 sm:px-7 pb-3 hover:border-blue-500 hover:text-gray-700
+                        @if ($order === 'recent') border-blue-500 text-gray-700 @else text-gray-400 @endif"
+                    >
+                        <span>最近更新</span>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        wire:click.prevent="setOrder('reply')"
+                        href="{{ $currentUrl . '?order=reply' }}"
+                        class=" transition duration-150 ease-in border-b-4 px-4 sm:px-7 pb-3 hover:border-blue-500 hover:text-gray-700
+                        @if ($order === 'reply') border-blue-500 text-gray-700 @else text-gray-400 @endif"
+                    >
+                        <span>最多留言</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
-<div class="card">
-    {{-- 文章排序選擇 --}}
-    <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-                <a
-                wire:click.prevent="setOrder('latest')"
-                href="{{ $currentUrl . '?order=latest' }}"
-                @if ($order === 'latest')
-                    class="nav-link active" aria-current="true"
-                @else
-                    class="nav-link link-secondary"
-                @endif
-                >
-                    <span>最新文章</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a
-                wire:click.prevent="setOrder('recent')"
-                href="{{ $currentUrl . '?order=recent' }}"
-                @if ($order === 'recent')
-                    class="nav-link active" aria-current="true"
-                @else
-                    class="nav-link link-secondary"
-                @endif
-                >
-                    <span>最近更新</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a
-                wire:click.prevent="setOrder('reply')"
-                href="{{ $currentUrl . '?order=reply' }}"
-                @if ($order === 'reply')
-                    class="nav-link active" aria-current="true"
-                @else
-                    class="nav-link link-secondary"
-                @endif
-                >
-                    <span>最多留言</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class="card-body">
-        @if ($posts->count())
-            {{-- 文章列表區塊 --}}
-            <ul class="list-group list-group-flush">
-                @foreach ($posts as $post)
-                    <li class="list-group-item">
+        {{-- 分類訊息區塊 --}}
+        @if (isset($category))
+            <div class="bg-gradient-to-br from-blue-100 to-blue-300 text-blue-700 border-2 border-blue-700 p-4 rounded-xl" role="alert">
+                <span class="font-bold">{{ $category->name }} : </span><span>{{ $category->description }}</span>
+            </div>
+        @endif
 
-                        <div class="row">
-                            {{-- 作者大頭貼 --}}
-                            <div class="d-none d-md-flex col-md-1 justify-content-center align-items-center">
-                                <a href="{{ route('users.show', ['user' => $post->user_id]) }}">
-                                    <img class="rounded-circle"
-                                    alt="{{ $post->user->name }}" src="{{ $post->user->gravatar() }}"
-                                    width="52px" height="52px">
-                                </a>
-                            </div>
+        {{-- 標籤訊息區塊 --}}
+        @if (isset($tag))
+            <div class="bg-gradient-to-br from-blue-100 to-blue-300 text-base text-blue-700 border-2 border-blue-700 p-4 rounded-xl" role="alert">
+                <span>標籤：</span><span class="font-bold">{{ $tag->name }}</span>
+            </div>
+        @endif
 
-                            {{-- 文章相關訊息 --}}
-                            <div class="col-12 col-md-10">
-                                <div class="p-1">
-                                    <span class="fs-5 fw-bold">
-                                        <a class="link-dark text-decoration-none" href="{{ $post->link_with_slug }}" title="{{ $post->title }}">
-                                            {{ $post->title }}
-                                        </a>
-                                    </span>
-                                </div>
+        {{-- Post Cards --}}
+        @forelse ($posts as $post)
+            <div
+                x-data
+                x-on:click="
+                    const clicked = $event.target
+                    const ignores = ['a']
 
-                                <div class="p-1 small">
-                                    <span class="text-secondary">
-                                        {{ $post->excerpt }}
-                                    </span>
-                                </div>
+                    if (!ignores.includes(target)) {
+                        clicked.closest('.post-container').querySelector('.post-link').click()
+                    }
+                "
+                class="post-container hover:shadow-xl transition duration-150 ease-in bg-white rounded-xl
+                flex cursor-pointer ring-1 ring-black ring-opacity-5"
+            >
+                <div class="flex flex-col md:flex-row flex-1 p-4">
+                    {{-- 大頭貼 --}}
+                    <div class="flex-none">
+                        <a href="{{ route('users.show', ['user' => $post->user_id]) }}">
+                            <img src="{{ $post->user->gravatar() }}" alt="avatar"
+                            class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400">
+                        </a>
+                    </div>
 
-                                <div class="p-1 small">
-                                    {{-- 文章分類資訊 --}}
-                                    <a class="link-secondary text-decoration-none"
+                    {{-- 文章 --}}
+                    <div class="w-full flex flex-col justify-between md:mx-4">
+                        {{-- 文章標題 --}}
+                        <h1 class="text-xl font-semibold mt-2 mb-2 md:mt-0">
+                            <a href="{{ $post->link_with_slug }}" class="post-link hover:underline">{{ $post->title }}</a>
+                        </h1>
+
+                        {{-- 文章大綱 --}}
+                        <div class="text-gray-600 mb-4">
+                            {{ $post->excerpt }}
+                        </div>
+
+                        {{-- 文章相關資訊 --}}
+                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                            <div class="flex items-center text-sm text-gray-400 font-semibold space-x-2">
+                                {{-- 文章分類資訊 --}}
+                                <div>
+                                    <a class="hover:text-gray-700"
                                     href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
-                                        <i class="{{ $post->category->icon }}"></i> {{ $post->category->name }}
+                                        <i class="{{ $post->category->icon }}"></i><span class="hidden md:inline ml-1">{{ $post->category->name }}</span>
                                     </a>
-
-                                    <span class="text-secondary mx-1">&bull;</span>
-
-                                    {{-- 文章作者資訊 --}}
-                                    <a class="link-secondary text-decoration-none"
+                                </div>
+                                <div>&bull;</div>
+                                {{-- 文章作者資訊 --}}
+                                <div>
+                                    <a class="hover:text-gray-700"
                                     href="{{ route('users.show', ['user' => $post->user_id]) }}"
                                     title="{{ $post->user->name }}">
-                                        <i class="fas fa-user"></i> {{ $post->user->name }}
+                                        <i class="bi bi-person-fill"></i><span class="hidden md:inline ml-1">{{ $post->user->name }}</span>
                                     </a>
-
-                                    <span class="text-secondary mx-1">&bull;</span>
-
-                                    {{-- 文章發佈時間 --}}
-                                    <a class="link-secondary text-decoration-none"
-                                    href="{{ $post->link_with_slug }}"
-                                    title="文章發佈於：{{ $post->created_at }}">
-                                        <i class="fas fa-clock"></i> {{ $post->created_at->diffForHumans() }}
-                                    </a>
-
-                                    <span class="d-md-none text-secondary mx-1">&bull;</span>
-
-                                    {{-- 文章留言數 --}}
-                                    <a class="d-md-none link-secondary text-decoration-none"
-                                    href="{{ $post->link_with_slug }}#replies-card">
-                                        <i class="fas fa-comment"></i> {{ $post->reply_count }}
-                                    </a>
-
                                 </div>
-
-                            </div>
-
-                            <div class="d-none d-md-flex col-md-1 justify-content-end align-items-center">
-                                <a class="link-secondary text-decoration-none"
-                                href="{{ $post->link_with_slug }}#replies-card">
-                                    <i class="fas fa-comment"></i>
-                                    {{ $post->reply_count }}
-                                </a>
+                                <div>&bull;</div>
+                                {{-- 文章發布時間 --}}
+                                <div>
+                                    <a class="hover:text-gray-700"
+                                    href="{{ $post->link_with_slug }}"
+                                    title="文章發布於：{{ $post->created_at }}">
+                                        <i class="bi bi-clock-fill"></i><span class="hidden md:inline ml-1">{{ $post->created_at->diffForHumans() }}</span>
+                                    </a>
+                                </div>
+                                <div>&bull;</div>
+                                <div>
+                                    {{-- 文章留言數 --}}
+                                    <a class="hover:text-gray-700"
+                                    href="{{ $post->link_with_slug }}#replies-card">
+                                        <i class="bi bi-chat-square-text-fill"></i><span class="hidden md:inline ml-2">{{ $post->reply_count }}</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </li>
-                @endforeach
-            </ul>
-
-            {{-- 分頁 --}}
-            <div class="d-flex justify-content-center mt-3">
-                {{-- onEachSide 會限制當前分頁左右顯示的分頁數目 --}}
-                {{-- withQueryString 會把 Url 中所有的查詢參數值添加到分頁鏈接 --}}
-                {{ $posts->onEachSide(1)->withQueryString()->links() }}
+                    </div>
+                </div>
             </div>
-        @else
-            <div class="d-flex justify-content-center p-5">目前此分類下沒有文章喔 ~_~ </div>
-        @endif
+
+        @empty
+        <div
+            class="post-container hover:shadow-xl transition duration-150 ease-in bg-white rounded-xl
+            flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-5 h-36"
+        >
+            <span>Oops！此分類底下還沒有文章，趕緊寫一篇吧！</span>
+        </div>
+        @endforelse
+    </div>
+
+    <div class="my-6">
+        {{ $posts->onEachSide(1)->withQueryString()->links() }}
     </div>
 </div>

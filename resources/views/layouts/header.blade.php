@@ -1,7 +1,7 @@
 {{-- Header --}}
 <nav
     x-data="{ mobileMenuIsOpen : false }"
-    class="bg-white border-blue-400 border-t-4 shadow-lg"
+    class="bg-white border-blue-400 border-t-4 shadow-lg mb-7"
 >
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between h-18">
@@ -44,12 +44,12 @@
                     </span>
                 </div>
                 <div class="hidden sm:block sm:ml-6">
-                    <div class="flex space-x-3">
+                    <div class="flex space-x-2">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         <a
                             href="{{ route('posts.index') }}"
                             class="@if(request()->url() === route('posts.index')) text-gray-700 @else text-gray-400 hover:text-gray-700 @endif
-                            px-3 py-2 font-medium"
+                            text-lg p-2 font-medium"
                             @if(request()->url() === route('posts.index')) aria-current="page" @endif
                         >
                             <i class="bi bi-house-fill"></i><span class="ml-2">全部文章</span>
@@ -58,7 +58,7 @@
                             <a
                                 href="{{ $category->link_with_name }}"
                                 class="@if(request()->url() === $category->link_with_name) text-gray-700 @else text-gray-400 hover:text-gray-700 @endif
-                                px-3 py-2 font-medium"
+                                text-lg p-2 font-medium"
                                 @if(request()->url() === $category->link_with_name) aria-current="page" @endif
                             >
                                 <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>
@@ -66,15 +66,15 @@
                         @endforeach
 
                         {{-- 搜尋 --}}
-                        {{-- <div class="aa-input-container" id="aa-input-container">
-                            <input type="search" id="aa-search-input" class="aa-input-search"
-                            placeholder="搜尋文章" name="search" autocomplete="off" />
+                        <div class="hidden relative xl:inline-block">
+                            <input type="search" id="aa-search-input" class="w-full rounded-xl bg-gray-100
+                            border-gray-400 placeholder-gray-400 px-4 py-2 pl-8"
+                            placeholder="Search" name="search" autocomplete="off" />
 
-                            <svg class="h-6 w-6 aa-input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                            </svg>
-                        </div> --}}
-
+                            <div class="absolute top-0 flex items-center h-full ml-2 text-gray-400">
+                                <i class="bi bi-search"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

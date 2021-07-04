@@ -1,5 +1,20 @@
 <div>
     <div class="space-y-6">
+        {{-- 分類訊息區塊 --}}
+        @if (isset($category))
+            <div class="flex justify-center items-center bg-gradient-to-br from-blue-100 to-blue-300 text-blue-700 border-2 border-blue-700 p-4 rounded-xl">
+                <span class="font-extrabold">{{ $category->name }}：</span>
+                <span>{{ $category->description }}</span>
+            </div>
+        @endif
+
+        {{-- 標籤訊息區塊 --}}
+        @if (isset($tag))
+            <div class="flex justify-center items-center bg-gradient-to-br from-blue-100 to-blue-300 text-blue-700 border-2 border-blue-700 p-4 rounded-xl">
+                <span class="font-extrabold">{{ $tag->name }}</>
+            </div>
+        @endif
+
         {{-- Post Sort --}}
         <nav class="flex items-center justify-between text-base">
             <ul class="flex uppercase font-semibold pb-2">
@@ -36,20 +51,6 @@
             </ul>
         </nav>
 
-        {{-- 分類訊息區塊 --}}
-        @if (isset($category))
-            <div class="bg-gradient-to-br from-blue-100 to-blue-300 text-blue-700 border-2 border-blue-700 p-4 rounded-xl" role="alert">
-                <span class="font-bold">{{ $category->name }} : </span><span>{{ $category->description }}</span>
-            </div>
-        @endif
-
-        {{-- 標籤訊息區塊 --}}
-        @if (isset($tag))
-            <div class="bg-gradient-to-br from-blue-100 to-blue-300 text-base text-blue-700 border-2 border-blue-700 p-4 rounded-xl" role="alert">
-                <span>標籤：</span><span class="font-bold">{{ $tag->name }}</span>
-            </div>
-        @endif
-
         {{-- Post Cards --}}
         @forelse ($posts as $post)
             <div
@@ -64,7 +65,7 @@
                     }
                 "
                 class="post-container transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl bg-white rounded-xl
-                flex cursor-pointer ring-1 ring-black ring-opacity-5"
+                flex cursor-pointer ring-1 ring-black ring-opacity-20"
             >
                 <div class="flex flex-col md:flex-row flex-1 p-4">
                     {{-- 大頭貼 --}}

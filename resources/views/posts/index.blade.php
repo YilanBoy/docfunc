@@ -17,7 +17,7 @@
         {{-- 文章列表側邊欄區塊 --}}
         <div class="w-full xl:w-80 space-y-6 mb-6">
             {{-- 介紹 --}}
-            <div class="bg-white border-blue rounded-xl ring-1 ring-black ring-opacity-5">
+            <div class="bg-white border-blue rounded-xl ring-1 ring-black ring-opacity-20">
                 <div class="text-gray-600 p-5">
                     <h3 class="font-semibold text-lg text-center mb-3">歡迎來到 {{ config('app.name') }}！</h3>
                     <p class="mt-2 pt-3 border-gray-600 border-t-2">
@@ -32,7 +32,7 @@
 
             {{-- 熱門標籤 --}}
             @if ($popularTags->count())
-            <div class="bg-white border-blue rounded-xl ring-1 ring-black ring-opacity-5">
+            <div class="bg-white border-blue rounded-xl ring-1 ring-black ring-opacity-20">
                 <div class="text-gray-600 p-5">
                     <h3 class="font-semibold text-lg text-center mb-3"><i class="bi bi-tags-fill"></i> 熱門標籤</h3>
                     <div class="mt-2 pt-3 border-gray-600 border-t-2 flex flex-wrap">
@@ -49,7 +49,7 @@
 
             {{-- 學習資源推薦 --}}
             @if ($links->count())
-                <div class="bg-white border-blue rounded-xl ring-1 ring-black ring-opacity-5">
+                <div class="bg-white border-blue rounded-xl ring-1 ring-black ring-opacity-20">
                     <div class="text-gray-600 p-5">
                         <h3 class="font-semibold text-lg text-center mb-3"><i class="bi bi-journal-code"></i> 學習資源推薦</h3>
                         <div class="mt-2 pt-3 border-gray-600 border-t-2 flex flex-col">

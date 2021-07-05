@@ -1,4 +1,4 @@
-<div>
+<div class="w-full xl:w-2/3 mr-0 xl:mr-6">
     <div class="space-y-6 mb-6">
         {{-- 分類訊息區塊 --}}
         @if (isset($category))
@@ -16,7 +16,7 @@
         @endif
 
         {{-- Post Sort --}}
-        <nav class="flex items-center justify-between">
+        <nav class="flex items-center">
             <ul class="flex uppercase font-semibold pb-2">
                 <li>
                     <a
@@ -64,10 +64,10 @@
                         clicked.closest('.post-container').querySelector('.post-link').click()
                     }
                 "
-                class="post-container transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
-                flex cursor-pointer ring-1 ring-black ring-opacity-20"
+                class="post-container transform hover:-translate-x-2 transition duration-150 ease-in shadow-md
+                hover:shadow-xl bg-white rounded-xl cursor-pointer ring-1 ring-black ring-opacity-20"
             >
-                <div class="flex flex-col md:flex-row flex-1 p-4">
+                <div class="flex flex-col md:flex-row justify-between p-4">
                     {{-- 大頭貼 --}}
                     <div class="flex-none">
                         <a href="{{ route('users.show', ['user' => $post->user_id]) }}">
@@ -79,17 +79,17 @@
                     {{-- 文章 --}}
                     <div class="w-full flex flex-col justify-between md:mx-4">
                         {{-- 文章標題 --}}
-                        <h1 class="text-xl font-semibold mt-2 mb-2 md:mt-0">
+                        <h1 class="text-xl font-semibold mt-2 md:mt-0">
                             <a href="{{ $post->link_with_slug }}" class="post-link hover:underline">{{ $post->title }}</a>
                         </h1>
 
                         {{-- 文章大綱 --}}
-                        <div class="text-gray-600 mb-4">
+                        <div class="text-gray-600 mt-2">
                             {{ $post->excerpt }}
                         </div>
 
                         {{-- 文章相關資訊 --}}
-                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mt-4">
                             <div class="flex items-center text-sm text-gray-400 space-x-2">
                                 {{-- 文章分類資訊 --}}
                                 <div>
@@ -131,12 +131,12 @@
             </div>
 
         @empty
-        <div
-            class="post-container transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
-            flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 h-36"
-        >
-            <span>Oops！此分類底下還沒有文章，趕緊寫一篇吧！</span>
-        </div>
+            <div
+                class="post-container transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
+                flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 h-36"
+            >
+                <span>Whoops！此分類底下還沒有文章，趕緊寫一篇吧！</span>
+            </div>
         @endforelse
     </div>
 

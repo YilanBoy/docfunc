@@ -7,13 +7,11 @@
     <div class="container mx-auto max-w-7xl mt-6">
         <div class="flex flex-col space-y-6 xl:space-y-0 xl:flex-row justify-center px-4 xl:px-0">
             {{-- 文章列表 --}}
-            <div class="w-full xl:w-2/3 mr-0 xl:mr-6">
-                @livewire('posts', [
-                    'currentUrl' => url()->current(),
-                    'category' => isset($category) ? $category : null,
-                    'tag' => isset($tag) ? $tag : null,
-                ])
-            </div>
+            @livewire('posts', [
+                'currentUrl' => url()->current(),
+                'category' => isset($category) ? $category : null,
+                'tag' => isset($tag) ? $tag : null,
+            ])
 
             {{-- 文章列表側邊欄區塊 --}}
             <div class="w-full xl:w-80 space-y-6">
@@ -25,7 +23,7 @@
                             用部落格來紀錄自己生活上大大小小的事情吧！此部落格使用 Laravel 與 Tailwind CSS 開發
                         </p>
                         <a href="{{ route('posts.create') }}"
-                        class="block w-full text-white bg-green-600 hover:bg-green-800 active:bg-green-600 rounded-md text-center py-2 mt-7 shadow-lg">
+                        class="block w-full text-white font-bold bg-green-600 hover:bg-green-800 active:bg-green-600 rounded-md text-center py-2 mt-7 shadow-lg">
                             <i class="bi bi-pencil"></i><span class="ml-2">新增文章</span>
                         </a>
                     </div>

@@ -11,9 +11,7 @@ ClassicEditor.create(document.querySelector('#editor'), {
 
     ckfinder: {
         // Upload the images to the server using the CKFinder QuickUpload command.
-        uploadUrl:
-            appUrl +
-            '/ckfinder/connector?command=QuickUpload&type=Images&responseType=json'
+        uploadUrl: '/ckfinder/connector?command=QuickUpload&type=Images&responseType=json'
     },
 
     // Editor configuration.

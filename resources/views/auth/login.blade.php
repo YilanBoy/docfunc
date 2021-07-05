@@ -13,7 +13,8 @@
 @section('content')
     <div class="container mx-auto max-w-7xl py-6">
         <div class="flex justify-center items-center px-4 xl:px-0">
-            <div class="w-full lg:w-1/3 flex flex-col sm:justify-center items-center bg-gray-100 pb-12">
+
+            <div class="w-full lg:w-1/3 flex flex-col justify-center items-center bg-gray-100">
                 {{-- Logo --}}
                 <div class="fill-current text-gray-700 text-2xl">
                     <i class="bi bi-box-arrow-in-right"></i><span class="ml-4">登入</span>

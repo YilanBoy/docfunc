@@ -1,4 +1,4 @@
-{{-- 新增文章 --}}
+<!-- 新增文章 -->
 @extends('layouts.app')
 
 @section('title', '新增文章')
@@ -9,6 +9,39 @@
 @endsection
 
 @section('content')
+    <div class="container mx-auto max-w-7xl mt-6">
+        <div class="flex justify-center items-center px-4 xl:px-0">
+
+            <div class="w-full xl:w-2/3 space-y-6 flex flex-col justify-center items-center"">
+                {{-- Title --}}
+                <div class="fill-current text-gray-700 text-2xl">
+                    <i class="bi bi-pencil"></i><span class="ml-4">新增文章</span>
+                </div>
+
+                <div class="w-full shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-6 space-y-6">
+
+                    {{-- Validation Errors --}}
+                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
+                    <form action="{{ route('posts.store') }}" method="POST"></form>
+                        {{-- Email Address --}}
+                        <div>
+                            <x-label for="title" :value="'請填寫標題'" />
+
+                            <x-input class="block mt-1 w-full" type="text" name="title" :value="old('title')" required autofocus />
+                        </div>
+
+                        <div>
+
+                        </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="position-relative">
         <div class="container mb-5">
             <div class="row justify-content-md-center">
@@ -26,10 +59,10 @@
                         <div class="position-sticky card" style="top: 30px">
                             <div class="d-flex flex-column card-body">
                                 <span class="fw-bold">文章字數</span>
-                                {{-- 顯示文章總字數 --}}
+                                <!-- 顯示文章總字數 -->
                                 <span class="update-characters"></span>
                                 <hr>
-                                {{-- 儲存文章 --}}
+                                <!-- 儲存文章 -->
                                 <button type="submit" id="lg-save-post" form="create-post" class="btn btn-primary shadow">
                                     <i class="far fa-save" aria-hidden="true"></i> 儲存
                                 </button>
@@ -45,7 +78,7 @@
                             <form id="create-post" action="{{ route('posts.store') }}" method="POST" accept-charset="UTF-8">
                                 @csrf
 
-                                {{-- 文章標題 --}}
+                                <!-- 文章標題 -->
                                 <div class="mb-3">
                                     <input class="form-control" type="text" name="title" value="{{ old('title') }}" placeholder="請填寫標題" required>
                                 </div>
@@ -58,11 +91,11 @@
                                     </div>
                                 @enderror
 
-                                {{-- 文章分類 --}}
+                                <!-- 文章分類 -->
                                 <div class="mb-3">
                                     <select class="form-select" name="category_id" required>
                                         <option value="" hidden disabled {{ old('category_id') ? '' : 'selected' }}>請選擇分類</option>
-                                        {{-- 這裡的 $categories 使用的是 View::composer() 方法取得值，寫在 ViewServiceProvider.php 中 --}}
+                                        <!-- 這裡的 $categories 使用的是 View::composer() 方法取得值，寫在 ViewServiceProvider.php 中 -->
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}" {{ old('category_id') == $category->id  ? 'selected' : '' }}>
                                                 {{ $category->name }}
@@ -79,12 +112,12 @@
                                     </div>
                                 @enderror
 
-                                {{-- 文章標籤 --}}
+                                <!-- 文章標籤 -->
                                 <div class="mb-3">
                                     <input class="form-control" type="text" id="tag-input" name="tags" value="{{ old('tags') }}" placeholder="輸入標籤（最多 5 個）">
                                 </div>
 
-                                {{-- 文章內容 --}}
+                                <!-- 文章內容 -->
                                 <div class="mb-3 mb-xl-0">
                                     <textarea name="body" id="editor" placeholder="請填寫文章內容～">{{ old('body') }}</textarea>
                                 </div>
@@ -98,13 +131,13 @@
                                 @enderror
 
                                 <div class="d-flex d-xl-none justify-content-between align-items-center">
-                                    {{-- 顯示文章總字數 --}}
+                                    <!-- 顯示文章總字數 -->
                                     <div>
                                         <span class="fw-bold">文章字數：</span>
                                         <span class="update-characters"></span>
                                     </div>
 
-                                    {{-- 儲存文章 --}}
+                                    <!-- 儲存文章 -->
                                     <button type="submit" id="save-post" class="btn btn-primary shadow">
                                         <i class="far fa-save" aria-hidden="true"></i> 儲存
                                     </button>
@@ -120,12 +153,9 @@
 @endsection
 
 @section('scripts')
-    <script>
-        const appUrl = "{{ config('app.url') }}";
-    </script>
-    {{-- 載入 Ckeditor --}}
+    <!-- 載入 Ckeditor -->
     <script src="{{ asset('js/editor/build/ckeditor.js') }}"></script>
     <script src="{{ asset('js/editor.js') }}"></script>
-    {{-- 載入 Tagify --}}
+    <!-- 載入 Tagify -->
     <script src="{{ asset('js/tagify.js') }}"></script>
 @endsection

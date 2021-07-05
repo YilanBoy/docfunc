@@ -5,14 +5,12 @@
 
 @section('content')
     <div class="container mx-auto max-w-7xl mt-6">
-        <div class="flex flex-col space-y-6 xl:space-y-0 xl:flex-row justify-center items-center px-4 xl:px-0">
+        <div class="flex justify-center items-center px-4 xl:px-0">
 
-            <div class="w-full md:w-2/3 lg:w-1/2 space-y-6">
+            <div class="w-full md:w-2/3 lg:w-1/2 space-y-6 flex flex-col justify-center items-center">
                 {{-- Notification Title --}}
-                <div class="flex items-center">
-                    <div class="text-gray-700 font-semibold px-7 border-b-4 border-blue-500 pb-2">
-                        <i class="bi bi-bell-fill"></i><span class="ml-2">我的通知</span>
-                    </div>
+                <div class="fill-current text-gray-700 text-2xl">
+                    <i class="bi bi-bell-fill"></i><span class="ml-4">我的通知</span>
                 </div>
 
                 {{-- Notification Cards --}}

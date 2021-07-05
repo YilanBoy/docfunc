@@ -121,9 +121,6 @@
 @endsection
 
 @section('scripts')
-    <script>
-        const appUrl = "{{ config('app.url') }}";
-    </script>
     {{-- 載入 Ckeditor --}}
     <script src="{{ asset('js/editor/build/ckeditor.js') }}"></script>
     <script src="{{ asset('js/editor.js') }}"></script>

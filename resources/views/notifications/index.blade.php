@@ -57,7 +57,7 @@
                                         href="{{ $notification->data['post_link'] }}">{{ $notification->data['post_title'] }}</a>
                                     </div>
 
-                                    <div class="break-all text-gray-600 mt-2">
+                                    <div class="text-gray-600 mt-2">
                                         {!! $notification->data['reply_content'] !!}
                                     </div>
 

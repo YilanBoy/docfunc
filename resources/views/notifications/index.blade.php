@@ -8,12 +8,12 @@
         <div class="flex justify-center items-center px-4 xl:px-0">
 
             <div class="w-full md:w-2/3 xl:w-1/2 space-y-6 flex flex-col justify-center items-center">
-                {{-- Notification Title --}}
+                {{-- Title --}}
                 <div class="fill-current text-gray-700 text-2xl">
                     <i class="bi bi-bell-fill"></i><span class="ml-4">我的通知</span>
                 </div>
 
-                {{-- Notification Cards --}}
+                {{-- Notification --}}
                 @forelse ($notifications as $notification)
                     <div
                         x-data

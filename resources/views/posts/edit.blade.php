@@ -18,14 +18,14 @@
                     <i class="bi bi-pencil"></i><span class="ml-4">新增文章</span>
                 </div>
 
-                <div class="relative w-full shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-6 space-y-6">
+                <div class="relative w-full shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-6">
 
                     <div
                         class="hidden xl:block absolute z-10 top-0 left-103/100 w-52 h-full"
                     >
-                        <div class="sticky top-9 flex flex-col justify-center items-center bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-4">
+                        <div class="sticky top-9 flex flex-col justify-center items-center shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-4">
                             <span class="w-full flex justify-center items-center update-characters border-b-2 border-gray-700 pb-4 mb-4"></span>
-                            <!-- 儲存文章 -->
+                            {{-- Save Button --}}
                             <x-button id="lg-save-post" form="edit-post" class="w-full flex justify-center items-center">
                                 <i class="bi bi-save2-fill"></i><span class="ml-2">儲存</span>
                             </x-button>
@@ -73,12 +73,12 @@
                         </div>
 
                         <div class="flex xl:hidden justify-between items-center mt-4">
-                            <!-- 顯示文章總字數 -->
+                            {{-- 顯示文章總字數 --}}
                             <div>
                                 <span class="update-characters"></span>
                             </div>
 
-                            <!-- 儲存文章 -->
+                            {{-- Save Button --}}
                             <x-button id="save-post">
                                 <i class="bi bi-save2-fill"></i><span class="ml-2">儲存</span>
                             </x-button>

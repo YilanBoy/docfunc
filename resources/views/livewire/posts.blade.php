@@ -50,7 +50,7 @@
         </ul>
     </nav>
 
-    {{-- Post Cards --}}
+    {{-- Posts --}}
     @forelse ($posts as $post)
         <div
             x-data

@@ -6,9 +6,9 @@
     <div class="container mx-auto max-w-7xl py-6">
         <div class="flex justify-center items-center px-4 xl:px-0">
 
-            <div class="w-full lg:w-1/3 flex flex-col justify-center items-center bg-gray-100">
+            <div class="w-full flex flex-col justify-center items-center bg-gray-100">
 
-                {{-- Logo --}}
+                {{-- Title --}}
                 <div class="fill-current text-gray-700 text-2xl">
                     <i class="bi bi-question-circle"></i><span class="ml-4">忘記密碼</span>
                 </div>

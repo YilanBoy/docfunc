@@ -136,7 +136,7 @@
                         <div
                             x-cloak
                             x-show.transition.duration.100ms.top.left="profileIsOpen"
-                            class="origin-top-right absolute right-0 p-2 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-20"
+                            class="origin-top-right absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-20"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                         >
                             <a href="{{ route('users.show', ['user' => auth()->id()]) }}"

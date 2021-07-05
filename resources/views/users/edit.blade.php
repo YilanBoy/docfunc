@@ -4,85 +4,71 @@
 @section('title', '編輯 ' . $user->name . ' 的個人資料')
 
 @section('content')
-    <div class="container mb-5">
-        <div class="row justify-content-md-center">
-            <div class="col-12 col-xl-6">
+    <div class="container mx-auto max-w-7xl py-6">
+        <div class="flex justify-center items-center px-4 xl:px-0">
 
-                <div class="card shadow">
-                    <h5 class="card-header py-3"><i class="fas fa-user-edit"></i> 編輯個人資料</h5>
+            <div class="w-full md:w-2/3 xl:w-2/5 flex flex-col justify-center items-center bg-gray-100">
+                {{-- Title --}}
+                <div class="fill-current text-gray-700 text-2xl">
+                    <i class="bi bi-person-lines-fill"></i><span class="ml-4">編輯個人資料</span>
+                </div>
 
-                    <div class="card-body px-3">
-                        <div class="d-flex justify-content-center">
-                            <div class="w-100">
+                {{-- Form --}}
+                <div class="w-full mt-4 px-6 py-4 bg-white shadow-md overflow-hidden rounded-xl ring-1 ring-black ring-opacity-20">
 
-                                <form action="{{ route('users.update', ['user' => $user->id]) }}" method="POST" accept-charset="UTF-8">
-                                    @method('PUT')
-                                    @csrf
-
-                                    <div class="d-flex justify-content-center mb-2">
-                                        <div class="p-1">
-                                            <img class="thumbnail rounded-circle" src="{{ $user->gravatar('200') }}" alt="圖片連結已失效"  width="200">
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex justify-content-center mb-3">
-                                        <span>
-                                            會員大頭貼由
-                                            <a class="text-decoration-none"
-                                            href="https://zh-tw.gravatar.com/"
-                                            target="_blank" rel="nofollow noopener noreferrer"> Gravatar </a>
-                                            技術提供
-                                        </span>
-                                    </div>
-
-                                    {{-- E-mail --}}
-                                    <div class="mb-3">
-                                        <input class="form-control"
-                                        value="{{ old('email', $user->email) }}"
-                                        type="email" name="email" required readonly>
-                                    </div>
-
-                                    @error('email')
-                                        <div class="mb-3">
-                                            <span class="text-danger">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        </div>
-                                    @enderror
-
-                                    {{-- 會員名稱 --}}
-                                    <div class="form-floating mb-3">
-                                        <input class="form-control @error('name') is-invalid @enderror" id="floatingInput" placeholder="name"
-                                        type="text" name="name" value="{{ old('name', $user->name) }}" autocomplete="name" required>
-                                        <label for="floatingInput">{{ __('Name') }}（請使用英文、數字、橫槓和底線）</label>
-                                    </div>
-
-                                    @error('name')
-                                        <div class="mb-3">
-                                            <span class="text-danger">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        </div>
-                                    @enderror
-
-                                    <div class="form-floating mb-3">
-                                        <textarea class="form-control" placeholder="introduction"
-                                        name="introduction" id="floatingTextarea"
-                                        style="height: 150px">{{ old('introduction', $user->introduction) }}</textarea>
-                                        <label for="floatingTextarea">個人簡介</label>
-                                    </div>
-
-                                    <div class="d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary shadow"><i class="far fa-save" aria-hidden="true"></i> 儲存</button>
-                                    </div>
-                                </form>
-
-                            </div>
+                    <div class="w-full flex flex-col justify-center items-center mb-4">
+                        <div>
+                            <img class="rounded-full h-24 w-24" src="{{ $user->gravatar('200') }}" alt="圖片連結已失效"  width="200">
                         </div>
 
+                        <div class="flex mt-4">
+                            <span class="mr-2">會員大頭貼由</span>
+                            <a href="https://zh-tw.gravatar.com/" target="_blank" rel="nofollow noopener noreferrer"
+                            class="text-gray-400 hover:text-gray-700">Gravatar</a>
+                            <span class="ml-2">技術提供</span>
+                        </div>
                     </div>
+
+                    {{-- Validation Errors --}}
+                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
+                    <form method="POST" action="{{ route('users.update', ['user' => $user->id]) }}">
+                        @method('PUT')
+                        @csrf
+
+                        {{-- Email Address --}}
+                        <div>
+                            <x-label for="email" :value="__('Email')" />
+
+                            <x-input id="email" class="block mt-1 w-full read-only:bg-gray-200" type="email" name="email" :value="old('email', $user->email)" required readonly />
+                        </div>
+
+                        <div class="mt-4">
+                            <x-label for="name" :value="__('Name') . '（請使用英文、數字、橫槓和底線）'" />
+
+                            <x-input id="name" :value="old('name', $user->name)" class="block mt-1 w-full" type="text" name="name" required autofocus />
+                        </div>
+
+                        {{-- Password --}}
+                        <div class="mt-4">
+                            <x-label for="introduction" :value="'個人簡介'" />
+
+                            <textarea name="introduction" id="introduction"
+                            class="block mt-1 h-32 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                {{ old('introduction', $user->introduction) }}
+                            </textarea>
+                        </div>
+
+                        <div class="flex items-center justify-end mt-4">
+                            {{-- Save Button --}}
+                            <x-button>
+                                <i class="bi bi-save2-fill"></i><span class="ml-2">儲存</span>
+                            </x-button>
+                        </div>
+                    </form>
                 </div>
             </div>
+
         </div>
     </div>
 @endsection

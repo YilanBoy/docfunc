@@ -4,81 +4,82 @@
 @section('title', $user->name . ' 的個人頁面')
 
 @section('content')
-    <div class="container mb-5">
-        <div class="row justify-content-md-center g-4">
+    <div class="container mx-auto max-w-7xl mt-6">
+        <div class="flex flex-col xl:flex-row justify-center space-y-6 xl:space-y-0 px-4 xl:px-0">
 
-            <div class="col-12 col-xl-3">
-                <div class="card shadow mb-4">
-                    <img class="d-none d-xl-block card-img-top" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}">
-                    <div class="card-body">
-                        <label class="fs-3 mb-0">{{ $user->name }}</label>
+            <div class="w-full xl:w-80 mr-0 xl:mr-6">
+                <div class="flex flex-col justify-center items-center text-gray-600 bg-white shadow-md p-5
+                rounded-xl ring-1 ring-black ring-opacity-20">
+                    {{-- 大頭貼 --}}
+                    <div>
+                        <img class="rounded-full h-36 w-36" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}"  width="200">
+                    </div>
 
-                        <hr>
+                    {{-- 會員名稱 --}}
+                    <span class="w-full flex justify-center items-center text-3xl text-black
+                    font-semibold my-5 pb-5 border-b-2 border-gray-700">{{ $user->name }}</span>
 
-                        <label>撰寫文章</label>
-                        <p class="fs-4 fw-bold">{{ $user->posts->count() }} 篇</p>
+                    {{-- 資訊 --}}
+                    <div class="w-full flex flex-col justify-start items-start">
+                        <span class="text-lg">撰寫文章</span>
+                        <span class="text-xl text-black font-semibold mt-2">{{ $user->posts->count() }} 篇</span>
 
-                        <label>文章留言</label>
-                        <p class="fs-4 fw-bold">{{ $user->replies->count() }} 次</p>
+                        <span class="text-lg mt-4">文章留言</span>
+                        <span class="text-xl text-black font-semibold mt-2">{{ $user->replies->count() }} 次</span>
 
-                        <label>註冊於 {{ $user->created_at->format('Y / m / d') . '（' . $user->created_at->diffForHumans() . '）' }}</label>
+                        <span class="mt-4">註冊於 {{ $user->created_at->format('Y / m / d') . '（' . $user->created_at->diffForHumans() . '）' }}</span>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-xl-8">
-                <div class="card p-3 mb-4">
-                    <div class="card-body">
-                        <h5>個人簡介</h5>
-                        <hr>
-                        @if ($user->introduction)
-                            <p class="card-text">{!! nl2br(e($user->introduction)) !!}</p>
-                        @else
-                            <p class="card-text">目前尚無個人簡介～</p>
-                        @endif
-                    </div>
+            <div class="w-full xl:w-2/3 mr-0 xl:mr-6 space-y-6">
+                <div class="flex flex-col justify-center items-center text-gray-600 bg-white shadow-md p-5
+                rounded-xl ring-1 ring-black ring-opacity-20">
+
+                    <span class="w-full flex justify-center items-center text-2xl text-black
+                    font-semibold mb-5 pb-5 border-b-2 border-gray-700">
+                        個人簡介
+                    </span>
+
+                    @if ($user->introduction)
+                        <span class="w-full flex justify-start items-center">{!! nl2br(e($user->introduction)) !!}</span>
+                    @else
+                        <span class="w-full flex justify-center items-center">目前尚無個人簡介～</span>
+                    @endif
                 </div>
 
-                {{-- 會員發布的內容 --}}
-                <div class="card shadow mb-4">
+                <nav class="flex items-center">
+                    <ul class="flex font-semibold pb-2">
+                        <li>
+                            <a
+                                href="{{ route('users.show', ['user' => $user->id]) }}"
+                                class="transition duration-150 ease-in border-b-4 px-2 sm:px-7 pb-3 hover:border-blue-500 hover:text-gray-700
+                                @if (!str_contains(request()->fullUrl(), 'replies')) border-blue-500 text-gray-700 @else text-gray-400 @endif"
+                            >
+                                <span>發布文章</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="{{ route('users.show', ['user' => $user->id, 'tab' => 'replies']) }}"
+                                class="transition duration-150 ease-in border-b-4 px-2 sm:px-7 pb-3 hover:border-blue-500 hover:text-gray-700
+                                @if (str_contains(request()->fullUrl(), 'replies')) border-blue-500 text-gray-700 @else text-gray-400 @endif"
+                            >
+                                <span>回覆紀錄</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
 
-                    <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs">
-                            <li class="nav-item">
-                                <a href="{{ route('users.show', ['user' => $user->id]) }}"
-                                @if (!str_contains(request()->fullUrl(), 'replies'))
-                                    class="nav-link active" aria-current="true"
-                                @else
-                                    class="nav-link link-secondary"
-                                @endif
-                                >
-                                    <span>發布文章</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('users.show', ['user' => $user->id, 'tab' => 'replies']) }}"
-                                @if (str_contains(request()->fullUrl(), 'replies'))
-                                    class="nav-link active" aria-current="true"
-                                @else
-                                    class="nav-link link-secondary"
-                                @endif
-                                >
-                                    <span>回覆紀錄</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="card-body">
-                        @if (str_contains(request()->getUri(), 'replies'))
-                            @include('users.replies', ['replies' => $replies])
-                        @else
-                            @include('users.posts', ['posts' => $posts])
-                        @endif
-                    </div>
+                <div class="space-y-6">
+                    @if (str_contains(request()->getUri(), 'replies'))
+                        @include('users.replies', ['replies' => $replies])
+                    @else
+                        @include('users.posts', ['posts' => $posts])
+                    @endif
                 </div>
-
             </div>
+
         </div>
     </div>
 @endsection

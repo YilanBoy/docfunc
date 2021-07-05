@@ -16,7 +16,7 @@
 
     {{-- Post Sort --}}
     <nav class="flex items-center">
-        <ul class="flex uppercase font-semibold pb-2">
+        <ul class="flex font-semibold pb-2">
             <li>
                 <a
                     wire:click.prevent="setOrder('latest')"

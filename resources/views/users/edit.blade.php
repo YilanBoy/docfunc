@@ -18,7 +18,7 @@
 
                     <div class="w-full flex flex-col justify-center items-center mb-4">
                         <div>
-                            <img class="rounded-full h-24 w-24" src="{{ $user->gravatar('200') }}" alt="圖片連結已失效"  width="200">
+                            <img class="rounded-full h-24 w-24" src="{{ $user->gravatar('200') }}" alt="{{ $user->name }}"  width="200">
                         </div>
 
                         <div class="flex mt-4">

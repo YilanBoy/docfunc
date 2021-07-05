@@ -128,10 +128,8 @@
         </div>
 
     @empty
-        <div
-            class="posts-container transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
-            flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 w-full h-36"
-        >
+        <div class="posts-container transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
+        flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 w-full h-36">
             <span>Whoops！此分類底下還沒有文章，趕緊寫一篇吧！</span>
         </div>
     @endforelse

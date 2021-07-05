@@ -68,10 +68,8 @@
                     </div>
 
                 @empty
-                    <div
-                        class="transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
-                        flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 w-full h-24 p-4"
-                    >
+                    <div class="transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
+                    flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 w-full h-24 p-4">
                         <span>沒有消息通知！</span>
                     </div>
                 @endforelse

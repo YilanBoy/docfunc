@@ -18,135 +18,73 @@
                     <i class="bi bi-pencil"></i><span class="ml-4">新增文章</span>
                 </div>
 
-                <div class="w-full shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-6 space-y-6">
+                <div class="relative w-full shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-6 space-y-6">
+
+                    <div
+                        class="hidden xl:block absolute z-10 top-0 left-103/100 w-52 h-full"
+                    >
+                        <div class="sticky top-9 flex flex-col justify-center items-center bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-4">
+                            <span class="w-full flex justify-center items-center update-characters border-b-2 border-gray-700 pb-4 mb-4"></span>
+                            <!-- 儲存文章 -->
+                            <x-button id="lg-save-post" form="create-post" class="w-full flex justify-center items-center">
+                                <i class="bi bi-save2-fill"></i><span class="ml-2">儲存</span>
+                            </x-button>
+                        </div>
+                    </div>
 
                     {{-- Validation Errors --}}
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-                    <form action="{{ route('posts.store') }}" method="POST"></form>
-                        {{-- Email Address --}}
+                    <form id="create-post" action="{{ route('posts.store') }}" method="POST">
+                        @csrf
+
                         <div>
-                            <x-label for="title" :value="'請填寫標題'" />
+                            <x-label for="title" :value="'標題'" />
 
                             <x-input class="block mt-1 w-full" type="text" name="title" :value="old('title')" required autofocus />
                         </div>
 
-                        <div>
+                        <div class="mt-4">
+                            <x-label for="category_id" :value="'分類'" />
 
+                            <select name="category_id" required
+                            class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="" hidden disabled {{ old('category_id') ? '' : 'selected' }}>請選擇分類</option>
+                                <!-- 這裡的 $categories 使用的是 View::composer() 方法取得值，寫在 ViewServiceProvider.php 中 -->
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id  ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
-                </div>
 
-            </div>
-        </div>
-    </div>
+                        <div class="mt-4">
+                            <x-label for="tags" :value="'標籤（最多 5 個）'" />
 
+                            <input class="block mt-1 w-full rounded-md" type="text" id="tag-input" name="tags" value="{{ old('tags') }}">
+                        </div>
 
+                        <div class="mt-4">
+                            <x-label for="body" :value="'內文'" class="mb-1" />
 
-    <div class="position-relative">
-        <div class="container mb-5">
-            <div class="row justify-content-md-center">
-                <div class="position-relative col-12 col-xl-8">
+                            <textarea name="body" id="editor" placeholder="請填寫文章內容～">{{ old('body') }}</textarea>
+                        </div>
 
-                    <div
-                        class="d-none d-xl-block position-absolute"
-                        style="
-                        z-index: 99;
-                        top:0;
-                        left: 101%;
-                        width: 200px;
-                        height: 100%;"
-                    >
-                        <div class="position-sticky card" style="top: 30px">
-                            <div class="d-flex flex-column card-body">
-                                <span class="fw-bold">文章字數</span>
-                                <!-- 顯示文章總字數 -->
+                        <div class="flex xl:hidden justify-between items-center mt-4">
+                            <!-- 顯示文章總字數 -->
+                            <div>
                                 <span class="update-characters"></span>
-                                <hr>
-                                <!-- 儲存文章 -->
-                                <button type="submit" id="lg-save-post" form="create-post" class="btn btn-primary shadow">
-                                    <i class="far fa-save" aria-hidden="true"></i> 儲存
-                                </button>
                             </div>
+
+                            <!-- 儲存文章 -->
+                            <x-button id="save-post">
+                                <i class="bi bi-save2-fill"></i><span class="ml-2">儲存</span>
+                            </x-button>
                         </div>
-                    </div>
-
-                    <div class="card shadow">
-
-                        <h5 class="card-header py-3"><i class="fas fa-edit"></i> 新建文章</h5>
-
-                        <div class="card-body">
-                            <form id="create-post" action="{{ route('posts.store') }}" method="POST" accept-charset="UTF-8">
-                                @csrf
-
-                                <!-- 文章標題 -->
-                                <div class="mb-3">
-                                    <input class="form-control" type="text" name="title" value="{{ old('title') }}" placeholder="請填寫標題" required>
-                                </div>
-
-                                @error('title')
-                                    <div class="mb-3">
-                                        <span class="text-danger">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    </div>
-                                @enderror
-
-                                <!-- 文章分類 -->
-                                <div class="mb-3">
-                                    <select class="form-select" name="category_id" required>
-                                        <option value="" hidden disabled {{ old('category_id') ? '' : 'selected' }}>請選擇分類</option>
-                                        <!-- 這裡的 $categories 使用的是 View::composer() 方法取得值，寫在 ViewServiceProvider.php 中 -->
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id  ? 'selected' : '' }}>
-                                                {{ $category->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                @error('category_id')
-                                    <div class="mb-3">
-                                        <span class="text-danger">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    </div>
-                                @enderror
-
-                                <!-- 文章標籤 -->
-                                <div class="mb-3">
-                                    <input class="form-control" type="text" id="tag-input" name="tags" value="{{ old('tags') }}" placeholder="輸入標籤（最多 5 個）">
-                                </div>
-
-                                <!-- 文章內容 -->
-                                <div class="mb-3 mb-xl-0">
-                                    <textarea name="body" id="editor" placeholder="請填寫文章內容～">{{ old('body') }}</textarea>
-                                </div>
-
-                                @error('body')
-                                    <div class="mb-3 mb-xl-0 mt-xl-3">
-                                        <span class="text-danger">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    </div>
-                                @enderror
-
-                                <div class="d-flex d-xl-none justify-content-between align-items-center">
-                                    <!-- 顯示文章總字數 -->
-                                    <div>
-                                        <span class="fw-bold">文章字數：</span>
-                                        <span class="update-characters"></span>
-                                    </div>
-
-                                    <!-- 儲存文章 -->
-                                    <button type="submit" id="save-post" class="btn btn-primary shadow">
-                                        <i class="far fa-save" aria-hidden="true"></i> 儲存
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
+                    </form>
                 </div>
+
             </div>
         </div>
     </div>

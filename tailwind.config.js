@@ -15,8 +15,11 @@ module.exports = {
                 noto: "'Noto Sans TC', sans-serif"
             },
             height: {
-                18: '4.5rem',
-            }
+                '18': '4.5rem',
+            },
+            inset: {
+                '103/100': '103%'
+            },
         },
     },
 

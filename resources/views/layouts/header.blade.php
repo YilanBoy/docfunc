@@ -89,7 +89,7 @@
                     </a>
 
                     <a href="{{ route('register') }}"
-                    class="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    class="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-md">
                         註冊
                     </a>
 

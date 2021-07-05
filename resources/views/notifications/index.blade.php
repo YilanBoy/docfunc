@@ -7,7 +7,7 @@
     <div class="container mx-auto max-w-7xl mt-6">
         <div class="flex justify-center items-center px-4 xl:px-0">
 
-            <div class="w-full md:w-2/3 lg:w-1/2 space-y-6 flex flex-col justify-center items-center">
+            <div class="w-full md:w-2/3 xl:w-1/2 space-y-6 flex flex-col justify-center items-center">
                 {{-- Notification Title --}}
                 <div class="fill-current text-gray-700 text-2xl">
                     <i class="bi bi-bell-fill"></i><span class="ml-4">我的通知</span>
@@ -70,7 +70,7 @@
                 @empty
                     <div
                         class="transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
-                        flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 h-24"
+                        flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 w-full h-24 p-4"
                     >
                         <span>沒有消息通知！</span>
                     </div>

@@ -4,7 +4,7 @@
 @section('title', $user->name . ' 的個人頁面')
 
 @section('content')
-    <div class="container mx-auto max-w-7xl mt-6">
+    <div class="flex-grow container mx-auto max-w-7xl mt-6">
         <div class="flex flex-col xl:flex-row justify-center space-y-6 xl:space-y-0 px-4 xl:px-0">
 
             <div class="w-full xl:w-80 mr-0 xl:mr-6">

@@ -1,8 +1,8 @@
 <div class="w-full xl:w-2/3 mr-0 xl:mr-6 space-y-6">
 
-    <div class="flex justify-between items-center">
+    <div class="flex justify-between">
         {{-- Post Sort --}}
-        <nav class="flex items-center font-semibold">
+        <nav class="flex font-semibold">
             <a
                 wire:click.prevent="setOrder('latest')"
                 href="{{ $currentUrl . '?order=latest' }}"

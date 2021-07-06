@@ -48,7 +48,7 @@
             </div>
 
             <div class="w-full xl:w-2/3 mr-0 xl:mr-6 space-y-6">
-                <nav class="flex items-center font-semibold">
+                <nav class="flex font-semibold">
                     <a
                         href="{{ route('users.show', ['user' => $user->id]) }}"
                         class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700

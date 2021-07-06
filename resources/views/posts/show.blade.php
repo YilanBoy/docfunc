@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-    <div class="flex-grow relative">
+    <div class="relative">
         {{-- 置頂按鈕 --}}
         <button id="scroll-to-top-btn" title="Go to top"
         class="fixed z-10 bottom-7 right-7 flex justify-center items-center h-16 w-16 text-3xl text-white font-bold bg-blue-600 hover:bg-blue-800 active:bg-blue-600 rounded-full
@@ -20,7 +20,7 @@
         </button>
 
         <div class="relative container mx-auto max-w-7xl mt-6">
-            <div class="flex justify-center items-center px-4 xl:px-0">
+            <div class="flex flex-col justify-center items-center px-4 xl:px-0">
 
                 <div class="relative w-full xl:w-2/3 shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-6">
 
@@ -58,11 +58,11 @@
                         <h1 class="flex-grow text-3xl font-bold">{{ $post->title }}</h1>
 
                         @can('update', $post)
+                            {{-- 文章選項 --}}
                             <div
                                 x-data="{ editMenuIsOpen : false }"
                                 class="relative xl:hidden"
                             >
-                                {{-- 使用者大頭貼 --}}
                                 <div>
                                     <button
                                         x-on:click="editMenuIsOpen = ! editMenuIsOpen"
@@ -76,7 +76,6 @@
                                     </button>
                                 </div>
 
-                                {{-- 下拉式選單 --}}
                                 <div
                                     x-cloak
                                     x-show.transition.duration.100ms.top.left="editMenuIsOpen"
@@ -189,7 +188,7 @@
                 </div>
 
                 {{-- 回覆區塊 --}}
-                {{-- @livewire('replies', ['post' => $post]) --}}
+                @livewire('replies', ['post' => $post])
             </div>
         </div>
     </div>

@@ -7,9 +7,12 @@
     <div class="flex-grow container mx-auto max-w-7xl mt-6">
         <div class="flex flex-col xl:flex-row justify-center space-y-6 xl:space-y-0 px-4 xl:px-0">
 
-            <div class="w-full sm:w-80 mx-auto xl:mr-6">
-                <div class="flex flex-col justify-center items-center text-gray-600 bg-white shadow-md p-5
-                rounded-xl ring-1 ring-black ring-opacity-20">
+            <div class="w-full xl:w-80
+            flex flex-col md:flex-row xl:flex-col justify-center items-center md:items-start xl:items-center
+            xl:mr-6">
+                <div class="w-full lg:w-80 flex flex-col justify-center items-center
+                text-gray-600 bg-white shadow-md rounded-xl ring-1 ring-black ring-opacity-20
+                md:mr-6 xl:mr-0 p-5">
                     {{-- 大頭貼 --}}
                     <div>
                         <img class="rounded-full h-36 w-36" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}"  width="200">
@@ -31,8 +34,9 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col justify-center items-center text-gray-600 bg-white shadow-md p-5
-                rounded-xl ring-1 ring-black ring-opacity-20 mt-6">
+                <div class="w-full lg:w-80 flex flex-col justify-center items-center
+                text-gray-600 bg-white shadow-md rounded-xl ring-1 ring-black ring-opacity-20
+                mt-6 md:mt-0 xl:mt-6 p-5">
 
                     <span class="w-full flex justify-center items-center text-2xl text-black
                     font-semibold mb-5 pb-5 border-b-2 border-gray-700">

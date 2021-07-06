@@ -630,9 +630,6 @@ video {
 }.mx-2{
 	margin-left: 0.5rem;
 	margin-right: 0.5rem;
-}.mx-4{
-	margin-left: 1rem;
-	margin-right: 1rem;
 }.ml-3{
 	margin-left: 0.75rem;
 }.-ml-px{
@@ -653,6 +650,8 @@ video {
 	margin-bottom: 0.25rem;
 }.mt-6{
 	margin-top: 1.5rem;
+}.mb-6{
+	margin-bottom: 1.5rem;
 }.mb-3{
 	margin-bottom: 0.75rem;
 }.mt-2{
@@ -665,8 +664,6 @@ video {
 	margin-right: 0px;
 }.mb-0{
 	margin-bottom: 0px;
-}.mb-6{
-	margin-bottom: 1.5rem;
 }.mb-2{
 	margin-bottom: 0.5rem;
 }.mt-3{
@@ -681,8 +678,6 @@ video {
 	margin-top: -1px;
 }.mr-3{
 	margin-right: 0.75rem;
-}.mr-6{
-	margin-right: 1.5rem;
 }.block{
 	display: block;
 }.flex{
@@ -739,8 +734,6 @@ video {
 	width: 2.5rem;
 }.w-48{
 	width: 12rem;
-}.w-80{
-	width: 20rem;
 }.max-w-7xl{
 	max-width: 80rem;
 }.max-w-6xl{
@@ -777,8 +770,6 @@ video {
 	flex-wrap: wrap;
 }.items-start{
 	align-items: flex-start;
-}.items-end{
-	align-items: flex-end;
 }.items-center{
 	align-items: center;
 }.justify-start{
@@ -844,15 +835,15 @@ video {
 }.border-gray-300{
 	--tw-border-opacity: 1;
 	border-color: rgba(209, 213, 219, var(--tw-border-opacity));
-}.border-gray-600{
-	--tw-border-opacity: 1;
-	border-color: rgba(75, 85, 99, var(--tw-border-opacity));
 }.border-blue-700{
 	--tw-border-opacity: 1;
 	border-color: rgba(29, 78, 216, var(--tw-border-opacity));
 }.border-green-700{
 	--tw-border-opacity: 1;
 	border-color: rgba(4, 120, 87, var(--tw-border-opacity));
+}.border-gray-600{
+	--tw-border-opacity: 1;
+	border-color: rgba(75, 85, 99, var(--tw-border-opacity));
 }.border-blue-500{
 	--tw-border-opacity: 1;
 	border-color: rgba(59, 130, 246, var(--tw-border-opacity));
@@ -962,10 +953,6 @@ video {
 	padding-bottom: 0px;
 }.pt-3{
 	padding-top: 0.75rem;
-}.pb-2{
-	padding-bottom: 0.5rem;
-}.pb-3{
-	padding-bottom: 0.75rem;
 }.pb-4{
 	padding-bottom: 1rem;
 }.pt-4{
@@ -984,6 +971,8 @@ video {
 	padding-left: 2rem;
 }.pr-2{
 	padding-right: 0.5rem;
+}.pb-3{
+	padding-bottom: 0.75rem;
 }.text-center{
 	text-align: center;
 }.align-baseline{
@@ -1015,10 +1004,10 @@ video {
 	line-height: 1.5rem;
 }.font-medium{
 	font-weight: 500;
-}.font-semibold{
-	font-weight: 600;
 }.font-bold{
 	font-weight: 700;
+}.font-semibold{
+	font-weight: 600;
 }.uppercase{
 	text-transform: uppercase;
 }.leading-5{
@@ -1041,18 +1030,18 @@ video {
 }.text-gray-600{
 	--tw-text-opacity: 1;
 	color: rgba(75, 85, 99, var(--tw-text-opacity));
-}.text-white{
-	--tw-text-opacity: 1;
-	color: rgba(255, 255, 255, var(--tw-text-opacity));
-}.text-green-700{
-	--tw-text-opacity: 1;
-	color: rgba(4, 120, 87, var(--tw-text-opacity));
-}.text-black{
-	--tw-text-opacity: 1;
-	color: rgba(0, 0, 0, var(--tw-text-opacity));
 }.text-blue-700{
 	--tw-text-opacity: 1;
 	color: rgba(29, 78, 216, var(--tw-text-opacity));
+}.text-green-700{
+	--tw-text-opacity: 1;
+	color: rgba(4, 120, 87, var(--tw-text-opacity));
+}.text-white{
+	--tw-text-opacity: 1;
+	color: rgba(255, 255, 255, var(--tw-text-opacity));
+}.text-black{
+	--tw-text-opacity: 1;
+	color: rgba(0, 0, 0, var(--tw-text-opacity));
 }.text-gray-800{
 	--tw-text-opacity: 1;
 	color: rgba(31, 41, 55, var(--tw-text-opacity));
@@ -1270,8 +1259,6 @@ video {
 		display: none;
 	}.sm\:w-1\/3{
 		width: 33.333333%;
-	}.sm\:w-80{
-		width: 20rem;
 	}.sm\:max-w-md{
 		max-width: 28rem;
 	}.sm\:flex-1{
@@ -1304,6 +1291,8 @@ video {
 		margin-top: 0px;
 	}.md\:mb-0{
 		margin-bottom: 0px;
+	}.md\:mr-6{
+		margin-right: 1.5rem;
 	}.md\:inline{
 		display: inline;
 	}.md\:flex{
@@ -1318,6 +1307,8 @@ video {
 		flex: 1 1 auto;
 	}.md\:flex-row{
 		flex-direction: row;
+	}.md\:items-start{
+		align-items: flex-start;
 	}.md\:items-center{
 		align-items: center;
 	}.md\:justify-end{
@@ -1329,16 +1320,18 @@ video {
 		display: none;
 	}.lg\:w-1\/3{
 		width: 33.333333%;
+	}.lg\:w-80{
+		width: 20rem;
 	}.lg\:px-8{
 		padding-left: 2rem;
 		padding-right: 2rem;
 	}
 }@media (min-width: 1280px){.xl\:mr-6{
 		margin-right: 1.5rem;
-	}.xl\:mt-6{
-		margin-top: 1.5rem;
 	}.xl\:mr-0{
 		margin-right: 0px;
+	}.xl\:mt-6{
+		margin-top: 1.5rem;
 	}.xl\:block{
 		display: block;
 	}.xl\:inline-block{
@@ -1359,6 +1352,8 @@ video {
 		flex-direction: row;
 	}.xl\:flex-col{
 		flex-direction: column;
+	}.xl\:items-center{
+		align-items: center;
 	}.xl\:space-y-0 > :not([hidden]) ~ :not([hidden]){
 		--tw-space-y-reverse: 0;
 		margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));

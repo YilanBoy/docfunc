@@ -15,7 +15,7 @@
             <div class="w-full xl:w-2/3 space-y-6 flex flex-col justify-center items-center"">
                 {{-- Title --}}
                 <div class="fill-current text-gray-700 text-2xl">
-                    <i class="bi bi-pencil"></i><span class="ml-4">新增文章</span>
+                    <i class="bi bi-pencil"></i><span class="ml-4">編輯文章</span>
                 </div>
 
                 <div class="relative w-full shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-6">
@@ -63,7 +63,7 @@
                         <div class="mt-4">
                             <x-label for="tags" :value="'標籤（最多 5 個）'" />
 
-                            <input class="block mt-1 w-full rounded-md" type="text" id="tag-input" name="tags" value="{{ old('tags', $post->tagsJson) }}">
+                            <input class="mt-1 rounded-md" type="text" id="tag-input" name="tags" value="{{ old('tags', $post->tagsJson) }}">
                         </div>
 
                         <div class="mt-4">

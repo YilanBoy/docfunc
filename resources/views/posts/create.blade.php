@@ -62,7 +62,7 @@
                         <div class="mt-4">
                             <x-label for="tags" :value="'標籤（最多 5 個）'" />
 
-                            <input class="block mt-1 w-full rounded-md" type="text" id="tag-input" name="tags" value="{{ old('tags') }}">
+                            <input class="mt-1 rounded-md" type="text" id="tag-input" name="tags" value="{{ old('tags') }}">
                         </div>
 
                         <div class="mt-4">

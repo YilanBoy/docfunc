@@ -27,7 +27,7 @@
                         <span class="text-lg mt-4">文章留言</span>
                         <span class="text-xl text-black font-semibold mt-2">{{ $user->replies->count() }} 次</span>
 
-                        <span class="mt-4">註冊於 {{ $user->created_at->format('Y / m / d') . '（' . $user->created_at->diffForHumans() . '）' }}</span>
+                        <span class="mt-4 text-xs">註冊於 {{ $user->created_at->format('Y / m / d') . '（' . $user->created_at->diffForHumans() . '）' }}</span>
                     </div>
                 </div>
             </div>

@@ -18,7 +18,7 @@
 
                     <div class="w-full flex flex-col justify-center items-center mb-4">
                         <div>
-                            <img class="rounded-full h-24 w-24" src="{{ $user->gravatar('200') }}" alt="{{ $user->name }}"  width="200">
+                            <img class="rounded-full h-36 w-36" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}">
                         </div>
 
                         <div class="flex mt-4">

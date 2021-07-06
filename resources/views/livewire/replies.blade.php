@@ -25,12 +25,12 @@
         </div>
     @endif
 
-    {{-- Comments Container --}}
-    <div class="w-full space-y-6 mt-6">
+    {{-- Reply Container --}}
+    <div id="replies-card" class="w-full space-y-6 mt-6">
 
         @forelse ($replies as $reply)
-            {{-- Comment Container --}}
-            <div class="flex relative bg-white rounded-xl ring-1 ring-black ring-opacity-20 shadow-md">
+            {{-- Reply Container --}}
+            <div id="reply-{{ $reply->id }}" class="flex relative bg-white rounded-xl ring-1 ring-black ring-opacity-20 shadow-md">
 
                 <div class="flex flex-col md:flex-row flex-1 p-4">
                     {{-- 大頭貼 --}}

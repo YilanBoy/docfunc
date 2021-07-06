@@ -30,11 +30,9 @@
                         <span class="mt-4 text-xs">註冊於 {{ $user->created_at->format('Y / m / d') . '（' . $user->created_at->diffForHumans() . '）' }}</span>
                     </div>
                 </div>
-            </div>
 
-            <div class="w-full xl:w-2/3 mr-0 xl:mr-6 space-y-6">
                 <div class="flex flex-col justify-center items-center text-gray-600 bg-white shadow-md p-5
-                rounded-xl ring-1 ring-black ring-opacity-20">
+                rounded-xl ring-1 ring-black ring-opacity-20 mt-6">
 
                     <span class="w-full flex justify-center items-center text-2xl text-black
                     font-semibold mb-5 pb-5 border-b-2 border-gray-700">
@@ -47,7 +45,9 @@
                         <span class="w-full flex justify-center items-center">目前尚無個人簡介～</span>
                     @endif
                 </div>
+            </div>
 
+            <div class="w-full xl:w-2/3 mr-0 xl:mr-6 space-y-6">
                 <nav class="flex items-center">
                     <ul class="flex font-semibold pb-2">
                         <li>

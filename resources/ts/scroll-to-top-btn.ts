@@ -18,12 +18,12 @@ if (header !== null) {
             // isIntersecting is false when element and viewport don't overlap
             if (entries[0].isIntersecting === true) {
                 // header 在畫面上
-                scrollToTopButton?.classList.add('d-none');
-                scrollToTopButton?.classList.remove('d-block');
+                scrollToTopButton?.classList.add('hidden');
+                scrollToTopButton?.classList.remove('block');
             } else {
                 // header 不在畫面上
-                scrollToTopButton?.classList.remove('d-none');
-                scrollToTopButton?.classList.add('d-block');
+                scrollToTopButton?.classList.remove('hidden');
+                scrollToTopButton?.classList.add('block');
             }
         },
         { threshold: [0] }
@@ -39,12 +39,12 @@ if (footer !== null) {
         function (entries) {
             if (entries[0].isIntersecting === true) {
                 // footer 在畫面上
-                scrollToTopButton?.classList.remove('position-fixed');
-                scrollToTopButton?.classList.add('position-absolute');
+                scrollToTopButton?.classList.remove('fixed');
+                scrollToTopButton?.classList.add('absolute');
             } else {
                 // footer 不在畫面上
-                scrollToTopButton?.classList.add('position-fixed');
-                scrollToTopButton?.classList.remove('position-absolute');
+                scrollToTopButton?.classList.add('fixed');
+                scrollToTopButton?.classList.remove('absolute');
             }
         },
         { threshold: [0] }

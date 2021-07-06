@@ -26,7 +26,7 @@
                         <div class="sticky top-9 flex flex-col justify-center items-center shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-4">
                             <span class="w-full flex justify-center items-center update-characters border-b-2 border-gray-700 pb-4 mb-4"></span>
                             {{-- Save Button --}}
-                            <x-button id="lg-save-post" form="create-post" class="w-full flex justify-center items-center">
+                            <x-button id="lg-save-post" form="create-post" class="w-full">
                                 <i class="bi bi-save2-fill"></i><span class="ml-2">儲存</span>
                             </x-button>
                         </div>

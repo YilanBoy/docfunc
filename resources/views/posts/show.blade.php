@@ -11,217 +11,188 @@
 @endsection
 
 @section('content')
-    <div class="container mx-auto max-w-7xl mt-6">
-        <div class="flex justify-center items-center px-4 xl:px-0">
-
-            <div class="relative w-full xl:w-2/3 shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-6">
-                <h1 class="text-3xl font-bold">{{ $post->title }}</h1>
-
-                <div class="flex items-center text-gray-400 mt-4 space-x-2">
-                    {{-- 文章分類資訊 --}}
-                    <div>
-                        <a class="hover:text-gray-700"
-                        href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
-                            <i class="{{ $post->category->icon }}"></i><span class="ml-2">{{ $post->category->name }}</span>
-                        </a>
-                    </div>
-
-                    <div>&bull;</div>
-
-                    {{-- 文章作者資訊 --}}
-                    <div>
-                        <a class="hover:text-gray-700"
-                        href="{{ route('users.show', ['user' => $post->user_id]) }}"
-                        title="{{ $post->user->name }}">
-                            <i class="bi bi-person-fill"></i><span class="ml-2">{{ $post->user->name }}</span>
-                        </a>
-                    </div>
-
-                    <div class="hidden md:block">&bull;</div>
-
-                    {{-- 文章發布時間 --}}
-                    <div class="hidden md:block">
-                        <a class="hover:text-gray-700"
-                        href="{{ $post->link_with_slug }}"
-                        title="文章發布於：{{ $post->created_at }}">
-                            <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
-                        </a>
-                    </div>
-
-                    <div class="hidden md:block">&bull;</div>
-
-                    <div class="hidden md:block">
-                        {{-- 文章留言數 --}}
-                        <a class="hover:text-gray-700"
-                        href="{{ $post->link_with_slug }}#replies-card">
-                            <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->reply_count }}</span>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="flex items-center mt-4 space-x-2">
-                    <!-- 文章標籤-->
-                    @if ($post->tags()->exists())
-                        <span class="text-green-700"><i class="bi bi-tags-fill"></i></span>
-
-                        @foreach ($post->tags as $tag)
-                            <a href="{{ route('tags.show', ['tag' => $tag->id]) }}"
-                            class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 m-1
-                            bg-green-200 hover:bg-green-400 active:bg-green-200 text-green-700 rounded-full shadow-lg ring-1 ring-green-700">
-                                {{ $tag->name }}
-                            </a>
-                        @endforeach
-                    @endif
-                </div>
-
-                <div class="mt-4">
-                    {!! $post->body !!}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- <!-- 返回頂部按鈕的 position 改為 absolute 時，上一層樣式需要設定 relative  -->
-    <div class="position-relative">
-        <!-- 返回頂部按鈕 -->
+    <div class="flex-grow relative">
+        {{-- 置頂按鈕 --}}
         <button id="scroll-to-top-btn" title="Go to top"
-        style="z-index: 99;bottom: 30px;right: 30px;"
-        class="btn btn-danger rounded-circle shadow d-none position-fixed">
-            <i class="fas fa-arrow-up fa-2x"></i>
+        class="fixed z-10 bottom-7 right-7 flex justify-center items-center h-16 w-16 text-3xl text-white font-bold bg-blue-600 hover:bg-blue-800 active:bg-blue-600 rounded-full
+        transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl">
+            <i class="bi bi-arrow-up"></i>
         </button>
 
-        <div class="container mb-5">
-            <div class="row justify-content-md-center">
-                <div class="position-relative col-12 col-xl-8">
+        <div class="relative container mx-auto max-w-7xl mt-6">
+            <div class="flex justify-center items-center px-4 xl:px-0">
 
-                    <!-- 編輯區塊 -->
+                <div class="relative w-full xl:w-2/3 shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-6">
+
+                    {{-- 文章編輯 --}}
                     @can('update', $post)
                         <div
-                            class="d-none d-xl-block position-absolute"
-                            style="
-                                z-index: 99;
-                                top:0;
-                                left: 101%;
-                                width: 90px;
-                                height: 100%;"
+                            class="absolute z-10 top-0 left-103/100 w-12 h-full"
                         >
-                            <div class="position-sticky" style="top: 30px">
-                                <a role="button"  class="btn btn-success w-100 shadow mb-2"
-                                href="{{ route('posts.edit', ['post' => $post->id]) }}">
-                                    <i class="far fa-edit"></i> 編輯
-                                </a>
+                            <div class="sticky top-9 flex flex-col justify-center items-center">
+                                    <a href="{{ route('posts.edit', ['post' => $post->id]) }}"
+                                    class="flex justify-center items-center h-12 w-12 text-xl text-white font-bold bg-green-600 hover:bg-green-800 active:bg-green-600 rounded-full
+                                    transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
 
-                                <form id="delete-post" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
-                                class="d-none"
-                                onsubmit="return confirm('您確定要刪除此文章嗎？')">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
+                                    <form id="delete-post" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
+                                    class="hidden"
+                                    onsubmit="return confirm('您確定要刪除此文章嗎？')">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
 
-                                <button type="submit" form="delete-post" class="btn btn-danger w-100 shadow">
-                                    <i class="far fa-trash-alt"></i> 刪除
-                                </button>
+                                    {{-- Delete Button --}}
+                                    <button type="submit" form="delete-post"
+                                    class="flex justify-center items-center h-12 w-12 text-xl text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
+                                    transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-2">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>
                             </div>
-                        </div>
-
-                        <div class="d-xl-none d-flex justify-content-end mb-2">
-                            <a role="button"  class="btn btn-success shadow me-2"
-                            href="{{ route('posts.edit', ['post' => $post->id]) }}">
-                                <i class="far fa-edit"></i> 編輯
-                            </a>
-
-                            <button type="submit" form="delete-post" class="btn btn-danger shadow">
-                                <i class="far fa-trash-alt"></i> 刪除
-                            </button>
                         </div>
                     @endcan
 
-                    <!-- 文章 -->
-                    <div class="card shadow mb-4">
-                        <div class="card-body p-3 p-md-4">
 
-                            <h1 class="text-start fw-bold mb-2">{{ $post->title }}</h1>
+                    <div class="flex justify-between">
+                        <h1 class="flex-grow text-3xl font-bold">{{ $post->title }}</h1>
 
-                            <div class="d-flex justify-content-start text-secondary mb-2">
-                                <a href="{{ $post->category->link_with_name }}"
-                                class="d-block link-secondary text-decoration-none">
-                                    <i class="{{ $post->category->icon }}"></i> {{ $post->category->name }}
-                                </a>
-
-                                <span class="text-secondary mx-2">&bull;</span>
-
-                                <a href="{{ route('users.show', ['user' => $post->user->id]) }}"
-                                class="d-block link-secondary text-decoration-none">
-                                    <i class="fas fa-user"></i> {{ $post->user->name }}
-                                </a>
-
-                                <span class="d-none d-md-block text-secondary mx-2">&bull;</span>
-
-                                <span class="d-none d-md-block">
-                                    <i class="fas fa-clock"></i> {{ $post->created_at->diffForHumans() }}
-                                </span>
-
-                                <span class="d-none d-md-block text-secondary mx-2">&bull;</span>
-
-                                <span class="d-none d-md-block">
-                                    <i class="fas fa-comment"></i> {{ $post->reply_count }}
-                                </span>
-                            </div>
-
-                            <div class="text-start mb-4">
-                                <!-- 文章標籤-->
-                                @if ($post->tags()->exists())
-                                    <span class="text-primary"><i class="fas fa-tags"></i></span>
-                                    @foreach ($post->tags as $tag)
-                                        <a role="button" class="btn btn-primary btn-sm rounded-pill py-0 shadow mb-1"
-                                        href="{{ route('tags.show', ['tag' => $tag->id])}}">
-                                            {{ $tag->name }}
-                                        </a>
-                                    @endforeach
-                                @endif
-                            </div>
-
-                            <!-- 文章內容 -->
-                            <div class="ck-content mb-4">
-                                {!! $post->body !!}
-                            </div>
-
-                            <!-- 分享文章 -->
-                            <div class="d-flex justify-content-end">
-                                <button type="button" title="分享此篇文章至 Facebook" data-sharer="facebook" data-url="{{ request()->fullUrl() }}"
-                                class="btn btn-link link-secondary text-decoration-none">
-                                    <i class="fab fa-facebook-square fa-2x"></i>
-                                </button>
-                                <button type="button" title="分享此篇文章至 Twitter" data-sharer="twitter" data-url="{{ request()->fullUrl() }}"
-                                class="btn btn-link link-secondary text-decoration-none">
-                                    <i class="fab fa-twitter fa-2x"></i>
-                                </button>
-                            </div>
-
-                            <hr>
-                            <!-- 作者 -->
-                            <div class="d-flex justify-content-start align-items-center">
-                                <div class="d-none d-md-block align-self-center me-4">
-                                    <img class="rounded-circle" src="{{ $post->user->gravatar() }}" width="60px" height="60px">
+                        @can('update', $post)
+                            <div
+                                x-data="{ editMenuIsOpen : false }"
+                                class="relative xl:hidden"
+                            >
+                                {{-- 使用者大頭貼 --}}
+                                <div>
+                                    <button
+                                        x-on:click="editMenuIsOpen = ! editMenuIsOpen"
+                                        x-on:click.away="editMenuIsOpen = false"
+                                        x-on:keydown.escape.window="editMenuIsOpen = false"
+                                        type="button"
+                                        class="text-2xl text-gray-400 hover:text-gray-700 focus:text-gray-700"
+                                        aria-expanded="false" aria-haspopup="true"
+                                    >
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </button>
                                 </div>
-                                <div class="d-flex flex-column">
-                                    <label class="fs-4 fw-bold">
-                                        <a class="link-dark text-decoration-none" href="{{ route('users.show', ['user' => $post->user->id]) }}">
-                                            {{ $post->user->name }}
-                                        </a>
-                                    </label>
-                                    <span class="text-dark">{!! nl2br(e($post->user->introduction)) !!}</span>
+
+                                {{-- 下拉式選單 --}}
+                                <div
+                                    x-cloak
+                                    x-show.transition.duration.100ms.top.left="editMenuIsOpen"
+                                    class="origin-top-right absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-20"
+                                    role="menu" aria-orientation="vertical" tabindex="-1"
+                                >
+                                    <a href="{{ route('posts.edit', ['post' => $post->id]) }}"
+                                    role="menuitem" tabindex="-1"
+                                    class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100">
+                                        <i class="bi bi-pencil"></i><span class="ml-2">編輯</span>
+                                    </a>
+
+                                    <button
+                                        type="submit" form="delete-post" role="menuitem" tabindex="-1"
+                                        class="flex items-start w-full px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100"
+                                    >
+                                        <i class="bi bi-trash-fill"></i><span class="ml-2">刪除</span>
+                                    </button>
                                 </div>
                             </div>
+                        @endcan
+                    </div>
+
+                    <div class="flex items-center text-gray-400 mt-4 space-x-2">
+                        {{-- 文章分類資訊 --}}
+                        <div>
+                            <a class="hover:text-gray-700"
+                            href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
+                                <i class="{{ $post->category->icon }}"></i><span class="ml-2">{{ $post->category->name }}</span>
+                            </a>
+                        </div>
+
+                        <div>&bull;</div>
+
+                        {{-- 文章作者資訊 --}}
+                        <div>
+                            <a class="hover:text-gray-700"
+                            href="{{ route('users.show', ['user' => $post->user_id]) }}"
+                            title="{{ $post->user->name }}">
+                                <i class="bi bi-person-fill"></i><span class="ml-2">{{ $post->user->name }}</span>
+                            </a>
+                        </div>
+
+                        <div class="hidden md:block">&bull;</div>
+
+                        {{-- 文章發布時間 --}}
+                        <div class="hidden md:block">
+                            <a class="hover:text-gray-700"
+                            href="{{ $post->link_with_slug }}"
+                            title="文章發布於：{{ $post->created_at }}">
+                                <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
+                            </a>
+                        </div>
+
+                        <div class="hidden md:block">&bull;</div>
+
+                        <div class="hidden md:block">
+                            {{-- 文章留言數 --}}
+                            <a class="hover:text-gray-700"
+                            href="{{ $post->link_with_slug }}#replies-card">
+                                <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->reply_count }}</span>
+                            </a>
                         </div>
                     </div>
 
-                    <!-- 回覆區塊 -->
-                    @livewire('replies', ['post' => $post])
+                    <div class="flex items-center mt-4 space-x-2">
+                        <!-- 文章標籤-->
+                        @if ($post->tags()->exists())
+                            <span class="text-green-700"><i class="bi bi-tags-fill"></i></span>
+
+                            @foreach ($post->tags as $tag)
+                                <a href="{{ route('tags.show', ['tag' => $tag->id]) }}"
+                                class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 m-1
+                                bg-green-200 hover:bg-green-400 active:bg-green-200 text-green-700 rounded-full shadow-lg ring-1 ring-green-700">
+                                    {{ $tag->name }}
+                                </a>
+                            @endforeach
+                        @endif
+                    </div>
+
+                    <div class="mt-4">
+                        {!! $post->body !!}
+                    </div>
+
+                    <div class="mt-4 flex justify-end space-x-4">
+                        {{-- 分享文章 --}}
+                        <button type="button" title="分享此篇文章至 Facebook" data-sharer="facebook" data-url="{{ request()->fullUrl() }}"
+                        class="text-4xl text-gray-300 hover:text-gray-500 duration-300">
+                            <i class="bi bi-facebook"></i>
+                        </button>
+
+                        <button type="button" title="分享此篇文章至 Twitter" data-sharer="twitter" data-url="{{ request()->fullUrl() }}"
+                        class="text-4xl text-gray-300 hover:text-gray-500 duration-300">
+                            <i class="bi bi-twitter"></i>
+                        </button>
+                    </div>
+
+                    <div class="flex justify-start items-center border-t-2 border-gray-700 mt-4 pt-4">
+                        <div class="flex-none none md:flex md:justify-center md:items-center p-2 mr-4">
+                            <img class="rounded-full h-16 w-16" src="{{ $post->user->gravatar(200) }}">
+                        </div>
+                        <div class="flex flex-col">
+                            <a class="text-2xl font-bold text-black hover:underline" href="{{ route('users.show', ['user' => $post->user->id]) }}">
+                                {{ $post->user->name }}
+                            </a>
+                            <span>{!! nl2br(e($post->user->introduction)) !!}</span>
+                        </div>
+                    </div>
+
                 </div>
+
+                {{-- 回覆區塊 --}}
+                {{-- @livewire('replies', ['post' => $post]) --}}
             </div>
         </div>
-    </div> --}}
+    </div>
 @endsection
 
 @section('scripts')

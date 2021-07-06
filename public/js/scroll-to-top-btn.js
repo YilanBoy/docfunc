@@ -23,12 +23,12 @@ if (header !== null) {
     // isIntersecting is false when element and viewport don't overlap
     if (entries[0].isIntersecting === true) {
       // header 在畫面上
-      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.add('d-none');
-      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.remove('d-block');
+      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.add('hidden');
+      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.remove('block');
     } else {
       // header 不在畫面上
-      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.remove('d-none');
-      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.add('d-block');
+      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.remove('hidden');
+      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.add('block');
     }
   }, {
     threshold: [0]
@@ -43,12 +43,12 @@ if (footer !== null) {
   var footerObserver = new IntersectionObserver(function (entries) {
     if (entries[0].isIntersecting === true) {
       // footer 在畫面上
-      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.remove('position-fixed');
-      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.add('position-absolute');
+      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.remove('fixed');
+      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.add('absolute');
     } else {
       // footer 不在畫面上
-      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.add('position-fixed');
-      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.remove('position-absolute');
+      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.add('fixed');
+      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.remove('absolute');
     }
   }, {
     threshold: [0]

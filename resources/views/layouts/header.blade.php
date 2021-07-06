@@ -1,6 +1,7 @@
 {{-- Header --}}
 <nav
     x-data="{ mobileMenuIsOpen : false }"
+    id="header"
     class="bg-white border-blue-400 border-t-4 shadow-md"
 >
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">

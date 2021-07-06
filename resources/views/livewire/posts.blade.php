@@ -1,54 +1,56 @@
 <div class="w-full xl:w-2/3 mr-0 xl:mr-6 space-y-6">
-    {{-- 分類訊息區塊 --}}
-    @if (isset($category))
-        <div class="flex justify-center items-center text-lg bg-gradient-to-br from-blue-100 to-blue-300 text-blue-700 border-2 border-blue-700 p-4 rounded-xl">
-            <span class="font-bold">{{ $category->name }}：</span>
-            <span>{{ $category->description }}</span>
-        </div>
-    @endif
 
-    {{-- 標籤訊息區塊 --}}
-    @if (isset($tag))
-        <div class="flex justify-center items-center text-lg bg-gradient-to-br from-green-100 to-green-300 text-green-700 border-2 border-green-700 p-4 rounded-xl">
-            <span class="font-bold">{{ $tag->name }}</>
-        </div>
-    @endif
+    <div class="flex justify-between items-center">
+        {{-- Post Sort --}}
+        <nav class="flex items-center font-semibold">
+            <a
+                wire:click.prevent="setOrder('latest')"
+                href="{{ $currentUrl . '?order=latest' }}"
+                class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700
+                border-b-4 px-2 sm:px-7 py-2
+                @if ($order === 'latest') border-blue-500 text-gray-700 @else text-gray-400 @endif"
+            >
+                <span>最新文章</span>
+            </a>
 
-    {{-- Post Sort --}}
-    <nav class="flex items-center">
-        <ul class="flex font-semibold pb-2">
-            <li>
-                <a
-                    wire:click.prevent="setOrder('latest')"
-                    href="{{ $currentUrl . '?order=latest' }}"
-                    class="transition duration-150 ease-in border-b-4 px-2 sm:px-7 pb-3 hover:border-blue-500 hover:text-gray-700
-                    @if ($order === 'latest') border-blue-500 text-gray-700 @else text-gray-400 @endif"
-                >
-                    <span>最新文章</span>
-                </a>
-            </li>
-            <li>
-                <a
-                    wire:click.prevent="setOrder('recent')"
-                    href="{{ $currentUrl . '?order=recent' }}"
-                    class="transition duration-150 ease-in border-b-4 px-2 sm:px-7 pb-3 hover:border-blue-500 hover:text-gray-700
-                    @if ($order === 'recent') border-blue-500 text-gray-700 @else text-gray-400 @endif"
-                >
-                    <span>最近更新</span>
-                </a>
-            </li>
-            <li>
-                <a
-                    wire:click.prevent="setOrder('reply')"
-                    href="{{ $currentUrl . '?order=reply' }}"
-                    class=" transition duration-150 ease-in border-b-4 px-2 sm:px-7 pb-3 hover:border-blue-500 hover:text-gray-700
-                    @if ($order === 'reply') border-blue-500 text-gray-700 @else text-gray-400 @endif"
-                >
-                    <span>最多留言</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+            <a
+                wire:click.prevent="setOrder('recent')"
+                href="{{ $currentUrl . '?order=recent' }}"
+                class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700
+                border-b-4 px-2 sm:px-7 py-2
+                @if ($order === 'recent') border-blue-500 text-gray-700 @else text-gray-400 @endif"
+            >
+                <span>最近更新</span>
+            </a>
+
+            <a
+                wire:click.prevent="setOrder('reply')"
+                href="{{ $currentUrl . '?order=reply' }}"
+                class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700
+                border-b-4 px-2 sm:px-7 py-2
+                @if ($order === 'reply') border-blue-500 text-gray-700 @else text-gray-400 @endif"
+            >
+                <span>最多留言</span>
+            </a>
+        </nav>
+
+        {{-- 分類訊息區塊 --}}
+        @if (isset($category))
+            <div class="hidden md:flex justify-center items-center text-blue-700 border-blue-700 border-2 rounded-xl
+            bg-gradient-to-br from-blue-100 to-blue-300 px-4 py-2">
+                <span class="font-bold">{{ $category->name }}：</span>
+                <span>{{ $category->description }}</span>
+            </div>
+        @endif
+
+        {{-- 標籤訊息區塊 --}}
+        @if (isset($tag))
+            <div class="hidden md:flex justify-center items-center text-green-700 border-green-700 border-2 rounded-xl
+            bg-gradient-to-br from-green-100 to-green-300 px-4 py-2">
+                <span class="font-bold">{{ $tag->name }}</>
+            </div>
+        @endif
+    </div>
 
     {{-- Posts --}}
     @forelse ($posts as $post)

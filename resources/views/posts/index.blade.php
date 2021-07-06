@@ -39,9 +39,9 @@
                 {{-- 介紹 --}}
                 <div class="text-gray-600 bg-white shadow-md p-5 rounded-xl ring-1 ring-black ring-opacity-20">
                     <h3 class="font-semibold text-lg text-center mb-3">歡迎來到 <span class="font-mono">{{ config('app.name') }}</span>！</h3>
-                    <p class="mt-2 pt-3 border-gray-600 border-t-2">
-                        用部落格來紀錄自己生活上大大小小的事情吧！此部落格使用 Laravel 與 Tailwind CSS 開發
-                    </p>
+                    <div class="mt-2 pt-3 border-gray-600 border-t-2">
+                        <span>用部落格來紀錄自己生活上大大小小的事情吧！此部落格使用 Laravel 與 Tailwind CSS 開發</span>
+                    </div>
                     <a href="{{ route('posts.create') }}"
                     class="block w-full text-white font-bold bg-green-600 hover:bg-green-800 active:bg-green-600 rounded-md text-center py-2 mt-7 shadow-lg">
                         <i class="bi bi-pencil"></i><span class="ml-2">新增文章</span>

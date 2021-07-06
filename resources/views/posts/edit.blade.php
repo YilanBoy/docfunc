@@ -12,7 +12,7 @@
     <div class="container mx-auto max-w-7xl mt-6">
         <div class="flex justify-center items-center px-4 xl:px-0">
 
-            <div class="w-full xl:w-2/3 space-y-6 flex flex-col justify-center items-center"">
+            <div class="w-full xl:w-2/3 space-y-6 flex flex-col justify-center items-center">
                 {{-- Title --}}
                 <div class="fill-current text-gray-700 text-2xl">
                     <i class="bi bi-pencil"></i><span class="ml-4">編輯文章</span>

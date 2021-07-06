@@ -89,41 +89,39 @@
                 </div>
 
                 {{-- 文章相關資訊 --}}
-                <div class="flex flex-col md:flex-row md:items-center justify-between mt-4">
-                    <div class="flex items-center text-sm text-gray-400 space-x-2">
-                        {{-- 文章分類資訊 --}}
-                        <div>
-                            <a class="hover:text-gray-700"
-                            href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
-                                <i class="{{ $post->category->icon }}"></i><span class="hidden md:inline ml-2">{{ $post->category->name }}</span>
-                            </a>
-                        </div>
-                        <div>&bull;</div>
-                        {{-- 文章作者資訊 --}}
-                        <div>
-                            <a class="hover:text-gray-700"
-                            href="{{ route('users.show', ['user' => $post->user_id]) }}"
-                            title="{{ $post->user->name }}">
-                                <i class="bi bi-person-fill"></i><span class="hidden md:inline ml-2">{{ $post->user->name }}</span>
-                            </a>
-                        </div>
-                        <div>&bull;</div>
-                        {{-- 文章發布時間 --}}
-                        <div>
-                            <a class="hover:text-gray-700"
-                            href="{{ $post->link_with_slug }}"
-                            title="文章發布於：{{ $post->created_at }}">
-                                <i class="bi bi-clock-fill"></i><span class="hidden md:inline ml-2">{{ $post->created_at->diffForHumans() }}</span>
-                            </a>
-                        </div>
-                        <div>&bull;</div>
-                        <div>
-                            {{-- 文章留言數 --}}
-                            <a class="hover:text-gray-700"
-                            href="{{ $post->link_with_slug }}#replies-card">
-                                <i class="bi bi-chat-square-text-fill"></i><span class="hidden md:inline ml-2">{{ $post->reply_count }}</span>
-                            </a>
-                        </div>
+                <div class="flex items-center text-sm text-gray-400 mt-4 space-x-2">
+                    {{-- 文章分類資訊 --}}
+                    <div>
+                        <a class="hover:text-gray-700"
+                        href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
+                            <i class="{{ $post->category->icon }}"></i><span class="hidden md:inline ml-2">{{ $post->category->name }}</span>
+                        </a>
+                    </div>
+                    <div>&bull;</div>
+                    {{-- 文章作者資訊 --}}
+                    <div>
+                        <a class="hover:text-gray-700"
+                        href="{{ route('users.show', ['user' => $post->user_id]) }}"
+                        title="{{ $post->user->name }}">
+                            <i class="bi bi-person-fill"></i><span class="hidden md:inline ml-2">{{ $post->user->name }}</span>
+                        </a>
+                    </div>
+                    <div>&bull;</div>
+                    {{-- 文章發布時間 --}}
+                    <div>
+                        <a class="hover:text-gray-700"
+                        href="{{ $post->link_with_slug }}"
+                        title="文章發布於：{{ $post->created_at }}">
+                            <i class="bi bi-clock-fill"></i><span class="hidden md:inline ml-2">{{ $post->created_at->diffForHumans() }}</span>
+                        </a>
+                    </div>
+                    <div>&bull;</div>
+                    <div>
+                        {{-- 文章留言數 --}}
+                        <a class="hover:text-gray-700"
+                        href="{{ $post->link_with_slug }}#replies-card">
+                            <i class="bi bi-chat-square-text-fill"></i><span class="hidden md:inline ml-2">{{ $post->reply_count }}</span>
+                        </a>
                     </div>
                 </div>
             </div>

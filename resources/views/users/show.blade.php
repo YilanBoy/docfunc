@@ -7,7 +7,7 @@
     <div class="flex-grow container mx-auto max-w-7xl mt-6">
         <div class="flex flex-col xl:flex-row justify-center space-y-6 xl:space-y-0 px-4 xl:px-0">
 
-            <div class="w-full xl:w-80 mr-0 xl:mr-6">
+            <div class="w-full sm:w-80 mx-auto xl:mr-6">
                 <div class="flex flex-col justify-center items-center text-gray-600 bg-white shadow-md p-5
                 rounded-xl ring-1 ring-black ring-opacity-20">
                     {{-- 大頭貼 --}}

@@ -376,12 +376,22 @@
     list-style-type: disc;
     list-style-position: inside;
 }
+.ck-content ul li {
+    list-style-position: inside;
+    text-indent: -1em;
+    padding-left: 1em;
+}
 .ck-content ol {
     margin: 1rem 0 1rem;
     padding: 0rem 1rem;
     margin: 1rem 0 1rem;
     list-style-type: decimal;
     list-style-position: inside;
+}
+.ck-content ol li {
+    list-style-position: inside;
+    text-indent: -1em;
+    padding-left: 1em;
 }
 .ck-content a {
     color: #9ca3af;

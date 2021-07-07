@@ -351,6 +351,10 @@
 }
 
 /* Tailwind CSS Compatibility */
+.ck-content p {
+    font-size: 1rem;
+    margin: 1rem 0 1rem;
+}
 .ck-content h2 {
     font-size: 1.6rem;
     font-weight: bold;
@@ -379,7 +383,11 @@
     list-style-type: decimal;
     list-style-position: inside;
 }
-.ck-content p {
-    font-size: 1rem;
-    margin: 1rem 0 1rem;
+.ck-content a {
+    color: #9ca3af;
+    cursor: pointer;
+}
+.ck-content a:hover {
+    color: #374151;
+    cursor: pointer;
 }

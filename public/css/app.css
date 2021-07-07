@@ -1141,23 +1141,7 @@ video {
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }.ease-in{
 	transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-}/* Bootstrap-icons *//* Alpine.js */[x-cloak] { display: none !important; }/* CKEditor */.ck-content > blockquote,
-.ck-content > h2,
-.ck-content > h3,
-.ck-content > h4,
-.ck-content > p {
-    margin: revert;
-}.ck-content > h2,
-.ck-content > h3,
-.ck-content > h4 {
-    font-size: revert;
-    font-weight: revert;
-}.ck-content > ol,
-.ck-content > ul {
-    list-style: revert;
-    margin: revert;
-    padding: revert;
-}.read-only\:bg-gray-200:-moz-read-only{
+}/* Bootstrap-icons *//* Alpine.js */[x-cloak] { display: none !important; }.read-only\:bg-gray-200:-moz-read-only{
 	--tw-bg-opacity: 1;
 	background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
 }.read-only\:bg-gray-200:read-only{
@@ -1418,5 +1402,4 @@ video {
 		padding-right: 0px;
 	}
 }
-
 

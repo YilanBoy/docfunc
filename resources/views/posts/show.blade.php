@@ -6,8 +6,8 @@
 @section('description', $post->excerpt)
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/content-styles.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/prism.css') }}" type="text/css">
+    <link href="{{ asset('css/content-styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/prism.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
         <div class="relative container mx-auto max-w-7xl mt-6">
             <div class="flex flex-col justify-center items-center px-4 xl:px-0">
 
-                <div class="relative ck-content w-full xl:w-2/3 shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-6">
+                <div class="relative w-full xl:w-2/3 shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-6">
 
                     {{-- 文章編輯 --}}
                     @can('update', $post)
@@ -156,7 +156,7 @@
                         @endif
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-4 ck-content">
                         {!! $post->body !!}
                     </div>
 

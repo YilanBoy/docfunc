@@ -4,6 +4,7 @@
 @section('title', '新增文章')
 
 @section('css')
+    <link href="{{ asset('css/content-styles.css') }}" rel="stylesheet">
     <link href="{{ asset('css/editor.css') }}" rel="stylesheet">
     <link href="{{ asset('css/tagify.css') }}" rel="stylesheet">
 @endsection

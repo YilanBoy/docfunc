@@ -7,27 +7,3 @@
 
 /* Alpine.js */
 [x-cloak] { display: none !important; }
-
-/* CKEditor */
-.ck-content > blockquote,
-.ck-content > h2,
-.ck-content > h3,
-.ck-content > h4,
-.ck-content > p {
-    margin: revert;
-}
-
-.ck-content > h2,
-.ck-content > h3,
-.ck-content > h4 {
-    font-size: revert;
-    font-weight: revert;
-}
-
-.ck-content > ol,
-.ck-content > ul {
-    list-style: revert;
-    margin: revert;
-    padding: revert;
-}
-

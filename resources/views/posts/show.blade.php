@@ -7,6 +7,7 @@
 
 @section('css')
     <link href="{{ asset('css/content-styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/missing-content-styles.css') }}" rel="stylesheet">
     <link href="{{ asset('css/prism.css') }}" rel="stylesheet">
 @endsection
 

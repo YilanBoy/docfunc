@@ -1,0 +1,51 @@
+/* Tailwind CSS Compatibility With CKEditor */
+.ck-content p {
+    font-size: 1rem;
+    margin: 1rem 0 1rem;
+}
+.ck-content h2 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin: 1.6rem 0 1.4rem;
+}
+.ck-content h3 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 1.4rem 0 1.2rem;
+}
+.ck-content h4 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 1.2rem 0 1rem;
+}
+.ck-content ul {
+    margin: 1rem 0 1rem;
+    padding: 0rem 1rem;
+    list-style-type: disc;
+    list-style-position: inside;
+}
+.ck-content ul li {
+    list-style-position: inside;
+    text-indent: -1em;
+    padding-left: 1em;
+}
+.ck-content ol {
+    margin: 1rem 0 1rem;
+    padding: 0rem 1rem;
+    margin: 1rem 0 1rem;
+    list-style-type: decimal;
+    list-style-position: inside;
+}
+.ck-content ol li {
+    list-style-position: inside;
+    text-indent: -1em;
+    padding-left: 1em;
+}
+.ck-content a {
+    color: #9ca3af;
+    cursor: pointer;
+}
+.ck-content a:hover {
+    color: #374151;
+    cursor: pointer;
+}

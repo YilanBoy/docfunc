@@ -22,7 +22,7 @@
         <div class="relative container mx-auto max-w-7xl mt-6">
             <div class="flex flex-col justify-center items-center px-4 xl:px-0">
 
-                <div class="relative w-full xl:w-2/3 shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-6">
+                <div class="relative ck-content w-full xl:w-2/3 shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-6">
 
                     {{-- 文章編輯 --}}
                     @can('update', $post)

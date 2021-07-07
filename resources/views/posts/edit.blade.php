@@ -24,12 +24,19 @@
                     <div
                         class="hidden xl:block absolute z-10 top-0 left-103/100 w-52 h-full"
                     >
-                        <div class="sticky top-9 flex flex-col justify-center items-center shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-4">
-                            <span class="w-full flex justify-center items-center update-characters border-b-2 border-gray-700 pb-4 mb-4"></span>
+                        <div class="sticky top-9 flex flex-col">
+                            <div class="w-full flex justify-center items-center bg-gradient-to-r from-white to-white/0
+                            rounded-xl p-4">
+                                <span class="update-characters"></span>
+                            </div>
+
                             {{-- Save Button --}}
-                            <x-button id="lg-save-post" form="edit-post" class="w-full">
-                                <i class="bi bi-save2-fill"></i><span class="ml-2">儲存</span>
-                            </x-button>
+                            <button type="submit" id="lg-save-post" form="edit-post"
+                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold
+                            bg-gray-600 hover:bg-gray-800 active:bg-gray-600 rounded-full
+                            transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4">
+                                <i class="bi bi-save2-fill"></i>
+                            </button>
                         </div>
                     </div>
 

@@ -27,11 +27,11 @@
                     {{-- 文章編輯 --}}
                     @can('update', $post)
                         <div
-                            class="absolute z-10 top-0 left-103/100 w-12 h-full"
+                            class="absolute z-10 top-0 left-103/100 w-16 h-full"
                         >
                             <div class="sticky top-9 flex flex-col justify-center items-center">
                                     <a href="{{ route('posts.edit', ['post' => $post->id]) }}"
-                                    class="flex justify-center items-center h-12 w-12 text-xl text-white font-bold bg-green-600 hover:bg-green-800 active:bg-green-600 rounded-full
+                                    class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-green-600 hover:bg-green-800 active:bg-green-600 rounded-full
                                     transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl">
                                         <i class="bi bi-pencil"></i>
                                     </a>
@@ -45,8 +45,8 @@
 
                                     {{-- Delete Button --}}
                                     <button type="submit" form="delete-post"
-                                    class="flex justify-center items-center h-12 w-12 text-xl text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
-                                    transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-2">
+                                    class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
+                                    transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4">
                                         <i class="bi bi-trash-fill"></i>
                                     </button>
                             </div>

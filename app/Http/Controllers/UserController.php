@@ -18,8 +18,10 @@ class UserController extends Controller
     public function show(User $user)
     {
         // 該會員的文章與留言
-        $posts = $user->posts()->with('category')->latest()->paginate(5);
-        $replies = $user->replies()->with('post')->latest()->paginate(5);
+        $posts = $user->posts()->withTrashed()->with('category')->latest()->paginate(5);
+        $replies = $user->replies()->whereHas('post', function ($query) {
+            return $query->whereNull('deleted_at');
+        })->with('post')->latest()->paginate(5);
 
         // 頁面顯示 users/show.blade.php，並傳入參數
         return view('users.show', [

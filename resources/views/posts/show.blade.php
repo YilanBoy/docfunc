@@ -23,9 +23,10 @@
         <div class="relative container mx-auto max-w-7xl mt-6">
             <div class="flex flex-col justify-center items-center px-4 xl:px-0">
 
-                <div class="relative w-full xl:w-2/3 shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-6">
+                <div class="relative w-full xl:w-2/3 shadow-md bg-white rounded-xl p-6
+                @if ($post->trashed()) ring-2 ring-red-500 @else ring-1 ring-black ring-opacity-20 @endif">
 
-                    {{-- 文章編輯 --}}
+                    {{-- 懸浮式文章編輯按鈕 --}}
                     @can('update', $post)
                         <div
                             class="absolute z-10 top-0 left-103/100 w-16 h-full"
@@ -39,27 +40,56 @@
 
                                     <form id="delete-post" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
                                     class="hidden"
-                                    onsubmit="return confirm('您確定要刪除此文章嗎？')">
+                                    onsubmit="return confirm('您確定要刪除此文章嗎？（時間內還可以恢復）')">
                                         @csrf
                                         @method('DELETE')
                                     </form>
 
-                                    {{-- Delete Button --}}
-                                    <button type="submit" form="delete-post"
-                                    class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
-                                    transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>
+                                    @if ($post->trashed())
+                                        <a
+                                            onclick="return confirm('您確定要恢復此文章嗎？')"
+                                            href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
+                                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-blue-600 hover:bg-blue-800 active:bg-blue-600 rounded-full
+                                            transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
+                                        >
+                                            <i class="bi bi-arrow-90deg-left"></i>
+                                        </a>
+
+                                        <form id="force-delete-post" action="{{ route('posts.forceDeletePost', ['id' => $post->id]) }}" method="POST"
+                                        class="hidden"
+                                        onsubmit="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）')">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+
+                                        {{-- Force Delete Button --}}
+                                        <button type="submit" form="force-delete-post"
+                                        class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
+                                        transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    @else
+                                        {{-- Delete Button --}}
+                                        <button type="submit" form="delete-post"
+                                        class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
+                                        transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    @endif
                             </div>
                         </div>
                     @endcan
 
+                    @if ($post->trashed())
+                        <span class="text-red-500">此文章已被設定為刪除！</span>
+                    @endif
 
                     <div class="flex justify-between">
+                        {{-- 文章標題 --}}
                         <h1 class="flex-grow text-3xl font-bold">{{ $post->title }}</h1>
 
+                        {{-- 文章編輯選單--}}
                         @can('update', $post)
-                            {{-- 文章選項 --}}
                             <div
                                 x-data="{ editMenuIsOpen : false }"
                                 class="relative xl:hidden"
@@ -89,12 +119,30 @@
                                         <i class="bi bi-pencil"></i><span class="ml-2">編輯</span>
                                     </a>
 
-                                    <button
-                                        type="submit" form="delete-post" role="menuitem" tabindex="-1"
-                                        class="flex items-start w-full px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100"
-                                    >
-                                        <i class="bi bi-trash-fill"></i><span class="ml-2">刪除</span>
-                                    </button>
+                                    @if ($post->trashed())
+                                        <a
+                                            onclick="return confirm('您確定要恢復此文章嗎？')"
+                                            href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
+                                            role="menuitem" tabindex="-1"
+                                            class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100"
+                                        >
+                                            <i class="bi bi-arrow-90deg-left"></i><span class="ml-2">恢復</span>
+                                        </a>
+
+                                        <button
+                                            type="submit" form="force-delete-post" role="menuitem" tabindex="-1"
+                                            class="flex items-start w-full px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100"
+                                        >
+                                            <i class="bi bi-trash-fill"></i><span class="ml-2">完全刪除</span>
+                                        </button>
+                                    @else
+                                        <button
+                                            type="submit" form="delete-post" role="menuitem" tabindex="-1"
+                                            class="flex items-start w-full px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100"
+                                        >
+                                            <i class="bi bi-trash-fill"></i><span class="ml-2">刪除</span>
+                                        </button>
+                                    @endif
                                 </div>
                             </div>
                         @endcan
@@ -189,7 +237,9 @@
                 </div>
 
                 {{-- 回覆區塊 --}}
-                @livewire('replies', ['post' => $post])
+                @if (!$post->trashed())
+                    @livewire('replies', ['post' => $post])
+                @endif
             </div>
         </div>
     </div>

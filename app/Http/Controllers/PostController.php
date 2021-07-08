@@ -104,4 +104,38 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')->with('success', '成功刪除文章！');
     }
+
+    // 顯示已經刪除的文章內容
+    public function showDeleted($id)
+    {
+        $deletedPost = Post::withTrashed()->find($id);
+
+        $this->authorize('update', $deletedPost);
+
+        return view('posts.show', ['post' => $deletedPost]);
+    }
+
+    // 恢復被刪除的文章
+    public function restorePost($id)
+    {
+        $deletedPost = Post::withTrashed()->find($id);
+
+        $this->authorize('update', $deletedPost);
+
+        $deletedPost->restore();
+
+        return view('posts.show', ['post' => $deletedPost]);
+    }
+
+    // 完全刪除文章
+    public function forceDeletePost(int $id)
+    {
+        $deletedPost = Post::withTrashed()->find($id);
+
+        $this->authorize('destroy', $deletedPost);
+
+        $deletedPost->forceDelete();
+
+        return redirect()->route('posts.index')->with('success', '成功刪除文章！');
+    }
 }

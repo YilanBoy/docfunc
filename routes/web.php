@@ -46,6 +46,12 @@ Route::prefix('posts')->group(function () {
     // {slug?} 當中的問號代表此參數可給可不給
     Route::get('/{post}/{slug?}', [PostController::class, 'show'])->name('posts.show');
 });
+// 軟刪除的文章內容，使用 /posts 前綴會返回 404 因此要分離出來
+Route::get('deleted-posts/{id}', [PostController::class, 'showDeleted'])->name('posts.showDeleted');
+// 恢復軟刪除的文章內容
+Route::get('restore-posts/{id}', [PostController::class, 'restorePost'])->name('posts.restorePost');
+// 完全刪除文章
+Route::delete('force-delete-posts/{id}', [PostController::class, 'forceDeletePost'])->name('posts.forceDeletePost');
 
 // 文章分類
 Route::get('categories/{category}/{name?}', [CategoryController::class, 'show'])->name('categories.show');

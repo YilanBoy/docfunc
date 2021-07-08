@@ -12,13 +12,25 @@
             }
         "
         class="posts-container flex flex-col md:flex-row justify-between p-4 shadow-md hover:shadow-xl bg-white rounded-xl
-        transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer ring-1 ring-black ring-opacity-20"
+        transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer
+        @if ($post->trashed()) ring-2 ring-red-500 @else ring-1 ring-black ring-opacity-20 @endif"
     >
         {{-- 文章 --}}
         <div class="w-full flex flex-col justify-between">
+            @if ($post->trashed())
+                <span class="text-red-500">此文章已被設定為刪除！</span>
+            @endif
+
             {{-- 文章標題 --}}
             <span class="text-xl font-semibold mt-2 md:mt-0">
-                <a href="{{ $post->link_with_slug }}" class="post-link hover:underline">{{ $post->title }}</a>
+                <a
+                    href="@if ($post->trashed())
+                        {{ route('posts.showDeleted', [ 'id' => $post->id]) }}
+                    @else
+                        {{ $post->link_with_slug }}
+                    @endif"
+                    class="post-link hover:underline"
+                >{{ $post->title }}</a>
             </span>
 
             {{-- flex items-center text-sm text-gray-400 mt-4 space-x-2 --}}

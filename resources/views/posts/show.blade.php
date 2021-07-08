@@ -33,19 +33,6 @@
                             class="absolute z-10 top-0 left-103/100 w-16 h-full"
                         >
                             <div class="sticky top-9 flex flex-col justify-center items-center">
-                                    <a href="{{ route('posts.edit', ['post' => $post->id]) }}"
-                                    class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-green-600 hover:bg-green-800 active:bg-green-600 rounded-full
-                                    transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-
-                                    <form id="delete-post" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
-                                    class="hidden"
-                                    onsubmit="">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
-
                                     @if ($post->trashed())
                                         <a
                                             x-on:click="return confirm('您確定恢復此文章嗎？');"
@@ -73,6 +60,19 @@
                                             <i class="bi bi-exclamation-diamond-fill"></i>
                                         </button>
                                     @else
+                                        {{-- Edit Post --}}
+                                        <a href="{{ route('posts.edit', ['post' => $post->id]) }}"
+                                        class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-green-600 hover:bg-green-800 active:bg-green-600 rounded-full
+                                        transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+
+                                        <form id="delete-post" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
+                                        class="hidden">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+
                                         {{-- Delete Button --}}
                                         <button
                                             x-on:click="return confirm('您確定要刪除此文章嗎？（時間內還可以恢復）');"

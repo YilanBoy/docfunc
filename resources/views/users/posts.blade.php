@@ -25,7 +25,7 @@
             <span class="text-xl font-semibold mt-2 md:mt-0">
                 <a
                     href="@if ($post->trashed())
-                        {{ route('posts.showDeleted', [ 'id' => $post->id]) }}
+                        {{ route('posts.showSoftDeleted', [ 'id' => $post->id]) }}
                     @else
                         {{ $post->link_with_slug }}
                     @endif"
@@ -47,7 +47,7 @@
                 <div>
                     <a
                         href="@if ($post->trashed())
-                            {{ route('posts.showDeleted', [ 'id' => $post->id]) }}
+                            {{ route('posts.showSoftDeleted', [ 'id' => $post->id]) }}
                         @else
                             {{ $post->link_with_slug }}
                         @endif"
@@ -96,6 +96,17 @@
                 >
                     <i class="bi bi-exclamation-diamond-fill"></i>
                 </button>
+            </div>
+        @else
+            {{-- Edit Post --}}
+            <div class="flex items-center mt-2 md:mt-0">
+                <a
+                    href="{{ route('posts.edit', ['post' => $post->id]) }}"
+                    class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-green-600 hover:bg-green-800 active:bg-green-600 rounded-full
+                    transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl"
+                >
+                    <i class="bi bi-pencil"></i>
+                </a>
             </div>
         @endif
     </div>

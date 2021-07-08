@@ -105,36 +105,42 @@ class PostController extends Controller
         return redirect()->route('users.show', ['user' => auth()->id()])->with('success', '成功刪除文章！');
     }
 
-    // 顯示已經刪除的文章內容
-    public function showDeleted($id)
+    // 顯示軟刪除的文章內容
+    public function showSoftDeleted(int $id)
     {
-        $deletedPost = Post::withTrashed()->find($id);
+        $softDeletedPost = Post::withTrashed()->find($id);
 
-        $this->authorize('update', $deletedPost);
+        $this->authorize('update', $softDeletedPost);
 
-        return view('posts.show', ['post' => $deletedPost]);
+        return view('posts.show', ['post' => $softDeletedPost]);
     }
 
-    // 恢復被刪除的文章
-    public function restorePost($id)
+    // 編輯軟刪除的文章
+    public function editSoftDeleted(int $id)
     {
-        $deletedPost = Post::withTrashed()->find($id);
+        $softDeletedPost = Post::withTrashed()->find($id);
+    }
 
-        $this->authorize('update', $deletedPost);
+    // 恢復被軟刪除的文章
+    public function restorePost(int $id)
+    {
+        $softDeletedPost = Post::withTrashed()->find($id);
 
-        $deletedPost->restore();
+        $this->authorize('update', $softDeletedPost);
 
-        return view('posts.show', ['post' => $deletedPost]);
+        $softDeletedPost->restore();
+
+        return view('posts.show', ['post' => $softDeletedPost]);
     }
 
     // 完全刪除文章
     public function forceDeletePost(int $id)
     {
-        $deletedPost = Post::withTrashed()->find($id);
+        $softDeletedPost = Post::withTrashed()->find($id);
 
-        $this->authorize('destroy', $deletedPost);
+        $this->authorize('destroy', $softDeletedPost);
 
-        $deletedPost->forceDelete();
+        $softDeletedPost->forceDelete();
 
         return redirect()->route('users.show', ['user' => auth()->id()])->with('success', '成功刪除文章！');
     }

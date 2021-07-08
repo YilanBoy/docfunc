@@ -124,7 +124,7 @@ class PostController extends Controller
 
         $deletedPost->restore();
 
-        return redirect()->route('posts.show', ['post' => $deletedPost->id])->with('success', '成功恢復文章！');
+        return view('posts.show', ['post' => $deletedPost]);
     }
 
     // 完全刪除文章

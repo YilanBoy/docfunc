@@ -145,18 +145,23 @@
                             class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100">
                                 <i class="bi bi-person-fill"></i><span class="ml-2">個人頁面</span>
                             </a>
+
                             <a href="{{ route('users.edit', ['user' => auth()->id()]) }}"
                             role="menuitem" tabindex="-1"
                             class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100">
                                 <i class="bi bi-person-lines-fill"></i><span class="ml-2">編輯資料</span>
                             </a>
-                            <form id="logout" action="{{ route('logout') }}" method="POST" onsubmit="return confirm('您確定要登出？');"
+
+                            <form id="logout" action="{{ route('logout') }}" method="POST"
                             class="hidden"
                             >
                                 @csrf
                             </form>
+
                             <button
-                                type="submit" form="logout" role="menuitem" tabindex="-1" id="user-menu-item-2"
+                                x-on:click="return confirm('您確定要登出？');"
+                                type="submit" form="logout"
+                                role="menuitem" tabindex="-1" id="user-menu-item-2"
                                 class="flex items-start w-full px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100"
                             >
                                 <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>

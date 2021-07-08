@@ -29,6 +29,7 @@
                     {{-- 懸浮式文章編輯按鈕 --}}
                     @can('update', $post)
                         <div
+                            x-data
                             class="absolute z-10 top-0 left-103/100 w-16 h-full"
                         >
                             <div class="sticky top-9 flex flex-col justify-center items-center">
@@ -40,14 +41,14 @@
 
                                     <form id="delete-post" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
                                     class="hidden"
-                                    onsubmit="return confirm('您確定要刪除此文章嗎？（時間內還可以恢復）')">
+                                    onsubmit="">
                                         @csrf
                                         @method('DELETE')
                                     </form>
 
                                     @if ($post->trashed())
                                         <a
-                                            onclick="return confirm('您確定要恢復此文章嗎？')"
+                                            x-on:click="return confirm('您確定恢復此文章嗎？');"
                                             href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
                                             class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-blue-600 hover:bg-blue-800 active:bg-blue-600 rounded-full
                                             transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
@@ -56,23 +57,30 @@
                                         </a>
 
                                         <form id="force-delete-post" action="{{ route('posts.forceDeletePost', ['id' => $post->id]) }}" method="POST"
-                                        class="hidden"
-                                        onsubmit="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）')">
+                                        class="hidden">
                                             @csrf
                                             @method('DELETE')
                                         </form>
 
                                         {{-- Force Delete Button --}}
-                                        <button type="submit" form="force-delete-post"
-                                        class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
-                                        transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4">
+                                        <button
+                                            x-on:click="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）');"
+                                            type="submit"
+                                            form="force-delete-post"
+                                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
+                                            transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
+                                        >
                                             <i class="bi bi-exclamation-diamond-fill"></i>
                                         </button>
                                     @else
                                         {{-- Delete Button --}}
-                                        <button type="submit" form="delete-post"
-                                        class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
-                                        transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4">
+                                        <button
+                                            x-on:click="return confirm('您確定要刪除此文章嗎？（時間內還可以恢復）');"
+                                            type="submit"
+                                            form="delete-post"
+                                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
+                                            transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
+                                        >
                                             <i class="bi bi-trash-fill"></i>
                                         </button>
                                     @endif
@@ -121,7 +129,7 @@
 
                                     @if ($post->trashed())
                                         <a
-                                            onclick="return confirm('您確定要恢復此文章嗎？')"
+                                            x-on:click="return confirm('您確定恢復此文章嗎？');"
                                             href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
                                             role="menuitem" tabindex="-1"
                                             class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100"
@@ -130,6 +138,7 @@
                                         </a>
 
                                         <button
+                                            x-on:click="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）');"
                                             type="submit" form="force-delete-post" role="menuitem" tabindex="-1"
                                             class="flex items-start w-full px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100"
                                         >
@@ -137,6 +146,7 @@
                                         </button>
                                     @else
                                         <button
+                                        x-on:click="return confirm('您確定要刪除此文章嗎？');"
                                             type="submit" form="delete-post" role="menuitem" tabindex="-1"
                                             class="flex items-start w-full px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100"
                                         >

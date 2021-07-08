@@ -71,7 +71,7 @@
         @if ($post->trashed())
             <div class="flex items-center mt-2 md:mt-0">
                 <a
-                    onclick="return confirm('您確定恢復此文章嗎？')"
+                    x-on:click.stop="return confirm('您確定恢復此文章嗎？');"
                     href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
                     class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-blue-600 hover:bg-blue-800 active:bg-blue-600 rounded-full
                     transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl"
@@ -80,14 +80,14 @@
                 </a>
 
                 <form id="force-delete-post" action="{{ route('posts.forceDeletePost', ['id' => $post->id]) }}" method="POST"
-                class="hidden"
-                onsubmit="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）')">
+                class="hidden">
                     @csrf
                     @method('DELETE')
                 </form>
 
                 {{-- Force Delete Button --}}
                 <button
+                    x-on:click.stop="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）');"
                     id = "force-delete-button"
                     type="submit"
                     form="force-delete-post"

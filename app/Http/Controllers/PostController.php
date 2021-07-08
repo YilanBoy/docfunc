@@ -102,7 +102,7 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect()->route('posts.index')->with('success', '成功刪除文章！');
+        return redirect()->route('users.show', ['user' => auth()->id()])->with('success', '成功刪除文章！');
     }
 
     // 顯示已經刪除的文章內容
@@ -124,7 +124,7 @@ class PostController extends Controller
 
         $deletedPost->restore();
 
-        return view('posts.show', ['post' => $deletedPost]);
+        return redirect()->route('posts.show', ['post' => $deletedPost->id])->with('success', '成功恢復文章！');
     }
 
     // 完全刪除文章
@@ -136,6 +136,6 @@ class PostController extends Controller
 
         $deletedPost->forceDelete();
 
-        return redirect()->route('posts.index')->with('success', '成功刪除文章！');
+        return redirect()->route('users.show', ['user' => auth()->id()])->with('success', '成功刪除文章！');
     }
 }

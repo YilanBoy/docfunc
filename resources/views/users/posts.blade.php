@@ -3,12 +3,12 @@
     <div
         x-data
         x-on:click="
-            const clicked = $event.target
-            const target = clicked.tagName.toLowerCase()
-            const ignores = ['a']
+            const clicked = $event.target;
+            const target = clicked.tagName.toLowerCase();
+            const ignores = ['a', 'button'];
 
             if (!ignores.includes(target)) {
-                clicked.closest('.posts-container').querySelector('.post-link').click()
+                clicked.closest('.posts-container').querySelector('.post-link').click();
             }
         "
         class="posts-container flex flex-col md:flex-row justify-between p-4 shadow-md hover:shadow-xl bg-white rounded-xl
@@ -33,8 +33,6 @@
                 >{{ $post->title }}</a>
             </span>
 
-            {{-- flex items-center text-sm text-gray-400 mt-4 space-x-2 --}}
-
             {{-- 文章相關資訊 --}}
             <div class="flex items-center text-sm text-gray-400 mt-2 space-x-2">
                 {{-- 文章分類資訊 --}}
@@ -47,9 +45,15 @@
                 <div>&bull;</div>
                 {{-- 文章發布時間 --}}
                 <div>
-                    <a class="hover:text-gray-700"
-                    href="{{ $post->link_with_slug }}"
-                    title="文章發布於：{{ $post->created_at }}">
+                    <a
+                        href="@if ($post->trashed())
+                            {{ route('posts.showDeleted', [ 'id' => $post->id]) }}
+                        @else
+                            {{ $post->link_with_slug }}
+                        @endif"
+                        class="hover:text-gray-700"
+                        title="文章發布於：{{ $post->created_at }}"
+                    >
                         <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
                     </a>
                 </div>
@@ -63,6 +67,37 @@
                 </div>
             </div>
         </div>
+
+        @if ($post->trashed())
+            <div class="flex items-center mt-2 md:mt-0">
+                <a
+                    onclick="return confirm('您確定恢復此文章嗎？')"
+                    href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
+                    class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-blue-600 hover:bg-blue-800 active:bg-blue-600 rounded-full
+                    transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl"
+                >
+                    <i class="bi bi-arrow-90deg-left"></i>
+                </a>
+
+                <form id="force-delete-post" action="{{ route('posts.forceDeletePost', ['id' => $post->id]) }}" method="POST"
+                class="hidden"
+                onsubmit="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）')">
+                    @csrf
+                    @method('DELETE')
+                </form>
+
+                {{-- Force Delete Button --}}
+                <button
+                    id = "force-delete-button"
+                    type="submit"
+                    form="force-delete-post"
+                    class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
+                    transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl ml-2"
+                >
+                    <i class="bi bi-exclamation-diamond-fill"></i>
+                </button>
+            </div>
+        @endif
     </div>
 
 @empty

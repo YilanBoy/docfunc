@@ -59,8 +59,6 @@
     @endforeach
 
     @yield('scripts')
-
-
 </body>
 
 </html>

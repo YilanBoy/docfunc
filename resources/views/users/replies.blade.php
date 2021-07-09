@@ -3,15 +3,14 @@
     <div
         x-data
         x-on:click="
-            const clicked = $event.target
-            const target = clicked.tagName.toLowerCase()
+            const targetTagName = $event.target.tagName.toLowerCase()
             const ignores = ['a']
 
-            if (!ignores.includes(target)) {
-                clicked.closest('.reply-container').querySelector('.reply-link').click()
+            if (!ignores.includes(targetTagName)) {
+                $refs.replyLink.click()
             }
         "
-        class="reply-container flex flex-col md:flex-row justify-between p-4 shadow-md hover:shadow-xl bg-white rounded-xl
+        class="flex flex-col md:flex-row justify-between p-4 shadow-md hover:shadow-xl bg-white rounded-xl
         transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer ring-1 ring-black ring-opacity-20"
     >
         {{-- 回覆 --}}
@@ -19,7 +18,11 @@
             {{-- 文章標題 --}}
             <div class="flex flex-col justify-between">
                 <span class="text-xl font-semibold">
-                    <a href="{{ $reply->post->link_with_slug . '#reply-' . $reply->id }}" class="reply-link hover:underline">
+                    <a
+                        x-ref="replyLink"
+                        href="{{ $reply->post->link_with_slug . '#reply-' . $reply->id }}"
+                        class="hover:underline"
+                    >
                         {{ $reply->post->title }}
                     </a>
                 </span>
@@ -42,7 +45,7 @@
     </div>
 
 @empty
-    <div class="post-container transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
+    <div class="transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
     flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 w-full h-36">
         <span>目前沒有回覆，快點找文章進行回覆吧！</span>
     </div>

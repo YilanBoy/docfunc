@@ -3,15 +3,14 @@
     <div
         x-data
         x-on:click="
-            const clicked = $event.target;
-            const target = clicked.tagName.toLowerCase();
-            const ignores = ['a', 'button'];
+            const targetTagName = $event.target.tagName.toLowerCase()
+            const ignores = ['a', 'button']
 
-            if (!ignores.includes(target)) {
-                clicked.closest('.post-container').querySelector('.post-link').click();
+            if (!ignores.includes(targetTagName)) {
+                $refs.postLink.click()
             }
         "
-        class="post-container flex flex-col md:flex-row justify-between p-4 shadow-md hover:shadow-xl bg-white rounded-xl
+        class="flex flex-col md:flex-row justify-between p-4 shadow-md hover:shadow-xl bg-white rounded-xl
         transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer
         @if ($post->trashed()) ring-2 ring-red-500 @else ring-1 ring-black ring-opacity-20 @endif"
     >
@@ -24,12 +23,13 @@
             {{-- 文章標題 --}}
             <span class="text-xl font-semibold mt-2 md:mt-0">
                 <a
+                    x-ref="postLink"
                     href="@if ($post->trashed())
                         {{ route('posts.showSoftDeleted', [ 'id' => $post->id]) }}
                     @else
                         {{ $post->link_with_slug }}
                     @endif"
-                    class="post-link hover:underline"
+                    class="hover:underline"
                 >{{ $post->title }}</a>
             </span>
 
@@ -128,7 +128,7 @@
     </div>
 
 @empty
-    <div class="post-container transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
+    <div class="transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
     flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 w-full h-36">
         <span>目前沒有文章，該開始寫囉！</span>
     </div>

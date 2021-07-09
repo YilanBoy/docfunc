@@ -57,15 +57,14 @@
         <div
             x-data
             x-on:click="
-                const clicked = $event.target
-                const target = clicked.tagName.toLowerCase()
+                const targetTagName = $event.target.tagName.toLowerCase()
                 const ignores = ['a']
 
-                if (!ignores.includes(target)) {
-                    clicked.closest('.post-container').querySelector('.post-link').click()
+                if (!ignores.includes(targetTagName)) {
+                    $refs.postLink.click()
                 }
             "
-            class="post-container flex flex-col md:flex-row justify-between p-4 shadow-md hover:shadow-xl bg-white rounded-xl
+            class="flex flex-col md:flex-row justify-between p-4 shadow-md hover:shadow-xl bg-white rounded-xl
             transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer ring-1 ring-black ring-opacity-20"
         >
             {{-- 大頭貼 --}}
@@ -80,7 +79,11 @@
             <div class="w-full flex flex-col justify-between md:mx-4">
                 {{-- 文章標題 --}}
                 <h1 class="text-xl font-semibold mt-2 md:mt-0">
-                    <a href="{{ $post->link_with_slug }}" class="post-link hover:underline">{{ $post->title }}</a>
+                    <a
+                        x-ref="postLink"
+                        href="{{ $post->link_with_slug }}"
+                        class="hover:underline"
+                    >{{ $post->title }}</a>
                 </h1>
 
                 {{-- 文章大綱 --}}
@@ -128,7 +131,7 @@
         </div>
 
     @empty
-        <div class="post-container transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
+        <div class="transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
         flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 w-full h-36">
             <span>Whoops！此分類底下還沒有文章，趕緊寫一篇吧！</span>
         </div>

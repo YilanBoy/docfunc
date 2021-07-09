@@ -34,7 +34,7 @@
                             <button type="submit" id="lg-save-post" form="create-post"
                             class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold
                             bg-gray-600 hover:bg-gray-800 active:bg-gray-600 rounded-full
-                            transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4">
+                            transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4">
                                 <i class="bi bi-save2-fill"></i>
                             </button>
                         </div>

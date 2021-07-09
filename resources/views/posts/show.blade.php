@@ -16,7 +16,7 @@
         {{-- 置頂按鈕 --}}
         <button id="scroll-to-top-btn" title="Go to top"
         class="fixed z-10 bottom-7 right-7 flex justify-center items-center h-16 w-16 text-3xl text-white font-bold bg-blue-600 hover:bg-blue-800 active:bg-blue-600 rounded-full
-        transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl">
+        transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl">
             <i class="bi bi-arrow-up"></i>
         </button>
 
@@ -38,7 +38,7 @@
                                             x-on:click="return confirm('您確定恢復此文章嗎？');"
                                             href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
                                             class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-blue-600 hover:bg-blue-800 active:bg-blue-600 rounded-full
-                                            transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
+                                            transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
                                         >
                                             <i class="bi bi-arrow-90deg-left"></i>
                                         </a>
@@ -55,7 +55,7 @@
                                             type="submit"
                                             form="force-delete-post"
                                             class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-purple-600 hover:bg-purple-800 active:bg-purple-600 rounded-full
-                                            transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
+                                            transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
                                         >
                                             <i class="bi bi-exclamation-diamond-fill"></i>
                                         </button>
@@ -63,7 +63,7 @@
                                         {{-- Edit Post --}}
                                         <a href="{{ route('posts.edit', ['post' => $post->id]) }}"
                                         class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-green-600 hover:bg-green-800 active:bg-green-600 rounded-full
-                                        transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl">
+                                        transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl">
                                             <i class="bi bi-pencil"></i>
                                         </a>
 
@@ -79,7 +79,7 @@
                                             type="submit"
                                             form="delete-post"
                                             class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
-                                            transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
+                                            transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
                                         >
                                             <i class="bi bi-trash-fill"></i>
                                         </button>

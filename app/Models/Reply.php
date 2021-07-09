@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
-    use HasFactory, Traits\SerializeDate;
+    use HasFactory;
 
     protected $fillable = ['user_id', 'post_id', 'content'];
 

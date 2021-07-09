@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Services\PostService;
 use App\Services\FormatTransferService;
 
 class PostController extends Controller
 {
-    protected $postService, $formatTransferService;
+    protected $postService;
+    protected $formatTransferService;
 
     public function __construct(PostService $postService, FormatTransferService $formatTransferService)
     {
@@ -29,7 +29,7 @@ class PostController extends Controller
     public function show(Request $request, Post $post)
     {
         // URL 修正，使用帶 slug 的網址
-        if (!empty($post->slug) && $post->slug !== $request->slug) {
+        if ($post->slug && $post->slug !== $request->slug) {
             return redirect($post->link_with_slug, 301);
         }
 
@@ -113,12 +113,6 @@ class PostController extends Controller
         $this->authorize('update', $softDeletedPost);
 
         return view('posts.show', ['post' => $softDeletedPost]);
-    }
-
-    // 編輯軟刪除的文章
-    public function editSoftDeleted(int $id)
-    {
-        $softDeletedPost = Post::withTrashed()->find($id);
     }
 
     // 恢復被軟刪除的文章

@@ -36,7 +36,9 @@ class PostService
         // 允許連結使用 rel 標籤
         $config->set('Attr.AllowedRel', ['nofollow', 'noreferrer', 'noopener']);
 
-        if ($def = $config->maybeGetRawHTMLDefinition()) {
+        $def = $config->maybeGetRawHTMLDefinition();
+
+        if ($def) {
             // 圖片
             $def->addElement('figure', 'Block', 'Optional: (figcaption, Flow) | (Flow, figcaption) | Flow', 'Common');
             // 圖片底下的說明文字

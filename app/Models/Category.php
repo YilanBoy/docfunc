@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory, Traits\SerializeDate;
+    use HasFactory;
 
     public $timestamps = false;
 

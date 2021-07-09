@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory, Traits\SerializeDate, Searchable, SoftDeletes;
+    use HasFactory, Searchable, SoftDeletes;
 
     protected $fillable = [
         'title', 'body', 'category_id', 'excerpt', 'slug',

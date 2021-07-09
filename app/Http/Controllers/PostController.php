@@ -130,7 +130,7 @@ class PostController extends Controller
 
         $softDeletedPost->restore();
 
-        return view('posts.show', ['post' => $softDeletedPost]);
+        return redirect()->route('posts.show', ['post' => $softDeletedPost->id])->with('success', '成功恢復文章！');
     }
 
     // 完全刪除文章

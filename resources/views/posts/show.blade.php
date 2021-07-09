@@ -63,7 +63,7 @@
                                         {{-- Edit Post --}}
                                         <a href="{{ route('posts.edit', ['post' => $post->id]) }}"
                                         class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-green-600 hover:bg-green-800 active:bg-green-600 rounded-full
-                                        transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl">
+                                        transform hover:scale-125 hover:-rotate-45 transition duration-150 ease-in shadow-md hover:shadow-xl">
                                             <i class="bi bi-pencil"></i>
                                         </a>
 

@@ -1084,8 +1084,6 @@ video {
 	transition-duration: 150ms;
 }.duration-300{
 	transition-duration: 300ms;
-}.duration-500{
-	transition-duration: 500ms;
 }.ease-in-out{
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }.ease-in{
@@ -1096,19 +1094,14 @@ video {
 }.read-only\:bg-gray-200:read-only{
 	--tw-bg-opacity: 1;
 	background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
-}.hover\:h-12:hover{
-	height: 3rem;
-}.hover\:w-12:hover{
-	width: 3rem;
-}.hover\:-translate-x-1:hover{
-	--tw-translate-x: -0.25rem;
-	transform: var(--tw-transform);
 }.hover\:-translate-x-2:hover{
 	--tw-translate-x: -0.5rem;
 	transform: var(--tw-transform);
-}.hover\:scale-150:hover{
-	--tw-scale-x: 1.5;
-	--tw-scale-y: 1.5;
+}.hover\:rotate-45:hover{
+	--tw-rotate: 45deg;
+	transform: var(--tw-transform);
+}.hover\:-rotate-45:hover{
+	--tw-rotate: -45deg;
 	transform: var(--tw-transform);
 }.hover\:scale-125:hover{
 	--tw-scale-x: 1.25;

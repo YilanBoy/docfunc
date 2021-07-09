@@ -4,8 +4,7 @@ scrollToTopButton?.addEventListener('click', scrollToTop);
 
 // 滾動至網頁最頂部
 function scrollToTop(): void {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 const header: HTMLElement | null = document.getElementById('header');

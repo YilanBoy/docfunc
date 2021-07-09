@@ -10,8 +10,10 @@ var scrollToTopButton = document.getElementById('scroll-to-top-btn');
 scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.addEventListener('click', scrollToTop); // 滾動至網頁最頂部
 
 function scrollToTop() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
 }
 
 var header = document.getElementById('header');

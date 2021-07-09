@@ -47,17 +47,19 @@
     </script>
     <script src="{{ asset('js/algolia.js') }}"></script>
 
-    @yield('scripts')
-
-    @foreach (['warning', 'success', 'info'] as $msg)
-        @if(session()->has($msg))
+    @foreach (['warning', 'success', 'info'] as $message)
+        @if(session()->has($message))
             <script>
-                const sweetalert2Title = '{{ session()->get($msg) }}';
-                const sweetalert2Icon = '{{ $msg }}';
+                const sweetalert2Title = '{{ session()->get($message) }}';
+                const sweetalert2Icon = '{{ $message }}';
             </script>
+
             <script src="{{ asset('js/sweet-alert.js') }}"></script>
         @endif
     @endforeach
+
+    @yield('scripts')
+
 
 </body>
 

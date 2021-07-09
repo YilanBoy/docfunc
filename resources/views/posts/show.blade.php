@@ -54,7 +54,7 @@
                                             x-on:click="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）');"
                                             type="submit"
                                             form="force-delete-post"
-                                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
+                                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-purple-600 hover:bg-purple-800 active:bg-purple-600 rounded-full
                                             transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
                                         >
                                             <i class="bi bi-exclamation-diamond-fill"></i>

@@ -88,10 +88,9 @@
                 {{-- Force Delete Button --}}
                 <button
                     x-on:click.stop="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）');"
-                    id = "force-delete-button"
                     type="submit"
                     form="force-delete-post"
-                    class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
+                    class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-purple-600 hover:bg-purple-800 active:bg-purple-600 rounded-full
                     transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl ml-2"
                 >
                     <i class="bi bi-exclamation-diamond-fill"></i>
@@ -107,6 +106,23 @@
                 >
                     <i class="bi bi-pencil"></i>
                 </a>
+
+                <form id="delete-post" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
+                class="hidden">
+                    @csrf
+                    @method('DELETE')
+                </form>
+
+                {{-- Force Delete Button --}}
+                <button
+                    x-on:click.stop="return confirm('您確定要刪除此文章嗎？（時間內還可以恢復）');"
+                    type="submit"
+                    form="delete-post"
+                    class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
+                    transform hover:-translate-x-1 transition duration-150 ease-in shadow-md hover:shadow-xl ml-2"
+                >
+                    <i class="bi bi-trash-fill"></i>
+                </button>
             </div>
         @endif
     </div>

@@ -62,10 +62,10 @@
                 const ignores = ['a']
 
                 if (!ignores.includes(target)) {
-                    clicked.closest('.posts-container').querySelector('.post-link').click()
+                    clicked.closest('.post-container').querySelector('.post-link').click()
                 }
             "
-            class="posts-container flex flex-col md:flex-row justify-between p-4 shadow-md hover:shadow-xl bg-white rounded-xl
+            class="post-container flex flex-col md:flex-row justify-between p-4 shadow-md hover:shadow-xl bg-white rounded-xl
             transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer ring-1 ring-black ring-opacity-20"
         >
             {{-- 大頭貼 --}}
@@ -128,7 +128,7 @@
         </div>
 
     @empty
-        <div class="posts-container transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
+        <div class="post-container transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
         flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 w-full h-36">
             <span>Whoops！此分類底下還沒有文章，趕緊寫一篇吧！</span>
         </div>

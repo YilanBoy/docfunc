@@ -8,10 +8,10 @@
             const ignores = ['a']
 
             if (!ignores.includes(target)) {
-                clicked.closest('.replies-container').querySelector('.reply-link').click()
+                clicked.closest('.reply-container').querySelector('.reply-link').click()
             }
         "
-        class="replies-container flex flex-col md:flex-row justify-between p-4 shadow-md hover:shadow-xl bg-white rounded-xl
+        class="reply-container flex flex-col md:flex-row justify-between p-4 shadow-md hover:shadow-xl bg-white rounded-xl
         transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer ring-1 ring-black ring-opacity-20"
     >
         {{-- 回覆 --}}
@@ -42,7 +42,7 @@
     </div>
 
 @empty
-    <div class="posts-container transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
+    <div class="post-container transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
     flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 w-full h-36">
         <span>目前沒有回覆，快點找文章進行回覆吧！</span>
     </div>

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a simple blog made by [Laravel](https://laravel.com/) and [Bootstrap](https://getbootstrap.com/)
+This is a simple blog made by [Laravel](https://laravel.com/), [Tailwind CSS](https://tailwindcss.com/) and [Alpine.js](https://alpinejs.dev/)
 
 The features of this blog include
 

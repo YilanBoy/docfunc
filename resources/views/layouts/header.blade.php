@@ -68,14 +68,15 @@
 
                         {{-- 搜尋 --}}
                         <div class="hidden relative xl:inline-block">
-                            <input type="search" id="aa-search-input" class="w-3/4 rounded-xl bg-gray-100
-                            border-gray-400 placeholder-gray-400 px-4 py-2 pl-8"
+                            <input type="search" id="aa-search-input" class="outline-none w-3/4 rounded-xl bg-gray-100 placeholder-gray-400
+                            border border-gray-400 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 py-2 pl-8"
                             placeholder="Search" name="search" autocomplete="off" />
 
                             <div class="absolute top-0 flex items-center h-full ml-2 text-gray-400">
                                 <i class="bi bi-search"></i>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

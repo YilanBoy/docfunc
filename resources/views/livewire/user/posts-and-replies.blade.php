@@ -31,6 +31,7 @@
         >
             @forelse ($posts as $post)
                 <div
+                    x-data
                     x-on:click="
                         const targetTagName = $event.target.tagName.toLowerCase()
                         const ignores = ['a', 'button']
@@ -176,6 +177,7 @@
         >
             @forelse ($replies as $reply)
                 <div
+                    x-data
                     x-on:click="
                         const targetTagName = $event.target.tagName.toLowerCase()
                         const ignores = ['a']

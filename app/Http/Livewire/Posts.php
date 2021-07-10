@@ -24,7 +24,7 @@ class Posts extends Component
         $this->order = request()->order ?? 'latest';
     }
 
-    public function setOrder($newOrder)
+    public function orderChange($newOrder)
     {
         // 回到第一頁
         $this->resetPage();

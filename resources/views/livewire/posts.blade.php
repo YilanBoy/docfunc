@@ -4,7 +4,7 @@
         {{-- Post Sort --}}
         <nav class="flex font-semibold">
             <a
-                wire:click.prevent="setOrder('latest')"
+                wire:click.prevent="orderChange('latest')"
                 href="{{ $currentUrl . '?order=latest' }}"
                 class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700
                 border-b-4 px-2 sm:px-7 py-2
@@ -14,7 +14,7 @@
             </a>
 
             <a
-                wire:click.prevent="setOrder('recent')"
+                wire:click.prevent="orderChange('recent')"
                 href="{{ $currentUrl . '?order=recent' }}"
                 class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700
                 border-b-4 px-2 sm:px-7 py-2
@@ -24,7 +24,7 @@
             </a>
 
             <a
-                wire:click.prevent="setOrder('reply')"
+                wire:click.prevent="orderChange('reply')"
                 href="{{ $currentUrl . '?order=reply' }}"
                 class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700
                 border-b-4 px-2 sm:px-7 py-2

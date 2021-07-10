@@ -91,7 +91,7 @@
                             <div>
                                 {{-- 文章留言數 --}}
                                 <a class="hover:text-gray-700"
-                                href="{{ $post->link_with_slug }}#replies-card">
+                                href="{{ $post->link_with_slug }}#post-{{ $post->id }}-replies-container">
                                     <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->reply_count }}</span>
                                 </a>
                             </div>
@@ -196,7 +196,7 @@
                             <span class="text-xl font-semibold">
                                 <a
                                     x-ref="replyLink"
-                                    href="{{ $reply->post->link_with_slug . '#reply-' . $reply->id }}"
+                                    href="{{ $reply->post->link_with_slug }}#post-{{ $reply->post->id }}-reply-card-{{ $reply->id }}"
                                     class="hover:underline"
                                 >
                                     {{ $reply->post->title }}

@@ -5,11 +5,12 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Reply;
 use App\Notifications\PostReplied;
+use Livewire\WithPagination;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Replies extends Component
 {
-    use AuthorizesRequests;
+    use AuthorizesRequests, WithPagination;
 
     public $post;
     public $content;
@@ -49,6 +50,8 @@ class Replies extends Component
 
         // 清空回覆表單的內容
         $this->content = '';
+
+        $this->resetPage();
     }
 
     // 刪除回覆
@@ -64,7 +67,10 @@ class Replies extends Component
     public function render()
     {
         return view('livewire.replies', [
-            'replies' => $this->post->replies()->latest()->with('user', 'post')->get(),
+            'replies' => $this->post->replies()
+                ->with('user', 'post')
+                ->latest()
+                ->paginate(5),
         ]);
     }
 }

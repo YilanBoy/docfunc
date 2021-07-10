@@ -1,4 +1,4 @@
-<div class="w-full xl:w-2/3">
+<div class="w-full xl:w-2/3 space-y-6">
     {{-- Reply --}}
     @if (auth()->check())
         <div class="w-full shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-5 mt-6">
@@ -6,7 +6,8 @@
                 wire:model.debounce.500ms="content"
                 id="content"
                 placeholder="分享你的評論~"
-                class="w-full h-24 rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                class="outline-none p-2 h-32 w-full rounded-md shadow-sm border border-gray-300
+                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             ></textarea>
 
             <div class="flex justify-between mt-2">
@@ -24,6 +25,10 @@
 
         </div>
     @endif
+
+    <div>
+        {{ $replies->onEachSide(1)->withQueryString()->links() }}
+    </div>
 
     {{-- Reply Container --}}
     <div id="post-{{ $post->id }}-replies-container" class="w-full space-y-6 mt-6">

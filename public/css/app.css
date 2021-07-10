@@ -545,10 +545,10 @@ video {
 	height: 2rem;
 }.h-14{
 	height: 3.5rem;
-}.h-24{
-	height: 6rem;
 }.h-7{
 	height: 1.75rem;
+}.h-24{
+	height: 6rem;
 }.min-h-screen{
 	min-height: 100vh;
 }.w-5{

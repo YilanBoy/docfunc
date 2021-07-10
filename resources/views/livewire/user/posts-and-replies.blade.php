@@ -136,7 +136,7 @@
                                 <i class="bi bi-pencil"></i>
                             </a>
 
-                            <form id="delete-post={{ $post->id }}" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
+                            <form id="delete-post-{{ $post->id }}" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
                             class="hidden">
                                 @csrf
                                 @method('DELETE')

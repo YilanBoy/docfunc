@@ -72,7 +72,7 @@
                         x-on:click="tab = 'replies'"
                         :class="{
                             'border-blue-500 text-gray-700': tab === 'replies',
-                            'text-gray-400': tab === 'replies'
+                            'text-gray-400': tab === 'posts'
                         }"
                         class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700
                         border-b-4 px-2 sm:px-7 py-2"

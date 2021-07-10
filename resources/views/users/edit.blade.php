@@ -89,14 +89,12 @@
                             <label for="introduction" class="hidden">Introduction</label>
 
                             <textarea
-                                id="introduction"
                                 name="introduction"
                                 placeholder="Introduction"
-                                class="outline-none p-2 h-32 w-full rounded-md shadow-sm border border-gray-300
+                                rows="5"
+                                class="outline-none p-2 w-full rounded-md shadow-sm border border-gray-300
                                 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            >
-                                {{ old('introduction', $user->introduction) }}
-                            </textarea>
+                            >{{ old('introduction', $user->introduction) }}</textarea>
                         </div>
 
                         <div class="flex items-center justify-end mt-4">

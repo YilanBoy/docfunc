@@ -51,11 +51,56 @@
                 </div>
             </div>
 
-            @livewire('user.posts-and-replies', [
-                'currentUrl' => url()->current(),
-                'user' => $user,
-            ])
 
+            <div
+                x-data="{ tab: 'posts' }"
+                class="w-full xl:w-2/3 mr-0 xl:mr-6 space-y-6"
+            >
+                <nav class="flex font-semibold">
+                    <button
+                        x-on:click="tab = 'posts'"
+                        :class="{
+                            'border-blue-500 text-gray-700': tab === 'posts',
+                            'text-gray-400': tab === 'replies'
+                        }"
+                        class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700
+                        border-b-4 px-2 sm:px-7 py-2"
+                    >
+                        <span>發布文章</span>
+                    </button>
+                    <button
+                        x-on:click="tab = 'replies'"
+                        :class="{
+                            'border-blue-500 text-gray-700': tab === 'replies',
+                            'text-gray-400': tab === 'replies'
+                        }"
+                        class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700
+                        border-b-4 px-2 sm:px-7 py-2"
+                    >
+                        <span>回覆紀錄</span>
+                    </button>
+                </nav>
+
+                {{-- 會員文章 --}}
+                <div
+                    x-cloak
+                    x-show.transition.in.duration.300ms="tab === 'posts'"
+                >
+                    @livewire('user.posts', [
+                        'user' => $user,
+                    ])
+                </div>
+
+                {{-- 會員回覆 --}}
+                <div
+                    x-cloak
+                    x-show.transition.in.duration.300ms="tab === 'replies'"
+                >
+                    @livewire('user.replies', [
+                        'user' => $user,
+                    ])
+                </div>
+            </div>
         </div>
     </div>
 @endsection

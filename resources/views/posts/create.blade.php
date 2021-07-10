@@ -46,17 +46,40 @@
                     <form id="create-post" action="{{ route('posts.store') }}" method="POST">
                         @csrf
 
-                        <div>
-                            <x-label for="title" :value="'標題'" />
+                        {{-- Title --}}
+                        <div class="relative mt-5">
+                            <input
+                                id="title"
+                                name="title"
+                                type="text"
+                                placeholder="標題"
+                                value="{{ old('title') }}"
+                                required
+                                autofocus
+                                class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900
+                                placeholder-transparent focus:outline-none focus:border-blue-600"
+                            >
 
-                            <x-input class="block mt-1 w-full" type="text" name="title" :value="old('title')" required autofocus />
+                            <label
+                                for="title"
+                                class="absolute left-0 -top-3.5 text-gray-600 text-sm
+                                transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2
+                                peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                            >
+                                標題
+                            </label>
                         </div>
 
-                        <div class="mt-4">
-                            <x-label for="category_id" :value="'分類'" />
+                        {{-- Category --}}
+                        <div class="mt-5">
+                            <label for="category_id" class="hidden">分類</label>
 
-                            <select name="category_id" required
-                            class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <select
+                                name="category_id"
+                                required
+                                class="outline-none px-2 h-10 w-full rounded-md shadow-sm border border-gray-300
+                                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            >
                                 <option value="" hidden disabled {{ old('category_id') ? '' : 'selected' }}>請選擇分類</option>
                                 {{-- 這裡的 $categories 使用的是 View::composer() 方法取得值，寫在 ViewServiceProvider.php 中 --}}
                                 @foreach ($categories as $category)
@@ -67,16 +90,25 @@
                             </select>
                         </div>
 
-                        <div class="mt-4">
-                            <x-label for="tags" :value="'標籤（最多 5 個）'" />
+                        {{-- Tags --}}
+                        <div class="mt-5">
+                            <label for="tags" class="hidden">標籤 (最多 5 個)</label>
 
-                            <input class="mt-1 rounded-md" type="text" id="tag-input" name="tags" value="{{ old('tags') }}">
+                            <input
+                                id="tag-input"
+                                type="text"
+                                name="tags"
+                                value="{{ old('tags') }}"
+                                placeholder="標籤 (最多 5 個)"
+                                class="h-10 rounded-md text-sm"
+                            >
                         </div>
 
-                        <div class="mt-4">
-                            <x-label for="body" :value="'內文'" class="mb-1" />
+                        {{-- Body --}}
+                        <div class="mt-5">
+                            <label for="body" class="hidden">內文</label>
 
-                            <textarea name="body" id="editor" placeholder="請填寫文章內容～">{{ old('body') }}</textarea>
+                            <textarea name="body" id="editor" placeholder="分享一些很棒的事情吧!">{{ old('body') }}</textarea>
                         </div>
 
                         <div class="flex xl:hidden justify-between items-center mt-4">

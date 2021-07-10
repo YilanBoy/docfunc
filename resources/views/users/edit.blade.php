@@ -37,24 +37,64 @@
                         @csrf
 
                         {{-- Email Address --}}
-                        <div>
-                            <x-label for="email" :value="__('Email')" />
+                        <div class="relative mt-5">
+                            <input
+                                id="email"
+                                name="email"
+                                type="text"
+                                placeholder="Email Address"
+                                value="{{ old('email', $user->email) }}"
+                                required
+                                readonly
+                                class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900
+                                placeholder-transparent focus:outline-none focus:border-blue-600"
+                            >
 
-                            <x-input id="email" class="block mt-1 w-full read-only:bg-gray-200" type="email" name="email" :value="old('email', $user->email)" required readonly />
+                            <label
+                                for="email"
+                                class="absolute left-0 -top-3.5 text-gray-600 text-sm
+                                transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2
+                                peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                            >
+                                Email address
+                            </label>
                         </div>
 
-                        <div class="mt-4">
-                            <x-label for="name" :value="__('Name') . '（請使用英文、數字、橫槓和底線）'" />
+                        {{-- Name --}}
+                        <div class="relative mt-10">
+                            <input
+                                id="name"
+                                name="name"
+                                type="text"
+                                placeholder="Name"
+                                value="{{ old('name', $user->name) }}"
+                                required
+                                autofocus
+                                class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900
+                                placeholder-transparent focus:outline-none focus:border-blue-600"
+                            >
 
-                            <x-input id="name" :value="old('name', $user->name)" class="block mt-1 w-full" type="text" name="name" required autofocus />
+                            <label
+                                for="name"
+                                class="absolute left-0 -top-3.5 text-gray-600 text-sm
+                                transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2
+                                peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                            >
+                                Name
+                            </label>
                         </div>
 
-                        {{-- Password --}}
-                        <div class="mt-4">
-                            <x-label for="introduction" :value="'個人簡介'" />
+                        {{-- Introduction --}}
+                        <div class="mt-5">
+                            <label for="introduction" class="hidden">Introduction</label>
 
-                            <textarea name="introduction" id="introduction"
-                            class="block mt-1 h-32 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <textarea
+                                id="introduction"
+                                name="introduction"
+                                placeholder="Introduction"
+                                class="outline-none p-2 h-32 w-full rounded-md shadow-sm border border-gray-300
+                                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            >
                                 {{ old('introduction', $user->introduction) }}
                             </textarea>
                         </div>

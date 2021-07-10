@@ -20,7 +20,12 @@ class Posts extends Component
     public function render()
     {
         // 該會員的文章
-        $posts = $this->user->posts()->withTrashed()->with('category')->latest()->paginate(5);
+        $posts = $this->user->posts()
+            ->withTrashed()
+            ->with('category')
+            ->orderBy('deleted_at', 'desc')
+            ->latest()
+            ->paginate(5);
 
         return view('livewire.user.posts', [
             'posts' => $posts,

@@ -95,7 +95,7 @@ class PostController extends Controller
         return redirect()->to($post->link_with_slug)->with('success', '成功更新文章！');
     }
 
-    // 刪除文章
+    // 軟刪除文章
     public function destroy(Post $post)
     {
         $this->authorize('destroy', $post);
@@ -115,7 +115,7 @@ class PostController extends Controller
         return view('posts.show', ['post' => $softDeletedPost]);
     }
 
-    // 恢復被軟刪除的文章
+    // 恢復軟刪除的文章
     public function restorePost(int $id)
     {
         $softDeletedPost = Post::withTrashed()->find($id);

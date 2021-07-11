@@ -19,9 +19,13 @@ class Replies extends Component
     public function render()
     {
         // 該會員的留言
-        $replies = $this->user->replies()->whereHas('post', function ($query) {
-            return $query->whereNull('deleted_at');
-        })->with('post')->latest()->paginate(10);
+        $replies = $this->user->replies()
+            ->whereHas('post', function ($query) {
+                $query->whereNull('deleted_at');
+            })
+            ->with('post')
+            ->latest()
+            ->paginate(10);
 
         return view('livewire.user.replies', [
             'replies' => $replies,

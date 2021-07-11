@@ -47,7 +47,7 @@
         @if (isset($tag))
             <div class="hidden md:flex justify-center items-center text-green-700 border-green-700 border-2 rounded-xl
             bg-gradient-to-br from-green-100 to-green-300 px-4 py-2">
-                <span class="font-bold">{{ $tag->name }}</>
+                <span class="font-bold">{{ $tag->name }}</span>
             </div>
         @endif
     </div>

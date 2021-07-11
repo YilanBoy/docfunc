@@ -21,7 +21,7 @@
             @if (isset($tag))
                 <div class="flex justify-center items-center text-green-700 border-green-700 rounded-xl border-2
                 bg-gradient-to-br from-green-100 to-green-300 px-4 py-2">
-                    <span class="font-bold">{{ $tag->name }}</>
+                    <span class="font-bold">{{ $tag->name }}</span>
                 </div>
             @endif
         </div>

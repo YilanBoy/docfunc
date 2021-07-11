@@ -25,7 +25,7 @@ class Posts extends Component
             ->with('category')
             ->orderBy('deleted_at', 'desc')
             ->latest()
-            ->paginate(5);
+            ->paginate(10);
 
         return view('livewire.user.posts', [
             'posts' => $posts,

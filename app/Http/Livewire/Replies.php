@@ -70,7 +70,7 @@ class Replies extends Component
             'replies' => $this->post->replies()
                 ->with('user', 'post')
                 ->latest()
-                ->paginate(5),
+                ->paginate(10),
         ]);
     }
 }

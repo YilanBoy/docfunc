@@ -51,7 +51,7 @@ class Post extends Model
         });
     }
 
-    // 將連結加上 slug
+    // 將連結加上文章的 slug
     public function getLinkWithSlugAttribute()
     {
         return route('posts.show', ['post' => $this->id, 'slug' => $this->slug]);

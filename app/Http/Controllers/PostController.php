@@ -20,7 +20,7 @@ class PostController extends Controller
     }
 
     // 文章列表
-    public function index(Request $request)
+    public function index()
     {
         return view('posts.index');
     }

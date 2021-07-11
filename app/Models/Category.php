@@ -20,7 +20,7 @@ class Category extends Model
         return $this->hasMany(Post::class);
     }
 
-    // 將連結加上標籤名稱
+    // 將連結加上分類名稱
     public function getLinkWithNameAttribute()
     {
         return route('categories.show', ['category' => $this->id, 'name' => $this->name]);

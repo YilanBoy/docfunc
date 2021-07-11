@@ -43,10 +43,13 @@
                         <div>用部落格紀錄生活上的大小事</div>
                         <div class="mt-1">此部落格使用 Laravel、Alpine.js 與 Tailwind CSS 開發</div>
                     </div>
-                    <a href="{{ route('posts.create') }}"
-                    class="block w-full text-white font-bold bg-green-600 hover:bg-green-800 active:bg-green-600 rounded-md text-center py-2 mt-7 shadow-lg">
-                        <i class="bi bi-pencil"></i><span class="ml-2">新增文章</span>
-                    </a>
+                    <div class="flex justify-center items-center">
+                        <a href="{{ route('posts.create') }}"
+                        class="block w-3/4 transition duration-500 ease-in-out bg-green-600 hover:bg-green-800 transform hover:-translate-y-1 hover:scale-110
+                        text-white text-center font-bold rounded-md py-2 mt-7 shadow-md hover:shadow-lg">
+                            <i class="bi bi-pencil"></i><span class="ml-2">新增文章</span>
+                        </a>
+                    </div>
                 </div>
 
                 {{-- 熱門標籤 --}}

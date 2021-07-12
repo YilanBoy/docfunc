@@ -21,7 +21,7 @@
                 </div>
 
                 {{-- Login Form --}}
-                <div class="w-full sm:max-w-md mt-4 px-6 py-4 bg-white shadow-md overflow-hidden rounded-xl ring-1 ring-black ring-opacity-20">
+                <x-card class="w-full sm:max-w-md mt-4 overflow-hidden">
 
                     {{-- Session Status --}}
                     <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -103,7 +103,7 @@
                             </x-button>
                         </div>
                     </form>
-                </div>
+                </x-card>
             </div>
 
         </div>

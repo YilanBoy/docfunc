@@ -13,7 +13,7 @@
                     <i class="bi bi-question-circle"></i><span class="ml-4">忘記密碼</span>
                 </div>
 
-                <div class="w-full sm:max-w-md mt-4 px-6 py-4 bg-white shadow-md overflow-hidden rounded-xl ring-1 ring-black ring-opacity-20">
+                <x-card class="w-full sm:max-w-md mt-4 overflow-hidden">
 
                     <div class="mb-4 text-gray-600">
                         {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
@@ -57,7 +57,7 @@
                             </x-button>
                         </div>
                     </form>
-                </div>
+                </x-card>
 
 
             </div>

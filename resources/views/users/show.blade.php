@@ -10,9 +10,8 @@
             <div class="w-full xl:w-80
             flex flex-col md:flex-row xl:flex-col justify-center items-center md:items-start xl:items-center
             xl:mr-6">
-                <div class="w-full lg:w-80 flex flex-col justify-center items-center
-                text-gray-600 bg-white shadow-md rounded-xl ring-1 ring-black ring-opacity-20
-                md:mr-6 xl:mr-0 p-5">
+                {{-- 會員資訊 --}}
+                <x-card class="w-full lg:w-80 flex flex-col justify-center items-center text-gray-600 md:mr-6 xl:mr-0">
                     {{-- 大頭貼 --}}
                     <div>
                         <img class="rounded-full h-36 w-36" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}"  width="200">
@@ -32,11 +31,10 @@
 
                         <span class="mt-4 text-xs">註冊於 {{ $user->created_at->format('Y / m / d') . '（' . $user->created_at->diffForHumans() . '）' }}</span>
                     </div>
-                </div>
+                </x-card>
 
-                <div class="w-full lg:w-80 flex flex-col justify-center items-center
-                text-gray-600 bg-white shadow-md rounded-xl ring-1 ring-black ring-opacity-20
-                mt-6 md:mt-0 xl:mt-6 p-5">
+                {{-- 會員個人簡介 --}}
+                <x-card class="w-full lg:w-80 flex flex-col justify-center items-center text-gray-600 mt-6 md:mt-0 xl:mt-6">
 
                     <span class="w-full flex justify-center items-center text-2xl text-black
                     font-semibold mb-5 pb-5 border-b-2 border-gray-700">
@@ -48,12 +46,12 @@
                     @else
                         <span class="w-full flex justify-center items-center">目前尚無個人簡介～</span>
                     @endif
-                </div>
+                </x-card>
             </div>
 
 
             <div
-                x-data="{ tab: 'posts' }"
+                x-data="{ tab : 'posts' }"
                 class="w-full xl:w-2/3 mr-0 xl:mr-6 space-y-6"
             >
                 <nav class="flex font-semibold">

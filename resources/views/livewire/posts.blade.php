@@ -54,8 +54,8 @@
 
     {{-- Posts --}}
     @forelse ($posts as $post)
-        <div
-            x-data
+        <x-card
+            x-data=""
             x-on:click="
                 const targetTagName = $event.target.tagName.toLowerCase()
                 const ignores = ['a']
@@ -64,8 +64,8 @@
                     $refs.postLink.click()
                 }
             "
-            class="flex flex-col md:flex-row justify-between p-4 shadow-md hover:shadow-xl bg-white rounded-xl
-            transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer ring-1 ring-black ring-opacity-20"
+            class="flex flex-col md:flex-row justify-between hover:shadow-xl
+            transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer"
         >
             {{-- 大頭貼 --}}
             <div class="flex-none">
@@ -128,13 +128,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </x-card>
 
     @empty
-        <div class="transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
-        flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 w-full h-36">
+        <x-card class="w-full h-36 flex justify-center items-center
+        transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl">
             <span>Whoops！此分類底下還沒有文章，趕緊寫一篇吧！</span>
-        </div>
+        </x-card>
     @endforelse
 
     <div>

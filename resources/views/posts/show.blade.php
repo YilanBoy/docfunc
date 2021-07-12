@@ -23,8 +23,7 @@
         <div class="relative container mx-auto max-w-7xl mt-6">
             <div class="flex flex-col justify-center items-center px-4 xl:px-0">
 
-                <div class="relative w-full xl:w-2/3 shadow-md bg-white rounded-xl p-6
-                @if ($post->trashed()) ring-2 ring-red-500 @else ring-1 ring-black ring-opacity-20 @endif">
+                <x-card class="relative w-full xl:w-2/3">
 
                     {{-- 懸浮式文章編輯按鈕 --}}
                     @can('update', $post)
@@ -244,7 +243,7 @@
                         </div>
                     </div>
 
-                </div>
+                </x-card>
 
                 {{-- 回覆區塊 --}}
                 @if (!$post->trashed())

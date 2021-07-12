@@ -6,8 +6,8 @@
     </div>
 
     @forelse ($replies as $reply)
-        <div
-            x-data
+        <x-card
+            x-data=""
             x-on:click="
                 const targetTagName = $event.target.tagName.toLowerCase()
                 const ignores = ['a']
@@ -16,8 +16,8 @@
                     $refs.replyLink.click()
                 }
             "
-            class="flex flex-col md:flex-row justify-between p-4 shadow-md hover:shadow-xl bg-white rounded-xl
-            transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer ring-1 ring-black ring-opacity-20"
+            class="flex flex-col md:flex-row justify-between hover:shadow-xl
+            transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer"
         >
             {{-- 回覆相關資訊 --}}
             <div class="w-full flex justify-between">
@@ -48,12 +48,12 @@
                 </span>
 
             </div>
-        </div>
+        </x-card>
 
     @empty
-        <div class="transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
-        flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 w-full h-36">
+        <x-card class="w-full h-36 flex justify-center items-center
+        transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl">
             <span>目前沒有回覆，快點找文章進行回覆吧！</span>
-        </div>
+        </x-card>
     @endforelse
 </div>

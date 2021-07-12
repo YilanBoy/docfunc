@@ -13,7 +13,7 @@
                     <i class="bi bi-person-check-fill"></i><span class="ml-4">驗證 Email</span>
                 </div>
 
-                <div class="w-full sm:max-w-md mt-4 px-6 py-4 bg-white shadow-md overflow-hidden rounded-xl ring-1 ring-black ring-opacity-20">
+                <x-card class="w-full sm:max-w-md mt-4 overflow-hidden">
                     <div class="mb-4 text-gray-600">
                         {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
                     </div>
@@ -43,7 +43,7 @@
                             </button>
                         </form>
                     </div>
-                </div>
+                </x-card>
 
             </div>
         </div>

@@ -1,7 +1,7 @@
 <div class="w-full xl:w-2/3 space-y-6">
     {{-- Reply --}}
     @if (auth()->check())
-        <div class="w-full shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-5 mt-6">
+        <x-card class="w-full mt-6">
             <textarea
                 wire:model.debounce.500ms="content"
                 id="content"
@@ -23,7 +23,7 @@
                 </button>
             </div>
 
-        </div>
+        </x-card>
     @endif
 
     <div>
@@ -35,9 +35,11 @@
 
         @forelse ($replies as $reply)
             {{-- Reply Container --}}
-            <div id="post-{{ $post->id }}-reply-card-{{ $reply->id }}" class="flex relative bg-white rounded-xl ring-1 ring-black ring-opacity-20 shadow-md">
-
-                <div class="flex flex-col md:flex-row flex-1 p-4">
+            <x-card
+                id="post-{{ $post->id }}-reply-card-{{ $reply->id }}"
+                class="flex relative"
+            >
+                <div class="flex flex-col md:flex-row flex-1">
                     {{-- 大頭貼 --}}
                     <div class="flex-none">
                         <a href="{{ route('users.show', ['user' => $reply->user_id]) }}">
@@ -45,6 +47,7 @@
                             class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400">
                         </a>
                     </div>
+
                     {{-- 留言 --}}
                     <div class="w-full md:mx-4">
                         <div class="text-gray-600 mt-3 sm:mt-0">
@@ -99,7 +102,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </x-card>
         @empty
         @endforelse
     </div>

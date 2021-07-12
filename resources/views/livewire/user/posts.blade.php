@@ -5,8 +5,8 @@
     </div>
 
     @forelse ($posts as $post)
-        <div
-            x-data
+        <x-card
+            x-data=""
             x-on:click="
                 const targetTagName = $event.target.tagName.toLowerCase()
                 const ignores = ['a', 'button']
@@ -15,9 +15,8 @@
                     $refs.postLink.click()
                 }
             "
-            class="flex flex-col md:flex-row justify-between p-4 shadow-md hover:shadow-xl bg-white rounded-xl
-            transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer
-            @if ($post->trashed()) ring-2 ring-red-500 @else ring-1 ring-black ring-opacity-20 @endif"
+            class="flex flex-col md:flex-row justify-between hover:shadow-xl
+            transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer"
         >
             {{-- 文章 --}}
             <div class="w-full flex flex-col justify-between">
@@ -131,12 +130,12 @@
                     </button>
                 </div>
             @endif
-        </div>
+        </x-card>
 
     @empty
-        <div class="transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
-        flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 w-full h-36">
+        <x-card class="w-full h-36 flex justify-center items-center
+        transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl">
             <span>目前沒有文章，有沒有什麼事情想要分享呢？</span>
-        </div>
+        </x-card>
     @endforelse
 </div>

@@ -15,19 +15,18 @@
 
                 {{-- Notification --}}
                 @forelse ($notifications as $notification)
-                    <div
-                        x-data
+                    <x-card
+                        x-data=""
                         x-on:click="
-                            const clicked = $event.target
-                            const target = clicked.tagName.toLowerCase()
+                            const targetTagName = $event.target.tagName.toLowerCase()
                             const ignores = ['a']
 
-                            if (!ignores.includes(target)) {
-                                clicked.closest('.notifications-container').querySelector('.notification-link').click()
+                            if (!ignores.includes(targetTagName)) {
+                                $refs.notificationLink.click()
                             }
                         "
-                        class="notifications-container flex flex-col md:flex-row justify-between p-4 shadow-md hover:shadow-xl bg-white rounded-xl
-                        transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer ring-1 ring-black ring-opacity-20"
+                        class="w-full flex flex-col md:flex-row justify-between hover:shadow-xl
+                        transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer"
                     >
                         {{-- 大頭貼 --}}
                         <div class="flex-none">
@@ -48,8 +47,13 @@
                                     class="text-gray-400 hover:text-gray-700"
                                 >{{ $notification->data['user_name'] }}</a>
                                 回覆
-                                <a class="notification-link text-gray-400 hover:text-gray-700"
-                                href="{{ $notification->data['post_link'] }}">{{ $notification->data['post_title'] }}</a>
+                                <a
+                                    x-ref="notificationLink"
+                                    class="text-gray-400 hover:text-gray-700"
+                                    href="{{ $notification->data['post_link'] }}"
+                                >
+                                    {{ $notification->data['post_title'] }}
+                                </a>
                             </div>
 
                             <div class="text-gray-600 mt-2">
@@ -65,13 +69,13 @@
                             </div>
                         </div>
 
-                    </div>
+                    </x-card>
 
                 @empty
-                    <div class="transform hover:-translate-x-2 transition duration-150 ease-in shadow-md hover:shadow-xl bg-white rounded-xl
-                    flex justify-center items-center cursor-pointer ring-1 ring-black ring-opacity-20 w-full h-24 p-4">
+                    <x-card class="w-full h-24 flex justify-center items-center hover:shadow-xl
+                    transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer">
                         <span>沒有消息通知！</span>
-                    </div>
+                    </x-card>
                 @endforelse
 
                 <div>

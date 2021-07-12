@@ -14,7 +14,7 @@
                 </div>
 
                 {{-- Form --}}
-                <div class="w-full mt-4 px-6 py-4 bg-white shadow-md overflow-hidden rounded-xl ring-1 ring-black ring-opacity-20">
+                <x-card class="w-full mt-4 overflow-hidden">
 
                     <div class="w-full flex flex-col justify-center items-center mb-4">
                         <div>
@@ -104,7 +104,7 @@
                             </x-button>
                         </div>
                     </form>
-                </div>
+                </x-card>
             </div>
 
         </div>

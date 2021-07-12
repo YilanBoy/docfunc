@@ -37,7 +37,7 @@
             {{-- 文章列表側邊欄區塊 --}}
             <div class="w-full xl:w-80 space-y-6">
                 {{-- 介紹 --}}
-                <div class="text-gray-600 bg-white shadow-md p-5 rounded-xl ring-1 ring-black ring-opacity-20">
+                <x-card class="text-gray-600">
                     <h3 class="font-semibold text-lg text-center border-gray-600 border-b-2 pb-3 mb-3">歡迎來到 <span class="font-mono">{{ config('app.name') }}</span>！</h3>
                     <div>
                         <div>用部落格紀錄生活上的大小事</div>
@@ -50,27 +50,27 @@
                             <i class="bi bi-pencil"></i><span class="ml-2">新增文章</span>
                         </a>
                     </div>
-                </div>
+                </x-card>
 
                 {{-- 熱門標籤 --}}
                 @if ($popularTags->count())
-                <div class="text-gray-600 bg-white shadow-md p-5 rounded-xl ring-1 ring-black ring-opacity-20">
-                    <h3 class="font-semibold text-lg text-center border-gray-600 border-b-2 pb-3 mb-3"><i class="bi bi-tags-fill"></i><span class="ml-2">熱門標籤</span></h3>
-                    <div class="flex flex-wrap">
-                        @foreach ($popularTags as $popularTag)
-                            <a href="{{ route('tags.show', ['tag' => $popularTag->id]) }}"
-                            class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 m-1
-                            bg-green-200 hover:bg-green-400 active:bg-green-200 text-green-700 rounded-full shadow-lg ring-1 ring-green-700">
-                                {{ $popularTag->name }}
-                            </a>
-                        @endforeach
-                    </div>
-                </div>
+                    <x-card class="text-gray-600">
+                        <h3 class="font-semibold text-lg text-center border-gray-600 border-b-2 pb-3 mb-3"><i class="bi bi-tags-fill"></i><span class="ml-2">熱門標籤</span></h3>
+                        <div class="flex flex-wrap">
+                            @foreach ($popularTags as $popularTag)
+                                <a href="{{ route('tags.show', ['tag' => $popularTag->id]) }}"
+                                class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 m-1
+                                bg-green-200 hover:bg-green-400 active:bg-green-200 text-green-700 rounded-full shadow-lg ring-1 ring-green-700">
+                                    {{ $popularTag->name }}
+                                </a>
+                            @endforeach
+                        </div>
+                    </x-card>
                 @endif
 
                 {{-- 學習資源推薦 --}}
                 @if ($links->count())
-                    <div class="text-gray-600 bg-white shadow-md p-5 rounded-xl ring-1 ring-black ring-opacity-20">
+                    <x-card class="text-gray-600">
                         <h3 class="font-semibold text-lg text-center border-gray-600 border-b-2 pb-3 mb-3"><i class="bi bi-journal-code"></i><span class="ml-2">學習資源推薦</span></h3>
                         <div class="flex flex-col">
                             @foreach ($links as $link)
@@ -80,7 +80,7 @@
                                 </a>
                             @endforeach
                         </div>
-                    </div>
+                    </x-card>
                 @endif
             </div>
 

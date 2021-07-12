@@ -6,10 +6,10 @@
     <div class="container mx-auto max-w-7xl py-6">
         <div class="flex justify-center items-center px-4 xl:px-0">
 
-            <div class="w-full flex flex-col justify-center items-center bg-gray-100">
+            <div class="w-full flex flex-col justify-center items-center">
 
                 {{-- Title --}}
-                <div class="fill-current text-gray-700 text-2xl">
+                <div class="fill-current text-gray-700 text-2xl dark:text-white">
                     <i class="bi bi-question-circle"></i><span class="ml-4">重設密碼</span>
                 </div>
 
@@ -34,14 +34,16 @@
                                 required
                                 readonly
                                 class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900
-                                placeholder-transparent focus:outline-none focus:border-blue-600"
+                                placeholder-transparent focus:outline-none focus:border-blue-600
+                                dark:bg-gray-600 dark:text-white"
                             >
 
                             <label
                                 for="email"
                                 class="absolute left-0 -top-3.5 text-gray-600 text-sm
                                 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2
-                                peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                                peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm
+                                dark:text-white dark:peer-placeholder-shown:text-white dark:peer-focus:text-white"
                             >
                                 Email address
                             </label>
@@ -57,14 +59,16 @@
                                 required
                                 autofocus
                                 class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900
-                                placeholder-transparent focus:outline-none focus:border-blue-600"
+                                placeholder-transparent focus:outline-none focus:border-blue-600
+                                dark:bg-gray-600 dark:text-white"
                             >
 
                             <label
                                 for="password"
                                 class="absolute left-0 -top-3.5 text-gray-600 text-sm
                                 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2
-                                peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                                peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm
+                                dark:text-white dark:peer-placeholder-shown:text-white dark:peer-focus:text-white"
                             >
                                 Password
                             </label>
@@ -79,14 +83,16 @@
                                 placeholder="Confirm password"
                                 required
                                 class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900
-                                placeholder-transparent focus:outline-none focus:border-blue-600"
+                                placeholder-transparent focus:outline-none focus:border-blue-600
+                                dark:bg-gray-600 dark:text-white"
                             >
 
                             <label
                                 for="password_confirmation"
                                 class="absolute left-0 -top-3.5 text-gray-600 text-sm
                                 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2
-                                peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                                peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm
+                                dark:text-white dark:peer-placeholder-shown:text-white dark:peer-focus:text-white"
                             >
                                 Confirm password
                             </label>

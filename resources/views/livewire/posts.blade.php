@@ -6,9 +6,9 @@
             <a
                 wire:click.prevent="orderChange('latest')"
                 href="{{ $currentUrl . '?order=latest' }}"
-                class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700
-                border-b-4 px-2 sm:px-7 py-2
-                @if ($order === 'latest') border-blue-500 text-gray-700 @else text-gray-400 @endif"
+                class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700 border-b-4 px-2 sm:px-7 py-2
+                dark:hover:text-white
+                {{ ($order === 'latest') ? 'border-blue-500 text-gray-700 dark:text-white' : 'border-gray-400 text-gray-400' }}"
             >
                 <span>最新文章</span>
             </a>
@@ -16,9 +16,9 @@
             <a
                 wire:click.prevent="orderChange('recent')"
                 href="{{ $currentUrl . '?order=recent' }}"
-                class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700
-                border-b-4 px-2 sm:px-7 py-2
-                @if ($order === 'recent') border-blue-500 text-gray-700 @else text-gray-400 @endif"
+                class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700 border-b-4 px-2 sm:px-7 py-2
+                dark:hover:text-white
+                {{ ($order === 'recent') ? 'border-blue-500 text-gray-700 dark:text-white' : 'border-gray-400 text-gray-400' }}"
             >
                 <span>最近更新</span>
             </a>
@@ -26,9 +26,9 @@
             <a
                 wire:click.prevent="orderChange('reply')"
                 href="{{ $currentUrl . '?order=reply' }}"
-                class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700
-                border-b-4 px-2 sm:px-7 py-2
-                @if ($order === 'reply') border-blue-500 text-gray-700 @else text-gray-400 @endif"
+                class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700 border-b-4 px-2 sm:px-7 py-2
+                dark:hover:text-white
+                {{ ($order === 'reply') ? 'border-blue-500 text-gray-700 dark:text-white' : 'border-gray-400 text-gray-400' }}"
             >
                 <span>最多留言</span>
             </a>
@@ -78,7 +78,7 @@
             {{-- 文章 --}}
             <div class="w-full flex flex-col justify-between md:mx-4">
                 {{-- 文章標題 --}}
-                <h1 class="text-xl font-semibold mt-2 md:mt-0">
+                <h1 class="text-xl font-semibold mt-2 md:mt-0 dark:text-white">
                     <a
                         x-ref="postLink"
                         href="{{ $post->link_with_slug }}"
@@ -87,7 +87,7 @@
                 </h1>
 
                 {{-- 文章大綱 --}}
-                <div class="text-gray-600 mt-2">
+                <div class="text-gray-600 mt-2 dark:text-white">
                     {{ $post->excerpt }}
                 </div>
 
@@ -95,7 +95,7 @@
                 <div class="flex items-center text-sm text-gray-400 mt-4 space-x-2">
                     {{-- 文章分類資訊 --}}
                     <div>
-                        <a class="hover:text-gray-700"
+                        <a class="hover:text-gray-700 dark:hover:text-white"
                         href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
                             <i class="{{ $post->category->icon }}"></i><span class="hidden md:inline ml-2">{{ $post->category->name }}</span>
                         </a>
@@ -103,7 +103,7 @@
                     <div>&bull;</div>
                     {{-- 文章作者資訊 --}}
                     <div>
-                        <a class="hover:text-gray-700"
+                        <a class="hover:text-gray-700 dark:hover:text-white"
                         href="{{ route('users.show', ['user' => $post->user_id]) }}"
                         title="{{ $post->user->name }}">
                             <i class="bi bi-person-fill"></i><span class="hidden md:inline ml-2">{{ $post->user->name }}</span>
@@ -112,7 +112,7 @@
                     <div>&bull;</div>
                     {{-- 文章發布時間 --}}
                     <div>
-                        <a class="hover:text-gray-700"
+                        <a class="hover:text-gray-700 dark:hover:text-white"
                         href="{{ $post->link_with_slug }}"
                         title="文章發布於：{{ $post->created_at }}">
                             <i class="bi bi-clock-fill"></i><span class="hidden md:inline ml-2">{{ $post->created_at->diffForHumans() }}</span>
@@ -121,7 +121,7 @@
                     <div>&bull;</div>
                     <div>
                         {{-- 文章留言數 --}}
-                        <a class="hover:text-gray-700"
+                        <a class="hover:text-gray-700 dark:hover:text-white"
                         href="{{ $post->link_with_slug }}#post-{{ $post->id }}-replies-container">
                             <i class="bi bi-chat-square-text-fill"></i><span class="hidden md:inline ml-2">{{ $post->reply_count }}</span>
                         </a>

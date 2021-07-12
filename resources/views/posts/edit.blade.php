@@ -15,11 +15,12 @@
 
             <div class="w-full xl:w-2/3 space-y-6 flex flex-col justify-center items-center">
                 {{-- Title --}}
-                <div class="fill-current text-gray-700 text-2xl">
+                <div class="fill-current text-gray-700 text-2xl dark:text-white">
                     <i class="bi bi-pencil"></i><span class="ml-4">編輯文章</span>
                 </div>
 
-                <div class="relative w-full shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-6">
+                <div class="relative w-full shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-5
+                dark:bg-gray-600">
 
                     <div
                         class="hidden xl:block absolute z-10 top-0 left-103/100 w-52 h-full"
@@ -33,7 +34,7 @@
                             {{-- Save Button --}}
                             <button type="submit" id="lg-save-post" form="edit-post"
                             class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold
-                            bg-gray-600 hover:bg-gray-800 active:bg-gray-600 rounded-full
+                            bg-gray-600 hover:bg-gray-900 rounded-full
                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4">
                                 <i class="bi bi-save2-fill"></i>
                             </button>
@@ -58,14 +59,16 @@
                                 required
                                 autofocus
                                 class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900
-                                placeholder-transparent focus:outline-none focus:border-blue-600"
+                                placeholder-transparent focus:outline-none focus:border-blue-600
+                                dark:bg-gray-600 dark:text-white"
                             >
 
                             <label
                                 for="title"
                                 class="absolute left-0 -top-3.5 text-gray-600 text-sm
                                 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2
-                                peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                                peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm
+                                dark:text-white dark:peer-placeholder-shown:text-white dark:peer-focus:text-white"
                             >
                                 標題
                             </label>
@@ -79,7 +82,8 @@
                                 name="category_id"
                                 required
                                 class="outline-none h-10 w-full rounded-md shadow-sm border border-gray-300
-                                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+                                dark:bg-gray-500 dark:text-white"
                             >
                                 <option value="" hidden disabled {{ $post->id ? '' : 'selected' }}>請選擇分類</option>
                                 {{-- 這裡的 $categories 使用的是 View::composer() 方法取得值，寫在 ViewServiceProvider.php 中 --}}
@@ -101,7 +105,7 @@
                                 name="tags"
                                 value="{{ old('tags', $post->tagsJson) }}"
                                 placeholder="標籤（最多 5 個）"
-                                class="h-10 rounded-md text-sm"
+                                class="h-10 rounded-md text-sm dark:bg-gray-500"
                             >
                         </div>
 

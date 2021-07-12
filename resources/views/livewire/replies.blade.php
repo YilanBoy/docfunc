@@ -7,12 +7,13 @@
                 id="content"
                 placeholder="分享你的評論~"
                 class="outline-none p-2 h-32 w-full rounded-md shadow-sm border border-gray-300
-                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+                dark:bg-gray-500 dark:text-white dark:placeholder-white"
             ></textarea>
 
             <div class="flex justify-between mt-2">
                 <div class="flex justify-center items-center">
-                    @error('content') <span class="text-red-700">{{ $message }}</span> @enderror
+                    @error('content') <span class="text-red-600">{{ $message }}</span> @enderror
                 </div>
 
                 <button
@@ -50,13 +51,13 @@
 
                     {{-- 留言 --}}
                     <div class="w-full md:mx-4">
-                        <div class="text-gray-600 mt-3 sm:mt-0">
+                        <div class="text-gray-600 mt-3 sm:mt-0 dark:text-white">
                             {!! nl2br(e($reply->content)) !!}
                         </div>
 
                         <div class="flex items-center justify-between mt-6">
                             <div class="flex items-center text-sm text-gray-400 space-x-2">
-                                <div class="text-gray-900">{{ $reply->user->name }}</div>
+                                <div>{{ $reply->user->name }}</div>
                                 <div>&bull;</div>
                                 <div>{{ $reply->created_at->diffForHumans() }}</div>
                             </div>

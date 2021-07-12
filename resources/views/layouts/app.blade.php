@@ -1,5 +1,13 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html
+    lang="{{ app()->getLocale() }}"
+    x-data="{ darkMode : false}"
+    x-init="
+        darkMode = JSON.parse(localStorage.getItem('darkMode'))
+        $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))
+    "
+    :class="{ 'dark' : darkMode === true }"
+>
 
 <head>
     <meta charset="utf-8">
@@ -29,7 +37,7 @@
     @yield('scriptsInHead')
 </head>
 
-<body class="flex flex-col min-h-screen justify-between bg-gray-100 antialiased font-noto">
+<body class="flex flex-col min-h-screen justify-between bg-gray-100 dark:bg-gray-700 antialiased font-noto">
     @include('layouts.header')
 
     @yield('content')

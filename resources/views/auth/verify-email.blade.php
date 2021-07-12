@@ -6,15 +6,15 @@
     <div class="container mx-auto max-w-7xl py-6">
         <div class="flex justify-center items-center px-4 xl:px-0">
 
-            <div class="w-full flex flex-col justify-center items-center bg-gray-100">
+            <div class="w-full flex flex-col justify-center items-center">
 
                 {{-- Title --}}
-                <div class="fill-current text-gray-700 text-2xl">
+                <div class="fill-current text-gray-700 text-2xl dark:text-white">
                     <i class="bi bi-person-check-fill"></i><span class="ml-4">驗證 Email</span>
                 </div>
 
                 <x-card class="w-full sm:max-w-md mt-4 overflow-hidden">
-                    <div class="mb-4 text-gray-600">
+                    <div class="mb-4 text-gray-600 dark:text-white">
                         {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
                     </div>
 
@@ -38,7 +38,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <button type="submit" class="text-gray-600 hover:text-gray-900">
+                            <button type="submit" class="text-gray-400 hover:text-gray-700 dark:hover:text-white">
                                 {{ __('Log Out') }}
                             </button>
                         </form>

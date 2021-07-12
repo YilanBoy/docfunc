@@ -9,7 +9,7 @@
 
             <div class="w-full md:w-2/3 xl:w-1/2 space-y-6 flex flex-col justify-center items-center">
                 {{-- Title --}}
-                <div class="fill-current text-gray-700 text-2xl">
+                <div class="fill-current text-gray-700 text-2xl dark:text-white">
                     <i class="bi bi-bell-fill"></i><span class="ml-4">我的通知</span>
                 </div>
 
@@ -73,7 +73,8 @@
 
                 @empty
                     <x-card class="w-full h-24 flex justify-center items-center hover:shadow-xl
-                    transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer">
+                    transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer
+                    dark:text-white">
                         <span>沒有消息通知！</span>
                     </x-card>
                 @endforelse

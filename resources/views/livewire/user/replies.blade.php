@@ -27,13 +27,13 @@
                         <a
                             x-ref="replyLink"
                             href="{{ $reply->post->link_with_slug }}#post-{{ $reply->post->id }}-reply-card-{{ $reply->id }}"
-                            class="hover:underline"
+                            class="hover:underline dark:text-white"
                         >
                             {{ $reply->post->title }}
                         </a>
                     </span>
 
-                    <span class="mt-2">
+                    <span class="mt-2 dark:text-white">
                         {!! nl2br(e($reply->content)) !!}
                     </span>
 
@@ -52,7 +52,8 @@
 
     @empty
         <x-card class="w-full h-36 flex justify-center items-center
-        transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl">
+        transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl
+        dark:text-white">
             <span>目前沒有回覆，快點找文章進行回覆吧！</span>
         </x-card>
     @endforelse

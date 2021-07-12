@@ -93,7 +93,7 @@
 
                     <div class="flex justify-between">
                         {{-- 文章標題 --}}
-                        <h1 class="flex-grow text-3xl font-bold">{{ $post->title }}</h1>
+                        <h1 class="flex-grow text-3xl font-bold dark:text-white">{{ $post->title }}</h1>
 
                         {{-- 文章編輯選單--}}
                         @can('update', $post)
@@ -117,21 +117,17 @@
                                 <div
                                     x-cloak
                                     x-show.transition.duration.100ms.top.left="editMenuIsOpen"
-                                    class="origin-top-right absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-20"
+                                    class="origin-top-right absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
+                                    dark:bg-gray-600 dark:text-white"
                                     role="menu" aria-orientation="vertical" tabindex="-1"
                                 >
-                                    <a href="{{ route('posts.edit', ['post' => $post->id]) }}"
-                                    role="menuitem" tabindex="-1"
-                                    class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100">
-                                        <i class="bi bi-pencil"></i><span class="ml-2">編輯</span>
-                                    </a>
-
                                     @if ($post->trashed())
                                         <a
                                             x-on:click="return confirm('您確定恢復此文章嗎？');"
                                             href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
                                             role="menuitem" tabindex="-1"
-                                            class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100"
+                                            class="block px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
+                                            dark:hover:bg-gray-500"
                                         >
                                             <i class="bi bi-arrow-90deg-left"></i><span class="ml-2">恢復</span>
                                         </a>
@@ -139,15 +135,26 @@
                                         <button
                                             x-on:click="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）');"
                                             type="submit" form="force-delete-post" role="menuitem" tabindex="-1"
-                                            class="flex items-start w-full px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100"
+                                            class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
+                                            dark:hover:bg-gray-500"
                                         >
                                             <i class="bi bi-exclamation-diamond-fill"></i><span class="ml-2">完全刪除</span>
                                         </button>
                                     @else
+                                        <a
+                                            href="{{ route('posts.edit', ['post' => $post->id]) }}"
+                                            role="menuitem" tabindex="-1"
+                                            class="block px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
+                                            dark:hover:bg-gray-500"
+                                        >
+                                            <i class="bi bi-pencil"></i><span class="ml-2">編輯</span>
+                                        </a>
+
                                         <button
-                                        x-on:click="return confirm('您確定要刪除此文章嗎？');"
+                                            x-on:click="return confirm('您確定要刪除此文章嗎？');"
                                             type="submit" form="delete-post" role="menuitem" tabindex="-1"
-                                            class="flex items-start w-full px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100"
+                                            class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
+                                            dark:hover:bg-gray-500"
                                         >
                                             <i class="bi bi-trash-fill"></i><span class="ml-2">刪除</span>
                                         </button>
@@ -160,7 +167,7 @@
                     <div class="flex items-center text-gray-400 mt-4 space-x-2">
                         {{-- 文章分類資訊 --}}
                         <div>
-                            <a class="hover:text-gray-700"
+                            <a class="hover:text-gray-700 dark:hover:text-white"
                             href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
                                 <i class="{{ $post->category->icon }}"></i><span class="ml-2">{{ $post->category->name }}</span>
                             </a>
@@ -170,7 +177,7 @@
 
                         {{-- 文章作者資訊 --}}
                         <div>
-                            <a class="hover:text-gray-700"
+                            <a class="hover:text-gray-700 dark:hover:text-white"
                             href="{{ route('users.show', ['user' => $post->user_id]) }}"
                             title="{{ $post->user->name }}">
                                 <i class="bi bi-person-fill"></i><span class="ml-2">{{ $post->user->name }}</span>
@@ -181,7 +188,7 @@
 
                         {{-- 文章發布時間 --}}
                         <div class="hidden md:block">
-                            <a class="hover:text-gray-700"
+                            <a class="hover:text-gray-700 dark:hover:text-white"
                             href="{{ $post->link_with_slug }}"
                             title="文章發布於：{{ $post->created_at }}">
                                 <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
@@ -192,7 +199,7 @@
 
                         <div class="hidden md:block">
                             {{-- 文章留言數 --}}
-                            <a class="hover:text-gray-700"
+                            <a class="hover:text-gray-700 dark:hover:text-white"
                             href="{{ $post->link_with_slug }}#replies-card">
                                 <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->reply_count }}</span>
                             </a>
@@ -214,32 +221,39 @@
                         @endif
                     </div>
 
-                    <div class="mt-4 ck-content">
+                    <div class="mt-4 ck-content dark:text-white">
                         {!! $post->body !!}
                     </div>
 
                     <div class="mt-4 flex justify-end space-x-4">
                         {{-- 分享文章 --}}
                         <button type="button" title="分享此篇文章至 Facebook" data-sharer="facebook" data-url="{{ request()->fullUrl() }}"
-                        class="text-4xl text-gray-300 hover:text-gray-500 duration-300">
+                        class="text-4xl text-gray-400 hover:text-gray-700 duration-300
+                        dark:hover:text-white">
                             <i class="bi bi-facebook"></i>
                         </button>
 
                         <button type="button" title="分享此篇文章至 Twitter" data-sharer="twitter" data-url="{{ request()->fullUrl() }}"
-                        class="text-4xl text-gray-300 hover:text-gray-500 duration-300">
+                        class="text-4xl text-gray-400 hover:text-gray-700 duration-300
+                        dark:hover:text-white">
                             <i class="bi bi-twitter"></i>
                         </button>
                     </div>
 
-                    <div class="flex justify-start items-center border-t-2 border-gray-700 mt-4 pt-4">
+                    <div class="flex justify-start items-center border-t-2 border-gray-700 mt-4 pt-4
+                    dark:border-white">
                         <div class="flex-none none md:flex md:justify-center md:items-center p-2 mr-4">
                             <img class="rounded-full h-16 w-16" src="{{ $post->user->gravatar(200) }}">
                         </div>
                         <div class="flex flex-col">
-                            <a class="text-2xl font-bold text-black hover:underline" href="{{ route('users.show', ['user' => $post->user->id]) }}">
+                            <a
+                                href="{{ route('users.show', ['user' => $post->user->id]) }}"
+                                class="text-2xl font-bold text-black hover:underline
+                                dark:text-white"
+                            >
                                 {{ $post->user->name }}
                             </a>
-                            <span>{!! nl2br(e($post->user->introduction)) !!}</span>
+                            <span class="dark:text-white">{!! nl2br(e($post->user->introduction)) !!}</span>
                         </div>
                     </div>
 

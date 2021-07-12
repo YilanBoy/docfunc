@@ -2,7 +2,8 @@
 <nav
     x-data="{ mobileMenuIsOpen : false }"
     id="header"
-    class="bg-white border-blue-400 border-t-4 shadow-md"
+    class="bg-white border-blue-400 border-t-4 shadow-md
+    dark:bg-gray-800"
 >
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between h-18">
@@ -41,7 +42,12 @@
                     <img class="block lg:hidden h-8 w-auto" src="{{ asset('images/icon/icon.png') }}" alt="{{ config('app.name') }}">
                     <span class="flex items-center justify-center">
                         <img class="hidden lg:block h-8 w-auto" src="{{ asset('images/icon/icon.png') }}" alt="{{ config('app.name') }}">
-                        <span class="hidden font-bold font-mono text-xl lg:block ml-2">{{ config('app.name') }}</span>
+                        <span
+                            class="hidden font-bold font-mono text-xl lg:block ml-2
+                            dark:text-white"
+                        >
+                            {{ config('app.name') }}
+                        </span>
                     </span>
                 </div>
                 <div class="hidden sm:block sm:ml-6">
@@ -49,7 +55,8 @@
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         <a
                             href="{{ route('posts.index') }}"
-                            class="@if(request()->url() === route('posts.index')) text-gray-700 @else text-gray-400 hover:text-gray-700 @endif
+                            class="
+                            {{ (request()->url() === route('posts.index')) ? 'text-gray-700 dark:text-white' : 'text-gray-400 hover:text-gray-700 dark:hover:text-white' }}
                             text-lg p-2 font-medium"
                             @if(request()->url() === route('posts.index')) aria-current="page" @endif
                         >
@@ -58,7 +65,8 @@
                         @foreach ($categories as $category)
                             <a
                                 href="{{ $category->link_with_name }}"
-                                class="@if(request()->url() === $category->link_with_name) text-gray-700 @else text-gray-400 hover:text-gray-700 @endif
+                                class="
+                                {{ (request()->url() === $category->link_with_name) ? 'text-gray-700 dark:text-white' : 'text-gray-400 hover:text-gray-700 dark:hover:text-white' }}
                                 text-lg p-2 font-medium"
                                 @if(request()->url() === $category->link_with_name) aria-current="page" @endif
                             >
@@ -68,11 +76,19 @@
 
                         {{-- 搜尋 --}}
                         <div class="hidden relative xl:inline-block">
-                            <input type="search" id="aa-search-input" class="outline-none w-3/4 rounded-xl bg-gray-100 placeholder-gray-400
-                            border border-gray-400 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 py-2 pl-8"
-                            placeholder="Search" name="search" autocomplete="off" />
+                            <input
+                                type="search"
+                                id="aa-search-input"
+                                name="search"
+                                autocomplete="off"
+                                placeholder="Search"
+                                class="outline-none w-3/4 rounded-xl bg-gray-100 placeholder-gray-400 border border-gray-400
+                                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 py-2 pl-8
+                                dark:bg-gray-500 dark:placeholder-white dark:text-white"
+                            />
 
-                            <div class="absolute top-0 flex items-center h-full ml-2 text-gray-400">
+                            <div class="absolute top-0 flex items-center h-full ml-2 text-gray-400
+                            dark:text-white">
                                 <i class="bi bi-search"></i>
                             </div>
                         </div>
@@ -86,7 +102,7 @@
                 @guest
 
                     <a href="{{ route('login') }}"
-                    class="mr-3 text-gray-400 hover:text-gray-700">
+                    class="mr-3 text-gray-400 hover:text-gray-700 dark:hover:text-white">
                         <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
                     </a>
 
@@ -99,7 +115,8 @@
                 @else
                     {{-- 新增文章 --}}
                     @if (request()->url() !== route('posts.create'))
-                        <a href="{{ route('posts.create') }}" class="p-1 mr-3 rounded-full text-gray-400 hover:text-gray-700">
+                        <a href="{{ route('posts.create') }}" class="p-1 mr-3 rounded-full text-gray-400 hover:text-gray-700
+                        dark:hover:text-white">
                             <span class="sr-only">Create Post</span>
                             <i class="bi bi-plus-lg"></i>
                         </a>
@@ -108,7 +125,7 @@
                     {{-- 通知 --}}
                     <a href="{{ route('notifications.index') }}"
                     class="p-1 mr-3 rounded-full
-                    {{ auth()->user()->notification_count > 0 ? 'text-red-400 hover:text-red-700' : 'text-gray-400 hover:text-gray-700' }}">
+                    {{ (auth()->user()->notification_count > 0) ? 'text-red-400 hover:text-red-700' : 'text-gray-400 hover:text-gray-700 dark:hover:text-white' }}">
                         <span class="sr-only">View notifications</span>
                         <i class="text-lg bi bi-bell-fill"></i>
                     </a>
@@ -138,18 +155,19 @@
                         <div
                             x-cloak
                             x-show.transition.duration.100ms.top.left="profileIsOpen"
-                            class="origin-top-right absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-20"
+                            class="origin-top-right absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
+                            dark:bg-gray-600 dark:text-white"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                         >
                             <a href="{{ route('users.show', ['user' => auth()->id()]) }}"
                             role="menuitem" tabindex="-1"
-                            class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100">
+                            class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-500">
                                 <i class="bi bi-person-fill"></i><span class="ml-2">個人頁面</span>
                             </a>
 
                             <a href="{{ route('users.edit', ['user' => auth()->id()]) }}"
                             role="menuitem" tabindex="-1"
-                            class="block px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100">
+                            class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-500">
                                 <i class="bi bi-person-lines-fill"></i><span class="ml-2">編輯資料</span>
                             </a>
 
@@ -163,7 +181,7 @@
                                 x-on:click="return confirm('您確定要登出？');"
                                 type="submit" form="logout"
                                 role="menuitem" tabindex="-1" id="user-menu-item-2"
-                                class="flex items-start w-full px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100"
+                                class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-500"
                             >
                                 <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
                             </button>
@@ -183,7 +201,8 @@
         <div class="px-2 pt-2 pb-3 space-y-1">
             <a
                 href="{{ route('posts.index') }}"
-                class="@if(request()->url() === route('posts.index')) bg-gray-200 text-gray-700 @else text-gray-400 hover:text-gray-700 hover:bg-gray-200 @endif
+                class="
+                {{ (request()->url() === route('posts.index')) ? 'bg-gray-200 text-gray-700' : 'text-gray-400 hover:text-gray-700 hover:bg-gray-200' }}
                 block px-3 py-2 rounded-md font-medium"
                 @if(request()->url() === route('posts.index')) aria-current="page" @endif
             >
@@ -192,7 +211,8 @@
             @foreach ($categories as $category)
                 <a
                     href="{{ $category->link_with_name }}"
-                    class="@if(request()->url() === $category->link_with_name) bg-gray-200 text-gray-700 @else text-gray-400 hover:text-gray-700 hover:bg-gray-200 @endif
+                    class="
+                    {{ (request()->url() === $category->link_with_name) ? 'bg-gray-200 text-gray-700' : 'text-gray-400 hover:text-gray-700 hover:bg-gray-200' }}
                     block px-3 py-2 rounded-md font-medium"
                     @if(request()->url() === $category->link_with_name) aria-current="page" @endif
                 >

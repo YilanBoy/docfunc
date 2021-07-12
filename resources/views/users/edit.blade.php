@@ -7,9 +7,9 @@
     <div class="container mx-auto max-w-7xl py-6">
         <div class="flex justify-center items-center px-4 xl:px-0">
 
-            <div class="w-full md:w-2/3 xl:w-2/5 flex flex-col justify-center items-center bg-gray-100">
+            <div class="w-full md:w-2/3 xl:w-2/5 flex flex-col justify-center items-center">
                 {{-- Title --}}
-                <div class="fill-current text-gray-700 text-2xl">
+                <div class="fill-current text-gray-700 text-2xl dark:text-white">
                     <i class="bi bi-person-lines-fill"></i><span class="ml-4">編輯個人資料</span>
                 </div>
 
@@ -21,10 +21,10 @@
                             <img class="rounded-full h-36 w-36" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}">
                         </div>
 
-                        <div class="flex mt-4">
+                        <div class="flex mt-4 dark:text-white">
                             <span class="mr-2">會員大頭貼由</span>
                             <a href="https://zh-tw.gravatar.com/" target="_blank" rel="nofollow noopener noreferrer"
-                            class="text-gray-400 hover:text-gray-700">Gravatar</a>
+                            class="text-gray-400 hover:text-gray-700 dark:hover:text-white">Gravatar</a>
                             <span class="ml-2">技術提供</span>
                         </div>
                     </div>
@@ -47,14 +47,16 @@
                                 required
                                 readonly
                                 class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900
-                                placeholder-transparent focus:outline-none focus:border-blue-600"
+                                placeholder-transparent focus:outline-none focus:border-blue-600
+                                dark:bg-gray-600 dark:text-white"
                             >
 
                             <label
                                 for="email"
                                 class="absolute left-0 -top-3.5 text-gray-600 text-sm
                                 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2
-                                peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                                peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm
+                                dark:text-white dark:peer-placeholder-shown:text-white dark:peer-focus:text-white"
                             >
                                 Email address
                             </label>
@@ -71,14 +73,16 @@
                                 required
                                 autofocus
                                 class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900
-                                placeholder-transparent focus:outline-none focus:border-blue-600"
+                                placeholder-transparent focus:outline-none focus:border-blue-600
+                                dark:bg-gray-600 dark:text-white"
                             >
 
                             <label
                                 for="name"
                                 class="absolute left-0 -top-3.5 text-gray-600 text-sm
                                 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2
-                                peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                                peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm
+                                dark:text-white dark:peer-placeholder-shown:text-white dark:peer-focus:text-white"
                             >
                                 Name
                             </label>
@@ -93,7 +97,8 @@
                                 placeholder="Introduction"
                                 rows="5"
                                 class="outline-none p-2 w-full rounded-md shadow-sm border border-gray-300
-                                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+                                dark:bg-gray-500 dark:text-white dark:placeholder-white"
                             >{{ old('introduction', $user->introduction) }}</textarea>
                         </div>
 

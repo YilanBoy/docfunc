@@ -28,12 +28,8 @@
                 <span class="text-xl font-semibold mt-2 md:mt-0">
                     <a
                         x-ref="postLink"
-                        href="@if ($post->trashed())
-                            {{ route('posts.showSoftDeleted', [ 'id' => $post->id]) }}
-                        @else
-                            {{ $post->link_with_slug }}
-                        @endif"
-                        class="hover:underline"
+                        href="{{ ($post->trashed()) ? route('posts.showSoftDeleted', [ 'id' => $post->id]) : $post->link_with_slug }}"
+                        class="hover:underline dark:text-white"
                     >{{ $post->title }}</a>
                 </span>
 
@@ -41,8 +37,11 @@
                 <div class="flex items-center text-sm text-gray-400 mt-2 space-x-2">
                     {{-- 文章分類資訊 --}}
                     <div>
-                        <a class="hover:text-gray-700"
-                        href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
+                        <a
+                            href="{{ $post->category->link_with_name }}"
+                            title="{{ $post->category->name }}"
+                            class="hover:text-gray-700 dark:hover:text-white"
+                        >
                             <i class="{{ $post->category->icon }}"></i><span class="ml-2">{{ $post->category->name }}</span>
                         </a>
                     </div>
@@ -50,12 +49,8 @@
                     {{-- 文章發布時間 --}}
                     <div>
                         <a
-                            href="@if ($post->trashed())
-                                {{ route('posts.showSoftDeleted', [ 'id' => $post->id]) }}
-                            @else
-                                {{ $post->link_with_slug }}
-                            @endif"
-                            class="hover:text-gray-700"
+                            href="{{ ($post->trashed()) ? route('posts.showSoftDeleted', [ 'id' => $post->id]) : $post->link_with_slug }}"
+                            class="hover:text-gray-700 dark:hover:text-white"
                             title="文章發布於：{{ $post->created_at }}"
                         >
                             <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
@@ -64,7 +59,7 @@
                     <div>&bull;</div>
                     <div>
                         {{-- 文章留言數 --}}
-                        <a class="hover:text-gray-700"
+                        <a class="hover:text-gray-700 dark:hover:text-white"
                         href="{{ $post->link_with_slug }}#post-{{ $post->id }}-replies-container">
                             <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->reply_count }}</span>
                         </a>
@@ -134,7 +129,8 @@
 
     @empty
         <x-card class="w-full h-36 flex justify-center items-center
-        transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl">
+        transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl
+        dark:text-white">
             <span>目前沒有文章，有沒有什麼事情想要分享呢？</span>
         </x-card>
     @endforelse

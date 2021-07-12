@@ -55,8 +55,9 @@
                 class="w-full xl:w-2/3 mr-0 xl:mr-6 space-y-6"
             >
                 <nav class="flex font-semibold">
-                    <button
-                        x-on:click="tab = 'posts'"
+                    <a
+                        x-on:click.prevent="tab = 'posts'"
+                        href="#"
                         :class="{
                             'border-blue-500 text-gray-700': tab === 'posts',
                             'text-gray-400': tab === 'replies'
@@ -65,9 +66,10 @@
                         border-b-4 px-2 sm:px-7 py-2"
                     >
                         <span>發布文章</span>
-                    </button>
-                    <button
-                        x-on:click="tab = 'replies'"
+                    </a>
+                    <a
+                        x-on:click.prevent="tab = 'replies'"
+                        href="#"
                         :class="{
                             'border-blue-500 text-gray-700': tab === 'replies',
                             'text-gray-400': tab === 'posts'
@@ -76,7 +78,7 @@
                         border-b-4 px-2 sm:px-7 py-2"
                     >
                         <span>回覆紀錄</span>
-                    </button>
+                    </a>
                 </nav>
 
                 {{-- 會員文章 --}}

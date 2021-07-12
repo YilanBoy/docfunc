@@ -47,7 +47,7 @@
                         </label>
                         <span class="text-gray-400 dark:text-white"><i class="bi bi-moon-fill"></i></span>
 
-                        <input id="toggle" type="checkbox" class="hidden" :value="darkMode" x-on:click="darkMode = !darkMode" />
+                        <input id="toggle" type="checkbox" class="hidden" x-on:click="dark = !dark" />
                     </div>
                 </x-card>
 

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html
     lang="{{ app()->getLocale() }}"
-    x-data="{ darkMode : false}"
+    x-data="{ dark : false}"
+    x-cloak
     x-init="
-        darkMode = JSON.parse(localStorage.getItem('darkMode'))
-        $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))
+        dark = JSON.parse(localStorage.getItem('dark'))
+        $watch('dark', value => localStorage.setItem('dark', JSON.stringify(value)))
     "
-    :class="{ 'dark' : darkMode === true }"
+    :class="{ 'dark' : dark === true }"
+    x-show="true"
 >
 
 <head>

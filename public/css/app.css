@@ -527,6 +527,8 @@ video {
 	margin-top: -1px;
 }.block{
 	display: block;
+}.inline{
+	display: inline;
 }.flex{
 	display: flex;
 }.inline-flex{

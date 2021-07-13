@@ -33,7 +33,7 @@
                         </a>
                     </span>
 
-                    <span class="mt-2 dark:text-white">
+                    <span class="mt-2 text-gray-600 dark:text-white">
                         {!! nl2br(e($reply->content)) !!}
                     </span>
 

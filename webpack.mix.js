@@ -22,6 +22,8 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/algolia.js', 'public/js')
     .ts('resources/ts/tagify.ts', 'public/js')
     .ts('resources/ts/scroll-to-top-btn.ts', 'public/js')
+    .ts('resources/ts/set-theme.ts', 'public/js')
+    .ts('resources/ts/theme-switch.ts', 'public/js')
     .copy('node_modules/sharer.js/sharer.min.js', 'public/js/sharer.min.js')
     .copy('node_modules/@yaireo/tagify/dist/tagify.css', 'public/css/tagify.css')
     .options({

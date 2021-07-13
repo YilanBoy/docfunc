@@ -100,7 +100,6 @@
 
                 {{-- 未登入 --}}
                 @guest
-
                     <a href="{{ route('login') }}"
                     class="mr-3 text-gray-400 hover:text-gray-700 dark:hover:text-white">
                         <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
@@ -139,7 +138,6 @@
                         <div>
                             <button
                                 x-on:click="profileIsOpen = ! profileIsOpen"
-                                x-on:click.away="profileIsOpen = false"
                                 x-on:keydown.escape.window="profileIsOpen = false"
                                 type="button"
                                 class="bg-gray-800 flex text-sm rounded-full
@@ -154,6 +152,7 @@
                         {{-- 下拉式選單 --}}
                         <div
                             x-cloak
+                            x-on:click.away="profileIsOpen = false"
                             x-show.transition.duration.100ms.top.left="profileIsOpen"
                             class="origin-top-right absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
                             dark:bg-gray-600 dark:text-white"
@@ -185,6 +184,18 @@
                             >
                                 <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
                             </button>
+
+                            {{-- 明亮 / 暗黑模式切換 --}}
+                            <div class="flex justify-center items-center space-x-2 mr-2 pt-2 mt-2 border-t-2 border-gray-400">
+                                <span class="text-gray-800 dark:text-gray-400"><i class="bi bi-brightness-high-fill"></i></span>
+                                <label for="theme-switch"
+                                class="w-9 h-6 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer duration-300 ease-in-out dark:bg-gray-800">
+                                    <div class="bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out dark:translate-x-3"></div>
+                                </label>
+                                <span class="text-gray-200 dark:text-white"><i class="bi bi-moon-fill"></i></span>
+
+                                <input id="theme-switch" type="checkbox" class="hidden">
+                            </div>
                         </div>
                     </div>
                 @endguest

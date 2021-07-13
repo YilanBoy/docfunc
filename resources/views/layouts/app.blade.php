@@ -1,15 +1,5 @@
 <!DOCTYPE html>
-<html
-    lang="{{ app()->getLocale() }}"
-    x-data="{ dark : false}"
-    x-cloak
-    x-init="
-        dark = JSON.parse(localStorage.getItem('dark'))
-        $watch('dark', value => localStorage.setItem('dark', JSON.stringify(value)))
-    "
-    :class="{ 'dark' : dark === true }"
-    x-show="true"
->
+<html lang="{{ app()->getLocale() }}">
 
 <head>
     <meta charset="utf-8">
@@ -23,6 +13,9 @@
     <meta name="description" content="@yield('description', 'Allen 的個人部落格')">
     {{-- Favicon --}}
     <link rel="shortcut icon" href="{{ asset('images/icon/icon.png') }}" type="image/x-icon">
+
+    {{-- Set theme --}}
+    <script src="{{ asset('js/set-theme.js') }}"></script>
 
     {{-- Styles --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -69,6 +62,8 @@
     @endforeach
 
     @yield('scripts')
+
+    <script src="{{ asset('js/theme-switch.js') }}"></script>
 </body>
 
 </html>

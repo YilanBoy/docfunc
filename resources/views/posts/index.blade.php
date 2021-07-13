@@ -36,21 +36,6 @@
 
             {{-- 文章列表側邊欄區塊 --}}
             <div class="w-full xl:w-80 space-y-6">
-
-                {{-- 明亮 / 暗黑模式切換 --}}
-                <x-card class="flex justify-center items-center">
-                    <div class="flex justify-end items-center space-x-2">
-                        <span class="text-gray-800 dark:text-gray-400"><i class="bi bi-brightness-high-fill"></i></span>
-                        <label for="toggle"
-                        class="w-9 h-6 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer duration-300 ease-in-out dark:bg-gray-800">
-                            <div class="toggle-dot bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out dark:translate-x-3"></div>
-                        </label>
-                        <span class="text-gray-400 dark:text-white"><i class="bi bi-moon-fill"></i></span>
-
-                        <input id="toggle" type="checkbox" class="hidden" x-on:click="dark = !dark" />
-                    </div>
-                </x-card>
-
                 {{-- 介紹 --}}
                 <x-card class="text-gray-600 dark:text-white">
                     <h3 class="font-semibold text-lg text-center border-gray-600 border-b-2 pb-3 mb-3

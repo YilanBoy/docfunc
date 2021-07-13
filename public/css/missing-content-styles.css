@@ -42,16 +42,16 @@
     padding-left: 1em;
 }
 .ck-content a {
-    color: #9ca3af;
+    color: #0EA5E9;
     cursor: pointer;
 }
 .ck-content a:hover {
-    color: #374151;
+    color: #0369A1;
     cursor: pointer;
 }
 /* Dark Mode */
 .dark .ck-content a:hover {
-    color: #ffffff;
+    color: #7DD3FC;
     cursor: pointer;
 }
 .dark .ck-rounded-corners .ck.ck-editor__main>.ck-editor__editable,

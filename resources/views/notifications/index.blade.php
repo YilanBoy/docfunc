@@ -44,19 +44,19 @@
                             <div class="mt-2 md:mt-0">
                                 <a
                                     href="{{ route('users.show', ['user' => $notification->data['user_id']]) }}"
-                                    class="text-gray-400 hover:text-gray-700"
+                                    class="text-gray-400 hover:text-gray-700 dark:hover:text-white"
                                 >{{ $notification->data['user_name'] }}</a>
-                                回覆
+                                <span class="text-black dark:text-white">回覆了你的文章</span>
                                 <a
                                     x-ref="notificationLink"
-                                    class="text-gray-400 hover:text-gray-700"
+                                    class="text-gray-400 hover:text-gray-700 dark:hover:text-white"
                                     href="{{ $notification->data['post_link'] }}"
                                 >
-                                    {{ $notification->data['post_title'] }}
+                                    {{'「' . $notification->data['post_title'] . '」' }}
                                 </a>
                             </div>
 
-                            <div class="text-gray-600 mt-2">
+                            <div class="text-gray-600 mt-2 dark:text-white">
                                 {!! $notification->data['reply_content'] !!}
                             </div>
 

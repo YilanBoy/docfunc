@@ -48,7 +48,7 @@ autocomplete(
                     `;
                 },
                 empty:
-                    '<div class="flex justify-center items-center p-3">找不到符合搜尋字詞的文章</div>'
+                    '<div class="flex justify-center items-center p-3 dark:text-white">找不到符合搜尋字詞的文章</div>'
             }
         }
     ]

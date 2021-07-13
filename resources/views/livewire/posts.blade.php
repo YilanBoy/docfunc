@@ -132,7 +132,8 @@
 
     @empty
         <x-card class="w-full h-36 flex justify-center items-center
-        transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl">
+        transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl
+        dark:text-white">
             <span>Whoops！此分類底下還沒有文章，趕緊寫一篇吧！</span>
         </x-card>
     @endforelse

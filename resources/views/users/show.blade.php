@@ -22,14 +22,13 @@
                     dark:text-white dark:border-white">{{ $user->name }}</span>
 
                     {{-- 資訊 --}}
-                    <div class="w-full flex flex-col justify-start items-start">
+                    <div class="w-full flex flex-col justify-start items-start text-black
+                    dark:text-white">
                         <span class="text-lg">撰寫文章</span>
-                        <span class="text-xl text-black font-semibold mt-2
-                        dark:text-white">{{ $user->posts->count() }} 篇</span>
+                        <span class="text-xl font-semibold mt-2">{{ $user->posts->count() }} 篇</span>
 
                         <span class="text-lg mt-4">文章留言</span>
-                        <span class="text-xl text-black font-semibold mt-2
-                        dark:text-white">{{ $user->replies->count() }} 次</span>
+                        <span class="text-x font-semibold mt-2">{{ $user->replies->count() }} 次</span>
 
                         <span class="mt-4 text-xs">註冊於 {{ $user->created_at->format('Y / m / d') . '（' . $user->created_at->diffForHumans() . '）' }}</span>
                     </div>

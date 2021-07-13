@@ -4249,7 +4249,7 @@ autocomplete_js__WEBPACK_IMPORTED_MODULE_0___default()('#aa-search-input', {
     suggestion: function suggestion(_suggestion) {
       return "\n                        <span class=\"w-full\">\n                            <a class=\"block text-gray-400 hover:text-gray-700 w-full\" href=\"".concat(_suggestion.url, "\">\n                                ").concat(_suggestion._highlightResult.title.value, "\n                            </a>\n                        </span>\n                    ");
     },
-    empty: '<div class="flex justify-center items-center p-3">找不到符合搜尋字詞的文章</div>'
+    empty: '<div class="flex justify-center items-center p-3 dark:text-white">找不到符合搜尋字詞的文章</div>'
   }
 }]).on('autocomplete:selected', function (event, suggestion) {
   location.href = suggestion.url;

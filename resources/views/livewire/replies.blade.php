@@ -73,27 +73,27 @@
                                             x-on:click.away="deleteMenuIsOpen = false"
                                             x-on:keydown.escape.window="deleteMenuIsOpen = false"
                                             type="button"
-                                            class="bg-gray-100 hover:bg-gray-200 border rounded-full h-7 transition duration-150 ease-in py-2 px-3"
+                                            class="text-2xl text-gray-400 hover:text-gray-700 focus:text-gray-700
+                                            dark:hover:text-white dark:focus:text-white"
                                             aria-expanded="false" aria-haspopup="true"
                                         >
-                                            <svg fill="currentColor" width="24" height="6">
-                                                <path d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97
-                                                0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z" style="color: rgba(163, 163, 163, .5)">
-                                            </svg>
+                                            <i class="bi bi-three-dots"></i>
                                         </button>
                                     </div>
 
                                     <div
                                         x-cloak
                                         x-show.transition.duration.100ms.top.left="deleteMenuIsOpen"
-                                        class="origin-top-right absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-20"
+                                        class="origin-top-right absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
+                                        dark:bg-gray-600 dark:text-white"
                                         role="menu" aria-orientation="vertical" tabindex="-1"
                                     >
                                         <button
                                             tabindex="-1"
                                             onclick="confirm('您確定要刪除此回覆嗎？') || event.stopImmediatePropagation()"
                                             wire:click.prevent="destroy({{ $reply->id }})"
-                                            class="flex items-start w-full px-4 py-2 rounded-md text-gray-700 hover:bg-gray-200 active:bg-gray-100"
+                                            class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200
+                                            dark:hover:bg-gray-500"
                                         >
                                             <i class="bi bi-trash-fill"></i><span class="ml-2">刪除</span>
                                         </button>

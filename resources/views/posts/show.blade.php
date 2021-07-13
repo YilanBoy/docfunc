@@ -107,7 +107,8 @@
                                         x-on:click.away="editMenuIsOpen = false"
                                         x-on:keydown.escape.window="editMenuIsOpen = false"
                                         type="button"
-                                        class="text-2xl text-gray-400 hover:text-gray-700 focus:text-gray-700"
+                                        class="text-2xl text-gray-400 hover:text-gray-700 focus:text-gray-700
+                                        dark:hover:text-white dark:focus:text-white"
                                         aria-expanded="false" aria-haspopup="true"
                                     >
                                         <i class="bi bi-three-dots-vertical"></i>

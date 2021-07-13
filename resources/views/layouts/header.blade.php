@@ -3,7 +3,7 @@
     x-data="{ mobileMenuIsOpen : false }"
     id="header"
     class="bg-white border-blue-400 border-t-4 shadow-md
-    dark:bg-gray-800"
+    dark:bg-gray-800 xl:flex"
 >
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between h-18">
@@ -184,18 +184,6 @@
                             >
                                 <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
                             </button>
-
-                            {{-- 明亮 / 暗黑模式切換 --}}
-                            <div class="flex justify-center items-center space-x-2 mr-2 pt-2 mt-2 border-t-2 border-gray-400">
-                                <span class="text-gray-800 dark:text-gray-400"><i class="bi bi-brightness-high-fill"></i></span>
-                                <label for="theme-switch"
-                                class="w-9 h-6 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer duration-300 ease-in-out dark:bg-gray-800">
-                                    <div class="bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out dark:translate-x-3"></div>
-                                </label>
-                                <span class="text-gray-200 dark:text-white"><i class="bi bi-moon-fill"></i></span>
-
-                                <input id="theme-switch" type="checkbox" class="hidden">
-                            </div>
                         </div>
                     </div>
                 @endguest
@@ -231,5 +219,17 @@
                 </a>
             @endforeach
         </div>
+    </div>
+
+    {{-- 明亮 / 暗黑模式切換 --}}
+    <div class="hidden xl:flex justify-center items-center space-x-2 pr-4">
+        <span class="text-gray-800 dark:text-gray-400"><i class="bi bi-brightness-high-fill"></i></span>
+        <label for="theme-switch"
+        class="w-9 h-6 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer duration-300 ease-in-out dark:bg-gray-600">
+            <div class="bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out dark:translate-x-3"></div>
+        </label>
+        <span class="text-gray-200 dark:text-white"><i class="bi bi-moon-fill"></i></span>
+
+        <input id="theme-switch" type="checkbox" class="hidden">
     </div>
 </nav>

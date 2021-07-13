@@ -18,7 +18,9 @@
 
                 <button
                     wire:click="store"
-                    class="text-white font-bold bg-blue-600 hover:bg-blue-800 active:bg-blue-600 rounded-md text-center py-2 px-4 shadow-lg"
+                    class="inline-flex justify-center items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-white
+                    uppercase tracking-widest hover:bg-blue-500 active:bg-blue-900 focus:outline-none focus:border-blue-900
+                    focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150"
                 >
                     <i class="bi bi-chat-left-text-fill"></i><span class="ml-2">回覆</span>
                 </button>

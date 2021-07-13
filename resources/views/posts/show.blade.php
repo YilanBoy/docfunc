@@ -15,7 +15,7 @@
     <div class="relative">
         {{-- 置頂按鈕 --}}
         <button id="scroll-to-top-btn" title="Go to top"
-        class="fixed z-10 bottom-7 right-7 flex justify-center items-center h-16 w-16 text-3xl text-white font-bold bg-blue-600 hover:bg-blue-800 active:bg-blue-600 rounded-full
+        class="fixed z-10 bottom-7 right-7 flex justify-center items-center h-16 w-16 text-3xl text-white font-bold bg-blue-600 rounded-full
         transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl">
             <i class="bi bi-arrow-up"></i>
         </button>

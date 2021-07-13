@@ -6,7 +6,7 @@
         placeholder="{{ $placeholder }}"
         {{ $attributes }}
         class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900
-        placeholder-transparent focus:outline-none focus:border-blue-500
+        placeholder-transparent focus:outline-none focus:border-blue-500 transition duration-150 ease-in
         dark:bg-gray-600 dark:text-white"
     >
 

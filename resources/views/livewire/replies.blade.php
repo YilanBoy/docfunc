@@ -6,7 +6,8 @@
                 wire:model.debounce.500ms="content"
                 id="content"
                 placeholder="分享你的評論~"
-                class="outline-none p-2 h-32 w-full rounded-md shadow-sm border border-gray-300
+                rows="5"
+                class="form-textarea w-full rounded-md shadow-sm border border-gray-300
                 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
                 dark:bg-gray-500 dark:text-white dark:placeholder-white"
             ></textarea>

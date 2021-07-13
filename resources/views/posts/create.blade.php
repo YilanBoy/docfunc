@@ -65,7 +65,7 @@
                             <select
                                 name="category_id"
                                 required
-                                class="outline-none px-2 h-10 w-full rounded-md shadow-sm border border-gray-300
+                                class="form-select h-10 w-full rounded-md shadow-sm border border-gray-300
                                 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
                                 dark:bg-gray-500 dark:text-white"
                             >

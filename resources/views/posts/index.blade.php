@@ -37,8 +37,8 @@
             {{-- 文章列表側邊欄區塊 --}}
             <div class="w-full xl:w-80 space-y-6">
                 {{-- 介紹 --}}
-                <x-card class="text-gray-600 dark:text-white">
-                    <h3 class="font-semibold text-lg text-center border-gray-600 border-b-2 pb-3 mb-3
+                <x-card class="text-black dark:text-white">
+                    <h3 class="font-semibold text-lg text-center border-black border-b-2 pb-3 mb-3
                     dark:border-white">
                         歡迎來到 <span class="font-mono">{{ config('app.name') }}</span>！
                     </h3>
@@ -57,8 +57,8 @@
 
                 {{-- 熱門標籤 --}}
                 @if ($popularTags->count())
-                    <x-card class="text-gray-600 dark:text-white">
-                        <h3 class="font-semibold text-lg text-center border-gray-600 border-b-2 pb-3 mb-3
+                    <x-card class="text-black dark:text-white">
+                        <h3 class="font-semibold text-lg text-center border-black border-b-2 pb-3 mb-3
                         dark:border-white">
                             <i class="bi bi-tags-fill"></i><span class="ml-2">熱門標籤</span>
                         </h3>
@@ -76,8 +76,8 @@
 
                 {{-- 學習資源推薦 --}}
                 @if ($links->count())
-                    <x-card class="text-gray-600 dark:text-white">
-                        <h3 class="font-semibold text-lg text-center border-gray-600 border-b-2 pb-3 mb-3
+                    <x-card class="text-black dark:text-white">
+                        <h3 class="font-semibold text-lg text-center border-black border-b-2 pb-3 mb-3
                         dark:border-white">
                             <i class="bi bi-journal-code"></i><span class="ml-2">學習資源推薦</span>
                         </h3>

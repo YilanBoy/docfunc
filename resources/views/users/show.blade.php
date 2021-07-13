@@ -10,7 +10,7 @@
             <div class="w-full xl:w-80
             flex flex-col md:flex-row xl:flex-col justify-center items-center md:items-start xl:items-center xl:mr-6">
                 {{-- 會員資訊 --}}
-                <x-card class="w-full lg:w-80 flex flex-col justify-center items-center text-gray-600 md:mr-6 xl:mr-0
+                <x-card class="w-full lg:w-80 flex flex-col justify-center items-center md:mr-6 xl:mr-0
                 dark:text-white">
                     {{-- 大頭貼 --}}
                     <div>
@@ -18,7 +18,7 @@
                     </div>
 
                     {{-- 會員名稱 --}}
-                    <span class="w-full flex justify-center items-center text-3xl text-black font-semibold my-5 pb-5 border-b-2 border-gray-700
+                    <span class="w-full flex justify-center items-center text-3xl text-black font-semibold my-5 pb-5 border-b-2 border-black
                     dark:text-white dark:border-white">{{ $user->name }}</span>
 
                     {{-- 資訊 --}}
@@ -35,11 +35,11 @@
                 </x-card>
 
                 {{-- 會員個人簡介 --}}
-                <x-card class="w-full lg:w-80 flex flex-col justify-center items-center text-gray-600 mt-6 md:mt-0 xl:mt-6
+                <x-card class="w-full lg:w-80 flex flex-col justify-center items-center text-black mt-6 md:mt-0 xl:mt-6
                 dark:text-white">
 
-                    <span class="w-full flex justify-center items-center text-2xl text-black
-                    font-semibold mb-5 pb-5 border-b-2 border-gray-700
+                    <span class="w-full flex justify-center items-center text-2xl
+                    font-semibold mb-5 pb-5 border-b-2 border-black
                     dark:text-white dark:border-white">
                         個人簡介
                     </span>

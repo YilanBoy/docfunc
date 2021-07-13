@@ -48,7 +48,7 @@
                     </div>
                     <div class="flex justify-center items-center">
                         <a href="{{ route('posts.create') }}"
-                        class="block w-3/4 transition duration-500 ease-in-out bg-green-600 hover:bg-green-700 transform hover:-translate-y-1 hover:scale-110
+                        class="block w-3/4 transition duration-500 ease-in-out bg-green-600 transform hover:-translate-y-1 hover:scale-110
                         text-white text-center font-bold rounded-md py-2 mt-7 shadow-md hover:shadow-lg">
                             <i class="bi bi-pencil"></i><span class="ml-2">新增文章</span>
                         </a>

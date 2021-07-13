@@ -102,7 +102,7 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect()->route('users.show', ['user' => auth()->id()])->with('success', '成功刪除文章！');
+        return redirect()->route('users.show', ['user' => auth()->id()])->with('success', '成功標記文章為刪除狀態！');
     }
 
     // 顯示軟刪除的文章內容

@@ -39,7 +39,7 @@
                                             class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-blue-600 hover:bg-blue-800 active:bg-blue-600 rounded-full
                                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
                                         >
-                                            <i class="bi bi-arrow-90deg-left"></i>
+                                            <i class="bi bi-box-arrow-up-left"></i>
                                         </a>
 
                                         <form id="force-delete-post" action="{{ route('posts.forceDeletePost', ['id' => $post->id]) }}" method="POST"
@@ -53,10 +53,10 @@
                                             x-on:click="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）');"
                                             type="submit"
                                             form="force-delete-post"
-                                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-purple-600 hover:bg-purple-800 active:bg-purple-600 rounded-full
+                                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
                                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
                                         >
-                                            <i class="bi bi-exclamation-diamond-fill"></i>
+                                            <i class="bi bi-trash-fill"></i>
                                         </button>
                                     @else
                                         {{-- Edit Post --}}
@@ -72,15 +72,15 @@
                                             @method('DELETE')
                                         </form>
 
-                                        {{-- Delete Button --}}
+                                        {{-- Soft Delete Post --}}
                                         <button
-                                            x-on:click="return confirm('您確定要刪除此文章嗎？（時間內還可以恢復）');"
+                                            x-on:click="return confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以恢復）');"
                                             type="submit"
                                             form="delete-post"
-                                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
+                                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-yellow-600 hover:bg-yellow-800 active:bg-yellow-600 rounded-full
                                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
                                         >
-                                            <i class="bi bi-trash-fill"></i>
+                                            <i class="bi bi-box-arrow-in-down-right"></i>
                                         </button>
                                     @endif
                             </div>
@@ -88,7 +88,7 @@
                     @endcan
 
                     @if ($post->trashed())
-                        <span class="text-red-500">此文章已被設定為刪除！</span>
+                        <span class="text-red-500">此文章已被標記為刪除狀態！</span>
                     @endif
 
                     <div class="flex justify-between">
@@ -130,7 +130,7 @@
                                             class="block px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
                                             dark:hover:bg-gray-500"
                                         >
-                                            <i class="bi bi-arrow-90deg-left"></i><span class="ml-2">恢復</span>
+                                            <i class="bi bi-box-arrow-up-left"></i><span class="ml-2">恢復</span>
                                         </a>
 
                                         <button
@@ -139,7 +139,7 @@
                                             class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
                                             dark:hover:bg-gray-500"
                                         >
-                                            <i class="bi bi-exclamation-diamond-fill"></i><span class="ml-2">完全刪除</span>
+                                            <i class="bi bi-trash-fill"></i><span class="ml-2">完全刪除</span>
                                         </button>
                                     @else
                                         <a
@@ -152,12 +152,12 @@
                                         </a>
 
                                         <button
-                                            x-on:click="return confirm('您確定要刪除此文章嗎？');"
+                                            x-on:click="return confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以恢復）');"
                                             type="submit" form="delete-post" role="menuitem" tabindex="-1"
                                             class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
                                             dark:hover:bg-gray-500"
                                         >
-                                            <i class="bi bi-trash-fill"></i><span class="ml-2">刪除</span>
+                                            <i class="bi bi-box-arrow-in-down-right"></i><span class="ml-2">刪除標記</span>
                                         </button>
                                     @endif
                                 </div>

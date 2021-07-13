@@ -49,3 +49,8 @@
     color: #374151;
     cursor: pointer;
 }
+.dark .ck-content a:hover {
+    color: #ffffff;
+    cursor: pointer;
+}
+

@@ -48,29 +48,15 @@
                         @csrf
 
                         {{-- Title --}}
-                        <div class="relative mt-5">
-                            <input
-                                id="title"
-                                name="title"
-                                type="text"
-                                placeholder="標題"
-                                value="{{ old('title') }}"
+                        <div class="mt-5">
+                            <x-floating-label-input
+                                :type="'text'"
+                                :name="'title'"
+                                :placeholder="'文章標題'"
+                                :value="old('title')"
                                 required
                                 autofocus
-                                class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900
-                                placeholder-transparent focus:outline-none focus:border-blue-600
-                                dark:bg-gray-600 dark:text-white"
-                            >
-
-                            <label
-                                for="title"
-                                class="absolute left-0 -top-3.5 text-gray-600 text-sm
-                                transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2
-                                peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm
-                                dark:text-white dark:peer-placeholder-shown:text-white dark:peer-focus:text-white"
-                            >
-                                標題
-                            </label>
+                            ></x-floating-label-input>
                         </div>
 
                         {{-- Category --}}

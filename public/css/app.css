@@ -1123,6 +1123,9 @@ video {
 }.focus\:border-blue-900:focus{
 	--tw-border-opacity: 1;
 	border-color: rgba(30, 58, 138, var(--tw-border-opacity));
+}.focus\:border-blue-500:focus{
+	--tw-border-opacity: 1;
+	border-color: rgba(59, 130, 246, var(--tw-border-opacity));
 }.focus\:text-gray-700:focus{
 	--tw-text-opacity: 1;
 	color: rgba(55, 65, 81, var(--tw-text-opacity));

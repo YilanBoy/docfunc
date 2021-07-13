@@ -2,8 +2,8 @@
 <nav
     x-data="{ mobileMenuIsOpen : false }"
     id="header"
-    class="bg-white border-blue-400 border-t-4 shadow-md
-    dark:bg-gray-800 xl:flex"
+    class="relative bg-white border-blue-400 border-t-4 shadow-md
+    dark:bg-gray-800"
 >
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between h-18">
@@ -222,7 +222,7 @@
     </div>
 
     {{-- 明亮 / 暗黑模式切換 --}}
-    <div class="hidden xl:flex justify-center items-center space-x-2 pr-4">
+    <div class="absolute top-6 right-3 hidden xl:flex justify-center items-center space-x-2">
         <span class="text-gray-800 dark:text-gray-400"><i class="bi bi-brightness-high-fill"></i></span>
         <label for="theme-switch"
         class="w-9 h-6 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer duration-300 ease-in-out dark:bg-gray-600">

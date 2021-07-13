@@ -456,6 +456,20 @@ video {
 	bottom: 1.75rem;
 }.right-7{
 	right: 1.75rem;
+}.top-0\.5{
+	top: 0.125rem;
+}.top-1{
+	top: 0.25rem;
+}.top-10{
+	top: 2.5rem;
+}.top-5{
+	top: 1.25rem;
+}.top-6{
+	top: 1.5rem;
+}.right-1{
+	right: 0.25rem;
+}.right-3{
+	right: 0.75rem;
 }.z-0{
 	z-index: 0;
 }.z-10{

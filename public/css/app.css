@@ -926,6 +926,9 @@ video {
 }.text-red-400{
 	--tw-text-opacity: 1;
 	color: rgba(248, 113, 113, var(--tw-text-opacity));
+}.text-green-400{
+	--tw-text-opacity: 1;
+	color: rgba(52, 211, 153, var(--tw-text-opacity));
 }.underline{
 	text-decoration: underline;
 }.antialiased{

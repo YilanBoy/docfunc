@@ -210,7 +210,7 @@
                     <div class="flex items-center mt-4 space-x-2">
                         <!-- 文章標籤-->
                         @if ($post->tags()->exists())
-                            <span class="text-green-700"><i class="bi bi-tags-fill"></i></span>
+                            <span class="text-green-400"><i class="bi bi-tags-fill"></i></span>
 
                             @foreach ($post->tags as $tag)
                                 <a href="{{ route('tags.show', ['tag' => $tag->id]) }}"

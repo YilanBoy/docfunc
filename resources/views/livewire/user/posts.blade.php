@@ -67,64 +67,66 @@
                 </div>
             </div>
 
-            @if ($post->trashed())
-                <div class="flex items-center mt-2 md:mt-0">
-                    {{-- Restore Post --}}
-                    <a
-                        x-on:click.stop="return confirm('您確定恢復此文章嗎？');"
-                        href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
-                        class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-blue-600 rounded-full
-                        transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl"
-                    >
-                        <i class="bi bi-box-arrow-up-left"></i>
-                    </a>
+            @can('update', $post)
+                @if ($post->trashed())
+                    <div class="flex items-center mt-2 md:mt-0">
+                        {{-- Restore Post --}}
+                        <a
+                            x-on:click.stop="return confirm('您確定恢復此文章嗎？');"
+                            href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
+                            class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-blue-600 rounded-full
+                            transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl"
+                        >
+                            <i class="bi bi-box-arrow-up-left"></i>
+                        </a>
 
-                    <form id="force-delete-post-{{ $post->id }}" action="{{ route('posts.forceDeletePost', ['id' => $post->id]) }}" method="POST"
-                    class="hidden">
-                        @csrf
-                        @method('DELETE')
-                    </form>
+                        <form id="force-delete-post-{{ $post->id }}" action="{{ route('posts.forceDeletePost', ['id' => $post->id]) }}" method="POST"
+                        class="hidden">
+                            @csrf
+                            @method('DELETE')
+                        </form>
 
-                    {{-- Force Delete Post --}}
-                    <button
-                        x-on:click.stop="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）');"
-                        type="submit"
-                        form="force-delete-post-{{ $post->id }}"
-                        class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-red-600 rounded-full
-                        transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl ml-2"
-                    >
-                        <i class="bi bi-trash-fill"></i>
-                    </button>
-                </div>
-            @else
-                {{-- Edit Post --}}
-                <div class="flex items-center mt-2 md:mt-0">
-                    <a
-                        href="{{ route('posts.edit', ['post' => $post->id]) }}"
-                        class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-green-600 rounded-full
-                        transform hover:scale-125 hover:-rotate-45 transition duration-150 ease-in shadow-md hover:shadow-xl"
-                    >
-                        <i class="bi bi-pencil"></i>
-                    </a>
+                        {{-- Force Delete Post --}}
+                        <button
+                            x-on:click.stop="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）');"
+                            type="submit"
+                            form="force-delete-post-{{ $post->id }}"
+                            class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-red-600 rounded-full
+                            transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl ml-2"
+                        >
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                    </div>
+                @else
+                    {{-- Edit Post --}}
+                    <div class="flex items-center mt-2 md:mt-0">
+                        <a
+                            href="{{ route('posts.edit', ['post' => $post->id]) }}"
+                            class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-green-600 rounded-full
+                            transform hover:scale-125 hover:-rotate-45 transition duration-150 ease-in shadow-md hover:shadow-xl"
+                        >
+                            <i class="bi bi-pencil"></i>
+                        </a>
 
-                    <form id="delete-post-{{ $post->id }}" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
-                    class="hidden">
-                        @csrf
-                        @method('DELETE')
-                    </form>
+                        <form id="delete-post-{{ $post->id }}" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
+                        class="hidden">
+                            @csrf
+                            @method('DELETE')
+                        </form>
 
-                    {{-- Soft Delete Post --}}
-                    <button
-                        x-on:click.stop="return confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以恢復）');"
-                        type="submit"
-                        form="delete-post-{{ $post->id }}"
-                        class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-yellow-600 rounded-full
-                        transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl ml-2"
-                    >
-                        <i class="bi bi-box-arrow-in-down-right"></i>
-                    </button>
-                </div>
-            @endif
+                        {{-- Soft Delete Post --}}
+                        <button
+                            x-on:click.stop="return confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以恢復）');"
+                            type="submit"
+                            form="delete-post-{{ $post->id }}"
+                            class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-yellow-600 rounded-full
+                            transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl ml-2"
+                        >
+                            <i class="bi bi-box-arrow-in-down-right"></i>
+                        </button>
+                    </div>
+                @endif
+            @endcan
         </x-card>
 
     @empty

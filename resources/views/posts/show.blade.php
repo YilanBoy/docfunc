@@ -36,7 +36,7 @@
                                         <a
                                             x-on:click="return confirm('您確定恢復此文章嗎？');"
                                             href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
-                                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-blue-600 hover:bg-blue-800 active:bg-blue-600 rounded-full
+                                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-blue-600 rounded-full
                                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
                                         >
                                             <i class="bi bi-box-arrow-up-left"></i>
@@ -53,7 +53,7 @@
                                             x-on:click="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）');"
                                             type="submit"
                                             form="force-delete-post"
-                                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-red-600 hover:bg-red-800 active:bg-red-600 rounded-full
+                                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-red-600 rounded-full
                                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
                                         >
                                             <i class="bi bi-trash-fill"></i>
@@ -61,7 +61,7 @@
                                     @else
                                         {{-- Edit Post --}}
                                         <a href="{{ route('posts.edit', ['post' => $post->id]) }}"
-                                        class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-green-600 hover:bg-green-800 active:bg-green-600 rounded-full
+                                        class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-green-600 rounded-full
                                         transform hover:scale-125 hover:-rotate-45 transition duration-150 ease-in shadow-md hover:shadow-xl">
                                             <i class="bi bi-pencil"></i>
                                         </a>
@@ -77,7 +77,7 @@
                                             x-on:click="return confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以恢復）');"
                                             type="submit"
                                             form="delete-post"
-                                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-yellow-600 hover:bg-yellow-800 active:bg-yellow-600 rounded-full
+                                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-yellow-600 rounded-full
                                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
                                         >
                                             <i class="bi bi-box-arrow-in-down-right"></i>

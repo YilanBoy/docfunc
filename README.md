@@ -13,7 +13,7 @@ The features of this blog include
 -   post tags
 -   comments
 
-Post editor use [CKEditor 5](https://ckeditor.com/), image upload use [CKFinder](https://ckeditor.com/ckfinder/), You can upload image to AWS S3 in blog post.  
+Post editor use [CKEditor 5](https://ckeditor.com/), You can upload image to AWS S3 in blog post.  
 You can search post on blog by [Algolia](https://www.algolia.com/)
 
 ## Requirements
@@ -36,12 +36,6 @@ Install the composer package
 $ composer install
 ```
 
-Download the ckfinder code
-
-```sh
-$ php artisan ckfinder:download
-```
-
 Generate ide-helper
 
 ```sh
@@ -57,7 +51,7 @@ $ npm install
 Running laravel mix
 
 ```sh
-$ npm run production
+$ npm run dev
 ```
 
 Make a .env file.  

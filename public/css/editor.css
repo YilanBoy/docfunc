@@ -55,3 +55,8 @@
     font-style: normal;
     min-width: 200px;
 }
+.dark .tagify__input {
+    --placeholder-color: white;
+    --placeholder-color-focus: white;
+    --input-color: white;
+}

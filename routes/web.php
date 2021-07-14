@@ -6,7 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\TagController;
-use CKSource\CKFinderBridge\Controller\CKFinderController;
+use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,5 +62,5 @@ Route::get('notifications', [NotificationController::class, 'index'])->name('not
 // 文章標籤
 Route::get('tags/{tag}', [TagController::class, 'show'])->name('tags.show');
 
-// CKEditor 上傳圖片，使用 CKFinder 上傳至 S3
-Route::any('/ckfinder/connector', [CKFinderController::class, 'requestAction'])->name('ckfinder_connector');
+// 上傳圖片至 S3
+Route::post('/images/upload', [ImageController::class, 'store'])->name('images.store');

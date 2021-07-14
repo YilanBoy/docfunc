@@ -12,8 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        // CKFinder 已經有自己的 CSRF Protection，因此這裡排除
-        'ckfinder/*',
         //
     ];
 }

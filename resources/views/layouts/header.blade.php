@@ -152,8 +152,9 @@
                         {{-- 下拉式選單 --}}
                         <div
                             x-cloak
-                            x-on:click.away="profileIsOpen = false"
-                            x-show.transition.duration.100ms.top.left="profileIsOpen"
+                            x-on:click.outside="profileIsOpen = false"
+                            x-show="profileIsOpen"
+                            x-transition.duration.100ms
                             class="origin-top-right absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
                             dark:bg-gray-600 dark:text-white"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
@@ -170,14 +171,13 @@
                                 <i class="bi bi-person-lines-fill"></i><span class="ml-2">編輯資料</span>
                             </a>
 
-                            <form id="logout" action="{{ route('logout') }}" method="POST"
+                            <form id="logout" action="{{ route('logout') }}" method="POST" onSubmit="return confirm('您確定要登出？');"
                             class="hidden"
                             >
                                 @csrf
                             </form>
 
                             <button
-                                x-on:click="return confirm('您確定要登出？');"
                                 type="submit" form="logout"
                                 role="menuitem" tabindex="-1" id="user-menu-item-2"
                                 class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-500"
@@ -194,7 +194,8 @@
     {{-- 手機版選單 --}}
     <div
         x-cloak
-        x-show.transition.duration.100ms.top.bottom="mobileMenuIsOpen"
+        x-show="mobileMenuIsOpen"
+        x-transition.duration.100ms
         class="sm:hidden"
     >
         <div class="px-2 pt-2 pb-3 space-y-1">

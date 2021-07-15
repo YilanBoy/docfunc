@@ -73,7 +73,7 @@
                                     <div>
                                         <button
                                             x-on:click="deleteMenuIsOpen = ! deleteMenuIsOpen"
-                                            x-on:click.away="deleteMenuIsOpen = false"
+                                            x-on:click.outside="deleteMenuIsOpen = false"
                                             x-on:keydown.escape.window="deleteMenuIsOpen = false"
                                             type="button"
                                             class="text-2xl text-gray-400 hover:text-gray-700 focus:text-gray-700
@@ -86,7 +86,8 @@
 
                                     <div
                                         x-cloak
-                                        x-show.transition.duration.100ms.top.left="deleteMenuIsOpen"
+                                        x-show="deleteMenuIsOpen"
+                                        x-transition.duration.100ms
                                         class="origin-top-right absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
                                         dark:bg-gray-600 dark:text-white"
                                         role="menu" aria-orientation="vertical" tabindex="-1"

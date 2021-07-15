@@ -72,7 +72,11 @@
                     <div class="flex items-center mt-2 md:mt-0">
                         {{-- Restore Post --}}
                         <a
-                            x-on:click.stop="return confirm('您確定恢復此文章嗎？');"
+                            x-on:click.prevent.stop="
+                                if (confirm('您確定恢復此文章嗎？')) {
+                                    window.location.href = $el.href
+                                }
+                            "
                             href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
                             class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-blue-600 rounded-full
                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl"
@@ -88,9 +92,12 @@
 
                         {{-- Force Delete Post --}}
                         <button
-                            x-on:click.stop="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）');"
-                            type="submit"
-                            form="force-delete-post-{{ $post->id }}"
+                            x-on:click.stop="
+                                if(confirm('您確定要完全刪除此文章嗎？（此動作無法復原）')) {
+                                    document.getElementById('force-delete-post-{{ $post->id }}').submit()
+                                }
+                            "
+                            type="button"
                             class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-red-600 rounded-full
                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl ml-2"
                         >
@@ -116,8 +123,13 @@
 
                         {{-- Soft Delete Post --}}
                         <button
-                            x-on:click.stop="return confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以恢復）');"
-                            type="submit"
+                            x-on:click.prevent.stop="
+                                if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以恢復）'))
+                                {
+                                    document.getElementById('delete-post-{{ $post->id }}').submit()
+                                }
+                            "
+                            type="button"
                             form="delete-post-{{ $post->id }}"
                             class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-yellow-600 rounded-full
                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl ml-2"

@@ -87,7 +87,8 @@
                 {{-- 會員文章 --}}
                 <div
                     x-cloak
-                    x-show.transition.in.duration.300ms="tab === 'posts'"
+                    x-show="tab === 'posts'"
+                    x-transition.duration.300ms
                 >
                     @livewire('user.posts', [
                         'user' => $user,
@@ -97,7 +98,8 @@
                 {{-- 會員回覆 --}}
                 <div
                     x-cloak
-                    x-show.transition.in.duration.300ms="tab === 'replies'"
+                    x-show="tab === 'replies'"
+                    x-transition.duration.300ms
                 >
                     @livewire('user.replies', [
                         'user' => $user,

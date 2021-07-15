@@ -34,7 +34,11 @@
                             <div class="sticky top-9 flex flex-col justify-center items-center">
                                     @if ($post->trashed())
                                         <a
-                                            x-on:click="return confirm('您確定恢復此文章嗎？');"
+                                            x-on:click.prevent="
+                                                if (confirm('您確定恢復此文章嗎？')) {
+                                                    window.location.href = $el.href
+                                                }
+                                            "
                                             href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
                                             class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-blue-600 rounded-full
                                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
@@ -50,9 +54,12 @@
 
                                         {{-- Force Delete Button --}}
                                         <button
-                                            x-on:click="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）');"
-                                            type="submit"
-                                            form="force-delete-post"
+                                            x-on:click="
+                                                if(confirm('您確定要完全刪除此文章嗎？（此動作無法復原）')) {
+                                                    document.getElementById('force-delete-post').submit()
+                                                }
+                                            "
+                                            type="button"
                                             class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-red-600 rounded-full
                                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
                                         >
@@ -74,9 +81,12 @@
 
                                         {{-- Soft Delete Post --}}
                                         <button
-                                            x-on:click="return confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以恢復）');"
-                                            type="submit"
-                                            form="delete-post"
+                                            x-on:click="
+                                                if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以恢復）')) {
+                                                    document.getElementById('delete-post').submit()
+                                                }
+                                            "
+                                            type="button"
                                             class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-yellow-600 rounded-full
                                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
                                         >
@@ -104,7 +114,7 @@
                                 <div>
                                     <button
                                         x-on:click="editMenuIsOpen = ! editMenuIsOpen"
-                                        x-on:click.away="editMenuIsOpen = false"
+                                        x-on:click.outside="editMenuIsOpen = false"
                                         x-on:keydown.escape.window="editMenuIsOpen = false"
                                         type="button"
                                         class="text-2xl text-gray-400 hover:text-gray-700 focus:text-gray-700
@@ -117,14 +127,19 @@
 
                                 <div
                                     x-cloak
-                                    x-show.transition.duration.100ms.top.left="editMenuIsOpen"
+                                    x-show="editMenuIsOpen"
+                                    x-transition.duration.100ms
                                     class="origin-top-right absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
                                     dark:bg-gray-600 dark:text-white"
                                     role="menu" aria-orientation="vertical" tabindex="-1"
                                 >
                                     @if ($post->trashed())
                                         <a
-                                            x-on:click="return confirm('您確定恢復此文章嗎？');"
+                                            x-on:click.prevent="
+                                                if (confirm('您確定恢復此文章嗎？')) {
+                                                    window.location.href = $el.href
+                                                }
+                                            "
                                             href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
                                             role="menuitem" tabindex="-1"
                                             class="block px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
@@ -134,8 +149,13 @@
                                         </a>
 
                                         <button
-                                            x-on:click="return confirm('您確定要完全刪除此文章嗎？（此動作無法復原）');"
-                                            type="submit" form="force-delete-post" role="menuitem" tabindex="-1"
+                                            x-on:click="
+                                                if(confirm('您確定要完全刪除此文章嗎？（此動作無法復原）')) {
+                                                    document.getElementById('force-delete-post').submit()
+                                                }
+                                            "
+                                            type="button"
+                                            role="menuitem" tabindex="-1"
                                             class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
                                             dark:hover:bg-gray-500"
                                         >
@@ -152,8 +172,14 @@
                                         </a>
 
                                         <button
-                                            x-on:click="return confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以恢復）');"
-                                            type="submit" form="delete-post" role="menuitem" tabindex="-1"
+                                            x-on:click="
+                                                if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以恢復）')) {
+                                                    document.getElementById('delete-post').submit()
+                                                }
+                                            "
+                                            type="button"
+                                            role="menuitem"
+                                            tabindex="-1"
                                             class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
                                             dark:hover:bg-gray-500"
                                         >

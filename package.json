@@ -14,7 +14,7 @@
         "@types/yaireo__tagify": "^4.3.1",
         "@yaireo/tagify": "^4.3.1",
         "algoliasearch": "^4.10.2",
-        "alpinejs": "^2.8.2",
+        "alpinejs": "^3.2.2",
         "autocomplete.js": "^0.38.0",
         "autoprefixer": "^10.1.0",
         "axios": "^0.21",

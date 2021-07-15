@@ -1,7 +1,7 @@
-<div class="w-full xl:w-2/3 space-y-6">
+<div class="w-full xl:w-2/3 space-y-6 mt-6">
     {{-- Reply --}}
     @if (auth()->check())
-        <x-card class="w-full mt-6">
+        <x-card class="w-full">
             <textarea
                 wire:model.debounce.500ms="content"
                 id="content"
@@ -35,7 +35,7 @@
     </div>
 
     {{-- Reply Container --}}
-    <div id="post-{{ $post->id }}-replies-container" class="w-full space-y-6 mt-6">
+    <div id="post-{{ $post->id }}-replies-container" class="w-full space-y-6">
 
         @forelse ($replies as $reply)
             {{-- Reply Container --}}

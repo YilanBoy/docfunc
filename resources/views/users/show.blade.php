@@ -88,7 +88,7 @@
                 <div
                     x-cloak
                     x-show="tab === 'posts'"
-                    x-transition.duration.300ms
+                    x-transition:enter.duration.300ms
                 >
                     @livewire('user.posts', [
                         'user' => $user,
@@ -99,7 +99,7 @@
                 <div
                     x-cloak
                     x-show="tab === 'replies'"
-                    x-transition.duration.300ms
+                    x-transition:enter.duration.300ms
                 >
                     @livewire('user.replies', [
                         'user' => $user,

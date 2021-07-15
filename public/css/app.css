@@ -703,8 +703,6 @@ video {
 	flex-shrink: 0;
 }.flex-grow{
 	flex-grow: 1;
-}.origin-top-right{
-	transform-origin: top right;
 }.transform{
 	transform: var(--tw-transform);
 }.cursor-default{

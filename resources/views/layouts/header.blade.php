@@ -154,8 +154,8 @@
                             x-cloak
                             x-on:click.outside="profileIsOpen = false"
                             x-show="profileIsOpen"
-                            x-transition.duration.100ms
-                            class="origin-top-right absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
+                            x-transition.origin.top.right
+                            class="absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
                             dark:bg-gray-600 dark:text-white"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                         >
@@ -195,7 +195,7 @@
     <div
         x-cloak
         x-show="mobileMenuIsOpen"
-        x-transition.duration.100ms
+        x-transition.origin.top
         class="sm:hidden"
     >
         <div class="px-2 pt-2 pb-3 space-y-1">

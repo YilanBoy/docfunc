@@ -2,31 +2,32 @@
     {{-- Reply --}}
     @if (auth()->check())
         <x-card class="w-full">
-            <textarea
-                wire:model.debounce.500ms="content"
-                id="content"
-                placeholder="分享你的評論~"
-                rows="5"
-                class="form-textarea w-full rounded-md shadow-sm border border-gray-300
-                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
-                dark:bg-gray-500 dark:text-white dark:placeholder-white"
-            ></textarea>
+            <form wire:submit.prevent="store">
+                <textarea
+                    wire:model.debounce.500ms="content"
+                    id="content"
+                    placeholder="分享你的評論~"
+                    rows="5"
+                    class="form-textarea w-full rounded-md shadow-sm border border-gray-300
+                    focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+                    dark:bg-gray-500 dark:text-white dark:placeholder-white"
+                ></textarea>
 
-            <div class="flex justify-between mt-2">
-                <div class="flex justify-center items-center">
-                    @error('content') <span class="text-red-600">{{ $message }}</span> @enderror
+                <div class="flex justify-between mt-2">
+                    <div class="flex justify-center items-center">
+                        @error('content') <span class="text-red-600">{{ $message }}</span> @enderror
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="inline-flex justify-center items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-white
+                        uppercase tracking-widest hover:bg-blue-500 active:bg-blue-900 focus:outline-none focus:border-blue-900
+                        focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150"
+                    >
+                        <i class="bi bi-chat-left-text-fill"></i><span class="ml-2">回覆</span>
+                    </button>
                 </div>
-
-                <button
-                    wire:click="store"
-                    class="inline-flex justify-center items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-white
-                    uppercase tracking-widest hover:bg-blue-500 active:bg-blue-900 focus:outline-none focus:border-blue-900
-                    focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150"
-                >
-                    <i class="bi bi-chat-left-text-fill"></i><span class="ml-2">回覆</span>
-                </button>
-            </div>
-
+            </form>
         </x-card>
     @endif
 

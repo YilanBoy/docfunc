@@ -75,23 +75,7 @@
                         @endforeach
 
                         {{-- 搜尋 --}}
-                        <div class="hidden relative xl:inline-block">
-                            <input
-                                type="search"
-                                id="aa-search-input"
-                                name="search"
-                                autocomplete="off"
-                                placeholder="Search"
-                                class="outline-none w-3/4 rounded-xl bg-gray-100 placeholder-gray-400 border border-gray-400
-                                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 py-2 pl-8
-                                dark:bg-gray-500 dark:placeholder-white dark:text-white"
-                            />
-
-                            <div class="absolute top-0 flex items-center h-full ml-2 text-gray-400
-                            dark:text-white">
-                                <i class="bi bi-search"></i>
-                            </div>
-                        </div>
+                        @livewire('search')
 
                     </div>
                 </div>

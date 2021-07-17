@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="flex-grow container mx-auto max-w-7xl mt-6">
-        <div class="flex flex-col xl:flex-row justify-center items-start space-y-6 xl:space-y-0 px-4 xl:px-0">
+        <div class="flex flex-col xl:flex-row justify-center space-y-6 xl:space-y-0 px-4 xl:px-0">
 
             <div class="w-full xl:w-80
             flex flex-col md:flex-row xl:flex-col justify-center items-center md:items-start xl:items-center xl:mr-6">

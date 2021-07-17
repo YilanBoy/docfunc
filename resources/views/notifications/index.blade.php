@@ -4,7 +4,7 @@
 @section('title', '我的通知')
 
 @section('content')
-    <div class="flex-grow container mx-auto max-w-7xl mt-6">
+    <div class="container mx-auto max-w-7xl mt-6">
         <div class="flex justify-center items-center px-4 xl:px-0">
 
             <div class="w-full md:w-2/3 xl:w-1/2 space-y-6 flex flex-col justify-center items-center">

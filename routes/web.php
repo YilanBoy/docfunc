@@ -28,7 +28,6 @@ require __DIR__ . '/auth.php';
 Route::prefix('users')->group(function () {
     Route::get('/{user}', [UserController::class, 'show'])->name('users.show');
     Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::get('/{user}/setting', [UserController::class, 'setting'])->name('users.setting');
     Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
     Route::get('/{user}/change-password', [UserController::class, 'changePassword'])->name('users.changePassword');
     Route::put('/{user}/change-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
@@ -67,3 +66,5 @@ Route::get('tags/{tag}', [TagController::class, 'show'])->name('tags.show');
 
 // 上傳圖片至 S3
 Route::post('/images/upload', [ImageController::class, 'store'])->name('images.store');
+
+Route::view('/setting/theme', 'setting/theme')->name('setting.theme');

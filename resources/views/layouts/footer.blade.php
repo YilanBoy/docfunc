@@ -1,7 +1,7 @@
 <footer id="footer" class="bg-gray-800 pt-4 mt-6">
     <div class="max-w-6xl m-auto text-gray-800 flex flex-wrap justify-left">
         {{-- Col-1 --}}
-        <div class="p-5 w-1/2 sm:w-1/3">
+        <div class="p-5 w-1/2 sm:w-1/3 md:w-1/4">
             {{-- Title --}}
             <div class="text-lg uppercase text-gray-500 font-medium mb-6">
                 About
@@ -18,7 +18,7 @@
         </div>
 
         {{-- Col-2 --}}
-        <div class="p-5 w-1/2 sm:w-1/3">
+        <div class="p-5 w-1/2 sm:w-1/3 md:w-1/4">
             {{-- Title --}}
             <div class="text-lg uppercase text-gray-500 font-medium mb-6">
                 Learing
@@ -32,7 +32,7 @@
         </div>
 
         {{-- Col-3 --}}
-        <div class="p-5 w-1/2 sm:w-1/3">
+        <div class="p-5 w-1/2 sm:w-1/3 md:w-1/4">
             {{-- Title --}}
             <div class="text-lg uppercase text-gray-500 font-medium mb-6">
                 Special Thanks
@@ -62,6 +62,20 @@
             <a href="https://www.flaticon.com/authors/freepik" target="_blank" rel="nofollow noopener noreferrer"
             class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
                 Frepik from flaction
+            </a>
+        </div>
+
+        {{-- Col-4 --}}
+        <div class="p-5 w-1/2 sm:w-1/3 md:w-1/4">
+            {{-- Title --}}
+            <div class="text-lg uppercase text-gray-500 font-medium mb-6">
+                Setting
+            </div>
+
+            {{-- Links --}}
+            <a href="{{ route('setting.theme') }}"
+            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+                Theme
             </a>
         </div>
     </div>

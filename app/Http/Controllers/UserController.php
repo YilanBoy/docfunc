@@ -35,13 +35,19 @@ class UserController extends Controller
         return view('users.edit', ['user' => $user]);
     }
 
-    // 網站設定
-    public function setting(User $user)
+    // 更新個人資料
+    public function update(UserRequest $request, User $user)
     {
-        // 會員只能進入自己的頁面，規則寫在 UserPolicy
         $this->authorize('update', $user);
 
-        return view('users.setting');
+        // 更新會員資料
+        $user->update([
+            'name' => $request->name,
+            // 替換連續兩次以上空白與換行的混合
+            'introduction' => preg_replace('/(\s*(\\r\\n|\\r|\\n)\s*){2,}/u', PHP_EOL, $request->introduction),
+        ]);
+
+        return redirect()->route('users.show', ['user' => $user->id])->with('success', '個人資料更新成功！');
     }
 
     // 更新密碼頁面
@@ -75,20 +81,5 @@ class UserController extends Controller
         User::find(auth()->id())->update(['password' => Hash::make($request->new_password)]);
 
         return back()->with('status', '密碼修改成功！');
-    }
-
-    // 更新個人資料
-    public function update(UserRequest $request, User $user)
-    {
-        $this->authorize('update', $user);
-
-        // 更新會員資料
-        $user->update([
-            'name' => $request->name,
-            // 替換連續兩次以上空白與換行的混合
-            'introduction' => preg_replace('/(\s*(\\r\\n|\\r|\\n)\s*){2,}/u', PHP_EOL, $request->introduction),
-        ]);
-
-        return redirect()->route('users.show', ['user' => $user->id])->with('success', '個人資料更新成功！');
     }
 }

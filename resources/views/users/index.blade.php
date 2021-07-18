@@ -22,13 +22,6 @@
                             編輯個人資料
                         </a>
 
-                        <a href="{{ route('users.setting', ['user' => auth()->id()]) }}"
-                        class="block text-black rounded-md p-2 mt-2 bg-white
-                        dark:text-white dark:bg-gray-600
-                        {{ (request()->url() === route('users.setting', ['user' => auth()->id()])) ? 'bg-gray-200 dark:bg-gray-500' : 'hover:bg-gray-200 dark:hover:bg-gray-500' }}">
-                            網站設定
-                        </a>
-
                         <a href="{{ route('users.changePassword', ['user' => auth()->id()]) }}"
                         class="block text-black rounded-md p-2 mt-2 bg-white
                         dark:text-white dark:bg-gray-600

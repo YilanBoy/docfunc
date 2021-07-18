@@ -30,6 +30,8 @@ Route::prefix('users')->group(function () {
     Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::get('/{user}/setting', [UserController::class, 'setting'])->name('users.setting');
     Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::get('/{user}/change-password', [UserController::class, 'changePassword'])->name('users.changePassword');
+    Route::put('/{user}/change-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
 });
 
 // 文章列表與內容

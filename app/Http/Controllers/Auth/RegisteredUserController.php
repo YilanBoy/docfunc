@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Rules\Recaptcha;
+use Illuminate\Validation\Rules\Password;
 
 class RegisteredUserController extends Controller
 {
@@ -33,10 +34,12 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        $passwordRule = Password::min(8)->letters()->mixedCase()->numbers();
+
         $rules = [
             'name' => 'required|string|regex:/^[A-Za-z0-9\-\_]+$/u|between:3,25|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:8',
+            'password' => ['required', 'confirmed', $passwordRule],
         ];
 
         $messages = [];

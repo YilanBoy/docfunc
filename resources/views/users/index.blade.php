@@ -11,7 +11,7 @@
                 dark:text-white">
                     <h3 class="w-full font-semibold text-lg text-center border-black border-b-2 pb-3 mb-3
                     dark:border-white">
-                        <i class="bi bi-person-lines-fill"></i><span class="ml-2">選項</span>
+                        <i class="bi bi-person-lines-fill"></i><span class="ml-2">會員中心</span>
                     </h3>
 
                     <div class="w-full flex flex-col">
@@ -29,10 +29,11 @@
                             網站設定
                         </a>
 
-                        <a href="#"
-                        class="block text-black rounded-md p-2 mt-2 bg-white hover:bg-gray-200
-                        dark:text-white dark:bg-gray-600 dark:hover:bg-gray-500">
-                            更改密碼（開發中）
+                        <a href="{{ route('users.changePassword', ['user' => auth()->id()]) }}"
+                        class="block text-black rounded-md p-2 mt-2 bg-white
+                        dark:text-white dark:bg-gray-600
+                        {{ (request()->url() === route('users.changePassword', ['user' => auth()->id()])) ? 'bg-gray-200 dark:bg-gray-500' : 'hover:bg-gray-200 dark:hover:bg-gray-500' }}">
+                            修改密碼
                         </a>
 
                         <a href="#"

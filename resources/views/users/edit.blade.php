@@ -26,14 +26,8 @@
 
         {{-- Email Address --}}
         <div class="mt-5">
-            <x-floating-label-input
-                :type="'text'"
-                :name="'email'"
-                :placeholder="'信箱 (不能編輯)'"
-                :value="old('email', $user->email)"
-                required
-                readonly
-            ></x-floating-label-input>
+            <div class="text-gray-600 dark:text-white">信箱</div>
+            <div class="text-black dark:text-white">{{ $user->email }}</div>
         </div>
 
         {{-- Name --}}

@@ -4,10 +4,10 @@
 @section('title', '網站設定-主題')
 
 @section('content')
-    <div class="flex-grow container mx-auto max-w-7xl py-6">
+    <div class="container mx-auto max-w-7xl py-6">
+        <div class="flex justify-center items-center px-4">
 
-        <div class="flex flex-col md:flex-row justify-center items-start px-4 xl:px-0">
-            <x-card class="w-full md:w-1/2 flex flex-col justify-center mt-6 md:mt-0">
+            <x-card class="w-full md:w-1/2 flex flex-col justify-center">
                 <div class="text-gray-600 dark:text-white">網站主題</div>
 
                 {{-- 明亮 / 暗黑模式切換 --}}
@@ -18,7 +18,7 @@
                     <option value="dark">暗黑</option>
                 </select>
             </x-card>
-        </div>
 
+        </div>
     </div>
 @endsection

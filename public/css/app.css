@@ -577,6 +577,9 @@ video {
 }.my-5{
 	margin-top: 1.25rem;
 	margin-bottom: 1.25rem;
+}.mx-4{
+	margin-left: 1rem;
+	margin-right: 1rem;
 }.ml-3{
 	margin-left: 0.75rem;
 }.-ml-px{

@@ -152,7 +152,7 @@
                             <a href="{{ route('users.edit', ['user' => auth()->id()]) }}"
                             role="menuitem" tabindex="-1"
                             class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-500">
-                                <i class="bi bi-person-lines-fill"></i><span class="ml-2">會員中心</span>
+                                <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
                             </a>
 
                             <form id="logout" action="{{ route('logout') }}" method="POST" onSubmit="return confirm('您確定要登出？');"

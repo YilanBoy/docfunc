@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
@@ -31,6 +32,9 @@ Route::prefix('users')->group(function () {
     Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
     Route::get('/{user}/change-password', [UserController::class, 'changePassword'])->name('users.changePassword');
     Route::put('/{user}/change-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
+    Route::get('/{user}/delete-user', [UserController::class, 'deleteUser'])->name('users.deleteUser');
+    Route::post('/{user}/send-delete-user-email', [UserController::class, 'sendDeleteUserEmail'])->name('users.sendDeleteUserEmail');
+    Route::delete('/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
 // 文章列表與內容

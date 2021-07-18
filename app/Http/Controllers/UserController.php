@@ -8,6 +8,10 @@ use App\Http\Requests\UserRequest;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DeleteAccount;
 
 class UserController extends Controller
 {
@@ -81,5 +85,50 @@ class UserController extends Controller
         User::find(auth()->id())->update(['password' => Hash::make($request->new_password)]);
 
         return back()->with('status', '密碼修改成功！');
+    }
+
+    // 刪除用戶頁面
+    public function deleteUser(User $user)
+    {
+        $this->authorize('update', $user);
+
+        return view('users.delete-user', ['user' => $user]);
+    }
+
+    public function sendDeleteUserEmail(User $user)
+    {
+        $this->authorize('update', $user);
+
+        // 生成一次性連結
+        $deleteAccountLink = URL::temporarySignedRoute(
+            'users.destroy',
+            now()->addMinutes(30),
+            ['user' => $user->id]
+        );
+
+        Mail::to($user)->send(new DeleteAccount($deleteAccountLink));
+
+        return back()->with('status', '已寄出信件！');
+    }
+
+    // 刪除用戶
+    public function destroy(Request $request, User $user)
+    {
+        // 確認來源網址是否有效
+        if (!$request->hasValidSignature()) {
+            abort(401);
+        }
+
+        $this->authorize('update', $user);
+
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        $user->delete();
+
+        return redirect(route('posts.index'))->with('success', '帳號已刪除！');
     }
 }

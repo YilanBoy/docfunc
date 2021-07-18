@@ -1,6 +1,6 @@
 @extends('users.index')
 
-@section('title', '會員中心-編輯個人資料')
+@section('title', '會員中心-修改密碼')
 
 @section('users.content')
 

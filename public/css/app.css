@@ -577,9 +577,6 @@ video {
 }.my-5{
 	margin-top: 1.25rem;
 	margin-bottom: 1.25rem;
-}.mx-4{
-	margin-left: 1rem;
-	margin-right: 1rem;
 }.ml-3{
 	margin-left: 0.75rem;
 }.-ml-px{
@@ -899,6 +896,9 @@ video {
 }.bg-purple-600{
 	--tw-bg-opacity: 1;
 	background-color: rgba(124, 58, 237, var(--tw-bg-opacity));
+}.bg-gray-700{
+	--tw-bg-opacity: 1;
+	background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
 }.bg-gradient-to-r{
 	background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }.bg-gradient-to-br{
@@ -1133,6 +1133,9 @@ video {
 }.ring-red-500{
 	--tw-ring-opacity: 1;
 	--tw-ring-color: rgba(239, 68, 68, var(--tw-ring-opacity));
+}.ring-red-300{
+	--tw-ring-opacity: 1;
+	--tw-ring-color: rgba(252, 165, 165, var(--tw-ring-opacity));
 }.ring-opacity-20{
 	--tw-ring-opacity: 0.2;
 }.transition{
@@ -1201,6 +1204,9 @@ video {
 }.hover\:bg-red-800:hover{
 	--tw-bg-opacity: 1;
 	background-color: rgba(153, 27, 27, var(--tw-bg-opacity));
+}.hover\:bg-red-500:hover{
+	--tw-bg-opacity: 1;
+	background-color: rgba(239, 68, 68, var(--tw-bg-opacity));
 }.hover\:text-gray-500:hover{
 	--tw-text-opacity: 1;
 	color: rgba(107, 114, 128, var(--tw-text-opacity));
@@ -1245,6 +1251,9 @@ video {
 }.focus\:border-blue-900:focus{
 	--tw-border-opacity: 1;
 	border-color: rgba(30, 58, 138, var(--tw-border-opacity));
+}.focus\:border-red-900:focus{
+	--tw-border-opacity: 1;
+	border-color: rgba(127, 29, 29, var(--tw-border-opacity));
 }.focus\:text-gray-700:focus{
 	--tw-text-opacity: 1;
 	color: rgba(55, 65, 81, var(--tw-text-opacity));
@@ -1292,6 +1301,9 @@ video {
 }.active\:bg-red-600:active{
 	--tw-bg-opacity: 1;
 	background-color: rgba(220, 38, 38, var(--tw-bg-opacity));
+}.active\:bg-red-900:active{
+	--tw-bg-opacity: 1;
+	background-color: rgba(127, 29, 29, var(--tw-bg-opacity));
 }.active\:text-gray-700:active{
 	--tw-text-opacity: 1;
 	color: rgba(55, 65, 81, var(--tw-text-opacity));
@@ -1458,10 +1470,10 @@ video {
 		display: none;
 	}.md\:w-1\/4{
 		width: 25%;
-	}.md\:w-60{
-		width: 15rem;
 	}.md\:w-1\/2{
 		width: 50%;
+	}.md\:w-60{
+		width: 15rem;
 	}.md\:w-2\/3{
 		width: 66.666667%;
 	}.md\:flex-auto{

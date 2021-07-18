@@ -31,6 +31,15 @@ class UserController extends Controller
         return view('users.edit', ['user' => $user]);
     }
 
+    // 網站設定
+    public function setting(User $user)
+    {
+        // 會員只能進入自己的頁面，規則寫在 UserPolicy
+        $this->authorize('update', $user);
+
+        return view('users.setting');
+    }
+
     // 更新個人資料
     public function update(UserRequest $request, User $user)
     {

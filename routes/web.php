@@ -28,6 +28,7 @@ require __DIR__ . '/auth.php';
 Route::prefix('users')->group(function () {
     Route::get('/{user}', [UserController::class, 'show'])->name('users.show');
     Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::get('/{user}/setting', [UserController::class, 'setting'])->name('users.setting');
     Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
 });
 

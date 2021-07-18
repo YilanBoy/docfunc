@@ -30,8 +30,9 @@
                         </a>
 
                         <a href="{{ route('users.deleteUser', ['user' => auth()->id()]) }}"
-                        class="block text-black rounded-md p-2 mt-2 bg-white hover:bg-gray-200
-                        dark:text-white dark:bg-gray-600 dark:hover:bg-gray-500">
+                        class="block text-black rounded-md p-2 mt-2 bg-white
+                        dark:text-white dark:bg-gray-600
+                        {{ (request()->url() === route('users.deleteUser', ['user' => auth()->id()])) ? 'bg-gray-200 dark:bg-gray-500' : 'hover:bg-gray-200 dark:hover:bg-gray-500' }}">
                             <i class="bi bi-person-x-fill"></i><span class="ml-2">刪除帳號</span>
                         </a>
                     </div>

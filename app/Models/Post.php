@@ -43,8 +43,10 @@ class Post extends Model
             switch ($order) {
                 case 'recent':
                     return $query->orderBy('updated_at', 'desc');
+                    break;
                 case 'reply':
                     return $query->orderBy('reply_count', 'desc');
+                    break;
                 default:
                     return $query->latest();
             }
@@ -54,7 +56,10 @@ class Post extends Model
     // 將連結加上文章的 slug
     public function getLinkWithSlugAttribute()
     {
-        return route('posts.show', ['post' => $this->id, 'slug' => $this->slug]);
+        return route('posts.show', [
+            'post' => $this->id,
+            'slug' => $this->slug,
+        ]);
     }
 
     // 更新回覆數量

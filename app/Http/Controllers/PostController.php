@@ -49,7 +49,8 @@ class PostController extends Controller
         $post->save();
 
         // 將傳過來的 JSON 資料轉成 array
-        $tagIdsArray = $this->formatTransferService->tagsJsonToTagIdsArray($request->tags);
+        $tagIdsArray = $this->formatTransferService
+            ->tagsJsonToTagIdsArray($request->tags);
 
         // 在關聯表新增關聯
         $post->tags()->attach($tagIdsArray);
@@ -87,7 +88,8 @@ class PostController extends Controller
         $post->excerpt = $this->postService->makeExcerpt($post->body);
         $post->save();
 
-        $tagIdsArray = $this->formatTransferService->tagsJsonToTagIdsArray($request->tags);
+        $tagIdsArray = $this->formatTransferService
+            ->tagsJsonToTagIdsArray($request->tags);
 
         // 關聯表更新
         $post->tags()->sync($tagIdsArray);
@@ -102,7 +104,9 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect()->route('users.show', ['user' => auth()->id()])->with('success', '成功標記文章為刪除狀態！');
+        return redirect()
+            ->route('users.show', ['user' => auth()->id()])
+            ->with('success', '成功標記文章為刪除狀態！');
     }
 
     // 顯示軟刪除的文章內容
@@ -124,7 +128,9 @@ class PostController extends Controller
 
         $softDeletedPost->restore();
 
-        return redirect()->to($softDeletedPost->link_with_slug)->with('success', '成功恢復文章！');
+        return redirect()
+            ->to($softDeletedPost->link_with_slug)
+            ->with('success', '成功恢復文章！');
     }
 
     // 完全刪除文章
@@ -136,6 +142,8 @@ class PostController extends Controller
 
         $softDeletedPost->forceDelete();
 
-        return redirect()->route('users.show', ['user' => auth()->id()])->with('success', '成功刪除文章！');
+        return redirect()
+            ->route('users.show', ['user' => auth()->id()])
+            ->with('success', '成功刪除文章！');
     }
 }

@@ -23,6 +23,9 @@ class Category extends Model
     // 將連結加上分類名稱
     public function getLinkWithNameAttribute()
     {
-        return route('categories.show', ['category' => $this->id, 'name' => $this->name]);
+        return route('categories.show', [
+            'category' => $this->id,
+            'name' => $this->name,
+        ]);
     }
 }

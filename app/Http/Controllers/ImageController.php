@@ -30,8 +30,6 @@ class ImageController extends Controller
         $filePath = 'images/' . $imageName;
         Storage::disk('s3')->put($filePath, file_get_contents($file), 'public');
 
-        return response()->json([
-            'url' => Storage::disk('s3')->url($filePath),
-        ]);
+        return response()->json(['url' => Storage::disk('s3')->url($filePath)]);
     }
 }

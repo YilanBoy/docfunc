@@ -27,8 +27,6 @@ class Posts extends Component
             ->latest()
             ->paginate(10);
 
-        return view('livewire.user.posts', [
-            'posts' => $posts,
-        ]);
+        return view('livewire.user.posts', ['posts' => $posts]);
     }
 }

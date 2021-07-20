@@ -45,8 +45,6 @@ class Posts extends Component
             ->with('user', 'category') // 預加載防止 N+1 問題
             ->paginate(10);
 
-        return view('livewire.posts', [
-            'posts' => $posts,
-        ]);
+        return view('livewire.posts', ['posts' => $posts]);
     }
 }

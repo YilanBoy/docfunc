@@ -27,8 +27,6 @@ class Replies extends Component
             ->latest()
             ->paginate(10);
 
-        return view('livewire.user.replies', [
-            'replies' => $replies,
-        ]);
+        return view('livewire.user.replies', ['replies' => $replies]);
     }
 }

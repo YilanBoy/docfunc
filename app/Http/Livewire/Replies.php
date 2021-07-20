@@ -36,11 +36,17 @@ class Replies extends Component
     {
         $this->validate();
 
-        $reply = Reply::create([
-            'post_id' => $this->post->id,
-            'user_id' => auth()->id(),
-            'content' => preg_replace('/(\s*(\\r\\n|\\r|\\n)\s*){3,}/u', PHP_EOL . PHP_EOL, $this->content),
-        ]);
+        $reply = Reply::create(
+            [
+                'post_id' => $this->post->id,
+                'user_id' => auth()->id(),
+                'content' => preg_replace(
+                    '/(\s*(\\r\\n|\\r|\\n)\s*){3,}/u',
+                    PHP_EOL . PHP_EOL,
+                    $this->content
+                ),
+            ]
+        );
 
         // 更新文章留言數
         $reply->post->updateReplyCount();
@@ -66,11 +72,11 @@ class Replies extends Component
 
     public function render()
     {
-        return view('livewire.replies', [
-            'replies' => $this->post->replies()
-                ->with('user', 'post')
-                ->latest()
-                ->paginate(10),
-        ]);
+        $replies = $this->post->replies()
+            ->with('user', 'post')
+            ->latest()
+            ->paginate(10);
+
+        return view('livewire.replies', ['replies' => $replies]);
     }
 }

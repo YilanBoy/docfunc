@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class GetTagsController extends Controller
+class TagController extends Controller
 {
     public function __invoke()
     {

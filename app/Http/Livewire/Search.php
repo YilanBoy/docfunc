@@ -17,8 +17,6 @@ class Search extends Component
             $results = Post::search($this->search)->take(10)->get();
         }
 
-        return view('livewire.search', [
-            'results' => $results,
-        ]);
+        return view('livewire.search', ['results' => $results]);
     }
 }

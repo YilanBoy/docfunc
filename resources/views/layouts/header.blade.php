@@ -55,9 +55,11 @@
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         <a
                             href="{{ route('posts.index') }}"
-                            class="
-                            {{ (request()->url() === route('posts.index')) ? 'text-gray-700 dark:text-white' : 'text-gray-400 hover:text-gray-700 dark:hover:text-white' }}
-                            text-lg p-2 font-medium"
+                            @class([
+                                'text-lg p-2 font-medium',
+                                'text-gray-700 dark:text-white' => (request()->url() === route('posts.index')),
+                                'text-gray-400 hover:text-gray-700 dark:hover:text-white' => (request()->url() !== route('posts.index')),
+                            ])
                             @if(request()->url() === route('posts.index')) aria-current="page" @endif
                         >
                             <i class="bi bi-house-fill"></i><span class="ml-2">全部文章</span>
@@ -65,9 +67,11 @@
                         @foreach ($categories as $category)
                             <a
                                 href="{{ $category->link_with_name }}"
-                                class="
-                                {{ (request()->url() === $category->link_with_name) ? 'text-gray-700 dark:text-white' : 'text-gray-400 hover:text-gray-700 dark:hover:text-white' }}
-                                text-lg p-2 font-medium"
+                                @class([
+                                    'text-lg p-2 font-medium',
+                                    'text-gray-700 dark:text-white' => (request()->url() === $category->link_with_name),
+                                    'text-gray-400 hover:text-gray-700 dark:hover:text-white' => (request()->url() !== $category->link_with_name),
+                                ])
                                 @if(request()->url() === $category->link_with_name) aria-current="page" @endif
                             >
                                 <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>
@@ -106,9 +110,14 @@
                     @endif
 
                     {{-- 通知 --}}
-                    <a href="{{ route('notifications.index') }}"
-                    class="p-1 mr-3 rounded-full
-                    {{ (auth()->user()->notification_count > 0) ? 'text-red-400 hover:text-red-700' : 'text-gray-400 hover:text-gray-700 dark:hover:text-white' }}">
+                    <a
+                        href="{{ route('notifications.index') }}"
+                        @class([
+                            'p-1 mr-3 rounded-full',
+                            'text-red-400 hover:text-red-700' => (auth()->user()->notification_count > 0),
+                            'text-gray-400 hover:text-gray-700 dark:hover:text-white' => (auth()->user()->notification_count === 0),
+                        ])
+                    >
                         <span class="sr-only">View notifications</span>
                         <i class="text-lg bi bi-bell-fill"></i>
                     </a>
@@ -185,9 +194,11 @@
         <div class="px-2 pt-2 pb-3 space-y-1">
             <a
                 href="{{ route('posts.index') }}"
-                class="
-                {{ (request()->url() === route('posts.index')) ? 'bg-gray-200 text-gray-700' : 'text-gray-400 hover:text-gray-700 hover:bg-gray-200' }}
-                block px-3 py-2 rounded-md font-medium"
+                @class([
+                    'block px-3 py-2 rounded-md font-medium',
+                    'bg-gray-200 text-gray-700' => (request()->url() === route('posts.index')),
+                    'text-gray-400 hover:text-gray-700 hover:bg-gray-200' => (request()->url() !== route('posts.index')),
+                ])
                 @if(request()->url() === route('posts.index')) aria-current="page" @endif
             >
                 <i class="bi bi-house-fill"></i><span class="ml-2">全部文章</span>
@@ -195,9 +206,11 @@
             @foreach ($categories as $category)
                 <a
                     href="{{ $category->link_with_name }}"
-                    class="
-                    {{ (request()->url() === $category->link_with_name) ? 'bg-gray-200 text-gray-700' : 'text-gray-400 hover:text-gray-700 hover:bg-gray-200' }}
-                    block px-3 py-2 rounded-md font-medium"
+                    @class([
+                        'block px-3 py-2 rounded-md font-medium',
+                        'bg-gray-200 text-gray-700' => (request()->url() === $category->link_with_name),
+                        'text-gray-400 hover:text-gray-700 hover:bg-gray-200' => (request()->url() !== $category->link_with_name),
+                    ])
                     @if(request()->url() === $category->link_with_name) aria-current="page" @endif
                 >
                     <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>

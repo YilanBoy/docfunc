@@ -6,9 +6,11 @@
             <a
                 wire:click.prevent="orderChange('latest')"
                 href="{{ $currentUrl . '?order=latest' }}"
-                class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700 border-b-4 px-2 sm:px-7 py-2
-                dark:hover:text-white
-                {{ ($order === 'latest') ? 'border-blue-500 text-gray-700 dark:text-white' : 'border-gray-400 text-gray-400' }}"
+                @class([
+                    'block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700 border-b-4 px-2 sm:px-7 py-2 dark:hover:text-white',
+                    'border-blue-500 text-gray-700 dark:text-white' => ($order === 'latest'),
+                    'border-gray-400 text-gray-400' => ($order !== 'latest'),
+                ])
             >
                 <span>最新文章</span>
             </a>
@@ -16,9 +18,11 @@
             <a
                 wire:click.prevent="orderChange('recent')"
                 href="{{ $currentUrl . '?order=recent' }}"
-                class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700 border-b-4 px-2 sm:px-7 py-2
-                dark:hover:text-white
-                {{ ($order === 'recent') ? 'border-blue-500 text-gray-700 dark:text-white' : 'border-gray-400 text-gray-400' }}"
+                @class([
+                    'block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700 border-b-4 px-2 sm:px-7 py-2 dark:hover:text-white',
+                    'border-blue-500 text-gray-700 dark:text-white' => ($order === 'recent'),
+                    'border-gray-400 text-gray-400' => ($order !== 'recent'),
+                ])
             >
                 <span>最近更新</span>
             </a>
@@ -26,9 +30,11 @@
             <a
                 wire:click.prevent="orderChange('reply')"
                 href="{{ $currentUrl . '?order=reply' }}"
-                class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700 border-b-4 px-2 sm:px-7 py-2
-                dark:hover:text-white
-                {{ ($order === 'reply') ? 'border-blue-500 text-gray-700 dark:text-white' : 'border-gray-400 text-gray-400' }}"
+                @class([
+                    'block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700 border-b-4 px-2 sm:px-7 py-2 dark:hover:text-white',
+                    'border-blue-500 text-gray-700 dark:text-white' => ($order === 'reply'),
+                    'border-gray-400 text-gray-400' => ($order !== 'reply'),
+                ])
             >
                 <span>最多留言</span>
             </a>

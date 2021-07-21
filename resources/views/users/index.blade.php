@@ -15,24 +15,36 @@
                     </h3>
 
                     <div class="w-full flex flex-col">
-                        <a href="{{ route('users.edit', ['user' => auth()->id()]) }}"
-                        class="block text-black rounded-md p-2 bg-white
-                        dark:text-white dark:bg-gray-600
-                        {{ (request()->url() === route('users.edit', ['user' => auth()->id()])) ? 'bg-gray-200 dark:bg-gray-500' : 'hover:bg-gray-200 dark:hover:bg-gray-500' }}">
+                        <a
+                            href="{{ route('users.edit', ['user' => auth()->id()]) }}"
+                            @class([
+                                'block text-black rounded-md p-2 bg-white dark:text-white dark:bg-gray-600',
+                                'bg-gray-200 dark:bg-gray-500' => (request()->url() === route('users.edit', ['user' => auth()->id()])),
+                                'hover:bg-gray-200 dark:hover:bg-gray-500' => (request()->url() !== route('users.edit', ['user' => auth()->id()])),
+                            ])
+                        >
                             <i class="bi bi-person-lines-fill"></i><span class="ml-2">編輯個人資料</span>
                         </a>
 
-                        <a href="{{ route('users.changePassword', ['user' => auth()->id()]) }}"
-                        class="block text-black rounded-md p-2 mt-2 bg-white
-                        dark:text-white dark:bg-gray-600
-                        {{ (request()->url() === route('users.changePassword', ['user' => auth()->id()])) ? 'bg-gray-200 dark:bg-gray-500' : 'hover:bg-gray-200 dark:hover:bg-gray-500' }}">
+                        <a
+                            href="{{ route('users.changePassword', ['user' => auth()->id()]) }}"
+                            @class([
+                                'block text-black rounded-md p-2 mt-2 bg-white dark:text-white dark:bg-gray-600',
+                                'bg-gray-200 dark:bg-gray-500' => (request()->url() === route('users.changePassword', ['user' => auth()->id()])),
+                                'hover:bg-gray-200 dark:hover:bg-gray-500' => (request()->url() !== route('users.changePassword', ['user' => auth()->id()])),
+                            ])
+                        >
                             <i class="bi bi-file-earmark-lock-fill"></i><span class="ml-2">修改密碼</span>
                         </a>
 
-                        <a href="{{ route('users.deleteUser', ['user' => auth()->id()]) }}"
-                        class="block text-black rounded-md p-2 mt-2 bg-white
-                        dark:text-white dark:bg-gray-600
-                        {{ (request()->url() === route('users.deleteUser', ['user' => auth()->id()])) ? 'bg-gray-200 dark:bg-gray-500' : 'hover:bg-gray-200 dark:hover:bg-gray-500' }}">
+                        <a
+                            href="{{ route('users.deleteUser', ['user' => auth()->id()]) }}"
+                            @class([
+                                'block text-black rounded-md p-2 mt-2 bg-white dark:text-white dark:bg-gray-600',
+                                'bg-gray-200 dark:bg-gray-500' => (request()->url() === route('users.deleteUser', ['user' => auth()->id()])),
+                                'hover:bg-gray-200 dark:hover:bg-gray-500' => (request()->url() !== route('users.deleteUser', ['user' => auth()->id()])),
+                            ])
+                        >
                             <i class="bi bi-person-x-fill"></i><span class="ml-2">刪除帳號</span>
                         </a>
                     </div>

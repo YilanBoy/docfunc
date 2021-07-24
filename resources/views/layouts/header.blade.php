@@ -3,12 +3,12 @@
     x-data="{ mobileMenuIsOpen : false }"
     id="header"
     class="relative bg-white border-blue-400 border-t-4 shadow-md
-    dark:bg-gray-800"
+    dark:bg-gray-800 sm:hidden"
 >
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between h-18">
             <div
-                class="absolute inset-y-0 left-0 flex items-center sm:hidden"
+                class="absolute inset-y-0 left-0 flex items-center"
             >
                 {{-- 手機版選單按鈕 --}}
                 <button
@@ -35,54 +35,6 @@
                         <i class="bi bi-x-lg"></i>
                     </div>
                 </button>
-            </div>
-            {{-- 電腦版選單 --}}
-            <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                <div class="flex-shrink-0 flex items-center">
-                    <img class="block lg:hidden h-8 w-auto" src="{{ asset('images/icon/icon.png') }}" alt="{{ config('app.name') }}">
-                    <span class="flex items-center justify-center">
-                        <img class="hidden lg:block h-8 w-auto" src="{{ asset('images/icon/icon.png') }}" alt="{{ config('app.name') }}">
-                        <span
-                            class="hidden font-bold font-mono text-xl lg:block ml-2
-                            dark:text-white"
-                        >
-                            {{ config('app.name') }}
-                        </span>
-                    </span>
-                </div>
-                <div class="hidden sm:block sm:ml-6">
-                    <div class="flex space-x-2">
-                        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <a
-                            href="{{ route('posts.index') }}"
-                            @class([
-                                'text-lg p-2 font-medium',
-                                'text-gray-700 dark:text-white' => (request()->url() === route('posts.index')),
-                                'text-gray-400 hover:text-gray-700 dark:hover:text-white' => (request()->url() !== route('posts.index')),
-                            ])
-                            @if(request()->url() === route('posts.index')) aria-current="page" @endif
-                        >
-                            <i class="bi bi-house-fill"></i><span class="hidden xl:inline ml-2">全部文章</span>
-                        </a>
-                        @foreach ($categories as $category)
-                            <a
-                                href="{{ $category->link_with_name }}"
-                                @class([
-                                    'text-lg p-2 font-medium',
-                                    'text-gray-700 dark:text-white' => (request()->url() === $category->link_with_name),
-                                    'text-gray-400 hover:text-gray-700 dark:hover:text-white' => (request()->url() !== $category->link_with_name),
-                                ])
-                                @if(request()->url() === $category->link_with_name) aria-current="page" @endif
-                            >
-                                <i class="{{ $category->icon }}"></i><span class="hidden xl:inline ml-2">{{ $category->name }}</span>
-                            </a>
-                        @endforeach
-
-                        {{-- 搜尋 --}}
-                        @livewire('search')
-
-                    </div>
-                </div>
             </div>
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
@@ -217,17 +169,5 @@
                 </a>
             @endforeach
         </div>
-    </div>
-
-    {{-- 明亮 / 暗黑模式切換 --}}
-    <div class="absolute top-6 right-3 hidden xl:flex justify-center items-center space-x-2">
-        <span class="text-gray-800 dark:text-gray-600"><i class="bi bi-brightness-high-fill"></i></span>
-        <label for="theme-switch"
-        class="w-9 h-6 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer duration-300 ease-in-out dark:bg-gray-600">
-            <div class="bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out dark:translate-x-3"></div>
-        </label>
-        <span class="text-gray-200 dark:text-white"><i class="bi bi-moon-fill"></i></span>
-
-        <input id="theme-switch" type="checkbox" class="hidden">
     </div>
 </nav>

@@ -1,9 +1,9 @@
 <div
     x-data="{ searchDropdownIsOpen : true }"
     x-on:click.outside="searchDropdownIsOpen = false"
-    class="relative hidden md:block"
+    class="relative"
 >
-    <div class="relative w-4/5">
+    <div class="relative">
         <input
             x-on:focus="searchDropdownIsOpen = true"
             x-on:keydown="searchDropdownIsOpen = true"
@@ -13,14 +13,9 @@
             autocomplete="off"
             placeholder="搜尋文章"
             class="outline-none w-full rounded-xl bg-gray-100 placeholder-gray-400 border border-gray-400
-            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 py-2 pl-10
+            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 py-2 px-4
             dark:bg-gray-500 dark:placeholder-white dark:text-white"
         />
-
-        <div class="absolute top-0 left-0 flex justify-center items-center h-full w-10 text-gray-400
-        dark:text-white">
-            <i class="bi bi-search"></i>
-        </div>
 
         <div
             wire:loading

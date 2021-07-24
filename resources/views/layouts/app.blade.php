@@ -30,12 +30,20 @@
     @yield('scriptsInHead')
 </head>
 
-<body class="flex flex-col min-h-screen justify-between bg-gray-100 dark:bg-gray-700 antialiased font-noto">
-    @include('layouts.header')
+<body class="bg-gray-100 dark:bg-gray-700 antialiased font-noto">
 
-    @yield('content')
+    <div class="relative min-h-screen flex">
 
-    @include('layouts.footer')
+        @include('layouts.sidebar')
+
+        <div class="ml-0 sm:ml-20 w-full flex flex-col justify-between">
+            @include('layouts.header')
+
+            @yield('content')
+
+            @include('layouts.footer')
+        </div>
+    </div>
 
     {{-- Scripts --}}
     @livewireScripts

@@ -1,23 +1,23 @@
 <div
-    x-data="{searchDropdownisOpen : true}"
-    x-on:click.outside="searchDropdownisOpen = false"
-    class="relative"
+    x-data="{ searchDropdownIsOpen : true }"
+    x-on:click.outside="searchDropdownIsOpen = false"
+    class="relative hidden md:block"
 >
-    <div class="hidden relative xl:inline-block w-4/5">
+    <div class="relative w-4/5">
         <input
-            x-on:focus="searchDropdownisOpen = true"
-            x-on:keydown="searchDropdownisOpen = true"
-            x-on:keydown.escape.window="searchDropdownisOpen = false"
+            x-on:focus="searchDropdownIsOpen = true"
+            x-on:keydown="searchDropdownIsOpen = true"
+            x-on:keydown.escape.window="searchDropdownIsOpen = false"
             type="text"
             wire:model.debounce.500ms="search"
             autocomplete="off"
             placeholder="搜尋文章"
             class="outline-none w-full rounded-xl bg-gray-100 placeholder-gray-400 border border-gray-400
-            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 py-2 pl-8
+            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 py-2 pl-10
             dark:bg-gray-500 dark:placeholder-white dark:text-white"
         />
 
-        <div class="absolute top-0 flex items-center h-full ml-2 text-gray-400
+        <div class="absolute top-0 left-0 flex justify-center items-center h-full w-10 text-gray-400
         dark:text-white">
             <i class="bi bi-search"></i>
         </div>
@@ -35,9 +35,9 @@
 
     @if (strlen($search) >= 2)
         <div
-            x-show="searchDropdownisOpen"
+            x-show="searchDropdownIsOpen"
             x-transition.origin.top.left
-            x-on:keydown.escape.window="searchDropdownisOpen = false"
+            x-on:keydown.escape.window="searchDropdownIsOpen = false"
             class="absolute w-96 text-sm mt-2 z-20 bg-white p-2 shadow-md rounded-xl ring-1 ring-black ring-opacity-20
             dark:bg-gray-600 dark:text-white"
         >

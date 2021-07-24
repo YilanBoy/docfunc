@@ -62,7 +62,7 @@
                             ])
                             @if(request()->url() === route('posts.index')) aria-current="page" @endif
                         >
-                            <i class="bi bi-house-fill"></i><span class="ml-2">全部文章</span>
+                            <i class="bi bi-house-fill"></i><span class="hidden xl:inline ml-2">全部文章</span>
                         </a>
                         @foreach ($categories as $category)
                             <a
@@ -74,7 +74,7 @@
                                 ])
                                 @if(request()->url() === $category->link_with_name) aria-current="page" @endif
                             >
-                                <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>
+                                <i class="{{ $category->icon }}"></i><span class="hidden xl:inline ml-2">{{ $category->name }}</span>
                             </a>
                         @endforeach
 

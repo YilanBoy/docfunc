@@ -14,7 +14,7 @@
                         <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
                     </h3>
 
-                    <div class="w-full flex flex-col">
+                    <div class="w-full flex flex-col space-y-1">
                         <a
                             href="{{ route('users.edit', ['user' => auth()->id()]) }}"
                             @class([
@@ -29,7 +29,7 @@
                         <a
                             href="{{ route('users.changePassword', ['user' => auth()->id()]) }}"
                             @class([
-                                'block text-black rounded-md p-2 mt-2 bg-white dark:text-white dark:bg-gray-600',
+                                'block text-black rounded-md p-2 bg-white dark:text-white dark:bg-gray-600',
                                 'bg-gray-200 dark:bg-gray-500' => (request()->url() === route('users.changePassword', ['user' => auth()->id()])),
                                 'hover:bg-gray-200 dark:hover:bg-gray-500' => (request()->url() !== route('users.changePassword', ['user' => auth()->id()])),
                             ])
@@ -40,7 +40,7 @@
                         <a
                             href="{{ route('users.deleteUser', ['user' => auth()->id()]) }}"
                             @class([
-                                'block text-black rounded-md p-2 mt-2 bg-white dark:text-white dark:bg-gray-600',
+                                'block text-black rounded-md p-2 bg-white dark:text-white dark:bg-gray-600',
                                 'bg-gray-200 dark:bg-gray-500' => (request()->url() === route('users.deleteUser', ['user' => auth()->id()])),
                                 'hover:bg-gray-200 dark:hover:bg-gray-500' => (request()->url() !== route('users.deleteUser', ['user' => auth()->id()])),
                             ])

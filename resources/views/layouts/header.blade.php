@@ -191,11 +191,13 @@
         bg-white border-blue-400 border-l-4 shadow-md transition-all duration-300 px-2 pt-6 pb-2
         dark:bg-gray-900"
     >
-        {{-- 電腦版-側邊欄 --}}
+        {{-- 電腦版-Logo --}}
         <div
             class="relative w-full flex justify-center items-center"
         >
-            <img class="peer h-10 w-10" src="{{ asset('images/icon/icon.png') }}" alt="{{ config('app.name') }}">
+            <a href="{{ route('root') }}" class="peer">
+                <img class="h-10 w-10" src="{{ asset('images/icon/icon.png') }}" alt="{{ config('app.name') }}">
+            </a>
 
             <span
                 class="absolute top-4 left-20 flex justify-center items-center w-max opacity-0 transition-all duration-300

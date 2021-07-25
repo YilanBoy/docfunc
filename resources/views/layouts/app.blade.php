@@ -32,13 +32,11 @@
 
 <body class="bg-gray-100 dark:bg-gray-700 antialiased font-noto">
 
-    <div class="relative min-h-screen flex">
+    <div class="relative flex-col lg:flex">
 
-        @include('layouts.sidebar')
+        @include('layouts.header')
 
-        <div class="ml-0 sm:ml-20 w-full flex flex-col justify-between">
-            @include('layouts.header')
-
+        <div class="pl-0 lg:pl-20 w-full min-h-screen flex flex-col justify-between">
             @yield('content')
 
             @include('layouts.footer')

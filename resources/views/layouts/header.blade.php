@@ -186,22 +186,22 @@
 
     {{-- 電腦版選單 --}}
     <div
-        class="hidden lg:flex flex-col justify-between fixed top-0 left-0 z-20 w-20 h-screen
-        bg-white border-blue-400 border-l-4 shadow-md transition-all duration-300 px-2 pt-6 pb-2
+        class="hidden lg:flex flex-col justify-between items-center fixed top-0 left-0 z-20 w-20 h-screen
+        bg-white border-blue-400 border-l-4 shadow-md transition-all duration-300 pt-6 pb-2
         dark:bg-gray-900"
     >
         {{-- 電腦版-Logo --}}
         <div
-            class="relative w-full flex justify-center items-center"
+            class="relative"
         >
-            <a href="{{ route('root') }}" class="peer">
-                <img class="h-10 w-10" src="{{ asset('images/icon/icon.png') }}" alt="{{ config('app.name') }}">
+            <a href="{{ route('root') }}" class="peer w-14 h-14 flex justify-center items-center">
+                <img class="w-10" src="{{ asset('images/icon/icon.png') }}" alt="{{ config('app.name') }}">
             </a>
 
             <span
-                class="absolute top-4 left-20 flex justify-center items-center w-max opacity-0 transition-all duration-300
+                class="absolute top-5 left-20 flex justify-center items-center w-max opacity-0 transition-all duration-300
                 text-gray-900 text-2xl font-bold font-mono bg-white rounded-md ring-1 ring-black ring-opacity-20 px-6 py-2 pointer-events-none
-                peer-hover:opacity-100 peer-hover:top-0
+                peer-hover:opacity-100 peer-hover:top-1
                 dark:bg-gray-500 dark:text-white"
             >
                 {{ config('app.name') }}
@@ -210,27 +210,29 @@
 
         <ul class="mt-6 space-y-2">
             {{-- 電腦版-搜尋 --}}
-            <li
-                x-data="{ showSearchBox : false }"
-                class="relative"
-            >
-                <button
-                    x-on:click="showSearchBox = !showSearchBox"
-                    type="button"
-                    class="w-full flex justify-center items-center text-2xl rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition duration-150 p-2"
-                >
-                    <i class="bi bi-search"></i>
-                </button>
-
+            <li>
                 <div
-                    x-cloak
-                    x-show="showSearchBox"
-                    x-on:click.outside="showSearchBox = false"
-                    x-on:keydown.escape.window="showSearchBox = false"
-                    x-transition.origin.left
-                    class="absolute top-1 left-20 w-60"
+                    x-data="{ showSearchBox : false }"
+                    class="relative"
                 >
-                    @livewire('search')
+                    <button
+                        x-on:click="showSearchBox = !showSearchBox"
+                        type="button"
+                        class="w-14 h-14 flex justify-center items-center text-2xl rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition duration-150"
+                    >
+                        <i class="bi bi-search"></i>
+                    </button>
+
+                    <div
+                        x-cloak
+                        x-show="showSearchBox"
+                        x-on:click.outside="showSearchBox = false"
+                        x-on:keydown.escape.window="showSearchBox = false"
+                        x-transition.origin.left
+                        class="absolute top-2 left-20 w-60"
+                    >
+                        @livewire('search')
+                    </div>
                 </div>
             </li>
 
@@ -287,15 +289,18 @@
             {{-- 電腦版-已登入 --}}
             @else
                 {{-- 電腦版-新增文章 --}}
-                @if (request()->url() !== route('posts.create'))
-                    <x-sidebar-link
-                        href="{{ route('posts.create') }}"
-                        class="text-gray-400 hover:text-gray-700 hover:bg-gray-100"
-                        :icon="'bi bi-pencil-fill'"
-                    >
-                        新增文章
-                    </x-sidebar-link>
-                @endif
+                <x-sidebar-link
+                    href="{{ route('posts.create') }}"
+                    class="{{
+                        (request()->url() === route('posts.create')) ?
+                        'bg-gray-100 text-gray-700' :
+                        'text-gray-400 hover:text-gray-700 hover:bg-gray-100'
+                    }}"
+                    :icon="'bi bi-pencil-fill'"
+                >
+                    新增文章
+                </x-sidebar-link>
+
 
                 {{-- 電腦版-通知 --}}
                 <x-sidebar-link

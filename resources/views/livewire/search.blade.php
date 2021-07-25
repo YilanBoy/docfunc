@@ -12,7 +12,7 @@
             wire:model.debounce.500ms="search"
             autocomplete="off"
             placeholder="搜尋文章"
-            class="outline-none w-full rounded-xl bg-gray-100 placeholder-gray-400 border border-gray-400
+            class="outline-none w-full rounded-xl bg-white placeholder-gray-400 border border-gray-400
             focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 py-2 px-4
             dark:bg-gray-500 dark:placeholder-white dark:text-white"
         />

@@ -566,6 +566,10 @@ video {
 	top: -1.25rem;
 }.top-4{
 	top: 1rem;
+}.top-6{
+	top: 1.5rem;
+}.right-3{
+	right: 0.75rem;
 }.z-0{
 	z-index: 0;
 }.z-10{
@@ -719,6 +723,8 @@ video {
 	width: auto;
 }.w-2\/3{
 	width: 66.666667%;
+}.w-4\/5{
+	width: 80%;
 }.max-w-6xl{
 	max-width: 72rem;
 }.max-w-7xl{
@@ -997,6 +1003,8 @@ video {
 	padding-top: 2rem;
 }.pl-0{
 	padding-left: 0px;
+}.pl-10{
+	padding-left: 2.5rem;
 }.text-center{
 	text-align: center;
 }.font-noto{
@@ -1239,6 +1247,9 @@ video {
 }.hover\:bg-gray-100:hover{
 	--tw-bg-opacity: 1;
 	background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+}.hover\:bg-gray-700:hover{
+	--tw-bg-opacity: 1;
+	background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
 }.hover\:text-gray-500:hover{
 	--tw-text-opacity: 1;
 	color: rgba(107, 114, 128, var(--tw-text-opacity));
@@ -1420,6 +1431,9 @@ video {
 }.dark .dark\:text-gray-100{
 	--tw-text-opacity: 1;
 	color: rgba(243, 244, 246, var(--tw-text-opacity));
+}.dark .dark\:text-gray-600{
+	--tw-text-opacity: 1;
+	color: rgba(75, 85, 99, var(--tw-text-opacity));
 }.dark .dark\:placeholder-white::-moz-placeholder{
 	--tw-placeholder-opacity: 1;
 	color: rgba(255, 255, 255, var(--tw-placeholder-opacity));
@@ -1435,6 +1449,9 @@ video {
 }.dark .dark\:hover\:bg-gray-800:hover{
 	--tw-bg-opacity: 1;
 	background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
+}.dark .dark\:hover\:bg-gray-400:hover{
+	--tw-bg-opacity: 1;
+	background-color: rgba(156, 163, 175, var(--tw-bg-opacity));
 }.dark .dark\:hover\:text-white:hover{
 	--tw-text-opacity: 1;
 	color: rgba(255, 255, 255, var(--tw-text-opacity));
@@ -1466,6 +1483,8 @@ video {
 		margin-top: 0px;
 	}.sm\:ml-20{
 		margin-left: 5rem;
+	}.sm\:block{
+		display: block;
 	}.sm\:flex{
 		display: flex;
 	}.sm\:hidden{
@@ -1478,6 +1497,8 @@ video {
 		flex: 1 1 0%;
 	}.sm\:items-center{
 		align-items: center;
+	}.sm\:items-stretch{
+		align-items: stretch;
 	}.sm\:justify-start{
 		justify-content: flex-start;
 	}.sm\:justify-between{
@@ -1561,6 +1582,8 @@ video {
 		margin-top: 1.5rem;
 	}.xl\:block{
 		display: block;
+	}.xl\:inline{
+		display: inline;
 	}.xl\:flex{
 		display: flex;
 	}.xl\:hidden{

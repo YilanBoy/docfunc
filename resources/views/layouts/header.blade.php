@@ -114,18 +114,18 @@
                                 x-show="profileIsOpen"
                                 x-transition.origin.top.right
                                 class="absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
-                                dark:bg-gray-600 dark:text-white"
+                                dark:bg-gray-500 dark:text-white"
                                 role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                             >
                                 <a href="{{ route('users.show', ['user' => auth()->id()]) }}"
                                 role="menuitem" tabindex="-1"
-                                class="block px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-500">
+                                class="block px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-400">
                                     <i class="bi bi-person-fill"></i><span class="ml-2">個人頁面</span>
                                 </a>
 
                                 <a href="{{ route('users.edit', ['user' => auth()->id()]) }}"
                                 role="menuitem" tabindex="-1"
-                                class="block px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-500">
+                                class="block px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-400">
                                     <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
                                 </a>
 
@@ -138,7 +138,7 @@
                                 <button
                                     type="submit" form="logout"
                                     role="menuitem" tabindex="-1" id="user-menu-item-2"
-                                    class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-500"
+                                    class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-400"
                                 >
                                     <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
                                 </button>
@@ -199,9 +199,9 @@
 
             <span
                 class="absolute top-4 left-20 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                text-gray-900 text-2xl font-bold font-mono bg-gray-100 rounded-md ring-1 ring-black ring-opacity-20 px-6 py-2 pointer-events-none
+                text-gray-900 text-2xl font-bold font-mono bg-white rounded-md ring-1 ring-black ring-opacity-20 px-6 py-2 pointer-events-none
                 peer-hover:opacity-100 peer-hover:top-0
-                dark:bg-gray-600 dark:text-gray-100"
+                dark:bg-gray-500 dark:text-white"
             >
                 {{ config('app.name') }}
             </span>
@@ -247,9 +247,9 @@
 
                 <span
                     class="absolute left-20 -top-3 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                    text-gray-900 bg-gray-100 rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
+                    text-gray-900 bg-white rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
                     peer-hover:opacity-100 peer-hover:top-1
-                    dark:bg-gray-600 dark:text-gray-100"
+                    dark:bg-gray-500 dark:text-white"
                 >
                     全部文章
                 </span>
@@ -270,9 +270,9 @@
 
                     <span
                         class="absolute left-20 -top-3 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                        text-gray-900 bg-gray-100 rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
+                        text-gray-900 bg-white rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
                         peer-hover:opacity-100 peer-hover:top-1
-                        dark:bg-gray-600 dark:text-gray-100"
+                        dark:bg-gray-500 dark:text-white"
                     >
                         {{ $category->name }}
                     </span>
@@ -294,9 +294,9 @@
 
                     <span
                         class="absolute left-20 -top-3 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                        text-gray-900 bg-gray-100 rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
+                        text-gray-900 bg-white rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
                         peer-hover:opacity-100 peer-hover:top-1
-                        dark:bg-gray-600 dark:text-gray-100"
+                        dark:bg-gray-500 dark:text-white"
                     >
                         登入
                     </span>
@@ -313,9 +313,9 @@
 
                     <span
                         class="absolute left-20 -top-3 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                        text-gray-900 bg-gray-100 rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
+                        text-gray-900 bg-white rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
                         peer-hover:opacity-100 peer-hover:top-1
-                        dark:bg-gray-600 dark:text-gray-100"
+                        dark:bg-gray-500 dark:text-white"
                     >
                         註冊
                     </span>
@@ -336,9 +336,9 @@
 
                         <span
                             class="absolute left-20 -top-3 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                            text-gray-900 bg-gray-100 rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
+                            text-gray-900 bg-white rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
                             peer-hover:opacity-100 peer-hover:top-1
-                            dark:bg-gray-600 dark:text-gray-100"
+                            dark:bg-gray-500 dark:text-white"
                         >
                             新增文章
                         </span>
@@ -360,9 +360,9 @@
 
                     <span
                         class="absolute left-20 -top-3 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                        text-gray-900 bg-gray-100 rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
+                        text-gray-900 bg-white rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
                         peer-hover:opacity-100 peer-hover:top-1
-                        dark:bg-gray-600 dark:text-gray-100"
+                        dark:bg-gray-500 dark:text-white"
                     >
                         通知
                     </span>
@@ -395,18 +395,18 @@
                         x-show="profileIsOpen"
                         x-transition.origin.bottom.left
                         class="absolute left-20 bottom-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
-                        dark:bg-gray-600 dark:text-white"
+                        dark:bg-gray-500 dark:text-white"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                     >
                         <a href="{{ route('users.show', ['user' => auth()->id()]) }}"
                         role="menuitem" tabindex="-1"
-                        class="block px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-500">
+                        class="block px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-400">
                             <i class="bi bi-person-fill"></i><span class="ml-2">個人頁面</span>
                         </a>
 
                         <a href="{{ route('users.edit', ['user' => auth()->id()]) }}"
                         role="menuitem" tabindex="-1"
-                        class="block px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-500">
+                        class="block px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-400">
                             <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
                         </a>
 
@@ -419,7 +419,7 @@
                         <button
                             type="submit" form="logout"
                             role="menuitem" tabindex="-1" id="user-menu-item-2"
-                            class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-500"
+                            class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-400"
                         >
                             <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
                         </button>

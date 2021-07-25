@@ -84,8 +84,8 @@
                         <div class="flex flex-col">
                             @foreach ($links as $link)
                                 <a href="{{ $link->link }}" target="_blank" rel="nofollow noopener noreferrer"
-                                class="block text-black rounded-md p-2 bg-white hover:bg-gray-200
-                                dark:text-white dark:bg-gray-600 dark:hover:bg-gray-500">
+                                class="block text-black rounded-md p-2 hover:bg-gray-200
+                                dark:text-white dark:hover:bg-gray-500">
                                     {{ $link->title }}
                                 </a>
                             @endforeach

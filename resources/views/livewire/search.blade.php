@@ -28,13 +28,14 @@
         </div>
     </div>
 
+    {{-- 搜尋結果 --}}
     @if (strlen($search) >= 2)
         <div
             x-show="searchDropdownIsOpen"
             x-transition.origin.top.left
             x-on:keydown.escape.window="searchDropdownIsOpen = false"
             class="absolute w-96 text-sm mt-2 z-20 bg-white p-2 shadow-md rounded-xl ring-1 ring-black ring-opacity-20
-            dark:bg-gray-600 dark:text-white"
+            dark:bg-gray-500 dark:text-white"
         >
             @if ($results->count() > 0)
                 <div class="flex justify-center items-center border-b-2 border-gray-400 pb-2 mb-2">
@@ -46,8 +47,8 @@
                         <li>
                             <a
                                 href="{{ $result->link_with_slug }}"
-                                class="block text-black rounded-md p-2 bg-white hover:bg-gray-200
-                                dark:text-white dark:bg-gray-600 dark:hover:bg-gray-500">
+                                class="block text-black rounded-md p-2 hover:bg-gray-200
+                                dark:text-white dark:hover:bg-gray-400">
                                 {{ $result->title }}
                             </a>
                         </li>

@@ -90,7 +90,7 @@
                                         x-show="deleteMenuIsOpen"
                                         x-transition.origin.top.right
                                         class="absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
-                                        dark:bg-gray-600 dark:text-white"
+                                        dark:bg-gray-500 dark:text-white"
                                         role="menu" aria-orientation="vertical" tabindex="-1"
                                     >
                                         <button
@@ -98,7 +98,7 @@
                                             onclick="confirm('您確定要刪除此回覆嗎？') || event.stopImmediatePropagation()"
                                             wire:click.prevent="destroy({{ $reply->id }})"
                                             class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200
-                                            dark:hover:bg-gray-500"
+                                            dark:hover:bg-gray-400"
                                         >
                                             <i class="bi bi-trash-fill"></i><span class="ml-2">刪除</span>
                                         </button>

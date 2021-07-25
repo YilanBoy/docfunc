@@ -1,9 +1,8 @@
 {{-- Header --}}
-<nav>
+<nav id="header">
     {{-- 手機版選單 --}}
     <div
         x-data="{ mobileMenuIsOpen : false }"
-        id="header"
         class="relative bg-white border-blue-400 border-t-4 shadow-md
         dark:bg-gray-800 lg:hidden"
     >

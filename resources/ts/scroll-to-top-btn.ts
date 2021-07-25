@@ -7,28 +7,16 @@ function scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-const header: HTMLElement | null = document.getElementById('header');
-
-if (header !== null) {
-    // 根據 header 是否出現在畫面上調整按鈕的樣式
-    let headerObserver = new IntersectionObserver(
-        function (entries) {
-            // isIntersecting is true when element and viewport are overlapping
-            // isIntersecting is false when element and viewport don't overlap
-            if (entries[0].isIntersecting === true) {
-                // header 在畫面上
-                scrollToTopButton?.classList.add('hidden');
-                scrollToTopButton?.classList.remove('block');
-            } else {
-                // header 不在畫面上
-                scrollToTopButton?.classList.remove('hidden');
-                scrollToTopButton?.classList.add('block');
-            }
-        },
-        { threshold: [0] }
-    );
-    headerObserver.observe(header);
-}
+// 監聽滾動
+window.addEventListener('scroll', function () {
+    if (window.scrollY > 0) {
+        scrollToTopButton?.classList.remove('hidden');
+        scrollToTopButton?.classList.add('flex');
+    } else {
+        scrollToTopButton?.classList.add('hidden');
+        scrollToTopButton?.classList.remove('flex');
+    }
+});
 
 const footer: HTMLElement | null = document.getElementById('footer');
 

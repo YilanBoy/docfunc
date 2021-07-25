@@ -14,30 +14,18 @@ function scrollToTop() {
     top: 0,
     behavior: 'smooth'
   });
-}
+} // 監聽滾動
 
-var header = document.getElementById('header');
 
-if (header !== null) {
-  // 根據 header 是否出現在畫面上調整按鈕的樣式
-  var headerObserver = new IntersectionObserver(function (entries) {
-    // isIntersecting is true when element and viewport are overlapping
-    // isIntersecting is false when element and viewport don't overlap
-    if (entries[0].isIntersecting === true) {
-      // header 在畫面上
-      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.add('hidden');
-      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.remove('block');
-    } else {
-      // header 不在畫面上
-      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.remove('hidden');
-      scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.add('block');
-    }
-  }, {
-    threshold: [0]
-  });
-  headerObserver.observe(header);
-}
-
+window.addEventListener('scroll', function () {
+  if (window.scrollY > 0) {
+    scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.remove('hidden');
+    scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.add('flex');
+  } else {
+    scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.add('hidden');
+    scrollToTopButton === null || scrollToTopButton === void 0 ? void 0 : scrollToTopButton.classList.remove('flex');
+  }
+});
 var footer = document.getElementById('footer');
 
 if (footer !== null) {

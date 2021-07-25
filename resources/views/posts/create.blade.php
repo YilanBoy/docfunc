@@ -16,7 +16,7 @@
             <div class="w-full xl:w-2/3 space-y-6 flex flex-col justify-center items-center">
                 {{-- Title --}}
                 <div class="fill-current text-gray-700 text-2xl dark:text-white">
-                    <i class="bi bi-pencil"></i><span class="ml-4">新增文章</span>
+                    <i class="bi bi-pencil-fill"></i><span class="ml-4">新增文章</span>
                 </div>
 
                 <div class="relative w-full shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-5

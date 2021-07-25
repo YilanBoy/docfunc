@@ -70,7 +70,7 @@
                             <a href="{{ route('posts.create') }}" class="p-1 mr-3 rounded-full text-gray-400 hover:text-gray-700
                             dark:hover:text-white">
                                 <span class="sr-only">Create Post</span>
-                                <i class="bi bi-plus-lg"></i>
+                                <i class="bi bi-pencil-fill"></i>
                             </a>
                         @endif
 
@@ -235,49 +235,33 @@
                 </div>
             </li>
 
-            <li class="relative">
-                <a
+            <li>
+                <x-sidebar-link
                     href="{{ route('posts.index') }}"
-                    @class([
-                        'peer flex justify-center items-center text-2xl rounded-md transition duration-150 p-2',
-                        'bg-gray-100 text-gray-700' => (request()->url() === route('posts.index')),
-                        'text-gray-400 hover:text-gray-700 hover:bg-gray-100' => (request()->url() !== route('posts.index')),
-                    ])
-                >
-                    <i class="bi bi-house-fill"></i>
-                </a>
-
-                <span
-                    class="absolute left-20 -top-3 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                    text-gray-900 bg-white rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
-                    peer-hover:opacity-100 peer-hover:top-1
-                    dark:bg-gray-500 dark:text-white"
+                    class="{{
+                        (request()->url() === route('posts.index')) ?
+                        'bg-gray-100 text-gray-700' :
+                        'text-gray-400 hover:text-gray-700 hover:bg-gray-100'
+                    }}"
+                    :icon="'bi bi-house-fill'"
                 >
                     全部文章
-                </span>
+                </x-sidebar-link>
             </li>
 
             @foreach ($categories as $category)
-                <li class="relative">
-                    <a
+                <li>
+                    <x-sidebar-link
                         href="{{ $category->link_with_name }}"
-                        @class([
-                            'peer flex justify-center items-center text-2xl rounded-md transition duration-150 p-2',
-                            'bg-gray-100 text-gray-700' => (request()->url() === $category->link_with_name),
-                            'text-gray-400 hover:text-gray-700 hover:bg-gray-100' => (request()->url() !== $category->link_with_name),
-                        ])
-                    >
-                        <i class="{{ $category->icon }}"></i>
-                    </a>
-
-                    <span
-                        class="absolute left-20 -top-3 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                        text-gray-900 bg-white rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
-                        peer-hover:opacity-100 peer-hover:top-1
-                        dark:bg-gray-500 dark:text-white"
+                        class="{{
+                            (request()->url() === $category->link_with_name) ?
+                            'bg-gray-100 text-gray-700' :
+                            'text-gray-400 hover:text-gray-700 hover:bg-gray-100'
+                        }}"
+                        :icon="$category->icon"
                     >
                         {{ $category->name }}
-                    </span>
+                    </x-sidebar-link>
                 </li>
             @endforeach
         </ul>
@@ -285,90 +269,47 @@
         <div class="flex flex-col space-y-2">
             {{-- 電腦版-未登入 --}}
             @guest
-                <div class="relative">
-                    <a
-                        href="{{ route('login') }}"
-                        class="peer flex justify-center items-center text-2xl text-gray-400 hover:text-gray-700 hover:bg-gray-100
-                        rounded-md transition duration-150 p-2"
-                    >
-                        <i class="bi bi-box-arrow-in-right"></i>
-                    </a>
+                <x-sidebar-link
+                    href="{{ route('login') }}"
+                    class="text-gray-400 hover:text-gray-700 hover:bg-gray-100"
+                    :icon="'bi bi-box-arrow-in-right'"
+                >
+                    登入
+                </x-sidebar-link>
 
-                    <span
-                        class="absolute left-20 -top-3 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                        text-gray-900 bg-white rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
-                        peer-hover:opacity-100 peer-hover:top-1
-                        dark:bg-gray-500 dark:text-white"
-                    >
-                        登入
-                    </span>
-                </div>
-
-                <div class="relative">
-                    <a
-                        href="{{ route('register') }}"
-                        class="peer flex justify-center items-center text-2xl text-gray-400 hover:text-gray-700 hover:bg-gray-100
-                        rounded-md transition duration-150 p-2"
-                    >
-                        <i class="bi bi-person-plus-fill"></i>
-                    </a>
-
-                    <span
-                        class="absolute left-20 -top-3 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                        text-gray-900 bg-white rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
-                        peer-hover:opacity-100 peer-hover:top-1
-                        dark:bg-gray-500 dark:text-white"
-                    >
-                        註冊
-                    </span>
-                </div>
+                <x-sidebar-link
+                    href="{{ route('register') }}"
+                    class="text-gray-400 hover:text-gray-700 hover:bg-gray-100"
+                    :icon="'bi bi-person-plus-fill'"
+                >
+                    註冊
+                </x-sidebar-link>
 
             {{-- 電腦版-已登入 --}}
             @else
                 {{-- 電腦版-新增文章 --}}
                 @if (request()->url() !== route('posts.create'))
-                    <div class="relative">
-                        <a
-                            href="{{ route('posts.create') }}"
-                            class="peer flex justify-center items-center text-2xl text-gray-400 hover:text-gray-700 hover:bg-gray-100
-                            rounded-md transition duration-150 p-2"
-                        >
-                            <i class="bi bi-plus-lg"></i>
-                        </a>
-
-                        <span
-                            class="absolute left-20 -top-3 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                            text-gray-900 bg-white rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
-                            peer-hover:opacity-100 peer-hover:top-1
-                            dark:bg-gray-500 dark:text-white"
-                        >
-                            新增文章
-                        </span>
-                    </div>
+                    <x-sidebar-link
+                        href="{{ route('posts.create') }}"
+                        class="text-gray-400 hover:text-gray-700 hover:bg-gray-100"
+                        :icon="'bi bi-pencil-fill'"
+                    >
+                        新增文章
+                    </x-sidebar-link>
                 @endif
 
                 {{-- 電腦版-通知 --}}
-                <div class="relative">
-                    <a
-                        href="{{ route('notifications.index') }}"
-                        @class([
-                            'peer flex justify-center items-center text-2xl rounded-md transition duration-150 p-2',
-                            'text-red-400 hover:text-red-500 hover:bg-gray-100' => (auth()->user()->notification_count > 0),
-                            'text-gray-400 hover:text-gray-700 hover:bg-gray-100' => (auth()->user()->notification_count === 0),
-                        ])
-                    >
-                        <i class="text-lg bi bi-bell-fill"></i>
-                    </a>
-
-                    <span
-                        class="absolute left-20 -top-3 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                        text-gray-900 bg-white rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
-                        peer-hover:opacity-100 peer-hover:top-1
-                        dark:bg-gray-500 dark:text-white"
-                    >
-                        通知
-                    </span>
-                </div>
+                <x-sidebar-link
+                    href="{{ route('notifications.index') }}"
+                    class="{{
+                        (auth()->user()->notification_count > 0) ?
+                        'text-red-400 hover:text-red-500 hover:bg-gray-100' :
+                        'text-gray-400 hover:text-gray-700 hover:bg-gray-100'
+                    }}"
+                    :icon="'bi bi-bell-fill'"
+                >
+                    通知
+                </x-sidebar-link>
 
                 {{-- 電腦版-會員選單 --}}
                 <div

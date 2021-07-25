@@ -50,7 +50,7 @@
                         <a href="{{ route('posts.create') }}"
                         class="block w-3/4 transition duration-500 ease-in-out bg-green-600 transform hover:-translate-y-1 hover:scale-110
                         text-white text-center font-bold rounded-md py-2 mt-7 shadow-md hover:shadow-lg">
-                            <i class="bi bi-pencil"></i><span class="ml-2">新增文章</span>
+                            <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
                         </a>
                     </div>
                 </x-card>
@@ -79,7 +79,7 @@
                     <x-card class="text-black dark:text-white">
                         <h3 class="font-semibold text-lg text-center border-black border-b-2 pb-3 mb-3
                         dark:border-white">
-                            <i class="bi bi-journal-code"></i><span class="ml-2">學習資源推薦</span>
+                            <i class="bi bi-file-earmark-code-fill"></i><span class="ml-2">學習資源推薦</span>
                         </h3>
                         <div class="flex flex-col">
                             @foreach ($links as $link)

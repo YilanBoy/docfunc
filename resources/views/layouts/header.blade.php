@@ -136,7 +136,7 @@
 
                                 <button
                                     type="submit" form="logout"
-                                    role="menuitem" tabindex="-1" id="user-menu-item-2"
+                                    role="menuitem" tabindex="-1"
                                     class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-400"
                                 >
                                     <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
@@ -357,15 +357,9 @@
                             <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
                         </a>
 
-                        <form id="logout" action="{{ route('logout') }}" method="POST" onSubmit="return confirm('您確定要登出？');"
-                        class="hidden"
-                        >
-                            @csrf
-                        </form>
-
                         <button
                             type="submit" form="logout"
-                            role="menuitem" tabindex="-1" id="user-menu-item-2"
+                            role="menuitem" tabindex="-1"
                             class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-400"
                         >
                             <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>

@@ -54,23 +54,24 @@
                         </li>
                     @endforeach
                 </ul>
-
-                <div class="flex justify-center items-center border-t-2 border-gray-400 pt-2 mt-2">
-                    <a target="_blank" rel="nofollow noopener noreferrer" href="https://www.algolia.com">
-                        <img src="/images/icon/search-by-algolia-light-background.png" alt="Search by Algolia">
-                    </a>
-                </div>
             @else
                 <div class="h-16 flex justify-center items-center">
                     <span class="ml-2">沒有「{{ $search }}」的搜尋結果</span>
                 </div>
-
-                <div class="w-full flex justify-center items-center border-t-2 border-gray-400 pt-2 mt-2">
-                    <a target="_blank" rel="nofollow noopener noreferrer" href="https://www.algolia.com">
-                        <img src="/images/icon/search-by-algolia-light-background.png" alt="Search by Algolia">
-                    </a>
-                </div>
             @endif
+
+            {{-- Algolia Logo --}}
+            <div class="w-full flex justify-center items-center border-t-2 border-gray-400 pt-2 mt-2">
+                <a target="_blank" rel="nofollow noopener noreferrer" href="https://www.algolia.com">
+                    {{-- Light Mode Logo --}}
+                    <img src="/images/icon/search-by-algolia-light-background.png" alt="Search by Algolia"
+                    class="inline-block dark:hidden">
+
+                    {{-- Dark Mode Logo --}}
+                    <img src="/images/icon/search-by-algolia-dark-background.png" alt="Search by Algolia"
+                    class="hidden dark:inline-block">
+                </a>
+            </div>
         </div>
     @endif
 

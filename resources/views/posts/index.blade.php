@@ -10,7 +10,7 @@
         <div class="md:hidden px-4 mb-6">
             {{-- 分類 --}}
             @if (isset($category))
-            <div class="flex justify-center items-center text-blue-700 border-blue-700 rounded-xl border-2
+            <div class="flex justify-center items-center text-blue-700 border-blue-700 rounded-xl border
                 bg-gradient-to-br from-blue-100 to-blue-300 px-4 py-2">
                     <span class="font-bold">{{ $category->name }}：</span>
                     <span>{{ $category->description }}</span>
@@ -19,7 +19,7 @@
 
             {{-- 標籤 --}}
             @if (isset($tag))
-                <div class="flex justify-center items-center text-green-700 border-green-700 rounded-xl border-2
+                <div class="flex justify-center items-center text-green-700 border-green-700 rounded-xl border
                 bg-gradient-to-br from-green-100 to-green-300 px-4 py-2">
                     <span class="font-bold">{{ $tag->name }}</span>
                 </div>

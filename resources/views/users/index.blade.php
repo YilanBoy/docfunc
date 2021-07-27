@@ -38,11 +38,11 @@
                         </a>
 
                         <a
-                            href="{{ route('users.deleteUser', ['user' => auth()->id()]) }}"
+                            href="{{ route('users.delete', ['user' => auth()->id()]) }}"
                             @class([
                                 'block text-black rounded-md p-2 bg-white dark:text-white dark:bg-gray-600',
-                                'bg-gray-200 dark:bg-gray-500' => (request()->url() === route('users.deleteUser', ['user' => auth()->id()])),
-                                'hover:bg-gray-200 dark:hover:bg-gray-500' => (request()->url() !== route('users.deleteUser', ['user' => auth()->id()])),
+                                'bg-gray-200 dark:bg-gray-500' => (request()->url() === route('users.delete', ['user' => auth()->id()])),
+                                'hover:bg-gray-200 dark:hover:bg-gray-500' => (request()->url() !== route('users.delete', ['user' => auth()->id()])),
                             ])
                         >
                             <i class="bi bi-person-x-fill"></i><span class="ml-2">刪除帳號</span>

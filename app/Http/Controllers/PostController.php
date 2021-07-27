@@ -55,7 +55,7 @@ class PostController extends Controller
         // 在關聯表新增關聯
         $post->tags()->attach($tagIdsArray);
 
-        return redirect()->to($post->link_with_slug)->with('success', '成功新增文章！');
+        return redirect($post->link_with_slug)->with('success', '成功新增文章！');
     }
 
     // 文章編輯頁面
@@ -94,7 +94,7 @@ class PostController extends Controller
         // 關聯表更新
         $post->tags()->sync($tagIdsArray);
 
-        return redirect()->to($post->link_with_slug)->with('success', '成功更新文章！');
+        return redirect($post->link_with_slug)->with('success', '成功更新文章！');
     }
 
     // 軟刪除文章
@@ -128,8 +128,7 @@ class PostController extends Controller
 
         $softDeletedPost->restore();
 
-        return redirect()
-            ->to($softDeletedPost->link_with_slug)
+        return redirect($softDeletedPost->link_with_slug)
             ->with('success', '成功恢復文章！');
     }
 

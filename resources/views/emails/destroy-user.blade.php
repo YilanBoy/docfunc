@@ -24,22 +24,18 @@
             <span class="text-red-400 mt-4">請注意！您撰寫的文章與留言都會一起刪除，而且無法恢復</span>
         </div>
 
-        <form method="POST" action="{{ $deleteAccountLink }}" onSubmit="return confirm('您確定要刪除帳號嗎？此動作無法復原');" class="w-full">
-            @method('DELETE')
-            @csrf
-
-            <div class="flex justify-center items-center mt-4">
-                {{-- Delete User Button --}}
-                <button
-                    type="submit"
-                    class="inline-flex justify-center items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-white
-                    uppercase tracking-widest hover:bg-red-500 active:bg-red-900 focus:outline-none focus:border-red-900
-                    focus:ring ring-red-300 disabled:opacity-25 transition ease-in-out duration-150"
-                >
-                    <i class="bi bi-exclamation-triangle-fill"></i><span class="ml-2">確認刪除帳號</span>
-                </button>
-            </div>
-        </form>
+        <div class="flex justify-center items-center mt-4">
+            {{-- Delete User Button --}}
+            <a
+                href="{{ $destroyLink }}"
+                onClick="return confirm('您確定要刪除帳號嗎？此動作無法復原');"
+                class="inline-flex justify-center items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-white
+                uppercase tracking-widest hover:bg-red-500 active:bg-red-900 focus:outline-none focus:border-red-900
+                focus:ring ring-red-300 disabled:opacity-25 transition ease-in-out duration-150"
+            >
+                <i class="bi bi-exclamation-triangle-fill"></i><span class="ml-2">確認刪除帳號</span>
+            </a>
+        </div>
     </x-card>
 </body>
 </html>

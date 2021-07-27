@@ -7,20 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class DeleteAccount extends Mailable
+class DestroyUser extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $deleteAccountLink;
+    public $destroyLink;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $deleteAccountLink)
+    public function __construct(string $destroyLink)
     {
-        $this->deleteAccountLink = $deleteAccountLink;
+        $this->destroyLink = $destroyLink;
     }
 
     /**
@@ -30,6 +30,6 @@ class DeleteAccount extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.delete-account');
+        return $this->subject('刪除帳號確認')->view('emails.destroy-user');
     }
 }

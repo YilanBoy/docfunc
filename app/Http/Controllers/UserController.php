@@ -11,7 +11,7 @@ use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\DeleteAccount;
+use App\Mail\DestroyUser;
 
 class UserController extends Controller
 {
@@ -94,33 +94,34 @@ class UserController extends Controller
     }
 
     // 刪除用戶頁面
-    public function deleteUser(User $user)
+    public function delete(User $user)
     {
         $this->authorize('update', $user);
 
-        return view('users.delete-user', ['user' => $user]);
+        return view('users.delete', ['user' => $user]);
     }
 
-    public function sendDeleteUserEmail(User $user)
+    // 寄出刪除帳號的信件
+    public function sendDestroyEmail(User $user)
     {
         $this->authorize('update', $user);
 
         // 生成一次性連結
-        $deleteAccountLink = URL::temporarySignedRoute(
+        $destroyLink = URL::temporarySignedRoute(
             'users.destroy',
             now()->addMinutes(30),
             ['user' => $user->id]
         );
 
-        Mail::to($user)->send(new DeleteAccount($deleteAccountLink));
+        Mail::to($user)->send(new DestroyUser($destroyLink));
 
         return back()->with('status', '已寄出信件！');
     }
 
-    // 刪除用戶
+    // 刪除用戶帳號
     public function destroy(Request $request, User $user)
     {
-        // 確認來源網址是否有效
+        // 確認網址是否有效
         if (!$request->hasValidSignature()) {
             abort(401);
         }
@@ -135,6 +136,6 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect(route('posts.index'))->with('success', '帳號已刪除！');
+        return redirect()->route('posts.index')->with('success', '帳號已刪除！');
     }
 }

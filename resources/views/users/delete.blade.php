@@ -13,7 +13,7 @@
     {{-- Session Status --}}
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('users.sendDeleteUserEmail', ['user' => $user->id]) }}" onSubmit="return confirm('您確定要寄出刪除帳號信件嗎？');" class="w-full">
+    <form method="POST" action="{{ route('users.sendDestroyEmail', ['user' => $user->id]) }}" onSubmit="return confirm('您確定要寄出刪除帳號信件嗎？');" class="w-full">
         @csrf
 
         <div class="flex items-center justify-end mt-4">

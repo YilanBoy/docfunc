@@ -73,7 +73,7 @@
             </div>
 
             {{-- Links --}}
-            <a href="{{ route('setting.theme') }}"
+            <a href="{{ route('settings.theme') }}"
             class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
                 Theme
             </a>

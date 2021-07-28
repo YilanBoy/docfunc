@@ -71,4 +71,5 @@ Route::get('tags/{tag}', [TagController::class, 'show'])->name('tags.show');
 // 上傳圖片至 S3
 Route::post('/images/upload', [ImageController::class, 'store'])->name('images.store');
 
-Route::view('/setting/theme', 'setting/theme')->name('setting.theme');
+// 網站設定
+Route::view('/settings/theme', 'settings/theme')->name('settings.theme');

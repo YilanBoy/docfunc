@@ -45,7 +45,7 @@
                                             class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-blue-600 rounded-full
                                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
                                         >
-                                            <i class="bi bi-box-arrow-up-left"></i>
+                                            <i class="bi bi-file-earmark-check-fill"></i>
                                         </a>
 
                                         <form id="force-delete-post" action="{{ route('posts.forceDeletePost', ['id' => $post->id]) }}" method="POST"
@@ -92,7 +92,7 @@
                                             class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-yellow-600 rounded-full
                                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4"
                                         >
-                                            <i class="bi bi-box-arrow-in-down-right"></i>
+                                            <i class="bi bi-file-earmark-x-fill"></i>
                                         </button>
                                     @endif
                             </div>
@@ -147,7 +147,7 @@
                                             class="block px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
                                             dark:hover:bg-gray-400"
                                         >
-                                            <i class="bi bi-box-arrow-up-left"></i><span class="ml-2">恢復</span>
+                                            <i class="bi bi-file-earmark-check-fill"></i><span class="ml-2">恢復</span>
                                         </a>
 
                                         <button
@@ -185,7 +185,7 @@
                                             class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
                                             dark:hover:bg-gray-400"
                                         >
-                                            <i class="bi bi-box-arrow-in-down-right"></i><span class="ml-2">刪除標記</span>
+                                            <i class="bi bi-file-earmark-x-fill"></i><span class="ml-2">刪除標記</span>
                                         </button>
                                     @endif
                                 </div>

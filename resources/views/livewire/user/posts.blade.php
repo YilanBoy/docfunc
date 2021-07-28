@@ -81,7 +81,7 @@
                             class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-blue-600 rounded-full
                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl"
                         >
-                            <i class="bi bi-box-arrow-up-left"></i>
+                            <i class="bi bi-file-earmark-check-fill"></i>
                         </a>
 
                         <form id="force-delete-post-{{ $post->id }}" action="{{ route('posts.forceDeletePost', ['id' => $post->id]) }}" method="POST"
@@ -134,7 +134,7 @@
                             class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-yellow-600 rounded-full
                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl ml-2"
                         >
-                            <i class="bi bi-box-arrow-in-down-right"></i>
+                            <i class="bi bi-file-earmark-x-fill"></i>
                         </button>
                     </div>
                 @endif

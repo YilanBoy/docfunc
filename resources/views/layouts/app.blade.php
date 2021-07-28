@@ -36,7 +36,7 @@
 
         @include('layouts.header')
 
-        <div class="pl-0 lg:pl-20 w-full min-h-screen flex flex-col justify-between">
+        <div class="pl-0 lg:pl-16 w-full min-h-screen flex flex-col justify-between">
             @yield('content')
 
             @include('layouts.footer')

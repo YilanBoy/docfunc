@@ -186,7 +186,7 @@
 
     {{-- 電腦版選單 --}}
     <div
-        class="hidden lg:flex flex-col justify-between items-center fixed top-0 left-0 z-20 w-20 h-screen
+        class="hidden lg:flex flex-col justify-between items-center fixed top-0 left-0 z-20 w-16 h-screen
         bg-white border-blue-400 border-l-4 shadow-md transition-all duration-300 pt-6 pb-2
         dark:bg-gray-900"
     >
@@ -199,7 +199,7 @@
             </a>
 
             <span
-                class="absolute top-5 left-20 flex justify-center items-center w-max opacity-0 transition-all duration-300
+                class="absolute top-5 left-16 flex justify-center items-center w-max opacity-0 transition-all duration-300
                 text-gray-900 text-2xl font-bold font-mono bg-white rounded-md ring-1 ring-black ring-opacity-20 px-6 py-2 pointer-events-none
                 peer-hover:opacity-100 peer-hover:top-1
                 dark:bg-gray-500 dark:text-white"
@@ -208,7 +208,7 @@
             </span>
         </div>
 
-        <ul class="mt-6 space-y-2">
+        <ul class="mt-6 space-y-1">
             {{-- 電腦版-搜尋 --}}
             <li>
                 <div
@@ -218,7 +218,7 @@
                     <button
                         x-on:click="showSearchBox = !showSearchBox"
                         type="button"
-                        class="w-14 h-14 flex justify-center items-center text-2xl rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition duration-150"
+                        class="w-12 h-12 flex justify-center items-center text-2xl rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition duration-150"
                     >
                         <i class="bi bi-search"></i>
                     </button>
@@ -229,7 +229,7 @@
                         x-on:click.outside="showSearchBox = false"
                         x-on:keydown.escape.window="showSearchBox = false"
                         x-transition.origin.left
-                        class="absolute top-2 left-20 w-60"
+                        class="absolute top-1 left-16 w-60"
                     >
                         @livewire('search')
                     </div>
@@ -267,7 +267,7 @@
             @endforeach
         </ul>
 
-        <div class="flex flex-col space-y-2">
+        <div class="flex flex-col space-y-1">
             {{-- 電腦版-未登入 --}}
             @guest
                 <x-sidebar-link

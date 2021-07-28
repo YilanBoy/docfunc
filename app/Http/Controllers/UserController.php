@@ -106,10 +106,10 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
 
-        // 生成一次性連結
+        // 生成一次性連結，並設定 5 分鐘後失效
         $destroyLink = URL::temporarySignedRoute(
             'users.destroy',
-            now()->addMinutes(30),
+            now()->addMinutes(5),
             ['user' => $user->id]
         );
 

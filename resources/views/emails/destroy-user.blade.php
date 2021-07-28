@@ -20,7 +20,7 @@
         </h3>
 
         <div class="flex flex-col">
-            <span>如果您確定要刪除帳號，請點選下方的按鈕連結</span>
+            <span>如果您確定要刪除帳號，請點選下方的按鈕連結（連結將在 5 分鐘後失效）</span>
             <span class="text-red-400 mt-4">請注意！您撰寫的文章與留言都會一起刪除，而且無法恢復</span>
         </div>
 

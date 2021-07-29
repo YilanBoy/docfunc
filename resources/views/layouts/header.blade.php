@@ -74,15 +74,6 @@
 
                     {{-- 手機版-已登入 --}}
                     @else
-                        {{-- 手機版-新增文章 --}}
-                        @if (request()->url() !== route('posts.create'))
-                            <a href="{{ route('posts.create') }}" class="p-1 mr-3 rounded-full text-gray-400 hover:text-gray-700
-                            dark:hover:text-white">
-                                <span class="sr-only">Create Post</span>
-                                <i class="bi bi-pencil-fill"></i>
-                            </a>
-                        @endif
-
                         {{-- 手機版-通知 --}}
                         <a
                             href="{{ route('notifications.index') }}"
@@ -166,6 +157,19 @@
             class="lg:hidden"
         >
             <div class="px-2 pt-2 pb-3 space-y-1">
+                {{-- 手機版-新增文章 --}}
+                <a
+                    href="{{ route('posts.create') }}"
+                    @class([
+                        'block px-3 py-2 rounded-md font-medium',
+                        'bg-gray-100 text-gray-700' => (request()->url() === route('posts.create')),
+                        'text-gray-400 hover:text-gray-700 hover:bg-gray-100' => (request()->url() !== route('posts.create')),
+                    ])
+                    @if(request()->url() === route('posts.create')) aria-current="page" @endif
+                >
+                    <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
+                </a>
+
                 <a
                     href="{{ route('posts.index') }}"
                     @class([
@@ -247,6 +251,21 @@
             </li>
 
             <li>
+                {{-- 電腦版-新增文章 --}}
+                <x-sidebar-link
+                    href="{{ route('posts.create') }}"
+                    class="{{
+                        (request()->url() === route('posts.create')) ?
+                        'bg-gray-100 text-gray-700' :
+                        'text-gray-400 hover:text-gray-700 hover:bg-gray-100'
+                    }}"
+                    :icon="'bi bi-pencil-fill'"
+                >
+                    新增文章
+                </x-sidebar-link>
+            </li>
+
+            <li>
                 <x-sidebar-link
                     href="{{ route('posts.index') }}"
                     class="{{
@@ -277,7 +296,7 @@
             @endforeach
         </ul>
 
-        <div class="flex flex-col space-y-1">
+        <div class="flex flex-col">
 
             {{-- 明亮 / 暗黑模式切換 --}}
             <div class="relative">
@@ -309,7 +328,7 @@
             @guest
                 <x-sidebar-link
                     href="{{ route('login') }}"
-                    class="text-gray-400 hover:text-gray-700 hover:bg-gray-100"
+                    class="text-gray-400 hover:text-gray-700 hover:bg-gray-100 mt-1"
                     :icon="'bi bi-box-arrow-in-right'"
                 >
                     登入
@@ -317,7 +336,7 @@
 
                 <x-sidebar-link
                     href="{{ route('register') }}"
-                    class="text-gray-400 hover:text-gray-700 hover:bg-gray-100"
+                    class="text-gray-400 hover:text-gray-700 hover:bg-gray-100 mt-1"
                     :icon="'bi bi-person-plus-fill'"
                 >
                     註冊
@@ -325,27 +344,13 @@
 
             {{-- 電腦版-已登入 --}}
             @else
-                {{-- 電腦版-新增文章 --}}
-                <x-sidebar-link
-                    href="{{ route('posts.create') }}"
-                    class="{{
-                        (request()->url() === route('posts.create')) ?
-                        'bg-gray-100 text-gray-700' :
-                        'text-gray-400 hover:text-gray-700 hover:bg-gray-100'
-                    }}"
-                    :icon="'bi bi-pencil-fill'"
-                >
-                    新增文章
-                </x-sidebar-link>
-
-
                 {{-- 電腦版-通知 --}}
                 <x-sidebar-link
                     href="{{ route('notifications.index') }}"
                     class="{{
                         (auth()->user()->notification_count > 0) ?
-                        'text-red-400 hover:text-red-500 hover:bg-gray-100' :
-                        'text-gray-400 hover:text-gray-700 hover:bg-gray-100'
+                        'text-red-400 hover:text-red-500 hover:bg-gray-100 mt-1' :
+                        'text-gray-400 hover:text-gray-700 hover:bg-gray-100 mt-1'
                     }}"
                     :icon="'bi bi-bell-fill'"
                 >
@@ -355,7 +360,7 @@
                 {{-- 電腦版-會員選單 --}}
                 <div
                     x-data="{ profileIsOpen : false }"
-                    class="relative flex justify-center items-center"
+                    class="relative flex justify-center items-center mt-2"
                 >
                     {{-- 電腦版-會員大頭貼 --}}
                     <div>

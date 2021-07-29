@@ -4,7 +4,7 @@
 @section('title', isset($category) ? $category->name : '所有文章')
 
 @section('content')
-    <div class="flex-grow container mx-auto max-w-7xl mt-6">
+    <div class="container mx-auto min-h-screen max-w-7xl mt-6">
 
         {{-- 文章訊息區塊 --}}
         <div class="md:hidden px-4 mb-6">

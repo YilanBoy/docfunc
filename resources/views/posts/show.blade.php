@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-    <div class="relative">
+    <div class="relative mt-6">
         {{-- 置頂按鈕 --}}
         <button id="scroll-to-top-btn" title="Go to top"
         class="fixed z-10 bottom-7 right-7 hidden justify-center h-16 w-16 text-white font-bold bg-blue-600 rounded-full
@@ -22,8 +22,8 @@
             </span>
         </button>
 
-        <div class="relative container mx-auto max-w-7xl mt-6">
-            <div class="flex flex-col justify-center items-center px-4 xl:px-0">
+        <div class="container mx-auto max-w-7xl">
+            <div class="min-h-screen flex flex-col justify-center items-center px-4 xl:px-0">
 
                 <x-card class="relative w-full xl:w-2/3">
 

@@ -11,8 +11,8 @@
 @endsection
 
 @section('content')
-    <div class="container mx-auto max-w-7xl py-6">
-        <div class="flex justify-center items-center px-4 xl:px-0">
+    <div class="container mx-auto max-w-7xl">
+        <div class="min-h-screen flex justify-center items-center px-4 xl:px-0">
 
             <div class="w-full flex flex-col justify-center items-center">
                 {{-- Title --}}

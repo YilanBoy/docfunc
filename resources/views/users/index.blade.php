@@ -2,8 +2,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex-grow container mx-auto max-w-7xl py-6">
-        <div class="flex flex-col md:flex-row justify-center items-start px-4 xl:px-0">
+    <div class="container mx-auto max-w-7xl">
+        <div class="min-h-screen flex flex-col md:flex-row justify-center items-start px-4 xl:px-0 mt-6">
 
             <div class="w-full md:w-60 xl:w-80 md:mr-6">
                 {{-- 選項 --}}

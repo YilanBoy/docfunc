@@ -26,9 +26,9 @@
                         class="hidden xl:block absolute z-10 top-0 left-103/100 w-52 h-full"
                     >
                         <div class="sticky top-9 flex flex-col">
-                            <div class="w-full flex justify-center items-center bg-gradient-to-r from-white to-white/0
-                            rounded-xl p-4">
-                                <span class="update-characters"></span>
+                            <div class="w-full flex justify-start items-center bg-gradient-to-r from-white to-white/0 rounded-xl p-4
+                            dark:text-white dark:from-gray-600 dark:to-gray-600/0">
+                                <span class="update-post-characters"></span>
                             </div>
 
                             {{-- Save Button --}}

@@ -28,7 +28,7 @@ function _createClass(Constructor, protoProps, staticProps) {
 
 var maxCharacters = 10000; // 設定要更新字數顯示的區塊
 
-var wordsBoxs = document.querySelectorAll('.update-characters'); // 設定表單 submit 按鈕的區塊
+var wordsBoxs = document.querySelectorAll('.update-post-characters'); // 設定表單 submit 按鈕的區塊
 
 var savePostButton = document.getElementsByClassName('save-post');
 
@@ -150,7 +150,7 @@ function MyCustomUploadAdapterPlugin(editor) {
 }
 
 ClassicEditor.create(document.querySelector('#editor'), {
-  // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+  // 圖片上傳
   extraPlugins: [MyCustomUploadAdapterPlugin],
   // Editor configuration.
   wordCount: {
@@ -161,11 +161,11 @@ ClassicEditor.create(document.querySelector('#editor'), {
       var isCloseToLimit = !isLimitExceeded && stats.characters > maxCharacters * 0.8; // 文章總字數更新
 
       wordsBoxs.forEach(function (element) {
-        element.textContent = "".concat(stats.characters, " / ").concat(maxCharacters); // 如果字數接近限制，則將 wordsBox 的 class 加上一個 characters-limit-exceeded，使文字變成橘色
+        element.textContent = "".concat(stats.characters, " / ").concat(maxCharacters); // 如果字數接近限制，則將 wordsBox 的 class 加上一個 text-yellow-500，使文字變成黃色
 
-        element.classList.toggle('characters-limit-close', isCloseToLimit); // 如果字數超過限制，則將 wordsBox 的 class 加上一個 characters-limit-exceeded，使文字變成紅色
+        element.classList.toggle('text-yellow-500', isCloseToLimit); // 如果字數超過限制，則將 wordsBox 的 class 加上一個 text-red-500，使文字變成紅色
 
-        element.classList.toggle('characters-limit-exceeded', isLimitExceeded);
+        element.classList.toggle('text-red-500', isLimitExceeded);
       }); // 如果字數超過最高限制，則將送出的按鈕 disable
 
       Array.prototype.forEach.call(savePostButton, function (element) {

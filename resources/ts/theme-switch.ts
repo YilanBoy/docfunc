@@ -1,21 +1,23 @@
-const themeSwitch = document.getElementById('theme-switch') as HTMLInputElement | null;
+const themeSwitch = document.getElementsByClassName('theme-switch');
 const themeSelect = document.getElementById('theme-select') as HTMLSelectElement | null;
 
 // Dark Mode Switch
-themeSwitch?.addEventListener('click', () => {
+Array.prototype.forEach.call(themeSwitch, (element) => {
+    element.addEventListener('click', () => {
 
-    if (document.documentElement.className === "") {
+        if (document.documentElement.className === "") {
 
-        document.documentElement.classList.add('dark');
-        // Store in local storage
-        localStorage.setItem('theme', 'dark');
-        syncThemeSelection()
-    } else if (document.documentElement.className === "dark") {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-        syncThemeSelection()
-    }
-});
+            document.documentElement.classList.add('dark');
+            // Store in local storage
+            localStorage.setItem('theme', 'dark');
+            syncThemeSelection()
+        } else if (document.documentElement.className === "dark") {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            syncThemeSelection()
+        }
+    });
+})
 
 function syncThemeSelection(): void {
     if (themeSelect !== null) {

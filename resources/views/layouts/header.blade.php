@@ -49,6 +49,16 @@
                 </div>
 
                 <div class="absolute inset-y-0 right-0 flex items-center">
+                    {{-- 明亮 / 暗黑模式切換 --}}
+                    <button type="button" class="theme-switch mr-3 text-gray-400 hover:text-gray-700 dark:hover:text-white">
+                        <span class="dark:hidden">
+                            <i class="bi bi-sun-fill"></i>
+                        </span>
+
+                        <span class="hidden dark:inline">
+                            <i class="bi bi-moon-stars-fill"></i>
+                        </span>
+                    </button>
 
                     {{-- 手機版-未登入 --}}
                     @guest
@@ -83,7 +93,7 @@
                             ])
                         >
                             <span class="sr-only">View notifications</span>
-                            <i class="text-lg bi bi-bell-fill"></i>
+                            <i class="bi bi-bell-fill"></i>
                         </a>
 
                         {{-- 手機版-會員選單 --}}
@@ -187,7 +197,7 @@
     {{-- 電腦版選單 --}}
     <div
         class="hidden lg:flex flex-col justify-between items-center fixed top-0 left-0 z-20 w-16 h-screen
-        bg-white border-blue-400 border-l-4 shadow-md transition-all duration-300 pt-6 pb-2
+        bg-white border-blue-400 border-l-4 shadow-md transition-all duration-300 py-2
         dark:bg-gray-900"
     >
         {{-- 電腦版-Logo --}}
@@ -273,8 +283,7 @@
             <div class="relative">
                 <button
                     type="button"
-                    id="theme-switch"
-                    class="peer h-12 w-12 flex justify-center items-center text-2xl rounded-md transition duration-150
+                    class="theme-switch peer h-12 w-12 flex justify-center items-center text-2xl rounded-md transition duration-150
                     text-gray-400 hover:text-gray-700 hover:bg-gray-100"
                 >
                     <span class="dark:hidden">

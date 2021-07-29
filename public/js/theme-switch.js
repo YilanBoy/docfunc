@@ -6,20 +6,22 @@ var __webpack_exports__ = {};
   \**************************************/
 
 
-var themeSwitch = document.getElementById('theme-switch');
+var themeSwitch = document.getElementsByClassName('theme-switch');
 var themeSelect = document.getElementById('theme-select'); // Dark Mode Switch
 
-themeSwitch === null || themeSwitch === void 0 ? void 0 : themeSwitch.addEventListener('click', function () {
-  if (document.documentElement.className === "") {
-    document.documentElement.classList.add('dark'); // Store in local storage
+Array.prototype.forEach.call(themeSwitch, function (element) {
+  element.addEventListener('click', function () {
+    if (document.documentElement.className === "") {
+      document.documentElement.classList.add('dark'); // Store in local storage
 
-    localStorage.setItem('theme', 'dark');
-    syncThemeSelection();
-  } else if (document.documentElement.className === "dark") {
-    document.documentElement.classList.remove('dark');
-    localStorage.setItem('theme', 'light');
-    syncThemeSelection();
-  }
+      localStorage.setItem('theme', 'dark');
+      syncThemeSelection();
+    } else if (document.documentElement.className === "dark") {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+      syncThemeSelection();
+    }
+  });
 });
 
 function syncThemeSelection() {

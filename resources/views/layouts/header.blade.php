@@ -268,6 +268,34 @@
         </ul>
 
         <div class="flex flex-col space-y-1">
+
+            {{-- 明亮 / 暗黑模式切換 --}}
+            <div class="relative">
+                <button
+                    type="button"
+                    id="theme-switch"
+                    class="peer h-12 w-12 flex justify-center items-center text-2xl rounded-md transition duration-150
+                    text-gray-400 hover:text-gray-700 hover:bg-gray-100"
+                >
+                    <span class="dark:hidden">
+                        <i class="bi bi-sun-fill"></i>
+                    </span>
+
+                    <span class="hidden dark:inline">
+                        <i class="bi bi-moon-stars-fill"></i>
+                    </span>
+                </button>
+
+                <span
+                    class="absolute left-16 -top-3 flex justify-center items-center w-max opacity-0 transition-all duration-300
+                    text-gray-900 bg-white rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
+                    peer-hover:opacity-100 peer-hover:top-1
+                    dark:bg-gray-500 dark:text-white"
+                >
+                    明亮 / 暗黑模式
+                </span>
+            </div>
+
             {{-- 電腦版-未登入 --}}
             @guest
                 <x-sidebar-link
@@ -341,7 +369,7 @@
                         x-on:click.outside="profileIsOpen = false"
                         x-show="profileIsOpen"
                         x-transition.origin.bottom.left
-                        class="absolute left-20 bottom-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
+                        class="absolute left-16 bottom-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
                         dark:bg-gray-500 dark:text-white"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                     >
@@ -367,19 +395,7 @@
                     </div>
                 </div>
             @endguest
-
-            {{-- 明亮 / 暗黑模式切換 --}}
-            <div class="flex justify-center items-center h-10">
-                <label for="theme-switch"
-                class="w-9 h-6 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer duration-300 ease-in-out dark:bg-gray-600">
-                    <div class="bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out dark:translate-x-3"></div>
-                </label>
-
-                <input id="theme-switch" type="checkbox" class="hidden">
-            </div>
         </div>
-
-
     </div>
 </nav>
 

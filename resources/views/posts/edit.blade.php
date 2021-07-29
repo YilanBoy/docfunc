@@ -32,8 +32,8 @@
                             </div>
 
                             {{-- Save Button --}}
-                            <button type="submit" id="lg-save-post" form="edit-post"
-                            class="flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-blue-600 rounded-full
+                            <button type="submit" form="edit-post"
+                            class="save-post flex justify-center items-center h-16 w-16 text-2xl text-white font-bold bg-blue-600 rounded-full
                             transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl mt-4">
                                 <i class="bi bi-save2-fill"></i>
                             </button>
@@ -108,7 +108,7 @@
                             </div>
 
                             {{-- Save Button --}}
-                            <x-button id="save-post">
+                            <x-button class="save-post">
                                 <i class="bi bi-save2-fill"></i><span class="ml-2">儲存</span>
                             </x-button>
                         </div>

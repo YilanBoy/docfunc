@@ -3,8 +3,8 @@ const maxCharacters = 10000;
 // 設定要更新字數顯示的區塊
 const wordsBoxs = document.querySelectorAll('.update-characters');
 // 設定表單 submit 按鈕的區塊
-const sendButton = document.querySelector('#save-post');
-const LargeScreenSendButton = document.querySelector('#lg-save-post');
+const savePostButton = document.getElementsByClassName('save-post');
+
 
 class MyUploadAdapter {
     constructor(loader) {
@@ -137,8 +137,9 @@ ClassicEditor.create(document.querySelector('#editor'), {
             });
 
             // 如果字數超過最高限制，則將送出的按鈕 disable
-            sendButton.toggleAttribute('disabled', isLimitExceeded);
-            LargeScreenSendButton.toggleAttribute('disabled', isLimitExceeded);
+            Array.prototype.forEach.call(savePostButton, (element) => {
+                element.toggleAttribute('disabled', isLimitExceeded);
+            });
         }
     }
 })
@@ -150,12 +151,12 @@ ClassicEditor.create(document.querySelector('#editor'), {
     });
 
 // 若以非送出表單的方式離開編輯頁面，以 alert 視窗提醒使用者
-var saveButtonClicked = false;
-sendButton.addEventListener('click', function () {
-    saveButtonClicked = true;
-});
-LargeScreenSendButton.addEventListener('click', function () {
-    saveButtonClicked = true;
+let saveButtonClicked = false;
+
+Array.prototype.forEach.call(savePostButton, (element) => {
+    element.addEventListener('click', () => {
+        saveButtonClicked = true;
+    });
 });
 
 window.addEventListener('beforeunload', event => {

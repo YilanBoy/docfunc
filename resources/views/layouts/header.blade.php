@@ -62,14 +62,15 @@
 
                     {{-- 手機版-未登入 --}}
                     @guest
-                        <a href="{{ route('login') }}"
-                        class="mr-3 text-gray-400 hover:text-gray-700 dark:hover:text-white">
-                            <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
+                        <a href="{{ route('register') }}"
+                        class="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-2 px-4 mr-3
+                        border border-blue-500 hover:border-transparent rounded-md">
+                            註冊
                         </a>
 
-                        <a href="{{ route('register') }}"
-                        class="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-md">
-                            註冊
+                        <a href="{{ route('login') }}"
+                        class="text-gray-400 hover:text-gray-700 dark:hover:text-white">
+                            <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
                         </a>
 
                     {{-- 手機版-已登入 --}}
@@ -327,19 +328,19 @@
             {{-- 電腦版-未登入 --}}
             @guest
                 <x-sidebar-link
-                    href="{{ route('login') }}"
-                    class="text-gray-400 hover:text-gray-700 hover:bg-gray-100 mt-1"
-                    :icon="'bi bi-box-arrow-in-right'"
-                >
-                    登入
-                </x-sidebar-link>
-
-                <x-sidebar-link
                     href="{{ route('register') }}"
                     class="text-gray-400 hover:text-gray-700 hover:bg-gray-100 mt-1"
                     :icon="'bi bi-person-plus-fill'"
                 >
                     註冊
+                </x-sidebar-link>
+
+                <x-sidebar-link
+                    href="{{ route('login') }}"
+                    class="text-gray-400 hover:text-gray-700 hover:bg-gray-100 mt-1"
+                    :icon="'bi bi-box-arrow-in-right'"
+                >
+                    登入
                 </x-sidebar-link>
 
             {{-- 電腦版-已登入 --}}

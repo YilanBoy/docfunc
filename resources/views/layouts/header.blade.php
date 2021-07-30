@@ -120,13 +120,13 @@
                             >
                                 <a href="{{ route('users.show', ['user' => auth()->id()]) }}"
                                 role="menuitem" tabindex="-1"
-                                class="block px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-400">
+                                class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-400">
                                     <i class="bi bi-person-fill"></i><span class="ml-2">個人頁面</span>
                                 </a>
 
                                 <a href="{{ route('users.edit', ['user' => auth()->id()]) }}"
                                 role="menuitem" tabindex="-1"
-                                class="block px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-400">
+                                class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-400">
                                     <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
                                 </a>
 
@@ -139,7 +139,7 @@
                                 <button
                                     type="submit" form="logout"
                                     role="menuitem" tabindex="-1"
-                                    class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-400"
+                                    class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-400"
                                 >
                                     <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
                                 </button>
@@ -163,8 +163,8 @@
                     href="{{ route('posts.create') }}"
                     @class([
                         'block px-3 py-2 rounded-md font-medium',
-                        'bg-gray-100 text-gray-700' => (request()->url() === route('posts.create')),
-                        'text-gray-400 hover:text-gray-700 hover:bg-gray-100' => (request()->url() !== route('posts.create')),
+                        'bg-gray-200 text-gray-700' => (request()->url() === route('posts.create')),
+                        'text-gray-400 hover:text-gray-700 hover:bg-gray-200' => (request()->url() !== route('posts.create')),
                     ])
                     @if(request()->url() === route('posts.create')) aria-current="page" @endif
                 >
@@ -175,8 +175,8 @@
                     href="{{ route('posts.index') }}"
                     @class([
                         'block px-3 py-2 rounded-md font-medium',
-                        'bg-gray-100 text-gray-700' => (request()->url() === route('posts.index')),
-                        'text-gray-400 hover:text-gray-700 hover:bg-gray-100' => (request()->url() !== route('posts.index')),
+                        'bg-gray-200 text-gray-700' => (request()->url() === route('posts.index')),
+                        'text-gray-400 hover:text-gray-700 hover:bg-gray-200' => (request()->url() !== route('posts.index')),
                     ])
                     @if(request()->url() === route('posts.index')) aria-current="page" @endif
                 >
@@ -187,8 +187,8 @@
                         href="{{ $category->link_with_name }}"
                         @class([
                             'block px-3 py-2 rounded-md font-medium',
-                            'bg-gray-100 text-gray-700' => (request()->url() === $category->link_with_name),
-                            'text-gray-400 hover:text-gray-700 hover:bg-gray-100' => (request()->url() !== $category->link_with_name),
+                            'bg-gray-200 text-gray-700' => (request()->url() === $category->link_with_name),
+                            'text-gray-400 hover:text-gray-700 hover:bg-gray-200' => (request()->url() !== $category->link_with_name),
                         ])
                         @if(request()->url() === $category->link_with_name) aria-current="page" @endif
                     >
@@ -215,7 +215,7 @@
 
             <span
                 class="absolute top-5 left-16 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                text-gray-900 text-2xl font-bold font-mono bg-white rounded-md ring-1 ring-black ring-opacity-20 px-6 py-2 pointer-events-none
+                text-gray-900 text-2xl font-bold font-mono bg-white rounded-lg ring-1 ring-black ring-opacity-20 px-6 py-2 pointer-events-none
                 peer-hover:opacity-100 peer-hover:top-1
                 dark:bg-gray-500 dark:text-white"
             >
@@ -223,7 +223,7 @@
             </span>
         </div>
 
-        <ul class="mt-6 space-y-1">
+        <ul class="mt-6 space-y-2">
             {{-- 電腦版-搜尋 --}}
             <li>
                 @livewire('search')
@@ -235,8 +235,8 @@
                     href="{{ route('posts.create') }}"
                     class="{{
                         (request()->url() === route('posts.create')) ?
-                        'bg-gray-100 text-gray-700' :
-                        'text-gray-400 hover:text-gray-700 hover:bg-gray-100'
+                        'bg-gray-200 text-gray-700' :
+                        'text-gray-400 hover:text-gray-700 hover:bg-gray-200'
                     }}"
                     :icon="'bi bi-pencil-fill'"
                 >
@@ -249,8 +249,8 @@
                     href="{{ route('posts.index') }}"
                     class="{{
                         (request()->url() === route('posts.index')) ?
-                        'bg-gray-100 text-gray-700' :
-                        'text-gray-400 hover:text-gray-700 hover:bg-gray-100'
+                        'bg-gray-200 text-gray-700' :
+                        'text-gray-400 hover:text-gray-700 hover:bg-gray-200'
                     }}"
                     :icon="'bi bi-house-fill'"
                 >
@@ -264,8 +264,8 @@
                         href="{{ $category->link_with_name }}"
                         class="{{
                             (request()->url() === $category->link_with_name) ?
-                            'bg-gray-100 text-gray-700' :
-                            'text-gray-400 hover:text-gray-700 hover:bg-gray-100'
+                            'bg-gray-200 text-gray-700' :
+                            'text-gray-400 hover:text-gray-700 hover:bg-gray-200'
                         }}"
                         :icon="$category->icon"
                     >
@@ -275,14 +275,14 @@
             @endforeach
         </ul>
 
-        <div class="flex flex-col">
+        <div class="flex flex-col space-y-2">
 
             {{-- 明亮 / 暗黑模式切換 --}}
             <div class="relative">
                 <button
                     type="button"
-                    class="theme-switch peer h-12 w-12 flex justify-center items-center text-2xl rounded-md transition duration-150
-                    text-gray-400 hover:text-gray-700 hover:bg-gray-100"
+                    class="theme-switch peer h-10 w-10 flex justify-center items-center text-2xl rounded-lg transition duration-150
+                    text-gray-400 hover:text-gray-700 hover:bg-gray-200"
                 >
                     <span class="dark:hidden">
                         <i class="bi bi-sun-fill"></i>
@@ -294,9 +294,9 @@
                 </button>
 
                 <span
-                    class="absolute left-16 -top-3 flex justify-center items-center w-max opacity-0 transition-all duration-300
+                    class="absolute left-16 -top-4 flex justify-center items-center w-max opacity-0 transition-all duration-300
                     text-gray-900 bg-white rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
-                    peer-hover:opacity-100 peer-hover:top-1
+                    peer-hover:opacity-100 peer-hover:top-0
                     dark:bg-gray-500 dark:text-white"
                 >
                     明亮 / 暗黑模式
@@ -307,7 +307,7 @@
             @guest
                 <x-sidebar-link
                     href="{{ route('register') }}"
-                    class="text-gray-400 hover:text-gray-700 hover:bg-gray-100 mt-1"
+                    class="text-gray-400 hover:text-gray-700 hover:bg-gray-200"
                     :icon="'bi bi-person-plus-fill'"
                 >
                     註冊
@@ -315,7 +315,7 @@
 
                 <x-sidebar-link
                     href="{{ route('login') }}"
-                    class="text-gray-400 hover:text-gray-700 hover:bg-gray-100 mt-1"
+                    class="text-gray-400 hover:text-gray-700 hover:bg-gray-200"
                     :icon="'bi bi-box-arrow-in-right'"
                 >
                     登入
@@ -328,8 +328,8 @@
                     href="{{ route('notifications.index') }}"
                     class="{{
                         (auth()->user()->notification_count > 0) ?
-                        'text-red-400 hover:text-red-500 hover:bg-gray-100 mt-1' :
-                        'text-gray-400 hover:text-gray-700 hover:bg-gray-100 mt-1'
+                        'text-red-400 hover:text-red-500 hover:bg-gray-200' :
+                        'text-gray-400 hover:text-gray-700 hover:bg-gray-200'
                     }}"
                     :icon="'bi bi-bell-fill'"
                 >
@@ -339,7 +339,7 @@
                 {{-- 電腦版-會員選單 --}}
                 <div
                     x-data="{ profileIsOpen : false }"
-                    class="relative flex justify-center items-center mt-2"
+                    class="relative flex justify-center items-center pt-1"
                 >
                     {{-- 電腦版-會員大頭貼 --}}
                     <div>
@@ -352,7 +352,7 @@
                             id="user-menu-button" aria-expanded="false" aria-haspopup="true"
                         >
                             <span class="sr-only">Open user menu</span>
-                            <img class=" h-10 w-10 rounded-full" src="{{ auth()->user()->gravatar() }}" alt="">
+                            <img class="h-10 w-10 rounded-full" src="{{ auth()->user()->gravatar() }}" alt="">
                         </button>
                     </div>
 
@@ -368,20 +368,20 @@
                     >
                         <a href="{{ route('users.show', ['user' => auth()->id()]) }}"
                         role="menuitem" tabindex="-1"
-                        class="block px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-400">
+                        class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-400">
                             <i class="bi bi-person-fill"></i><span class="ml-2">個人頁面</span>
                         </a>
 
                         <a href="{{ route('users.edit', ['user' => auth()->id()]) }}"
                         role="menuitem" tabindex="-1"
-                        class="block px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-400">
+                        class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-400">
                             <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
                         </a>
 
                         <button
                             type="submit" form="logout"
                             role="menuitem" tabindex="-1"
-                            class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-400"
+                            class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-400"
                         >
                             <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
                         </button>

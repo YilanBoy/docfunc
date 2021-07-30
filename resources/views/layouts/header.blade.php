@@ -226,29 +226,7 @@
         <ul class="mt-6 space-y-1">
             {{-- 電腦版-搜尋 --}}
             <li>
-                <div
-                    x-data="{ showSearchBox : false }"
-                    class="relative"
-                >
-                    <button
-                        x-on:click="showSearchBox = !showSearchBox"
-                        type="button"
-                        class="w-12 h-12 flex justify-center items-center text-2xl rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition duration-150"
-                    >
-                        <i class="bi bi-search"></i>
-                    </button>
-
-                    <div
-                        x-cloak
-                        x-show="showSearchBox"
-                        x-on:click.outside="showSearchBox = false"
-                        x-on:keydown.escape.window="showSearchBox = false"
-                        x-transition.origin.left
-                        class="absolute top-1 left-16 w-60"
-                    >
-                        @livewire('search')
-                    </div>
-                </div>
+                @livewire('search')
             </li>
 
             <li>

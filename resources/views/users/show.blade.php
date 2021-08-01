@@ -5,8 +5,7 @@
 
 @section('content')
     <div class="container mx-auto max-w-7xl">
-        <div class="min-h-screen space-y-6 xl:space-y-0 px-4 xl:px-0 mt-6
-        flex flex-col justify-start items-center xl:flex-row xl:justify-center xl:items-start">
+        <div class="min-h-screen flex flex-col md:flex-row justify-center items-start px-4 xl:px-0 mt-6">
 
             {{-- 會員資訊 --}}
             <x-card class="w-full md:w-80 flex flex-col justify-center items-center mr-0 xl:mr-6
@@ -35,7 +34,7 @@
 
             <div
                 x-data="{ tab : 'introduction' }"
-                class="w-full xl:w-2/3 mr-0 xl:mr-6 space-y-6"
+                class="w-full xl:w-2/3 space-y-6"
             >
                 <nav class="flex font-semibold">
                     <a

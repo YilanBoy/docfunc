@@ -5,7 +5,7 @@
 @section('scriptsInHead')
     {{-- Google reCAPTCHA --}}
     @if (app()->isProduction())
-        {{-- async defer 同時使用會優先使用 async，當瀏覽器不支援 async 才會使用 defer --}}
+        {{-- async defer 同時使用會優先使用 async，當瀏覽器不支援 async 才會使用 defer --}}
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     @endif
 @endsection

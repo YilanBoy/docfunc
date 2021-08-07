@@ -33,21 +33,21 @@
             </x-card>
 
             <div
-                x-data="{ tab : 'introduction' }"
+                x-data="{ tab : 'information' }"
                 class="w-full xl:w-2/3 space-y-6"
             >
                 <nav class="flex font-semibold">
                     <a
-                        x-on:click.prevent="tab = 'introduction'"
+                        x-on:click.prevent="tab = 'information'"
                         href="#"
                         :class="{
-                            'border-blue-500 text-gray-700 dark:text-white': tab === 'introduction',
-                            'border-gray-400 text-gray-400': tab !== 'introduction'
+                            'border-blue-500 text-gray-700 dark:text-white': tab === 'information',
+                            'border-gray-400 text-gray-400': tab !== 'information'
                         }"
                         class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700 border-b-4 px-2 sm:px-7 py-2
                         dark:hover:text-white"
                     >
-                        <span>個人簡介</span>
+                        <span>會員資訊</span>
                     </a>
 
                     <a
@@ -76,21 +76,13 @@
                     </a>
                 </nav>
 
-                {{-- 會員個人簡介 --}}
+                {{-- 會員資訊 --}}
                 <div
                     x-cloak
-                    x-show="tab === 'introduction'"
+                    x-show="tab === 'information'"
                     x-transition:enter.duration.300ms
                 >
-                    <x-card class="w-full flex flex-col justify-center items-center text-black mt-6 md:mt-0 xl:mt-6
-                    dark:text-white">
-
-                        @if ($user->introduction)
-                            <span class="w-full flex justify-start items-center">{!! nl2br(e($user->introduction)) !!}</span>
-                        @else
-                            <span class="w-full flex justify-center items-center">目前尚無個人簡介～</span>
-                        @endif
-                    </x-card>
+                    @include('users.information')
                 </div>
 
                 {{-- 會員文章 --}}

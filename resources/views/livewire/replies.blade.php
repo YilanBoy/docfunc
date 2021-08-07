@@ -59,7 +59,7 @@
                             {!! nl2br(e($reply->content)) !!}
                         </div>
 
-                        <div class="flex items-center justify-between mt-6">
+                        <div class="flex items-center justify-between mt-3">
                             <div class="flex items-center text-sm text-gray-400 space-x-2">
                                 <div>{{ $reply->user->name }}</div>
                                 <div>&bull;</div>

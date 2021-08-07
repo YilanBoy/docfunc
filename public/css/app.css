@@ -806,6 +806,12 @@ video {
 .top-3 {
 	top: 0.75rem;
 }
+.right-1 {
+	right: 0.25rem;
+}
+.bottom-1 {
+	bottom: 0.25rem;
+}
 .z-0 {
 	z-index: 0;
 }
@@ -943,6 +949,9 @@ video {
 }
 .h-24 {
 	height: 6rem;
+}
+.h-2 {
+	height: 0.5rem;
 }
 .min-h-screen {
 	min-height: 100vh;

@@ -71,19 +71,17 @@
                                     x-data="{ deleteMenuIsOpen : false }"
                                     class="relative"
                                 >
-                                    <div>
-                                        <button
-                                            x-on:click="deleteMenuIsOpen = ! deleteMenuIsOpen"
-                                            x-on:click.outside="deleteMenuIsOpen = false"
-                                            x-on:keydown.escape.window="deleteMenuIsOpen = false"
-                                            type="button"
-                                            class="text-2xl text-gray-400 hover:text-gray-700 focus:text-gray-700
-                                            dark:hover:text-white dark:focus:text-white"
-                                            aria-expanded="false" aria-haspopup="true"
-                                        >
-                                            <i class="bi bi-three-dots"></i>
-                                        </button>
-                                    </div>
+                                    <button
+                                        x-on:click="deleteMenuIsOpen = ! deleteMenuIsOpen"
+                                        x-on:click.outside="deleteMenuIsOpen = false"
+                                        x-on:keydown.escape.window="deleteMenuIsOpen = false"
+                                        type="button"
+                                        class="text-2xl text-gray-400 hover:text-gray-700 focus:text-gray-700
+                                        dark:hover:text-white dark:focus:text-white"
+                                        aria-expanded="false" aria-haspopup="true"
+                                    >
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
 
                                     <div
                                         x-cloak

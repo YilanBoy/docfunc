@@ -30,7 +30,7 @@
                     {{-- 懸浮式文章編輯按鈕 --}}
                     @can('update', $post)
                         <div
-                            x-data
+                            x-data=""
                             class="absolute z-10 top-0 left-103/100 w-16 h-full"
                         >
                             <div class="sticky top-9 flex flex-col justify-center items-center">

@@ -74,7 +74,7 @@ class Replies extends Component
     {
         $replies = $this->post->replies()
             ->with('user', 'post')
-            ->latest()
+            ->oldest()
             ->paginate(10);
 
         return view('livewire.replies', ['replies' => $replies]);

@@ -26,7 +26,7 @@
                     <span class="text-xl font-semibold">
                         <a
                             x-ref="replyLink"
-                            href="{{ $reply->post->link_with_slug }}#post-{{ $reply->post->id }}-reply-card-{{ $reply->id }}"
+                            href="{{ $reply->post->link_with_slug }}#post-{{ $reply->post->id }}-reply-{{ $reply->id }}"
                             class="hover:underline dark:text-white"
                         >
                             {{ $reply->post->title }}

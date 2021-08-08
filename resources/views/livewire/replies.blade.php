@@ -36,12 +36,12 @@
     </div>
 
     {{-- Reply Container --}}
-    <div id="post-{{ $post->id }}-replies-container" class="w-full space-y-6">
+    <div id="post-{{ $post->id }}-replies" class="w-full space-y-6">
 
         @forelse ($replies as $reply)
             {{-- Reply Container --}}
             <x-card
-                id="post-{{ $post->id }}-reply-card-{{ $reply->id }}"
+                id="post-{{ $post->id }}-reply-{{ $reply->id }}"
                 class="flex relative"
             >
                 <div class="flex flex-col md:flex-row flex-1">

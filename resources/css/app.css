@@ -5,6 +5,7 @@
 /* Alpine.js */
 [x-cloak] { display: none !important; }
 
+/* nested reply */
 .reply-with-responses .responses {
     margin-left: 60px;
     position: relative;

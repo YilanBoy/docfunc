@@ -9,7 +9,9 @@ class Reply extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'post_id', 'content'];
+    protected $fillable = ['user_id', 'post_id', 'parent_id', 'content'];
+
+    public $with = ['user'];
 
     public function post()
     {
@@ -19,5 +21,10 @@ class Reply extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Reply::class, 'parent_id');
     }
 }

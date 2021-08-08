@@ -290,7 +290,7 @@
 
                 {{-- 回覆區塊 --}}
                 @if (!$post->trashed())
-                    @livewire('replies', ['post' => $post])
+                    @livewire('reply-box', ['post' => $post])
                 @endif
             </div>
         </div>

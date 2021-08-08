@@ -9,7 +9,7 @@ class Reply extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'post_id', 'content'];
+    protected $fillable = ['user_id', 'post_id', 'reply_id', 'content'];
 
     public $with = ['user', 'subReplies'];
 

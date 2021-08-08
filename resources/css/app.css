@@ -11,35 +11,33 @@
 }
 
 .reply-with-responses .responses:before {
-    background: #3F3F46;
+    background: #D1D5DB;
     content: "";
     display: block;
     height: 100%;
     left: -36px;
-    opacity: .07;
     position: absolute;
     top: 0;
     width: 3px;
 }
 
 .dark .reply-with-responses .responses:before {
-    background: #E4E4E7;
+    background: #6B7280;
 }
 
 .reply-with-responses .responses>:before {
-    background: #3F3F46;
+    background: #D1D5DB;
     content: "";
     display: block;
     height: 3px;
-    left: -53px;
-    opacity: .07;
+    left: -33px;
     position: relative;
-    top: 30px;
+    top: 50px;
     width: 23px;
 }
 
 .dark .reply-with-responses .responses>:before {
-    background: #E4E4E7;
+    background: #6B7280;
 }
 
 .reply-with-responses .responses>:last-child:after {
@@ -47,10 +45,10 @@
     content: "";
     display: block;
     height: calc(100% - 53px);
-    left: -36px;
+    left: -37px;
     position: absolute;
     top: 53px;
-    width: 3px;
+    width: 5px;
 }
 
 .dark .reply-with-responses .responses>:last-child:after {

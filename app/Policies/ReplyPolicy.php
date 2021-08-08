@@ -8,8 +8,8 @@ use App\Models\Reply;
 
 class ReplyPolicy extends Policy
 {
-    public function destroy(User $user, Post $post, Reply $reply)
+    public function destroy(User $user, Reply $reply)
     {
-        return $user->isAuthorOf($reply) || $user->isAuthorOf($post);
+        return $user->isAuthorOf($reply) || $user->isAuthorOf($reply->post);
     }
 }

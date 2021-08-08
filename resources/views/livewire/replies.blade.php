@@ -1,6 +1,6 @@
 <div class="w-full xl:w-2/3 space-y-6 mt-6">
     {{-- Reply --}}
-    @if (auth()->check())
+    @auth
         <x-card class="w-full">
             <form wire:submit.prevent="store">
                 <textarea
@@ -29,7 +29,7 @@
                 </div>
             </form>
         </x-card>
-    @endif
+    @endauth
 
     <div>
         {{ $replies->onEachSide(1)->withQueryString()->links() }}

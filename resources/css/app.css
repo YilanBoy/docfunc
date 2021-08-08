@@ -4,3 +4,55 @@
 
 /* Alpine.js */
 [x-cloak] { display: none !important; }
+
+.reply-with-responses .responses {
+    margin-left: 60px;
+    position: relative;
+}
+
+.reply-with-responses .responses:before {
+    background: #3F3F46;
+    content: "";
+    display: block;
+    height: 100%;
+    left: -36px;
+    opacity: .07;
+    position: absolute;
+    top: 0;
+    width: 3px;
+}
+
+.dark .reply-with-responses .responses:before {
+    background: #E4E4E7;
+}
+
+.reply-with-responses .responses>:before {
+    background: #3F3F46;
+    content: "";
+    display: block;
+    height: 3px;
+    left: -53px;
+    opacity: .07;
+    position: relative;
+    top: 30px;
+    width: 23px;
+}
+
+.dark .reply-with-responses .responses>:before {
+    background: #E4E4E7;
+}
+
+.reply-with-responses .responses>:last-child:after {
+    background: #F3F4F6;
+    content: "";
+    display: block;
+    height: calc(100% - 53px);
+    left: -36px;
+    position: absolute;
+    top: 53px;
+    width: 3px;
+}
+
+.dark .reply-with-responses .responses>:last-child:after {
+    background: #374151;
+}

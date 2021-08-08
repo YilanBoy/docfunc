@@ -11,6 +11,8 @@ class Reply extends Model
 
     protected $fillable = ['user_id', 'post_id', 'content'];
 
+    public $with = ['user', 'subReplies'];
+
     public function post()
     {
         return $this->belongsTo(Post::class);
@@ -19,5 +21,10 @@ class Reply extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function subReplies()
+    {
+        return $this->hasMany(Reply::class);
     }
 }

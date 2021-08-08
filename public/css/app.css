@@ -806,12 +806,6 @@ video {
 .top-3 {
 	top: 0.75rem;
 }
-.right-1 {
-	right: 0.25rem;
-}
-.bottom-1 {
-	bottom: 0.25rem;
-}
 .z-0 {
 	z-index: 0;
 }
@@ -949,9 +943,6 @@ video {
 }
 .h-24 {
 	height: 6rem;
-}
-.h-2 {
-	height: 0.5rem;
 }
 .min-h-screen {
 	min-height: 100vh;
@@ -1583,6 +1574,51 @@ video {
 }
 /* Alpine.js */
 [x-cloak] { display: none !important; }
+.reply-with-responses .responses {
+    margin-left: 60px;
+    position: relative;
+}
+.reply-with-responses .responses:before {
+    background: #3F3F46;
+    content: "";
+    display: block;
+    height: 100%;
+    left: -36px;
+    opacity: .07;
+    position: absolute;
+    top: 0;
+    width: 3px;
+}
+.dark .reply-with-responses .responses:before {
+    background: #E4E4E7;
+}
+.reply-with-responses .responses>:before {
+    background: #3F3F46;
+    content: "";
+    display: block;
+    height: 3px;
+    left: -53px;
+    opacity: .07;
+    position: relative;
+    top: 30px;
+    width: 23px;
+}
+.dark .reply-with-responses .responses>:before {
+    background: #E4E4E7;
+}
+.reply-with-responses .responses>:last-child:after {
+    background: #F3F4F6;
+    content: "";
+    display: block;
+    height: calc(100% - 53px);
+    left: -36px;
+    position: absolute;
+    top: 53px;
+    width: 3px;
+}
+.dark .reply-with-responses .responses>:last-child:after {
+    background: #374151;
+}
 .hover\:-translate-x-2:hover {
 	--tw-translate-x: -0.5rem;
 	transform: var(--tw-transform);
@@ -1984,12 +2020,12 @@ video {
 		display: none;
 	}
 
-	.md\:w-80 {
-		width: 20rem;
-	}
-
 	.md\:w-2\/3 {
 		width: 66.666667%;
+	}
+
+	.md\:w-80 {
+		width: 20rem;
 	}
 
 	.md\:w-60 {

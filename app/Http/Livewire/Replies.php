@@ -73,9 +73,10 @@ class Replies extends Component
     public function render()
     {
         $replies = $this->post->replies()
-            ->with('user', 'post')
+            // 不顯示子回覆
+            ->whereNull('reply_id')
             ->oldest()
-            ->paginate(10);
+            ->get();
 
         return view('livewire.replies', ['replies' => $replies]);
     }

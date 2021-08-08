@@ -128,7 +128,7 @@
                     <div>
                         {{-- 文章留言數 --}}
                         <a class="hover:text-gray-700 dark:hover:text-white"
-                        href="{{ $post->link_with_slug }}#post-{{ $post->id }}-replies-container">
+                        href="{{ $post->link_with_slug }}#post-{{ $post->id }}-replies">
                             <i class="bi bi-chat-square-text-fill"></i><span class="hidden md:inline ml-2">{{ $post->reply_count }}</span>
                         </a>
                     </div>

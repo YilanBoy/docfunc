@@ -2018,6 +2018,10 @@ video {
 	--tw-bg-opacity: 1;
 	background-color: rgba(156, 163, 175, var(--tw-bg-opacity));
 }
+.dark .dark\:bg-red-700 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(185, 28, 28, var(--tw-bg-opacity));
+}
 .dark .dark\:from-gray-600 {
 	--tw-gradient-from: #4b5563;
 	--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(75, 85, 99, 0));

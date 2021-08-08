@@ -46,9 +46,9 @@
                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl
                 transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full
-                dark:bg-gray-600"
+                dark:bg-gray-700"
             >
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 dark:bg-gray-600">
+                <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 space-y-2">
                     <div class="sm:flex sm:items-start">
                         <textarea
                             wire:model.debounce.500ms="content"
@@ -59,14 +59,9 @@
                             dark:bg-gray-500 dark:text-white dark:placeholder-white"
                         ></textarea>
                     </div>
-                    <div class="flex justify-between mt-2">
-                        <div class="flex justify-center items-center">
-                            @error('content') <span class="text-red-600">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
                 </div>
 
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse dark:bg-gray-700">
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse dark:bg-gray-600">
                     <button
                         @click="replyBoxOpen = false"
                         wire:click="store()"
@@ -87,6 +82,12 @@
                     >
                         取消
                     </button>
+
+                    <div class="flex-1 flex justify-start">
+                        <div class="flex justify-center items-center">
+                            @error('content') <span class="text-red-600">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

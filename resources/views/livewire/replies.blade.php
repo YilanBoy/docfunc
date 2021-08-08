@@ -1,35 +1,4 @@
-<div class="w-full xl:w-2/3 space-y-6 mt-6">
-    {{-- Reply --}}
-    @auth
-        <x-card class="w-full">
-            <form wire:submit.prevent="storeReply()">
-                <textarea
-                    wire:model.debounce.500ms="reply"
-                    placeholder="分享你的評論~"
-                    rows="5"
-                    class="form-textarea w-full rounded-md shadow-sm border border-gray-300
-                    focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
-                    dark:bg-gray-500 dark:text-white dark:placeholder-white"
-                ></textarea>
-
-                <div class="flex justify-between mt-2">
-                    <div class="flex justify-center items-center">
-                        @error('reply') <span class="text-red-600">{{ $message }}</span> @enderror
-                    </div>
-
-                    <button
-                        type="submit"
-                        class="inline-flex justify-center items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-white
-                        uppercase tracking-widest hover:bg-blue-500 active:bg-blue-900 focus:outline-none focus:border-blue-900
-                        focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150"
-                    >
-                        <i class="bi bi-chat-left-text-fill"></i><span class="ml-2">回覆</span>
-                    </button>
-                </div>
-            </form>
-        </x-card>
-    @endauth
-
+<div class="w-full space-y-6 mt-6">
     {{-- Reply Container --}}
     <div id="post-{{ $post->id }}-replies" class="w-full space-y-6">
 
@@ -60,87 +29,51 @@
                                 <div>&bull;</div>
                                 <div>{{ $reply->created_at->diffForHumans() }}</div>
                             </div>
-
-                            @auth
-                                <div
-                                    x-data="{ deleteMenuIsOpen : false }"
-                                    x-on:click.outside="deleteMenuIsOpen = false"
-                                    class="relative"
-                                >
-                                    <button
-                                        x-on:click="deleteMenuIsOpen = ! deleteMenuIsOpen"
-                                        x-on:keydown.escape.window="deleteMenuIsOpen = false"
-                                        type="button"
-                                        class="text-2xl text-gray-400 hover:text-gray-700 focus:text-gray-700
-                                        dark:hover:text-white dark:focus:text-white"
-                                        aria-expanded="false" aria-haspopup="true"
-                                    >
-                                        <i class="bi bi-three-dots"></i>
-                                    </button>
-
-                                    <div
-                                        x-cloak
-                                        x-show="deleteMenuIsOpen"
-                                        x-transition.origin.top.right
-                                        class="absolute right-0 z-20 p-2 mt-2 w-72 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
-                                        dark:bg-gray-500 dark:text-white"
-                                        role="menu" aria-orientation="vertical" tabindex="-1"
-                                    >
-                                        <form wire:submit.prevent="storeResponse({{ $reply->id }})">
-                                            <textarea
-                                                wire:model.debounce.500ms="response"
-                                                rows="3"
-                                                class="form-textarea w-full rounded-md shadow-sm border border-gray-300
-                                                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
-                                                dark:bg-gray-500 dark:text-white dark:placeholder-white"
-                                            ></textarea>
-
-                                            <div class="flex mt-1">
-                                                @error('response') <span class="text-red-600">{{ $message }}</span> @enderror
-                                            </div>
-
-                                            <button
-                                                type="submit"
-                                                class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200
-                                                dark:hover:bg-gray-400 mt-1"
-                                            >
-                                                <i class="bi bi-chat-left-text-fill"></i><span class="ml-2">回覆</span>
-                                            </button>
-                                        </form>
-
-                                        @if (in_array(auth()->id(), [$reply->user_id, $post->user_id]))
-                                            <button
-                                                onclick="confirm('您確定要刪除此回覆嗎？') || event.stopImmediatePropagation()"
-                                                wire:click="destroy({{ $reply->id }})"
-                                                class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200
-                                                dark:hover:bg-gray-400 mt-1"
-                                            >
-                                                <i class="bi bi-trash-fill"></i><span class="ml-2">刪除</span>
-                                            </button>
-                                        @endif
-                                    </div>
-                                </div>
-                            @endauth
-
                         </div>
+                    </div>
+
+                    <div class="mt-2 md:mt-0 flex justify-start items-center space-x-2">
+                        @auth
+                            <button
+                                @click="replyBoxOpen = true"
+                                wire:click="$emit('changeReplyId', {{ $reply->id }})"
+                                class="w-8 h-8 flex justify-center items-center bg-blue-600 border border-transparent rounded-md font-semibold text-white
+                                uppercase tracking-widest hover:bg-blue-500 active:bg-blue-900 focus:outline-none focus:border-blue-900
+                                focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150"
+                            >
+                                <i class="bi bi-chat-left-text-fill"></i>
+                            </button>
+
+                            @if (in_array(auth()->id(), [$reply->user_id, $post->user_id]))
+                                <button
+                                    onclick="confirm('您確定要刪除此回覆嗎？') || event.stopImmediatePropagation()"
+                                    wire:click="destroy({{ $reply->id }})"
+                                    class="w-8 h-8 flex justify-center items-center bg-red-600 border border-transparent rounded-md font-semibold text-white
+                                    uppercase tracking-widest hover:bg-red-500 active:bg-red-900 focus:outline-none focus:border-red-900
+                                    focus:ring ring-red-300 disabled:opacity-25 transition ease-in-out duration-150"
+                                >
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             </x-card>
 
+            {{-- 子回覆 --}}
             <div class="reply-with-responses">
                 <div class="responses space-y-6">
-                    {{-- 子回覆 --}}
-                    @forelse ($reply->subReplies as $subReply)
+                    @forelse ($reply->children as $child)
                         <div class="relative">
                             <x-card
-                                id="post-{{ $post->id }}-reply-{{ $subReply->id }}"
+                                id="post-{{ $post->id }}-reply-{{ $child->id }}"
                                 class="flex"
                             >
                                 <div class="flex flex-col md:flex-row flex-1">
                                     {{-- 大頭貼 --}}
                                     <div class="flex-none">
-                                        <a href="{{ route('users.show', ['user' => $subReply->user_id]) }}">
-                                            <img src="{{ $subReply->user->gravatar() }}" alt="{{ $subReply->user->name }}"
+                                        <a href="{{ route('users.show', ['user' => $child->user_id]) }}">
+                                            <img src="{{ $child->user->gravatar() }}" alt="{{ $child->user->name }}"
                                             class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400">
                                         </a>
                                     </div>
@@ -148,57 +81,30 @@
                                     {{-- 留言 --}}
                                     <div class="w-full md:mx-4">
                                         <div class="text-gray-600 mt-3 sm:mt-0 dark:text-white">
-                                            {!! nl2br(e($subReply->content)) !!}
+                                            {!! nl2br(e($child->content)) !!}
                                         </div>
 
                                         <div class="flex items-center justify-between mt-3">
                                             <div class="flex items-center text-sm text-gray-400 space-x-2">
-                                                <div>{{ $subReply->user->name }}</div>
+                                                <div>{{ $child->user->name }}</div>
                                                 <div>&bull;</div>
-                                                <div>{{ $subReply->created_at->diffForHumans() }}</div>
+                                                <div>{{ $child->created_at->diffForHumans() }}</div>
                                             </div>
-
-                                            @if (in_array(auth()->id(), [$subReply->user_id, $post->user_id]))
-                                                <div
-                                                    x-data="{ deleteMenuIsOpen : false }"
-                                                    class="relative"
-                                                >
-                                                    <button
-                                                        x-on:click="deleteMenuIsOpen = ! deleteMenuIsOpen"
-                                                        x-on:click.outside="deleteMenuIsOpen = false"
-                                                        x-on:keydown.escape.window="deleteMenuIsOpen = false"
-                                                        type="button"
-                                                        class="text-2xl text-gray-400 hover:text-gray-700 focus:text-gray-700
-                                                        dark:hover:text-white dark:focus:text-white"
-                                                        aria-expanded="false" aria-haspopup="true"
-                                                    >
-                                                        <i class="bi bi-three-dots"></i>
-                                                    </button>
-
-                                                    <div
-                                                        x-cloak
-                                                        x-show="deleteMenuIsOpen"
-                                                        x-transition.origin.top.right
-                                                        class="absolute right-0 z-20 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
-                                                        dark:bg-gray-500 dark:text-white"
-                                                        role="menu" aria-orientation="vertical" tabindex="-1"
-                                                    >
-
-                                                        <button
-                                                            tabindex="-1"
-                                                            onclick="confirm('您確定要刪除此回覆嗎？') || event.stopImmediatePropagation()"
-                                                            wire:click="destroy({{ $subReply->id }})"
-                                                            class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200
-                                                            dark:hover:bg-gray-400"
-                                                        >
-                                                            <i class="bi bi-trash-fill"></i><span class="ml-2">刪除</span>
-                                                        </button>
-
-                                                    </div>
-                                                </div>
-                                            @endif
-
                                         </div>
+                                    </div>
+
+                                    <div class="mt-2 md:mt-0 flex justify-start items-center">
+                                        @if (in_array(auth()->id(), [$child->user_id, $post->user_id]))
+                                            <button
+                                                onclick="confirm('您確定要刪除此回覆嗎？') || event.stopImmediatePropagation()"
+                                                wire:click="destroy({{ $child->id }})"
+                                                class="w-8 h-8 flex justify-center items-center bg-red-600 border border-transparent rounded-md font-semibold text-white
+                                                uppercase tracking-widest hover:bg-red-500 active:bg-red-900 focus:outline-none focus:border-red-900
+                                                focus:ring ring-red-300 disabled:opacity-25 transition ease-in-out duration-150"
+                                            >
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
+                                        @endif
                                     </div>
                                 </div>
                             </x-card>

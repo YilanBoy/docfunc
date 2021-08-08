@@ -40,6 +40,10 @@ class ReplyBox extends Component
     // 儲存回覆
     public function store()
     {
+        if (!auth()->check()) {
+            return abort(403);
+        }
+
         $this->validate();
 
         $reply = Reply::create(

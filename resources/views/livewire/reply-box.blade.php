@@ -3,7 +3,10 @@
         {{-- Open Reply Box Modal--}}
         <div class="flex justify-end">
             <button
-                @click="replyBoxOpen = true"
+                x-on:click="
+                    replyBoxOpen = true
+                    $nextTick(() => { $refs.replyBox.focus() })
+                "
                 wire:click="switchReplyId(null)"
                 type="button"
                 class="w-full inline-flex justify-center rounded-md border border-transparent shadow-md px-4 py-2
@@ -53,6 +56,7 @@
 
                     <div class="sm:flex sm:items-start">
                         <textarea
+                            x-ref="replyBox"
                             wire:model.debounce.500ms="content"
                             placeholder="分享你的評論~"
                             rows="5"

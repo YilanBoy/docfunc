@@ -35,7 +35,10 @@
                     <div class="mt-2 md:mt-0 flex justify-start items-center space-x-2">
                         @auth
                             <button
-                                @click="replyBoxOpen = true"
+                                x-on:click="
+                                    replyBoxOpen = true
+                                    $nextTick(() => { $refs.replyBox.focus() })
+                                "
                                 wire:click="$emit('switchReplyId', {{ $reply->id }})"
                                 class="w-8 h-8 flex justify-center items-center bg-blue-600 border border-transparent rounded-md font-semibold text-white
                                 uppercase tracking-widest hover:bg-blue-500 active:bg-blue-900 focus:outline-none focus:border-blue-900

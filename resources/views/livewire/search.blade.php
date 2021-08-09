@@ -1,12 +1,12 @@
 <div
-    x-data="{showSearchBox : false}"
+    x-data="{ showSearchBox : false }"
     class="relative"
 >
     {{-- 搜尋按鈕 --}}
     <button
         x-on:click="
             showSearchBox = !showSearchBox
-            $nextTick(() => { $refs.searchBox.focus() });
+            $nextTick(() => { $refs.searchBox.focus() })
         "
         type="button"
         class="w-10 h-10 flex justify-center items-center text-2xl rounded-lg

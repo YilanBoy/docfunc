@@ -10,7 +10,7 @@ class ReplyBox extends Component
 {
     public $post;
     public $content;
-    public $replyId;
+    public $replyId = null;
 
     protected $listeners = ['switchReplyId'];
 
@@ -28,12 +28,6 @@ class ReplyBox extends Component
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
-    }
-
-    // 切換要回覆的留言
-    public function switchReplyId(?int $replyId)
-    {
-        $this->replyId = $replyId;
     }
 
     // 儲存回覆

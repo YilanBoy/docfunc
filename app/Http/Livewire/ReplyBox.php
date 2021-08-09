@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Reply;
 use App\Notifications\PostReplied;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ReplyBox extends Component
 {

@@ -48,22 +48,21 @@
                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl
                     transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full
-                    dark:bg-gray-700"
+                    dark:bg-gray-700 p-5"
                 >
-                    <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 space-y-2">
-                        <div class="sm:flex sm:items-start">
-                            <textarea
-                                wire:model.debounce.500ms="content"
-                                placeholder="分享你的評論~"
-                                rows="5"
-                                class="form-textarea w-full rounded-md shadow-sm border border-gray-300
-                                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
-                                dark:bg-gray-500 dark:text-white dark:placeholder-white"
-                            ></textarea>
-                        </div>
+
+                    <div class="sm:flex sm:items-start">
+                        <textarea
+                            wire:model.debounce.500ms="content"
+                            placeholder="分享你的評論~"
+                            rows="5"
+                            class="form-textarea w-full rounded-md shadow-sm border border-gray-300
+                            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+                            dark:bg-gray-600 dark:text-white dark:placeholder-white"
+                        ></textarea>
                     </div>
 
-                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse dark:bg-gray-600">
+                    <div class="mt-5 sm:flex sm:flex-row-reverse">
                         <button
                             @click="replyBoxOpen = false"
                             wire:click="store()"

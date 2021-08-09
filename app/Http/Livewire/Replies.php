@@ -12,7 +12,7 @@ class Replies extends Component
 
     public $post;
 
-    protected $listeners = ['refreshReplies' => 'render'];
+    protected $listeners = ['refresh'];
 
     // 刪除回覆
     public function destroy(Reply $reply)
@@ -24,10 +24,15 @@ class Replies extends Component
         $reply->post->updateReplyCount();
     }
 
+    public function refresh()
+    {
+        // Refresh replies
+    }
+
     public function render()
     {
         $replies = $this->post->replies()
-            // 不顯示子回覆
+            // 不撈取子回覆
             ->whereNull('parent_id')
             ->oldest()
             ->with(['children' => function ($query) {

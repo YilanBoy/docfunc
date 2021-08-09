@@ -4,7 +4,7 @@
         <div class="flex justify-end">
             <button
                 @click="replyBoxOpen = true"
-                wire:click="changeReplyId(null)"
+                wire:click="switchReplyId(null)"
                 type="button"
                 class="w-full inline-flex justify-center rounded-md border border-transparent shadow-md px-4 py-2
                 bg-blue-600 text-base font-medium text-white hover:bg-blue-700

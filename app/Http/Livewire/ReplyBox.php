@@ -13,8 +13,7 @@ class ReplyBox extends Component
     public $content;
     public $replyId;
 
-    protected $listeners = ['changeReplyId' => 'changeReplyId'];
-
+    protected $listeners = ['switchReplyId'];
 
     protected $rules = [
         'content' => ['required', 'min:2', 'max:400'],
@@ -32,7 +31,8 @@ class ReplyBox extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function changeReplyId(?int $replyId)
+    // 切換要回覆的留言
+    public function switchReplyId(?int $replyId)
     {
         $this->replyId = $replyId;
     }
@@ -68,7 +68,7 @@ class ReplyBox extends Component
         // 清空回覆表單的內容
         $this->content = '';
 
-        $this->emit('refreshReplies');
+        $this->emit('refresh');
     }
 
     public function render()

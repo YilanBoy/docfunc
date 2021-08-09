@@ -51,7 +51,7 @@
             {{-- 搜尋結果 --}}
             @if (strlen($search) >= 2)
                 <div
-                    class="absolute w-96 text-sm mt-2 z-20 bg-white p-2 shadow-md rounded-xl ring-1 ring-black ring-opacity-20
+                    class="absolute w-96 text-sm mt-2 z-10 bg-white p-2 shadow-md rounded-xl ring-1 ring-black ring-opacity-20
                     dark:bg-gray-500 dark:text-white"
                 >
                     @if ($results->count() > 0)

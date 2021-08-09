@@ -19,7 +19,7 @@
             x-cloak
             x-show="replyBoxOpen"
             @keydown.window.escape="replyBoxOpen = false"
-            class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
+            class="fixed z-20 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
         >
             <div
                 x-cloak

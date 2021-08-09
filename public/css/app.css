@@ -815,11 +815,11 @@ video {
 .z-0 {
 	z-index: 0;
 }
-.z-10 {
-	z-index: 10;
-}
 .z-20 {
 	z-index: 20;
+}
+.z-10 {
+	z-index: 10;
 }
 .m-1 {
 	margin: 0.25rem;

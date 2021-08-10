@@ -53,14 +53,15 @@ class ReplyBox extends Component
         );
 
         // 更新文章留言數
-        $reply->post->updateReplyCount();
+        $this->post->updateReplyCount();
 
         // 通知文章作者有新的評論
-        $reply->post->user->postNotify(new PostReplied($reply));
+        $this->post->user->postNotify(new PostReplied($reply));
 
         // 清空回覆表單的內容
         $this->content = '';
 
+        // 更新回覆列表
         $this->emit('refresh');
     }
 

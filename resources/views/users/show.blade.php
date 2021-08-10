@@ -37,43 +37,76 @@
                 class="w-full xl:w-2/3 space-y-6"
             >
                 <nav class="flex font-semibold">
-                    <a
-                        x-on:click.prevent="tab = 'information'"
-                        href="#"
-                        :class="{
-                            'border-blue-500 text-gray-700 dark:text-white': tab === 'information',
-                            'border-gray-400 text-gray-400': tab !== 'information'
-                        }"
-                        class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700 border-b-4 px-2 sm:px-7 py-2
-                        dark:hover:text-white"
-                    >
-                        <span>會員資訊</span>
-                    </a>
 
-                    <a
-                        x-on:click.prevent="tab = 'posts'"
-                        href="#"
-                        :class="{
-                            'border-blue-500 text-gray-700 dark:text-white': tab === 'posts',
-                            'border-gray-400 text-gray-400': tab !== 'posts'
-                        }"
-                        class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700 border-b-4 px-2 sm:px-7 py-2
-                        dark:hover:text-white"
-                    >
-                        <span>發布文章</span>
-                    </a>
-                    <a
-                        x-on:click.prevent="tab = 'replies'"
-                        href="#"
-                        :class="{
-                            'border-blue-500 text-gray-700 dark:text-white': tab === 'replies',
-                            'border-gray-400 text-gray-400': tab !== 'replies'
-                        }"
-                        class="block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700 border-b-4 px-2 sm:px-7 py-2
-                        dark:hover:text-white"
-                    >
-                        <span>回覆紀錄</span>
-                    </a>
+                    <div class="group">
+                        <a
+                            x-on:click.prevent="tab = 'information'"
+                            href="#"
+                            :class="{
+                                'text-gray-700 dark:text-white': tab === 'information',
+                                'text-gray-400 hover:text-gray-700 dark:hover:text-white': tab !== 'information'
+                            }"
+                            class="block transition duration-300 ease-in px-2 sm:px-7 py-2"
+                        >
+                            <span>會員資訊</span>
+                        </a>
+                        <div class="bg-gray-200 dark:bg-gray-600">
+                            <div
+                                :class="{
+                                    'w-full': tab === 'information',
+                                    'w-0 group-hover:w-full': tab !== 'information'
+                                }"
+                                class="h-1 bg-blue-500 transition-all duration-300"
+                            ></div>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <a
+                            x-on:click.prevent="tab = 'posts'"
+                            href="#"
+                            :class="{
+                                'text-gray-700 dark:text-white': tab === 'posts',
+                                'text-gray-400 hover:text-gray-700 dark:hover:text-white': tab !== 'posts'
+                            }"
+                            class="block transition duration-300 ease-in px-2 sm:px-7 py-2"
+                        >
+                            <span>發布文章</span>
+                        </a>
+                        <div class="bg-gray-200 dark:bg-gray-600">
+                            <div
+                                :class="{
+                                    'w-full': tab === 'posts',
+                                    'w-0 group-hover:w-full': tab !== 'posts'
+                                }"
+                                class="h-1 bg-blue-500 transition-all duration-300"
+                            ></div>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <a
+                            x-on:click.prevent="tab = 'replies'"
+                            href="#"
+                            :class="{
+                                'text-gray-700 dark:text-white': tab === 'replies',
+                                'text-gray-400 hover:text-gray-700 dark:hover:text-white': tab !== 'replies'
+                            }"
+                            class="block transition duration-300 ease-in px-2 sm:px-7 py-2"
+                        >
+                            <span>回覆紀錄</span>
+                        </a>
+                        <div class="bg-gray-200 dark:bg-gray-600">
+                            <div
+                                :class="{
+                                    'w-full': tab === 'replies',
+                                    'w-0 group-hover:w-full': tab !== 'replies'
+                                }"
+                                class="h-1 bg-blue-500 transition-all duration-300"
+                            ></div>
+                        </div>
+                    </div>
+
                 </nav>
 
                 {{-- 會員資訊 --}}

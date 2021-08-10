@@ -3,41 +3,74 @@
     <div class="flex justify-between">
         {{-- Post Sort --}}
         <nav class="flex font-semibold">
-            <a
-                wire:click.prevent="orderChange('latest')"
-                href="{{ $currentUrl . '?order=latest' }}"
-                @class([
-                    'block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700 border-b-4 px-2 sm:px-7 py-2 dark:hover:text-white',
-                    'border-blue-500 text-gray-700 dark:text-white' => ($order === 'latest'),
-                    'border-gray-400 text-gray-400' => ($order !== 'latest'),
-                ])
-            >
-                <span>最新文章</span>
-            </a>
+            <div class="group">
+                <a
+                    wire:click.prevent="orderChange('latest')"
+                    href="{{ $currentUrl . '?order=latest' }}"
+                    @class([
+                        'block transition duration-300 ease-in px-2 sm:px-7 py-2',
+                        'text-gray-700 dark:text-white' => ($order === 'latest'),
+                        'text-gray-400 hover:text-gray-700 dark:hover:text-white' => ($order !== 'latest'),
+                    ])
+                >
+                    <span>最新文章</span>
+                </a>
+                <div class="bg-gray-200 dark:bg-gray-600">
+                    <div
+                        @class([
+                            'h-1 bg-blue-500 transition-all duration-300',
+                            'w-full' => ($order === 'latest'),
+                            'w-0 group-hover:w-full' => ($order !== 'latest'),
+                        ])
+                    ></div>
+                </div>
+            </div>
 
-            <a
-                wire:click.prevent="orderChange('recent')"
-                href="{{ $currentUrl . '?order=recent' }}"
-                @class([
-                    'block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700 border-b-4 px-2 sm:px-7 py-2 dark:hover:text-white',
-                    'border-blue-500 text-gray-700 dark:text-white' => ($order === 'recent'),
-                    'border-gray-400 text-gray-400' => ($order !== 'recent'),
-                ])
-            >
-                <span>最近更新</span>
-            </a>
+            <div class="group">
+                <a
+                    wire:click.prevent="orderChange('recent')"
+                    href="{{ $currentUrl . '?order=recent' }}"
+                    @class([
+                        'block transition duration-300 ease-in px-2 sm:px-7 py-2',
+                        'text-gray-700 dark:text-white' => ($order === 'recent'),
+                        'text-gray-400 hover:text-gray-700 dark:hover:text-white' => ($order !== 'recent'),
+                    ])
+                >
+                    <span>最近更新</span>
+                </a>
+                <div class="bg-gray-200 dark:bg-gray-600">
+                    <div
+                        @class([
+                            'h-1 bg-blue-500 transition-all duration-300',
+                            'w-full' => ($order === 'recent'),
+                            'w-0 group-hover:w-full' => ($order !== 'recent'),
+                        ])
+                    ></div>
+                </div>
+            </div>
 
-            <a
-                wire:click.prevent="orderChange('reply')"
-                href="{{ $currentUrl . '?order=reply' }}"
-                @class([
-                    'block transition duration-150 ease-in hover:border-blue-500 hover:text-gray-700 border-b-4 px-2 sm:px-7 py-2 dark:hover:text-white',
-                    'border-blue-500 text-gray-700 dark:text-white' => ($order === 'reply'),
-                    'border-gray-400 text-gray-400' => ($order !== 'reply'),
-                ])
-            >
-                <span>最多留言</span>
-            </a>
+            <div class="group">
+                <a
+                    wire:click.prevent="orderChange('reply')"
+                    href="{{ $currentUrl . '?order=reply' }}"
+                    @class([
+                        'block transition duration-300 ease-in px-2 sm:px-7 py-2',
+                        'text-gray-700 dark:text-white' => ($order === 'reply'),
+                        'text-gray-400 hover:text-gray-700 dark:hover:text-white' => ($order !== 'reply'),
+                    ])
+                >
+                    <span>最多留言</span>
+                </a>
+                <div class="bg-gray-200 dark:bg-gray-600">
+                    <div
+                        @class([
+                            'h-1 bg-blue-500 transition-all duration-300',
+                            'w-full' => ($order === 'reply'),
+                            'w-0 group-hover:w-full' => ($order !== 'reply'),
+                        ])
+                    ></div>
+                </div>
+            </div>
         </nav>
 
         {{-- 分類訊息區塊 --}}

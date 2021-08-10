@@ -15,11 +15,11 @@
                 "
                 @click="replyId = null"
                 type="button"
-                class="group relative h-12 inline-flex w-64 border border-blue-600 sm:w-56 focus:outline-none"
+                class="group relative h-12 inline-flex w-64 rounded-md border border-blue-600 sm:w-56 focus:outline-none"
             >
                 <span
-                    class="absolute inset-0 inline-flex items-center justify-center self-stretch px-6 text-white text-center font-medium bg-blue-600 ring-1
-                    ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
+                    class="absolute inset-0 inline-flex items-center justify-center self-stretch px-6 text-white text-center font-medium bg-blue-600
+                    rounded-md ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
                     group-hover:-translate-y-2 group-hover:-translate-x-2 group-focus:-translate-y-2 group-focus:-translate-x-2"
                 >
                     <i class="bi bi-chat-left-text-fill"></i><span class="ml-2">回覆文章</span>

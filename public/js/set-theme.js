@@ -1,15 +1,1 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!***********************************!*\
-  !*** ./resources/ts/set-theme.ts ***!
-  \***********************************/
- // Load local storage or OS preferences
-
-if (localStorage.theme === 'light' || !('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches) {
-  document.documentElement.classList.remove('dark');
-} else {
-  document.documentElement.classList.add('dark');
-}
-/******/ })()
-;
+(()=>{"use strict";"light"===localStorage.theme||!("theme"in localStorage)&&window.matchMedia("(prefers-color-scheme: light)").matches?document.documentElement.classList.remove("dark"):document.documentElement.classList.add("dark")})();

@@ -33,7 +33,7 @@
             </x-card>
 
             <div
-                x-data="{ tab : 'information' }"
+                x-data="{ tab: 'information' }"
                 class="w-full xl:w-2/3 space-y-6"
             >
                 <nav class="flex font-semibold">

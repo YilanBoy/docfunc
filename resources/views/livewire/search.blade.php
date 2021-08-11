@@ -1,5 +1,5 @@
 <div
-    x-data="{ showSearchBox : false }"
+    x-data="{ showSearchBox: false }"
     class="relative"
 >
     {{-- 搜尋按鈕 --}}

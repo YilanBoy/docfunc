@@ -1,7 +1,7 @@
 <div
     x-data="{
-        replyBoxOpen : false,
-        replyId : @entangle('replyId')
+        replyBoxOpen: false,
+        replyId: @entangle('replyId')
     }"
     class="w-full xl:w-2/3 mt-6"
 >

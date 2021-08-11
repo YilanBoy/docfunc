@@ -2,7 +2,7 @@
 <nav id="header">
     {{-- 手機版選單 --}}
     <div
-        x-data="{ mobileMenuIsOpen : false }"
+        x-data="{ mobileMenuIsOpen: false }"
         class="relative bg-white border-blue-400 border-t-4 shadow-md
         dark:bg-gray-800 lg:hidden"
     >
@@ -90,7 +90,7 @@
 
                         {{-- 手機版-會員選單 --}}
                         <div
-                            x-data="{ profileIsOpen : false }"
+                            x-data="{ profileIsOpen: false }"
                             class="relative"
                         >
                             {{-- 手機版-會員大頭貼 --}}
@@ -338,7 +338,7 @@
 
                 {{-- 電腦版-會員選單 --}}
                 <div
-                    x-data="{ profileIsOpen : false }"
+                    x-data="{ profileIsOpen: false }"
                     class="relative flex justify-center items-center pt-1"
                 >
                     {{-- 電腦版-會員大頭貼 --}}

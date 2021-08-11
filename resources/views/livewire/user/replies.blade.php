@@ -7,7 +7,7 @@
 
     @forelse ($replies as $reply)
         <x-card
-            x-data=""
+            x-data="{}"
             x-on:click="
                 const targetTagName = $event.target.tagName.toLowerCase()
                 const ignores = ['a']

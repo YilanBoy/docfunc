@@ -142,4 +142,29 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('cardLink', () => ({
+                // 文章連結
+                postCardLink(event, refs) {
+                    let ignores = ['a'];
+                    let targetTagName = event.target.tagName.toLowerCase();
+
+                    if (!ignores.includes(targetTagName)) {
+                        refs.postLink.click();
+                    }
+                },
+                // 回覆連結
+                replyCardLink(event, refs) {
+                    let ignores = ['a'];
+                    let targetTagName = event.target.tagName.toLowerCase();
+
+                    if (!ignores.includes(targetTagName)) {
+                        refs.replyLink.click();
+                    }
+                }
+            }));
+        });
+    </script>
 @endsection

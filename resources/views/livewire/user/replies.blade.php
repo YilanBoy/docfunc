@@ -7,15 +7,8 @@
 
     @forelse ($replies as $reply)
         <x-card
-            x-data="{}"
-            x-on:click="
-                const targetTagName = $event.target.tagName.toLowerCase()
-                const ignores = ['a']
-
-                if (!ignores.includes(targetTagName)) {
-                    $refs.replyLink.click()
-                }
-            "
+            x-data="cardLink"
+            x-on:click="replyCardLink($event, $refs)"
             class="flex flex-col md:flex-row justify-between hover:shadow-xl
             transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer"
         >

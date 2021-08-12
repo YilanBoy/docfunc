@@ -71,10 +71,13 @@
                                 }
                             "
                             href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
-                            class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-blue-600 rounded-full
-                            transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl"
+                            class="group relative w-10 h-10 inline-flex rounded-md border border-blue-600"
                         >
-                            <i class="bi bi-file-earmark-check-fill"></i>
+                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-lg text-white text-center font-medium bg-blue-600
+                            rounded-md ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
+                            group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                <i class="bi bi-file-earmark-check-fill"></i>
+                            </span>
                         </a>
 
                         <form id="force-delete-post-{{ $post->id }}" action="{{ route('posts.forceDeletePost', ['id' => $post->id]) }}" method="POST"
@@ -91,10 +94,13 @@
                                 }
                             "
                             type="button"
-                            class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-red-600 rounded-full
-                            transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl ml-2"
+                            class="group relative w-10 h-10 inline-flex rounded-md border border-red-600 focus:outline-none ml-2"
                         >
-                            <i class="bi bi-trash-fill"></i>
+                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-lg text-white text-center font-medium bg-red-600
+                            rounded-md ring-1 ring-red-600 ring-offset-1 ring-offset-red-600 transform transition-transform
+                            group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                <i class="bi bi-trash-fill"></i>
+                            </span>
                         </button>
                     </div>
                 @else
@@ -102,10 +108,15 @@
                     <div class="flex items-center mt-2 md:mt-0">
                         <a
                             href="{{ route('posts.edit', ['post' => $post->id]) }}"
-                            class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-green-600 rounded-full
-                            transform hover:scale-125 hover:-rotate-45 transition duration-150 ease-in shadow-md hover:shadow-xl"
+                            class="group relative w-10 h-10 inline-flex rounded-md border border-green-600"
                         >
-                            <i class="bi bi-pencil-fill"></i>
+                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-lg text-white text-center font-medium bg-green-600
+                            rounded-md ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 transform transition-transform
+                            group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                <span class="transform group-hover:scale-125 group-hover:-rotate-45 transition duration-150 ease-in">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </span>
+                            </span>
                         </a>
 
                         <form id="delete-post-{{ $post->id }}" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
@@ -123,11 +134,13 @@
                                 }
                             "
                             type="button"
-                            form="delete-post-{{ $post->id }}"
-                            class="flex justify-center items-center h-10 w-10 text-lg text-white font-bold bg-yellow-600 rounded-full
-                            transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl ml-2"
+                            class="group relative w-10 h-10 inline-flex rounded-md border border-yellow-600 focus:outline-none ml-2"
                         >
-                            <i class="bi bi-file-earmark-x-fill"></i>
+                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-lg text-white text-center font-medium bg-yellow-600
+                            rounded-md ring-1 ring-yellow-600 ring-offset-1 ring-offset-yellow-600 transform transition-transform
+                            group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                <i class="bi bi-file-earmark-x-fill"></i>
+                            </span>
                         </button>
                     </div>
                 @endif

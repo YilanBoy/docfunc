@@ -15,7 +15,7 @@
                 "
                 @click="replyId = null"
                 type="button"
-                class="group relative h-12 inline-flex w-64 rounded-md border border-blue-600 sm:w-56 focus:outline-none"
+                class="group relative h-12 w-64 inline-flex rounded-md border border-blue-600 focus:outline-none"
             >
                 <span
                     class="absolute inset-0 inline-flex items-center justify-center self-stretch px-6 text-white text-center font-medium bg-blue-600

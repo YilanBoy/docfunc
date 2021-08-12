@@ -32,7 +32,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-2 md:mt-0 flex justify-start items-center space-x-3">
+                    <div class="mt-2 md:mt-0 flex justify-start items-center space-x-2">
                         @auth
                             <button
                                 x-on:click="
@@ -42,7 +42,7 @@
                                 @click="replyId = {{ $reply->id }}"
                                 class="group relative w-10 h-10 inline-flex rounded-md border border-blue-600 focus:outline-none"
                             >
-                                <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-white text-center font-medium bg-blue-600
+                                <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-lg text-white text-center font-medium bg-blue-600
                                 rounded-md ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
                                 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                     <i class="bi bi-chat-left-text-fill"></i>
@@ -55,7 +55,7 @@
                                     wire:click="destroy({{ $reply->id }})"
                                     class="group relative w-10 h-10 inline-flex rounded-md border border-red-600 focus:outline-none"
                                 >
-                                    <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-white text-center font-medium bg-red-600
+                                    <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-lg text-white text-center font-medium bg-red-600
                                     rounded-md ring-1 ring-red-600 ring-offset-1 ring-offset-red-600 transform transition-transform
                                     group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                         <i class="bi bi-trash-fill"></i>
@@ -107,7 +107,7 @@
                                                 wire:click="destroy({{ $child->id }})"
                                                 class="group relative w-10 h-10 inline-flex rounded-md border border-red-600 focus:outline-none"
                                             >
-                                                <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-white text-center font-medium bg-red-600
+                                                <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-lg text-white text-center font-medium bg-red-600
                                                 rounded-md ring-1 ring-red-600 ring-offset-1 ring-offset-red-600 transform transition-transform
                                                 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                                     <i class="bi bi-trash-fill"></i>

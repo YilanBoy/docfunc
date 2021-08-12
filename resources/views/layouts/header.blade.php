@@ -3,8 +3,8 @@
     {{-- 手機版選單 --}}
     <div
         x-data="{ mobileMenuIsOpen: false }"
-        class="relative bg-white border-blue-400 border-t-4 shadow-md
-        dark:bg-gray-800 lg:hidden"
+        class="relative bg-white shadow-md lg:hidden
+        dark:bg-gray-800"
     >
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div class="relative flex items-center justify-between h-18">
@@ -202,7 +202,7 @@
     {{-- 電腦版選單 --}}
     <div
         class="hidden lg:flex flex-col justify-between items-center fixed top-0 left-0 z-10 w-16 h-screen
-        bg-white border-blue-400 border-l-4 shadow-md transition-all duration-300 py-2
+        bg-white shadow-md transition-all duration-300 py-2
         dark:bg-gray-900"
     >
         {{-- 電腦版-Logo --}}

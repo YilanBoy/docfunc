@@ -46,11 +46,15 @@
                         <div>用部落格紀錄生活上的大小事</div>
                         <div class="mt-1">此部落格使用 Laravel、Alpine.js 與 Tailwind CSS 開發</div>
                     </div>
-                    <div class="flex justify-center items-center">
+                    <div class="flex justify-center items-center mt-7">
                         <a href="{{ route('posts.create') }}"
-                        class="block w-3/4 transition duration-500 ease-in-out bg-green-600 transform hover:-translate-y-1 hover:scale-110
-                        text-white text-center font-bold rounded-md py-2 mt-7 shadow-md hover:shadow-lg">
-                            <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
+                        class="group relative h-12 w-64 inline-flex rounded-md border border-green-600 focus:outline-none">
+                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch py-2 text-white text-center font-medium bg-green-600
+                            rounded-md ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 transform transition-transform
+                            group-hover:-translate-y-2 group-hover:-translate-x-2 group-focus:-translate-y-2 group-focus:-translate-x-2
+                            group-active:-translate-y-0 group-active:-translate-x-0">
+                                <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
+                            </span>
                         </a>
                     </div>
                 </x-card>

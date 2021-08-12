@@ -32,7 +32,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-2 md:mt-0 flex justify-start items-center space-x-2">
+                    <div class="mt-2 md:mt-0 flex justify-start items-center space-x-3">
                         @auth
                             <button
                                 x-on:click="
@@ -40,22 +40,26 @@
                                     $nextTick(() => { $refs.replyBox.focus() })
                                 "
                                 @click="replyId = {{ $reply->id }}"
-                                class="w-8 h-8 flex justify-center items-center bg-blue-600 border border-transparent rounded-md font-semibold text-white
-                                uppercase tracking-widest hover:bg-blue-500 active:bg-blue-900 focus:outline-none focus:border-blue-900
-                                focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150"
+                                class="group relative w-10 h-10 inline-flex rounded-md border border-blue-600 focus:outline-none"
                             >
-                                <i class="bi bi-chat-left-text-fill"></i>
+                                <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-white text-center font-medium bg-blue-600
+                                rounded-md ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
+                                group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                    <i class="bi bi-chat-left-text-fill"></i>
+                                </span>
                             </button>
 
                             @if (in_array(auth()->id(), [$reply->user_id, $post->user_id]))
                                 <button
                                     onclick="confirm('您確定要刪除此回覆嗎？') || event.stopImmediatePropagation()"
                                     wire:click="destroy({{ $reply->id }})"
-                                    class="w-8 h-8 flex justify-center items-center bg-red-600 border border-transparent rounded-md font-semibold text-white
-                                    uppercase tracking-widest hover:bg-red-500 active:bg-red-900 focus:outline-none focus:border-red-900
-                                    focus:ring ring-red-300 disabled:opacity-25 transition ease-in-out duration-150"
+                                    class="group relative w-10 h-10 inline-flex rounded-md border border-red-600 focus:outline-none"
                                 >
-                                    <i class="bi bi-trash-fill"></i>
+                                    <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-white text-center font-medium bg-red-600
+                                    rounded-md ring-1 ring-red-600 ring-offset-1 ring-offset-red-600 transform transition-transform
+                                    group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </span>
                                 </button>
                             @endif
                         @endauth
@@ -101,11 +105,13 @@
                                             <button
                                                 onclick="confirm('您確定要刪除此回覆嗎？') || event.stopImmediatePropagation()"
                                                 wire:click="destroy({{ $child->id }})"
-                                                class="w-8 h-8 flex justify-center items-center bg-red-600 border border-transparent rounded-md font-semibold text-white
-                                                uppercase tracking-widest hover:bg-red-500 active:bg-red-900 focus:outline-none focus:border-red-900
-                                                focus:ring ring-red-300 disabled:opacity-25 transition ease-in-out duration-150"
+                                                class="group relative w-10 h-10 inline-flex rounded-md border border-red-600 focus:outline-none"
                                             >
-                                                <i class="bi bi-trash-fill"></i>
+                                                <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-white text-center font-medium bg-red-600
+                                                rounded-md ring-1 ring-red-600 ring-offset-1 ring-offset-red-600 transform transition-transform
+                                                group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                                    <i class="bi bi-trash-fill"></i>
+                                                </span>
                                             </button>
                                         @endif
                                     </div>

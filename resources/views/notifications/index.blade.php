@@ -16,15 +16,8 @@
                 {{-- Notification --}}
                 @forelse ($notifications as $notification)
                     <x-card
-                        x-data="{}"
-                        x-on:click="
-                            const targetTagName = $event.target.tagName.toLowerCase()
-                            const ignores = ['a']
-
-                            if (!ignores.includes(targetTagName)) {
-                                $refs.notificationLink.click()
-                            }
-                        "
+                        x-data="cardLink"
+                        x-on:click="notificationCardLink($event, $refs)"
                         class="w-full flex flex-col md:flex-row justify-between hover:shadow-xl
                         transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer"
                     >
@@ -86,4 +79,20 @@
 
         </div>
     </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('cardLink', () => ({
+                // 通知連結
+                notificationCardLink(event, refs) {
+                    let ignores = ['a'];
+                    let targetTagName = event.target.tagName.toLowerCase();
+
+                    if (!ignores.includes(targetTagName)) {
+                        refs.notificationLink.click();
+                    }
+                }
+            }));
+        });
+    </script>
 @endsection

@@ -42,10 +42,10 @@
                                                 }
                                             "
                                             href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
-                                            class="group relative w-16 h-16 inline-flex rounded-md border border-blue-600"
+                                            class="group relative w-16 h-16 inline-flex rounded-xl border border-blue-600"
                                         >
                                             <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-white text-center font-medium bg-blue-600
-                                            rounded-md ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
+                                            rounded-xl ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
                                             group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                                 <i class="bi bi-file-earmark-check-fill"></i>
                                             </span>
@@ -65,10 +65,10 @@
                                                 }
                                             "
                                             type="button"
-                                            class="group relative w-16 h-16 inline-flex rounded-md border border-red-600 focus:outline-none mt-4"
+                                            class="group relative w-16 h-16 inline-flex rounded-xl border border-red-600 focus:outline-none mt-4"
                                         >
                                             <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-white text-center font-medium bg-red-600
-                                            rounded-md ring-1 ring-red-600 ring-offset-1 ring-offset-red-600 transform transition-transform
+                                            rounded-xl ring-1 ring-red-600 ring-offset-1 ring-offset-red-600 transform transition-transform
                                             group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                                 <i class="bi bi-trash-fill"></i>
                                             </span>
@@ -77,10 +77,10 @@
                                         {{-- Edit Post --}}
                                         <a
                                             href="{{ route('posts.edit', ['post' => $post->id]) }}"
-                                            class="group relative w-16 h-16 inline-flex rounded-md border border-green-600"
+                                            class="group relative w-16 h-16 inline-flex rounded-xl border border-green-600"
                                         >
                                             <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-white text-center font-medium bg-green-600
-                                            rounded-md ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 transform transition-transform
+                                            rounded-xl ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 transform transition-transform
                                             group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                                 <span class="transform group-hover:scale-125 group-hover:-rotate-45 transition duration-150 ease-in">
                                                     <i class="bi bi-pencil-fill"></i>
@@ -102,10 +102,10 @@
                                                 }
                                             "
                                             type="button"
-                                            class="group relative w-16 h-16 inline-flex rounded-md border border-yellow-600 focus:outline-none mt-4"
+                                            class="group relative w-16 h-16 inline-flex rounded-xl border border-yellow-600 focus:outline-none mt-4"
                                         >
                                             <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-white text-center font-medium bg-yellow-600
-                                            rounded-md ring-1 ring-yellow-600 ring-offset-1 ring-offset-yellow-600 transform transition-transform
+                                            rounded-xl ring-1 ring-yellow-600 ring-offset-1 ring-offset-yellow-600 transform transition-transform
                                             group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                                 <i class="bi bi-file-earmark-x-fill"></i>
                                             </span>

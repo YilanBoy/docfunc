@@ -48,9 +48,9 @@
                     </div>
                     <div class="flex justify-center items-center mt-7">
                         <a href="{{ route('posts.create') }}"
-                        class="group relative h-12 w-64 inline-flex rounded-md border border-green-600 focus:outline-none">
+                        class="group relative h-12 w-64 inline-flex rounded-lg border border-green-600 focus:outline-none">
                             <span class="absolute inset-0 inline-flex items-center justify-center self-stretch py-2 text-white text-center font-medium bg-green-600
-                            rounded-md ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 transform transition-transform
+                            rounded-lg ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 transform transition-transform
                             group-hover:-translate-y-2 group-hover:-translate-x-2 group-focus:-translate-y-2 group-focus:-translate-x-2
                             group-active:-translate-y-0 group-active:-translate-x-0">
                                 <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>

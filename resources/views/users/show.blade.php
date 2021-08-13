@@ -8,7 +8,7 @@
         <div class="min-h-screen flex flex-col md:flex-row justify-center items-start px-4 xl:px-0 mt-6">
 
             {{-- 會員資訊 --}}
-            <x-card class="w-full md:w-80 flex flex-col justify-center items-center mr-0 xl:mr-6
+            <x-card class="w-full md:w-80 flex flex-col justify-center items-center mr-0 md:mr-6
             dark:text-white">
                 {{-- 大頭貼 --}}
                 <div>

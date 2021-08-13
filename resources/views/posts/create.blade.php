@@ -33,9 +33,9 @@
 
                             {{-- Save Button --}}
                             <button type="submit" form="create-post"
-                            class="save-post group relative w-16 h-16 inline-flex rounded-md border border-blue-600 focus:outline-none mt-4">
+                            class="save-post group relative w-16 h-16 inline-flex rounded-xl border border-blue-600 focus:outline-none mt-4">
                                 <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-white text-center font-medium bg-blue-600
-                                rounded-md ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
+                                rounded-xl ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
                                 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                     <i class="bi bi-save2-fill"></i>
                                 </span>

@@ -114,7 +114,7 @@
                     <a
                         x-ref="postLink"
                         href="{{ $post->link_with_slug }}"
-                        class="hover:underline"
+                        class="fancy-link"
                     >{{ $post->title }}</a>
                 </h1>
 

@@ -55,3 +55,23 @@
 .dark .reply-with-responses .responses>:last-child:after {
     background: #374151;
 }
+
+/* multi-line underline text-gradient animation */
+.fancy-link {
+    background-image: linear-gradient(90deg, #DC2626, #4F46E5);
+    background-size: 0% 3px;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    transition: background-size 300ms ease;
+
+    /* extra styling */
+    text-decoration: none;
+}
+
+.dark .fancy-link {
+    background-image: linear-gradient(90deg, #FCA5A5, #A5B4FC);
+}
+
+.fancy-link:hover {
+    background-size: 100% 3px;
+}

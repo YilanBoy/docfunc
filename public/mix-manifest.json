@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/alpine.js": "/js/alpine.js",
     "/js/sweet-alert.js": "/js/sweet-alert.js",
     "/js/editor.js": "/js/editor.js",
     "/js/tagify.js": "/js/tagify.js",

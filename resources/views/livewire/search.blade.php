@@ -1,6 +1,5 @@
 <div
     x-data="{ searchBoxOpen: false }"
-    class="relative"
 >
     {{-- 搜尋按鈕 --}}
     <button

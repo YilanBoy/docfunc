@@ -3,8 +3,8 @@
     {{-- 手機版選單 --}}
     <div
         x-data="{ mobileMenuIsOpen: false }"
-        class="relative bg-white shadow-md lg:hidden
-        dark:bg-gray-800"
+        class="relative z-20 bg-white shadow-md lg:hidden
+        dark:bg-gray-800 "
     >
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div class="relative flex items-center justify-between h-18">
@@ -114,7 +114,7 @@
                                 x-on:click.outside="profileIsOpen = false"
                                 x-show="profileIsOpen"
                                 x-transition.origin.top.right
-                                class="absolute right-0 z-10 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
+                                class="absolute right-0 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
                                 dark:bg-gray-500 dark:text-white"
                                 role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                             >
@@ -201,7 +201,7 @@
 
     {{-- 電腦版選單 --}}
     <div
-        class="hidden lg:flex flex-col justify-between items-center fixed top-0 left-0 z-10 w-16 h-screen
+        class="hidden z-20 w-16 h-screen lg:flex flex-col justify-between items-center fixed top-0 left-0
         bg-white shadow-md transition-all duration-300 py-2
         dark:bg-gray-900"
     >
@@ -362,7 +362,7 @@
                         x-on:click.outside="profileIsOpen = false"
                         x-show="profileIsOpen"
                         x-transition.origin.bottom.left
-                        class="absolute left-16 bottom-0 z-10 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
+                        class="absolute left-16 bottom-0 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
                         dark:bg-gray-500 dark:text-white"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                     >

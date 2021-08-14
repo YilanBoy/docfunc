@@ -16,11 +16,11 @@
             <div class="w-full flex justify-between">
                 {{-- 文章標題 --}}
                 <div class="flex flex-col justify-between">
-                    <span class="text-xl font-semibold">
+                    <span class="text-xl font-semibold dark:text-white">
                         <a
                             x-ref="replyLink"
                             href="{{ $reply->post->link_with_slug }}#post-{{ $reply->post->id }}-reply-{{ $reply->id }}"
-                            class="hover:underline dark:text-white"
+                            class="fancy-link"
                         >
                             {{ $reply->post->title }}
                         </a>

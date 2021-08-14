@@ -18,11 +18,11 @@
                 @endif
 
                 {{-- 文章標題 --}}
-                <span class="text-xl font-semibold mt-2 md:mt-0">
+                <span class="text-xl font-semibold mt-2 md:mt-0 dark:text-white">
                     <a
                         x-ref="postLink"
                         href="{{ ($post->trashed()) ? route('posts.showSoftDeleted', [ 'id' => $post->id]) : $post->link_with_slug }}"
-                        class="hover:underline dark:text-white"
+                        class="fancy-link"
                     >{{ $post->title }}</a>
                 </span>
 

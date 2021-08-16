@@ -35,13 +35,11 @@ class PostTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $categoryOnePost = Post::factory()->make(
-            [
-                'title' => 'this post belongs to category one',
-                'user_id' => $user->id,
-                'category_id' => 1,
-            ]
-        );
+        $categoryOnePost = Post::factory()->make([
+            'title' => 'this post belongs to category one',
+            'user_id' => $user->id,
+            'category_id' => 1,
+        ]);
 
         $categoryOnePost->save();
 
@@ -55,6 +53,52 @@ class PostTest extends TestCase
             ->set('category', Category::find(2))
             ->assertViewHas('posts', function ($posts) {
                 return $posts->count() === 0;
+            });
+    }
+
+    public function test_order_query_string_filters_correctly()
+    {
+        $user = User::factory()->create();
+
+        $recentlyUpdatedPost = Post::factory()->create([
+            'title' => 'this post is updated recently',
+            'user_id' => $user->id,
+            'created_at' => now()->subDays(20),
+            'updated_at' => now(),
+        ]);
+
+        $latestPost = Post::factory()->create([
+            'title' => 'this post is the latest',
+            'user_id' => $user->id,
+            'created_at' => now()->subDays(10),
+            'updated_at' => now()->subDays(5),
+        ]);
+
+        $mostReplyPost = Post::factory()->create([
+            'title' => 'this post has the most replies',
+            'user_id' => $user->id,
+            'reply_count' => 10,
+            'created_at' => now()->subDays(15),
+            'updated_at' => now()->subDays(15),
+        ]);
+
+        Livewire::withQueryParams(['order' => 'latest'])
+            ->test(Posts::class)
+            ->assertViewHas('posts', function ($posts) {
+                return $posts->first()->title === 'this post is the latest';
+            });
+
+        Livewire::withQueryParams(['order' => 'recent'])
+            ->test(Posts::class)
+            ->assertViewHas('posts', function ($posts) {
+                return $posts->first()->title === 'this post is updated recently';
+            });
+
+
+        Livewire::withQueryParams(['order' => 'reply'])
+            ->test(Posts::class)
+            ->assertViewHas('posts', function ($posts) {
+                return $posts->first()->title === 'this post has the most replies';
             });
     }
 

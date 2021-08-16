@@ -128,8 +128,8 @@ ClassicEditor.create(document.querySelector('#editor'), {
                 element.textContent = `${stats.characters} / ${maxCharacters}`;
                 // 如果字數接近限制，則將 wordsBox 的 class 加上一個 text-yellow-500，使文字變成黃色
                 element.classList.toggle('text-yellow-500', isCloseToLimit);
-                // 如果字數超過限制，則將 wordsBox 的 class 加上一個 text-red-500，使文字變成紅色
-                element.classList.toggle('text-red-500', isLimitExceeded);
+                // 如果字數超過限制，則將 wordsBox 的 class 加上一個 text-red-400，使文字變成紅色
+                element.classList.toggle('text-red-400', isLimitExceeded);
             });
 
             // 如果字數超過最高限制，則將送出的按鈕 disable

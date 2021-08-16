@@ -14,7 +14,7 @@
             {{-- 文章 --}}
             <div class="w-full flex flex-col justify-between">
                 @if ($post->trashed())
-                    <span class="text-red-500">此文章已被標記為刪除狀態！</span>
+                    <span class="text-red-400">此文章已被標記為刪除狀態！</span>
                 @endif
 
                 {{-- 文章標題 --}}

@@ -116,7 +116,7 @@
                     @endcan
 
                     @if ($post->trashed())
-                        <span class="text-red-500">此文章已被標記為刪除狀態！</span>
+                        <span class="text-red-400">此文章已被標記為刪除狀態！</span>
                     @endif
 
                     <div class="flex justify-between">

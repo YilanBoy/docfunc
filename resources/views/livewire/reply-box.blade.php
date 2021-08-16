@@ -101,7 +101,7 @@
 
                         <div class="flex-1 flex justify-start">
                             <div class="flex justify-center items-center">
-                                @error('content') <span class="text-red-600">{{ $message }}</span> @enderror
+                                @error('content') <span class="text-red-400">{{ $message }}</span> @enderror
                             </div>
                         </div>
                     </div>

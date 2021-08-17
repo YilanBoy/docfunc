@@ -116,4 +116,53 @@ class PostTest extends TestCase
             ->assertSee($post->title)
             ->assertSee($post->body);
     }
+
+    public function test_guest_can_not_visit_create_post_page()
+    {
+        $this->get(route('posts.create'))
+            ->assertStatus(302)
+            ->assertRedirect(route('login'));
+    }
+
+    public function test_login_user_can_visit_create_post_page()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->get(route('posts.create'))
+            ->assertSuccessful();
+    }
+
+    public function test_guest_can_not_create_post()
+    {
+        $response = $this->post(route('posts.store'), [
+            'title' => 'This is a test post title',
+            'category_id' => 1,
+            'tags' => '',
+            'body' => 'This is a test post body'
+        ]);
+
+        $response->assertStatus(302)
+            ->assertRedirect(route('login'));
+
+        $this->assertDatabaseCount('posts', 0);
+    }
+
+    public function test_login_user_can_create_post()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post(route('posts.store'), [
+            'title' => 'This is a test post title',
+            'category_id' => 1,
+            'tags' => '',
+            'body' => 'This is a test post body'
+        ]);
+
+        $this->assertDatabaseHas('posts', [
+            'title' => 'This is a test post title',
+            'category_id' => 1,
+            'body' => 'This is a test post body'
+        ]);
+    }
 }

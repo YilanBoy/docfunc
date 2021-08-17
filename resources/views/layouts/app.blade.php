@@ -13,7 +13,7 @@
     <meta name="description" content="@yield('description', 'Allen 的個人部落格')">
 
     {{-- Favicon --}}
-    <link rel="shortcut icon" href="{{ asset('images/icon/icon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/icon/icon.svg') }}" type="image/x-icon">
     {{-- Set theme --}}
     <script src="{{ asset('js/set-theme.js') }}"></script>
     {{-- Styles --}}

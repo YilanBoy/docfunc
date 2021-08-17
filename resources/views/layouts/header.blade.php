@@ -210,7 +210,7 @@
             class="relative"
         >
             <a href="{{ route('root') }}" class="peer w-14 h-14 flex justify-center items-center">
-                <img class="w-10" src="{{ asset('images/icon/icon.png') }}" alt="{{ config('app.name') }}">
+                <img class="w-10" src="{{ asset('images/icon/icon.svg') }}" alt="{{ config('app.name') }}">
             </a>
 
             <span

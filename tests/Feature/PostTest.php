@@ -60,21 +60,21 @@ class PostTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $recentlyUpdatedPost = Post::factory()->create([
+        Post::factory()->create([
             'title' => 'this post is updated recently',
             'user_id' => $user->id,
             'created_at' => now()->subDays(20),
             'updated_at' => now(),
         ]);
 
-        $latestPost = Post::factory()->create([
+        Post::factory()->create([
             'title' => 'this post is the latest',
             'user_id' => $user->id,
             'created_at' => now()->subDays(10),
             'updated_at' => now()->subDays(5),
         ]);
 
-        $mostReplyPost = Post::factory()->create([
+        Post::factory()->create([
             'title' => 'this post has the most replies',
             'user_id' => $user->id,
             'reply_count' => 10,
@@ -93,7 +93,6 @@ class PostTest extends TestCase
             ->assertViewHas('posts', function ($posts) {
                 return $posts->first()->title === 'this post is updated recently';
             });
-
 
         Livewire::withQueryParams(['order' => 'reply'])
             ->test(Posts::class)
@@ -138,7 +137,6 @@ class PostTest extends TestCase
         $response = $this->post(route('posts.store'), [
             'title' => 'This is a test post title',
             'category_id' => 1,
-            'tags' => '',
             'body' => 'This is a test post body'
         ]);
 
@@ -155,14 +153,36 @@ class PostTest extends TestCase
         $response = $this->actingAs($user)->post(route('posts.store'), [
             'title' => 'This is a test post title',
             'category_id' => 1,
-            'tags' => '',
             'body' => 'This is a test post body'
         ]);
+
+        $latestPost = Post::latest()->first();
+
+        $response->assertStatus(302)
+            ->assertRedirect(route('posts.show', ['post' => $latestPost->id, 'slug' => $latestPost->slug]));
 
         $this->assertDatabaseHas('posts', [
             'title' => 'This is a test post title',
             'category_id' => 1,
             'body' => 'This is a test post body'
         ]);
+    }
+
+    public function test_author_can_soft_delete_own_post()
+    {
+        $user = User::factory()->create();
+
+        $post = Post::factory()->create([
+            'title' => 'This is a test post title',
+            'user_id' => $user->id,
+            'category_id' => 1,
+            'body' => 'This is a test post body'
+        ]);
+
+        $response = $this->actingAs($user)
+            ->delete(route('posts.destroy', ['post' => $post->id]));
+
+        $response->assertStatus(302)
+            ->assertRedirect(route('users.show', ['user' => $user->id]));
     }
 }

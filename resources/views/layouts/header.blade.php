@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="mx-auto flex items-center">
-                    <img class="block h-8 w-auto" src="{{ asset('images/icon/icon.png') }}" alt="{{ config('app.name') }}">
+                    <img class="block h-8 w-auto" src="{{ asset('images/icon/icon.svg') }}" alt="{{ config('app.name') }}">
                     <span
                         class="hidden md:block font-bold font-mono text-xl ml-2
                         dark:text-white"

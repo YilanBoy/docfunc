@@ -10,7 +10,7 @@
         <div class="md:hidden px-4 mb-6">
             {{-- 分類 --}}
             @if (isset($category))
-            <div class="flex justify-center items-center text-blue-700 border-blue-700 rounded-xl border
+                <div class="flex justify-center items-center text-blue-700 border-blue-700 rounded-xl border
                 bg-gradient-to-br from-blue-100 to-blue-300 px-4 py-2">
                     <span class="font-bold">{{ $category->name }}：</span>
                     <span>{{ $category->description }}</span>

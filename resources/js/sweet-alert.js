@@ -6,6 +6,7 @@ Swal.fire({
     title: sweetalert2Title,
     icon: sweetalert2Icon,
     showConfirmButton: false,
+    showCloseButton: true,
     timer: 6000,
     timerProgressBar: true
 });

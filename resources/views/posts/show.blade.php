@@ -31,7 +31,7 @@
                     @can('update', $post)
                         <div
                             x-data="{}"
-                            class="absolute top-0 left-103/100 w-16 h-full"
+                            class="hidden xl:block absolute top-0 left-103/100 w-16 h-full"
                         >
                             <div class="sticky top-7 flex flex-col justify-center items-center">
                                     @if ($post->trashed())

@@ -3,11 +3,11 @@
         replyBoxOpen: false,
         replyId: @entangle('replyId')
     }"
-    class="w-full xl:w-2/3 mt-6"
+    class="w-full xl:w-2/3"
 >
     @auth
         {{-- Open Reply Box Modal--}}
-        <div class="flex justify-end">
+        <div class="flex justify-end mt-6">
             <button
                 x-on:click="
                     replyBoxOpen = true

@@ -22,6 +22,8 @@ The features of this blog include
 Post editor use [CKEditor 5](https://ckeditor.com/), You can upload image to AWS S3 in blog post.  
 You can search post by [Algolia](https://www.algolia.com/)
 
+Blog logo made by [Freepik](https://www.freepik.com) from [Flaticon](https://www.flaticon.com/)
+
 ## Requirements
 
 [php](https://www.php.net/) ^8.0  
@@ -66,7 +68,7 @@ Generate ide-helper
 $ php artisan ide-helper:generate
 ```
 
-Generate ide-helper
+Generate model ide-helper 
 ```sh
 $ php artisan ide-helper:models
 ```

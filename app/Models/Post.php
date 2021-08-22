@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Post extends Model
 {
@@ -65,8 +66,10 @@ class Post extends Model
     // 更新回覆數量
     public function updateReplyCount(): void
     {
-        $this->reply_count = $this->replies->count();
-        $this->save();
+        // 更新 Model 中的 reply_count 資料
+        $this->reply_count = Reply::where('post_id', $this->id)->count();
+        // 使用 Lock 更新資料庫資料
+        $this->lockForUpdate()->update(['reply_count' => $this->reply_count]);
     }
 
     // 設定 Algolia 匯入的 index 名稱

@@ -28,7 +28,7 @@
                 <x-card class="relative w-full xl:w-2/3">
 
                     {{-- 懸浮式文章編輯按鈕 --}}
-                    @can('update', $post)
+                    @if(auth()->id() === $post->user_id)
                         <div
                             x-data="{}"
                             class="hidden xl:block absolute top-0 left-103/100 w-16 h-full"
@@ -113,7 +113,7 @@
                                     @endif
                             </div>
                         </div>
-                    @endcan
+                    @endif
 
                     @if ($post->trashed())
                         <span class="text-red-400">此文章已被標記為刪除狀態！</span>
@@ -124,7 +124,7 @@
                         <h1 class="flex-grow text-3xl font-bold dark:text-white">{{ $post->title }}</h1>
 
                         {{-- 文章編輯選單--}}
-                        @can('update', $post)
+                        @if(auth()->id() === $post->user_id)
                             <div
                                 x-data="{ editMenuIsOpen: false }"
                                 class="relative xl:hidden"
@@ -206,7 +206,7 @@
                                     @endif
                                 </div>
                             </div>
-                        @endcan
+                        @endif
                     </div>
 
                     <div class="flex items-center text-gray-400 mt-4 space-x-2">
@@ -306,7 +306,7 @@
 
                 {{-- 回覆區塊 --}}
                 @if (!$post->trashed())
-                    @livewire('reply-box', ['post' => $post])
+                    @livewire('reply-box', ['post' => $post, 'replyCount' => $post->reply_count])
                 @endif
             </div>
         </div>

@@ -11,8 +11,9 @@ class ReplyBox extends Component
     public $post;
     public $content;
     public $replyId = null;
+    public $replyCount;
 
-    protected $listeners = ['switchReplyId'];
+    protected $listeners = ['updateReplyCount'];
 
     protected $rules = [
         'content' => ['required', 'min:2', 'max:400'],
@@ -54,6 +55,7 @@ class ReplyBox extends Component
 
         // 更新文章留言數
         $this->post->updateReplyCount();
+        $this->updateReplyCount();
 
         // 通知文章作者有新的評論
         $this->post->user->postNotify(new PostReplied($reply));
@@ -63,6 +65,12 @@ class ReplyBox extends Component
 
         // 更新回覆列表
         $this->emit('refresh');
+    }
+
+    // 更新留言數量
+    public function updateReplyCount()
+    {
+        $this->replyCount = $this->post->reply_count;
     }
 
     public function render()

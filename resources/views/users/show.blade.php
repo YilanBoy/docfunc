@@ -94,7 +94,7 @@
                             }"
                             class="block transition duration-300 ease-in px-2 sm:px-7 py-2"
                         >
-                            <span>回覆紀錄</span>
+                            <span>留言紀錄</span>
                         </a>
                         <div class="bg-gray-200 dark:bg-gray-600">
                             <div

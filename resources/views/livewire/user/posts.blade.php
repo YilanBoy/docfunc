@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            @can('update', $post)
+            @if (auth()->id() === $post->user_id)
                 @if ($post->trashed())
                     {{-- Force Delete Form --}}
                     <form
@@ -146,7 +146,7 @@
                         </button>
                     </div>
                 @endif
-            @endcan
+            @endif
         </x-card>
 
     @empty

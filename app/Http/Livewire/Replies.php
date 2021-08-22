@@ -22,6 +22,7 @@ class Replies extends Component
         $reply->delete();
 
         $this->post->updateReplyCount();
+        $this->emit('updateReplyCount');
     }
 
     public function refresh()

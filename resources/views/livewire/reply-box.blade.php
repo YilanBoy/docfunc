@@ -7,7 +7,12 @@
 >
     @auth
         {{-- Open Reply Box Modal--}}
-        <div class="flex justify-end mt-6">
+        <div class="flex justify-between mt-6">
+            <span class="flex items-center dark:text-white">
+                <i class="bi bi-chat-square-text-fill"></i>
+                <span class="ml-2">{{ $replyCount }} 則留言</span>
+            </span>
+
             <button
                 x-on:click="
                     replyBoxOpen = true
@@ -15,14 +20,14 @@
                 "
                 @click="replyId = null"
                 type="button"
-                class="group relative h-12 w-64 inline-flex rounded-lg border border-blue-600 focus:outline-none"
+                class="group relative h-12 w-40 inline-flex rounded-lg border border-blue-600 focus:outline-none"
             >
                 <span
                     class="absolute inset-0 inline-flex items-center justify-center self-stretch px-6 text-white text-center font-medium bg-blue-600
                     rounded-lg ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
                     group-hover:-translate-y-2 group-hover:-translate-x-2"
                 >
-                    <i class="bi bi-chat-left-text-fill"></i><span class="ml-2">回覆文章</span>
+                    <i class="bi bi-chat-left-text-fill"></i><span class="ml-2">新增留言</span>
                 </span>
             </button>
         </div>
@@ -69,7 +74,7 @@
                         <textarea
                             x-ref="replyBox"
                             wire:model.debounce.500ms="content"
-                            placeholder="分享你的評論~"
+                            placeholder="分享你的想法 ~"
                             rows="5"
                             class="form-textarea w-full rounded-md shadow-sm border border-gray-300
                             focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50

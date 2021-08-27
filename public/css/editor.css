@@ -28,12 +28,12 @@
 
 /* Dark Mode */
 .dark .ck-content a:hover {
-    color: #7DD3FC;
+    color: #7dd3fc;
     cursor: pointer;
 }
-.dark .ck-rounded-corners .ck.ck-editor__main>.ck-editor__editable,
-.dark .ck.ck-editor__main>.ck-editor__editable.ck-rounded-corners {
-    background-color: #475569;
+.dark .ck-rounded-corners .ck.ck-editor__main > .ck-editor__editable,
+.dark .ck.ck-editor__main > .ck-editor__editable.ck-rounded-corners {
+    background-color: #6b7280;
     color: white;
     border-radius: var(--ck-border-radius);
     border-top-left-radius: 0;
@@ -44,8 +44,8 @@
 }
 .dark .ck-content pre {
     padding: 1em;
-    color: #E7E5E4;
-    background: hsla(0,0%,78%,.3);
+    color: #e7e5e4;
+    background: hsla(0, 0%, 78%, 0.3);
     border: 1px solid #c4c4c4;
     border-radius: 2px;
     text-align: left;

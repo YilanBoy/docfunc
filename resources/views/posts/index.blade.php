@@ -6,7 +6,7 @@
 @section('content')
     <div class="container mx-auto min-h-screen max-w-7xl mt-6">
 
-        {{-- 文章訊息區塊 --}}
+        {{-- 文章分類訊息-行動裝置 --}}
         <div class="md:hidden px-4 mb-6">
             {{-- 分類 --}}
             @if (isset($category))
@@ -34,7 +34,7 @@
                 'tag' => isset($tag) ? $tag : null,
             ])
 
-            {{-- 文章列表側邊欄區塊 --}}
+            {{-- 文章列表側邊欄 --}}
             <div class="w-full xl:w-80 space-y-6">
                 {{-- 介紹 --}}
                 <x-card class="text-black dark:text-white">

@@ -7,7 +7,7 @@
     <div class="container mx-auto max-w-7xl">
         <div class="min-h-screen flex flex-col md:flex-row justify-center items-start px-4 xl:px-0 mt-6">
 
-            {{-- 會員資訊 --}}
+            {{-- 會員基本資訊 --}}
             <x-card class="w-full md:w-80 flex flex-col justify-center items-center mr-0 md:mr-6
             dark:text-white">
                 {{-- 大頭貼 --}}
@@ -32,12 +32,13 @@
                 </div>
             </x-card>
 
+            {{-- 會員資訊、文章與留言 --}}
             <div
                 x-data="{ tab: 'information' }"
                 class="w-full xl:w-2/3 space-y-6"
             >
+                {{-- 切換顯示選單 --}}
                 <nav class="flex font-semibold">
-
                     <div class="group">
                         <a
                             x-on:click.prevent="tab = 'information'"
@@ -106,7 +107,6 @@
                             ></div>
                         </div>
                     </div>
-
                 </nav>
 
                 {{-- 會員資訊 --}}

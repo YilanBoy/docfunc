@@ -1,4 +1,4 @@
-<!-- 文章內容 -->
+{{-- 文章內容 --}}
 @extends('layouts.app')
 
 @section('title', $post->title)
@@ -27,7 +27,7 @@
 
                 <x-card class="relative w-full xl:w-2/3">
 
-                    {{-- 懸浮式文章編輯按鈕 --}}
+                    {{-- 文章選單-桌面裝置 --}}
                     @if(auth()->id() === $post->user_id)
                         <div
                             x-data="{}"
@@ -35,9 +35,10 @@
                         >
                             <div class="sticky top-7 flex flex-col justify-center items-center">
                                     @if ($post->trashed())
+                                        {{-- 還原文章 --}}
                                         <a
                                             x-on:click.prevent="
-                                                if (confirm('您確定恢復此文章嗎？')) {
+                                                if (confirm('您確定還原此文章嗎？')) {
                                                     window.location.href = $el.href
                                                 }
                                             "
@@ -57,7 +58,7 @@
                                             @method('DELETE')
                                         </form>
 
-                                        {{-- Force Delete Button --}}
+                                        {{-- 完全刪除 --}}
                                         <button
                                             x-on:click="
                                                 if(confirm('您確定要完全刪除此文章嗎？（此動作無法復原）')) {
@@ -74,7 +75,7 @@
                                             </span>
                                         </button>
                                     @else
-                                        {{-- Edit Post --}}
+                                        {{-- 編輯文章 --}}
                                         <a
                                             href="{{ route('posts.edit', ['post' => $post->id]) }}"
                                             class="group relative w-16 h-16 inline-flex rounded-xl border border-green-600"
@@ -94,10 +95,10 @@
                                             @method('DELETE')
                                         </form>
 
-                                        {{-- Soft Delete Post --}}
+                                        {{-- 軟刪除 --}}
                                         <button
                                             x-on:click="
-                                                if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以恢復）')) {
+                                                if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以還原）')) {
                                                     document.getElementById('delete-post').submit()
                                                 }
                                             "
@@ -123,7 +124,7 @@
                         {{-- 文章標題 --}}
                         <h1 class="flex-grow text-3xl font-bold dark:text-white">{{ $post->title }}</h1>
 
-                        {{-- 文章編輯選單--}}
+                        {{-- 文章選單-行動裝置 --}}
                         @if(auth()->id() === $post->user_id)
                             <div
                                 x-data="{ editMenuIsOpen: false }"
@@ -152,9 +153,10 @@
                                     role="menu" aria-orientation="vertical" tabindex="-1"
                                 >
                                     @if ($post->trashed())
+                                        {{-- 還原文章 --}}
                                         <a
                                             x-on:click.prevent="
-                                                if (confirm('您確定恢復此文章嗎？')) {
+                                                if (confirm('您確定還原此文章嗎？')) {
                                                     window.location.href = $el.href
                                                 }
                                             "
@@ -163,9 +165,10 @@
                                             class="block px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
                                             dark:hover:bg-gray-400"
                                         >
-                                            <i class="bi bi-file-earmark-check-fill"></i><span class="ml-2">恢復</span>
+                                            <i class="bi bi-file-earmark-check-fill"></i><span class="ml-2">還原</span>
                                         </a>
 
+                                        {{-- 完全刪除 --}}
                                         <button
                                             x-on:click="
                                                 if(confirm('您確定要完全刪除此文章嗎？（此動作無法復原）')) {
@@ -180,6 +183,7 @@
                                             <i class="bi bi-trash-fill"></i><span class="ml-2">完全刪除</span>
                                         </button>
                                     @else
+                                        {{-- 編輯文章 --}}
                                         <a
                                             href="{{ route('posts.edit', ['post' => $post->id]) }}"
                                             role="menuitem" tabindex="-1"
@@ -189,9 +193,10 @@
                                             <i class="bi bi-pencil-fill"></i><span class="ml-2">編輯</span>
                                         </a>
 
+                                        {{-- 軟刪除 --}}
                                         <button
                                             x-on:click="
-                                                if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以恢復）')) {
+                                                if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以還原）')) {
                                                     document.getElementById('delete-post').submit()
                                                 }
                                             "
@@ -209,8 +214,9 @@
                         @endif
                     </div>
 
+                    {{-- 文章資訊 --}}
                     <div class="flex items-center text-gray-400 mt-4 space-x-2">
-                        {{-- 文章分類資訊 --}}
+                        {{-- 分類 --}}
                         <div>
                             <a class="hover:text-gray-700 dark:hover:text-white"
                             href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
@@ -220,7 +226,7 @@
 
                         <div>&bull;</div>
 
-                        {{-- 文章作者資訊 --}}
+                        {{-- 作者 --}}
                         <div>
                             <a class="hover:text-gray-700 dark:hover:text-white"
                             href="{{ route('users.show', ['user' => $post->user_id]) }}"
@@ -231,7 +237,7 @@
 
                         <div class="hidden md:block">&bull;</div>
 
-                        {{-- 文章發布時間 --}}
+                        {{-- 發布時間 --}}
                         <div class="hidden md:block">
                             <a class="hover:text-gray-700 dark:hover:text-white"
                             href="{{ $post->link_with_slug }}"
@@ -242,8 +248,8 @@
 
                         <div class="hidden md:block">&bull;</div>
 
+                        {{-- 留言數 --}}
                         <div class="hidden md:block">
-                            {{-- 文章留言數 --}}
                             <a class="hover:text-gray-700 dark:hover:text-white"
                             href="{{ $post->link_with_slug }}#replies-card">
                                 <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->reply_count }}</span>
@@ -251,8 +257,8 @@
                         </div>
                     </div>
 
+                    {{-- 文章標籤 --}}
                     <div class="flex items-center mt-4 space-x-2">
-                        <!-- 文章標籤-->
                         @if ($post->tags()->exists())
                             <span class="text-green-400"><i class="bi bi-tags-fill"></i></span>
 
@@ -266,12 +272,13 @@
                         @endif
                     </div>
 
+                    {{-- 文章內容 --}}
                     <div class="mt-4 ck-content dark:text-white">
                         {!! $post->body !!}
                     </div>
 
+                    {{-- 分享文章 --}}
                     <div class="mt-4 flex justify-end space-x-4">
-                        {{-- 分享文章 --}}
                         <button type="button" title="分享此篇文章至 Facebook" data-sharer="facebook" data-url="{{ request()->fullUrl() }}"
                         class="text-4xl text-gray-400 hover:text-gray-700 duration-300
                         dark:hover:text-white">
@@ -285,6 +292,7 @@
                         </button>
                     </div>
 
+                    {{-- 作者簡介 --}}
                     <div class="flex justify-start items-center border-t-2 border-gray-700 mt-4 pt-4
                     dark:border-white">
                         <div class="flex-none none md:flex md:justify-center md:items-center p-2 mr-4">
@@ -314,13 +322,13 @@
 @endsection
 
 @section('scripts')
-    <!-- 至頂按鈕 -->
+    {{-- 至頂按鈕 --}}
     <script src="{{ asset('js/scroll-to-top-btn.js') }}"></script>
-    <!-- 文章中的嵌入影片顯示 -->
+    {{-- 文章中的嵌入影片顯示 --}}
     <script async charset="utf-8" src="{{ asset('js/platform.js') }}"></script>
     <script src="{{ asset('js/embedly.js') }}"></script>
-    <!-- 程式碼區塊高亮 -->
+    {{-- 程式碼區塊高亮 --}}
     <script src="{{ asset('js/prism.js') }}"></script>
-    <!-- 社交分享按鈕 -->
+    {{-- 社交分享按鈕 --}}
     <script src="{{ asset('js/sharer.min.js') }}"></script>
 @endsection

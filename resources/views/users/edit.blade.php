@@ -3,8 +3,8 @@
 @section('title', '會員中心-編輯個人資料')
 
 @section('users.content')
-    {{-- Form --}}
     <div class="flex flex-col justify-center items-center mb-8">
+        {{-- 大頭貼照片 --}}
         <div>
             <img class="rounded-full h-36 w-36" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}">
         </div>
@@ -17,20 +17,20 @@
         </div>
     </div>
 
-    {{-- Validation Errors --}}
+    {{-- 驗證錯誤訊息 --}}
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
     <form method="POST" action="{{ route('users.update', ['user' => $user->id]) }}" class="w-full">
         @method('PUT')
         @csrf
 
-        {{-- Email Address --}}
+        {{-- 信箱 --}}
         <div class="mt-5">
             <div class="text-gray-600 dark:text-white">信箱</div>
             <div class="text-black dark:text-white">{{ $user->email }}</div>
         </div>
 
-        {{-- Name --}}
+        {{-- 會員名稱 --}}
         <div class="mt-10">
             <x-floating-label-input
                 :type="'text'"
@@ -42,7 +42,7 @@
             ></x-floating-label-input>
         </div>
 
-        {{-- Introduction --}}
+        {{-- 會員自介 --}}
         <div class="mt-5">
             <label for="introduction" class="text-gray-600 dark:text-white">個人介紹 (最多 80 個字)</label>
 
@@ -57,7 +57,7 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            {{-- Save Button --}}
+            {{-- 儲存按鈕 --}}
             <x-button>
                 <i class="bi bi-save2-fill"></i><span class="ml-2">儲存</span>
             </x-button>

@@ -4,17 +4,17 @@
 
 @section('users.content')
 
-    {{-- Session Status --}}
+    {{-- Session 狀態訊息 --}}
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    {{-- Validation Errors --}}
+    {{-- 驗證錯誤訊息 --}}
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
     <form method="POST" action="{{ route('users.updatePassword', ['user' => $user->id]) }}" class="w-full">
         @method('PUT')
         @csrf
 
-        {{-- Current Password --}}
+        {{-- 舊密碼 --}}
         <div class="mt-5">
             <x-floating-label-input
                 :type="'password'"
@@ -25,7 +25,7 @@
             ></x-floating-label-input>
         </div>
 
-        {{-- New Password --}}
+        {{-- 新密碼 --}}
         <div class="mt-10">
             <x-floating-label-input
                 :type="'password'"
@@ -35,7 +35,7 @@
             ></x-floating-label-input>
         </div>
 
-        {{-- Confirm New Password --}}
+        {{-- 確認新密碼 --}}
         <div class="mt-10">
             <x-floating-label-input
                 :type="'password'"
@@ -46,7 +46,7 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            {{-- Save Button --}}
+            {{-- 儲存按鈕 --}}
             <x-button>
                 <i class="bi bi-save2-fill"></i><span class="ml-2">修改密碼</span>
             </x-button>

@@ -8,12 +8,12 @@
         <div class="min-h-screen flex justify-center items-center px-4 xl:px-0 mt-6">
 
             <div class="w-full md:w-2/3 xl:w-1/2 space-y-6 flex flex-col justify-center items-center">
-                {{-- Title --}}
+                {{-- 頁面標題 --}}
                 <div class="fill-current text-gray-700 text-2xl dark:text-white">
                     <i class="bi bi-bell-fill"></i><span class="ml-4">我的通知</span>
                 </div>
 
-                {{-- Notification --}}
+                {{-- 通知列表 --}}
                 @forelse ($notifications as $notification)
                     <x-card
                         x-data="cardLink"

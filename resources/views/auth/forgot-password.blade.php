@@ -19,10 +19,10 @@
                         {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
                     </div>
 
-                    {{-- Session Status --}}
+                    {{-- Session 狀態訊息 --}}
                     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-                    {{-- Validation Errors --}}
+                    {{-- 驗證錯誤訊息 --}}
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
                     <form method="POST" action="{{ route('password.email') }}">

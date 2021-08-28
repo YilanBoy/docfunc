@@ -1,7 +1,7 @@
 <div class="w-full xl:w-2/3 mr-0 xl:mr-6 space-y-6">
 
     <div class="flex justify-between">
-        {{-- Post Sort --}}
+        {{-- 文章排序 --}}
         <nav class="flex font-semibold">
             <div class="group">
                 <a
@@ -73,7 +73,7 @@
             </div>
         </nav>
 
-        {{-- 分類訊息區塊 --}}
+        {{-- 文章分類訊息-桌面裝置 --}}
         @if (isset($category))
             <div class="hidden md:flex justify-center items-center text-blue-700 border-blue-700 border rounded-xl
             bg-gradient-to-br from-blue-100 to-blue-300 px-4 py-2">
@@ -82,7 +82,7 @@
             </div>
         @endif
 
-        {{-- 標籤訊息區塊 --}}
+        {{-- 文章標籤訊息-桌面裝置 --}}
         @if (isset($tag))
             <div class="hidden md:flex justify-center items-center text-green-700 border-green-700 border rounded-xl
             bg-gradient-to-br from-green-100 to-green-300 px-4 py-2">
@@ -91,7 +91,7 @@
         @endif
     </div>
 
-    {{-- Posts --}}
+    {{-- 文章列表 --}}
     @forelse ($posts as $post)
         <x-card
             x-data="cardLink"

@@ -14,7 +14,7 @@
         <i class="bi bi-search"></i>
     </button>
 
-    {{-- Search Box Modal --}}
+    {{-- 搜尋 Modal --}}
     <div
         x-cloak
         x-show="searchBoxOpen"
@@ -46,7 +46,7 @@
                 @click.outside="searchBoxOpen = false"
                 class="inline-block transform transition-all mt-16 max-w-md w-full"
             >
-                {{-- 搜尋輸入框 --}}
+                {{-- 搜尋欄 --}}
                 <div class="relative">
                     <input
                         x-ref="searchBox"
@@ -74,7 +74,7 @@
                     </div>
                 </div>
 
-                {{-- 搜尋結果 --}}
+                {{-- 搜尋結果列表 --}}
                 @if (strlen($search) >= 2)
                     <div
                         class="w-full mt-4 bg-white p-2 shadow-md rounded-xl ring-1 ring-black ring-opacity-20
@@ -107,11 +107,11 @@
                         {{-- Algolia Logo --}}
                         <div class="w-full flex justify-center items-center border-t-2 border-gray-400 pt-2 mt-2">
                             <a target="_blank" rel="nofollow noopener noreferrer" href="https://www.algolia.com">
-                                {{-- Light Mode Logo --}}
+                                {{-- Light Mode Algolia Logo --}}
                                 <img src="/images/icon/search-by-algolia-light-background.png" alt="Search by Algolia"
                                 class="inline-block dark:hidden">
 
-                                {{-- Dark Mode Logo --}}
+                                {{-- Dark Mode Algolia Logo --}}
                                 <img src="/images/icon/search-by-algolia-dark-background.png" alt="Search by Algolia"
                                 class="hidden dark:inline-block">
                             </a>

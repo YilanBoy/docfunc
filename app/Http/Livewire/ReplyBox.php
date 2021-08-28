@@ -20,9 +20,9 @@ class ReplyBox extends Component
     ];
 
     protected $messages = [
-        'content.required' => '請填寫回覆內容',
-        'content.min' => '回覆內容至少 2 個字元',
-        'content.max' => '回覆內容至多 400 個字元',
+        'content.required' => '請填寫留言內容',
+        'content.min' => '留言內容至少 2 個字元',
+        'content.max' => '留言內容至多 400 個字元',
     ];
 
     // 實時判斷表單內容是否符合 $rules
@@ -31,7 +31,7 @@ class ReplyBox extends Component
         $this->validateOnly($propertyName);
     }
 
-    // 儲存回覆
+    // 儲存留言
     public function store()
     {
         if (!auth()->check()) {
@@ -60,10 +60,10 @@ class ReplyBox extends Component
         // 通知文章作者有新的評論
         $this->post->user->postNotify(new PostReplied($reply));
 
-        // 清空回覆表單的內容
+        // 清空留言表單的內容
         $this->content = '';
 
-        // 更新回覆列表
+        // 更新留言列表
         $this->emit('refresh');
     }
 

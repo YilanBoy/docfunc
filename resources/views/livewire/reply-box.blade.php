@@ -6,8 +6,8 @@
     class="w-full xl:w-2/3"
 >
     @auth
-        {{-- Open Reply Box Modal--}}
         <div class="flex justify-between mt-6">
+            {{-- 顯示留言數目 --}}
             <span class="flex items-center dark:text-white">
                 <i class="bi bi-chat-square-text-fill"></i>
                 <span class="ml-2">{{ $replyCount }} 則留言</span>
@@ -32,7 +32,7 @@
             </button>
         </div>
 
-        {{-- Reply Box Modal --}}
+        {{-- 留言表單 Modal --}}
         <div
             x-cloak
             x-show="replyBoxOpen"
@@ -52,9 +52,10 @@
             >
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
-                <!-- This element is to trick the browser into centering the modal contents. -->
+                {{-- This element is to trick the browser into centering the modal contents. --}}
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
+                {{-- 留言表單 --}}
                 <div
                     x-cloak
                     x-show="replyBoxOpen"
@@ -91,7 +92,7 @@
                             bg-blue-600 text-base font-medium text-white hover:bg-blue-700
                             focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                         >
-                            回覆
+                            留言
                         </button>
                         <button
                             @click="replyBoxOpen = false"

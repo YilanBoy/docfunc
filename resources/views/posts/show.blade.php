@@ -312,7 +312,7 @@
 
                 </x-card>
 
-                {{-- 回覆區塊 --}}
+                {{-- 留言區塊 --}}
                 @if (!$post->trashed())
                     @livewire('reply-box', ['post' => $post, 'replyCount' => $post->reply_count])
                 @endif

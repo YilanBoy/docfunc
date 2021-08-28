@@ -8,7 +8,7 @@
 
             <div class="w-full flex flex-col justify-center items-center">
 
-                {{-- Title --}}
+                {{-- 頁面標題 --}}
                 <div class="fill-current text-gray-700 text-2xl dark:text-white">
                     <i class="bi bi-question-circle"></i><span class="ml-4">忘記密碼</span>
                 </div>
@@ -28,7 +28,7 @@
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
 
-                        {{-- Email Address --}}
+                        {{-- 信箱 --}}
                         <div class="mt-10">
                             <x-floating-label-input
                                 :type="'text'"

@@ -16,7 +16,7 @@ class PostReplied extends Notification
 
     public function __construct(Reply $reply)
     {
-        // 注入回覆實體，方便 toDatabase 方法中的使用
+        // 注入留言實體，方便 toDatabase 方法中的使用
         $this->reply = $reply;
     }
 

@@ -15,13 +15,13 @@
         <div class="min-h-screen flex justify-center items-center px-4 xl:px-0">
 
             <div class="w-full flex flex-col justify-center items-center">
-                {{-- Title --}}
+                {{-- 頁面標題 --}}
                 <div class="fill-current text-gray-700 text-2xl
                 dark:text-white">
                     <i class="bi bi-box-arrow-in-right"></i><span class="ml-4">登入</span>
                 </div>
 
-                {{-- Login Form --}}
+                {{-- 登入表單 --}}
                 <x-card class="w-full sm:max-w-md mt-4 overflow-hidden">
 
                     {{-- Session 狀態訊息 --}}
@@ -33,7 +33,7 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        {{-- Email Address --}}
+                        {{-- 信箱 --}}
                         <div class="mt-5">
                             <x-floating-label-input
                                 :type="'text'"
@@ -44,7 +44,7 @@
                             ></x-floating-label-input>
                         </div>
 
-                        {{-- Password --}}
+                        {{-- 密碼 --}}
                         <div class="mt-10">
                             <x-floating-label-input
                                 :type="'password'"
@@ -54,7 +54,7 @@
                             ></x-floating-label-input>
                         </div>
 
-                        {{-- Remember Me --}}
+                        {{-- 記住我 --}}
                         <div class="block mt-4">
                             <label for="remember_me" class="inline-flex items-center">
                                 <input id="remember_me" type="checkbox" name="remember"

@@ -14,7 +14,7 @@ class Replies extends Component
 
     protected $listeners = ['refresh'];
 
-    // 刪除回覆
+    // 刪除留言
     public function destroy(Reply $reply)
     {
         $this->authorize('destroy', $reply);
@@ -33,7 +33,7 @@ class Replies extends Component
     public function render()
     {
         $replies = $this->post->replies()
-            // 不撈取子回覆
+            // 不撈取子留言
             ->whereNull('parent_id')
             ->oldest()
             ->with(['children' => function ($query) {

@@ -4,6 +4,7 @@
         {{ $posts->onEachSide(1)->withQueryString()->links() }}
     </div>
 
+    {{-- 文章列表 --}}
     @forelse ($posts as $post)
         <x-card
             x-data="cardLink"
@@ -62,7 +63,7 @@
 
             @if (auth()->id() === $post->user_id)
                 @if ($post->trashed())
-                    {{-- Force Delete Form --}}
+                    {{-- 完全刪除隱藏表單 --}}
                     <form
                         id="force-delete-post-{{ $post->id }}"
                         action="{{ route('posts.forceDeletePost', ['id' => $post->id]) }}"
@@ -74,7 +75,7 @@
                     </form>
 
                     <div class="flex items-center mt-2 md:mt-0 space-x-2">
-                        {{-- Restore Post --}}
+                        {{-- 還原文章 --}}
                         <a
                             x-on:click.prevent.stop="
                                 if (confirm('您確定恢復此文章嗎？')) {
@@ -89,7 +90,7 @@
                             <i class="bi bi-file-earmark-check-fill"></i>
                         </a>
 
-                        {{-- Force Delete Post --}}
+                        {{-- 完全刪除 --}}
                         <button
                             x-on:click.stop="
                                 if(confirm('您確定要完全刪除此文章嗎？（此動作無法復原）')) {
@@ -105,7 +106,7 @@
                         </button>
                     </div>
                 @else
-                    {{-- Soft Delete Form --}}
+                    {{-- 軟刪除隱藏表單 --}}
                     <form
                         id="delete-post-{{ $post->id }}"
                         action="{{ route('posts.destroy', ['post' => $post->id]) }}"
@@ -117,7 +118,7 @@
                     </form>
 
                     <div class="flex items-center mt-2 md:mt-0 space-x-2">
-                        {{-- Edit Post --}}
+                        {{-- 編輯文章 --}}
                         <a
                             href="{{ route('posts.edit', ['post' => $post->id]) }}"
                             class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-white
@@ -129,7 +130,7 @@
                             </span>
                         </a>
 
-                        {{-- Soft Delete Post --}}
+                        {{-- 軟刪除 --}}
                         <button
                             x-on:click.prevent.stop="
                                 if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以恢復）'))

@@ -15,7 +15,7 @@
 
             <div class="w-full flex flex-col justify-center items-center">
 
-                {{-- Title --}}
+                {{-- 頁面標題 --}}
                 <div class="fill-current text-gray-700 text-2xl dark:text-white">
                     <i class="bi bi-person-plus-fill"></i><span class="ml-4">註冊</span>
                 </div>
@@ -28,7 +28,7 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        {{-- Name --}}
+                        {{-- 會員名稱 --}}
                         <div class="mt-5">
                             <x-floating-label-input
                                 :type="'text'"
@@ -40,7 +40,7 @@
                             ></x-floating-label-input>
                         </div>
 
-                        {{-- Email Address --}}
+                        {{-- 信箱 --}}
                         <div class="mt-10">
                             <x-floating-label-input
                                 :type="'text'"
@@ -51,7 +51,7 @@
                             ></x-floating-label-input>
                         </div>
 
-                        {{-- Password --}}
+                        {{-- 密碼 --}}
                         <div class="mt-10">
                             <x-floating-label-input
                                 :type="'password'"
@@ -61,7 +61,7 @@
                             ></x-floating-label-input>
                         </div>
 
-                        {{-- Confirm Password --}}
+                        {{-- 確認密碼 --}}
                         <div class="mt-10">
                             <x-floating-label-input
                                 :type="'password'"

@@ -8,7 +8,7 @@
 
             <div class="w-full flex flex-col justify-center items-center">
 
-                {{-- Title --}}
+                {{-- 頁面標題 --}}
                 <div class="fill-current text-gray-700 text-2xl dark:text-white">
                     <i class="bi bi-person-check-fill"></i><span class="ml-4">驗證 Email</span>
                 </div>

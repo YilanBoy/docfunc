@@ -1,8 +1,8 @@
-{{-- Reply Container --}}
+{{-- 留言列表 --}}
 <div id="post-{{ $post->id }}-replies" class="w-full space-y-6 mt-6">
 
     @forelse ($replies as $reply)
-        {{-- Reply Container --}}
+        {{-- 第一階層留言 --}}
         <x-card
             id="post-{{ $post->id }}-reply-{{ $reply->id }}"
             class="flex relative"
@@ -31,6 +31,7 @@
                     </div>
                 </div>
 
+                {{-- 新增第二階層留言與刪除留言 --}}
                 <div class="mt-2 md:mt-0 flex justify-start items-center space-x-2">
                     @auth
                         <button
@@ -48,7 +49,7 @@
 
                         @if (in_array(auth()->id(), [$reply->user_id, $post->user_id]))
                             <button
-                                onclick="confirm('您確定要刪除此回覆嗎？') || event.stopImmediatePropagation()"
+                                onclick="confirm('您確定要刪除此留言嗎？') || event.stopImmediatePropagation()"
                                 wire:click="destroy({{ $reply->id }})"
                                 class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-white
                                 bg-red-600 hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900
@@ -62,7 +63,7 @@
             </div>
         </x-card>
 
-        {{-- 子回覆 --}}
+        {{-- 第二階層留言 --}}
         <div class="reply-with-responses">
             <div class="responses space-y-6">
                 @forelse ($reply->children as $child)
@@ -95,10 +96,11 @@
                                     </div>
                                 </div>
 
+                                {{-- 刪除留言 --}}
                                 <div class="mt-2 md:mt-0 flex justify-start items-center">
                                     @if (in_array(auth()->id(), [$child->user_id, $post->user_id]))
                                         <button
-                                            onclick="confirm('您確定要刪除此回覆嗎？') || event.stopImmediatePropagation()"
+                                            onclick="confirm('您確定要刪除此留言嗎？') || event.stopImmediatePropagation()"
                                             wire:click="destroy({{ $child->id }})"
                                             class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-white
                                             bg-red-600 hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900

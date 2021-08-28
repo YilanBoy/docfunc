@@ -39,7 +39,7 @@
                                     href="{{ route('users.show', ['user' => $notification->data['user_id']]) }}"
                                     class="text-gray-400 hover:text-gray-700 dark:hover:text-white"
                                 >{{ $notification->data['user_name'] }}</a>
-                                <span class="text-black dark:text-white">回覆了你的文章</span>
+                                <span class="text-black dark:text-white">留言了你的文章</span>
                                 <a
                                     x-ref="notificationLink"
                                     class="text-gray-400 hover:text-gray-700 dark:hover:text-white"

@@ -129,7 +129,7 @@
                     ])
                 </div>
 
-                {{-- 會員回覆 --}}
+                {{-- 會員留言 --}}
                 <div
                     x-cloak
                     x-show="tab === 'replies'"
@@ -155,7 +155,7 @@
                         refs.postLink.click();
                     }
                 },
-                // 回覆連結
+                // 留言連結
                 replyCardLink(event, refs) {
                     let ignores = ['a'];
                     let targetTagName = event.target.tagName.toLowerCase();

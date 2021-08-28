@@ -63,7 +63,7 @@ class Post extends Model
         ]);
     }
 
-    // 更新回覆數量
+    // 更新留言數量
     public function updateReplyCount(): void
     {
         // 更新 Model 中的 reply_count 資料

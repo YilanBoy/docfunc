@@ -1,4 +1,4 @@
-{{-- 會員回覆 --}}
+{{-- 會員留言 --}}
 <div class="space-y-6">
 
     <div>
@@ -12,7 +12,7 @@
             class="flex flex-col md:flex-row justify-between hover:shadow-xl
             transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer"
         >
-            {{-- 回覆相關資訊 --}}
+            {{-- 留言相關資訊 --}}
             <div class="w-full flex justify-between">
                 {{-- 文章標題 --}}
                 <div class="flex flex-col justify-between">
@@ -47,7 +47,7 @@
         <x-card class="w-full h-36 flex justify-center items-center
         transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl
         dark:text-white">
-            <span>目前沒有回覆，快點找文章進行回覆吧！</span>
+            <span>目前沒有留言，快點找文章進行留言吧！</span>
         </x-card>
     @endforelse
 </div>

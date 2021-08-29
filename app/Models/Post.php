@@ -66,10 +66,10 @@ class Post extends Model
     // 更新留言數量
     public function updateReplyCount(): void
     {
-        // 更新 Model 中的 reply_count 資料
-        $this->reply_count = Reply::where('post_id', $this->id)->count();
-        // 使用 Lock 更新資料庫資料
-        $this->lockForUpdate()->update(['reply_count' => $this->reply_count]);
+        // 使用鎖表來更新 Model 中的 reply_count 資料
+        $this->reply_count = Reply::where('post_id', $this->id)->lockForUpdate()->count();
+        // 更新資料庫資料
+        $this->save();
     }
 
     // 設定 Algolia 匯入的 index 名稱

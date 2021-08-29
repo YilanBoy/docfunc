@@ -53,15 +53,13 @@
                         @csrf
 
                         {{-- 文章標題 --}}
-                        <div class="mt-5">
-                            <x-floating-label-input
-                                :type="'text'"
-                                :name="'title'"
-                                :placeholder="'文章標題'"
-                                :value="old('title', $post->title )"
-                                required
-                                autofocus
-                            ></x-floating-label-input>
+                        <div>
+                            <label for="title" class="hidden">文章標題</label>
+
+                            <input type="text" name="title" placeholder="文章標題" value="{{ old('title', $post->title) }}" required autofocus
+                            class="form-input w-full rounded-md shadow-sm border border-gray-300
+                            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-2
+                            dark:bg-gray-500 dark:text-white dark:placeholder-white">
                         </div>
 
                         {{-- 文章分類 --}}

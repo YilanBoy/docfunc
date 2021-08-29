@@ -5,10 +5,12 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Reply;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Livewire\WithPagination;
 
 class Replies extends Component
 {
     use AuthorizesRequests;
+    use WithPagination;
 
     public $post;
 
@@ -39,7 +41,7 @@ class Replies extends Component
             ->with(['children' => function ($query) {
                 $query->oldest();
             }])
-            ->get();
+            ->paginate(10);
 
         return view('livewire.replies', ['replies' => $replies]);
     }

@@ -1,9 +1,5 @@
 {{-- 會員文章 --}}
 <div class="space-y-6">
-    <div>
-        {{ $posts->onEachSide(1)->withQueryString()->links() }}
-    </div>
-
     {{-- 文章列表 --}}
     @forelse ($posts as $post)
         <x-card
@@ -157,4 +153,8 @@
             <span>目前沒有文章，有沒有什麼事情想要分享呢？</span>
         </x-card>
     @endforelse
+
+    <div>
+        {{ $posts->onEachSide(1)->withQueryString()->links() }}
+    </div>
 </div>

@@ -23,7 +23,7 @@
         </button>
 
         <div class="container mx-auto max-w-7xl">
-            <div class="min-h-screen flex flex-col justify-center items-center px-4 xl:px-0">
+            <div class="min-h-screen flex flex-col justify-start items-center px-4 xl:px-0">
 
                 <x-card class="relative w-full xl:w-2/3">
 

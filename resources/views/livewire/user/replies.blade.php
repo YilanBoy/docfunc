@@ -1,10 +1,5 @@
 {{-- 會員留言 --}}
 <div class="space-y-6">
-
-    <div>
-        {{ $replies->onEachSide(1)->withQueryString()->links() }}
-    </div>
-
     @forelse ($replies as $reply)
         <x-card
             x-data="cardLink"
@@ -50,4 +45,8 @@
             <span>目前沒有留言，快點找文章進行留言吧！</span>
         </x-card>
     @endforelse
+
+    <div>
+        {{ $replies->onEachSide(1)->withQueryString()->links() }}
+    </div>
 </div>

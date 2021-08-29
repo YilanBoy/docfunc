@@ -11,7 +11,7 @@
 
 @section('content')
     <div class="container mx-auto max-w-7xl">
-        <div class="min-h-screen flex justify-center items-center px-4 xl:px-0 mt-6">
+        <div class="min-h-screen flex justify-center items-start px-4 xl:px-0 mt-6">
 
             <div class="w-full xl:w-2/3 space-y-6 flex flex-col justify-center items-center">
                 {{-- 頁面標題 --}}

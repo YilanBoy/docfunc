@@ -119,4 +119,8 @@
         </div>
     @empty
     @endforelse
+
+    <div>
+        {{ $replies->onEachSide(1)->withQueryString()->links() }}
+    </div>
 </div>

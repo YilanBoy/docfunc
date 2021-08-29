@@ -33,7 +33,7 @@
                             <x-floating-label-input
                                 :type="'text'"
                                 :name="'email'"
-                                :placeholder="'Email address'"
+                                :placeholder="'電子信箱'"
                                 required
                                 autofocus
                             ></x-floating-label-input>

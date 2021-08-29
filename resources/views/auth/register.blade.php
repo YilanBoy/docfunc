@@ -33,7 +33,7 @@
                             <x-floating-label-input
                                 :type="'text'"
                                 :name="'name'"
-                                :placeholder="'Name'"
+                                :placeholder="'會員名稱'"
                                 :value="old('name')"
                                 required
                                 autofocus
@@ -45,7 +45,7 @@
                             <x-floating-label-input
                                 :type="'text'"
                                 :name="'email'"
-                                :placeholder="'Email address'"
+                                :placeholder="'電子信箱'"
                                 :value="old('email')"
                                 required
                             ></x-floating-label-input>
@@ -56,7 +56,7 @@
                             <x-floating-label-input
                                 :type="'password'"
                                 :name="'password'"
-                                :placeholder="'Password'"
+                                :placeholder="'密碼'"
                                 required
                             ></x-floating-label-input>
                         </div>
@@ -66,7 +66,7 @@
                             <x-floating-label-input
                                 :type="'password'"
                                 :name="'password_confirmation'"
-                                :placeholder="'Confirm password'"
+                                :placeholder="'確認密碼'"
                                 required
                             ></x-floating-label-input>
                         </div>

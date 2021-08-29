@@ -28,7 +28,7 @@
                             <x-floating-label-input
                                 :type="'text'"
                                 :name="'email'"
-                                :placeholder="'Email address'"
+                                :placeholder="'電子信箱'"
                                 :value="$request->email ?? old('email')"
                                 required
                                 readonly
@@ -40,7 +40,7 @@
                             <x-floating-label-input
                                 :type="'password'"
                                 :name="'password'"
-                                :placeholder="'Password'"
+                                :placeholder="'新密碼'"
                                 required
                                 autofocus
                             ></x-floating-label-input>
@@ -51,7 +51,7 @@
                             <x-floating-label-input
                                 :type="'password'"
                                 :name="'password_confirmation'"
-                                :placeholder="'Confirm password'"
+                                :placeholder="'確認新密碼'"
                                 required
                             ></x-floating-label-input>
                         </div>

@@ -38,7 +38,7 @@
                             <x-floating-label-input
                                 :type="'text'"
                                 :name="'email'"
-                                :placeholder="'Email address'"
+                                :placeholder="'電子信箱'"
                                 required
                                 autofocus
                             ></x-floating-label-input>
@@ -49,7 +49,7 @@
                             <x-floating-label-input
                                 :type="'password'"
                                 :name="'password'"
-                                :placeholder="'Password'"
+                                :placeholder="'密碼'"
                                 required
                             ></x-floating-label-input>
                         </div>

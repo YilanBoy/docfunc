@@ -67,6 +67,18 @@
     @yield('scripts')
 
     <script src="{{ asset('js/theme-switch.js') }}"></script>
+
+    <script>
+        function disableScroll() {
+            document.body.classList.add('overflow-y-hidden')
+            document.body.style.paddingRight = '17px'
+        }
+
+        function enableScroll() {
+            document.body.classList.remove('overflow-y-hidden')
+            document.body.style.paddingRight = '0px'
+        }
+    </script>
 </body>
 
 </html>

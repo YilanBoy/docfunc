@@ -17,6 +17,7 @@
                 x-on:click="
                     replyBoxOpen = true
                     $nextTick(() => { $refs.replyBox.focus() })
+                    disableScroll()
                 "
                 @click="replyId = null"
                 type="button"
@@ -36,7 +37,10 @@
         <div
             x-cloak
             x-show="replyBoxOpen"
-            @keydown.window.escape="replyBoxOpen = false"
+            @keydown.window.escape="
+                replyBoxOpen = false
+                enableScroll()
+            "
             class="fixed z-20 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
         >
             <div
@@ -65,7 +69,10 @@
                     x-transition:leave="ease-in duration-200"
                     x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                    @click.outside="replyBoxOpen = false"
+                    @click.outside="
+                        replyBoxOpen = false
+                        enableScroll()
+                    "
                     class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl
                     transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full
                     dark:bg-gray-700 p-5"
@@ -85,7 +92,10 @@
 
                     <div class="mt-5 sm:flex sm:flex-row-reverse">
                         <button
-                            @click="replyBoxOpen = false"
+                            @click="
+                                replyBoxOpen = false
+                                enableScroll()
+                            "
                             wire:click="store()"
                             type="button"
                             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2
@@ -95,7 +105,10 @@
                             留言
                         </button>
                         <button
-                            @click="replyBoxOpen = false"
+                            @click="
+                                replyBoxOpen = false
+                                enableScroll()
+                            "
                             type="button"
                             class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2
                             bg-white text-base font-medium text-gray-700 hover:bg-gray-50

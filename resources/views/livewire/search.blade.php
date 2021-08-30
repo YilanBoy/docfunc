@@ -6,6 +6,7 @@
         x-on:click="
             searchBoxOpen = !searchBoxOpen
             $nextTick(() => { $refs.searchBox.focus() })
+            disableScroll()
         "
         type="button"
         class="w-10 h-10 flex justify-center items-center text-2xl rounded-lg
@@ -18,7 +19,10 @@
     <div
         x-cloak
         x-show="searchBoxOpen"
-        @keydown.window.escape="searchBoxOpen = false"
+        @keydown.window.escape="
+            searchBoxOpen = false
+            enableScroll()
+        "
         class="fixed z-20 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
     >
         <div
@@ -43,7 +47,10 @@
                 x-transition:leave="ease-in duration-200"
                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                @click.outside="searchBoxOpen = false"
+                @click.outside="
+                    searchBoxOpen = false
+                    enableScroll()
+                "
                 class="inline-block transform transition-all mt-16 max-w-md w-full"
             >
                 {{-- 搜尋欄 --}}

@@ -38,6 +38,7 @@
                             x-on:click="
                                 replyBoxOpen = true
                                 $nextTick(() => { $refs.replyBox.focus() })
+                                disableScroll()
                             "
                             @click="replyId = {{ $reply->id }}"
                             class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-white

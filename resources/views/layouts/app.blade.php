@@ -30,7 +30,6 @@
     @livewireStyles
 
     {{-- Head Scripts --}}
-    <script defer src="{{ asset('js/alpine.js') }}"></script>
     @yield('scriptsInHead')
 </head>
 

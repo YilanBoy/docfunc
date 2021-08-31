@@ -12,7 +12,6 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .js('resources/js/alpine.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
@@ -26,6 +25,9 @@ mix.js('resources/js/app.js', 'public/js')
     .ts('resources/ts/theme-switch.ts', 'public/js')
     .copy('node_modules/sharer.js/sharer.min.js', 'public/js/sharer.min.js')
     .copy('node_modules/@yaireo/tagify/dist/tagify.css', 'public/css/tagify.css')
+    .css('resources/css/content/content-styles.css', 'public/css')
+    .css('resources/css/content/missing-content-styles.css', 'public/css')
+    .css('resources/css/editor.css', 'public/css')
     .options({
         terser: {
             extractComments: false

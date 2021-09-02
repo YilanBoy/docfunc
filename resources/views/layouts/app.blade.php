@@ -74,8 +74,11 @@
         }
 
         function enableScroll() {
-            document.body.classList.remove('overflow-y-hidden')
-            document.body.style.paddingRight = '0px'
+            // 等待 Modal 完全關閉再啟用 scroll bar
+            setTimeout(function() {
+                document.body.classList.remove('overflow-y-hidden')
+                document.body.style.paddingRight = '0px'
+            }, 200)
         }
     </script>
 </body>

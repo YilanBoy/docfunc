@@ -98,7 +98,7 @@
                                         <a
                                             href="{{ $result->link_with_slug }}"
                                             class="flex text-left text-black rounded-md p-2 hover:bg-gray-200
-                                            dark:text-white dark:hover:bg-gray-500"
+                                            dark:text-white dark:hover:bg-gray-600"
                                         >
                                             <i class="bi bi-caret-right-fill"></i><span class="ml-2">{{ $result->title }}</span>
                                         </a>

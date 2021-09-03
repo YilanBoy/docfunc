@@ -42,7 +42,7 @@
                     <img class="block h-8 w-auto" src="{{ asset('images/icon/icon.svg') }}" alt="{{ config('app.name') }}">
                     <span
                         class="hidden md:block font-bold font-mono text-xl ml-2
-                        dark:text-white"
+                        dark:text-gray-50"
                     >
                         {{ config('app.name') }}
                     </span>
@@ -50,7 +50,7 @@
 
                 <div class="absolute inset-y-0 right-0 flex items-center">
                     {{-- 明亮 / 暗黑模式切換 --}}
-                    <button type="button" class="theme-switch mr-3 text-gray-400 hover:text-gray-700 dark:hover:text-white">
+                    <button type="button" class="theme-switch mr-3 text-gray-400 hover:text-gray-700 dark:hover:text-gray-50">
                         <span class="dark:hidden">
                             <i class="bi bi-sun-fill"></i>
                         </span>
@@ -63,13 +63,13 @@
                     {{-- 手機版-未登入 --}}
                     @guest
                         <a href="{{ route('register') }}"
-                        class="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white py-2 px-4 mr-3
+                        class="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-gray-50 py-2 px-4 mr-3
                         border border-blue-500 hover:border-transparent rounded-md">
                             註冊
                         </a>
 
                         <a href="{{ route('login') }}"
-                        class="text-gray-400 hover:text-gray-700 dark:hover:text-white">
+                        class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50">
                             <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
                         </a>
 
@@ -81,7 +81,7 @@
                             @class([
                                 'p-1 mr-3 rounded-full',
                                 'text-red-400 hover:text-red-700' => (auth()->user()->notification_count > 0),
-                                'text-gray-400 hover:text-gray-700 dark:hover:text-white' => (auth()->user()->notification_count === 0),
+                                'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50' => (auth()->user()->notification_count === 0),
                             ])
                         >
                             <span class="sr-only">View notifications</span>
@@ -115,7 +115,7 @@
                                 x-show="profileIsOpen"
                                 x-transition.origin.top.right
                                 class="absolute right-0 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
-                                dark:bg-gray-500 dark:text-white"
+                                dark:bg-gray-500 dark:text-gray-50"
                                 role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                             >
                                 <a href="{{ route('users.show', ['user' => auth()->id()]) }}"
@@ -217,7 +217,7 @@
                 class="absolute top-5 left-16 flex justify-center items-center w-max opacity-0 transition-all duration-300
                 text-gray-900 text-2xl font-bold font-mono bg-white rounded-lg ring-1 ring-black ring-opacity-20 px-6 py-2 pointer-events-none
                 peer-hover:opacity-100 peer-hover:top-1
-                dark:bg-gray-500 dark:text-white"
+                dark:bg-gray-500 dark:text-gray-50"
             >
                 {{ config('app.name') }}
             </span>
@@ -297,7 +297,7 @@
                     class="absolute left-16 -top-4 flex justify-center items-center w-max opacity-0 transition-all duration-300
                     text-gray-900 bg-white rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
                     peer-hover:opacity-100 peer-hover:top-0
-                    dark:bg-gray-500 dark:text-white"
+                    dark:bg-gray-500 dark:text-gray-50"
                 >
                     明亮 / 暗黑模式
                 </span>
@@ -363,7 +363,7 @@
                         x-show="profileIsOpen"
                         x-transition.origin.bottom.left
                         class="absolute left-16 bottom-0 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
-                        dark:bg-gray-500 dark:text-white"
+                        dark:bg-gray-500 dark:text-gray-50"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                     >
                         <a href="{{ route('users.show', ['user' => auth()->id()]) }}"

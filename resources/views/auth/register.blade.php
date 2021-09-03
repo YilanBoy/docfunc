@@ -16,7 +16,7 @@
             <div class="w-full flex flex-col justify-center items-center">
 
                 {{-- 頁面標題 --}}
-                <div class="fill-current text-gray-700 text-2xl dark:text-white">
+                <div class="fill-current text-gray-700 text-2xl dark:text-gray-50">
                     <i class="bi bi-person-plus-fill"></i><span class="ml-4">註冊</span>
                 </div>
 
@@ -77,7 +77,7 @@
                         @endif
 
                         <div class="flex items-center justify-end mt-4">
-                            <a class="text-gray-400 hover:text-gray-700 dark:hover:text-white" href="{{ route('login') }}">
+                            <a class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50" href="{{ route('login') }}">
                                 {{ __('Already registered?') }}
                             </a>
 

@@ -15,7 +15,7 @@
     <div class="relative mt-6">
         {{-- 置頂按鈕 --}}
         <button id="scroll-to-top-btn" title="Go to top"
-        class="fixed z-10 bottom-7 right-7 hidden justify-center h-16 w-16 text-white font-bold bg-blue-600 rounded-full
+        class="fixed z-10 bottom-7 right-7 hidden justify-center h-16 w-16 text-gray-50 font-bold bg-blue-600 rounded-full
         transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl">
             <span class="animate-bounce text-3xl mt-4">
                 <i class="bi bi-arrow-up"></i>
@@ -45,7 +45,7 @@
                                             href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
                                             class="group relative w-16 h-16 inline-flex rounded-xl border border-blue-600"
                                         >
-                                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-white text-center font-medium bg-blue-600
+                                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-gray-50 text-center font-medium bg-blue-600
                                             rounded-xl ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
                                             group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                                 <i class="bi bi-file-earmark-check-fill"></i>
@@ -68,7 +68,7 @@
                                             type="button"
                                             class="group relative w-16 h-16 inline-flex rounded-xl border border-red-600 focus:outline-none mt-4"
                                         >
-                                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-white text-center font-medium bg-red-600
+                                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-gray-50 text-center font-medium bg-red-600
                                             rounded-xl ring-1 ring-red-600 ring-offset-1 ring-offset-red-600 transform transition-transform
                                             group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                                 <i class="bi bi-trash-fill"></i>
@@ -80,7 +80,7 @@
                                             href="{{ route('posts.edit', ['post' => $post->id]) }}"
                                             class="group relative w-16 h-16 inline-flex rounded-xl border border-green-600"
                                         >
-                                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-white text-center font-medium bg-green-600
+                                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-gray-50 text-center font-medium bg-green-600
                                             rounded-xl ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 transform transition-transform
                                             group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                                 <span class="transform group-hover:scale-125 group-hover:-rotate-45 transition duration-150 ease-in">
@@ -105,7 +105,7 @@
                                             type="button"
                                             class="group relative w-16 h-16 inline-flex rounded-xl border border-yellow-600 focus:outline-none mt-4"
                                         >
-                                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-white text-center font-medium bg-yellow-600
+                                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-gray-50 text-center font-medium bg-yellow-600
                                             rounded-xl ring-1 ring-yellow-600 ring-offset-1 ring-offset-yellow-600 transform transition-transform
                                             group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                                 <i class="bi bi-file-earmark-x-fill"></i>
@@ -122,7 +122,7 @@
 
                     <div class="flex justify-between">
                         {{-- 文章標題 --}}
-                        <h1 class="flex-grow text-3xl font-bold dark:text-white">{{ $post->title }}</h1>
+                        <h1 class="flex-grow text-3xl font-bold dark:text-gray-50">{{ $post->title }}</h1>
 
                         {{-- 文章選單-行動裝置 --}}
                         @if(auth()->id() === $post->user_id)
@@ -137,7 +137,7 @@
                                         x-on:keydown.escape.window="editMenuIsOpen = false"
                                         type="button"
                                         class="text-2xl text-gray-400 hover:text-gray-700 focus:text-gray-700
-                                        dark:hover:text-white dark:focus:text-white"
+                                        dark:hover:text-gray-50 dark:focus:text-gray-50"
                                         aria-expanded="false" aria-haspopup="true"
                                     >
                                         <i class="bi bi-three-dots-vertical"></i>
@@ -149,7 +149,7 @@
                                     x-show="editMenuIsOpen"
                                     x-transition.origin.top.right
                                     class="absolute right-0 z-10 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
-                                    dark:bg-gray-500 dark:text-white"
+                                    dark:bg-gray-500 dark:text-gray-50"
                                     role="menu" aria-orientation="vertical" tabindex="-1"
                                 >
                                     @if ($post->trashed())
@@ -218,7 +218,7 @@
                     <div class="flex items-center text-gray-400 mt-4 space-x-2">
                         {{-- 分類 --}}
                         <div>
-                            <a class="hover:text-gray-700 dark:hover:text-white"
+                            <a class="hover:text-gray-700 dark:hover:text-gray-50"
                             href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
                                 <i class="{{ $post->category->icon }}"></i><span class="ml-2">{{ $post->category->name }}</span>
                             </a>
@@ -228,7 +228,7 @@
 
                         {{-- 作者 --}}
                         <div>
-                            <a class="hover:text-gray-700 dark:hover:text-white"
+                            <a class="hover:text-gray-700 dark:hover:text-gray-50"
                             href="{{ route('users.show', ['user' => $post->user_id]) }}"
                             title="{{ $post->user->name }}">
                                 <i class="bi bi-person-fill"></i><span class="ml-2">{{ $post->user->name }}</span>
@@ -239,7 +239,7 @@
 
                         {{-- 發布時間 --}}
                         <div class="hidden md:block">
-                            <a class="hover:text-gray-700 dark:hover:text-white"
+                            <a class="hover:text-gray-700 dark:hover:text-gray-50"
                             href="{{ $post->link_with_slug }}"
                             title="文章發布於：{{ $post->created_at }}">
                                 <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
@@ -250,7 +250,7 @@
 
                         {{-- 留言數 --}}
                         <div class="hidden md:block">
-                            <a class="hover:text-gray-700 dark:hover:text-white"
+                            <a class="hover:text-gray-700 dark:hover:text-gray-50"
                             href="{{ $post->link_with_slug }}#replies-card">
                                 <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->reply_count }}</span>
                             </a>
@@ -273,7 +273,7 @@
                     </div>
 
                     {{-- 文章內容 --}}
-                    <div class="mt-4 ck-content dark:text-white">
+                    <div class="mt-4 ck-content dark:text-gray-50">
                         {!! $post->body !!}
                     </div>
 
@@ -281,13 +281,13 @@
                     <div class="mt-4 flex justify-end space-x-4">
                         <button type="button" title="分享此篇文章至 Facebook" data-sharer="facebook" data-url="{{ request()->fullUrl() }}"
                         class="text-4xl text-gray-400 hover:text-gray-700 duration-300
-                        dark:hover:text-white">
+                        dark:hover:text-gray-50">
                             <i class="bi bi-facebook"></i>
                         </button>
 
                         <button type="button" title="分享此篇文章至 Twitter" data-sharer="twitter" data-url="{{ request()->fullUrl() }}"
                         class="text-4xl text-gray-400 hover:text-gray-700 duration-300
-                        dark:hover:text-white">
+                        dark:hover:text-gray-50">
                             <i class="bi bi-twitter"></i>
                         </button>
                     </div>
@@ -301,12 +301,12 @@
                         <div class="flex flex-col">
                             <a
                                 href="{{ route('users.show', ['user' => $post->user->id]) }}"
-                                class="text-2xl font-bold text-black hover:underline
-                                dark:text-white"
+                                class="text-2xl font-bold hover:underline
+                                dark:text-gray-50"
                             >
                                 {{ $post->user->name }}
                             </a>
-                            <span class="dark:text-white">{!! nl2br(e($post->user->introduction)) !!}</span>
+                            <span class="dark:text-gray-50">{!! nl2br(e($post->user->introduction)) !!}</span>
                         </div>
                     </div>
 

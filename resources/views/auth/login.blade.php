@@ -17,7 +17,7 @@
             <div class="w-full flex flex-col justify-center items-center">
                 {{-- 頁面標題 --}}
                 <div class="fill-current text-gray-700 text-2xl
-                dark:text-white">
+                dark:text-gray-50">
                     <i class="bi bi-box-arrow-in-right"></i><span class="ml-4">登入</span>
                 </div>
 
@@ -59,7 +59,7 @@
                             <label for="remember_me" class="inline-flex items-center">
                                 <input id="remember_me" type="checkbox" name="remember"
                                 class="form-checkbox rounded border-gray-300 text-indigo-400 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <span class="ml-2 text-sm text-gray-600 dark:text-white">{{ __('Remember me') }}</span>
+                                <span class="ml-2 text-sm text-gray-600 dark:text-gray-50">{{ __('Remember me') }}</span>
                             </label>
                         </div>
 
@@ -70,7 +70,7 @@
 
                         <div class="flex items-center justify-end mt-4">
                             @if (Route::has('password.request'))
-                                <a class="text-gray-400 hover:text-gray-700 dark:hover:text-white" href="{{ route('password.request') }}">
+                                <a class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50" href="{{ route('password.request') }}">
                                     {{ __('Forgot your password?') }}
                                 </a>
                             @endif

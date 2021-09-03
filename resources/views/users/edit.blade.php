@@ -9,10 +9,10 @@
             <img class="rounded-full h-36 w-36" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}">
         </div>
 
-        <div class="flex mt-4 dark:text-white">
+        <div class="flex mt-4 dark:text-gray-50">
             <span class="mr-2">會員大頭貼由</span>
             <a href="https://zh-tw.gravatar.com/" target="_blank" rel="nofollow noopener noreferrer"
-            class="text-gray-400 hover:text-gray-700 dark:hover:text-white">Gravatar</a>
+            class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50">Gravatar</a>
             <span class="ml-2">技術提供</span>
         </div>
     </div>
@@ -26,23 +26,23 @@
 
         {{-- 信箱 --}}
         <div class="mt-5">
-            <div class="text-gray-600 dark:text-white">信箱</div>
-            <div class="text-black dark:text-white">{{ $user->email }}</div>
+            <div class="text-gray-600 dark:text-gray-50">信箱</div>
+            <div class="dark:text-gray-50">{{ $user->email }}</div>
         </div>
 
         {{-- 會員名稱 --}}
         <div class="mt-5">
-            <label for="name" class="text-gray-600 dark:text-white">會員名稱 (只能使用英文、數字、_ 或是 -)</label>
+            <label for="name" class="text-gray-600 dark:text-gray-50">會員名稱 (只能使用英文、數字、_ 或是 -)</label>
 
             <input type="text" name="name" placeholder="給自己取個有趣的暱稱吧！" value="{{ old('name', $user->name) }}" required autofocus
             class="form-input w-full rounded-md shadow-sm border border-gray-300
             focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-2
-            dark:bg-gray-500 dark:text-white dark:placeholder-white">
+            dark:bg-gray-500 dark:text-gray-50 dark:placeholder-white">
         </div>
 
         {{-- 會員自介 --}}
         <div class="mt-5">
-            <label for="introduction" class="text-gray-600 dark:text-white">個人介紹 (最多 80 個字)</label>
+            <label for="introduction" class="text-gray-600 dark:text-gray-50">個人介紹 (最多 80 個字)</label>
 
             <textarea
                 name="introduction"
@@ -50,7 +50,7 @@
                 rows="5"
                 class="form-textarea w-full rounded-md shadow-sm border border-gray-300
                 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-2
-                dark:bg-gray-500 dark:text-white dark:placeholder-white"
+                dark:bg-gray-500 dark:text-gray-50 dark:placeholder-white"
             >{{ old('introduction', $user->introduction) }}</textarea>
         </div>
 

@@ -7,7 +7,7 @@
 
             {{-- 選項 --}}
             <x-card class="w-full md:w-60 xl:w-80 flex flex-col justify-center items-center md:mr-6
-            dark:text-white">
+            dark:text-gray-50">
                 <h3 class="w-full font-semibold text-lg text-center border-black border-b-2 pb-3 mb-3
                 dark:border-white">
                     <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
@@ -17,7 +17,7 @@
                     <a
                         href="{{ route('users.edit', ['user' => auth()->id()]) }}"
                         @class([
-                            'block rounded-md p-2 text-black dark:text-white',
+                            'block rounded-md p-2 dark:text-gray-50',
                             'bg-gray-200 dark:bg-gray-600' => (request()->url() === route('users.edit', ['user' => auth()->id()])),
                             'hover:bg-gray-200 dark:hover:bg-gray-600' => (request()->url() !== route('users.edit', ['user' => auth()->id()])),
                         ])
@@ -28,7 +28,7 @@
                     <a
                         href="{{ route('users.changePassword', ['user' => auth()->id()]) }}"
                         @class([
-                            'block rounded-md p-2 text-black dark:text-white',
+                            'block rounded-md p-2 dark:text-gray-50',
                             'bg-gray-200 dark:bg-gray-600' => (request()->url() === route('users.changePassword', ['user' => auth()->id()])),
                             'hover:bg-gray-200 dark:hover:bg-gray-600' => (request()->url() !== route('users.changePassword', ['user' => auth()->id()])),
                         ])
@@ -39,7 +39,7 @@
                     <a
                         href="{{ route('users.delete', ['user' => auth()->id()]) }}"
                         @class([
-                            'block rounded-md p-2 text-black dark:text-white',
+                            'block rounded-md p-2 dark:text-gray-50',
                             'bg-gray-200 dark:bg-gray-600' => (request()->url() === route('users.delete', ['user' => auth()->id()])),
                             'hover:bg-gray-200 dark:hover:bg-gray-600' => (request()->url() !== route('users.delete', ['user' => auth()->id()])),
                         ])

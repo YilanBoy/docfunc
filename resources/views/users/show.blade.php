@@ -9,19 +9,19 @@
 
             {{-- 會員基本資訊 --}}
             <x-card class="w-full md:w-80 flex flex-col justify-center items-center mr-0 md:mr-6
-            dark:text-white">
+            dark:text-gray-50">
                 {{-- 大頭貼 --}}
                 <div>
                     <img class="rounded-full h-36 w-36" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}"  width="200">
                 </div>
 
                 {{-- 會員名稱 --}}
-                <span class="w-full flex justify-center items-center text-3xl text-black font-semibold my-5 pb-5 border-b-2 border-black
-                dark:text-white dark:border-white">{{ $user->name }}</span>
+                <span class="w-full flex justify-center items-center text-3xl font-semibold my-5 pb-5 border-b-2 border-black
+                dark:text-gray-50 dark:border-white">{{ $user->name }}</span>
 
                 {{-- 資訊 --}}
-                <div class="w-full flex flex-col justify-start items-start text-black
-                dark:text-white">
+                <div class="w-full flex flex-col justify-start items-start
+                dark:text-gray-50">
                     <span class="text-lg">撰寫文章</span>
                     <span class="text-xl font-semibold mt-2">{{ $user->posts->count() }} 篇</span>
 
@@ -44,8 +44,8 @@
                             x-on:click.prevent="tab = 'information'"
                             href="#"
                             :class="{
-                                'text-gray-700 dark:text-white': tab === 'information',
-                                'text-gray-400 hover:text-gray-700 dark:hover:text-white': tab !== 'information'
+                                'text-gray-700 dark:text-gray-50': tab === 'information',
+                                'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50': tab !== 'information'
                             }"
                             class="block transition duration-300 ease-in px-2 sm:px-7 py-2"
                         >
@@ -67,8 +67,8 @@
                             x-on:click.prevent="tab = 'posts'"
                             href="#"
                             :class="{
-                                'text-gray-700 dark:text-white': tab === 'posts',
-                                'text-gray-400 hover:text-gray-700 dark:hover:text-white': tab !== 'posts'
+                                'text-gray-700 dark:text-gray-50': tab === 'posts',
+                                'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50': tab !== 'posts'
                             }"
                             class="block transition duration-300 ease-in px-2 sm:px-7 py-2"
                         >
@@ -90,8 +90,8 @@
                             x-on:click.prevent="tab = 'replies'"
                             href="#"
                             :class="{
-                                'text-gray-700 dark:text-white': tab === 'replies',
-                                'text-gray-400 hover:text-gray-700 dark:hover:text-white': tab !== 'replies'
+                                'text-gray-700 dark:text-gray-50': tab === 'replies',
+                                'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50': tab !== 'replies'
                             }"
                             class="block transition duration-300 ease-in px-2 sm:px-7 py-2"
                         >

@@ -1,5 +1,5 @@
-<x-card class="w-full flex flex-col justify-center items-center text-black mt-6 md:mt-0 xl:mt-6
-dark:text-white">
+<x-card class="w-full flex flex-col justify-center items-center mt-6 md:mt-0 xl:mt-6
+dark:text-gray-50">
 
     <h3 class="w-full font-semibold text-lg border-black border-b-2 pb-3 mb-3
     dark:border-white">

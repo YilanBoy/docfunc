@@ -9,8 +9,8 @@
                     href="{{ $currentUrl . '?order=latest' }}"
                     @class([
                         'block transition duration-300 ease-in px-2 sm:px-7 py-2',
-                        'text-gray-700 dark:text-white' => ($order === 'latest'),
-                        'text-gray-400 hover:text-gray-700 dark:hover:text-white' => ($order !== 'latest'),
+                        'text-gray-700 dark:text-gray-50' => ($order === 'latest'),
+                        'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50' => ($order !== 'latest'),
                     ])
                 >
                     <span>最新文章</span>
@@ -32,8 +32,8 @@
                     href="{{ $currentUrl . '?order=recent' }}"
                     @class([
                         'block transition duration-300 ease-in px-2 sm:px-7 py-2',
-                        'text-gray-700 dark:text-white' => ($order === 'recent'),
-                        'text-gray-400 hover:text-gray-700 dark:hover:text-white' => ($order !== 'recent'),
+                        'text-gray-700 dark:text-gray-50' => ($order === 'recent'),
+                        'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50' => ($order !== 'recent'),
                     ])
                 >
                     <span>最近更新</span>
@@ -55,8 +55,8 @@
                     href="{{ $currentUrl . '?order=reply' }}"
                     @class([
                         'block transition duration-300 ease-in px-2 sm:px-7 py-2',
-                        'text-gray-700 dark:text-white' => ($order === 'reply'),
-                        'text-gray-400 hover:text-gray-700 dark:hover:text-white' => ($order !== 'reply'),
+                        'text-gray-700 dark:text-gray-50' => ($order === 'reply'),
+                        'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50' => ($order !== 'reply'),
                     ])
                 >
                     <span>最多留言</span>
@@ -110,7 +110,7 @@
             {{-- 文章 --}}
             <div class="w-full flex flex-col justify-between md:mx-4">
                 {{-- 文章標題 --}}
-                <h1 class="text-xl font-semibold mt-2 md:mt-0 dark:text-white">
+                <h1 class="text-xl font-semibold mt-2 md:mt-0 dark:text-gray-50">
                     <a
                         x-ref="postLink"
                         href="{{ $post->link_with_slug }}"
@@ -119,7 +119,7 @@
                 </h1>
 
                 {{-- 文章大綱 --}}
-                <div class="text-gray-600 mt-2 dark:text-white">
+                <div class="text-gray-600 mt-2 dark:text-gray-50">
                     {{ $post->excerpt }}
                 </div>
 
@@ -127,7 +127,7 @@
                 <div class="flex items-center text-sm text-gray-400 mt-4 space-x-2">
                     {{-- 文章分類資訊 --}}
                     <div>
-                        <a class="hover:text-gray-700 dark:hover:text-white"
+                        <a class="hover:text-gray-700 dark:hover:text-gray-50"
                         href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
                             <i class="{{ $post->category->icon }}"></i><span class="hidden md:inline ml-2">{{ $post->category->name }}</span>
                         </a>
@@ -135,7 +135,7 @@
                     <div>&bull;</div>
                     {{-- 文章作者資訊 --}}
                     <div>
-                        <a class="hover:text-gray-700 dark:hover:text-white"
+                        <a class="hover:text-gray-700 dark:hover:text-gray-50"
                         href="{{ route('users.show', ['user' => $post->user_id]) }}"
                         title="{{ $post->user->name }}">
                             <i class="bi bi-person-fill"></i><span class="hidden md:inline ml-2">{{ $post->user->name }}</span>
@@ -144,7 +144,7 @@
                     <div>&bull;</div>
                     {{-- 文章發布時間 --}}
                     <div>
-                        <a class="hover:text-gray-700 dark:hover:text-white"
+                        <a class="hover:text-gray-700 dark:hover:text-gray-50"
                         href="{{ $post->link_with_slug }}"
                         title="文章發布於：{{ $post->created_at }}">
                             <i class="bi bi-clock-fill"></i><span class="hidden md:inline ml-2">{{ $post->created_at->diffForHumans() }}</span>
@@ -153,7 +153,7 @@
                     <div>&bull;</div>
                     <div>
                         {{-- 文章留言數 --}}
-                        <a class="hover:text-gray-700 dark:hover:text-white"
+                        <a class="hover:text-gray-700 dark:hover:text-gray-50"
                         href="{{ $post->link_with_slug }}#post-{{ $post->id }}-replies">
                             <i class="bi bi-chat-square-text-fill"></i><span class="hidden md:inline ml-2">{{ $post->reply_count }}</span>
                         </a>
@@ -165,7 +165,7 @@
     @empty
         <x-card class="w-full h-36 flex justify-center items-center
         transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl
-        dark:text-white">
+        dark:text-gray-50">
             <span>Whoops！此分類底下還沒有文章，趕緊寫一篇吧！</span>
         </x-card>
     @endforelse

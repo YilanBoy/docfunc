@@ -9,12 +9,12 @@
             <div class="w-full flex flex-col justify-center items-center">
 
                 {{-- 頁面標題 --}}
-                <div class="fill-current text-gray-700 text-2xl dark:text-white">
+                <div class="fill-current text-gray-700 text-2xl dark:text-gray-50">
                     <i class="bi bi-person-check-fill"></i><span class="ml-4">驗證 Email</span>
                 </div>
 
                 <x-card class="w-full sm:max-w-md mt-4 overflow-hidden">
-                    <div class="mb-4 text-gray-600 dark:text-white">
+                    <div class="mb-4 text-gray-600 dark:text-gray-50">
                         {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
                     </div>
 
@@ -38,7 +38,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <button type="submit" class="text-gray-400 hover:text-gray-700 dark:hover:text-white">
+                            <button type="submit" class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50">
                                 {{ __('Log Out') }}
                             </button>
                         </form>

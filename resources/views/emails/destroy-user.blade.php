@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
 </head>
 <body class="bg-gray-100 min-h-screen flex justify-center items-center antialiased font-noto">
-    <x-card class="text-black">
+    <x-card>
         <h3 class="font-semibold text-lg text-center border-black border-b-2 pb-3 mb-3">
             <i class="bi bi-person-x-fill"></i><span class="ml-2">刪除帳號</span>
         </h3>
@@ -29,7 +29,7 @@
             <a
                 href="{{ $destroyLink }}"
                 onClick="return confirm('您確定要刪除帳號嗎？此動作無法復原');"
-                class="inline-flex justify-center items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-white
+                class="inline-flex justify-center items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-gray-50
                 uppercase tracking-widest hover:bg-red-500 active:bg-red-900 focus:outline-none focus:border-red-900
                 focus:ring ring-red-300 disabled:opacity-25 transition ease-in-out duration-150"
             >

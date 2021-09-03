@@ -9,7 +9,7 @@
             <div class="w-full flex flex-col justify-center items-center">
 
                 {{-- 頁面標題 --}}
-                <div class="fill-current text-gray-700 text-2xl dark:text-white">
+                <div class="fill-current text-gray-700 text-2xl dark:text-gray-50">
                     <i class="bi bi-question-circle"></i><span class="ml-4">重設密碼</span>
                 </div>
 

@@ -15,7 +15,7 @@
 
             <div class="w-full xl:w-2/3 space-y-6 flex flex-col justify-center items-center">
                 {{-- 頁面標題 --}}
-                <div class="fill-current text-gray-700 text-2xl dark:text-white">
+                <div class="fill-current text-gray-700 text-2xl dark:text-gray-50">
                     <i class="bi bi-pencil-fill"></i><span class="ml-4">新增文章</span>
                 </div>
 
@@ -28,14 +28,14 @@
                         <div class="sticky top-9 flex flex-col">
                             {{-- 字數提示 --}}
                             <div class="w-full flex justify-start items-center bg-gradient-to-r from-white to-white/0 rounded-xl p-4
-                            dark:text-white dark:from-gray-700 dark:to-gray-700/0">
+                            dark:text-gray-50 dark:from-gray-700 dark:to-gray-700/0">
                                 <span class="update-post-characters"></span>
                             </div>
 
                             {{-- 儲存按鈕 --}}
                             <button type="submit" form="create-post"
                             class="save-post group relative w-16 h-16 inline-flex rounded-xl border border-blue-600 focus:outline-none mt-4">
-                                <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-white text-center font-medium bg-blue-600
+                                <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-gray-50 text-center font-medium bg-blue-600
                                 rounded-xl ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
                                 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                     <i class="bi bi-save2-fill"></i>
@@ -57,7 +57,7 @@
                             <input type="text" name="title" placeholder="文章標題" value="{{ old('title') }}" required autofocus
                             class="form-input w-full rounded-md shadow-sm border border-gray-300
                             focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-2
-                            dark:bg-gray-500 dark:text-white dark:placeholder-white">
+                            dark:bg-gray-500 dark:text-gray-50 dark:placeholder-white">
                         </div>
 
                         {{-- 文章分類 --}}
@@ -69,7 +69,7 @@
                                 required
                                 class="form-select h-10 w-full rounded-md shadow-sm border border-gray-300
                                 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
-                                dark:bg-gray-500 dark:text-white"
+                                dark:bg-gray-500 dark:text-gray-50"
                             >
                                 <option value="" hidden disabled {{ old('category_id') ? '' : 'selected' }}>請選擇分類</option>
                                 {{-- 這裡的 $categories 使用的是 view composer 來取得值，詳細可查看 ViewServiceProvider --}}

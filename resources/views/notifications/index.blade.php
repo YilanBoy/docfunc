@@ -9,7 +9,7 @@
 
             <div class="w-full md:w-2/3 xl:w-1/2 space-y-6 flex flex-col justify-center items-center">
                 {{-- 頁面標題 --}}
-                <div class="fill-current text-gray-700 text-2xl dark:text-white">
+                <div class="fill-current text-gray-700 text-2xl dark:text-gray-50">
                     <i class="bi bi-bell-fill"></i><span class="ml-4">我的通知</span>
                 </div>
 
@@ -37,19 +37,19 @@
                             <div class="mt-2 md:mt-0">
                                 <a
                                     href="{{ route('users.show', ['user' => $notification->data['user_id']]) }}"
-                                    class="text-gray-400 hover:text-gray-700 dark:hover:text-white"
+                                    class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
                                 >{{ $notification->data['user_name'] }}</a>
-                                <span class="text-black dark:text-white">留言了你的文章</span>
+                                <span class="dark:text-gray-50">留言了你的文章</span>
                                 <a
                                     x-ref="notificationLink"
-                                    class="text-gray-400 hover:text-gray-700 dark:hover:text-white"
+                                    class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
                                     href="{{ $notification->data['post_link'] }}"
                                 >
                                     {{'「' . $notification->data['post_title'] . '」' }}
                                 </a>
                             </div>
 
-                            <div class="text-gray-600 mt-2 dark:text-white">
+                            <div class="text-gray-600 mt-2 dark:text-gray-50">
                                 {!! $notification->data['reply_content'] !!}
                             </div>
 
@@ -67,7 +67,7 @@
                 @empty
                     <x-card class="w-full h-24 flex justify-center items-center hover:shadow-xl
                     transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer
-                    dark:text-white">
+                    dark:text-gray-50">
                         <span>沒有消息通知！</span>
                     </x-card>
                 @endforelse

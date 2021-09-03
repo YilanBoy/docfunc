@@ -18,7 +18,7 @@
 
                 {{-- 留言 --}}
                 <div class="w-full md:mx-4">
-                    <div class="text-gray-600 mt-3 sm:mt-0 dark:text-white">
+                    <div class="text-gray-600 mt-3 sm:mt-0 dark:text-gray-50">
                         {!! nl2br(e($reply->content)) !!}
                     </div>
 
@@ -41,7 +41,7 @@
                                 disableScroll()
                             "
                             @click="replyId = {{ $reply->id }}"
-                            class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-white
+                            class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-gray-50
                             bg-blue-600 hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900
                             focus:ring ring-blue-300 transition ease-in-out duration-150"
                         >
@@ -52,7 +52,7 @@
                             <button
                                 onclick="confirm('您確定要刪除此留言嗎？') || event.stopImmediatePropagation()"
                                 wire:click="destroy({{ $reply->id }})"
-                                class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-white
+                                class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-gray-50
                                 bg-red-600 hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900
                                 focus:ring ring-red-300 transition ease-in-out duration-150"
                             >
@@ -84,7 +84,7 @@
 
                                 {{-- 留言 --}}
                                 <div class="w-full md:mx-4">
-                                    <div class="text-gray-600 mt-3 sm:mt-0 dark:text-white">
+                                    <div class="text-gray-600 mt-3 sm:mt-0 dark:text-gray-50">
                                         {!! nl2br(e($child->content)) !!}
                                     </div>
 
@@ -103,7 +103,7 @@
                                         <button
                                             onclick="confirm('您確定要刪除此留言嗎？') || event.stopImmediatePropagation()"
                                             wire:click="destroy({{ $child->id }})"
-                                            class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-white
+                                            class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-gray-50
                                             bg-red-600 hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900
                                             focus:ring ring-red-300 transition ease-in-out duration-150"
                                         >

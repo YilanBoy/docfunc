@@ -63,10 +63,10 @@
                         placeholder="搜尋文章"
                         class="outline-none w-full rounded-xl text-xl bg-white placeholder-gray-400 border border-gray-400
                         focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 py-2 px-10
-                        dark:bg-gray-700 dark:placeholder-white dark:text-white"
+                        dark:bg-gray-700 dark:placeholder-white dark:text-gray-50"
                     />
 
-                    <div class="absolute top-2.5 left-3.5 text-lg text-gray-400 dark:text-white">
+                    <div class="absolute top-2.5 left-3.5 text-lg text-gray-400 dark:text-gray-50">
                         <i class="bi bi-search"></i>
                     </div>
 
@@ -74,7 +74,7 @@
                         wire:loading
                         class="absolute top-3 right-0"
                     >
-                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-700 dark:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-700 dark:text-gray-50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
@@ -85,7 +85,7 @@
                 @if (strlen($search) >= 2)
                     <div
                         class="w-full mt-4 bg-white p-2 shadow-md rounded-xl ring-1 ring-black ring-opacity-20
-                        dark:bg-gray-700 dark:text-white"
+                        dark:bg-gray-700 dark:text-gray-50"
                     >
                         @if ($results->count() > 0)
                             <div class="flex justify-center items-center border-b-2 border-gray-400 pb-2 mb-2">
@@ -97,8 +97,8 @@
                                     <li>
                                         <a
                                             href="{{ $result->link_with_slug }}"
-                                            class="flex text-left text-black rounded-md p-2 hover:bg-gray-200
-                                            dark:text-white dark:hover:bg-gray-600"
+                                            class="flex text-left rounded-md p-2 hover:bg-gray-200
+                                            dark:text-gray-50 dark:hover:bg-gray-600"
                                         >
                                             <i class="bi bi-caret-right-fill"></i><span class="ml-2">{{ $result->title }}</span>
                                         </a>

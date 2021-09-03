@@ -61,7 +61,7 @@
                         wire:model.debounce.500ms="search"
                         autocomplete="off"
                         placeholder="搜尋文章"
-                        class="outline-none w-full rounded-xl text-xl bg-white placeholder-gray-400 border border-gray-400
+                        class="outline-none w-full rounded-xl text-xl bg-gray-50 placeholder-gray-400 border border-gray-400
                         focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 py-2 px-10
                         dark:bg-gray-700 dark:placeholder-white dark:text-gray-50"
                     />
@@ -84,7 +84,7 @@
                 {{-- 搜尋結果列表 --}}
                 @if (strlen($search) >= 2)
                     <div
-                        class="w-full mt-4 bg-white p-2 shadow-md rounded-xl ring-1 ring-black ring-opacity-20
+                        class="w-full mt-4 bg-gray-50 p-2 shadow-md rounded-xl ring-1 ring-black ring-opacity-20
                         dark:bg-gray-700 dark:text-gray-50"
                     >
                         @if ($results->count() > 0)

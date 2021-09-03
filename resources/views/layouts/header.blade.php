@@ -3,7 +3,7 @@
     {{-- 手機版選單 --}}
     <div
         x-data="{ mobileMenuIsOpen: false }"
-        class="relative z-20 bg-white shadow-md lg:hidden
+        class="relative z-20 bg-gray-50 shadow-md lg:hidden
         dark:bg-gray-800 "
     >
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -114,7 +114,7 @@
                                 x-on:click.outside="profileIsOpen = false"
                                 x-show="profileIsOpen"
                                 x-transition.origin.top.right
-                                class="absolute right-0 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
+                                class="absolute right-0 p-2 mt-2 w-48 rounded-md shadow-lg bg-gray-50 text-gray-700 ring-1 ring-black ring-opacity-20
                                 dark:bg-gray-500 dark:text-gray-50"
                                 role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                             >
@@ -202,7 +202,7 @@
     {{-- 電腦版選單 --}}
     <div
         class="hidden z-20 w-16 h-screen lg:flex flex-col justify-between items-center fixed top-0 left-0
-        bg-white shadow-md transition-all duration-300 py-2
+        bg-gray-50 shadow-md transition-all duration-300 py-2
         dark:bg-gray-900"
     >
         {{-- 電腦版-Logo --}}
@@ -215,7 +215,7 @@
 
             <span
                 class="absolute top-5 left-16 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                text-gray-900 text-2xl font-bold font-mono bg-white rounded-lg ring-1 ring-black ring-opacity-20 px-6 py-2 pointer-events-none
+                text-gray-900 text-2xl font-bold font-mono bg-gray-50 rounded-lg ring-1 ring-black ring-opacity-20 px-6 py-2 pointer-events-none
                 peer-hover:opacity-100 peer-hover:top-1
                 dark:bg-gray-500 dark:text-gray-50"
             >
@@ -295,7 +295,7 @@
 
                 <span
                     class="absolute left-16 -top-4 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                    text-gray-900 bg-white rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
+                    text-gray-900 bg-gray-50 rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
                     peer-hover:opacity-100 peer-hover:top-0
                     dark:bg-gray-500 dark:text-gray-50"
                 >
@@ -362,7 +362,7 @@
                         x-on:click.outside="profileIsOpen = false"
                         x-show="profileIsOpen"
                         x-transition.origin.bottom.left
-                        class="absolute left-16 bottom-0 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
+                        class="absolute left-16 bottom-0 p-2 mt-2 w-48 rounded-md shadow-lg bg-gray-50 text-gray-700 ring-1 ring-black ring-opacity-20
                         dark:bg-gray-500 dark:text-gray-50"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                     >

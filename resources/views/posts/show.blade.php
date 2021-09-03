@@ -148,7 +148,7 @@
                                     x-cloak
                                     x-show="editMenuIsOpen"
                                     x-transition.origin.top.right
-                                    class="absolute right-0 z-10 p-2 mt-2 w-48 rounded-md shadow-lg bg-white text-gray-700 ring-1 ring-black ring-opacity-20
+                                    class="absolute right-0 z-10 p-2 mt-2 w-48 rounded-md shadow-lg bg-gray-50 text-gray-700 ring-1 ring-black ring-opacity-20
                                     dark:bg-gray-500 dark:text-gray-50"
                                     role="menu" aria-orientation="vertical" tabindex="-1"
                                 >

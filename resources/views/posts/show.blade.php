@@ -326,9 +326,9 @@
     <script src="{{ asset('js/scroll-to-top-btn.js') }}"></script>
     {{-- 文章中的嵌入影片顯示 --}}
     <script async charset="utf-8" src="{{ asset('js/platform.js') }}"></script>
-    <script src="{{ asset('js/embedly.js') }}"></script>
+    <script src="{{ asset('embedly/embedly.js') }}"></script>
     {{-- 程式碼區塊高亮 --}}
-    <script src="{{ asset('js/prism.js') }}"></script>
+    <script src="{{ asset('embedly/prism.js') }}"></script>
     {{-- 社交分享按鈕 --}}
     <script src="{{ asset('js/sharer.min.js') }}"></script>
 @endsection

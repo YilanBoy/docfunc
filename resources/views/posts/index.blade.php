@@ -89,7 +89,7 @@
                             @foreach ($links as $link)
                                 <a href="{{ $link->link }}" target="_blank" rel="nofollow noopener noreferrer"
                                 class="block text-black rounded-md p-2 hover:bg-gray-200
-                                dark:text-white dark:hover:bg-gray-500">
+                                dark:text-white dark:hover:bg-gray-600">
                                     {{ $link->title }}
                                 </a>
                             @endforeach

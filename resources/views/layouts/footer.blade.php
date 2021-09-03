@@ -1,4 +1,4 @@
-<footer id="footer" class="bg-gray-800 pt-4 mt-6">
+<footer id="footer" class="bg-gray-800 dark:bg-black pt-4 mt-6">
     <div class="max-w-6xl m-auto text-gray-800 flex flex-wrap justify-left">
 
         {{-- Col-1 --}}

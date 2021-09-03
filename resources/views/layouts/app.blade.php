@@ -33,7 +33,7 @@
     @yield('scriptsInHead')
 </head>
 
-<body class="bg-gray-100 dark:bg-gray-700 antialiased font-noto">
+<body class="bg-gray-100 dark:bg-gray-800 antialiased font-noto">
 
     <div class="relative flex-col lg:flex">
 

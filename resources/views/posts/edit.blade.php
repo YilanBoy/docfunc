@@ -20,16 +20,14 @@
                 </div>
 
                 {{-- 文章編輯資訊-桌面裝置 --}}
-                <div class="relative w-full shadow-md bg-white rounded-xl ring-1 ring-black ring-opacity-20 p-5
-                dark:bg-gray-600">
-
+                <x-card class="relative w-full">
                     <div
                         class="hidden xl:block absolute top-0 left-103/100 w-52 h-full"
                     >
                         <div class="sticky top-9 flex flex-col">
                             {{-- 字數提示 --}}
                             <div class="w-full flex justify-start items-center bg-gradient-to-r from-white to-white/0 rounded-xl p-4
-                            dark:text-white dark:from-gray-600 dark:to-gray-600/0">
+                            dark:text-white dark:from-gray-700 dark:to-gray-700/0">
                                 <span class="update-post-characters"></span>
                             </div>
 
@@ -117,7 +115,7 @@
                             </x-button>
                         </div>
                     </form>
-                </div>
+                </x-card>
 
             </div>
         </div>

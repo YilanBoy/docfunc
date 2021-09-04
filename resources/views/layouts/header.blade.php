@@ -4,7 +4,7 @@
     <div
         x-data="{ mobileMenuIsOpen: false }"
         class="relative z-20 bg-gray-50 shadow-md lg:hidden
-        dark:bg-gray-800 "
+        dark:bg-gray-700"
     >
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div class="relative flex items-center justify-between h-18">
@@ -203,7 +203,7 @@
     <div
         class="hidden z-20 w-16 h-screen lg:flex flex-col justify-between items-center fixed top-0 left-0
         bg-gray-50 shadow-md transition-all duration-300 py-2
-        dark:bg-gray-900"
+        dark:bg-gray-700"
     >
         {{-- 電腦版-Logo --}}
         <div

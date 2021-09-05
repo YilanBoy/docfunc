@@ -25,7 +25,7 @@
             </div>
             <div class="col-span-4 flex items-center">
                 <div class="h-3 bg-gradient-to-r from-green-400 to-blue-500"
-                style="width: {{ (int)($category->posts->count() / $user->posts->count() * 100) }}rem;">
+                style="width: {{ $user->posts->count() ? (int)($category->posts->count() / $user->posts->count() * 100) : 0 }}rem;">
                 </div>
             </div>
             <div class="col-span-1 flex justify-end items-center text-lg">

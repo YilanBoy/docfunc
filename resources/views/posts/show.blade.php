@@ -37,7 +37,7 @@
                                 {{-- 編輯文章 --}}
                                 <a
                                     href="{{ route('posts.edit', ['post' => $post->id]) }}"
-                                    class="group relative w-16 h-16 inline-flex rounded-xl border border-green-600 mt-4"
+                                    class="group relative w-16 h-16 inline-flex rounded-xl border border-green-600"
                                 >
                                     <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-gray-50 text-center font-medium bg-green-600
                                     rounded-xl ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 transform transition-transform

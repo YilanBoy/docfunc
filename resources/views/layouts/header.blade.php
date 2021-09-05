@@ -23,7 +23,7 @@
                             {{-- 手機版-關閉選單的 icon --}}
                         <div
                             :class="mobileMenuIsOpen ? 'hidden' : 'block'"
-                            class="text-3xl text-gray-400 hover:text-gray-700"
+                            class="text-3xl text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
                         >
                             <i class="bi bi-list"></i>
                         </div>
@@ -31,7 +31,7 @@
                         <div
                             x-cloak
                             :class="mobileMenuIsOpen ? 'block' : 'hidden'"
-                            class="text-xl text-gray-400 hover:text-gray-700"
+                            class="text-xl text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
                         >
                             <i class="bi bi-x-lg"></i>
                         </div>

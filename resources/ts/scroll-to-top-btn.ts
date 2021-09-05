@@ -10,11 +10,9 @@ function scrollToTop(): void {
 // 監聽滾動
 window.addEventListener('scroll', function () {
     if (window.scrollY > 0) {
-        scrollToTopButton?.classList.remove('hidden');
-        scrollToTopButton?.classList.add('flex');
+        scrollToTopButton?.classList.add('xl:flex');
     } else {
-        scrollToTopButton?.classList.add('hidden');
-        scrollToTopButton?.classList.remove('flex');
+        scrollToTopButton?.classList.remove('xl:flex');
     }
 });
 

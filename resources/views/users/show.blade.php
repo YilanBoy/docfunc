@@ -5,7 +5,8 @@
 
 @section('content')
     <div class="container mx-auto max-w-7xl">
-        <div class="min-h-screen flex flex-col md:flex-row justify-center items-start px-4 xl:px-0 mt-6">
+        <div class="min-h-screen flex flex-col justify-start items-center
+        md:flex-row md:justify-center md:items-start px-4 xl:px-0 mt-6">
 
             {{-- 會員基本資訊 --}}
             <x-card class="w-full md:w-80 flex flex-col justify-center items-center mr-0 md:mr-6
@@ -35,7 +36,7 @@
             {{-- 會員資訊、文章與留言 --}}
             <div
                 x-data="{ tab: 'information' }"
-                class="w-full xl:w-2/3 space-y-6"
+                class="w-full xl:w-2/3 space-y-6 mt-4 md:mt-0"
             >
                 {{-- 切換顯示選單 --}}
                 <nav class="flex font-semibold">

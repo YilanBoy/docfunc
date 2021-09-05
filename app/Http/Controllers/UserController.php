@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Rules\MatchOldPassword;
@@ -23,7 +24,11 @@ class UserController extends Controller
     // 個人頁面
     public function show(User $user)
     {
-        return view('users.show', ['user' => $user]);
+        $categories = Category::with(['posts' => function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        }])->get();
+
+        return view('users.show', ['user' => $user, 'categories' => $categories]);
     }
 
     // 編輯個人資料

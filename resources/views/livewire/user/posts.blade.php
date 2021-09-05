@@ -18,7 +18,7 @@
                 <span class="text-xl font-semibold mt-2 md:mt-0 dark:text-gray-50">
                     <a
                         x-ref="postLink"
-                        href="{{ ($post->trashed()) ? route('posts.showSoftDeleted', [ 'id' => $post->id]) : $post->link_with_slug }}"
+                        href="{{ $post->trashed() ? '#' : $post->link_with_slug }}"
                         class="fancy-link"
                     >{{ $post->title }}</a>
                 </span>
@@ -39,7 +39,7 @@
                     {{-- 文章發布時間 --}}
                     <div>
                         <a
-                            href="{{ ($post->trashed()) ? route('posts.showSoftDeleted', [ 'id' => $post->id]) : $post->link_with_slug }}"
+                            href="{{ $post->trashed() ? '#' : $post->link_with_slug }}"
                             class="hover:text-gray-700 dark:hover:text-gray-50"
                             title="文章發布於：{{ $post->created_at }}"
                         >
@@ -50,7 +50,7 @@
                     <div>
                         {{-- 文章留言數 --}}
                         <a class="hover:text-gray-700 dark:hover:text-gray-50"
-                        href="{{ $post->link_with_slug }}#post-{{ $post->id }}-replies">
+                        href="{{ $post->trashed() ? '#' : $post->link_with_slug . '#post-' . $post->id . '-replies' }}">
                             <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->reply_count }}</span>
                         </a>
                     </div>
@@ -59,10 +59,20 @@
 
             @if (auth()->id() === $post->user_id)
                 @if ($post->trashed())
+                    {{-- 還原文章隱藏表單 --}}
+                    <form
+                        id="restore-post-{{ $post->id }}"
+                        action="{{ route('posts.restore', ['id' => $post->id]) }}"
+                        method="POST"
+                        class="hidden"
+                    >
+                        @csrf
+                    </form>
+
                     {{-- 完全刪除隱藏表單 --}}
                     <form
                         id="force-delete-post-{{ $post->id }}"
-                        action="{{ route('posts.forceDeletePost', ['id' => $post->id]) }}"
+                        action="{{ route('posts.forceDelete', ['id' => $post->id]) }}"
                         method="POST"
                         class="hidden"
                     >
@@ -72,19 +82,19 @@
 
                     <div class="flex items-center mt-2 md:mt-0 space-x-2">
                         {{-- 還原文章 --}}
-                        <a
-                            x-on:click.prevent.stop="
+                        <button
+                            x-on:click.stop="
                                 if (confirm('您確定恢復此文章嗎？')) {
-                                    window.location.href = $el.href
+                                    document.getElementById('restore-post-{{ $post->id }}').submit()
                                 }
                             "
-                            href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
+                            type="button"
                             class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-gray-50
                             bg-blue-600 hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900
                             focus:ring ring-blue-300 transition ease-in-out duration-150"
                         >
                             <i class="bi bi-file-earmark-check-fill"></i>
-                        </a>
+                        </button>
 
                         {{-- 完全刪除 --}}
                         <button

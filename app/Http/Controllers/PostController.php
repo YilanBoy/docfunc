@@ -109,18 +109,8 @@ class PostController extends Controller
             ->with('success', '成功標記文章為刪除狀態！');
     }
 
-    // 顯示軟刪除的文章內容
-    public function showSoftDeleted(int $id)
-    {
-        $softDeletedPost = Post::withTrashed()->find($id);
-
-        $this->authorize('update', $softDeletedPost);
-
-        return view('posts.show', ['post' => $softDeletedPost]);
-    }
-
     // 恢復軟刪除的文章
-    public function restorePost(int $id)
+    public function restore(int $id)
     {
         $softDeletedPost = Post::withTrashed()->find($id);
 
@@ -133,7 +123,7 @@ class PostController extends Controller
     }
 
     // 完全刪除文章
-    public function forceDeletePost(int $id)
+    public function forceDelete(int $id)
     {
         $softDeletedPost = Post::withTrashed()->find($id);
 

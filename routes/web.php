@@ -47,17 +47,15 @@ Route::prefix('posts')->group(function () {
         Route::get('/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
         Route::put('/{post}', [PostController::class, 'update'])->name('posts.update');
         Route::delete('/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+        // 恢復軟刪除的文章
+        Route::post('/{id}/restore', [PostController::class, 'restore'])->name('posts.restore');
+        // 完全刪除文章
+        Route::delete('/{id}/force-delete', [PostController::class, 'forceDelete'])->name('posts.forceDelete');
     });
 
     // {slug?} 當中的問號代表此參數可給可不給
     Route::get('/{post}/{slug?}', [PostController::class, 'show'])->name('posts.show');
 });
-// 顯示軟刪除的文章 (使用 /posts 前綴會返回 404)
-Route::get('deleted-posts/{id}', [PostController::class, 'showSoftDeleted'])->name('posts.showSoftDeleted');
-// 恢復軟刪除的文章
-Route::get('restore-posts/{id}', [PostController::class, 'restorePost'])->name('posts.restorePost');
-// 完全刪除文章
-Route::delete('force-delete-posts/{id}', [PostController::class, 'forceDeletePost'])->name('posts.forceDeletePost');
 
 // 文章分類
 Route::get('categories/{category}/{name?}', [CategoryController::class, 'show'])->name('categories.show');

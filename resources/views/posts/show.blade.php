@@ -28,97 +28,51 @@
                 <x-card class="relative w-full xl:w-2/3">
 
                     {{-- 文章選單-桌面裝置 --}}
-                    @if(auth()->id() === $post->user_id)
-                        <div
-                            x-data="{}"
-                            class="hidden xl:block absolute top-0 left-103/100 w-16 h-full"
-                        >
-                            <div class="sticky top-7 flex flex-col justify-center items-center">
-                                    @if ($post->trashed())
-                                        {{-- 還原文章 --}}
-                                        <a
-                                            x-on:click.prevent="
-                                                if (confirm('您確定還原此文章嗎？')) {
-                                                    window.location.href = $el.href
-                                                }
-                                            "
-                                            href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
-                                            class="group relative w-16 h-16 inline-flex rounded-xl border border-blue-600"
-                                        >
-                                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-gray-50 text-center font-medium bg-blue-600
-                                            rounded-xl ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
-                                            group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
-                                                <i class="bi bi-file-earmark-check-fill"></i>
-                                            </span>
-                                        </a>
+                    <div
+                        x-data="{}"
+                        class="hidden xl:block absolute top-0 left-103/100 w-16 h-full"
+                    >
+                        <div class="sticky top-7 flex flex-col justify-center items-center">
+                            @if(auth()->id() === $post->user_id)
+                                {{-- 編輯文章 --}}
+                                <a
+                                    href="{{ route('posts.edit', ['post' => $post->id]) }}"
+                                    class="group relative w-16 h-16 inline-flex rounded-xl border border-green-600 mt-4"
+                                >
+                                    <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-gray-50 text-center font-medium bg-green-600
+                                    rounded-xl ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 transform transition-transform
+                                    group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                        <span class="transform group-hover:scale-125 group-hover:-rotate-45 transition duration-150 ease-in">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </span>
+                                    </span>
+                                </a>
 
-                                        <form id="force-delete-post" action="{{ route('posts.forceDeletePost', ['id' => $post->id]) }}" method="POST"
-                                        class="hidden">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
+                                <form id="delete-post" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
+                                class="hidden">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
 
-                                        {{-- 完全刪除 --}}
-                                        <button
-                                            x-on:click="
-                                                if(confirm('您確定要完全刪除此文章嗎？（此動作無法復原）')) {
-                                                    document.getElementById('force-delete-post').submit()
-                                                }
-                                            "
-                                            type="button"
-                                            class="group relative w-16 h-16 inline-flex rounded-xl border border-red-600 focus:outline-none mt-4"
-                                        >
-                                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-gray-50 text-center font-medium bg-red-600
-                                            rounded-xl ring-1 ring-red-600 ring-offset-1 ring-offset-red-600 transform transition-transform
-                                            group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
-                                                <i class="bi bi-trash-fill"></i>
-                                            </span>
-                                        </button>
-                                    @else
-                                        {{-- 編輯文章 --}}
-                                        <a
-                                            href="{{ route('posts.edit', ['post' => $post->id]) }}"
-                                            class="group relative w-16 h-16 inline-flex rounded-xl border border-green-600"
-                                        >
-                                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-gray-50 text-center font-medium bg-green-600
-                                            rounded-xl ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 transform transition-transform
-                                            group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
-                                                <span class="transform group-hover:scale-125 group-hover:-rotate-45 transition duration-150 ease-in">
-                                                    <i class="bi bi-pencil-fill"></i>
-                                                </span>
-                                            </span>
-                                        </a>
-
-                                        <form id="delete-post" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
-                                        class="hidden">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-
-                                        {{-- 軟刪除 --}}
-                                        <button
-                                            x-on:click="
-                                                if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以還原）')) {
-                                                    document.getElementById('delete-post').submit()
-                                                }
-                                            "
-                                            type="button"
-                                            class="group relative w-16 h-16 inline-flex rounded-xl border border-yellow-600 focus:outline-none mt-4"
-                                        >
-                                            <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-gray-50 text-center font-medium bg-yellow-600
-                                            rounded-xl ring-1 ring-yellow-600 ring-offset-1 ring-offset-yellow-600 transform transition-transform
-                                            group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
-                                                <i class="bi bi-file-earmark-x-fill"></i>
-                                            </span>
-                                        </button>
-                                    @endif
-                            </div>
+                                {{-- 軟刪除 --}}
+                                <button
+                                    x-on:click="
+                                        if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以還原）')) {
+                                            document.getElementById('delete-post').submit()
+                                        }
+                                    "
+                                    type="button"
+                                    class="group relative w-16 h-16 inline-flex rounded-xl border border-yellow-600 focus:outline-none mt-4"
+                                >
+                                    <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-gray-50 text-center font-medium bg-yellow-600
+                                    rounded-xl ring-1 ring-yellow-600 ring-offset-1 ring-offset-yellow-600 transform transition-transform
+                                    group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                        <i class="bi bi-file-earmark-x-fill"></i>
+                                    </span>
+                                </button>
+                            @endif
                         </div>
-                    @endif
-
-                    @if ($post->trashed())
-                        <span class="text-red-400">此文章已被標記為刪除狀態！</span>
-                    @endif
+                    </div>
 
                     <div class="flex justify-between">
                         {{-- 文章標題 --}}
@@ -152,63 +106,31 @@
                                     dark:bg-gray-500 dark:text-gray-50"
                                     role="menu" aria-orientation="vertical" tabindex="-1"
                                 >
-                                    @if ($post->trashed())
-                                        {{-- 還原文章 --}}
-                                        <a
-                                            x-on:click.prevent="
-                                                if (confirm('您確定還原此文章嗎？')) {
-                                                    window.location.href = $el.href
-                                                }
-                                            "
-                                            href="{{ route('posts.restorePost', [ 'id' => $post->id ]) }}"
-                                            role="menuitem" tabindex="-1"
-                                            class="block px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
-                                            dark:hover:bg-gray-400"
-                                        >
-                                            <i class="bi bi-file-earmark-check-fill"></i><span class="ml-2">還原</span>
-                                        </a>
+                                    {{-- 編輯文章 --}}
+                                    <a
+                                        href="{{ route('posts.edit', ['post' => $post->id]) }}"
+                                        role="menuitem" tabindex="-1"
+                                        class="block px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
+                                        dark:hover:bg-gray-400"
+                                    >
+                                        <i class="bi bi-pencil-fill"></i><span class="ml-2">編輯</span>
+                                    </a>
 
-                                        {{-- 完全刪除 --}}
-                                        <button
-                                            x-on:click="
-                                                if(confirm('您確定要完全刪除此文章嗎？（此動作無法復原）')) {
-                                                    document.getElementById('force-delete-post').submit()
-                                                }
-                                            "
-                                            type="button"
-                                            role="menuitem" tabindex="-1"
-                                            class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
-                                            dark:hover:bg-gray-400"
-                                        >
-                                            <i class="bi bi-trash-fill"></i><span class="ml-2">完全刪除</span>
-                                        </button>
-                                    @else
-                                        {{-- 編輯文章 --}}
-                                        <a
-                                            href="{{ route('posts.edit', ['post' => $post->id]) }}"
-                                            role="menuitem" tabindex="-1"
-                                            class="block px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
-                                            dark:hover:bg-gray-400"
-                                        >
-                                            <i class="bi bi-pencil-fill"></i><span class="ml-2">編輯</span>
-                                        </a>
-
-                                        {{-- 軟刪除 --}}
-                                        <button
-                                            x-on:click="
-                                                if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以還原）')) {
-                                                    document.getElementById('delete-post').submit()
-                                                }
-                                            "
-                                            type="button"
-                                            role="menuitem"
-                                            tabindex="-1"
-                                            class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
-                                            dark:hover:bg-gray-400"
-                                        >
-                                            <i class="bi bi-file-earmark-x-fill"></i><span class="ml-2">刪除標記</span>
-                                        </button>
-                                    @endif
+                                    {{-- 軟刪除 --}}
+                                    <button
+                                        x-on:click="
+                                            if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以還原）')) {
+                                                document.getElementById('delete-post').submit()
+                                            }
+                                        "
+                                        type="button"
+                                        role="menuitem"
+                                        tabindex="-1"
+                                        class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
+                                        dark:hover:bg-gray-400"
+                                    >
+                                        <i class="bi bi-file-earmark-x-fill"></i><span class="ml-2">刪除標記</span>
+                                    </button>
                                 </div>
                             </div>
                         @endif
@@ -313,9 +235,7 @@
                 </x-card>
 
                 {{-- 留言區塊 --}}
-                @if (!$post->trashed())
-                    @livewire('reply-box', ['post' => $post, 'replyCount' => $post->reply_count])
-                @endif
+                @livewire('reply-box', ['post' => $post, 'replyCount' => $post->reply_count])
             </div>
         </div>
     </div>

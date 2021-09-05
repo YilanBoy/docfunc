@@ -18,14 +18,14 @@
         <span class="ml-2">文章統計</span>
     </h3>
 
-    <div class="grid grid-cols-5 gap-1">
+    <div class="grid grid-cols-12 gap-1">
         @foreach ($categories as $category)
-            <div class="col-span-5">
+            <div class="col-span-12">
                 {{ $category->name }}
             </div>
-            <div class="col-span-4 flex items-center">
-                <div class="h-3 bg-gradient-to-r from-green-400 to-blue-500"
-                style="width: {{ $user->posts->count() ? (int)($category->posts->count() / $user->posts->count() * 100) : 0 }}rem;">
+            <div class="col-span-11 flex items-center">
+                <div class="h-4 bg-gradient-to-r from-green-400 to-blue-400"
+                style="width: {{ $user->posts->count() ? (int)($category->posts->count() / $user->posts->count() * 100) + 0.2 : 0 }}rem;">
                 </div>
             </div>
             <div class="col-span-1 flex justify-end items-center text-lg">

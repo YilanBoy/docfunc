@@ -1,9 +1,11 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 /* Alpine.js */
-[x-cloak] { display: none !important; }
+[x-cloak] {
+    display: none !important;
+}
 
 /* nested reply */
 .reply-with-responses .responses {
@@ -12,7 +14,7 @@
 }
 
 .reply-with-responses .responses:before {
-    background: #D1D5DB;
+    background: #d1d5db;
     content: "";
     display: block;
     height: 100%;
@@ -23,11 +25,11 @@
 }
 
 .dark .reply-with-responses .responses:before {
-    background: #6B7280;
+    background: #6b7280;
 }
 
-.reply-with-responses .responses>:before {
-    background: #D1D5DB;
+.reply-with-responses .responses > :before {
+    background: #d1d5db;
     content: "";
     display: block;
     height: 3px;
@@ -37,12 +39,12 @@
     width: 23px;
 }
 
-.dark .reply-with-responses .responses>:before {
-    background: #6B7280;
+.dark .reply-with-responses .responses > :before {
+    background: #6b7280;
 }
 
-.reply-with-responses .responses>:last-child:after {
-    background: #F3F4F6;
+.reply-with-responses .responses > :last-child:after {
+    background: #f3f4f6;
     content: "";
     display: block;
     height: calc(100% - 53px);
@@ -52,13 +54,13 @@
     width: 5px;
 }
 
-.dark .reply-with-responses .responses>:last-child:after {
-    background: #374151;
+.dark .reply-with-responses .responses > :last-child:after {
+    background: #1f2937;
 }
 
 /* multi-line underline text-gradient animation */
 .fancy-link {
-    background-image: linear-gradient(90deg, #DC2626, #4F46E5);
+    background-image: linear-gradient(90deg, #dc2626, #4f46e5);
     background-size: 0% 3px;
     background-repeat: no-repeat;
     background-position: left bottom;
@@ -69,7 +71,7 @@
 }
 
 .dark .fancy-link {
-    background-image: linear-gradient(90deg, #FCA5A5, #A5B4FC);
+    background-image: linear-gradient(90deg, #fca5a5, #a5b4fc);
 }
 
 .fancy-link:hover {

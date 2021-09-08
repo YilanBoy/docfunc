@@ -220,15 +220,15 @@
                         <div class="flex-none none md:flex md:justify-center md:items-center p-2 mr-4">
                             <img class="rounded-full h-16 w-16" src="{{ $post->user->gravatar(200) }}">
                         </div>
-                        <div class="flex flex-col">
+                        <div>
                             <a
                                 href="{{ route('users.show', ['user' => $post->user->id]) }}"
-                                class="text-2xl font-bold hover:underline
+                                class="text-2xl font-bold fancy-link
                                 dark:text-gray-50"
                             >
                                 {{ $post->user->name }}
                             </a>
-                            <span class="dark:text-gray-50">{!! nl2br(e($post->user->introduction)) !!}</span>
+                            <div class="dark:text-gray-50">{!! nl2br(e($post->user->introduction)) !!}</div>
                         </div>
                     </div>
 

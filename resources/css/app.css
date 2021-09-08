@@ -65,9 +65,6 @@
     background-repeat: no-repeat;
     background-position: left bottom;
     transition: background-size 300ms ease;
-
-    /* extra styling */
-    text-decoration: none;
 }
 
 .dark .fancy-link {

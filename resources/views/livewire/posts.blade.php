@@ -119,15 +119,19 @@
                 </h1>
 
                 {{-- 文章標籤 --}}
-                <div class="mt-2 flex flex-wrap">
-                    @foreach ($post->tags as $tag)
-                        <a href="{{ route('tags.show', ['tag' => $tag->id]) }}"
-                        class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 m-1
-                        bg-green-200 hover:bg-green-400 active:bg-green-200 text-green-700 rounded-full ring-1 ring-green-700">
-                            {{ $tag->name }}
-                        </a>
-                    @endforeach
-                </div>
+                @if ($post->tags_count > 0)
+                    <div class="mt-2 flex items-center flex-wrap">
+                        <span class="text-green-400 mr-1"><i class="bi bi-tags-fill"></i></span>
+
+                        @foreach ($post->tags as $tag)
+                            <a href="{{ route('tags.show', ['tag' => $tag->id]) }}"
+                            class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 m-1
+                            bg-green-200 hover:bg-green-400 active:bg-green-200 text-green-700 rounded-full ring-1 ring-green-700">
+                                {{ $tag->name }}
+                            </a>
+                        @endforeach
+                    </div>
+                @endif
 
                 {{-- 文章大綱 --}}
                 <div class="text-gray-600 mt-2 dark:text-gray-50">

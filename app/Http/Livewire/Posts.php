@@ -43,6 +43,7 @@ class Posts extends Component
 
         $posts = $post->withOrder($this->order)
             ->with('user', 'category', 'tags') // 預加載防止 N+1 問題
+            ->withCount('tags') // 計算標籤數目
             ->paginate(10);
 
         return view('livewire.posts', ['posts' => $posts]);

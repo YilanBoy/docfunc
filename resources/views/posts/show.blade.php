@@ -180,19 +180,19 @@
                     </div>
 
                     {{-- 文章標籤 --}}
-                    <div class="flex items-center mt-4 space-x-2">
-                        @if ($post->tags()->exists())
-                            <span class="text-green-400"><i class="bi bi-tags-fill"></i></span>
+                    @if ($post->tags()->exists())
+                        <div class="flex items-center mt-4">
+                            <span class="text-green-400 mr-1"><i class="bi bi-tags-fill"></i></span>
 
                             @foreach ($post->tags as $tag)
                                 <a href="{{ route('tags.show', ['tag' => $tag->id]) }}"
                                 class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 m-1
-                                bg-green-200 hover:bg-green-400 active:bg-green-200 text-green-700 rounded-full shadow-lg ring-1 ring-green-700">
+                                bg-green-200 hover:bg-green-400 active:bg-green-200 text-green-700 rounded-full ring-1 ring-green-700">
                                     {{ $tag->name }}
                                 </a>
                             @endforeach
-                        @endif
-                    </div>
+                        </div>
+                    @endif
 
                     {{-- 文章內容 --}}
                     <div class="mt-4 ck-content dark:text-gray-50">

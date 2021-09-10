@@ -51,12 +51,12 @@
 
             <div class="group">
                 <a
-                    wire:click.prevent="orderChange('reply')"
-                    href="{{ $currentUrl . '?order=reply' }}"
+                    wire:click.prevent="orderChange('comment')"
+                    href="{{ $currentUrl . '?order=comment' }}"
                     @class([
                         'block transition duration-300 ease-in px-2 sm:px-7 py-2',
-                        'text-gray-700 dark:text-gray-50' => ($order === 'reply'),
-                        'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50' => ($order !== 'reply'),
+                        'text-gray-700 dark:text-gray-50' => ($order === 'comment'),
+                        'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50' => ($order !== 'comment'),
                     ])
                 >
                     <span>最多留言</span>
@@ -65,8 +65,8 @@
                     <div
                         @class([
                             'h-1 bg-blue-500 transition-all duration-300',
-                            'w-full' => ($order === 'reply'),
-                            'w-0 group-hover:w-full' => ($order !== 'reply'),
+                            'w-full' => ($order === 'comment'),
+                            'w-0 group-hover:w-full' => ($order !== 'comment'),
                         ])
                     ></div>
                 </div>
@@ -154,8 +154,8 @@
                     <div>
                         {{-- 文章留言數 --}}
                         <a class="hover:text-gray-700 dark:hover:text-gray-50"
-                        href="{{ $post->link_with_slug }}#post-{{ $post->id }}-replies">
-                            <i class="bi bi-chat-square-text-fill"></i><span class="hidden md:inline ml-2">{{ $post->reply_count }}</span>
+                        href="{{ $post->link_with_slug }}#post-{{ $post->id }}-comments">
+                            <i class="bi bi-chat-square-text-fill"></i><span class="hidden md:inline ml-2">{{ $post->comment_count }}</span>
                         </a>
                     </div>
                 </div>

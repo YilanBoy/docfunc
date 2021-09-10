@@ -16,9 +16,9 @@ class Post extends Model
         'title', 'body', 'category_id', 'excerpt', 'slug',
     ];
 
-    public function replies()
+    public function comments()
     {
-        return $this->hasMany(Reply::class);
+        return $this->hasMany(Comment::class);
     }
 
     public function category()
@@ -45,8 +45,8 @@ class Post extends Model
                 case 'recent':
                     return $query->orderBy('updated_at', 'desc');
                     break;
-                case 'reply':
-                    return $query->orderBy('reply_count', 'desc');
+                case 'comment':
+                    return $query->orderBy('comment_count', 'desc');
                     break;
                 default:
                     return $query->latest();
@@ -64,10 +64,10 @@ class Post extends Model
     }
 
     // 更新留言數量
-    public function updateReplyCount(): void
+    public function updateCommentCount(): void
     {
-        // 使用鎖表來更新 Model 中的 reply_count 資料
-        $this->reply_count = Reply::where('post_id', $this->id)->lockForUpdate()->count();
+        // 使用鎖表來更新 Model 中的 comment_count 資料
+        $this->comment_count = Comment::where('post_id', $this->id)->lockForUpdate()->count();
         // 更新資料庫資料
         $this->save();
     }

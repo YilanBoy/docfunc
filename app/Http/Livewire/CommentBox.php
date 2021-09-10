@@ -3,17 +3,17 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Reply;
-use App\Notifications\PostReplied;
+use App\Models\Comment;
+use App\Notifications\PostComment;
 
-class ReplyBox extends Component
+class CommentBox extends Component
 {
     public $post;
     public $content;
-    public $replyId = null;
-    public $replyCount;
+    public $commentId = null;
+    public $commentCount;
 
-    protected $listeners = ['updateReplyCount'];
+    protected $listeners = ['updateCommentCount'];
 
     protected $rules = [
         'content' => ['required', 'min:2', 'max:400'],
@@ -40,11 +40,11 @@ class ReplyBox extends Component
 
         $this->validate();
 
-        $reply = Reply::create(
+        $comment = Comment::create(
             [
                 'post_id' => $this->post->id,
                 'user_id' => auth()->id(),
-                'parent_id' => $this->replyId,
+                'parent_id' => $this->commentId,
                 'content' => preg_replace(
                     '/(\s*(\\r\\n|\\r|\\n)\s*){3,}/u',
                     PHP_EOL . PHP_EOL,
@@ -54,11 +54,11 @@ class ReplyBox extends Component
         );
 
         // 更新文章留言數
-        $this->post->updateReplyCount();
-        $this->updateReplyCount();
+        $this->post->updateCommentCount();
+        $this->updateCommentCount();
 
         // 通知文章作者有新的評論
-        $this->post->user->postNotify(new PostReplied($reply));
+        $this->post->user->postNotify(new PostComment($comment));
 
         // 清空留言表單的內容
         $this->content = '';
@@ -68,13 +68,13 @@ class ReplyBox extends Component
     }
 
     // 更新留言數量
-    public function updateReplyCount()
+    public function updateCommentCount()
     {
-        $this->replyCount = $this->post->reply_count;
+        $this->commentCount = $this->post->comment_count;
     }
 
     public function render()
     {
-        return view('livewire.reply-box');
+        return view('livewire.comment-box');
     }
 }

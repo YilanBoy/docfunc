@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reply extends Model
+class Comment extends Model
 {
     use HasFactory;
 
@@ -25,6 +25,6 @@ class Reply extends Model
 
     public function children()
     {
-        return $this->hasMany(Reply::class, 'parent_id');
+        return $this->hasMany(Comment::class, 'parent_id');
     }
 }

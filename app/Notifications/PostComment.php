@@ -6,18 +6,18 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Models\Reply;
+use App\Models\Comment;
 
-class PostReplied extends Notification
+class PostComment extends Notification
 {
     use Queueable;
 
-    protected $reply;
+    protected $comment;
 
-    public function __construct(Reply $reply)
+    public function __construct(Comment $comment)
     {
         // 注入留言實體，方便 toDatabase 方法中的使用
-        $this->reply = $reply;
+        $this->comment = $comment;
     }
 
     public function via($notifiable)
@@ -28,16 +28,16 @@ class PostReplied extends Notification
 
     public function toDatabase($notifiable)
     {
-        $post = $this->reply->post;
-        $link = $post->link_with_slug . '#post-' . $post->id . '-reply-' . $this->reply->id;
+        $post = $this->comment->post;
+        $link = $post->link_with_slug . '#post-' . $post->id . '-comments';
 
         // 存入資料庫裡的數據
         return [
-            'reply_id' => $this->reply->id,
-            'reply_content' => $this->reply->content,
-            'user_id' => $this->reply->user->id,
-            'user_name' => $this->reply->user->name,
-            'user_avatar' => $this->reply->user->gravatar(),
+            'comment_id' => $this->comment->id,
+            'comment_content' => $this->comment->content,
+            'user_id' => $this->comment->user->id,
+            'user_name' => $this->comment->user->name,
+            'user_avatar' => $this->comment->user->gravatar(),
             'post_link' => $link,
             'post_id' => $post->id,
             'post_title' => $post->title,

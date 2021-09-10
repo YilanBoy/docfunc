@@ -27,7 +27,7 @@
                     <span class="text-xl font-semibold mt-2">{{ $user->posts->count() }} 篇</span>
 
                     <span class="text-lg mt-4">文章留言</span>
-                    <span class="text-xl font-semibold mt-2">{{ $user->replies->count() }} 次</span>
+                    <span class="text-xl font-semibold mt-2">{{ $user->comments->count() }} 次</span>
 
                     <span class="mt-4 text-xs">註冊於 {{ $user->created_at->format('Y / m / d') . '（' . $user->created_at->diffForHumans() . '）' }}</span>
                 </div>
@@ -88,11 +88,11 @@
 
                     <div class="group">
                         <a
-                            x-on:click.prevent="tab = 'replies'"
+                            x-on:click.prevent="tab = 'comments'"
                             href="#"
                             :class="{
-                                'text-gray-700 dark:text-gray-50': tab === 'replies',
-                                'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50': tab !== 'replies'
+                                'text-gray-700 dark:text-gray-50': tab === 'comments',
+                                'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50': tab !== 'comments'
                             }"
                             class="block transition duration-300 ease-in px-2 sm:px-7 py-2"
                         >
@@ -101,8 +101,8 @@
                         <div class="bg-gray-200 dark:bg-gray-600">
                             <div
                                 :class="{
-                                    'w-full': tab === 'replies',
-                                    'w-0 group-hover:w-full': tab !== 'replies'
+                                    'w-full': tab === 'comments',
+                                    'w-0 group-hover:w-full': tab !== 'comments'
                                 }"
                                 class="h-1 bg-blue-500 transition-all duration-300"
                             ></div>
@@ -133,10 +133,10 @@
                 {{-- 會員留言 --}}
                 <div
                     x-cloak
-                    x-show="tab === 'replies'"
+                    x-show="tab === 'comments'"
                     x-transition:enter.duration.300ms
                 >
-                    @livewire('user.replies', [
+                    @livewire('user.comments', [
                         'user' => $user,
                     ])
                 </div>
@@ -157,12 +157,12 @@
                     }
                 },
                 // 留言連結
-                replyCardLink(event, refs) {
+                commentCardLink(event, refs) {
                     let ignores = ['a'];
                     let targetTagName = event.target.tagName.toLowerCase();
 
                     if (!ignores.includes(targetTagName)) {
-                        refs.replyLink.click();
+                        refs.commentLink.click();
                     }
                 }
             }));

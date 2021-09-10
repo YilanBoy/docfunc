@@ -2,15 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Post;
-use App\Models\Reply;
-use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class ReplyFactory extends Factory
+class CommentFactory extends Factory
 {
-    protected $model = Reply::class;
+    protected $model = Comment::class;
 
     public function definition()
     {

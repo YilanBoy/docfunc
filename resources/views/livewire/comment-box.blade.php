@@ -1,7 +1,7 @@
 <div
     x-data="{
-        replyBoxOpen: false,
-        replyId: @entangle('replyId')
+        commentBoxOpen: false,
+        commentId: @entangle('commentId')
     }"
     class="w-full xl:w-2/3"
 >
@@ -10,16 +10,16 @@
             {{-- 顯示留言數目 --}}
             <span class="flex items-center dark:text-gray-50">
                 <i class="bi bi-chat-square-text-fill"></i>
-                <span class="ml-2">{{ $replyCount }} 則留言</span>
+                <span class="ml-2">{{ $commentCount }} 則留言</span>
             </span>
 
             <button
                 x-on:click="
-                    replyBoxOpen = true
-                    $nextTick(() => { $refs.replyBox.focus() })
+                    commentBoxOpen = true
+                    $nextTick(() => { $refs.commentBox.focus() })
                     disableScroll()
                 "
-                @click="replyId = null"
+                @click="commentId = null"
                 type="button"
                 class="group relative h-12 w-40 inline-flex rounded-lg border border-blue-600 focus:outline-none"
             >
@@ -36,16 +36,16 @@
         {{-- 留言表單 Modal --}}
         <div
             x-cloak
-            x-show="replyBoxOpen"
+            x-show="commentBoxOpen"
             @keydown.window.escape="
-                replyBoxOpen = false
+                commentBoxOpen = false
                 enableScroll()
             "
             class="fixed z-20 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
         >
             <div
                 x-cloak
-                x-show="replyBoxOpen"
+                x-show="commentBoxOpen"
                 x-transition:enter="ease-out duration-300"
                 x-transition:enter-start="opacity-0"
                 x-transition:enter-end="opacity-100"
@@ -62,7 +62,7 @@
                 {{-- 留言表單 --}}
                 <div
                     x-cloak
-                    x-show="replyBoxOpen"
+                    x-show="commentBoxOpen"
                     x-transition:enter="ease-out duration-300"
                     x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
@@ -70,7 +70,7 @@
                     x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     @click.outside="
-                        replyBoxOpen = false
+                        commentBoxOpen = false
                         enableScroll()
                     "
                     class="inline-block align-bottom bg-gray-50 rounded-lg text-left overflow-hidden shadow-xl
@@ -80,7 +80,7 @@
 
                     <div class="sm:flex sm:items-start">
                         <textarea
-                            x-ref="replyBox"
+                            x-ref="commentBox"
                             wire:model.debounce.500ms="content"
                             placeholder="分享你的想法 ~"
                             rows="5"
@@ -93,7 +93,7 @@
                     <div class="mt-5 sm:flex sm:flex-row-reverse">
                         <button
                             @click="
-                                replyBoxOpen = false
+                                commentBoxOpen = false
                                 enableScroll()
                             "
                             wire:click="store()"
@@ -106,7 +106,7 @@
                         </button>
                         <button
                             @click="
-                                replyBoxOpen = false
+                                commentBoxOpen = false
                                 enableScroll()
                             "
                             type="button"
@@ -129,6 +129,6 @@
         </div>
     @endauth
 
-    @livewire('replies', ['post' => $post])
+    @livewire('comments', ['post' => $post])
 </div>
 

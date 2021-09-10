@@ -3,12 +3,12 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Reply;
+use App\Models\Comment;
 
-class ReplySeeder extends Seeder
+class CommentSeeder extends Seeder
 {
     public function run()
     {
-        Reply::factory()->count(1000)->create();
+        Comment::factory()->count(1000)->create();
     }
 }

@@ -1,9 +1,9 @@
 {{-- 會員留言 --}}
 <div class="space-y-6">
-    @forelse ($replies as $reply)
+    @forelse ($comments as $comment)
         <x-card
             x-data="cardLink"
-            x-on:click="replyCardLink($event, $refs)"
+            x-on:click="commentCardLink($event, $refs)"
             class="flex flex-col md:flex-row justify-between hover:shadow-xl
             transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer"
         >
@@ -13,26 +13,26 @@
                 <div class="flex flex-col justify-between">
                     <span class="text-xl font-semibold dark:text-gray-50">
                         <a
-                            x-ref="replyLink"
-                            href="{{ $reply->post->link_with_slug }}#post-{{ $reply->post->id }}-reply-{{ $reply->id }}"
+                            x-ref="commentLink"
+                            href="{{ $comment->post->link_with_slug }}#post-{{ $comment->post->id }}-comments"
                             class="fancy-link"
                         >
-                            {{ $reply->post->title }}
+                            {{ $comment->post->title }}
                         </a>
                     </span>
 
                     <span class="mt-2 text-gray-600 dark:text-gray-50">
-                        {!! nl2br(e($reply->content)) !!}
+                        {!! nl2br(e($comment->content)) !!}
                     </span>
 
                     <span class="xl:hidden mt-2 text-gray-400">
-                        <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $reply->created_at->diffForHumans() }}</span>
+                        <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>
                     </span>
                 </div>
 
                 {{-- 文章發布時間 --}}
                 <span class="hidden xl:flex text-gray-400 justify-center items-center">
-                    <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $reply->created_at->diffForHumans() }}</span>
+                    <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>
                 </span>
 
             </div>
@@ -47,6 +47,6 @@
     @endforelse
 
     <div>
-        {{ $replies->onEachSide(1)->withQueryString()->links() }}
+        {{ $comments->onEachSide(1)->withQueryString()->links() }}
     </div>
 </div>

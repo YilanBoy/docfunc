@@ -8,8 +8,8 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Verified;
 use App\Listeners\EmailVerified;
-use App\Models\Reply;
-use App\Observers\ReplyObserver;
+use App\Models\Comment;
+use App\Observers\CommentObserver;
 
 class EventServiceProvider extends ServiceProvider
 {

@@ -5,7 +5,7 @@ namespace App\Http\Livewire\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Replies extends Component
+class Comments extends Component
 {
     use WithPagination;
 
@@ -19,7 +19,7 @@ class Replies extends Component
     public function render()
     {
         // 該會員的留言
-        $replies = $this->user->replies()
+        $comments = $this->user->comments()
             ->whereHas('post', function ($query) {
                 $query->whereNull('deleted_at');
             })
@@ -27,6 +27,6 @@ class Replies extends Component
             ->latest()
             ->paginate(10);
 
-        return view('livewire.user.replies', ['replies' => $replies]);
+        return view('livewire.user.comments', ['comments' => $comments]);
     }
 }

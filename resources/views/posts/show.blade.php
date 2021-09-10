@@ -173,8 +173,8 @@
                         {{-- 留言數 --}}
                         <div class="hidden md:block">
                             <a class="hover:text-gray-700 dark:hover:text-gray-50"
-                            href="{{ $post->link_with_slug }}#replies-card">
-                                <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->reply_count }}</span>
+                            href="{{ $post->link_with_slug }}#comments-card">
+                                <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->comment_count }}</span>
                             </a>
                         </div>
                     </div>
@@ -235,7 +235,7 @@
                 </x-card>
 
                 {{-- 留言區塊 --}}
-                @livewire('reply-box', ['post' => $post, 'replyCount' => $post->reply_count])
+                @livewire('comment-box', ['post' => $post, 'commentCount' => $post->comment_count])
             </div>
         </div>
     </div>

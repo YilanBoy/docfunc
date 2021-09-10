@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddParentIdToRepliesTable extends Migration
+class AddParentIdToCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddParentIdToRepliesTable extends Migration
      */
     public function up()
     {
-        Schema::table('replies', function (Blueprint $table) {
-            $table->foreignId('parent_id')->nullable()->constrained('replies')->onDelete('cascade');
+        Schema::table('comments', function (Blueprint $table) {
+            $table->foreignId('parent_id')->nullable()->constrained('comments')->onDelete('cascade');
         });
     }
 
@@ -25,7 +25,7 @@ class AddParentIdToRepliesTable extends Migration
      */
     public function down()
     {
-        Schema::table('replies', function (Blueprint $table) {
+        Schema::table('comments', function (Blueprint $table) {
             $table->dropForeign(['parent_id']);
         });
     }

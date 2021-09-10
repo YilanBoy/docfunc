@@ -3,11 +3,11 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Reply;
+use App\Models\Comment;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\WithPagination;
 
-class Replies extends Component
+class Comments extends Component
 {
     use AuthorizesRequests;
     use WithPagination;
@@ -17,24 +17,24 @@ class Replies extends Component
     protected $listeners = ['refresh'];
 
     // 刪除留言
-    public function destroy(Reply $reply)
+    public function destroy(Comment $comment)
     {
-        $this->authorize('destroy', $reply);
+        $this->authorize('destroy', $comment);
 
-        $reply->delete();
+        $comment->delete();
 
-        $this->post->updateReplyCount();
-        $this->emit('updateReplyCount');
+        $this->post->updateCommentCount();
+        $this->emit('updateCommentCount');
     }
 
     public function refresh()
     {
-        // Refresh replies
+        // Refresh comments
     }
 
     public function render()
     {
-        $replies = $this->post->replies()
+        $comments = $this->post->comments()
             // 不撈取子留言
             ->whereNull('parent_id')
             ->oldest()
@@ -43,6 +43,6 @@ class Replies extends Component
             }])
             ->paginate(10);
 
-        return view('livewire.replies', ['replies' => $replies]);
+        return view('livewire.comments', ['comments' => $comments]);
     }
 }

@@ -7,13 +7,13 @@
     display: none !important;
 }
 
-/* nested reply */
-.reply-with-responses .responses {
+/* nested comment */
+.comment-with-responses .responses {
     margin-left: 60px;
     position: relative;
 }
 
-.reply-with-responses .responses:before {
+.comment-with-responses .responses:before {
     background: #d1d5db;
     content: "";
     display: block;
@@ -24,11 +24,11 @@
     width: 3px;
 }
 
-.dark .reply-with-responses .responses:before {
+.dark .comment-with-responses .responses:before {
     background: #6b7280;
 }
 
-.reply-with-responses .responses > :before {
+.comment-with-responses .responses > :before {
     background: #d1d5db;
     content: "";
     display: block;
@@ -39,11 +39,11 @@
     width: 23px;
 }
 
-.dark .reply-with-responses .responses > :before {
+.dark .comment-with-responses .responses > :before {
     background: #6b7280;
 }
 
-.reply-with-responses .responses > :last-child:after {
+.comment-with-responses .responses > :last-child:after {
     background: #f3f4f6;
     content: "";
     display: block;
@@ -54,7 +54,7 @@
     width: 5px;
 }
 
-.dark .reply-with-responses .responses > :last-child:after {
+.dark .comment-with-responses .responses > :last-child:after {
     background: #1f2937;
 }
 

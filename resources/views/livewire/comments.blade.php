@@ -1,17 +1,14 @@
 {{-- 留言列表 --}}
-<div id="post-{{ $post->id }}-replies" class="w-full space-y-6 mt-6">
+<div id="post-{{ $post->id }}-comments" class="w-full space-y-6 mt-6">
 
-    @forelse ($replies as $reply)
+    @forelse ($comments as $comment)
         {{-- 第一階層留言 --}}
-        <x-card
-            id="post-{{ $post->id }}-reply-{{ $reply->id }}"
-            class="flex relative"
-        >
+        <x-card class="flex relative">
             <div class="flex flex-col md:flex-row flex-1">
                 {{-- 大頭貼 --}}
                 <div class="flex-none">
-                    <a href="{{ route('users.show', ['user' => $reply->user_id]) }}">
-                        <img src="{{ $reply->user->gravatar() }}" alt="{{ $reply->user->name }}"
+                    <a href="{{ route('users.show', ['user' => $comment->user_id]) }}">
+                        <img src="{{ $comment->user->gravatar() }}" alt="{{ $comment->user->name }}"
                         class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400">
                     </a>
                 </div>
@@ -19,14 +16,14 @@
                 {{-- 留言 --}}
                 <div class="w-full md:mx-4">
                     <div class="text-gray-600 mt-3 sm:mt-0 dark:text-gray-50">
-                        {!! nl2br(e($reply->content)) !!}
+                        {!! nl2br(e($comment->content)) !!}
                     </div>
 
                     <div class="flex items-center justify-between mt-3">
                         <div class="flex items-center text-sm text-gray-400 space-x-2">
-                            <div>{{ $reply->user->name }}</div>
+                            <div>{{ $comment->user->name }}</div>
                             <div>&bull;</div>
-                            <div>{{ $reply->created_at->diffForHumans() }}</div>
+                            <div>{{ $comment->created_at->diffForHumans() }}</div>
                         </div>
                     </div>
                 </div>
@@ -36,11 +33,11 @@
                     @auth
                         <button
                             x-on:click="
-                                replyBoxOpen = true
-                                $nextTick(() => { $refs.replyBox.focus() })
+                                commentBoxOpen = true
+                                $nextTick(() => { $refs.commentBox.focus() })
                                 disableScroll()
                             "
-                            @click="replyId = {{ $reply->id }}"
+                            @click="commentId = {{ $comment->id }}"
                             class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-gray-50
                             bg-blue-600 hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900
                             focus:ring ring-blue-300 transition ease-in-out duration-150"
@@ -48,10 +45,10 @@
                             <i class="bi bi-chat-left-text-fill"></i>
                         </button>
 
-                        @if (in_array(auth()->id(), [$reply->user_id, $post->user_id]))
+                        @if (in_array(auth()->id(), [$comment->user_id, $post->user_id]))
                             <button
                                 onclick="confirm('您確定要刪除此留言嗎？') || event.stopImmediatePropagation()"
-                                wire:click="destroy({{ $reply->id }})"
+                                wire:click="destroy({{ $comment->id }})"
                                 class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-gray-50
                                 bg-red-600 hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900
                                 focus:ring ring-red-300 transition ease-in-out duration-150"
@@ -65,14 +62,11 @@
         </x-card>
 
         {{-- 第二階層留言 --}}
-        <div class="reply-with-responses">
+        <div class="comment-with-responses">
             <div class="responses space-y-6">
-                @forelse ($reply->children as $child)
+                @forelse ($comment->children as $child)
                     <div class="relative">
-                        <x-card
-                            id="post-{{ $post->id }}-reply-{{ $child->id }}"
-                            class="flex"
-                        >
+                        <x-card class="flex">
                             <div class="flex flex-col md:flex-row flex-1">
                                 {{-- 大頭貼 --}}
                                 <div class="flex-none">
@@ -122,6 +116,6 @@
     @endforelse
 
     <div>
-        {{ $replies->onEachSide(1)->withQueryString()->links() }}
+        {{ $comments->onEachSide(1)->withQueryString()->links() }}
     </div>
 </div>

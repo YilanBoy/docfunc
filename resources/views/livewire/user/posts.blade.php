@@ -50,8 +50,8 @@
                     <div>
                         {{-- 文章留言數 --}}
                         <a class="hover:text-gray-700 dark:hover:text-gray-50"
-                        href="{{ $post->trashed() ? '#' : $post->link_with_slug . '#post-' . $post->id . '-replies' }}">
-                            <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->reply_count }}</span>
+                        href="{{ $post->trashed() ? '#' : $post->link_with_slug . '#post-' . $post->id . '-comments' }}">
+                            <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->comment_count }}</span>
                         </a>
                     </div>
                 </div>

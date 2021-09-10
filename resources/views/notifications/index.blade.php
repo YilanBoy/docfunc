@@ -50,7 +50,7 @@
                             </div>
 
                             <div class="text-gray-600 mt-2 dark:text-gray-50">
-                                {!! $notification->data['reply_content'] !!}
+                                {!! $notification->data['comment_content'] !!}
                             </div>
 
                             {{-- 通知時間 --}}

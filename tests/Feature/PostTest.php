@@ -75,9 +75,9 @@ class PostTest extends TestCase
         ]);
 
         Post::factory()->create([
-            'title' => 'this post has the most replies',
+            'title' => 'this post has the most comments',
             'user_id' => $user->id,
-            'reply_count' => 10,
+            'comment_count' => 10,
             'created_at' => now()->subDays(15),
             'updated_at' => now()->subDays(15),
         ]);
@@ -94,10 +94,10 @@ class PostTest extends TestCase
                 return $posts->first()->title === 'this post is updated recently';
             });
 
-        Livewire::withQueryParams(['order' => 'reply'])
+        Livewire::withQueryParams(['order' => 'comment'])
             ->test(Posts::class)
             ->assertViewHas('posts', function ($posts) {
-                return $posts->first()->title === 'this post has the most replies';
+                return $posts->first()->title === 'this post has the most comments';
             });
     }
 

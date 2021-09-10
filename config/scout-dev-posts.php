@@ -32,7 +32,7 @@ return [
     |
     */
 
-    'customRanking' => ['desc(reply_count)'],
+    'customRanking' => ['desc(comment_count)'],
 
     /*
     |--------------------------------------------------------------------------

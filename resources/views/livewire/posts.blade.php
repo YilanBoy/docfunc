@@ -118,13 +118,24 @@
                     >{{ $post->title }}</a>
                 </h1>
 
+                {{-- 文章標籤 --}}
+                <div class="mt-2 flex flex-wrap">
+                    @foreach ($post->tags as $tag)
+                        <a href="{{ route('tags.show', ['tag' => $tag->id]) }}"
+                        class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 m-1
+                        bg-green-200 hover:bg-green-400 active:bg-green-200 text-green-700 rounded-full ring-1 ring-green-700">
+                            {{ $tag->name }}
+                        </a>
+                    @endforeach
+                </div>
+
                 {{-- 文章大綱 --}}
                 <div class="text-gray-600 mt-2 dark:text-gray-50">
                     {{ $post->excerpt }}
                 </div>
 
                 {{-- 文章相關資訊 --}}
-                <div class="flex items-center text-sm text-gray-400 mt-4 space-x-2">
+                <div class="flex items-center text-sm text-gray-400 mt-2 space-x-2">
                     {{-- 文章分類資訊 --}}
                     <div>
                         <a class="hover:text-gray-700 dark:hover:text-gray-50"

@@ -70,7 +70,7 @@
                             @foreach ($popularTags as $popularTag)
                                 <a href="{{ route('tags.show', ['tag' => $popularTag->id]) }}"
                                 class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 m-1
-                                bg-green-200 hover:bg-green-400 active:bg-green-200 text-green-700 rounded-full shadow-lg ring-1 ring-green-700">
+                                bg-green-200 hover:bg-green-400 active:bg-green-200 text-green-700 rounded-full ring-1 ring-green-700">
                                     {{ $popularTag->name }}
                                 </a>
                             @endforeach

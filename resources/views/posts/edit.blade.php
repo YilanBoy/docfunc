@@ -91,7 +91,7 @@
                                 name="tags"
                                 value="{{ old('tags', $post->tagsJson) }}"
                                 placeholder="標籤（最多 5 個）"
-                                class="h-10 rounded-md text-sm dark:bg-gray-500"
+                                class="h-10 rounded-md text-sm bg-white dark:bg-gray-500"
                             >
                         </div>
 

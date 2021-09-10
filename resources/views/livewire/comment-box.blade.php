@@ -16,10 +16,10 @@
             <button
                 x-on:click="
                     commentBoxOpen = true
+                    commentId = null
                     $nextTick(() => { $refs.commentBox.focus() })
                     disableScroll()
                 "
-                @click="commentId = null"
                 type="button"
                 class="group relative h-12 w-40 inline-flex rounded-lg border border-blue-600 focus:outline-none"
             >
@@ -37,7 +37,7 @@
         <div
             x-cloak
             x-show="commentBoxOpen"
-            @keydown.window.escape="
+            x-on:keydown.window.escape="
                 commentBoxOpen = false
                 enableScroll()
             "
@@ -69,7 +69,7 @@
                     x-transition:leave="ease-in duration-200"
                     x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                    @click.outside="
+                    x-on:click.outside="
                         commentBoxOpen = false
                         enableScroll()
                     "
@@ -92,7 +92,7 @@
 
                     <div class="mt-5 sm:flex sm:flex-row-reverse">
                         <button
-                            @click="
+                            x-on:click="
                                 commentBoxOpen = false
                                 enableScroll()
                             "
@@ -105,7 +105,7 @@
                             留言
                         </button>
                         <button
-                            @click="
+                            x-on:click="
                                 commentBoxOpen = false
                                 enableScroll()
                             "

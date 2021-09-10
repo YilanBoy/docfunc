@@ -34,10 +34,10 @@
                         <button
                             x-on:click="
                                 commentBoxOpen = true
+                                commentId = {{ $comment->id }}
                                 $nextTick(() => { $refs.commentBox.focus() })
                                 disableScroll()
                             "
-                            @click="commentId = {{ $comment->id }}"
                             class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-gray-50
                             bg-blue-600 hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900
                             focus:ring ring-blue-300 transition ease-in-out duration-150"

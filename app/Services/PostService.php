@@ -69,8 +69,11 @@ class PostService
     }
 
     // 生成摘錄的方法
-    public function makeExcerpt(string $body, int $length = 150)
+    public function makeExcerpt(string $body, int $length = 200)
     {
+        // 將換行標籤替換成句號
+        $body = preg_replace('/(。*\s*(<br \/>)+)+/u', '。', $body);
+
         return Str::limit(strip_tags($body), $length);
     }
 }

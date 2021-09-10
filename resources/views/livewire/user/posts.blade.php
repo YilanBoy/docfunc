@@ -71,8 +71,8 @@
 
                     {{-- 完全刪除隱藏表單 --}}
                     <form
-                        id="force-delete-post-{{ $post->id }}"
-                        action="{{ route('posts.forceDelete', ['id' => $post->id]) }}"
+                        id="destroy-post-{{ $post->id }}"
+                        action="{{ route('posts.destroy', ['id' => $post->id]) }}"
                         method="POST"
                         class="hidden"
                     >
@@ -100,7 +100,7 @@
                         <button
                             x-on:click.stop="
                                 if(confirm('您確定要完全刪除此文章嗎？（此動作無法復原）')) {
-                                    document.getElementById('force-delete-post-{{ $post->id }}').submit()
+                                    document.getElementById('destroy-post-{{ $post->id }}').submit()
                                 }
                             "
                             type="button"
@@ -114,8 +114,8 @@
                 @else
                     {{-- 軟刪除隱藏表單 --}}
                     <form
-                        id="delete-post-{{ $post->id }}"
-                        action="{{ route('posts.destroy', ['post' => $post->id]) }}"
+                        id="soft-delete-post-{{ $post->id }}"
+                        action="{{ route('posts.softDelete', ['post' => $post->id]) }}"
                         method="POST"
                         class="hidden"
                     >
@@ -141,7 +141,7 @@
                             x-on:click.prevent.stop="
                                 if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以恢復）'))
                                 {
-                                    document.getElementById('delete-post-{{ $post->id }}').submit()
+                                    document.getElementById('soft-delete-post-{{ $post->id }}').submit()
                                 }
                             "
                             type="button"

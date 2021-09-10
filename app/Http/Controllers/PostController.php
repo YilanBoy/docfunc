@@ -98,7 +98,7 @@ class PostController extends Controller
     }
 
     // 軟刪除文章
-    public function destroy(Post $post)
+    public function softDelete(Post $post)
     {
         $this->authorize('destroy', $post);
 
@@ -123,7 +123,7 @@ class PostController extends Controller
     }
 
     // 完全刪除文章
-    public function forceDelete(int $id)
+    public function destroy(int $id)
     {
         $softDeletedPost = Post::withTrashed()->find($id);
 

@@ -48,7 +48,7 @@
                                     </span>
                                 </a>
 
-                                <form id="delete-post" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
+                                <form id="soft-delete-post" action="{{ route('posts.softDelete', ['post' => $post->id]) }}" method="POST"
                                 class="hidden">
                                     @csrf
                                     @method('DELETE')
@@ -58,7 +58,7 @@
                                 <button
                                     x-on:click="
                                         if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以還原）')) {
-                                            document.getElementById('delete-post').submit()
+                                            document.getElementById('soft-delete-post').submit()
                                         }
                                     "
                                     type="button"
@@ -120,7 +120,7 @@
                                     <button
                                         x-on:click="
                                             if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以還原）')) {
-                                                document.getElementById('delete-post').submit()
+                                                document.getElementById('soft-delete-post').submit()
                                             }
                                         "
                                         type="button"

@@ -46,11 +46,11 @@ Route::prefix('posts')->group(function () {
         Route::post('/', [PostController::class, 'store'])->middleware('post.limit')->name('posts.store');
         Route::get('/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
         Route::put('/{post}', [PostController::class, 'update'])->name('posts.update');
-        Route::delete('/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+        Route::delete('/{post}', [PostController::class, 'softDelete'])->name('posts.softDelete');
         // 恢復軟刪除的文章
         Route::post('/{id}/restore', [PostController::class, 'restore'])->name('posts.restore');
         // 完全刪除文章
-        Route::delete('/{id}/force-delete', [PostController::class, 'forceDelete'])->name('posts.forceDelete');
+        Route::delete('/{id}/destroy', [PostController::class, 'destroy'])->name('posts.destroy');
     });
 
     // {slug?} 當中的問號代表此參數可給可不給

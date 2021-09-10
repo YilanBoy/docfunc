@@ -1,5 +1,5 @@
 {{-- 留言列表 --}}
-<div id="post-{{ $post->id }}-comments" class="w-full space-y-6 mt-6">
+<div id="comments" class="w-full space-y-6 mt-6">
 
     @forelse ($comments as $comment)
         {{-- 第一階層留言 --}}

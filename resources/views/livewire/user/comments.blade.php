@@ -14,7 +14,7 @@
                     <span class="text-xl font-semibold dark:text-gray-50">
                         <a
                             x-ref="commentLink"
-                            href="{{ $comment->post->link_with_slug }}#post-{{ $comment->post->id }}-comments"
+                            href="{{ $comment->post->link_with_slug }}#comments"
                             class="fancy-link"
                         >
                             {{ $comment->post->title }}

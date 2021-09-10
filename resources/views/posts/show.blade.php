@@ -173,7 +173,7 @@
                         {{-- 留言數 --}}
                         <div class="hidden md:block">
                             <a class="hover:text-gray-700 dark:hover:text-gray-50"
-                            href="{{ $post->link_with_slug }}#comments-card">
+                            href="{{ $post->link_with_slug }}#comments">
                                 <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->comment_count }}</span>
                             </a>
                         </div>

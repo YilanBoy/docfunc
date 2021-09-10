@@ -29,7 +29,7 @@ class PostComment extends Notification
     public function toDatabase($notifiable)
     {
         $post = $this->comment->post;
-        $link = $post->link_with_slug . '#post-' . $post->id . '-comments';
+        $link = $post->link_with_slug . '#comments';
 
         // 存入資料庫裡的數據
         return [

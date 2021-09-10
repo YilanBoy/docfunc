@@ -154,7 +154,7 @@
                     <div>
                         {{-- 文章留言數 --}}
                         <a class="hover:text-gray-700 dark:hover:text-gray-50"
-                        href="{{ $post->link_with_slug }}#post-{{ $post->id }}-comments">
+                        href="{{ $post->link_with_slug }}#comments">
                             <i class="bi bi-chat-square-text-fill"></i><span class="hidden md:inline ml-2">{{ $post->comment_count }}</span>
                         </a>
                     </div>

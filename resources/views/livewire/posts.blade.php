@@ -1,7 +1,7 @@
 <div class="w-full xl:w-2/3 mr-0 xl:mr-6 space-y-6">
 
-    <div class="flex justify-between">
-        {{-- 文章排序 --}}
+    {{-- 文章排序 --}}
+    <div class="w-full flex flex-col-reverse md:flex-row md:justify-between">
         <nav class="flex font-semibold">
             <div class="group">
                 <a
@@ -75,8 +75,8 @@
 
         {{-- 文章分類訊息-桌面裝置 --}}
         @if (isset($category))
-            <div class="hidden md:flex justify-center items-center text-blue-700 border-blue-700 border rounded-xl
-            bg-gradient-to-br from-blue-100 to-blue-300 px-4 py-2">
+            <div class="flex justify-center items-center text-blue-700 border-blue-700 border rounded-xl
+            bg-gradient-to-br from-blue-100 to-blue-300 px-4 py-2 mb-2 md:mb-0">
                 <span class="font-bold">{{ $category->name }}：</span>
                 <span>{{ $category->description }}</span>
             </div>
@@ -84,8 +84,9 @@
 
         {{-- 文章標籤訊息-桌面裝置 --}}
         @if (isset($tag))
-            <div class="hidden md:flex justify-center items-center text-green-700 border-green-700 border rounded-xl
-            bg-gradient-to-br from-green-100 to-green-300 px-4 py-2">
+            <div class="flex justify-center items-center text-gray-700 border-gray-700 border rounded-xl
+            bg-gradient-to-br from-gray-100 to-gray-300 px-4 py-2 mb-2 md:mb-0">
+                <span>標籤：</span>
                 <span class="font-bold">{{ $tag->name }}</span>
             </div>
         @endif
@@ -118,25 +119,25 @@
                     >{{ $post->title }}</a>
                 </h1>
 
+                {{-- 文章大綱 --}}
+                <div class="text-gray-400 mt-2">
+                    {{ $post->excerpt }}
+                </div>
+
                 {{-- 文章標籤 --}}
                 @if ($post->tags_count > 0)
                     <div class="mt-2 flex items-center flex-wrap">
-                        <span class="text-green-400 mr-1"><i class="bi bi-tags-fill"></i></span>
+                        <span class="text-gray-400 mr-1"><i class="bi bi-tags-fill"></i></span>
 
                         @foreach ($post->tags as $tag)
                             <a href="{{ route('tags.show', ['tag' => $tag->id]) }}"
                             class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 m-1
-                            bg-green-200 hover:bg-green-400 active:bg-green-200 text-green-700 rounded-full ring-1 ring-green-700">
+                            bg-gray-200 hover:bg-gray-400 active:bg-gray-200 text-gray-700 rounded-full ring-1 ring-gray-700">
                                 {{ $tag->name }}
                             </a>
                         @endforeach
                     </div>
                 @endif
-
-                {{-- 文章大綱 --}}
-                <div class="text-gray-600 mt-2 dark:text-gray-50">
-                    {{ $post->excerpt }}
-                </div>
 
                 {{-- 文章相關資訊 --}}
                 <div class="flex items-center text-sm text-gray-400 mt-2 space-x-2">

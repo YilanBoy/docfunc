@@ -5,27 +5,6 @@
 
 @section('content')
     <div class="container mx-auto min-h-screen max-w-7xl mt-6">
-
-        {{-- 文章分類訊息-行動裝置 --}}
-        <div class="md:hidden px-4 mb-6">
-            {{-- 分類 --}}
-            @if (isset($category))
-                <div class="flex justify-center items-center text-blue-700 border-blue-700 rounded-xl border
-                bg-gradient-to-br from-blue-100 to-blue-300 px-4 py-2">
-                    <span class="font-bold">{{ $category->name }}：</span>
-                    <span>{{ $category->description }}</span>
-                </div>
-            @endif
-
-            {{-- 標籤 --}}
-            @if (isset($tag))
-                <div class="flex justify-center items-center text-green-700 border-green-700 rounded-xl border
-                bg-gradient-to-br from-green-100 to-green-300 px-4 py-2">
-                    <span class="font-bold">{{ $tag->name }}</span>
-                </div>
-            @endif
-        </div>
-
         <div class="flex flex-col space-y-6 xl:space-y-0 xl:flex-row justify-center px-4 xl:px-0">
             {{-- 文章列表 --}}
             @livewire('posts', [
@@ -70,7 +49,7 @@
                             @foreach ($popularTags as $popularTag)
                                 <a href="{{ route('tags.show', ['tag' => $popularTag->id]) }}"
                                 class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 m-1
-                                bg-green-200 hover:bg-green-400 active:bg-green-200 text-green-700 rounded-full ring-1 ring-green-700">
+                                bg-gray-200 hover:bg-gray-400 active:bg-gray-200 text-gray-700 rounded-full ring-1 ring-gray-700">
                                     {{ $popularTag->name }}
                                 </a>
                             @endforeach

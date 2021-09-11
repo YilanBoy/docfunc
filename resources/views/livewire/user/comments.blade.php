@@ -21,7 +21,7 @@
                         </a>
                     </span>
 
-                    <span class="mt-2 text-gray-600 dark:text-gray-50">
+                    <span class="mt-2 text-gray-400">
                         {!! nl2br(e($comment->content)) !!}
                     </span>
 

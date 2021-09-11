@@ -214,24 +214,24 @@
                         </button>
                     </div>
 
-                    {{-- 作者簡介 --}}
-                    <div class="flex justify-start items-center border-t-2 border-gray-700 mt-4 pt-4
-                    dark:border-white">
-                        <div class="flex-none none md:flex md:justify-center md:items-center p-2 mr-4">
-                            <img class="rounded-full h-16 w-16" src="{{ $post->user->gravatar(200) }}">
-                        </div>
-                        <div>
-                            <a
-                                href="{{ route('users.show', ['user' => $post->user->id]) }}"
-                                class="text-2xl font-bold fancy-link
-                                dark:text-gray-50"
-                            >
-                                {{ $post->user->name }}
-                            </a>
-                            <div class="dark:text-gray-50">{!! nl2br(e($post->user->introduction)) !!}</div>
-                        </div>
-                    </div>
+                </x-card>
 
+                {{-- 作者簡介 --}}
+                <x-card class="w-full xl:w-2/3 flex justify-start items-center mt-6">
+                    <div class="flex-none none md:flex md:justify-center md:items-center p-2 mr-4">
+                        <img class="rounded-full h-16 w-16" src="{{ $post->user->gravatar(200) }}">
+                    </div>
+                    <div class="space-y-2">
+                        <div class="text-gray-400">WRITEN BY</div>
+                        <a
+                            href="{{ route('users.show', ['user' => $post->user->id]) }}"
+                            class="inline-block text-2xl font-bold fancy-link
+                            dark:text-gray-50"
+                        >
+                            {{ $post->user->name }}
+                        </a>
+                        <div class="dark:text-gray-50">{!! nl2br(e($post->user->introduction)) !!}</div>
+                    </div>
                 </x-card>
 
                 {{-- 留言區塊 --}}

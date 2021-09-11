@@ -35,6 +35,7 @@
                             x-on:click="
                                 commentBoxOpen = true
                                 commentId = {{ $comment->id }}
+                                commentTo = '回覆{{ $comment->user->name }}'
                                 $nextTick(() => { $refs.commentBox.focus() })
                                 disableScroll()
                             "

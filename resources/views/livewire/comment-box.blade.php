@@ -1,11 +1,12 @@
 <div
     x-data="{
         commentBoxOpen: false,
-        commentId: @entangle('commentId')
+        commentId: @entangle('commentId'),
+        commentTo: ''
     }"
     class="w-full xl:w-2/3"
 >
-    @auth
+
         <div class="flex justify-between mt-6">
             {{-- 顯示留言數目 --}}
             <span class="flex items-center dark:text-gray-50">
@@ -13,26 +14,30 @@
                 <span class="ml-2">{{ $commentCount }} 則留言</span>
             </span>
 
-            <button
-                x-on:click="
-                    commentBoxOpen = true
-                    commentId = null
-                    $nextTick(() => { $refs.commentBox.focus() })
-                    disableScroll()
-                "
-                type="button"
-                class="group relative h-12 w-40 inline-flex rounded-lg border border-blue-600 focus:outline-none"
-            >
-                <span
-                    class="absolute inset-0 inline-flex items-center justify-center self-stretch px-6 text-gray-50 text-center font-medium bg-blue-600
-                    rounded-lg ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
-                    group-hover:-translate-y-2 group-hover:-translate-x-2"
+            @auth
+                <button
+                    x-on:click="
+                        commentBoxOpen = true
+                        commentId = null
+                        commentTo = '回覆此文章'
+                        $nextTick(() => { $refs.commentBox.focus() })
+                        disableScroll()
+                    "
+                    type="button"
+                    class="group relative h-12 w-40 inline-flex rounded-lg border border-blue-600 focus:outline-none"
                 >
-                    <i class="bi bi-chat-left-text-fill"></i><span class="ml-2">新增留言</span>
-                </span>
-            </button>
+                    <span
+                        class="absolute inset-0 inline-flex items-center justify-center self-stretch px-6 text-gray-50 text-center font-medium bg-blue-600
+                        rounded-lg ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
+                        group-hover:-translate-y-2 group-hover:-translate-x-2"
+                    >
+                        <i class="bi bi-chat-left-text-fill"></i><span class="ml-2">新增留言</span>
+                    </span>
+                </button>
+            @endauth
         </div>
 
+    @auth
         {{-- 留言表單 Modal --}}
         <div
             x-cloak
@@ -77,8 +82,13 @@
                     transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full
                     dark:bg-gray-700 p-5"
                 >
+                    {{-- 留言提示 --}}
 
-                    <div class="sm:flex sm:items-start">
+                    <div class="text-gray-700 dark:text-gray-50">
+                        <div x-text="commentTo"></div>
+                    </div>
+
+                    <div class="sm:flex sm:items-start mt-5">
                         <textarea
                             x-ref="commentBox"
                             wire:model.debounce.500ms="content"
@@ -90,7 +100,7 @@
                         ></textarea>
                     </div>
 
-                    <div class="mt-5 sm:flex sm:flex-row-reverse">
+                    <div class="sm:flex sm:flex-row-reverse mt-5">
                         <button
                             x-on:click="
                                 commentBoxOpen = false

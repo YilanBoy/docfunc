@@ -44,7 +44,7 @@
 }
 
 .comment-with-responses .responses > :last-child:after {
-    background: #f3f4f6;
+    background: #e5e7eb;
     content: "";
     display: block;
     height: calc(100% - 53px);

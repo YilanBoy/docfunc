@@ -52,7 +52,7 @@
                         >
                             <span>會員資訊</span>
                         </a>
-                        <div class="bg-gray-200 dark:bg-gray-600">
+                        <div class="bg-gray-400 dark:bg-gray-600">
                             <div
                                 :class="{
                                     'w-full': tab === 'information',
@@ -75,7 +75,7 @@
                         >
                             <span>發布文章</span>
                         </a>
-                        <div class="bg-gray-200 dark:bg-gray-600">
+                        <div class="bg-gray-400 dark:bg-gray-600">
                             <div
                                 :class="{
                                     'w-full': tab === 'posts',
@@ -98,7 +98,7 @@
                         >
                             <span>留言紀錄</span>
                         </a>
-                        <div class="bg-gray-200 dark:bg-gray-600">
+                        <div class="bg-gray-400 dark:bg-gray-600">
                             <div
                                 :class="{
                                     'w-full': tab === 'comments',

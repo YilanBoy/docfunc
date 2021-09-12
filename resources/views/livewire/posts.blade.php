@@ -15,7 +15,7 @@
                 >
                     <span>最新文章</span>
                 </a>
-                <div class="bg-gray-200 dark:bg-gray-600">
+                <div class="bg-gray-400 dark:bg-gray-600">
                     <div
                         @class([
                             'h-1 bg-blue-500 transition-all duration-300',
@@ -38,7 +38,7 @@
                 >
                     <span>最近更新</span>
                 </a>
-                <div class="bg-gray-200 dark:bg-gray-600">
+                <div class="bg-gray-400 dark:bg-gray-600">
                     <div
                         @class([
                             'h-1 bg-blue-500 transition-all duration-300',
@@ -61,7 +61,7 @@
                 >
                     <span>最多留言</span>
                 </a>
-                <div class="bg-gray-200 dark:bg-gray-600">
+                <div class="bg-gray-400 dark:bg-gray-600">
                     <div
                         @class([
                             'h-1 bg-blue-500 transition-all duration-300',

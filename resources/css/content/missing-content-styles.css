@@ -1,56 +1,98 @@
 /* Tailwind CSS Compatibility With CKEditor */
+
+/* generic block-level elements */
+
 .ck-content p {
-    font-size: 1rem;
-    margin: 1rem 0 1rem;
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
 }
+
+/* heading elements */
+
 .ck-content h2 {
-    font-size: 1.6rem;
+    display: block;
+    font-size: 1.5em;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
     font-weight: bold;
-    margin: 1.6rem 0 1.4rem;
 }
 .ck-content h3 {
-    font-size: 1.4rem;
+    display: block;
+    font-size: 1.17em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
     font-weight: bold;
-    margin: 1.4rem 0 1.2rem;
 }
 .ck-content h4 {
-    font-size: 1.2rem;
+    display: block;
+    margin-top: 1.33em;
+    margin-bottom: 1.33em;
+    margin-left: 0;
+    margin-right: 0;
     font-weight: bold;
-    margin: 1.2rem 0 1rem;
 }
+
+/* lists */
+
 .ck-content ul {
-    margin: 1rem 0 1rem;
-    padding: 0rem 1rem;
+    display: block;
     list-style-type: disc;
-    list-style-position: inside;
-}
-.ck-content ul li {
-    list-style-position: inside;
-    text-indent: -1em;
-    padding-left: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 40px;
 }
 .ck-content ol {
-    margin: 1rem 0 1rem;
-    padding: 0rem 1rem;
-    margin: 1rem 0 1rem;
+    display: block;
     list-style-type: decimal;
-    list-style-position: inside;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 40px;
 }
-.ck-content ol li {
-    list-style-position: inside;
-    text-indent: -1em;
-    padding-left: 1em;
+.ck-content li {
+    display: list-item;
+    text-align: -webkit-match-parent;
 }
+.ck-content ul ul,
+.ck-content ol ul {
+    list-style-type: circle;
+}
+.ck-content ol ol ul,
+.ck-content ol ul ul,
+.ck-content ul ol ul,
+.ck-content ul ul ul {
+    list-style-type: square;
+}
+.ck-content ol ul,
+.ck-content ul ol,
+.ck-content ul ul,
+.ck-content ol ol {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+/* links */
+
 .ck-content a {
-    color: #0EA5E9;
+    color: #0ea5e9;
     cursor: pointer;
 }
 .ck-content a:hover {
-    color: #0369A1;
+    color: #0369a1;
     cursor: pointer;
 }
 /* Dark Mode */
 .dark .ck-content a:hover {
-    color: #7DD3FC;
+    color: #7dd3fc;
     cursor: pointer;
 }

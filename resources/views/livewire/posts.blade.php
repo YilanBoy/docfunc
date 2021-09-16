@@ -98,7 +98,7 @@
             x-data="cardLink"
             x-on:click="postCardLink($event, $refs)"
             class="flex flex-col md:flex-row justify-between hover:shadow-xl
-            transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer"
+            transform hover:-translate-x-1 transition duration-150 ease-in cursor-pointer"
         >
             {{-- 大頭貼 --}}
             <div class="flex-none">

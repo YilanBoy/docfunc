@@ -5,7 +5,7 @@
             x-data="cardLink"
             x-on:click="commentCardLink($event, $refs)"
             class="flex flex-col md:flex-row justify-between hover:shadow-xl
-            transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer"
+            transform hover:-translate-x-1 transition duration-150 ease-in cursor-pointer"
         >
             {{-- 留言相關資訊 --}}
             <div class="w-full flex justify-between">
@@ -40,7 +40,7 @@
 
     @empty
         <x-card class="w-full h-36 flex justify-center items-center
-        transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl
+        transform hover:-translate-x-1 transition duration-150 ease-in hover:shadow-xl
         dark:text-gray-50">
             <span>目前沒有留言，快點找文章進行留言吧！</span>
         </x-card>

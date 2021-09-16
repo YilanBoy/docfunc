@@ -6,7 +6,7 @@
             x-data="cardLink"
             x-on:click="postCardLink($event, $refs)"
             class="flex flex-col md:flex-row justify-between hover:shadow-xl
-            transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer"
+            transform hover:-translate-x-1 transition duration-150 ease-in cursor-pointer"
         >
             {{-- 文章 --}}
             <div class="w-full flex flex-col justify-between">
@@ -158,7 +158,7 @@
 
     @empty
         <x-card class="w-full h-36 flex justify-center items-center
-        transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl
+        transform hover:-translate-x-1 transition duration-150 ease-in hover:shadow-xl
         dark:text-gray-50">
             <span>目前沒有文章，有沒有什麼事情想要分享呢？</span>
         </x-card>

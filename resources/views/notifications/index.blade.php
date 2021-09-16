@@ -19,7 +19,7 @@
                         x-data="cardLink"
                         x-on:click="notificationCardLink($event, $refs)"
                         class="w-full flex flex-col md:flex-row justify-between hover:shadow-xl
-                        transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer"
+                        transform hover:-translate-x-1 transition duration-150 ease-in cursor-pointer"
                     >
                         {{-- 大頭貼 --}}
                         <div class="flex-none">
@@ -66,7 +66,7 @@
 
                 @empty
                     <x-card class="w-full h-24 flex justify-center items-center hover:shadow-xl
-                    transform hover:-translate-x-2 transition duration-150 ease-in cursor-pointer
+                    transform hover:-translate-x-1 transition duration-150 ease-in cursor-pointer
                     dark:text-gray-50">
                         <span>沒有消息通知！</span>
                     </x-card>

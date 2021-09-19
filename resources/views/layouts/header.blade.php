@@ -65,12 +65,12 @@
                         <a href="{{ route('register') }}"
                         class="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-gray-50 py-2 px-4 mr-3
                         border border-blue-500 hover:border-transparent rounded-md">
-                            註冊
+                            <i class="bi bi-person-plus-fill"></i><span class="hidden md:inline ml-2">註冊</span>
                         </a>
 
                         <a href="{{ route('login') }}"
                         class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50">
-                            <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
+                            <i class="bi bi-box-arrow-in-right"></i><span class="hidden md:inline ml-2">登入</span>
                         </a>
 
                     {{-- 手機版-已登入 --}}

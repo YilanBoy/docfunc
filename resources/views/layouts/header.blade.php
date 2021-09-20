@@ -115,18 +115,18 @@
                                 x-show="profileIsOpen"
                                 x-transition.origin.top.right
                                 class="absolute right-0 p-2 mt-2 w-48 rounded-md shadow-lg bg-gray-50 text-gray-700 ring-1 ring-black ring-opacity-20
-                                dark:bg-gray-500 dark:text-gray-50"
+                                dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
                                 role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                             >
                                 <a href="{{ route('users.show', ['user' => auth()->id()]) }}"
                                 role="menuitem" tabindex="-1"
-                                class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-400">
+                                class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
                                     <i class="bi bi-person-fill"></i><span class="ml-2">個人頁面</span>
                                 </a>
 
                                 <a href="{{ route('users.edit', ['user' => auth()->id()]) }}"
                                 role="menuitem" tabindex="-1"
-                                class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-400">
+                                class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
                                     <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
                                 </a>
 
@@ -139,7 +139,7 @@
                                 <button
                                     type="submit" form="logout"
                                     role="menuitem" tabindex="-1"
-                                    class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-400"
+                                    class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600"
                                 >
                                     <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
                                 </button>
@@ -217,7 +217,7 @@
                 class="absolute top-5 left-16 flex justify-center items-center w-max opacity-0 transition-all duration-300
                 text-gray-900 text-2xl font-bold font-mono bg-gray-50 rounded-lg ring-1 ring-black ring-opacity-20 px-6 py-2 pointer-events-none
                 peer-hover:opacity-100 peer-hover:top-1
-                dark:bg-gray-500 dark:text-gray-50"
+                dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
             >
                 {{ config('app.name') }}
             </span>
@@ -297,7 +297,7 @@
                     class="absolute left-16 -top-4 flex justify-center items-center w-max opacity-0 transition-all duration-300
                     text-gray-900 bg-gray-50 rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
                     peer-hover:opacity-100 peer-hover:top-0
-                    dark:bg-gray-500 dark:text-gray-50"
+                    dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
                 >
                     明亮 / 暗黑模式
                 </span>
@@ -363,25 +363,25 @@
                         x-show="profileIsOpen"
                         x-transition.origin.bottom.left
                         class="absolute left-16 bottom-0 p-2 mt-2 w-48 rounded-md shadow-lg bg-gray-50 text-gray-700 ring-1 ring-black ring-opacity-20
-                        dark:bg-gray-500 dark:text-gray-50"
+                        dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                     >
                         <a href="{{ route('users.show', ['user' => auth()->id()]) }}"
                         role="menuitem" tabindex="-1"
-                        class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-400">
+                        class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
                             <i class="bi bi-person-fill"></i><span class="ml-2">個人頁面</span>
                         </a>
 
                         <a href="{{ route('users.edit', ['user' => auth()->id()]) }}"
                         role="menuitem" tabindex="-1"
-                        class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-400">
+                        class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
                             <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
                         </a>
 
                         <button
                             type="submit" form="logout"
                             role="menuitem" tabindex="-1"
-                            class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-400"
+                            class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600"
                         >
                             <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
                         </button>

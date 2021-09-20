@@ -9,7 +9,7 @@
         class="absolute left-16 -top-4 flex justify-center items-center w-max opacity-0 transition-all duration-300
         text-gray-900 bg-gray-50 rounded-lg ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
         peer-hover:opacity-100 peer-hover:top-0
-        dark:bg-gray-500 dark:text-gray-50"
+        dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
     >
         {{ $slot }}
     </span>

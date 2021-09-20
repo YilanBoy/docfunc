@@ -103,7 +103,7 @@
                                     x-show="editMenuIsOpen"
                                     x-transition.origin.top.right
                                     class="absolute right-0 z-10 p-2 mt-2 w-48 rounded-md shadow-lg bg-gray-50 text-gray-700 ring-1 ring-black ring-opacity-20
-                                    dark:bg-gray-500 dark:text-gray-50"
+                                    dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
                                     role="menu" aria-orientation="vertical" tabindex="-1"
                                 >
                                     {{-- 編輯文章 --}}
@@ -111,7 +111,7 @@
                                         href="{{ route('posts.edit', ['post' => $post->id]) }}"
                                         role="menuitem" tabindex="-1"
                                         class="block px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
-                                        dark:hover:bg-gray-400"
+                                        dark:hover:bg-gray-600"
                                     >
                                         <i class="bi bi-pencil-fill"></i><span class="ml-2">編輯</span>
                                     </a>
@@ -127,7 +127,7 @@
                                         role="menuitem"
                                         tabindex="-1"
                                         class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
-                                        dark:hover:bg-gray-400"
+                                        dark:hover:bg-gray-600"
                                     >
                                         <i class="bi bi-file-earmark-x-fill"></i><span class="ml-2">刪除標記</span>
                                     </button>

@@ -4,7 +4,7 @@
     @forelse ($posts as $post)
         <x-card
             x-data="cardLink"
-            x-on:click="postCardLink($event, $refs)"
+            x-on:click="directToCardLink($event, $refs)"
             class="flex flex-col md:flex-row justify-between hover:shadow-xl
             transform hover:-translate-x-1 transition duration-150 ease-in cursor-pointer"
         >
@@ -17,7 +17,7 @@
                 {{-- 文章標題 --}}
                 <span class="text-xl font-semibold mt-2 md:mt-0 dark:text-gray-50">
                     <a
-                        x-ref="postLink"
+                        x-ref="cardLinkUrl"
                         href="{{ $post->trashed() ? '#' : $post->link_with_slug }}"
                         class="fancy-link"
                     >{{ $post->title }}</a>

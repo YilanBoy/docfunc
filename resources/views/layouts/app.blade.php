@@ -50,6 +50,21 @@
 
     {{-- Scripts --}}
     @livewireScripts
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('cardLink', () => ({
+                // Card 連結
+                directToCardLink(event, refs) {
+                    let ignores = ['a'];
+                    let targetTagName = event.target.tagName.toLowerCase();
+
+                    if (!ignores.includes(targetTagName)) {
+                        refs.cardLinkUrl.click();
+                    }
+                }
+            }));
+        });
+    </script>
     <script src="{{ asset('js/app.js') }}"></script>
 
     @foreach (['warning', 'success', 'info'] as $message)

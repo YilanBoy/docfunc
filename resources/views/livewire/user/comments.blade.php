@@ -3,7 +3,7 @@
     @forelse ($comments as $comment)
         <x-card
             x-data="cardLink"
-            x-on:click="commentCardLink($event, $refs)"
+            x-on:click="directToCardLink($event, $refs)"
             class="flex flex-col md:flex-row justify-between hover:shadow-xl
             transform hover:-translate-x-1 transition duration-150 ease-in cursor-pointer"
         >
@@ -13,7 +13,7 @@
                 <div class="flex flex-col justify-between">
                     <span class="text-xl font-semibold dark:text-gray-50">
                         <a
-                            x-ref="commentLink"
+                            x-ref="cardLinkUrl"
                             href="{{ $comment->post->link_with_slug }}#comments"
                             class="fancy-link"
                         >

@@ -3,7 +3,7 @@
 
     @forelse ($comments as $comment)
         {{-- 第一階層留言 --}}
-        <x-card class="flex relative">
+        <x-card class="flex relative group">
             <div class="flex flex-col md:flex-row flex-1">
                 {{-- 大頭貼 --}}
                 <div class="flex-none">
@@ -29,8 +29,9 @@
                 </div>
 
                 {{-- 新增第二階層留言與刪除留言 --}}
-                <div class="mt-2 md:mt-0 flex justify-start items-center space-x-2">
-                    @auth
+                @auth
+                    <div class="mt-2 md:mt-0 flex justify-start items-center space-x-2
+                    opacity-0 group-hover:opacity-100 transition duration-150">
                         <button
                             x-on:click="
                                 commentBoxOpen = true
@@ -57,8 +58,8 @@
                                 <i class="bi bi-trash-fill"></i>
                             </button>
                         @endif
-                    @endauth
-                </div>
+                    </div>
+                @endauth
             </div>
         </x-card>
 
@@ -67,7 +68,7 @@
             <div class="responses space-y-6">
                 @forelse ($comment->children as $child)
                     <div class="relative">
-                        <x-card class="flex">
+                        <x-card class="group flex">
                             <div class="flex flex-col md:flex-row flex-1">
                                 {{-- 大頭貼 --}}
                                 <div class="flex-none">
@@ -93,8 +94,9 @@
                                 </div>
 
                                 {{-- 刪除留言 --}}
-                                <div class="mt-2 md:mt-0 flex justify-start items-center">
-                                    @if (in_array(auth()->id(), [$child->user_id, $post->user_id]))
+                                @if (in_array(auth()->id(), [$child->user_id, $post->user_id]))
+                                    <div class="mt-2 md:mt-0 flex justify-start items-center
+                                    opacity-0 group-hover:opacity-100 transition duration-150">
                                         <button
                                             onclick="confirm('您確定要刪除此留言嗎？') || event.stopImmediatePropagation()"
                                             wire:click="destroy({{ $child->id }})"
@@ -104,8 +106,8 @@
                                         >
                                             <i class="bi bi-trash-fill"></i>
                                         </button>
-                                    @endif
-                                </div>
+                                    </div>
+                                @endif
                             </div>
                         </x-card>
                     </div>

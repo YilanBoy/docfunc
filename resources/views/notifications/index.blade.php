@@ -17,7 +17,7 @@
                 @forelse ($notifications as $notification)
                     <x-card
                         x-data="cardLink"
-                        x-on:click="notificationCardLink($event, $refs)"
+                        x-on:click="directToCardLink($event, $refs)"
                         class="w-full flex flex-col md:flex-row justify-between hover:shadow-xl
                         transform hover:-translate-x-1 transition duration-150 ease-in cursor-pointer"
                     >
@@ -41,7 +41,7 @@
                                 >{{ $notification->data['user_name'] }}</a>
                                 <span class="dark:text-gray-50">留言了你的文章</span>
                                 <a
-                                    x-ref="notificationLink"
+                                    x-ref="cardLinkUrl"
                                     class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
                                     href="{{ $notification->data['post_link'] }}"
                                 >
@@ -79,20 +79,4 @@
 
         </div>
     </div>
-
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('cardLink', () => ({
-                // 通知連結
-                notificationCardLink(event, refs) {
-                    let ignores = ['a'];
-                    let targetTagName = event.target.tagName.toLowerCase();
-
-                    if (!ignores.includes(targetTagName)) {
-                        refs.notificationLink.click();
-                    }
-                }
-            }));
-        });
-    </script>
 @endsection

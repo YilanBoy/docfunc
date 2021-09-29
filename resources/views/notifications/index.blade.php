@@ -5,11 +5,11 @@
 
 @section('content')
     <div class="container mx-auto max-w-7xl">
-        <div class="min-h-screen flex justify-center items-center px-4 xl:px-0 mt-6">
+        <div class="flex items-start justify-center min-h-screen px-4 mt-6 xl:px-0">
 
-            <div class="w-full md:w-2/3 xl:w-1/2 space-y-6 flex flex-col justify-center items-center">
+            <div class="flex flex-col items-center justify-center w-full space-y-6 md:w-2/3 xl:w-1/2">
                 {{-- 頁面標題 --}}
-                <div class="fill-current text-gray-700 text-2xl dark:text-gray-50">
+                <div class="text-2xl text-gray-700 fill-current dark:text-gray-50">
                     <i class="bi bi-bell-fill"></i><span class="ml-4">我的通知</span>
                 </div>
 
@@ -18,8 +18,7 @@
                     <x-card
                         x-data="cardLink"
                         x-on:click="directToCardLink($event, $refs)"
-                        class="w-full flex flex-col md:flex-row justify-between hover:shadow-xl
-                        transform hover:-translate-x-1 transition duration-150 ease-in cursor-pointer"
+                        class="flex flex-col justify-between w-full transition duration-150 ease-in transform cursor-pointer md:flex-row hover:shadow-xl hover:-translate-x-1"
                     >
                         {{-- 大頭貼 --}}
                         <div class="flex-none">
@@ -32,7 +31,7 @@
                         </div>
 
                         {{-- 通知內容 --}}
-                        <div class="w-full flex flex-col justify-between md:mx-4">
+                        <div class="flex flex-col justify-between w-full md:mx-4">
                             {{-- 文章標題 --}}
                             <div class="mt-2 md:mt-0">
                                 <a
@@ -49,7 +48,7 @@
                                 </a>
                             </div>
 
-                            <div class="text-gray-600 mt-2 dark:text-gray-50">
+                            <div class="mt-2 text-gray-600 dark:text-gray-50">
                                 {!! $notification->data['comment_content'] !!}
                             </div>
 
@@ -65,9 +64,7 @@
                     </x-card>
 
                 @empty
-                    <x-card class="w-full h-24 flex justify-center items-center hover:shadow-xl
-                    transform hover:-translate-x-1 transition duration-150 ease-in cursor-pointer
-                    dark:text-gray-50">
+                    <x-card class="flex items-center justify-center w-full h-24 transition duration-150 ease-in transform cursor-pointer hover:shadow-xl hover:-translate-x-1 dark:text-gray-50">
                         <span>沒有消息通知！</span>
                     </x-card>
                 @endforelse

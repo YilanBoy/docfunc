@@ -33,23 +33,21 @@
     @yield('scriptsInHead')
 </head>
 
-<body class="bg-gray-200 dark:bg-gray-800 text-gray-900 antialiased font-noto">
+<body class="antialiased text-gray-900 bg-gray-200 dark:bg-gray-800 font-noto">
 
-    <div class="relative flex-col lg:flex">
+    <div class="relative flex flex-col justify-between">
 
         @include('layouts.header')
 
-        <div class="pl-0 lg:pl-16 w-full flex flex-col justify-between">
+        @yield('content')
 
-            @yield('content')
+        @include('layouts.footer')
 
-            @include('layouts.footer')
-
-        </div>
     </div>
 
     {{-- Scripts --}}
     @livewireScripts
+
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('cardLink', () => ({
@@ -78,8 +76,6 @@
         @endif
     @endforeach
 
-    @yield('scripts')
-
     <script src="{{ asset('js/theme-switch.js') }}"></script>
 
     <script>
@@ -96,6 +92,8 @@
             }, 200)
         }
     </script>
+
+    @yield('scripts')
 </body>
 
 </html>

@@ -1,12 +1,11 @@
 {{-- Header --}}
-<nav id="header">
+<nav id="header" class="z-20">
     {{-- 手機版選單 --}}
     <div
         x-data="{ mobileMenuIsOpen: false }"
-        class="relative z-20 bg-gray-50 shadow-md lg:hidden
-        dark:bg-gray-700"
+        class="shadow-md bg-gray-50 lg:hidden dark:bg-gray-700"
     >
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div class="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="relative flex items-center justify-between h-18">
                 <div
                     class="absolute inset-y-0 left-0 flex items-center"
@@ -15,7 +14,7 @@
                     <button
                         x-on:click="mobileMenuIsOpen = ! mobileMenuIsOpen"
                         type="button"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-700"
+                        class="inline-flex items-center justify-center p-2 text-gray-700 rounded-md"
                         aria-controls="mobile-menu"
                         aria-expanded="false"
                     >
@@ -38,11 +37,9 @@
                     </button>
                 </div>
 
-                <div class="mx-auto flex items-center">
-                    <img class="block h-8 w-auto" src="{{ asset('images/icon/icon.svg') }}" alt="{{ config('app.name') }}">
+                <div class="flex items-center mx-auto">
                     <span
-                        class="hidden md:block font-bold font-mono text-xl ml-2
-                        dark:text-gray-50"
+                        class="hidden font-mono text-xl font-bold md:block dark:text-gray-50"
                     >
                         {{ config('app.name') }}
                     </span>
@@ -50,7 +47,7 @@
 
                 <div class="absolute inset-y-0 right-0 flex items-center">
                     {{-- 明亮 / 暗黑模式切換 --}}
-                    <button type="button" class="theme-switch mr-3 text-gray-400 hover:text-gray-700 dark:hover:text-gray-50">
+                    <button type="button" class="mr-3 text-gray-400 theme-switch hover:text-gray-700 dark:hover:text-gray-50">
                         <span class="dark:hidden">
                             <i class="bi bi-sun-fill"></i>
                         </span>
@@ -63,14 +60,13 @@
                     {{-- 手機版-未登入 --}}
                     @guest
                         <a href="{{ route('register') }}"
-                        class="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-gray-50 py-2 px-4 mr-3
-                        border border-blue-500 hover:border-transparent rounded-md">
-                            <i class="bi bi-person-plus-fill"></i><span class="hidden md:inline ml-2">註冊</span>
+                        class="px-4 py-2 mr-3 text-blue-700 bg-transparent border border-blue-500 rounded-md hover:bg-blue-500 hover:text-gray-50 hover:border-transparent">
+                            <i class="bi bi-person-plus-fill"></i><span class="hidden ml-2 md:inline">註冊</span>
                         </a>
 
                         <a href="{{ route('login') }}"
                         class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50">
-                            <i class="bi bi-box-arrow-in-right"></i><span class="hidden md:inline ml-2">登入</span>
+                            <i class="bi bi-box-arrow-in-right"></i><span class="hidden ml-2 md:inline">登入</span>
                         </a>
 
                     {{-- 手機版-已登入 --}}
@@ -99,12 +95,11 @@
                                     x-on:click="profileIsOpen = ! profileIsOpen"
                                     x-on:keydown.escape.window="profileIsOpen = false"
                                     type="button"
-                                    class="bg-gray-800 flex text-sm rounded-full
-                                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white"
+                                    class="flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white"
                                     id="user-menu-button" aria-expanded="false" aria-haspopup="true"
                                 >
                                     <span class="sr-only">Open user menu</span>
-                                    <img class=" h-10 w-10 rounded-full" src="{{ auth()->user()->gravatar() }}" alt="">
+                                    <img class="w-10 h-10 rounded-full " src="{{ auth()->user()->gravatar() }}" alt="">
                                 </button>
                             </div>
 
@@ -114,10 +109,15 @@
                                 x-on:click.outside="profileIsOpen = false"
                                 x-show="profileIsOpen"
                                 x-transition.origin.top.right
-                                class="absolute right-0 p-2 mt-2 w-48 rounded-md shadow-lg bg-gray-50 text-gray-700 ring-1 ring-black ring-opacity-20
-                                dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
+                                class="absolute right-0 w-48 p-2 mt-2 text-gray-700 rounded-md shadow-lg bg-gray-50 ring-1 ring-black ring-opacity-20 dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
                                 role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                             >
+                                <a href="{{ route('posts.create') }}"
+                                role="menuitem" tabindex="-1"
+                                class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
+                                    <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
+                                </a>
+
                                 <a href="{{ route('users.show', ['user' => auth()->id()]) }}"
                                 role="menuitem" tabindex="-1"
                                 class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
@@ -158,19 +158,6 @@
             class="lg:hidden"
         >
             <div class="px-2 pt-2 pb-3 space-y-1">
-                {{-- 手機版-新增文章 --}}
-                <a
-                    href="{{ route('posts.create') }}"
-                    @class([
-                        'block px-3 py-2 rounded-md font-medium',
-                        'bg-gray-200 text-gray-700' => (request()->url() === route('posts.create')),
-                        'text-gray-400 hover:text-gray-700 hover:bg-gray-200' => (request()->url() !== route('posts.create')),
-                    ])
-                    @if(request()->url() === route('posts.create')) aria-current="page" @endif
-                >
-                    <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
-                </a>
-
                 <a
                     href="{{ route('posts.index') }}"
                     @class([
@@ -201,145 +188,93 @@
 
     {{-- 電腦版選單 --}}
     <div
-        class="hidden z-20 w-16 h-screen lg:flex flex-col justify-between items-center fixed top-0 left-0
-        bg-gray-50 shadow-md transition-all duration-300 py-2
-        dark:bg-gray-700"
+        class="items-center justify-between hidden w-full h-16 px-4 py-2 transition-all duration-300 shadow-md lg:flex bg-gray-50 dark:bg-gray-700"
     >
         {{-- 電腦版-Logo --}}
-        <div
-            class="relative"
-        >
-            <a href="{{ route('root') }}" class="peer w-14 h-14 flex justify-center items-center">
-                <img class="w-10" src="{{ asset('images/icon/icon.svg') }}" alt="{{ config('app.name') }}">
-            </a>
+        <a href="{{ route('root') }}" class="font-mono text-2xl font-bold dark:text-gray-50">
+            {{ config('app.name') }}
+        </a>
 
-            <span
-                class="absolute top-5 left-16 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                text-gray-900 text-2xl font-bold font-mono bg-gray-50 rounded-lg ring-1 ring-black ring-opacity-20 px-6 py-2 pointer-events-none
-                peer-hover:opacity-100 peer-hover:top-1
-                dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
-            >
-                {{ config('app.name') }}
-            </span>
-        </div>
-
-        <ul class="mt-6 space-y-2">
-            {{-- 電腦版-搜尋 --}}
+        <ul class="flex space-x-2">
             <li>
-                @livewire('search')
-            </li>
-
-            <li>
-                {{-- 電腦版-新增文章 --}}
-                <x-sidebar-link
-                    href="{{ route('posts.create') }}"
-                    class="{{
-                        (request()->url() === route('posts.create')) ?
-                        'bg-gray-200 text-gray-700' :
-                        'text-gray-400 hover:text-gray-700 hover:bg-gray-200'
-                    }}"
-                    :icon="'bi bi-pencil-fill'"
-                >
-                    新增文章
-                </x-sidebar-link>
-            </li>
-
-            <li>
-                <x-sidebar-link
+                <a
                     href="{{ route('posts.index') }}"
-                    class="{{
-                        (request()->url() === route('posts.index')) ?
-                        'bg-gray-200 text-gray-700' :
-                        'text-gray-400 hover:text-gray-700 hover:bg-gray-200'
-                    }}"
-                    :icon="'bi bi-house-fill'"
+                    @class([
+                        'flex items-center justify-center h-10 px-3 transition duration-150 rounded-lg',
+                        'bg-gray-200 text-gray-700' => (request()->url() === route('posts.index')),
+                        'text-gray-400 hover:text-gray-700 hover:bg-gray-200' => (request()->url() !== route('posts.index')),
+                    ])
                 >
-                    全部文章
-                </x-sidebar-link>
+                    <i class="bi bi-house-fill"></i><span class="ml-2">全部文章</span>
+                </a>
             </li>
 
             @foreach ($categories as $category)
                 <li>
-                    <x-sidebar-link
+                    <a
                         href="{{ $category->link_with_name }}"
-                        class="{{
-                            (request()->url() === $category->link_with_name) ?
-                            'bg-gray-200 text-gray-700' :
-                            'text-gray-400 hover:text-gray-700 hover:bg-gray-200'
-                        }}"
-                        :icon="$category->icon"
+                        @class([
+                            'flex items-center justify-center h-10 px-3 transition duration-150 rounded-lg',
+                            'bg-gray-200 text-gray-700' => (request()->url() === $category->link_with_name),
+                            'text-gray-400 hover:text-gray-700 hover:bg-gray-200' => (request()->url() !== $category->link_with_name),
+                        ])
                     >
-                        {{ $category->name }}
-                    </x-sidebar-link>
+                        <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>
+                    </a>
                 </li>
             @endforeach
         </ul>
 
-        <div class="flex flex-col space-y-2">
+        <div class="flex space-x-2">
+
+            {{-- 電腦版-搜尋 --}}
+            @livewire('search')
 
             {{-- 明亮 / 暗黑模式切換 --}}
-            <div class="relative">
-                <button
-                    type="button"
-                    class="theme-switch peer h-10 w-10 flex justify-center items-center text-2xl rounded-lg transition duration-150
-                    text-gray-400 hover:text-gray-700 hover:bg-gray-200"
-                >
-                    <span class="dark:hidden">
-                        <i class="bi bi-sun-fill"></i>
-                    </span>
-
-                    <span class="hidden dark:inline">
-                        <i class="bi bi-moon-stars-fill"></i>
-                    </span>
-                </button>
-
-                <span
-                    class="absolute left-16 -top-4 flex justify-center items-center w-max opacity-0 transition-all duration-300
-                    text-gray-900 bg-gray-50 rounded-md ring-1 ring-black ring-opacity-20 px-4 py-2 pointer-events-none
-                    peer-hover:opacity-100 peer-hover:top-0
-                    dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
-                >
-                    明亮 / 暗黑模式
+            <button
+                type="button"
+                class="flex items-center justify-center w-10 h-10 text-xl text-gray-400 transition duration-150 rounded-lg theme-switch hover:text-gray-700 hover:bg-gray-200"
+            >
+                <span class="dark:hidden">
+                    <i class="bi bi-sun-fill"></i>
                 </span>
-            </div>
+
+                <span class="hidden dark:inline">
+                    <i class="bi bi-moon-stars-fill"></i>
+                </span>
+            </button>
+
 
             {{-- 電腦版-未登入 --}}
             @guest
-                <x-sidebar-link
-                    href="{{ route('register') }}"
-                    class="text-gray-400 hover:text-gray-700 hover:bg-gray-200"
-                    :icon="'bi bi-person-plus-fill'"
-                >
+                <a href="{{ route('register') }}"
+                class="flex items-center justify-center h-10 px-3 mr-3 text-blue-400 transition duration-150 bg-transparent border border-blue-400 rounded-lg hover:bg-blue-400 hover:text-gray-50 hover:border-transparent">
                     註冊
-                </x-sidebar-link>
+                </a>
 
-                <x-sidebar-link
-                    href="{{ route('login') }}"
-                    class="text-gray-400 hover:text-gray-700 hover:bg-gray-200"
-                    :icon="'bi bi-box-arrow-in-right'"
-                >
-                    登入
-                </x-sidebar-link>
+                <a href="{{ route('login') }}"
+                class="flex items-center justify-center h-10 px-3 text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200">
+                    <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
+                </a>
 
             {{-- 電腦版-已登入 --}}
             @else
                 {{-- 電腦版-通知 --}}
-                <x-sidebar-link
+                <a
                     href="{{ route('notifications.index') }}"
-                    class="{{
-                        (auth()->user()->notification_count > 0) ?
-                        'text-red-400 hover:text-red-500 hover:bg-gray-200' :
-                        'text-gray-400 hover:text-gray-700 hover:bg-gray-200'
-                    }}"
-                    :icon="'bi bi-bell-fill'"
+                    @class([
+                        'flex items-center justify-center w-10 h-10 text-xl transition duration-150 rounded-lg',
+                        'text-red-400 hover:text-red-500 hover:bg-gray-200' => (auth()->user()->notification_count > 0),
+                        'text-gray-400 hover:text-gray-700 hover:bg-gray-200' => (auth()->user()->notification_count === 0),
+                    ])
                 >
-                    通知
-                </x-sidebar-link>
+                    <i class="bi bi-bell-fill"></i>
+                </a>
 
                 {{-- 電腦版-會員選單 --}}
                 <div
                     x-data="{ profileIsOpen: false }"
-                    class="relative flex justify-center items-center pt-1"
+                    class="relative flex items-center justify-center"
                 >
                     {{-- 電腦版-會員大頭貼 --}}
                     <div>
@@ -347,12 +282,11 @@
                             x-on:click="profileIsOpen = ! profileIsOpen"
                             x-on:keydown.escape.window="profileIsOpen = false"
                             type="button"
-                            class=" bg-gray-800 flex text-sm rounded-full
-                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white"
+                            class="flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white"
                             id="user-menu-button" aria-expanded="false" aria-haspopup="true"
                         >
                             <span class="sr-only">Open user menu</span>
-                            <img class="h-10 w-10 rounded-full" src="{{ auth()->user()->gravatar() }}" alt="">
+                            <img class="w-10 h-10 rounded-full" src="{{ auth()->user()->gravatar() }}" alt="">
                         </button>
                     </div>
 
@@ -361,11 +295,16 @@
                         x-cloak
                         x-on:click.outside="profileIsOpen = false"
                         x-show="profileIsOpen"
-                        x-transition.origin.bottom.left
-                        class="absolute left-16 bottom-0 p-2 mt-2 w-48 rounded-md shadow-lg bg-gray-50 text-gray-700 ring-1 ring-black ring-opacity-20
-                        dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
+                        x-transition.origin.top.right
+                        class="absolute right-0 w-48 p-2 mt-2 text-gray-700 rounded-md shadow-lg top-14 bg-gray-50 ring-1 ring-black ring-opacity-20 dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                     >
+                        <a href="{{ route('posts.create') }}"
+                        role="menuitem" tabindex="-1"
+                        class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
+                            <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
+                        </a>
+
                         <a href="{{ route('users.show', ['user' => auth()->id()]) }}"
                         role="menuitem" tabindex="-1"
                         class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">

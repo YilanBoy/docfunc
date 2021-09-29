@@ -74,3 +74,23 @@
 .fancy-link:hover {
     background-size: 100% 3px;
 }
+
+/* scroll bar */
+::-webkit-scrollbar {
+    width: 1em;
+}
+
+::-webkit-scrollbar-track {
+    background: hsl(216, 12%, 84%);
+    border-radius: 100vw;
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsl(220, 9%, 46%);
+    border: 0.15em solid hsl(216, 12%, 84%);
+    border-radius: 100vw;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: hsl(217, 19%, 27%);
+}

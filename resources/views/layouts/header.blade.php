@@ -59,16 +59,15 @@
 
                     {{-- 手機版-未登入 --}}
                     @guest
-                        <a href="{{ route('register') }}"
-                        class="px-4 py-2 mr-3 text-blue-700 bg-transparent border border-blue-500 rounded-md hover:bg-blue-500 hover:text-gray-50 hover:border-transparent">
-                            <i class="bi bi-person-plus-fill"></i><span class="hidden ml-2 md:inline">註冊</span>
-                        </a>
-
                         <a href="{{ route('login') }}"
-                        class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50">
+                        class="mr-3 text-gray-400 hover:text-gray-700 dark:hover:text-gray-50">
                             <i class="bi bi-box-arrow-in-right"></i><span class="hidden ml-2 md:inline">登入</span>
                         </a>
 
+                        <a href="{{ route('register') }}"
+                        class="px-4 py-2 text-blue-400 bg-transparent border border-blue-400 rounded-md hover:bg-blue-400 hover:text-gray-50 hover:border-transparent">
+                            <span>註冊</span>
+                        </a>
                     {{-- 手機版-已登入 --}}
                     @else
                         {{-- 手機版-通知 --}}
@@ -233,7 +232,7 @@
             {{-- 明亮 / 暗黑模式切換 --}}
             <button
                 type="button"
-                class="flex items-center justify-center w-10 h-10 text-xl text-gray-400 transition duration-150 rounded-lg theme-switch hover:text-gray-700 hover:bg-gray-200"
+                class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg theme-switch hover:text-gray-700 hover:bg-gray-200"
             >
                 <span class="dark:hidden">
                     <i class="bi bi-sun-fill"></i>
@@ -247,23 +246,22 @@
 
             {{-- 電腦版-未登入 --}}
             @guest
-                <a href="{{ route('register') }}"
-                class="flex items-center justify-center h-10 px-3 mr-3 text-blue-400 transition duration-150 bg-transparent border border-blue-400 rounded-lg hover:bg-blue-400 hover:text-gray-50 hover:border-transparent">
-                    註冊
-                </a>
-
                 <a href="{{ route('login') }}"
                 class="flex items-center justify-center h-10 px-3 text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200">
                     <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
                 </a>
 
+                <a href="{{ route('register') }}"
+                class="flex items-center justify-center h-10 px-3 text-blue-400 transition duration-150 bg-transparent border border-blue-400 rounded-lg hover:bg-blue-400 hover:text-gray-50 hover:border-transparent">
+                    註冊
+                </a>
             {{-- 電腦版-已登入 --}}
             @else
                 {{-- 電腦版-通知 --}}
                 <a
                     href="{{ route('notifications.index') }}"
                     @class([
-                        'flex items-center justify-center w-10 h-10 text-xl transition duration-150 rounded-lg',
+                        'flex items-center justify-center w-10 h-10 transition duration-150 rounded-lg',
                         'text-red-400 hover:text-red-500 hover:bg-gray-200' => (auth()->user()->notification_count > 0),
                         'text-gray-400 hover:text-gray-700 hover:bg-gray-200' => (auth()->user()->notification_count === 0),
                     ])

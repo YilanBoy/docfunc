@@ -194,32 +194,48 @@
             {{ config('app.name') }}
         </a>
 
-        <ul class="flex space-x-2">
-            <li>
+        <ul class="flex space-x-6">
+            <li class="relative">
                 <a
                     href="{{ route('posts.index') }}"
                     @class([
-                        'flex items-center justify-center h-10 px-3 transition duration-150 rounded-lg',
-                        'bg-gray-200 text-gray-700' => (request()->url() === route('posts.index')),
-                        'text-gray-400 hover:text-gray-700 hover:bg-gray-200' => (request()->url() !== route('posts.index')),
+                        'peer flex items-center justify-center h-10 transition duration-150',
+                        'text-gray-400 hover:text-blue-400' => (request()->url() !== route('posts.index')),
+                        'text-blue-400' => (request()->url() === route('posts.index')),
                     ])
                 >
                     <i class="bi bi-house-fill"></i><span class="ml-2">全部文章</span>
                 </a>
+
+                <span
+                    @class([
+                        'absolute left-0 w-full h-1 transition-all duration-300 bg-blue-400 rounded-full pointer-events-none',
+                        'opacity-0 -bottom-5 peer-hover:opacity-100 peer-hover:-bottom-3' => (request()->url() !== route('posts.index')),
+                        'opacity-100 -bottom-3' => (request()->url() === route('posts.index')),
+                    ])
+                ></span>
             </li>
 
             @foreach ($categories as $category)
-                <li>
+                <li class="relative">
                     <a
                         href="{{ $category->link_with_name }}"
                         @class([
-                            'flex items-center justify-center h-10 px-3 transition duration-150 rounded-lg',
-                            'bg-gray-200 text-gray-700' => (request()->url() === $category->link_with_name),
-                            'text-gray-400 hover:text-gray-700 hover:bg-gray-200' => (request()->url() !== $category->link_with_name),
+                            'peer flex items-center justify-center h-10 transition duration-150',
+                            'text-gray-400 hover:text-blue-400' => (request()->url() !== $category->link_with_name),
+                            'text-blue-400' => (request()->url() === $category->link_with_name),
                         ])
                     >
                         <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>
                     </a>
+
+                    <span
+                    @class([
+                        'absolute left-0 w-full h-1 transition-all duration-300 bg-blue-400 rounded-full pointer-events-none',
+                        'opacity-0 -bottom-5 peer-hover:opacity-100 peer-hover:-bottom-3' => (request()->url() !== $category->link_with_name),
+                        'opacity-100 -bottom-3' => (request()->url() === $category->link_with_name),
+                    ])
+                ></span>
                 </li>
             @endforeach
         </ul>

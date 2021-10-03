@@ -1,7 +1,6 @@
 /* Tailwind CSS Compatibility With CKEditor */
 
 /* generic block-level elements */
-
 .ck-content p {
     display: block;
     margin-top: 1em;
@@ -11,7 +10,6 @@
 }
 
 /* heading elements */
-
 .ck-content h2 {
     display: block;
     font-size: 1.5em;
@@ -40,7 +38,6 @@
 }
 
 /* lists */
-
 .ck-content ul {
     display: block;
     list-style-type: disc;
@@ -82,7 +79,6 @@
 }
 
 /* links */
-
 .ck-content a {
     color: #0ea5e9;
     cursor: pointer;
@@ -91,6 +87,12 @@
     color: #0369a1;
     cursor: pointer;
 }
+
+/* code block */
+.ck-content pre {
+    border-radius: 0.75rem;
+}
+
 /* Dark Mode */
 .dark .ck-content a:hover {
     color: #7dd3fc;

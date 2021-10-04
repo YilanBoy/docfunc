@@ -187,14 +187,14 @@
 
     {{-- 電腦版選單 --}}
     <div
-        class="items-center justify-between hidden w-full h-16 px-4 py-2 transition-all duration-300 shadow-md lg:flex bg-gray-50 dark:bg-gray-700"
+        class="relative items-center hidden w-full h-16 transition-all duration-300 shadow-md lg:flex bg-gray-50 dark:bg-gray-700"
     >
         {{-- 電腦版-Logo --}}
-        <a href="{{ route('root') }}" class="font-mono text-2xl font-bold dark:text-gray-50">
+        <a href="{{ route('root') }}" class="absolute font-mono text-2xl font-bold top-4 left-4 dark:text-gray-50">
             {{ config('app.name') }}
         </a>
 
-        <ul class="flex space-x-6">
+        <ul class="flex mx-auto space-x-6">
             <li class="relative">
                 <a
                     href="{{ route('posts.index') }}"
@@ -240,7 +240,7 @@
             @endforeach
         </ul>
 
-        <div class="flex space-x-2">
+        <div class="absolute flex space-x-2 top-3 right-4">
 
             {{-- 電腦版-搜尋 --}}
             @livewire('search')

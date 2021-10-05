@@ -1,7 +1,7 @@
-<div class="w-full xl:w-2/3 mr-0 xl:mr-6 space-y-6">
+<div class="w-full mr-0 space-y-6 xl:w-2/3 xl:mr-6">
 
     {{-- 文章排序 --}}
-    <div class="w-full flex flex-col-reverse md:flex-row md:justify-between">
+    <div class="flex flex-col-reverse w-full md:flex-row md:justify-between">
         <nav class="flex font-semibold">
             <div class="group">
                 <a
@@ -75,8 +75,7 @@
 
         {{-- 文章分類訊息-桌面裝置 --}}
         @if (isset($category))
-            <div class="flex justify-center items-center text-blue-700 border-blue-700 border rounded-xl
-            bg-gradient-to-br from-blue-100 to-blue-300 px-4 py-2 mb-2 md:mb-0">
+            <div class="flex items-center justify-center px-4 py-2 mb-2 text-blue-700 border border-blue-700 rounded-xl bg-gradient-to-br from-blue-100 to-blue-300 md:mb-0">
                 <span class="font-bold">{{ $category->name }}：</span>
                 <span>{{ $category->description }}</span>
             </div>
@@ -84,8 +83,7 @@
 
         {{-- 文章標籤訊息-桌面裝置 --}}
         @if (isset($tag))
-            <div class="flex justify-center items-center text-gray-700 border-gray-700 border rounded-xl
-            bg-gradient-to-br from-gray-100 to-gray-300 px-4 py-2 mb-2 md:mb-0">
+            <div class="flex items-center justify-center px-4 py-2 mb-2 text-gray-700 border border-gray-700 rounded-xl bg-gradient-to-br from-gray-100 to-gray-300 md:mb-0">
                 <span>標籤：</span>
                 <span class="font-bold">{{ $tag->name }}</span>
             </div>
@@ -97,8 +95,7 @@
         <x-card
             x-data="cardLink"
             x-on:click="directToCardLink($event, $refs)"
-            class="flex flex-col md:flex-row justify-between hover:shadow-xl
-            transform hover:-translate-x-1 transition duration-150 ease-in cursor-pointer"
+            class="flex flex-col justify-between transition duration-150 ease-in transform cursor-pointer md:flex-row hover:shadow-xl hover:-translate-x-1"
         >
             {{-- 大頭貼 --}}
             <div class="flex-none">
@@ -109,9 +106,9 @@
             </div>
 
             {{-- 文章 --}}
-            <div class="w-full flex flex-col justify-between md:mx-4">
+            <div class="flex flex-col justify-between w-full md:mx-4">
                 {{-- 文章標題 --}}
-                <h1 class="text-xl font-semibold mt-2 md:mt-0 dark:text-gray-50">
+                <h1 class="mt-2 text-xl font-semibold md:mt-0 dark:text-gray-50">
                     <a
                         x-ref="cardLinkUrl"
                         href="{{ $post->link_with_slug }}"
@@ -120,32 +117,30 @@
                 </h1>
 
                 {{-- 文章大綱 --}}
-                <div class="text-gray-400 mt-2">
+                <div class="mt-2 text-gray-400">
                     {{ $post->excerpt }}
                 </div>
 
                 {{-- 文章標籤 --}}
                 @if ($post->tags_count > 0)
-                    <div class="mt-2 flex items-center flex-wrap">
-                        <span class="text-gray-400 mr-1"><i class="bi bi-tags-fill"></i></span>
+                    <div class="flex flex-wrap items-center mt-2">
+                        <span class="mr-1 text-gray-400"><i class="bi bi-tags-fill"></i></span>
 
                         @foreach ($post->tags as $tag)
-                            <a href="{{ route('tags.show', ['tag' => $tag->id]) }}"
-                            class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 m-1
-                            bg-gray-200 hover:bg-gray-400 active:bg-gray-200 text-gray-700 rounded-full ring-1 ring-gray-700">
+                            <x-tag :href="route('tags.show', ['tag' => $tag->id])">
                                 {{ $tag->name }}
-                            </a>
+                            </x-tag>
                         @endforeach
                     </div>
                 @endif
 
                 {{-- 文章相關資訊 --}}
-                <div class="flex items-center text-sm text-gray-400 mt-2 space-x-2">
+                <div class="flex items-center mt-2 space-x-2 text-sm text-gray-400">
                     {{-- 文章分類資訊 --}}
                     <div>
                         <a class="hover:text-gray-700 dark:hover:text-gray-50"
                         href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
-                            <i class="{{ $post->category->icon }}"></i><span class="hidden md:inline ml-2">{{ $post->category->name }}</span>
+                            <i class="{{ $post->category->icon }}"></i><span class="hidden ml-2 md:inline">{{ $post->category->name }}</span>
                         </a>
                     </div>
                     <div>&bull;</div>
@@ -154,7 +149,7 @@
                         <a class="hover:text-gray-700 dark:hover:text-gray-50"
                         href="{{ route('users.show', ['user' => $post->user_id]) }}"
                         title="{{ $post->user->name }}">
-                            <i class="bi bi-person-fill"></i><span class="hidden md:inline ml-2">{{ $post->user->name }}</span>
+                            <i class="bi bi-person-fill"></i><span class="hidden ml-2 md:inline">{{ $post->user->name }}</span>
                         </a>
                     </div>
                     <div>&bull;</div>
@@ -163,7 +158,7 @@
                         <a class="hover:text-gray-700 dark:hover:text-gray-50"
                         href="{{ $post->link_with_slug }}"
                         title="文章發布於：{{ $post->created_at }}">
-                            <i class="bi bi-clock-fill"></i><span class="hidden md:inline ml-2">{{ $post->created_at->diffForHumans() }}</span>
+                            <i class="bi bi-clock-fill"></i><span class="hidden ml-2 md:inline">{{ $post->created_at->diffForHumans() }}</span>
                         </a>
                     </div>
                     <div>&bull;</div>
@@ -171,7 +166,7 @@
                         {{-- 文章留言數 --}}
                         <a class="hover:text-gray-700 dark:hover:text-gray-50"
                         href="{{ $post->link_with_slug }}#comments">
-                            <i class="bi bi-chat-square-text-fill"></i><span class="hidden md:inline ml-2">{{ $post->comment_count }}</span>
+                            <i class="bi bi-chat-square-text-fill"></i><span class="hidden ml-2 md:inline">{{ $post->comment_count }}</span>
                         </a>
                     </div>
                 </div>
@@ -179,9 +174,7 @@
         </x-card>
 
     @empty
-        <x-card class="w-full h-36 flex justify-center items-center
-        transform hover:-translate-x-2 transition duration-150 ease-in hover:shadow-xl
-        dark:text-gray-50">
+        <x-card class="flex items-center justify-center w-full transition duration-150 ease-in transform h-36 hover:-translate-x-2 hover:shadow-xl dark:text-gray-50">
             <span>Whoops！此分類底下還沒有文章，趕緊寫一篇吧！</span>
         </x-card>
     @endforelse

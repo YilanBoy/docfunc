@@ -15,34 +15,31 @@
     <div class="relative mt-6">
         {{-- 置頂按鈕 --}}
         <button id="scroll-to-top-btn" title="Go to top"
-        class="fixed z-10 bottom-7 right-7 hidden justify-center h-16 w-16 text-gray-50 font-bold bg-blue-600 rounded-full
-        transform hover:scale-125 transition duration-150 ease-in shadow-md hover:shadow-xl">
-            <span class="animate-bounce text-3xl mt-4">
+        class="fixed z-10 justify-center hidden w-16 h-16 font-bold transition duration-150 ease-in transform bg-blue-600 rounded-full shadow-md bottom-7 right-7 text-gray-50 hover:scale-125 hover:shadow-xl">
+            <span class="mt-4 text-3xl animate-bounce">
                 <i class="bi bi-arrow-up"></i>
             </span>
         </button>
 
         <div class="container mx-auto max-w-7xl">
-            <div class="min-h-screen flex flex-col justify-start items-center px-4 xl:px-0">
+            <div class="flex flex-col items-center justify-start min-h-screen px-4 xl:px-0">
 
                 <x-card class="relative w-full xl:w-2/3">
 
                     {{-- 文章選單-桌面裝置 --}}
                     <div
                         x-data="{}"
-                        class="hidden xl:block absolute top-0 left-103/100 w-16 h-full"
+                        class="absolute top-0 hidden w-16 h-full xl:block left-103/100"
                     >
-                        <div class="sticky top-7 flex flex-col justify-center items-center">
+                        <div class="sticky flex flex-col items-center justify-center top-7">
                             @if(auth()->id() === $post->user_id)
                                 {{-- 編輯文章 --}}
                                 <a
                                     href="{{ route('posts.edit', ['post' => $post->id]) }}"
-                                    class="group relative w-16 h-16 inline-flex rounded-xl border border-green-600"
+                                    class="relative inline-flex w-16 h-16 border border-green-600 group rounded-xl"
                                 >
-                                    <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-gray-50 text-center font-medium bg-green-600
-                                    rounded-xl ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 transform transition-transform
-                                    group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
-                                        <span class="transform group-hover:scale-125 group-hover:-rotate-45 transition duration-150 ease-in">
+                                    <span class="absolute inset-0 inline-flex items-center self-stretch justify-center text-2xl font-medium text-center transition-transform transform bg-green-600 text-gray-50 rounded-xl ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                        <span class="transition duration-150 ease-in transform group-hover:scale-125 group-hover:-rotate-45">
                                             <i class="bi bi-pencil-fill"></i>
                                         </span>
                                     </span>
@@ -62,11 +59,9 @@
                                         }
                                     "
                                     type="button"
-                                    class="group relative w-16 h-16 inline-flex rounded-xl border border-yellow-600 focus:outline-none mt-4"
+                                    class="relative inline-flex w-16 h-16 mt-4 border border-yellow-600 group rounded-xl focus:outline-none"
                                 >
-                                    <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-gray-50 text-center font-medium bg-yellow-600
-                                    rounded-xl ring-1 ring-yellow-600 ring-offset-1 ring-offset-yellow-600 transform transition-transform
-                                    group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                    <span class="absolute inset-0 inline-flex items-center self-stretch justify-center text-2xl font-medium text-center transition-transform transform bg-yellow-600 text-gray-50 rounded-xl ring-1 ring-yellow-600 ring-offset-1 ring-offset-yellow-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                         <i class="bi bi-file-earmark-x-fill"></i>
                                     </span>
                                 </button>
@@ -90,8 +85,7 @@
                                         x-on:click.outside="editMenuIsOpen = false"
                                         x-on:keydown.escape.window="editMenuIsOpen = false"
                                         type="button"
-                                        class="text-2xl text-gray-400 hover:text-gray-700 focus:text-gray-700
-                                        dark:hover:text-gray-50 dark:focus:text-gray-50"
+                                        class="text-2xl text-gray-400 hover:text-gray-700 focus:text-gray-700 dark:hover:text-gray-50 dark:focus:text-gray-50"
                                         aria-expanded="false" aria-haspopup="true"
                                     >
                                         <i class="bi bi-three-dots-vertical"></i>
@@ -102,16 +96,14 @@
                                     x-cloak
                                     x-show="editMenuIsOpen"
                                     x-transition.origin.top.right
-                                    class="absolute right-0 z-10 p-2 mt-2 w-48 rounded-md shadow-lg bg-gray-50 text-gray-700 ring-1 ring-black ring-opacity-20
-                                    dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
+                                    class="absolute right-0 z-10 w-48 p-2 mt-2 text-gray-700 rounded-md shadow-lg bg-gray-50 ring-1 ring-black ring-opacity-20 dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
                                     role="menu" aria-orientation="vertical" tabindex="-1"
                                 >
                                     {{-- 編輯文章 --}}
                                     <a
                                         href="{{ route('posts.edit', ['post' => $post->id]) }}"
                                         role="menuitem" tabindex="-1"
-                                        class="block px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
-                                        dark:hover:bg-gray-600"
+                                        class="block px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100 dark:hover:bg-gray-600"
                                     >
                                         <i class="bi bi-pencil-fill"></i><span class="ml-2">編輯</span>
                                     </a>
@@ -126,8 +118,7 @@
                                         type="button"
                                         role="menuitem"
                                         tabindex="-1"
-                                        class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100
-                                        dark:hover:bg-gray-600"
+                                        class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100 dark:hover:bg-gray-600"
                                     >
                                         <i class="bi bi-file-earmark-x-fill"></i><span class="ml-2">刪除標記</span>
                                     </button>
@@ -137,7 +128,7 @@
                     </div>
 
                     {{-- 文章資訊 --}}
-                    <div class="flex items-center text-gray-400 mt-4 space-x-2">
+                    <div class="flex items-center mt-4 space-x-2 text-gray-400">
                         {{-- 分類 --}}
                         <div>
                             <a class="hover:text-gray-700 dark:hover:text-gray-50"
@@ -182,14 +173,12 @@
                     {{-- 文章標籤 --}}
                     @if ($post->tags()->exists())
                         <div class="flex items-center mt-4">
-                            <span class="text-gray-400 mr-1"><i class="bi bi-tags-fill"></i></span>
+                            <span class="mr-1 text-gray-400"><i class="bi bi-tags-fill"></i></span>
 
                             @foreach ($post->tags as $tag)
-                                <a href="{{ route('tags.show', ['tag' => $tag->id]) }}"
-                                class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 m-1
-                                bg-gray-200 hover:bg-gray-400 active:bg-gray-200 text-gray-700 rounded-full ring-1 ring-gray-700">
+                                <x-tag :href="route('tags.show', ['tag' => $tag->id])">
                                     {{ $tag->name }}
-                                </a>
+                                </x-tag>
                             @endforeach
                         </div>
                     @endif
@@ -200,16 +189,14 @@
                     </div>
 
                     {{-- 分享文章 --}}
-                    <div class="mt-4 flex justify-end space-x-4">
+                    <div class="flex justify-end mt-4 space-x-4">
                         <button type="button" title="分享此篇文章至 Facebook" data-sharer="facebook" data-url="{{ request()->fullUrl() }}"
-                        class="text-4xl text-gray-400 hover:text-gray-700 duration-300
-                        dark:hover:text-gray-50">
+                        class="text-4xl text-gray-400 duration-300 hover:text-gray-700 dark:hover:text-gray-50">
                             <i class="bi bi-facebook"></i>
                         </button>
 
                         <button type="button" title="分享此篇文章至 Twitter" data-sharer="twitter" data-url="{{ request()->fullUrl() }}"
-                        class="text-4xl text-gray-400 hover:text-gray-700 duration-300
-                        dark:hover:text-gray-50">
+                        class="text-4xl text-gray-400 duration-300 hover:text-gray-700 dark:hover:text-gray-50">
                             <i class="bi bi-twitter"></i>
                         </button>
                     </div>
@@ -217,16 +204,15 @@
                 </x-card>
 
                 {{-- 作者簡介 --}}
-                <x-card class="w-full xl:w-2/3 flex justify-start items-center mt-6">
-                    <div class="flex-none none md:flex md:justify-center md:items-center p-2 mr-4">
-                        <img class="rounded-full h-16 w-16" src="{{ $post->user->gravatar(200) }}">
+                <x-card class="flex items-center justify-start w-full mt-6 xl:w-2/3">
+                    <div class="flex-none p-2 mr-4 none md:flex md:justify-center md:items-center">
+                        <img class="w-16 h-16 rounded-full" src="{{ $post->user->gravatar(200) }}">
                     </div>
                     <div class="space-y-2">
                         <div class="text-gray-400">WRITEN BY</div>
                         <a
                             href="{{ route('users.show', ['user' => $post->user->id]) }}"
-                            class="inline-block text-2xl font-bold fancy-link
-                            dark:text-gray-50"
+                            class="inline-block text-2xl font-bold fancy-link dark:text-gray-50"
                         >
                             {{ $post->user->name }}
                         </a>

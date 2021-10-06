@@ -5,29 +5,25 @@
 
 @section('content')
     <div class="container mx-auto max-w-7xl">
-        <div class="min-h-screen flex flex-col justify-start items-center
-        md:flex-row md:justify-center md:items-start px-4 xl:px-0 mt-6">
+        <div class="flex flex-col items-center justify-start min-h-screen px-4 mt-6 md:flex-row md:justify-center md:items-start xl:px-0">
 
             {{-- 會員基本資訊 --}}
-            <x-card class="w-full md:w-80 flex flex-col justify-center items-center mr-0 md:mr-6
-            dark:text-gray-50">
+            <x-card class="flex flex-col items-center justify-center w-full mr-0 md:w-80 md:mr-6 dark:text-gray-50">
                 {{-- 大頭貼 --}}
                 <div>
                     <img class="rounded-full h-36 w-36" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}"  width="200">
                 </div>
 
                 {{-- 會員名稱 --}}
-                <span class="w-full flex justify-center items-center text-3xl font-semibold my-5 pb-5 border-b-2 border-black
-                dark:text-gray-50 dark:border-white">{{ $user->name }}</span>
+                <span class="flex items-center justify-center w-full pb-5 my-5 text-3xl font-semibold border-b-2 border-black dark:text-gray-50 dark:border-white">{{ $user->name }}</span>
 
                 {{-- 資訊 --}}
-                <div class="w-full flex flex-col justify-start items-start
-                dark:text-gray-50">
+                <div class="flex flex-col items-start justify-start w-full dark:text-gray-50">
                     <span class="text-lg">撰寫文章</span>
-                    <span class="text-xl font-semibold mt-2">{{ $user->posts->count() }} 篇</span>
+                    <span class="mt-2 text-xl font-semibold">{{ $user->posts->count() }} 篇</span>
 
-                    <span class="text-lg mt-4">文章留言</span>
-                    <span class="text-xl font-semibold mt-2">{{ $user->comments->count() }} 次</span>
+                    <span class="mt-4 text-lg">文章留言</span>
+                    <span class="mt-2 text-xl font-semibold">{{ $user->comments->count() }} 次</span>
 
                     <span class="mt-4 text-xs">註冊於 {{ $user->created_at->format('Y / m / d') . '（' . $user->created_at->diffForHumans() . '）' }}</span>
                 </div>
@@ -36,79 +32,40 @@
             {{-- 會員資訊、文章與留言 --}}
             <div
                 x-data="{ tab: 'information' }"
-                class="w-full xl:w-2/3 space-y-6 mt-4 md:mt-0"
+                class="w-full mt-4 space-y-6 xl:w-2/3 md:mt-0"
             >
                 {{-- 切換顯示選單 --}}
-                <nav class="flex font-semibold">
-                    <div class="group">
+                <div>
+                    <nav class="flex p-1 space-x-1 w-max rounded-xl bg-gray-400/30 dark:bg-white/30 dark:text-gray-50">
                         <a
                             x-on:click.prevent="tab = 'information'"
                             href="#"
                             :class="{
-                                'text-gray-700 dark:text-gray-50': tab === 'information',
-                                'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50': tab !== 'information'
+                                'bg-gray-50 dark:bg-gray-600': tab === 'information',
+                                'hover:bg-gray-50 dark:hover:bg-gray-600': tab !== 'information'
                             }"
-                            class="block transition duration-300 ease-in px-2 sm:px-7 py-2"
-                        >
-                            <span>會員資訊</span>
-                        </a>
-                        <div class="bg-gray-400 dark:bg-gray-600">
-                            <div
-                                :class="{
-                                    'w-full': tab === 'information',
-                                    'w-0 group-hover:w-full': tab !== 'information'
-                                }"
-                                class="h-1 bg-blue-500 transition-all duration-300"
-                            ></div>
-                        </div>
-                    </div>
-
-                    <div class="group">
+                            class="block px-4 py-2 transition duration-300 rounded-lg"
+                        >會員資訊</a>
                         <a
                             x-on:click.prevent="tab = 'posts'"
                             href="#"
                             :class="{
-                                'text-gray-700 dark:text-gray-50': tab === 'posts',
-                                'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50': tab !== 'posts'
+                                'bg-gray-50 dark:bg-gray-600': tab === 'posts',
+                                'hover:bg-gray-50 dark:hover:bg-gray-600': tab !== 'posts'
                             }"
-                            class="block transition duration-300 ease-in px-2 sm:px-7 py-2"
-                        >
-                            <span>發布文章</span>
-                        </a>
-                        <div class="bg-gray-400 dark:bg-gray-600">
-                            <div
-                                :class="{
-                                    'w-full': tab === 'posts',
-                                    'w-0 group-hover:w-full': tab !== 'posts'
-                                }"
-                                class="h-1 bg-blue-500 transition-all duration-300"
-                            ></div>
-                        </div>
-                    </div>
-
-                    <div class="group">
+                            class="block px-4 py-2 transition duration-300 rounded-lg"
+                        >發布文章</a>
                         <a
                             x-on:click.prevent="tab = 'comments'"
                             href="#"
                             :class="{
-                                'text-gray-700 dark:text-gray-50': tab === 'comments',
-                                'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50': tab !== 'comments'
+                                'bg-gray-50 dark:bg-gray-600': tab === 'comments',
+                                'hover:bg-gray-50 dark:hover:bg-gray-600': tab !== 'comments'
                             }"
-                            class="block transition duration-300 ease-in px-2 sm:px-7 py-2"
-                        >
-                            <span>留言紀錄</span>
-                        </a>
-                        <div class="bg-gray-400 dark:bg-gray-600">
-                            <div
-                                :class="{
-                                    'w-full': tab === 'comments',
-                                    'w-0 group-hover:w-full': tab !== 'comments'
-                                }"
-                                class="h-1 bg-blue-500 transition-all duration-300"
-                            ></div>
-                        </div>
-                    </div>
-                </nav>
+                            class="block px-4 py-2 transition duration-300 rounded-lg"
+                        >留言紀錄</a>
+                    </nav>
+                </div>
 
                 {{-- 會員資訊 --}}
                 <div

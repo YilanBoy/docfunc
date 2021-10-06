@@ -2,75 +2,34 @@
 
     {{-- 文章排序 --}}
     <div class="flex flex-col-reverse w-full md:flex-row md:justify-between">
-        <nav class="flex font-semibold">
-            <div class="group">
-                <a
-                    wire:click.prevent="orderChange('latest')"
-                    href="{{ $currentUrl . '?order=latest' }}"
-                    @class([
-                        'block transition duration-300 ease-in px-2 sm:px-7 py-2',
-                        'text-gray-700 dark:text-gray-50' => ($order === 'latest'),
-                        'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50' => ($order !== 'latest'),
-                    ])
-                >
-                    <span>最新文章</span>
-                </a>
-                <div class="bg-gray-400 dark:bg-gray-600">
-                    <div
-                        @class([
-                            'h-1 bg-blue-500 transition-all duration-300',
-                            'w-full' => ($order === 'latest'),
-                            'w-0 group-hover:w-full' => ($order !== 'latest'),
-                        ])
-                    ></div>
-                </div>
-            </div>
-
-            <div class="group">
-                <a
-                    wire:click.prevent="orderChange('recent')"
-                    href="{{ $currentUrl . '?order=recent' }}"
-                    @class([
-                        'block transition duration-300 ease-in px-2 sm:px-7 py-2',
-                        'text-gray-700 dark:text-gray-50' => ($order === 'recent'),
-                        'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50' => ($order !== 'recent'),
-                    ])
-                >
-                    <span>最近更新</span>
-                </a>
-                <div class="bg-gray-400 dark:bg-gray-600">
-                    <div
-                        @class([
-                            'h-1 bg-blue-500 transition-all duration-300',
-                            'w-full' => ($order === 'recent'),
-                            'w-0 group-hover:w-full' => ($order !== 'recent'),
-                        ])
-                    ></div>
-                </div>
-            </div>
-
-            <div class="group">
-                <a
-                    wire:click.prevent="orderChange('comment')"
-                    href="{{ $currentUrl . '?order=comment' }}"
-                    @class([
-                        'block transition duration-300 ease-in px-2 sm:px-7 py-2',
-                        'text-gray-700 dark:text-gray-50' => ($order === 'comment'),
-                        'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50' => ($order !== 'comment'),
-                    ])
-                >
-                    <span>最多留言</span>
-                </a>
-                <div class="bg-gray-400 dark:bg-gray-600">
-                    <div
-                        @class([
-                            'h-1 bg-blue-500 transition-all duration-300',
-                            'w-full' => ($order === 'comment'),
-                            'w-0 group-hover:w-full' => ($order !== 'comment'),
-                        ])
-                    ></div>
-                </div>
-            </div>
+        <nav class="flex p-1 space-x-1 rounded-xl bg-gray-400/30 dark:bg-white/30 dark:text-gray-50">
+            <a
+                wire:click.prevent="orderChange('latest')"
+                href="{{ $currentUrl . '?order=latest' }}"
+                @class([
+                    'block px-4 py-2 rounded-lg transition duration-300',
+                    'bg-gray-50 dark:bg-gray-600' => ($order === 'latest'),
+                    'hover:bg-gray-50 dark:hover:bg-gray-600' => ($order !== 'latest'),
+                ])
+            >最新文章</a>
+            <a
+                wire:click.prevent="orderChange('recent')"
+                href="{{ $currentUrl . '?order=recent' }}"
+                @class([
+                    'block px-4 py-2 rounded-lg transition duration-300',
+                    'bg-gray-50 dark:bg-gray-600' => ($order === 'recent'),
+                    'hover:bg-gray-50 dark:hover:bg-gray-600' => ($order !== 'recent'),
+                ])
+            >最近更新</a>
+            <a
+                wire:click.prevent="orderChange('comment')"
+                href="{{ $currentUrl . '?order=comment' }}"
+                @class([
+                    'block px-4 py-2 rounded-lg transition duration-300',
+                    'bg-gray-50 dark:bg-gray-600' => ($order === 'comment'),
+                    'hover:bg-gray-50 dark:hover:bg-gray-600' => ($order !== 'comment'),
+                ])
+            >最多留言</a>
         </nav>
 
         {{-- 文章分類訊息-桌面裝置 --}}

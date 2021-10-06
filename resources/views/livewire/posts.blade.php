@@ -2,12 +2,12 @@
 
     {{-- 文章排序 --}}
     <div class="flex flex-col-reverse w-full md:flex-row md:justify-between">
-        <nav class="flex p-1 space-x-1 rounded-xl bg-gray-400/30 dark:bg-white/30 dark:text-gray-50">
+        <nav class="flex w-full p-1 space-x-1 md:w-1/2 lg:w-2/5 rounded-xl bg-gray-400/30 dark:bg-white/30 dark:text-gray-50">
             <a
                 wire:click.prevent="orderChange('latest')"
                 href="{{ $currentUrl . '?order=latest' }}"
                 @class([
-                    'block px-4 py-2 rounded-lg transition duration-300',
+                    'w-1/3 flex justify-center py-2 rounded-lg transition duration-300',
                     'bg-gray-50 dark:bg-gray-600' => ($order === 'latest'),
                     'hover:bg-gray-50 dark:hover:bg-gray-600' => ($order !== 'latest'),
                 ])
@@ -16,7 +16,7 @@
                 wire:click.prevent="orderChange('recent')"
                 href="{{ $currentUrl . '?order=recent' }}"
                 @class([
-                    'block px-4 py-2 rounded-lg transition duration-300',
+                    'w-1/3 flex justify-center px-4 py-2 rounded-lg transition duration-300',
                     'bg-gray-50 dark:bg-gray-600' => ($order === 'recent'),
                     'hover:bg-gray-50 dark:hover:bg-gray-600' => ($order !== 'recent'),
                 ])
@@ -25,7 +25,7 @@
                 wire:click.prevent="orderChange('comment')"
                 href="{{ $currentUrl . '?order=comment' }}"
                 @class([
-                    'block px-4 py-2 rounded-lg transition duration-300',
+                    'w-1/3 flex justify-center px-4 py-2 rounded-lg transition duration-300',
                     'bg-gray-50 dark:bg-gray-600' => ($order === 'comment'),
                     'hover:bg-gray-50 dark:hover:bg-gray-600' => ($order !== 'comment'),
                 ])

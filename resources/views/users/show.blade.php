@@ -35,37 +35,35 @@
                 class="w-full mt-4 space-y-6 xl:w-2/3 md:mt-0"
             >
                 {{-- 切換顯示選單 --}}
-                <div>
-                    <nav class="flex p-1 space-x-1 w-max rounded-xl bg-gray-400/30 dark:bg-white/30 dark:text-gray-50">
-                        <a
-                            x-on:click.prevent="tab = 'information'"
-                            href="#"
-                            :class="{
-                                'bg-gray-50 dark:bg-gray-600': tab === 'information',
-                                'hover:bg-gray-50 dark:hover:bg-gray-600': tab !== 'information'
-                            }"
-                            class="block px-4 py-2 transition duration-300 rounded-lg"
-                        >會員資訊</a>
-                        <a
-                            x-on:click.prevent="tab = 'posts'"
-                            href="#"
-                            :class="{
-                                'bg-gray-50 dark:bg-gray-600': tab === 'posts',
-                                'hover:bg-gray-50 dark:hover:bg-gray-600': tab !== 'posts'
-                            }"
-                            class="block px-4 py-2 transition duration-300 rounded-lg"
-                        >發布文章</a>
-                        <a
-                            x-on:click.prevent="tab = 'comments'"
-                            href="#"
-                            :class="{
-                                'bg-gray-50 dark:bg-gray-600': tab === 'comments',
-                                'hover:bg-gray-50 dark:hover:bg-gray-600': tab !== 'comments'
-                            }"
-                            class="block px-4 py-2 transition duration-300 rounded-lg"
-                        >留言紀錄</a>
-                    </nav>
-                </div>
+                <nav class="flex w-full p-1 space-x-1 md:w-4/5 lg:w-1/2 rounded-xl bg-gray-400/30 dark:bg-white/30 dark:text-gray-50">
+                    <a
+                        x-on:click.prevent="tab = 'information'"
+                        href="#"
+                        :class="{
+                            'bg-gray-50 dark:bg-gray-600': tab === 'information',
+                            'hover:bg-gray-50 dark:hover:bg-gray-600': tab !== 'information'
+                        }"
+                        class="flex justify-center w-1/3 px-4 py-2 transition duration-300 rounded-lg"
+                    >會員資訊</a>
+                    <a
+                        x-on:click.prevent="tab = 'posts'"
+                        href="#"
+                        :class="{
+                            'bg-gray-50 dark:bg-gray-600': tab === 'posts',
+                            'hover:bg-gray-50 dark:hover:bg-gray-600': tab !== 'posts'
+                        }"
+                        class="flex justify-center w-1/3 px-4 py-2 transition duration-300 rounded-lg"
+                    >發布文章</a>
+                    <a
+                        x-on:click.prevent="tab = 'comments'"
+                        href="#"
+                        :class="{
+                            'bg-gray-50 dark:bg-gray-600': tab === 'comments',
+                            'hover:bg-gray-50 dark:hover:bg-gray-600': tab !== 'comments'
+                        }"
+                        class="flex justify-center w-1/3 px-4 py-2 transition duration-300 rounded-lg"
+                    >留言紀錄</a>
+                </nav>
 
                 {{-- 會員資訊 --}}
                 <div

@@ -9,7 +9,7 @@
             disableScroll()
         "
         type="button"
-        class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200"
+        class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50"
     >
         <i class="bi bi-search"></i>
     </button>

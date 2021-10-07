@@ -71,17 +71,20 @@
                     {{-- 手機版-已登入 --}}
                     @else
                         {{-- 手機版-通知 --}}
-                        <a
-                            href="{{ route('notifications.index') }}"
-                            @class([
-                                'p-1 mr-3 rounded-full',
-                                'text-red-400 hover:text-red-700' => (auth()->user()->notification_count > 0),
-                                'text-gray-400 hover:text-gray-700 dark:hover:text-gray-50' => (auth()->user()->notification_count === 0),
-                            ])
-                        >
-                            <span class="sr-only">View notifications</span>
-                            <i class="bi bi-bell-fill"></i>
-                        </a>
+                        <span class="relative inline-flex mr-3 rounded-md shadow-sm">
+                            <a
+                                href="{{ route('notifications.index') }}"
+                                class="text-gray-400 rounded-full hover:text-gray-700 dark:hover:text-gray-50"
+                            >
+                                <i class="bi bi-bell-fill"></i>
+                            </a>
+                            @if (auth()->user()->notification_count > 0)
+                                <span class="absolute flex w-3 h-3 -mt-1 -mr-1 top-2 right-2">
+                                    <span class="absolute inline-flex w-full h-full bg-red-400 rounded-full opacity-75 animate-ping"></span>
+                                    <span class="relative inline-flex w-3 h-3 bg-red-500 rounded-full"></span>
+                                </span>
+                            @endif
+                        </span>
 
                         {{-- 手機版-會員選單 --}}
                         <div
@@ -161,8 +164,8 @@
                     href="{{ route('posts.index') }}"
                     @class([
                         'block px-3 py-2 rounded-md font-medium',
-                        'bg-gray-200 text-gray-700' => (request()->url() === route('posts.index')),
-                        'text-gray-400 hover:text-gray-700 hover:bg-gray-200' => (request()->url() !== route('posts.index')),
+                        'bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-50' => (request()->url() === route('posts.index')),
+                        'text-gray-400 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-600 dark:hover:text-gray-50' => (request()->url() !== route('posts.index')),
                     ])
                     @if(request()->url() === route('posts.index')) aria-current="page" @endif
                 >
@@ -173,8 +176,8 @@
                         href="{{ $category->link_with_name }}"
                         @class([
                             'block px-3 py-2 rounded-md font-medium',
-                            'bg-gray-200 text-gray-700' => (request()->url() === $category->link_with_name),
-                            'text-gray-400 hover:text-gray-700 hover:bg-gray-200' => (request()->url() !== $category->link_with_name),
+                            'bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-50' => (request()->url() === $category->link_with_name),
+                            'text-gray-400 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-600 dark:hover:text-gray-50' => (request()->url() !== $category->link_with_name),
                         ])
                         @if(request()->url() === $category->link_with_name) aria-current="page" @endif
                     >
@@ -248,7 +251,7 @@
             {{-- 明亮 / 暗黑模式切換 --}}
             <button
                 type="button"
-                class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg theme-switch hover:text-gray-700 hover:bg-gray-200"
+                class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg theme-switch hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50"
             >
                 <span class="dark:hidden">
                     <i class="bi bi-sun-fill"></i>
@@ -263,7 +266,7 @@
             {{-- 電腦版-未登入 --}}
             @guest
                 <a href="{{ route('login') }}"
-                class="flex items-center justify-center h-10 px-3 text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200">
+                class="flex items-center justify-center h-10 px-3 text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50">
                     <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
                 </a>
 
@@ -274,16 +277,20 @@
             {{-- 電腦版-已登入 --}}
             @else
                 {{-- 電腦版-通知 --}}
-                <a
-                    href="{{ route('notifications.index') }}"
-                    @class([
-                        'flex items-center justify-center w-10 h-10 transition duration-150 rounded-lg',
-                        'text-red-400 hover:text-red-500 hover:bg-gray-200' => (auth()->user()->notification_count > 0),
-                        'text-gray-400 hover:text-gray-700 hover:bg-gray-200' => (auth()->user()->notification_count === 0),
-                    ])
-                >
-                    <i class="bi bi-bell-fill"></i>
-                </a>
+                <span class="relative inline-flex rounded-md shadow-sm">
+                    <a
+                        href="{{ route('notifications.index') }}"
+                        class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50"
+                    >
+                        <i class="bi bi-bell-fill"></i>
+                    </a>
+                    @if (auth()->user()->notification_count > 0)
+                        <span class="absolute flex w-3 h-3 -mt-1 -mr-1 top-2 right-2">
+                            <span class="absolute inline-flex w-full h-full bg-red-400 rounded-full opacity-75 animate-ping"></span>
+                            <span class="relative inline-flex w-3 h-3 bg-red-500 rounded-full"></span>
+                        </span>
+                    @endif
+                </span>
 
                 {{-- 電腦版-會員選單 --}}
                 <div

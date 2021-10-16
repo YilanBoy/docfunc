@@ -31,6 +31,14 @@ class CommentBox extends Component
         $this->validateOnly($propertyName);
     }
 
+    // 確認是否有登入
+    public function authCheck()
+    {
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
+    }
+
     // 儲存留言
     public function store()
     {

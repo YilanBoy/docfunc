@@ -14,25 +14,24 @@
                 <span class="ml-2">{{ $commentCount }} 則留言</span>
             </span>
 
-            @auth
-                <button
-                    x-on:click="
-                        commentBoxOpen = true
-                        commentId = null
-                        commentTo = '回覆此文章'
-                        $nextTick(() => { $refs.commentBox.focus() })
-                        disableScroll()
-                    "
-                    type="button"
-                    class="relative inline-flex w-40 h-12 border border-blue-600 rounded-lg group focus:outline-none"
+            <button
+                x-on:click="
+                    commentBoxOpen = true
+                    commentId = null
+                    commentTo = '回覆此文章'
+                    $nextTick(() => { $refs.commentBox.focus() })
+                    disableScroll()
+                "
+                wire:click="authCheck"
+                type="button"
+                class="relative inline-flex w-40 h-12 border border-blue-600 rounded-lg group focus:outline-none"
+            >
+                <span
+                    class="absolute inset-0 inline-flex items-center self-stretch justify-center px-6 font-medium text-center transition-transform transform bg-blue-600 rounded-lg text-gray-50 ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 group-hover:-translate-y-2 group-hover:-translate-x-2"
                 >
-                    <span
-                        class="absolute inset-0 inline-flex items-center self-stretch justify-center px-6 font-medium text-center transition-transform transform bg-blue-600 rounded-lg text-gray-50 ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 group-hover:-translate-y-2 group-hover:-translate-x-2"
-                    >
-                        <i class="bi bi-chat-left-text-fill"></i><span class="ml-2">新增留言</span>
-                    </span>
-                </button>
-            @endauth
+                    <i class="bi bi-chat-left-text-fill"></i><span class="ml-2">新增留言</span>
+                </span>
+            </button>
         </div>
 
     @auth

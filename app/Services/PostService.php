@@ -28,7 +28,7 @@ class PostService
     {
         // 設定 XSS 過濾規則
         $config = HTMLPurifier_Config::createDefault();
-        // 設置配置的名稱
+        // 設置配置的名稱
         $config->set('HTML.DefinitionID', 'wysiwyg editon');
         // 設置配置的版本
         $config->set('HTML.DefinitionRev', 1);

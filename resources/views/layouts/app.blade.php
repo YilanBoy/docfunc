@@ -63,21 +63,6 @@
 
     <script src="{{ asset('js/theme-switch.js') }}"></script>
 
-    <script>
-        function disableScroll() {
-            document.body.classList.add('overflow-y-hidden')
-            document.body.style.paddingRight = '1em'
-        }
-
-        function enableScroll() {
-            // 等待 Modal 完全關閉再啟用 scroll bar
-            setTimeout(function() {
-                document.body.classList.remove('overflow-y-hidden')
-                document.body.style.paddingRight = '0em'
-            }, 200)
-        }
-    </script>
-
     @yield('scripts')
 </body>
 

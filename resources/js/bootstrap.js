@@ -26,3 +26,17 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+// enable/disable scroll
+window.disableScroll = function () {
+    document.body.classList.add('overflow-y-hidden')
+    document.body.style.paddingRight = '1em'
+}
+
+window.enableScroll = function () {
+    // 等待 Modal 完全關閉再啟用 scroll bar
+    setTimeout(function() {
+        document.body.classList.remove('overflow-y-hidden')
+        document.body.style.paddingRight = '0em'
+    }, 200)
+}

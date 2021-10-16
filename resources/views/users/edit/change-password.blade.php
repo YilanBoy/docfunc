@@ -1,4 +1,4 @@
-@extends('users.index')
+@extends('users.edit.index')
 
 @section('title', '會員中心-修改密碼')
 

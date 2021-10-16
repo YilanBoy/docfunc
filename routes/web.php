@@ -27,7 +27,7 @@ require __DIR__ . '/auth.php';
 
 // 會員相關頁面
 Route::prefix('users')->group(function () {
-    Route::get('/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/{user}', [UserController::class, 'index'])->name('users.index');
     Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
     Route::get('/{user}/change-password', [UserController::class, 'changePassword'])->name('users.changePassword');

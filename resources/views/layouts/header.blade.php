@@ -120,7 +120,7 @@
                                     <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
                                 </a>
 
-                                <a href="{{ route('users.show', ['user' => auth()->id()]) }}"
+                                <a href="{{ route('users.index', ['user' => auth()->id()]) }}"
                                 role="menuitem" tabindex="-1"
                                 class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
                                     <i class="bi bi-person-fill"></i><span class="ml-2">個人頁面</span>
@@ -326,7 +326,7 @@
                             <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
                         </a>
 
-                        <a href="{{ route('users.show', ['user' => auth()->id()]) }}"
+                        <a href="{{ route('users.index', ['user' => auth()->id()]) }}"
                         role="menuitem" tabindex="-1"
                         class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
                             <i class="bi bi-person-fill"></i><span class="ml-2">個人頁面</span>
@@ -351,5 +351,3 @@
         </div>
     </div>
 </nav>
-
-

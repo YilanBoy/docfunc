@@ -1,5 +1,3 @@
-@extends('layouts.app')
-
 @section('title', '註冊')
 
 @section('scriptsInHead')
@@ -9,7 +7,7 @@
     @endif
 @endsection
 
-@section('content')
+<x-app-layout>
     <div class="container mx-auto max-w-7xl">
         <div class="min-h-screen flex justify-center items-center px-4 xl:px-0">
 
@@ -91,4 +89,4 @@
 
         </div>
     </div>
-@endsection
+</x-app-layout>

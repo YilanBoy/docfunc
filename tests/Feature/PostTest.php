@@ -180,9 +180,9 @@ class PostTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
-            ->delete(route('posts.destroy', ['post' => $post->id]));
+            ->delete(route('posts.destroy', ['id' => $post->id]));
 
         $response->assertStatus(302)
-            ->assertRedirect(route('users.show', ['user' => $user->id]));
+            ->assertRedirect(route('users.index', ['user' => $user->id]));
     }
 }

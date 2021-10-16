@@ -58,7 +58,7 @@
         >
             {{-- 大頭貼 --}}
             <div class="flex-none">
-                <a href="{{ route('users.show', ['user' => $post->user_id]) }}">
+                <a href="{{ route('users.index', ['user' => $post->user_id]) }}">
                     <img src="{{ $post->user->gravatar() }}" alt="avatar"
                     class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400">
                 </a>
@@ -106,7 +106,7 @@
                     {{-- 文章作者資訊 --}}
                     <div>
                         <a class="hover:text-gray-700 dark:hover:text-gray-50"
-                        href="{{ route('users.show', ['user' => $post->user_id]) }}"
+                        href="{{ route('users.index', ['user' => $post->user_id]) }}"
                         title="{{ $post->user->name }}">
                             <i class="bi bi-person-fill"></i><span class="hidden ml-2 md:inline">{{ $post->user->name }}</span>
                         </a>

@@ -22,13 +22,13 @@ class UserController extends Controller
     }
 
     // 個人頁面
-    public function show(User $user)
+    public function index(User $user)
     {
         $categories = Category::with(['posts' => function ($query) use ($user) {
             $query->where('user_id', $user->id);
         }])->get();
 
-        return view('users.show', ['user' => $user, 'categories' => $categories]);
+        return view('users.index', ['user' => $user, 'categories' => $categories]);
     }
 
     // 編輯個人資料
@@ -37,7 +37,7 @@ class UserController extends Controller
         // 會員只能進入自己的頁面，規則寫在 UserPolicy
         $this->authorize('update', $user);
 
-        return view('users.edit', ['user' => $user]);
+        return view('users.edit.edit', ['user' => $user]);
     }
 
     // 更新個人資料
@@ -57,7 +57,7 @@ class UserController extends Controller
         ]);
 
         return redirect()
-            ->route('users.show', ['user' => $user->id])
+            ->route('users.index', ['user' => $user->id])
             ->with('success', '個人資料更新成功！');
     }
 
@@ -66,7 +66,7 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
 
-        return view('users.change-password', ['user' => $user]);
+        return view('users.edit.change-password', ['user' => $user]);
     }
 
     // 更新密碼
@@ -101,7 +101,7 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
 
-        return view('users.delete', ['user' => $user]);
+        return view('users.edit.delete', ['user' => $user]);
     }
 
     // 寄出刪除帳號的信件

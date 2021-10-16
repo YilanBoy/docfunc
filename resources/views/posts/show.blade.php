@@ -1,6 +1,3 @@
-{{-- 文章內容 --}}
-@extends('layouts.app')
-
 @section('title', $post->title)
 
 @section('description', $post->excerpt)
@@ -11,7 +8,20 @@
     <link href="{{ asset('prism/prism.css') }}" rel="stylesheet">
 @endsection
 
-@section('content')
+@section('scripts')
+    {{-- 至頂按鈕 --}}
+    <script src="{{ asset('js/scroll-to-top-btn.js') }}"></script>
+    {{-- 文章中的嵌入影片顯示 --}}
+    <script async charset="utf-8" src="{{ asset('embedly/platform.js') }}"></script>
+    <script src="{{ asset('embedly/embedly.js') }}"></script>
+    {{-- 程式碼區塊高亮 --}}
+    <script src="{{ asset('prism/prism.js') }}"></script>
+    {{-- 社交分享按鈕 --}}
+    <script src="{{ asset('js/sharer.min.js') }}"></script>
+@endsection
+
+{{-- 文章內容 --}}
+<x-app-layout>
     <div class="relative mt-6">
         {{-- 置頂按鈕 --}}
         <button id="scroll-to-top-btn" title="Go to top"
@@ -142,7 +152,7 @@
                         {{-- 作者 --}}
                         <div>
                             <a class="hover:text-gray-700 dark:hover:text-gray-50"
-                            href="{{ route('users.show', ['user' => $post->user_id]) }}"
+                            href="{{ route('users.index', ['user' => $post->user_id]) }}"
                             title="{{ $post->user->name }}">
                                 <i class="bi bi-person-fill"></i><span class="ml-2">{{ $post->user->name }}</span>
                             </a>
@@ -211,7 +221,7 @@
                     <div class="space-y-2">
                         <div class="text-gray-400">WRITEN BY</div>
                         <a
-                            href="{{ route('users.show', ['user' => $post->user->id]) }}"
+                            href="{{ route('users.index', ['user' => $post->user->id]) }}"
                             class="inline-block text-2xl font-bold fancy-link dark:text-gray-50"
                         >
                             {{ $post->user->name }}
@@ -225,16 +235,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-    {{-- 至頂按鈕 --}}
-    <script src="{{ asset('js/scroll-to-top-btn.js') }}"></script>
-    {{-- 文章中的嵌入影片顯示 --}}
-    <script async charset="utf-8" src="{{ asset('embedly/platform.js') }}"></script>
-    <script src="{{ asset('embedly/embedly.js') }}"></script>
-    {{-- 程式碼區塊高亮 --}}
-    <script src="{{ asset('prism/prism.js') }}"></script>
-    {{-- 社交分享按鈕 --}}
-    <script src="{{ asset('js/sharer.min.js') }}"></script>
-@endsection
+</x-app-layout>

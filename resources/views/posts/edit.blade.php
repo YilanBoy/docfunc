@@ -1,6 +1,3 @@
-{{-- 編輯文章 --}}
-@extends('layouts.app')
-
 @section('title', '編輯文章')
 
 @section('css')
@@ -9,7 +6,16 @@
     <link href="{{ asset('css/tagify.css') }}" rel="stylesheet">
 @endsection
 
-@section('content')
+@section('scripts')
+    {{-- 載入 Ckeditor --}}
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('js/editor.js') }}"></script>
+    {{-- 載入 Tagify --}}
+    <script src="{{ asset('js/tagify.js') }}"></script>
+@endsection
+
+{{-- 編輯文章 --}}
+<x-app-layout>
     <div class="container mx-auto max-w-7xl">
         <div class="min-h-screen flex justify-center items-start px-4 xl:px-0 mt-6">
 
@@ -120,12 +126,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-    {{-- 載入 Ckeditor --}}
-    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ asset('js/editor.js') }}"></script>
-    {{-- 載入 Tagify --}}
-    <script src="{{ asset('js/tagify.js') }}"></script>
-@endsection
+</x-app-layout>

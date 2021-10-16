@@ -39,7 +39,7 @@
 
         @include('layouts.header')
 
-        @yield('content')
+        {{ $slot }}
 
         @include('layouts.footer')
 

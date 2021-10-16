@@ -7,7 +7,7 @@
             <div class="flex flex-col md:flex-row flex-1">
                 {{-- 大頭貼 --}}
                 <div class="flex-none">
-                    <a href="{{ route('users.show', ['user' => $comment->user_id]) }}">
+                    <a href="{{ route('users.index', ['user' => $comment->user_id]) }}">
                         <img src="{{ $comment->user->gravatar() }}" alt="{{ $comment->user->name }}"
                         class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400">
                     </a>
@@ -72,7 +72,7 @@
                             <div class="flex flex-col md:flex-row flex-1">
                                 {{-- 大頭貼 --}}
                                 <div class="flex-none">
-                                    <a href="{{ route('users.show', ['user' => $child->user_id]) }}">
+                                    <a href="{{ route('users.index', ['user' => $child->user_id]) }}">
                                         <img src="{{ $child->user->gravatar() }}" alt="{{ $child->user->name }}"
                                         class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400">
                                     </a>

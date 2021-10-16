@@ -1,9 +1,7 @@
-{{-- 通知列表 --}}
-@extends('layouts.app')
-
 @section('title', '我的通知')
 
-@section('content')
+{{-- 通知列表 --}}
+<x-app-layout>
     <div class="container mx-auto max-w-7xl">
         <div class="flex items-start justify-center min-h-screen px-4 mt-6 xl:px-0">
 
@@ -22,7 +20,7 @@
                     >
                         {{-- 大頭貼 --}}
                         <div class="flex-none">
-                            <a href="{{ route('users.show', ['user' => $notification->data['user_id']]) }}">
+                            <a href="{{ route('users.index', ['user' => $notification->data['user_id']]) }}">
                                 <img
                                 alt="{{ $notification->data['user_name'] }}"
                                 src="{{ $notification->data['user_avatar'] }}"
@@ -35,7 +33,7 @@
                             {{-- 文章標題 --}}
                             <div class="mt-2 md:mt-0">
                                 <a
-                                    href="{{ route('users.show', ['user' => $notification->data['user_id']]) }}"
+                                    href="{{ route('users.index', ['user' => $notification->data['user_id']]) }}"
                                     class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
                                 >{{ $notification->data['user_name'] }}</a>
                                 <span class="dark:text-gray-50">留言了你的文章</span>
@@ -76,4 +74,4 @@
 
         </div>
     </div>
-@endsection
+</x-app-layout>

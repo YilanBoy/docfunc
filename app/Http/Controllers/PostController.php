@@ -105,7 +105,7 @@ class PostController extends Controller
         $post->delete();
 
         return redirect()
-            ->route('users.show', ['user' => auth()->id()])
+            ->route('users.index', ['user' => auth()->id()])
             ->with('success', '成功標記文章為刪除狀態！');
     }
 
@@ -132,7 +132,7 @@ class PostController extends Controller
         $softDeletedPost->forceDelete();
 
         return redirect()
-            ->route('users.show', ['user' => auth()->id()])
+            ->route('users.index', ['user' => auth()->id()])
             ->with('success', '成功刪除文章！');
     }
 }

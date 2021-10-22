@@ -10,8 +10,8 @@ use App\Services\FormatTransferService;
 
 class PostController extends Controller
 {
-    protected $postService;
-    protected $formatTransferService;
+    protected PostService $postService;
+    protected FormatTransferService $formatTransferService;
 
     public function __construct(PostService $postService, FormatTransferService $formatTransferService)
     {

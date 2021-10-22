@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class TagController extends Controller
 {
-    public function __invoke()
+    public function __invoke(): JsonResponse
     {
         $tags = Cache::remember('inputTags', now()->addDay(), function () {
             // 傳過去的格式會長這樣

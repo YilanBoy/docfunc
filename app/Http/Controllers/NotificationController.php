@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+
 class NotificationController extends Controller
 {
     public function __construct()
@@ -9,7 +13,12 @@ class NotificationController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    /**
+     * 通知列表首頁
+     *
+     * @return Application|Factory|View
+     */
+    public function index(): Application|Factory|View
     {
         // 獲取登入會員的所有通知
         $notifications = auth()->user()->notifications()->paginate(20);

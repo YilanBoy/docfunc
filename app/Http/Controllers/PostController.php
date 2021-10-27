@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Services\PostService;
 use App\Services\FormatTransferService;
+use Illuminate\Routing\Redirector;
 
 class PostController extends Controller
 {
@@ -19,14 +25,24 @@ class PostController extends Controller
         $this->formatTransferService = $formatTransferService;
     }
 
-    // 文章列表
-    public function index()
+    /**
+     * 文章首頁
+     *
+     * @return Application|Factory|View
+     */
+    public function index(): Application|Factory|View
     {
         return view('posts.index');
     }
 
-    // 文章內容
-    public function show(Request $request, Post $post)
+    /**
+     * 文章內容
+     *
+     * @param Request $request
+     * @param Post $post
+     * @return Application|Factory|View|RedirectResponse|Redirector
+     */
+    public function show(Request $request, Post $post): Application|Factory|View|RedirectResponse|Redirector
     {
         // URL 修正，使用帶 slug 的網址
         if ($post->slug && $post->slug !== $request->slug) {
@@ -36,8 +52,14 @@ class PostController extends Controller
         return view('posts.show', ['post' => $post]);
     }
 
-    // 新增文章
-    public function store(PostRequest $request, Post $post)
+    /**
+     * 新增文章
+     *
+     * @param PostRequest $request
+     * @param Post $post
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function store(PostRequest $request, Post $post): Application|RedirectResponse|Redirector
     {
         $post->fill($request->validated());
         $post->user_id = auth()->id();
@@ -58,8 +80,14 @@ class PostController extends Controller
         return redirect($post->link_with_slug)->with('success', '成功新增文章！');
     }
 
-    // 文章編輯頁面
-    public function edit(Post $post)
+    /**
+     * 文章編輯頁面
+     *
+     * @param Post $post
+     * @return Application|Factory|View
+     * @throws AuthorizationException
+     */
+    public function edit(Post $post): View|Factory|Application
     {
         // 只能編輯自己發佈的文章，規則寫在 PostPolicy
         $this->authorize('update', $post);
@@ -67,7 +95,7 @@ class PostController extends Controller
         // 生成包含 tag ID 與 tag name 的 Array
         // [["id" => "2","value" => "C#"], ["id" => "5","value" => "Dart"]]
         $tagsArray = $post->tags
-            ->map(fn ($tag) => ['id' => $tag->id, 'value' => $tag->name])
+            ->map(fn($tag) => ['id' => $tag->id, 'value' => $tag->name])
             ->all();
 
         // 轉成 tagify 的 JSON 格式
@@ -77,8 +105,15 @@ class PostController extends Controller
         return view('posts.edit', ['post' => $post]);
     }
 
-    // 更新文章
-    public function update(PostRequest $request, Post $post)
+    /**
+     * 更新文章
+     *
+     * @param PostRequest $request
+     * @param Post $post
+     * @return Application|RedirectResponse|Redirector
+     * @throws AuthorizationException
+     */
+    public function update(PostRequest $request, Post $post): Application|RedirectResponse|Redirector
     {
         $this->authorize('update', $post);
 
@@ -97,8 +132,14 @@ class PostController extends Controller
         return redirect($post->link_with_slug)->with('success', '成功更新文章！');
     }
 
-    // 軟刪除文章
-    public function softDelete(Post $post)
+    /**
+     * 軟刪除文章
+     *
+     * @param Post $post
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function softDelete(Post $post): RedirectResponse
     {
         $this->authorize('destroy', $post);
 
@@ -109,8 +150,14 @@ class PostController extends Controller
             ->with('success', '成功標記文章為刪除狀態！');
     }
 
-    // 恢復軟刪除的文章
-    public function restore(int $id)
+    /**
+     * 恢復軟刪除的文章
+     *
+     * @param int $id 文章的 ID
+     * @return Application|RedirectResponse|Redirector
+     * @throws AuthorizationException
+     */
+    public function restore(int $id): Application|RedirectResponse|Redirector
     {
         $softDeletedPost = Post::withTrashed()->find($id);
 
@@ -122,8 +169,14 @@ class PostController extends Controller
             ->with('success', '成功恢復文章！');
     }
 
-    // 完全刪除文章
-    public function destroy(int $id)
+    /**
+     * 完全刪除文章
+     *
+     * @param int $id 文章的 ID
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function destroy(int $id): RedirectResponse
     {
         $softDeletedPost = Post::withTrashed()->find($id);
 

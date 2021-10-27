@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
-    public function store(Request $request)
+    /**
+     * 在文章中上傳圖片至 AWS S3 的 API
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function store(Request $request): JsonResponse
     {
         $request->validate([
             'upload' => [

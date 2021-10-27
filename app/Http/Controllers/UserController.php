@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Category;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Rules\MatchOldPassword;
@@ -21,8 +26,13 @@ class UserController extends Controller
         $this->middleware('auth', ['except' => ['show']]);
     }
 
-    // 個人頁面
-    public function index(User $user)
+    /**
+     * 用戶個人頁面
+     *
+     * @param User $user
+     * @return Application|Factory|View
+     */
+    public function index(User $user): Application|Factory|View
     {
         $categories = Category::with(['posts' => function ($query) use ($user) {
             $query->where('user_id', $user->id);
@@ -31,24 +41,37 @@ class UserController extends Controller
         return view('users.index', ['user' => $user, 'categories' => $categories]);
     }
 
-    // 編輯個人資料
-    public function edit(User $user)
+    /**
+     * 編輯用戶個人資料
+     *
+     * @param User $user
+     * @return Application|Factory|View
+     * @throws AuthorizationException
+     */
+    public function edit(User $user): Application|Factory|View
     {
-        // 會員只能進入自己的頁面，規則寫在 UserPolicy
+        // 會員只能進入自己的頁面，規則寫在 UserPolicy
         $this->authorize('update', $user);
 
         return view('users.edit.edit', ['user' => $user]);
     }
 
-    // 更新個人資料
-    public function update(UserRequest $request, User $user)
+    /**
+     * 更新用戶個人資料
+     *
+     * @param UserRequest $request
+     * @param User $user
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function update(UserRequest $request, User $user): RedirectResponse
     {
         $this->authorize('update', $user);
 
         // 更新會員資料
         $user->update([
             'name' => $request->name,
-            // 替換連續兩次以上空白與換行的混合
+            // 替換連續兩次以上空白與換行的混合
             'introduction' => preg_replace(
                 '/(\s*(\\r\\n|\\r|\\n)\s*){2,}/u',
                 PHP_EOL,
@@ -61,7 +84,13 @@ class UserController extends Controller
             ->with('success', '個人資料更新成功！');
     }
 
-    // 更新密碼頁面
+    /**
+     * 用戶更新密碼頁面
+     *
+     * @param User $user
+     * @return Application|Factory|View
+     * @throws AuthorizationException
+     */
     public function changePassword(User $user)
     {
         $this->authorize('update', $user);
@@ -69,8 +98,15 @@ class UserController extends Controller
         return view('users.edit.change-password', ['user' => $user]);
     }
 
-    // 更新密碼
-    public function updatePassword(Request $request, User $user)
+    /**
+     * 用戶送出更新密碼
+     *
+     * @param Request $request
+     * @param User $user
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function updatePassword(Request $request, User $user): RedirectResponse
     {
         $this->authorize('update', $user);
 
@@ -96,16 +132,28 @@ class UserController extends Controller
         return back()->with('status', '密碼修改成功！');
     }
 
-    // 刪除用戶頁面
-    public function delete(User $user)
+    /**
+     * 用戶刪除頁面
+     *
+     * @param User $user
+     * @return Application|Factory|View
+     * @throws AuthorizationException
+     */
+    public function delete(User $user): Application|Factory|View
     {
         $this->authorize('update', $user);
 
         return view('users.edit.delete', ['user' => $user]);
     }
 
-    // 寄出刪除帳號的信件
-    public function sendDestroyEmail(User $user)
+    /**
+     * 寄出刪除帳號的信件
+     *
+     * @param User $user
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function sendDestroyEmail(User $user): RedirectResponse
     {
         $this->authorize('update', $user);
 
@@ -114,8 +162,15 @@ class UserController extends Controller
         return back()->with('status', '已寄出信件！');
     }
 
-    // 刪除用戶帳號
-    public function destroy(Request $request, User $user)
+    /**
+     * 刪除用戶帳號
+     *
+     * @param Request $request
+     * @param User $user
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function destroy(Request $request, User $user): RedirectResponse
     {
         // 確認網址是否有效
         if (!$request->hasValidSignature()) {

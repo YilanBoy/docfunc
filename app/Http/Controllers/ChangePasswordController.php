@@ -15,18 +15,16 @@ use Illuminate\Validation\Rules\Password;
 
 class ChangePasswordController extends Controller
 {
-    //
     /**
      * 用戶更新密碼頁面
      *
      * @param User $user
-     * @param UserController $userController
      * @return Application|Factory|View
      * @throws AuthorizationException
      */
-    public function edit(User $user, UserController $userController): Application|Factory|View
+    public function edit(User $user): Application|Factory|View
     {
-        $userController->authorize('update', $user);
+        $this->authorize('update', $user);
 
         return view('users.edit.change-password', ['user' => $user]);
     }
@@ -36,13 +34,12 @@ class ChangePasswordController extends Controller
      *
      * @param Request $request
      * @param User $user
-     * @param UserController $userController
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function update(Request $request, User $user, UserController $userController): RedirectResponse
+    public function update(Request $request, User $user): RedirectResponse
     {
-        $userController->authorize('update', $user);
+        $this->authorize('update', $user);
 
         $passwordRule = Password::min(8)->letters()->mixedCase()->numbers();
 

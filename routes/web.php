@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NotificationController;
@@ -30,11 +31,12 @@ Route::prefix('users')->group(function () {
     Route::get('/{user}', [UserController::class, 'index'])->name('users.index');
     Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
-    Route::get('/{user}/change-password', [UserController::class, 'changePassword'])->name('users.changePassword');
-    Route::put('/{user}/change-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
     Route::get('/{user}/delete', [UserController::class, 'delete'])->name('users.delete');
     Route::post('/{user}/send-destroy-email', [UserController::class, 'sendDestroyEmail'])->name('users.sendDestroyEmail');
     Route::get('/{user}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
+
+    Route::get('/{user}/change-password', [ChangePasswordController::class, 'edit'])->name('users.changePassword');
+    Route::put('/{user}/change-password', [ChangePasswordController::class, 'update'])->name('users.updatePassword');
 });
 
 // 文章列表與內容

@@ -85,54 +85,6 @@ class UserController extends Controller
     }
 
     /**
-     * 用戶更新密碼頁面
-     *
-     * @param User $user
-     * @return Application|Factory|View
-     * @throws AuthorizationException
-     */
-    public function changePassword(User $user)
-    {
-        $this->authorize('update', $user);
-
-        return view('users.edit.change-password', ['user' => $user]);
-    }
-
-    /**
-     * 用戶送出更新密碼
-     *
-     * @param Request $request
-     * @param User $user
-     * @return RedirectResponse
-     * @throws AuthorizationException
-     */
-    public function updatePassword(Request $request, User $user): RedirectResponse
-    {
-        $this->authorize('update', $user);
-
-        $passwordRule = Password::min(8)->letters()->mixedCase()->numbers();
-
-        $rules = [
-            'current_password' => ['required', new MatchOldPassword()],
-            'new_password' => ['required', 'confirmed', $passwordRule],
-        ];
-
-        $messages = [
-            'current_password.required' => '請輸入現在的密碼',
-            'new_password.required' => '請輸入新密碼',
-            'new_password.confirmed' => '新密碼與確認新密碼不符合',
-        ];
-
-        $request->validate($rules, $messages);
-
-        User::find(auth()->id())->update(
-            ['password' => Hash::make($request->new_password)]
-        );
-
-        return back()->with('status', '密碼修改成功！');
-    }
-
-    /**
      * 用戶刪除頁面
      *
      * @param User $user

@@ -4,8 +4,12 @@ namespace App\Services;
 
 class FormatTransferService
 {
-    // 將 tag 的 JSON 資料轉成 array，這裡的問號，代表允許參數為 null
-    // 後面的 : array 為聲明這個 function 返回的值為 array 類型
+    /**
+     * 將 tag 的 JSON 資料轉成 array
+     *
+     * @param string|null $tagsJson
+     * @return array
+     */
     public function tagsJsonToTagIdsArray(?string $tagsJson): array
     {
         // 沒有設定標籤

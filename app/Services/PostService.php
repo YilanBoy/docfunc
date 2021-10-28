@@ -5,11 +5,17 @@ namespace App\Services;
 use Illuminate\Support\Str;
 use HTMLPurifier;
 use HTMLPurifier_Config;
+use JetBrains\PhpStorm\Pure;
 
 class PostService
 {
-    // 生成 Slug
-    public function makeSlug(string $title)
+    /**
+     * 生成用來優化 SEO 的 slug
+     *
+     * @param string $title 標題
+     * @return string
+     */
+    public function makeSlug(string $title): string
     {
         // 去掉特殊字元，只留中文與英文
         $title = preg_replace('/[^A-Za-z0-9 \p{Han}]+/u', '', $title);
@@ -24,9 +30,15 @@ class PostService
         return $title . '-post';
     }
 
-    public function htmlPurifier(string $html)
+    /**
+     * 過濾 html 格式的文章內容，避免 XSS 攻擊
+     *
+     * @param string $html
+     * @return string
+     */
+    public function htmlPurifier(string $html): string
     {
-        // 設定 XSS 過濾規則
+        // 設定 XSS 過濾規則
         $config = HTMLPurifier_Config::createDefault();
         // 設置配置的名稱
         $config->set('HTML.DefinitionID', 'wysiwyg editon');
@@ -68,13 +80,16 @@ class PostService
         return $purifier->purify($html);
     }
 
-    // 生成摘錄的方法
-    public function makeExcerpt(string $body, int $length = 200)
+    /**
+     * 生成文章內容的摘錄
+     *
+     * @param string $body
+     * @param int $length
+     * @return string
+     */
+    #[Pure]
+    public function makeExcerpt(string $body, int $length = 200): string
     {
-        // 將換行替換成句號
-        $body = preg_replace('/(<\/p>)(<p>(\s|<br \/>)*<\/p>)*\s*(<p>)/u', '</p>。<p>', $body);
-        $body = preg_replace('/(。*\s*(<br \/>)+)+/u', '。', $body);
-
         return Str::limit(strip_tags($body), $length);
     }
 }

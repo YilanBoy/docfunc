@@ -11,11 +11,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
-use App\Rules\MatchOldPassword;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Auth;
-use App\Jobs\SendDestroyUserEmail;
 
 class UserController extends Controller
 {
@@ -96,22 +92,6 @@ class UserController extends Controller
         $this->authorize('update', $user);
 
         return view('users.edit.delete', ['user' => $user]);
-    }
-
-    /**
-     * 寄出刪除帳號的信件
-     *
-     * @param User $user
-     * @return RedirectResponse
-     * @throws AuthorizationException
-     */
-    public function sendDestroyEmail(User $user): RedirectResponse
-    {
-        $this->authorize('update', $user);
-
-        SendDestroyUserEmail::dispatch($user);
-
-        return back()->with('status', '已寄出信件！');
     }
 
     /**

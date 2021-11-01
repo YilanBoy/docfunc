@@ -86,7 +86,7 @@
                     <div class="mt-5 sm:flex sm:items-start">
                         <textarea
                             x-ref="commentBox"
-                            wire:model.debounce.500ms="content"
+                            wire:model.debounce.2000ms="content"
                             placeholder="分享你的想法 ~"
                             rows="5"
                             class="w-full border border-gray-300 rounded-md shadow-sm form-textarea focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
@@ -129,4 +129,3 @@
 
     @livewire('comments', ['post' => $post])
 </div>
-

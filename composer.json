@@ -16,6 +16,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/octane": "^1.0",
+        "laravel/sanctum": "^2.12",
         "laravel/tinker": "^2.5",
         "league/flysystem-aws-s3-v3": "~1.0",
         "livewire/livewire": "^2.3"

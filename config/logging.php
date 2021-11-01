@@ -1,4 +1,3 @@
-
 <?php
 
 use Monolog\Handler\NullHandler;
@@ -16,9 +15,22 @@ return [
     | messages to the logs. The name specified in this option should match
     | one of the channels defined in the "channels" configuration array.
     |
-     */
+    */
 
     'default' => env('LOG_CHANNEL', 'stack'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Deprecations Log Channel
+    |--------------------------------------------------------------------------
+    |
+    | This option controls the log channel that should be used to log warnings
+    | regarding deprecated PHP and library features. This allows you to get
+    | your application ready for upcoming major versions of dependencies.
+    |
+    */
+
+    'deprecations' => env('LOG_DEPRECATIONS_CHANNEL', 'null'),
 
     /*
     |--------------------------------------------------------------------------
@@ -33,7 +45,7 @@ return [
     |                    "errorlog", "monolog",
     |                    "custom", "stack"
     |
-     */
+    */
 
     'channels' => [
         'stack' => [
@@ -75,6 +87,7 @@ return [
 
         'stderr' => [
             'driver' => 'monolog',
+            'level' => env('LOG_LEVEL', 'debug'),
             'handler' => StreamHandler::class,
             'formatter' => env('LOG_STDERR_FORMATTER'),
             'with' => [

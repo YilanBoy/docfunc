@@ -1,21 +1,22 @@
 <?php
 
-use Illuminate\Support\Facades\Broadcast;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TagController;
 
 /*
 |--------------------------------------------------------------------------
-| Broadcast Channels
+| API Routes
 |--------------------------------------------------------------------------
 |
-| Here you may register all of the event broadcasting channels that your
-| application supports. The given channel authorization callbacks are
-| used to check if an authenticated user can listen to the channel.
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| is assigned the "api" middleware group. Enjoy building your API!
 |
- */
+*/
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
 });
 
 Route::get('tags', TagController::class);

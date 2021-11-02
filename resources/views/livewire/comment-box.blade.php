@@ -17,7 +17,7 @@
             <button
                 x-on:click="
                     commentBoxOpen = true
-                    commentId = null
+                    commentId = 0
                     commentTo = '回覆此文章'
                     $nextTick(() => { $refs.commentBox.focus() })
                     disableScroll()

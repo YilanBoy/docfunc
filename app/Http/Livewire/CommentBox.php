@@ -10,7 +10,7 @@ class CommentBox extends Component
 {
     public $post;
     public $content;
-    public $commentId = null;
+    public $commentId = 0;
     public $commentCount;
 
     protected $listeners = ['updateCommentCount'];
@@ -46,13 +46,15 @@ class CommentBox extends Component
             return abort(403);
         }
 
-        $this->validate();
+        $this->validate([
+            'commentId' => ['required', 'numeric']
+        ]);
 
         $comment = Comment::create(
             [
                 'post_id' => $this->post->id,
                 'user_id' => auth()->id(),
-                'parent_id' => $this->commentId,
+                'parent_id' => $this->commentId === 0 ? null : $this->commentId,
                 'content' => preg_replace(
                     '/(\s*(\\r\\n|\\r|\\n)\s*){3,}/u',
                     PHP_EOL . PHP_EOL,

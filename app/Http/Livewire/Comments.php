@@ -13,8 +13,20 @@ class Comments extends Component
     use WithPagination;
 
     public $post;
+    public $count = 3;
+    public $perPage = 3;
+    public $showMoreButtonIsActive = true;
 
-    protected $listeners = ['refresh'];
+    public function showMore()
+    {
+        $parentCommentCount = $this->post->comments()->whereNull('parent_id')->count();
+
+        if ($this->count < $parentCommentCount) {
+            $this->count += $this->perPage;
+        } else {
+            $this->showMoreButtonIsActive = false;
+        }
+    }
 
     // 刪除留言
     public function destroy(Comment $comment)
@@ -27,22 +39,8 @@ class Comments extends Component
         $this->emit('updateCommentCount');
     }
 
-    public function refresh()
-    {
-        // Refresh comments
-    }
-
     public function render()
     {
-        $comments = $this->post->comments()
-            // 不撈取子留言
-            ->whereNull('parent_id')
-            ->oldest()
-            ->with(['children' => function ($query) {
-                $query->oldest();
-            }])
-            ->paginate(10);
-
-        return view('livewire.comments', ['comments' => $comments]);
+        return view('livewire.comments');
     }
 }

@@ -13,17 +13,15 @@ class Comments extends Component
     use WithPagination;
 
     public $post;
-    public $count = 3;
-    public $perPage = 3;
+    public $count = 10;
+    public $perPage = 10;
     public $showMoreButtonIsActive = true;
 
     public function showMore()
     {
-        $parentCommentCount = $this->post->comments()->whereNull('parent_id')->count();
+        $this->count += $this->perPage;
 
-        if ($this->count < $parentCommentCount) {
-            $this->count += $this->perPage;
-        } else {
+        if ($this->count >= $this->post->comments()->whereNull('parent_id')->count()) {
             $this->showMoreButtonIsActive = false;
         }
     }

@@ -5,11 +5,11 @@
     <div class="container min-h-screen mx-auto mt-6 max-w-7xl">
         <div class="flex flex-col justify-center px-4 space-y-6 xl:space-y-0 xl:flex-row xl:px-0">
             {{-- 文章列表 --}}
-            @livewire('posts', [
-                'currentUrl' => url()->current(),
-                'category' => isset($category) ? $category : null,
-                'tag' => isset($tag) ? $tag : null,
-            ])
+            <livewire:posts
+                :currentUrl="url()->current()"
+                :category="$category ?? null"
+                :tag="$tag ?? null"
+            />
 
             {{-- 文章列表側邊欄 --}}
             <div class="w-full space-y-6 xl:w-80">
@@ -25,8 +25,9 @@
                     </span>
                     <div class="flex items-center justify-center mt-7">
                         <a href="{{ route('posts.create') }}"
-                        class="relative inline-flex w-64 h-12 border border-green-600 rounded-lg group focus:outline-none">
-                            <span class="absolute inset-0 inline-flex items-center self-stretch justify-center py-2 font-medium text-center transition-transform transform bg-green-600 rounded-lg text-gray-50 ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                           class="relative inline-flex w-64 h-12 border border-green-600 rounded-lg group focus:outline-none">
+                            <span
+                                class="absolute inset-0 inline-flex items-center self-stretch justify-center py-2 font-medium text-center transition-transform transform bg-green-600 rounded-lg text-gray-50 ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                 <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
                             </span>
                         </a>
@@ -58,7 +59,7 @@
                         <div class="flex flex-col">
                             @foreach ($links as $link)
                                 <a href="{{ $link->link }}" target="_blank" rel="nofollow noopener noreferrer"
-                                class="block p-2 rounded-md hover:bg-gray-200 dark:text-gray-50 dark:hover:bg-gray-600">
+                                   class="block p-2 rounded-md hover:bg-gray-200 dark:text-gray-50 dark:hover:bg-gray-600">
                                     {{ $link->title }}
                                 </a>
                             @endforeach

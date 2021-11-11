@@ -19,7 +19,7 @@
                         aria-expanded="false"
                     >
                         <span class="sr-only">Open main menu</span>
-                            {{-- 手機版-關閉選單的 icon --}}
+                        {{-- 手機版-關閉選單的 icon --}}
                         <div
                             :class="mobileMenuIsOpen ? 'hidden' : 'block'"
                             class="text-3xl text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
@@ -47,7 +47,10 @@
 
                 <div class="absolute inset-y-0 right-0 flex items-center">
                     {{-- 明亮 / 暗黑模式切換 --}}
-                    <button type="button" class="mr-3 text-gray-400 theme-switch hover:text-gray-700 dark:hover:text-gray-50">
+                    <button
+                        type="button"
+                        class="mr-3 text-gray-400 theme-switch hover:text-gray-700 dark:hover:text-gray-50"
+                    >
                         <span class="dark:hidden">
                             <i class="bi bi-sun-fill"></i>
                         </span>
@@ -60,15 +63,15 @@
                     {{-- 手機版-未登入 --}}
                     @guest
                         <a href="{{ route('login') }}"
-                        class="mr-3 text-gray-400 hover:text-gray-700 dark:hover:text-gray-50">
+                           class="mr-3 text-gray-400 hover:text-gray-700 dark:hover:text-gray-50">
                             <i class="bi bi-box-arrow-in-right"></i><span class="hidden ml-2 md:inline">登入</span>
                         </a>
 
                         <a href="{{ route('register') }}"
-                        class="px-4 py-2 text-blue-400 bg-transparent border border-blue-400 rounded-md hover:bg-blue-400 hover:text-gray-50 hover:border-transparent">
+                           class="px-4 py-2 text-blue-400 bg-transparent border border-blue-400 rounded-md hover:bg-blue-400 hover:text-gray-50 hover:border-transparent">
                             <span>註冊</span>
                         </a>
-                    {{-- 手機版-已登入 --}}
+                        {{-- 手機版-已登入 --}}
                     @else
                         {{-- 手機版-通知 --}}
                         <span class="relative inline-flex mr-3 rounded-md shadow-sm">
@@ -80,7 +83,8 @@
                             </a>
                             @if (auth()->user()->notification_count > 0)
                                 <span class="absolute flex w-3 h-3 -mt-1 -mr-1 top-2 right-2">
-                                    <span class="absolute inline-flex w-full h-full bg-red-400 rounded-full opacity-75 animate-ping"></span>
+                                    <span
+                                        class="absolute inline-flex w-full h-full bg-red-400 rounded-full opacity-75 animate-ping"></span>
                                     <span class="relative inline-flex w-3 h-3 bg-red-500 rounded-full"></span>
                                 </span>
                             @endif
@@ -115,25 +119,26 @@
                                 role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                             >
                                 <a href="{{ route('posts.create') }}"
-                                role="menuitem" tabindex="-1"
-                                class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
+                                   role="menuitem" tabindex="-1"
+                                   class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
                                     <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
                                 </a>
 
                                 <a href="{{ route('users.index', ['user' => auth()->id()]) }}"
-                                role="menuitem" tabindex="-1"
-                                class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
+                                   role="menuitem" tabindex="-1"
+                                   class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
                                     <i class="bi bi-person-fill"></i><span class="ml-2">個人頁面</span>
                                 </a>
 
                                 <a href="{{ route('users.edit', ['user' => auth()->id()]) }}"
-                                role="menuitem" tabindex="-1"
-                                class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
+                                   role="menuitem" tabindex="-1"
+                                   class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
                                     <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
                                 </a>
 
-                                <form id="logout" action="{{ route('logout') }}" method="POST" onSubmit="return confirm('您確定要登出？');"
-                                class="hidden"
+                                <form id="logout" action="{{ route('logout') }}" method="POST"
+                                      onSubmit="return confirm('您確定要登出？');"
+                                      class="hidden"
                                 >
                                     @csrf
                                 </form>
@@ -233,12 +238,12 @@
                     </a>
 
                     <span
-                    @class([
-                        'absolute left-0 w-full h-1 transition-all duration-300 bg-blue-400 rounded-full pointer-events-none',
-                        'opacity-0 -bottom-5 peer-hover:opacity-100 peer-hover:-bottom-3' => (request()->url() !== $category->link_with_name),
-                        'opacity-100 -bottom-3' => (request()->url() === $category->link_with_name),
-                    ])
-                ></span>
+                        @class([
+                            'absolute left-0 w-full h-1 transition-all duration-300 bg-blue-400 rounded-full pointer-events-none',
+                            'opacity-0 -bottom-5 peer-hover:opacity-100 peer-hover:-bottom-3' => (request()->url() !== $category->link_with_name),
+                            'opacity-100 -bottom-3' => (request()->url() === $category->link_with_name),
+                        ])
+                    ></span>
                 </li>
             @endforeach
         </ul>
@@ -246,12 +251,13 @@
         <div class="absolute flex space-x-2 top-3 right-4">
 
             {{-- 電腦版-搜尋 --}}
-            @livewire('search')
+            <livewire:search/>
 
             {{-- 明亮 / 暗黑模式切換 --}}
             <button
                 type="button"
-                class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg theme-switch hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50"
+                class="theme-switch flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150
+                rounded-lg hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50"
             >
                 <span class="dark:hidden">
                     <i class="bi bi-sun-fill"></i>
@@ -266,27 +272,31 @@
             {{-- 電腦版-未登入 --}}
             @guest
                 <a href="{{ route('login') }}"
-                class="flex items-center justify-center h-10 px-3 text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50">
+                   class="flex items-center justify-center h-10 px-3 text-gray-400 transition duration-150 rounded-lg
+                   hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50">
                     <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
                 </a>
 
                 <a href="{{ route('register') }}"
-                class="flex items-center justify-center h-10 px-3 text-blue-400 transition duration-150 bg-transparent border border-blue-400 rounded-lg hover:bg-blue-400 hover:text-gray-50 hover:border-transparent">
+                   class="flex items-center justify-center h-10 px-3 text-blue-400 transition duration-150 bg-transparent
+                   border border-blue-400 rounded-lg hover:bg-blue-400 hover:text-gray-50 hover:border-transparent">
                     註冊
                 </a>
-            {{-- 電腦版-已登入 --}}
+                {{-- 電腦版-已登入 --}}
             @else
                 {{-- 電腦版-通知 --}}
                 <span class="relative inline-flex rounded-md shadow-sm">
                     <a
                         href="{{ route('notifications.index') }}"
-                        class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50"
+                        class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg
+                        hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50"
                     >
                         <i class="bi bi-bell-fill"></i>
                     </a>
                     @if (auth()->user()->notification_count > 0)
                         <span class="absolute flex w-3 h-3 -mt-1 -mr-1 top-2 right-2">
-                            <span class="absolute inline-flex w-full h-full bg-red-400 rounded-full opacity-75 animate-ping"></span>
+                            <span
+                                class="absolute inline-flex w-full h-full bg-red-400 rounded-full opacity-75 animate-ping"></span>
                             <span class="relative inline-flex w-3 h-3 bg-red-500 rounded-full"></span>
                         </span>
                     @endif
@@ -303,7 +313,8 @@
                             x-on:click="profileIsOpen = ! profileIsOpen"
                             x-on:keydown.escape.window="profileIsOpen = false"
                             type="button"
-                            class="flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white"
+                            class="flex text-sm bg-gray-800 rounded-full
+                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white"
                             id="user-menu-button" aria-expanded="false" aria-haspopup="true"
                         >
                             <span class="sr-only">Open user menu</span>
@@ -317,24 +328,25 @@
                         x-on:click.outside="profileIsOpen = false"
                         x-show="profileIsOpen"
                         x-transition.origin.top.right
-                        class="absolute right-0 w-48 p-2 mt-2 text-gray-700 rounded-md shadow-lg top-14 bg-gray-50 ring-1 ring-black ring-opacity-20 dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
+                        class="absolute right-0 w-48 p-2 mt-2 text-gray-700 rounded-md shadow-lg top-14 bg-gray-50
+                        ring-1 ring-black ring-opacity-20 dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                     >
                         <a href="{{ route('posts.create') }}"
-                        role="menuitem" tabindex="-1"
-                        class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
+                           role="menuitem" tabindex="-1"
+                           class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
                             <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
                         </a>
 
                         <a href="{{ route('users.index', ['user' => auth()->id()]) }}"
-                        role="menuitem" tabindex="-1"
-                        class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
+                           role="menuitem" tabindex="-1"
+                           class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
                             <i class="bi bi-person-fill"></i><span class="ml-2">個人頁面</span>
                         </a>
 
                         <a href="{{ route('users.edit', ['user' => auth()->id()]) }}"
-                        role="menuitem" tabindex="-1"
-                        class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
+                           role="menuitem" tabindex="-1"
+                           class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600">
                             <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
                         </a>
 

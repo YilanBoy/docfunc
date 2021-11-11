@@ -25,7 +25,7 @@
     <div class="relative mt-6">
         {{-- 置頂按鈕 --}}
         <button id="scroll-to-top-btn" title="Go to top"
-        class="fixed z-10 justify-center hidden w-16 h-16 font-bold transition duration-150 ease-in transform bg-blue-600 rounded-full shadow-md bottom-7 right-7 text-gray-50 hover:scale-125 hover:shadow-xl">
+                class="fixed z-10 justify-center hidden w-16 h-16 font-bold transition duration-150 ease-in transform bg-blue-600 rounded-full shadow-md bottom-7 right-7 text-gray-50 hover:scale-125 hover:shadow-xl">
             <span class="mt-4 text-3xl animate-bounce">
                 <i class="bi bi-arrow-up"></i>
             </span>
@@ -48,15 +48,18 @@
                                     href="{{ route('posts.edit', ['post' => $post->id]) }}"
                                     class="relative inline-flex w-16 h-16 border border-green-600 group rounded-xl"
                                 >
-                                    <span class="absolute inset-0 inline-flex items-center self-stretch justify-center text-2xl font-medium text-center transition-transform transform bg-green-600 text-gray-50 rounded-xl ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
-                                        <span class="transition duration-150 ease-in transform group-hover:scale-125 group-hover:-rotate-45">
+                                    <span
+                                        class="absolute inset-0 inline-flex items-center self-stretch justify-center text-2xl font-medium text-center transition-transform transform bg-green-600 text-gray-50 rounded-xl ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                        <span
+                                            class="transition duration-150 ease-in transform group-hover:scale-125 group-hover:-rotate-45">
                                             <i class="bi bi-pencil-fill"></i>
                                         </span>
                                     </span>
                                 </a>
 
-                                <form id="soft-delete-post" action="{{ route('posts.softDelete', ['post' => $post->id]) }}" method="POST"
-                                class="hidden">
+                                <form id="soft-delete-post"
+                                      action="{{ route('posts.softDelete', ['post' => $post->id]) }}" method="POST"
+                                      class="hidden">
                                     @csrf
                                     @method('DELETE')
                                 </form>
@@ -71,7 +74,8 @@
                                     type="button"
                                     class="relative inline-flex w-16 h-16 mt-4 border border-yellow-600 group rounded-xl focus:outline-none"
                                 >
-                                    <span class="absolute inset-0 inline-flex items-center self-stretch justify-center text-2xl font-medium text-center transition-transform transform bg-yellow-600 text-gray-50 rounded-xl ring-1 ring-yellow-600 ring-offset-1 ring-offset-yellow-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                    <span
+                                        class="absolute inset-0 inline-flex items-center self-stretch justify-center text-2xl font-medium text-center transition-transform transform bg-yellow-600 text-gray-50 rounded-xl ring-1 ring-yellow-600 ring-offset-1 ring-offset-yellow-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                         <i class="bi bi-file-earmark-x-fill"></i>
                                     </span>
                                 </button>
@@ -142,8 +146,9 @@
                         {{-- 分類 --}}
                         <div>
                             <a class="hover:text-gray-700 dark:hover:text-gray-50"
-                            href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
-                                <i class="{{ $post->category->icon }}"></i><span class="ml-2">{{ $post->category->name }}</span>
+                               href="{{ $post->category->link_with_name }}" title="{{ $post->category->name }}">
+                                <i class="{{ $post->category->icon }}"></i><span
+                                    class="ml-2">{{ $post->category->name }}</span>
                             </a>
                         </div>
 
@@ -152,8 +157,8 @@
                         {{-- 作者 --}}
                         <div>
                             <a class="hover:text-gray-700 dark:hover:text-gray-50"
-                            href="{{ route('users.index', ['user' => $post->user_id]) }}"
-                            title="{{ $post->user->name }}">
+                               href="{{ route('users.index', ['user' => $post->user_id]) }}"
+                               title="{{ $post->user->name }}">
                                 <i class="bi bi-person-fill"></i><span class="ml-2">{{ $post->user->name }}</span>
                             </a>
                         </div>
@@ -163,9 +168,10 @@
                         {{-- 發布時間 --}}
                         <div class="hidden md:block">
                             <a class="hover:text-gray-700 dark:hover:text-gray-50"
-                            href="{{ $post->link_with_slug }}"
-                            title="文章發布於：{{ $post->created_at }}">
-                                <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
+                               href="{{ $post->link_with_slug }}"
+                               title="文章發布於：{{ $post->created_at }}">
+                                <i class="bi bi-clock-fill"></i><span
+                                    class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
                             </a>
                         </div>
 
@@ -174,8 +180,9 @@
                         {{-- 留言數 --}}
                         <div class="hidden md:block">
                             <a class="hover:text-gray-700 dark:hover:text-gray-50"
-                            href="{{ $post->link_with_slug }}#comments">
-                                <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->comment_count }}</span>
+                               href="{{ $post->link_with_slug }}#comments">
+                                <i class="bi bi-chat-square-text-fill"></i><span
+                                    class="ml-2">{{ $post->comment_count }}</span>
                             </a>
                         </div>
                     </div>
@@ -200,13 +207,15 @@
 
                     {{-- 分享文章 --}}
                     <div class="flex justify-end mt-4 space-x-4">
-                        <button type="button" title="分享此篇文章至 Facebook" data-sharer="facebook" data-url="{{ request()->fullUrl() }}"
-                        class="text-4xl text-gray-400 duration-300 hover:text-gray-700 dark:hover:text-gray-50">
+                        <button type="button" title="分享此篇文章至 Facebook" data-sharer="facebook"
+                                data-url="{{ request()->fullUrl() }}"
+                                class="text-4xl text-gray-400 duration-300 hover:text-gray-700 dark:hover:text-gray-50">
                             <i class="bi bi-facebook"></i>
                         </button>
 
-                        <button type="button" title="分享此篇文章至 Twitter" data-sharer="twitter" data-url="{{ request()->fullUrl() }}"
-                        class="text-4xl text-gray-400 duration-300 hover:text-gray-700 dark:hover:text-gray-50">
+                        <button type="button" title="分享此篇文章至 Twitter" data-sharer="twitter"
+                                data-url="{{ request()->fullUrl() }}"
+                                class="text-4xl text-gray-400 duration-300 hover:text-gray-700 dark:hover:text-gray-50">
                             <i class="bi bi-twitter"></i>
                         </button>
                     </div>
@@ -231,10 +240,10 @@
                 </x-card>
 
                 {{-- 留言回覆 --}}
-                @livewire('comment-box', ['post' => $post, 'commentCount' => $post->comment_count])
+                <livewire:comment-box :post="$post" :commentCount="$post->comment_count"/>
 
                 {{-- 留言列表 --}}
-                @livewire('comments', ['post' => $post])
+                <livewire:comments :post="$post"/>
             </div>
         </div>
     </div>

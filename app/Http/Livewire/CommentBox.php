@@ -74,7 +74,7 @@ class CommentBox extends Component
         $this->content = '';
 
         // 更新留言列表
-        $this->emit('refresh');
+        $this->emit('refreshCommentsGroup');
     }
 
     // 更新留言數量

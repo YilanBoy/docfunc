@@ -14,12 +14,7 @@ class CommentsGroup extends Component
     public $offset;
     public $perPage;
 
-    protected $listeners = ['refresh'];
-
-    public function refresh()
-    {
-        // Refresh comments
-    }
+    protected $listeners = ['refreshCommentsGroup' => '$refresh'];
 
     // 刪除留言
     public function destroy(Comment $comment)

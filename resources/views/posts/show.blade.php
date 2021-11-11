@@ -230,8 +230,11 @@
                     </div>
                 </x-card>
 
-                {{-- 留言區塊 --}}
+                {{-- 留言回覆 --}}
                 @livewire('comment-box', ['post' => $post, 'commentCount' => $post->comment_count])
+
+                {{-- 留言列表 --}}
+                @livewire('comments', ['post' => $post])
             </div>
         </div>
     </div>

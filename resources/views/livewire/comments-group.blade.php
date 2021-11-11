@@ -32,10 +32,10 @@
                     opacity-0 group-hover:opacity-100 transition duration-150">
                         <button
                             x-on:click="
-                                commentBoxOpen = true
-                                commentId = {{ $comment->id }}
-                                commentTo = '回覆{{ $comment->user->name }}'
-                                $nextTick(() => { $refs.commentBox.focus() })
+                                $dispatch('set-comment-box-open', true)
+                                $dispatch('set-comment-id', {{ $comment->id }})
+                                $dispatch('set-comment-to', '回覆{{ $comment->user->name }}')
+                                $dispatch('comment-box-focus')
                                 disableScroll()
                             "
                             class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-gray-50

@@ -4,6 +4,10 @@
         commentId: $wire.entangle('commentId'),
         commentTo: ''
     }"
+    @set-comment-box-open.window="commentBoxOpen = $event.detail"
+    @set-comment-id.window="commentId = $event.detail"
+    @set-comment-to.window="commentTo = $event.detail"
+    @comment-box-focus.window="$nextTick(() => { $refs.commentBox.focus() })"
     class="w-full xl:w-2/3"
 >
 
@@ -126,6 +130,4 @@
             </div>
         </div>
     @endauth
-
-    @livewire('comments', ['post' => $post])
 </div>

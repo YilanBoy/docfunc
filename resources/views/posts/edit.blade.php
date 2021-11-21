@@ -39,7 +39,7 @@
 
                             {{-- 儲存按鈕 --}}
                             <button type="submit" form="edit-post"
-                            class="save-post group relative w-16 h-16 inline-flex rounded-xl border border-blue-600 focus:outline-none mt-4">
+                                    class="save-post group relative w-16 h-16 inline-flex rounded-xl border border-blue-600 focus:outline-none mt-4">
                                 <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-gray-50 text-center font-medium bg-blue-600
                                 rounded-xl ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
                                 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
@@ -50,9 +50,9 @@
                     </div>
 
                     {{-- 驗證錯誤訊息 --}}
-                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                    <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
-                    <form id="edit-post" action="{{ route('posts.update', ['post' => $post->id]) }}" method="POST" >
+                    <form id="edit-post" action="{{ route('posts.update', ['post' => $post->id]) }}" method="POST">
                         @method('PUT')
                         @csrf
 
@@ -60,8 +60,9 @@
                         <div>
                             <label for="title" class="hidden">文章標題</label>
 
-                            <input type="text" name="title" placeholder="文章標題" value="{{ old('title', $post->title) }}" required autofocus
-                            class="form-input w-full rounded-md shadow-sm border border-gray-300
+                            <input type="text" name="title" placeholder="文章標題" value="{{ old('title', $post->title) }}"
+                                   required autofocus
+                                   class="form-input w-full rounded-md shadow-sm border border-gray-300
                             focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-2
                             dark:bg-gray-500 dark:text-gray-50 dark:placeholder-white">
                         </div>
@@ -80,7 +81,10 @@
                                 <option value="" hidden disabled {{ $post->id ? '' : 'selected' }}>請選擇分類</option>
                                 {{-- 這裡的 $categories 使用的是 view composer 來取得值，詳細可查看 ViewServiceProvider --}}
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ $post->category_id == $category->id ? 'selected' : '' }}>
+                                    <option
+                                        value="{{ $category->id }}"
+                                        {{ $post->category_id == $category->id ? 'selected' : '' }}
+                                    >
                                         {{ $category->name }}
                                     </option>
                                 @endforeach
@@ -95,7 +99,7 @@
                                 id="tag-input"
                                 type="text"
                                 name="tags"
-                                value="{{ old('tags', $post->tagsJson) }}"
+                                value="{{ old('tags', $post->tags_json) }}"
                                 placeholder="標籤（最多 5 個）"
                                 class="h-10 rounded-md text-sm bg-white dark:bg-gray-500"
                             >
@@ -105,7 +109,8 @@
                         <div class="mt-5">
                             <label for="body" class="hidden">內文</label>
 
-                            <textarea name="body" id="editor" placeholder="分享一些很棒的事情吧!">{{ old('body', $post->body ) }}</textarea>
+                            <textarea name="body" id="editor"
+                                      placeholder="分享一些很棒的事情吧!">{{ old('body', $post->body ) }}</textarea>
                         </div>
 
                         {{-- 文章編輯資訊-行動裝置 --}}

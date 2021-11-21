@@ -92,16 +92,6 @@ class PostController extends Controller
         // 只能編輯自己發佈的文章，規則寫在 PostPolicy
         $this->authorize('update', $post);
 
-        // 生成包含 tag ID 與 tag name 的 Array
-        // [["id" => "2","value" => "C#"], ["id" => "5","value" => "Dart"]]
-        $tagsArray = $post->tags
-            ->map(fn($tag) => ['id' => $tag->id, 'value' => $tag->name])
-            ->all();
-
-        // 轉成 tagify 的 JSON 格式
-        // [{"id":"2","value":"C#"},{"id":"5","value":"Dart"}]
-        $post->tagsJson = json_encode($tagsArray, JSON_UNESCAPED_UNICODE);
-
         return view('posts.edit', ['post' => $post]);
     }
 

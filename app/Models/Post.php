@@ -41,26 +41,30 @@ class Post extends Model
     public function scopeWithOrder($query, ?string $order)
     {
         return $query->when($order, function ($query, $order) {
-            switch ($order) {
-                case 'recent':
-                    return $query->orderBy('updated_at', 'desc');
-                    break;
-                case 'comment':
-                    return $query->orderBy('comment_count', 'desc');
-                    break;
-                default:
-                    return $query->latest();
-            }
+            return match ($order) {
+                'recent' => $query->orderBy('updated_at', 'desc'),
+                'comment' => $query->orderBy('comment_count', 'desc'),
+                default => $query->latest(),
+            };
         });
     }
 
     // 將連結加上文章的 slug
-    public function getLinkWithSlugAttribute()
+    public function getLinkWithSlugAttribute(): string
     {
         return route('posts.show', [
             'post' => $this->id,
             'slug' => $this->slug,
         ]);
+    }
+
+    public function getTagsJsonAttribute(): string
+    {
+        // 生成包含 tag ID 與 tag name 的 json 字串
+        // [{"id":"2","value":"C#"},{"id":"5","value":"Dart"}]
+        return $this->tags
+            ->map(fn($tag) => ['id' => $tag->id, 'value' => $tag->name])
+            ->toJson();
     }
 
     // 更新留言數量

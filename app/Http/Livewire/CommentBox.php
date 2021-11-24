@@ -10,26 +10,22 @@ class CommentBox extends Component
 {
     public $post;
     public $content;
+    public $commentBoxOpen = false;
     public $commentId = 0;
     public $commentCount;
 
     protected $listeners = ['updateCommentCount'];
 
     protected $rules = [
-        'content' => ['required', 'min:2', 'max:400'],
+        'commentId' => ['required', 'numeric'],
+        'content' => ['required', 'min:5', 'max:400'],
     ];
 
     protected $messages = [
         'content.required' => '請填寫留言內容',
-        'content.min' => '留言內容至少 2 個字元',
+        'content.min' => '留言內容至少 5 個字元',
         'content.max' => '留言內容至多 400 個字元',
     ];
-
-    // 實時判斷表單內容是否符合 $rules
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
 
     // 確認是否有登入
     public function authCheck()
@@ -46,9 +42,7 @@ class CommentBox extends Component
             return abort(403);
         }
 
-        $this->validate([
-            'commentId' => ['required', 'numeric']
-        ]);
+        $this->validate();
 
         $comment = Comment::create(
             [
@@ -72,6 +66,9 @@ class CommentBox extends Component
 
         // 清空留言表單的內容
         $this->content = '';
+
+        $this->commentBoxOpen = false;
+        $this->dispatchBrowserEvent('enableScroll');
 
         // 更新留言列表
         $this->emit('refreshCommentsGroup');

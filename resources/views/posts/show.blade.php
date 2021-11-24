@@ -244,6 +244,12 @@
 
                 {{-- 留言列表 --}}
                 <livewire:comments :post="$post"/>
+
+                <script>
+                    window.addEventListener('enableScroll', () => {
+                        enableScroll();
+                    })
+                </script>
             </div>
         </div>
     </div>

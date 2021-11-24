@@ -1,6 +1,6 @@
 <div
     x-data="{
-        commentBoxOpen: false,
+        commentBoxOpen: $wire.entangle('commentBoxOpen'),
         commentId: $wire.entangle('commentId'),
         commentTo: ''
     }"
@@ -11,32 +11,32 @@
     class="w-full xl:w-2/3"
 >
 
-        <div class="flex justify-between mt-6">
-            {{-- 顯示留言數目 --}}
-            <span class="flex items-center dark:text-gray-50">
+    <div class="flex justify-between mt-6">
+        {{-- 顯示留言數目 --}}
+        <span class="flex items-center dark:text-gray-50">
                 <i class="bi bi-chat-square-text-fill"></i>
                 <span class="ml-2">{{ $commentCount }} 則留言</span>
             </span>
 
-            <button
-                x-on:click="
-                    commentBoxOpen = true
-                    commentId = 0
-                    commentTo = '回覆此文章'
-                    $nextTick(() => { $refs.commentBox.focus() })
-                    disableScroll()
-                "
-                wire:click="authCheck"
-                type="button"
-                class="relative inline-flex w-40 h-12 border border-blue-600 rounded-lg group focus:outline-none"
-            >
+        <button
+            x-on:click="
+                commentBoxOpen = true
+                commentId = 0
+                commentTo = '回覆此文章'
+                $nextTick(() => { $refs.commentBox.focus() })
+                disableScroll()
+            "
+            wire:click="authCheck"
+            type="button"
+            class="relative inline-flex w-40 h-12 border border-blue-600 rounded-lg group focus:outline-none"
+        >
                 <span
                     class="absolute inset-0 inline-flex items-center self-stretch justify-center px-6 font-medium text-center transition-transform transform bg-blue-600 rounded-lg text-gray-50 ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 group-hover:-translate-y-2 group-hover:-translate-x-2"
                 >
                     <i class="bi bi-chat-left-text-fill"></i><span class="ml-2">新增留言</span>
                 </span>
-            </button>
-        </div>
+        </button>
+    </div>
 
     @auth
         {{-- 留言表單 Modal --}}
@@ -90,7 +90,7 @@
                     <div class="mt-5 sm:flex sm:items-start">
                         <textarea
                             x-ref="commentBox"
-                            wire:model.debounce.2000ms="content"
+                            wire:model.lazy="content"
                             placeholder="分享你的想法 ~"
                             rows="5"
                             class="w-full border border-gray-300 rounded-md shadow-sm form-textarea focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
@@ -99,11 +99,7 @@
 
                     <div class="mt-5 sm:flex sm:flex-row-reverse">
                         <button
-                            x-on:click="
-                                commentBoxOpen = false
-                                enableScroll()
-                            "
-                            wire:click="store()"
+                            wire:click="store"
                             type="button"
                             class="inline-flex justify-center w-full px-4 py-2 text-base font-medium bg-blue-600 border border-transparent rounded-md shadow-sm text-gray-50 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                         >

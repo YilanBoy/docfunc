@@ -33,6 +33,12 @@ module.exports = {
                                     color: theme('colors.blue.500'),
                                 },
                             },
+                            'a code': {
+                                color: theme('colors.blue.400'),
+                                '&:hover': {
+                                    color: theme('colors.blue.500'),
+                                },
+                            },
                         },
                     ],
                 },
@@ -51,6 +57,9 @@ module.exports = {
                             },
                             strong: {
                                 color: theme('colors.gray.50'),
+                            },
+                            'mark strong': {
+                                color: theme('colors.gray.900'),
                             },
                             'ol > li::before': {
                                 color: theme('colors.gray.400'),
@@ -84,7 +93,10 @@ module.exports = {
                                 color: theme('colors.gray.50'),
                             },
                             'a code': {
-                                color: theme('colors.gray.50'),
+                                color: theme('colors.blue.400'),
+                                '&:hover': {
+                                    color: theme('colors.blue.300'),
+                                },
                             },
                             pre: {
                                 color: theme('colors.gray.200'),

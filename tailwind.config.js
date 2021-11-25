@@ -31,13 +31,17 @@ module.exports = {
                                 color: theme('colors.blue.400'),
                                 '&:hover': {
                                     color: theme('colors.blue.500'),
+                                    'text-decoration': 'underline',
                                 },
+                                'text-decoration': 'none',
                             },
                             'a code': {
                                 color: theme('colors.blue.400'),
                                 '&:hover': {
                                     color: theme('colors.blue.500'),
+                                    'text-decoration': 'underline',
                                 },
+                                'text-decoration': 'none',
                             },
                         },
                     ],
@@ -53,7 +57,9 @@ module.exports = {
                                 color: theme('colors.blue.400'),
                                 '&:hover': {
                                     color: theme('colors.blue.300'),
+                                    'text-decoration': 'underline',
                                 },
+                                'text-decoration': 'none',
                             },
                             strong: {
                                 color: theme('colors.gray.50'),
@@ -96,7 +102,9 @@ module.exports = {
                                 color: theme('colors.blue.400'),
                                 '&:hover': {
                                     color: theme('colors.blue.300'),
+                                    'text-decoration': 'underline',
                                 },
+                                'text-decoration': 'none',
                             },
                             pre: {
                                 color: theme('colors.gray.200'),

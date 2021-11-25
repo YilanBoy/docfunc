@@ -4,7 +4,6 @@
 
 @section('css')
     <link href="{{ asset('css/content-styles.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/missing-content-styles.css') }}" rel="stylesheet">
     <link href="{{ asset('prism/prism.css') }}" rel="stylesheet">
 @endsection
 
@@ -201,7 +200,7 @@
                     @endif
 
                     {{-- 文章內容 --}}
-                    <div class="mt-4 ck-content dark:text-gray-50">
+                    <div class="prose max-w-none dark:prose-dark mt-4 ck-content dark:text-gray-50">
                         {!! $post->body !!}
                     </div>
 

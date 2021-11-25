@@ -25,8 +25,7 @@ mix.js('resources/js/app.js', 'public/js')
     .ts('resources/ts/theme/theme-switch.ts', 'public/js')
     .copy('node_modules/sharer.js/sharer.min.js', 'public/js/sharer.min.js')
     .copy('node_modules/@yaireo/tagify/dist/tagify.css', 'public/css/tagify.css')
-    .css('resources/css/content/content-styles.css', 'public/css')
-    .css('resources/css/content/missing-content-styles.css', 'public/css')
+    .css('resources/css/content-styles.css', 'public/css')
     .css('resources/css/editor.css', 'public/css')
     .options({
         terser: {

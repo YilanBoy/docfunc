@@ -1,7 +1,6 @@
 @section('title', '編輯文章')
 
 @section('css')
-    <link href="{{ asset('css/missing-content-styles.css') }}" rel="stylesheet">
     <link href="{{ asset('css/editor.css') }}" rel="stylesheet">
     <link href="{{ asset('css/tagify.css') }}" rel="stylesheet">
 @endsection
@@ -106,7 +105,7 @@
                         </div>
 
                         {{-- 文章內容 --}}
-                        <div class="mt-5">
+                        <div class="prose max-w-none dark:prose-dark mt-5">
                             <label for="body" class="hidden">內文</label>
 
                             <textarea name="body" id="editor"

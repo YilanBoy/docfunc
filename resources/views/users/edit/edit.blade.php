@@ -12,13 +12,13 @@
         <div class="flex mt-4 dark:text-gray-50">
             <span class="mr-2">會員大頭貼由</span>
             <a href="https://zh-tw.gravatar.com/" target="_blank" rel="nofollow noopener noreferrer"
-            class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50">Gravatar</a>
+               class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50">Gravatar</a>
             <span class="ml-2">技術提供</span>
         </div>
     </div>
 
     {{-- 驗證錯誤訊息 --}}
-    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+    <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
     <form method="POST" action="{{ route('users.update', ['user' => $user->id]) }}" class="w-full">
         @method('PUT')
@@ -34,10 +34,14 @@
         <div class="mt-5">
             <label for="name" class="text-gray-600 dark:text-gray-50">會員名稱 (只能使用英文、數字、_ 或是 -)</label>
 
-            <input type="text" name="name" placeholder="給自己取個有趣的暱稱吧！" value="{{ old('name', $user->name) }}" required autofocus
-            class="form-input w-full rounded-md shadow-sm border border-gray-300
-            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-2
-            dark:bg-gray-500 dark:text-gray-50 dark:placeholder-white">
+            <input
+                type="text" name="name" placeholder="給自己取個有趣的暱稱吧！" value="{{ old('name', $user->name) }}"
+                required
+                autofocus
+                class="form-input w-full rounded-md shadow-sm border border-gray-300
+                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-2
+                dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+            >
         </div>
 
         {{-- 會員自介 --}}
@@ -50,7 +54,7 @@
                 rows="5"
                 class="form-textarea w-full rounded-md shadow-sm border border-gray-300
                 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-2
-                dark:bg-gray-500 dark:text-gray-50 dark:placeholder-white"
+                dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
             >{{ old('introduction', $user->introduction) }}</textarea>
         </div>
 

@@ -40,7 +40,7 @@
 
                             {{-- 儲存按鈕 --}}
                             <button type="submit" form="create-post"
-                            class="save-post group relative w-16 h-16 inline-flex rounded-xl border border-blue-600 focus:outline-none mt-4">
+                                    class="save-post group relative w-16 h-16 inline-flex rounded-xl border border-blue-600 focus:outline-none mt-4">
                                 <span class="absolute inset-0 inline-flex items-center justify-center self-stretch text-2xl text-gray-50 text-center font-medium bg-blue-600
                                 rounded-xl ring-1 ring-blue-600 ring-offset-1 ring-offset-blue-600 transform transition-transform
                                 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
@@ -51,7 +51,7 @@
                     </div>
 
                     {{-- 驗證錯誤訊息 --}}
-                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                    <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
                     <form id="create-post" action="{{ route('posts.store') }}" method="POST">
                         @csrf
@@ -60,10 +60,13 @@
                         <div>
                             <label for="title" class="hidden">文章標題</label>
 
-                            <input type="text" name="title" placeholder="文章標題" value="{{ old('title') }}" required autofocus
-                            class="form-input w-full rounded-md shadow-sm border border-gray-300
-                            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-2
-                            dark:bg-gray-500 dark:text-gray-50 dark:placeholder-white">
+                            <input
+                                type="text" name="title" placeholder="文章標題" value="{{ old('title') }}" required
+                                autofocus
+                                class="form-input w-full rounded-md shadow-sm border border-gray-300
+                                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-2
+                                dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+                            >
                         </div>
 
                         {{-- 文章分類 --}}
@@ -75,12 +78,14 @@
                                 required
                                 class="form-select h-10 w-full rounded-md shadow-sm border border-gray-300
                                 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
-                                dark:bg-gray-500 dark:text-gray-50"
+                                dark:bg-gray-600 dark:text-gray-50"
                             >
-                                <option value="" hidden disabled {{ old('category_id') ? '' : 'selected' }}>請選擇分類</option>
+                                <option value="" hidden disabled {{ old('category_id') ? '' : 'selected' }}>請選擇分類
+                                </option>
                                 {{-- 這裡的 $categories 使用的是 view composer 來取得值，詳細可查看 ViewServiceProvider --}}
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id  ? 'selected' : '' }}>
+                                    <option
+                                        value="{{ $category->id }}" {{ old('category_id') == $category->id  ? 'selected' : '' }}>
                                         {{ $category->name }}
                                     </option>
                                 @endforeach
@@ -97,7 +102,7 @@
                                 name="tags"
                                 value="{{ old('tags') }}"
                                 placeholder="標籤 (最多 5 個)"
-                                class="h-10 rounded-md text-sm bg-white dark:bg-gray-500"
+                                class="h-10 rounded-md text-sm bg-white dark:bg-gray-600"
                             >
                         </div>
 

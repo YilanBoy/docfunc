@@ -59,11 +59,13 @@
                         <div>
                             <label for="title" class="hidden">文章標題</label>
 
-                            <input type="text" name="title" placeholder="文章標題" value="{{ old('title', $post->title) }}"
-                                   required autofocus
-                                   class="form-input w-full rounded-md shadow-sm border border-gray-300
-                            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-2
-                            dark:bg-gray-500 dark:text-gray-50 dark:placeholder-white">
+                            <input
+                                type="text" name="title" placeholder="文章標題" value="{{ old('title', $post->title) }}"
+                                required autofocus
+                                class="form-input w-full rounded-md shadow-sm border border-gray-300
+                                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-2
+                                dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+                            >
                         </div>
 
                         {{-- 文章分類 --}}
@@ -75,7 +77,7 @@
                                 required
                                 class="form-select h-10 w-full rounded-md shadow-sm border border-gray-300
                                 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
-                                dark:bg-gray-500 dark:text-gray-50"
+                                dark:bg-gray-600 dark:text-gray-50"
                             >
                                 <option value="" hidden disabled {{ $post->id ? '' : 'selected' }}>請選擇分類</option>
                                 {{-- 這裡的 $categories 使用的是 view composer 來取得值，詳細可查看 ViewServiceProvider --}}
@@ -100,7 +102,7 @@
                                 name="tags"
                                 value="{{ old('tags', $post->tags_json) }}"
                                 placeholder="標籤（最多 5 個）"
-                                class="h-10 rounded-md text-sm bg-white dark:bg-gray-500"
+                                class="h-10 rounded-md text-sm bg-white dark:bg-gray-600"
                             >
                         </div>
 

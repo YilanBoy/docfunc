@@ -27,32 +27,20 @@
 }
 
 /* Dark Mode */
-/* Link hover */
-.dark .ck-content a:hover {
-    color: #7dd3fc;
-    cursor: pointer;
-}
-
 /* Textarea */
 .dark .ck-rounded-corners .ck.ck-editor__main > .ck-editor__editable,
 .dark .ck.ck-editor__main > .ck-editor__editable.ck-rounded-corners {
     background-color: #4B5563;
-    color: white;
 }
 
 /* Placeholder */
 .dark .ck.ck-editor__editable > .ck-placeholder::before {
-    color: white;
-}
-
-/* Code block */
-.dark .ck-content pre {
-    color: #f4f4f5;
+    color: #F9FAFB;
 }
 
 /* tagify */
 .dark .tagify__input {
-    --placeholder-color: white;
-    --placeholder-color-focus: white;
-    --input-color: white;
+    --placeholder-color: #F9FAFB;
+    --placeholder-color-focus: #F9FAFB;
+    --input-color: #F9FAFB;
 }

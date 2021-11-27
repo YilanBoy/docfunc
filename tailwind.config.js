@@ -55,7 +55,7 @@ module.exports = {
                 dark: {
                     css: [
                         {
-                            color: theme('colors.gray.400'),
+                            color: theme('colors.gray.50'),
                             '[class~="lead"]': {
                                 color: theme('colors.gray.300'),
                             },
@@ -107,7 +107,8 @@ module.exports = {
                                 color: theme('colors.gray.50'),
                             },
                             'figure figcaption': {
-                                color: theme('colors.gray.400'),
+                                color: theme('colors.gray.50'),
+                                backgroundColor: theme('colors.gray.500'),
                             },
                             code: {
                                 color: theme('colors.gray.50'),

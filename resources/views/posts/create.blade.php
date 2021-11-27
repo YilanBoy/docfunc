@@ -107,7 +107,7 @@
                         </div>
 
                         {{-- 文章內容 --}}
-                        <div class="mt-5">
+                        <div class="prose max-w-none dark:prose-dark mt-5">
                             <label for="body" class="hidden">內文</label>
 
                             <textarea name="body" id="editor" placeholder="分享一些很棒的事情吧!">{{ old('body') }}</textarea>

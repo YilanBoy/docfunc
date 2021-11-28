@@ -35,7 +35,9 @@
             <label for="name" class="text-gray-600 dark:text-gray-50">會員名稱 (只能使用英文、數字、_ 或是 -)</label>
 
             <input
-                type="text" name="name" placeholder="給自己取個有趣的暱稱吧！" value="{{ old('name', $user->name) }}"
+                id="name"
+                type="text" name="name" value="{{ old('name', $user->name) }}"
+                placeholder="給自己取個有趣的暱稱吧！"
                 required
                 autofocus
                 class="form-input w-full rounded-md shadow-sm border border-gray-300
@@ -49,6 +51,7 @@
             <label for="introduction" class="text-gray-600 dark:text-gray-50">個人介紹 (最多 80 個字)</label>
 
             <textarea
+                id="introduction"
                 name="introduction"
                 placeholder="介紹一下你自己吧！"
                 rows="5"

@@ -88,7 +88,9 @@
                     </div>
 
                     <div class="mt-5 sm:flex sm:items-start">
+                        <label for="commentBox" class="hidden">留言內容</label>
                         <textarea
+                            id="commentBox"
                             x-ref="commentBox"
                             wire:model.lazy="content"
                             placeholder="分享你的想法 ~"

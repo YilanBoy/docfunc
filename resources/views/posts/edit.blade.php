@@ -60,7 +60,8 @@
                             <label for="title" class="hidden">文章標題</label>
 
                             <input
-                                type="text" name="title" placeholder="文章標題" value="{{ old('title', $post->title) }}"
+                                type="text" id="title" name="title" placeholder="文章標題"
+                                value="{{ old('title', $post->title) }}"
                                 required autofocus
                                 class="form-input w-full rounded-md shadow-sm border border-gray-300
                                 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-2
@@ -73,6 +74,7 @@
                             <label for="category_id" class="hidden">分類</label>
 
                             <select
+                                id="category_id"
                                 name="category_id"
                                 required
                                 class="form-select h-10 w-full rounded-md shadow-sm border border-gray-300
@@ -94,7 +96,7 @@
 
                         {{-- 文章標籤 --}}
                         <div class="mt-5">
-                            <label for="tags" class="hidden">標籤（最多 5 個）</label>
+                            <label for="tag-input" class="hidden">標籤（最多 5 個）</label>
 
                             <input
                                 id="tag-input"
@@ -108,10 +110,13 @@
 
                         {{-- 文章內容 --}}
                         <div class="prose max-w-none dark:prose-dark mt-5">
-                            <label for="body" class="hidden">內文</label>
+                            <label for="editor" class="hidden">內文</label>
 
-                            <textarea name="body" id="editor"
-                                      placeholder="分享一些很棒的事情吧!">{{ old('body', $post->body ) }}</textarea>
+                            <textarea
+                                id="editor"
+                                name="body"
+                                placeholder="分享一些很棒的事情吧!"
+                            >{{ old('body', $post->body ) }}</textarea>
                         </div>
 
                         {{-- 文章編輯資訊-行動裝置 --}}

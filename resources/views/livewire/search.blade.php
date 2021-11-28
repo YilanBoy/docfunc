@@ -54,7 +54,9 @@
             >
                 {{-- 搜尋欄 --}}
                 <div class="relative">
+                    <label for="searchBox" class="hidden">搜尋</label>
                     <input
+                        id="searchBox"
                         x-ref="searchBox"
                         type="text"
                         wire:model.debounce.500ms="search"
@@ -71,9 +73,12 @@
                         wire:loading
                         class="absolute right-0 top-3"
                     >
-                        <svg class="w-5 h-5 mr-3 -ml-1 text-gray-700 animate-spin dark:text-gray-50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        <svg class="w-5 h-5 mr-3 -ml-1 text-gray-700 animate-spin dark:text-gray-50"
+                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                    stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor"
+                                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
                     </div>
                 </div>
@@ -95,7 +100,8 @@
                                             href="{{ $result->link_with_slug }}"
                                             class="flex p-2 text-left rounded-md hover:bg-gray-200 dark:text-gray-50 dark:hover:bg-gray-600"
                                         >
-                                            <i class="bi bi-caret-right-fill"></i><span class="ml-2">{{ $result->title }}</span>
+                                            <i class="bi bi-caret-right-fill"></i><span
+                                                class="ml-2">{{ $result->title }}</span>
                                         </a>
                                     </li>
                                 @endforeach
@@ -111,11 +117,11 @@
                             <a target="_blank" rel="nofollow noopener noreferrer" href="https://www.algolia.com">
                                 {{-- Light Mode Algolia Logo --}}
                                 <img src="/images/icon/search-by-algolia-light-background.png" alt="Search by Algolia"
-                                class="inline-block dark:hidden">
+                                     class="inline-block dark:hidden">
 
                                 {{-- Dark Mode Algolia Logo --}}
                                 <img src="/images/icon/search-by-algolia-dark-background.png" alt="Search by Algolia"
-                                class="hidden dark:inline-block">
+                                     class="hidden dark:inline-block">
                             </a>
                         </div>
                     </div>

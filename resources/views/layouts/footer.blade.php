@@ -9,12 +9,12 @@
             </div>
             {{-- Links --}}
             <a href="https://github.com/YilanBoy/simple-blog" target="_blank" rel="nofollow noopener noreferrer"
-            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+               class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
                 Source Code
             </a>
             <a href="https://github.com/YilanBoy" target="_blank" rel="nofollow noopener noreferrer"
-            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
-                Auther
+               class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+                Author
             </a>
         </div>
 
@@ -22,12 +22,12 @@
         <div class="p-5 w-1/2 sm:w-1/3">
             {{-- Title --}}
             <div class="text-lg uppercase text-gray-500 font-medium mb-6">
-                Learing
+                Learning
             </div>
 
             {{-- Links --}}
             <a href="https://laracasts.com/" target="_blank" rel="nofollow noopener noreferrer"
-            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+               class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
                 Laracasts
             </a>
         </div>
@@ -41,27 +41,27 @@
 
             {{-- Links --}}
             <a href="https://laravel.com/" target="_blank" rel="nofollow noopener noreferrer"
-            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+               class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
                 Laravel
             </a>
             <a href="https://learnku.com/laravel" target="_blank" rel="nofollow noopener noreferrer"
-            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+               class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
                 Laravel China
             </a>
             <a href="https://www.facebook.com/groups/498481680220886" target="_blank" rel="nofollow noopener noreferrer"
-            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+               class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
                 Laravel Taiwan
             </a>
             <a href="https://tailwindcss.com/" target="_blank" rel="nofollow noopener noreferrer"
-            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+               class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
                 TailwindCSS
             </a>
             <a href="https://alpinejs.dev/" target="_blank" rel="nofollow noopener noreferrer"
-            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+               class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
                 Alpine.js
             </a>
             <a href="https://www.flaticon.com/authors/freepik" target="_blank" rel="nofollow noopener noreferrer"
-            class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
+               class="my-3 block text-gray-300 hover:text-gray-500 font-medium duration-300">
                 Frepik from flaction
             </a>
         </div>
@@ -77,15 +77,16 @@
 
             <div class="flex flex-row justify-center md:flex-auto md:justify-end space-x-4">
                 <a href="https://github.com/YilanBoy" target="_blank" rel="nofollow noopener noreferrer"
-                class="text-2xl text-gray-300 hover:text-gray-500 duration-300">
+                   class="text-2xl text-gray-300 hover:text-gray-500 duration-300">
                     <i class="bi bi-github"></i>
                 </a>
                 <a href="https://twitter.com/bVK1uFaMvQkDyPR" target="_blank" rel="nofollow noopener noreferrer"
-                class="text-2xl text-gray-300 hover:text-gray-500 duration-300">
+                   class="text-2xl text-gray-300 hover:text-gray-500 duration-300">
                     <i class="bi bi-twitter"></i>
                 </a>
-                <a href="https://www.facebook.com/profile.php?id=100004204543711" target="_blank" rel="nofollow noopener noreferrer"
-                class="text-2xl text-gray-300 hover:text-gray-500 duration-300">
+                <a href="https://www.facebook.com/profile.php?id=100004204543711" target="_blank"
+                   rel="nofollow noopener noreferrer"
+                   class="text-2xl text-gray-300 hover:text-gray-500 duration-300">
                     <i class="bi bi-facebook"></i>
                 </a>
             </div>

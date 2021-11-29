@@ -16,13 +16,11 @@ use Illuminate\Routing\Redirector;
 
 class PostController extends Controller
 {
-    protected PostService $postService;
-    protected FormatTransferService $formatTransferService;
-
-    public function __construct(PostService $postService, FormatTransferService $formatTransferService)
+    public function __construct(
+        protected PostService           $postService,
+        protected FormatTransferService $formatTransferService
+    )
     {
-        $this->postService = $postService;
-        $this->formatTransferService = $formatTransferService;
     }
 
     /**

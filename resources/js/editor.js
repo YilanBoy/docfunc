@@ -44,13 +44,13 @@ ClassicEditor.create(document.querySelector('#editor'), {
     }
 })
     .then(editor => {
-        window.editor = editor;
+        console.log('Editor was initialized');
     })
     .catch(err => {
         console.error(err.stack);
     });
 
-// 若以非送出表單的方式離開編輯頁面，以 alert 視窗提醒使用者
+// 若以非送出表單的方式離開編輯頁面，以 alert 視窗提醒使用者
 let saveButtonClicked = false;
 
 Array.prototype.forEach.call(savePostButton, (element) => {

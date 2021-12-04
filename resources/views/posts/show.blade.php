@@ -17,6 +17,8 @@
     <script src="{{ asset('prism/prism.js') }}"></script>
     {{-- 社交分享按鈕 --}}
     <script src="{{ asset('js/sharer.min.js') }}"></script>
+    {{-- 程式碼複製按鈕  --}}
+    <script src="{{ asset('js/copy-code-btn.js')}}"></script>
 @endsection
 
 {{-- 文章內容 --}}

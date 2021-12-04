@@ -28,12 +28,8 @@ for (let i = 0, copyButtonsLength = copyButtons.length; i < copyButtonsLength; i
 
         let code = this.parentElement.getElementsByTagName('code')[0];
         let codeText: string = code.innerText;
-        let textArea: HTMLTextAreaElement = document.createElement('textarea');
-        textArea.value = codeText;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        textArea.remove();
+        navigator.clipboard.writeText(codeText)
+            .then(() => console.log('Copied to clipboard'), () => console.log('Failed to copy to clipboard'));
 
         // change button inner text to "Copied!" for 2 seconds
         this.innerText = 'Copied!';

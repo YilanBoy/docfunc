@@ -35,6 +35,12 @@ module.exports = {
                                 },
                                 'text-decoration': 'none',
                             },
+                            pre: {
+                                'white-space': 'pre-wrap !important',
+                            },
+                            code: {
+                                'white-space': 'pre-wrap !important',
+                            },
                             'a code': {
                                 color: theme('colors.blue.400'),
                                 '&:hover': {

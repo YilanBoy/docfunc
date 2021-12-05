@@ -8,25 +8,20 @@ let buttonClassList: string[] = [
     'opacity-0', 'group-hover:opacity-100', 'transition-all', 'duration-200'
 ];
 
-// add class "relative" and copy button to all pre tags
+// add copy button to all pre tags
 for (let i = 0, preTagsLength = preTags.length; i < preTagsLength; i++) {
     preTags[i].classList.add('relative', 'group');
 
+    // create copy button
     let copyButton: HTMLButtonElement = document.createElement('button');
     copyButton.classList.add(...buttonClassList);
     copyButton.innerHTML = 'Copy';
-    preTags[i].appendChild(copyButton);
-}
 
-// add event listener to all copy buttons, when button clicked, copy code to clipboard
-let copyButtons: HTMLCollectionOf<Element> = document.getElementsByClassName('copy-code-button');
-for (let i = 0, copyButtonsLength = copyButtons.length; i < copyButtonsLength; i++) {
-    copyButtons[i].addEventListener('click', function (this: HTMLButtonElement) {
-        if (!this.parentElement) {
-            return;
-        }
+    // when copy button is clicked, copy code to clipboard
+    copyButton.addEventListener('click', function (this: HTMLButtonElement) {
+        let code = preTags[i].getElementsByTagName('code')[0];
 
-        let code = this.parentElement.getElementsByTagName('code')[0];
+        // copy code to clipboard
         let codeText: string = code.innerText;
         navigator.clipboard.writeText(codeText)
             .then(() => console.log('Copied to clipboard'), () => console.log('Failed to copy to clipboard'));
@@ -37,4 +32,6 @@ for (let i = 0, copyButtonsLength = copyButtons.length; i < copyButtonsLength; i
             this.innerText = 'Copy';
         }.bind(this), 2000);
     });
+
+    preTags[i].appendChild(copyButton);
 }

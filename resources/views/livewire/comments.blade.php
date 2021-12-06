@@ -3,7 +3,8 @@
 
     <div x-data class="w-full">
         @for ($offset = 0; $offset < $count; $offset += $perPage)
-            <livewire:comments-group :post="$post" :perPage="$perPage" :offset="$offset" wire:key="comments-group-{{ $offset }}"/>
+            <livewire:comments-group :postId="$postId" :perPage="$perPage" :offset="$offset"
+                                     wire:key="comments-group-{{ $offset }}"/>
         @endfor
     </div>
 

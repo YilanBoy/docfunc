@@ -7,8 +7,8 @@
             {{-- 文章列表 --}}
             <livewire:posts
                 :currentUrl="url()->current()"
-                :category="$category ?? null"
-                :tag="$tag ?? null"
+                :categoryId="$category->id ?? 0"
+                :tagId="$tag->id ?? 0"
             />
 
             {{-- 文章列表側邊欄 --}}

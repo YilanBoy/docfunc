@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -9,7 +10,7 @@ class Posts extends Component
 {
     use WithPagination;
 
-    public $user;
+    public int $userId;
 
     public function getQueryString()
     {
@@ -20,7 +21,7 @@ class Posts extends Component
     public function render()
     {
         // 該會員的文章
-        $posts = $this->user->posts()
+        $posts = User::find($this->userId)->posts()
             ->withTrashed()
             ->with('category')
             ->orderBy('deleted_at', 'desc')

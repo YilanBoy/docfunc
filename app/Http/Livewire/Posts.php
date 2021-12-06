@@ -10,10 +10,10 @@ class Posts extends Component
 {
     use WithPagination;
 
-    public $currentUrl;
-    public $category;
-    public $tag;
-    public $order;
+    public string $currentUrl;
+    public int $categoryId;
+    public int $tagId;
+    public string $order = '';
 
     protected $queryString = [
         'order',
@@ -33,15 +33,16 @@ class Posts extends Component
 
     public function render()
     {
-        if ($this->category) {
-            $post = $this->category->posts();
-        } elseif ($this->tag) {
-            $post = $this->tag->posts();
-        } else {
-            $post = Post::query();
-        }
-
-        $posts = $post->withOrder($this->order)
+        $posts = Post::query()
+            ->when($this->categoryId, function ($query) {
+                return $query->where('category_id', $this->categoryId);
+            })
+            ->when($this->tagId, function ($query) {
+                return $query->whereHas('tags', function ($query) {
+                    $query->where('tag_id', $this->tagId);
+                });
+            })
+            ->withOrder($this->order)
             ->with('user', 'category', 'tags') // 預加載防止 N+1 問題
             ->withCount('tags') // 計算標籤數目
             ->paginate(10)

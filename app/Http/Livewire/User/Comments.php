@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -9,7 +10,7 @@ class Comments extends Component
 {
     use WithPagination;
 
-    public $user;
+    public int $userId;
 
     public function getQueryString()
     {
@@ -19,7 +20,7 @@ class Comments extends Component
     public function render()
     {
         // 該會員的留言
-        $comments = $this->user->comments()
+        $comments = User::find($this->userId)->comments()
             ->whereHas('post', function ($query) {
                 $query->whereNull('deleted_at');
             })

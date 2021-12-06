@@ -241,10 +241,10 @@
                 </x-card>
 
                 {{-- 留言回覆 --}}
-                <livewire:comment-box :post="$post" :commentCount="$post->comment_count"/>
+                <livewire:comment-box :postId="$post->id" :commentCount="$post->comment_count"/>
 
                 {{-- 留言列表 --}}
-                <livewire:comments :post="$post"/>
+                <livewire:comments :postId="$post->id" :authorId="$post->user_id"/>
 
                 <script>
                     window.addEventListener('enableScroll', () => {

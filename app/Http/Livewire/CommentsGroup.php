@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Post;
 use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Comment;
@@ -10,9 +11,10 @@ class CommentsGroup extends Component
 {
     use AuthorizesRequests;
 
-    public $post;
-    public $offset;
-    public $perPage;
+    public int $postId;
+    public int $authorId;
+    public int $offset;
+    public int $perPage;
 
     protected $listeners = ['refreshCommentsGroup' => '$refresh'];
 
@@ -23,13 +25,13 @@ class CommentsGroup extends Component
 
         $comment->delete();
 
-        $this->post->updateCommentCount();
+        Post::find($this->postId)->updateCommentCount();
         $this->emit('updateCommentCount');
     }
 
     public function render()
     {
-        $comments = $this->post->comments()
+        $comments = Post::find($this->postId)->comments()
             // 不撈取子留言
             ->whereNull('parent_id')
             ->latest()

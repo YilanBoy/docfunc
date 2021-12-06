@@ -7,7 +7,7 @@ use App\Models\Post;
 
 class Search extends Component
 {
-    public $search;
+    public string $search = '';
 
     public function render()
     {

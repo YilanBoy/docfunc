@@ -45,7 +45,7 @@
                             <i class="bi bi-chat-left-text-fill"></i>
                         </button>
 
-                        @if (in_array(auth()->id(), [$comment->user_id, $post->user_id]))
+                        @if (in_array(auth()->id(), [$comment->user_id, $authorId]))
                             <button
                                 onclick="confirm('您確定要刪除此留言嗎？') || event.stopImmediatePropagation()"
                                 wire:click="destroy({{ $comment->id }})"
@@ -92,7 +92,7 @@
                                 </div>
 
                                 {{-- 刪除留言 --}}
-                                @if (in_array(auth()->id(), [$child->user_id, $post->user_id]))
+                                @if (in_array(auth()->id(), [$child->user_id, $authorId]))
                                     <div class="mt-2 md:mt-0 flex justify-start items-center
                                     opacity-0 group-hover:opacity-100 transition duration-150">
                                         <button

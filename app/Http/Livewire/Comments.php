@@ -8,7 +8,6 @@ use Livewire\Component;
 class Comments extends Component
 {
     public int $postId;
-    public int $authorId;
     public int $count = 10;
     public int $perPage = 10;
     public bool $showMoreButtonIsActive = false;

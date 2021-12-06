@@ -12,7 +12,6 @@ class CommentsGroup extends Component
     use AuthorizesRequests;
 
     public int $postId;
-    public int $authorId;
     public int $offset;
     public int $perPage;
 
@@ -32,7 +31,9 @@ class CommentsGroup extends Component
 
     public function render()
     {
-        $comments = Post::find($this->postId)->comments()
+        $post = Post::find($this->postId);
+
+        $comments = $post->comments()
             // 不撈取子留言
             ->whereNull('parent_id')
             ->latest()
@@ -43,6 +44,6 @@ class CommentsGroup extends Component
             }])
             ->get();
 
-        return view('livewire.comments-group', ['comments' => $comments]);
+        return view('livewire.comments-group', ['post' => $post, 'comments' => $comments]);
     }
 }

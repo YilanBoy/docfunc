@@ -244,7 +244,7 @@
                 <livewire:comment-box :postId="$post->id" :commentCount="$post->comment_count"/>
 
                 {{-- 留言列表 --}}
-                <livewire:comments :postId="$post->id" :authorId="$post->user_id"/>
+                <livewire:comments :postId="$post->id"/>
 
                 <script>
                     window.addEventListener('enableScroll', () => {

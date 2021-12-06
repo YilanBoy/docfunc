@@ -26,6 +26,7 @@ class CommentsGroup extends Component
         $comment->delete();
 
         Post::find($this->postId)->updateCommentCount();
+
         $this->emit('updateCommentCount');
     }
 
@@ -37,7 +38,7 @@ class CommentsGroup extends Component
             ->latest()
             ->limit($this->perPage)
             ->offset($this->offset)
-            ->with(['children' => function ($query) {
+            ->with(['subComments' => function ($query) {
                 $query->oldest();
             }])
             ->get();

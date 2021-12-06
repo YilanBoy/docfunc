@@ -60,9 +60,9 @@ class CommentBox extends Component
             ]
         );
 
-
-        // 更新文章留言數
+        // 更新資料庫的文章留言數
         $post->updateCommentCount();
+        // 更新頁面上的留言數量
         $this->updateCommentCount();
 
         // 通知文章作者有新的評論
@@ -78,7 +78,7 @@ class CommentBox extends Component
         $this->emit('refreshCommentsGroup');
     }
 
-    // 更新留言數量
+    // 更新頁面上的留言數量
     public function updateCommentCount()
     {
         $this->commentCount = Post::find($this->postId)->comment_count;

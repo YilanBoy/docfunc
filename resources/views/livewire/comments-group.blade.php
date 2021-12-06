@@ -64,14 +64,15 @@
         {{-- 第二階層留言 --}}
         <div class="comment-with-responses">
             <div class="responses space-y-6">
-                @forelse ($comment->children as $child)
+                @forelse ($comment->subComments as $subComment)
                     <div class="relative">
                         <x-card class="group flex">
                             <div class="flex flex-col md:flex-row flex-1">
                                 {{-- 大頭貼 --}}
                                 <div class="flex-none">
-                                    <a href="{{ route('users.index', ['user' => $child->user_id]) }}">
-                                        <img src="{{ $child->user->gravatar() }}" alt="{{ $child->user->name }}"
+                                    <a href="{{ route('users.index', ['user' => $subComment->user_id]) }}">
+                                        <img src="{{ $subComment->user->gravatar() }}"
+                                             alt="{{ $subComment->user->name }}"
                                              class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400">
                                     </a>
                                 </div>
@@ -79,25 +80,25 @@
                                 {{-- 留言 --}}
                                 <div class="w-full md:mx-4">
                                     <div class="text-gray-600 mt-3 sm:mt-0 dark:text-gray-50">
-                                        {!! nl2br(e($child->content)) !!}
+                                        {!! nl2br(e($subComment->content)) !!}
                                     </div>
 
                                     <div class="flex items-center justify-between mt-3">
                                         <div class="flex items-center text-sm text-gray-400 space-x-2">
-                                            <div>{{ $child->user->name }}</div>
+                                            <div>{{ $subComment->user->name }}</div>
                                             <div>&bull;</div>
-                                            <div>{{ $child->created_at->diffForHumans() }}</div>
+                                            <div>{{ $subComment->created_at->diffForHumans() }}</div>
                                         </div>
                                     </div>
                                 </div>
 
                                 {{-- 刪除留言 --}}
-                                @if (in_array(auth()->id(), [$child->user_id, $authorId]))
+                                @if (in_array(auth()->id(), [$subComment->user_id, $authorId]))
                                     <div class="mt-2 md:mt-0 flex justify-start items-center
                                     opacity-0 group-hover:opacity-100 transition duration-150">
                                         <button
                                             onclick="confirm('您確定要刪除此留言嗎？') || event.stopImmediatePropagation()"
-                                            wire:click="destroy({{ $child->id }})"
+                                            wire:click="destroy({{ $subComment->id }})"
                                             class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-gray-50
                                             bg-red-600 hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900
                                             focus:ring ring-red-300 transition ease-in-out duration-150"

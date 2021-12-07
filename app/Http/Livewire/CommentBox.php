@@ -10,10 +10,10 @@ use App\Notifications\PostComment;
 class CommentBox extends Component
 {
     public int $postId;
-    public string $content = '';
-    public bool $commentBoxOpen = false;
-    public int $commentId = 0;
     public int $commentCount;
+    public string $content = '';
+    public int $commentId = 0;
+    public bool $commentBoxOpen = false;
 
     protected $listeners = ['updateCommentCount'];
 
@@ -45,7 +45,7 @@ class CommentBox extends Component
 
         $this->validate();
 
-        $post = Post::find($this->postId);
+        $post = Post::findOrFail($this->postId);
 
         $comment = Comment::create(
             [
@@ -62,17 +62,17 @@ class CommentBox extends Component
 
         // 更新資料庫的文章留言數
         $post->updateCommentCount();
-        // 更新頁面上的留言數量
-        $this->updateCommentCount();
-
         // 通知文章作者有新的評論
         $post->user->postNotify(new PostComment($comment));
 
         // 清空留言表單的內容
         $this->content = '';
-
+        // 關閉 comment box modal
         $this->commentBoxOpen = false;
+        // 啟用 scroll bar
         $this->dispatchBrowserEvent('enableScroll');
+        // 更新頁面上的留言數量
+        $this->updateCommentCount();
 
         // 更新留言列表
         $this->emit('refreshCommentsGroup');
@@ -81,7 +81,7 @@ class CommentBox extends Component
     // 更新頁面上的留言數量
     public function updateCommentCount()
     {
-        $this->commentCount = Post::find($this->postId)->comment_count;
+        $this->commentCount = Post::findOrFail($this->postId)->comment_count;
     }
 
     public function render()

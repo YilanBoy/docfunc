@@ -26,13 +26,15 @@
                     </span>
 
                     <span class="xl:hidden mt-2 text-gray-400">
-                        <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>
+                        <i class="bi bi-clock-fill"></i><span
+                            class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>
                     </span>
                 </div>
 
                 {{-- 文章發布時間 --}}
                 <span class="hidden xl:flex text-gray-400 justify-center items-center">
-                    <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>
+                    <i class="bi bi-clock-fill"></i><span
+                        class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>
                 </span>
 
             </div>
@@ -47,6 +49,6 @@
     @endforelse
 
     <div>
-        {{ $comments->onEachSide(1)->withQueryString()->links() }}
+        {{ $comments->onEachSide(1)->links() }}
     </div>
 </div>

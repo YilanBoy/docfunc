@@ -32,7 +32,8 @@
                             title="{{ $post->category->name }}"
                             class="hover:text-gray-700 dark:hover:text-gray-50"
                         >
-                            <i class="{{ $post->category->icon }}"></i><span class="ml-2">{{ $post->category->name }}</span>
+                            <i class="{{ $post->category->icon }}"></i><span
+                                class="ml-2">{{ $post->category->name }}</span>
                         </a>
                     </div>
                     <div>&bull;</div>
@@ -43,15 +44,17 @@
                             class="hover:text-gray-700 dark:hover:text-gray-50"
                             title="文章發布於：{{ $post->created_at }}"
                         >
-                            <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
+                            <i class="bi bi-clock-fill"></i><span
+                                class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
                         </a>
                     </div>
                     <div>&bull;</div>
                     <div>
                         {{-- 文章留言數 --}}
                         <a class="hover:text-gray-700 dark:hover:text-gray-50"
-                        href="{{ $post->trashed() ? '#' : $post->link_with_slug . '#post-' . $post->id . '-comments' }}">
-                            <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->comment_count }}</span>
+                           href="{{ $post->trashed() ? '#' : $post->link_with_slug . '#post-' . $post->id . '-comments' }}">
+                            <i class="bi bi-chat-square-text-fill"></i><span
+                                class="ml-2">{{ $post->comment_count }}</span>
                         </a>
                     </div>
                 </div>
@@ -131,7 +134,8 @@
                             bg-green-600 hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900
                             focus:ring ring-green-300 transition ease-in-out duration-150"
                         >
-                            <span class="transform group-hover:scale-125 group-hover:-rotate-45 transition duration-150 ease-in">
+                            <span
+                                class="transform group-hover:scale-125 group-hover:-rotate-45 transition duration-150 ease-in">
                                 <i class="bi bi-pencil-fill"></i>
                             </span>
                         </a>
@@ -165,6 +169,6 @@
     @endforelse
 
     <div>
-        {{ $posts->onEachSide(1)->withQueryString()->links() }}
+        {{ $posts->onEachSide(1)->links() }}
     </div>
 </div>

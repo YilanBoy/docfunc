@@ -24,14 +24,14 @@ class CommentsGroup extends Component
 
         $comment->delete();
 
-        Post::find($this->postId)->updateCommentCount();
+        Post::findOrFail($this->postId)->updateCommentCount();
 
         $this->emit('updateCommentCount');
     }
 
     public function render()
     {
-        $post = Post::find($this->postId);
+        $post = Post::findOrFail($this->postId);
 
         $comments = $post->comments()
             // 不撈取子留言

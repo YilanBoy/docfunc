@@ -16,7 +16,9 @@ class Comments extends Component
     public function mount()
     {
         // 父留言的數目
-        $this->parentCommentsCount = Post::find($this->postId)->comments()->whereNull('parent_id')->count();
+        $this->parentCommentsCount = Post::findOrFail($this->postId)->comments()
+            ->whereNull('parent_id')
+            ->count();
 
         // 當父留言總數大於每頁數目，需要顯示「顯示更多留言」的按鈕
         if ($this->parentCommentsCount > $this->perPage) {

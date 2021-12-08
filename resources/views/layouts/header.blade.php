@@ -45,11 +45,11 @@
                     </span>
                 </div>
 
-                <div class="absolute inset-y-0 right-0 flex items-center">
+                <div class="absolute inset-y-0 right-0 flex items-center space-x-3">
                     {{-- 明亮 / 暗黑模式切換 --}}
                     <button
                         type="button"
-                        class="mr-3 text-gray-400 theme-switch hover:text-gray-700 dark:hover:text-gray-50"
+                        class="text-gray-400 theme-switch hover:text-gray-700 dark:hover:text-gray-50"
                     >
                         <span class="dark:hidden">
                             <i class="bi bi-sun-fill"></i>
@@ -62,25 +62,28 @@
 
                     {{-- 手機版-未登入 --}}
                     @guest
-                        <a href="{{ route('login') }}"
-                           class="mr-3 text-gray-400 hover:text-gray-700 dark:hover:text-gray-50">
-                            <i class="bi bi-box-arrow-in-right"></i><span class="hidden ml-2 md:inline">登入</span>
-                        </a>
+                        @if (!config('settings.disable_signup'))
+                            <a href="{{ route('register') }}"
+                               class="px-4 py-2 text-blue-400 bg-transparent border border-blue-400 rounded-md hover:bg-blue-400 hover:text-gray-50 hover:border-transparent">
+                                註冊
+                            </a>
+                        @endif
 
-                        <a href="{{ route('register') }}"
-                           class="px-4 py-2 text-blue-400 bg-transparent border border-blue-400 rounded-md hover:bg-blue-400 hover:text-gray-50 hover:border-transparent">
-                            <span>註冊</span>
+                        <a href="{{ route('login') }}"
+                           class="px-4 py-2 text-green-400 bg-transparent border border-green-400 rounded-md hover:bg-green-400 hover:text-gray-50 hover:border-transparent">
+                            登入
                         </a>
                         {{-- 手機版-已登入 --}}
                     @else
                         {{-- 手機版-通知 --}}
-                        <span class="relative inline-flex mr-3 rounded-md shadow-sm">
+                        <span class="relative inline-flex rounded-md shadow-sm">
                             <a
                                 href="{{ route('notifications.index') }}"
                                 class="text-gray-400 rounded-full hover:text-gray-700 dark:hover:text-gray-50"
                             >
                                 <i class="bi bi-bell-fill"></i>
                             </a>
+
                             @if (auth()->user()->notification_count > 0)
                                 <span class="absolute flex w-3 h-3 -mt-1 -mr-1 top-2 right-2">
                                     <span
@@ -248,7 +251,7 @@
             @endforeach
         </ul>
 
-        <div class="absolute flex space-x-2 top-3 right-4">
+        <div class="absolute flex space-x-3 top-3 right-4">
 
             {{-- 電腦版-搜尋 --}}
             <livewire:search/>
@@ -271,16 +274,16 @@
 
             {{-- 電腦版-未登入 --}}
             @guest
-                <a href="{{ route('login') }}"
-                   class="flex items-center justify-center h-10 px-3 text-gray-400 transition duration-150 rounded-lg
-                   hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50">
-                    <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
-                </a>
-
                 <a href="{{ route('register') }}"
                    class="flex items-center justify-center h-10 px-3 text-blue-400 transition duration-150 bg-transparent
                    border border-blue-400 rounded-lg hover:bg-blue-400 hover:text-gray-50 hover:border-transparent">
                     註冊
+                </a>
+
+                <a href="{{ route('login') }}"
+                   class="flex items-center justify-center h-10 px-3 text-green-400 transition duration-150 bg-transparent
+                   border border-green-400 rounded-lg hover:bg-green-400 hover:text-gray-50 hover:border-transparent">
+                    <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
                 </a>
                 {{-- 電腦版-已登入 --}}
             @else

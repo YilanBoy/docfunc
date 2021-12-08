@@ -43,17 +43,21 @@ class PostTest extends TestCase
 
         $categoryOnePost->save();
 
-        Livewire::test(Posts::class)
-            ->set('category', Category::first())
-            ->assertViewHas('posts', function ($posts) {
-                return $posts->count() === 1;
-            });
+        Livewire::test(Posts::class, [
+            'currentUrl' => '/',
+            'categoryId' => 1,
+            'tagId' => 0,
+        ])->assertViewHas('posts', function ($posts) {
+            return $posts->count() === 1;
+        });
 
-        Livewire::test(Posts::class)
-            ->set('category', Category::find(2))
-            ->assertViewHas('posts', function ($posts) {
-                return $posts->count() === 0;
-            });
+        Livewire::test(Posts::class, [
+            'currentUrl' => '/',
+            'categoryId' => 2,
+            'tagId' => 0,
+        ])->assertViewHas('posts', function ($posts) {
+            return $posts->count() === 0;
+        });
     }
 
     public function test_order_query_string_filters_correctly()
@@ -82,23 +86,23 @@ class PostTest extends TestCase
             'updated_at' => now()->subDays(15),
         ]);
 
-        Livewire::withQueryParams(['order' => 'latest'])
-            ->test(Posts::class)
-            ->assertViewHas('posts', function ($posts) {
-                return $posts->first()->title === 'this post is the latest';
-            });
+        $queryStringAndTitle = [
+            'latest' => 'this post is the latest',
+            'recent' => 'this post is updated recently',
+            'comment' => 'this post has the most comments',
+        ];
 
-        Livewire::withQueryParams(['order' => 'recent'])
-            ->test(Posts::class)
-            ->assertViewHas('posts', function ($posts) {
-                return $posts->first()->title === 'this post is updated recently';
-            });
-
-        Livewire::withQueryParams(['order' => 'comment'])
-            ->test(Posts::class)
-            ->assertViewHas('posts', function ($posts) {
-                return $posts->first()->title === 'this post has the most comments';
-            });
+        foreach ($queryStringAndTitle as $queryString => $title) {
+            Livewire::withQueryParams(['order' => $queryString])
+                ->test(Posts::class, [
+                    'currentUrl' => '/',
+                    'categoryId' => 0,
+                    'tagId' => 0,
+                ])
+                ->assertViewHas('posts', function ($posts) use ($title) {
+                    return $posts->first()->title === $title;
+                });
+        }
     }
 
     public function test_user_can_view_a_post()

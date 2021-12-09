@@ -62,7 +62,7 @@
             {{-- 大頭貼 --}}
             <div class="flex-none">
                 <a href="{{ route('users.index', ['user' => $post->user_id]) }}">
-                    <img src="{{ $post->user->gravatar() }}" alt="avatar"
+                    <img src="{{ $post->user->gravatar }}" alt="avatar"
                          class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400">
                 </a>
             </div>

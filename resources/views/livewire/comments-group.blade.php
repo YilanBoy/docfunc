@@ -6,7 +6,8 @@
                 {{-- 大頭貼 --}}
                 <div class="flex-none">
                     <a href="{{ route('users.index', ['user' => $comment->user_id]) }}">
-                        <img src="{{ $comment->user->gravatar() }}" alt="{{ $comment->user->name }}"
+                        <img src="{{ 'https://www.gravatar.com/avatar/' . $comment->user_email_hash . '?s=400&d=mp' }}"
+                             alt="{{ $comment->user_name }}"
                              class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400">
                     </a>
                 </div>
@@ -19,7 +20,7 @@
 
                     <div class="flex items-center justify-between mt-3">
                         <div class="flex items-center text-sm text-gray-400 space-x-2">
-                            <div>{{ $comment->user->name }}</div>
+                            <div>{{ $comment->user_name }}</div>
                             <div>&bull;</div>
                             <div>{{ $comment->created_at->diffForHumans() }}</div>
                         </div>
@@ -34,7 +35,7 @@
                             x-on:click="
                                 $dispatch('set-comment-box-open', { open: true })
                                 $dispatch('set-comment-id', {{ $comment->id }})
-                                $dispatch('set-comment-to', '回覆{{ $comment->user->name }}')
+                                $dispatch('set-comment-to', '回覆{{ $comment->user_name }}')
                                 $dispatch('comment-box-focus')
                                 disableScroll()
                             "
@@ -71,9 +72,10 @@
                                 {{-- 大頭貼 --}}
                                 <div class="flex-none">
                                     <a href="{{ route('users.index', ['user' => $subComment->user_id]) }}">
-                                        <img src="{{ $subComment->user->gravatar() }}"
-                                             alt="{{ $subComment->user->name }}"
-                                             class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400">
+                                        <img
+                                            src="{{ 'https://www.gravatar.com/avatar/' . $subComment->user_email_hash . '?s=400&d=mp' }}"
+                                            alt="{{ $subComment->user_name }}"
+                                            class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400">
                                     </a>
                                 </div>
 
@@ -85,7 +87,7 @@
 
                                     <div class="flex items-center justify-between mt-3">
                                         <div class="flex items-center text-sm text-gray-400 space-x-2">
-                                            <div>{{ $subComment->user->name }}</div>
+                                            <div>{{ $subComment->user_name }}</div>
                                             <div>&bull;</div>
                                             <div>{{ $subComment->created_at->diffForHumans() }}</div>
                                         </div>

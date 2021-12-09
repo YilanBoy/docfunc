@@ -12,7 +12,7 @@
                 <div>
                     <img
                         class="rounded-full h-36 w-36"
-                        src="{{ $user->gravatar('500') }}"
+                        src="{{ $user->gravatar }}"
                         alt="{{ $user->name }}"
                         width="200"
                     >

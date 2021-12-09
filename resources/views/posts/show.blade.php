@@ -226,7 +226,7 @@
                 {{-- 作者簡介 --}}
                 <x-card class="flex items-center justify-start w-full mt-6 xl:w-2/3">
                     <div class="flex-none p-2 mr-4 none md:flex md:justify-center md:items-center">
-                        <img class="w-16 h-16 rounded-full" src="{{ $post->user->gravatar(200) }}">
+                        <img class="w-16 h-16 rounded-full" src="{{ $post->user->gravatar }}">
                     </div>
                     <div class="space-y-2">
                         <div class="text-gray-400">WRITEN BY</div>

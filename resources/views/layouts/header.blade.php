@@ -108,7 +108,7 @@
                                     id="user-menu-button" aria-expanded="false" aria-haspopup="true"
                                 >
                                     <span class="sr-only">Open user menu</span>
-                                    <img class="w-10 h-10 rounded-full " src="{{ auth()->user()->gravatar() }}" alt="">
+                                    <img class="w-10 h-10 rounded-full " src="{{ auth()->user()->gravatar }}" alt="">
                                 </button>
                             </div>
 
@@ -321,7 +321,7 @@
                             id="user-menu-button" aria-expanded="false" aria-haspopup="true"
                         >
                             <span class="sr-only">Open user menu</span>
-                            <img class="w-10 h-10 rounded-full" src="{{ auth()->user()->gravatar() }}" alt="">
+                            <img class="w-10 h-10 rounded-full" src="{{ auth()->user()->gravatar }}" alt="">
                         </button>
                     </div>
 

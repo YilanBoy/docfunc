@@ -6,7 +6,7 @@
     <div class="flex flex-col justify-center items-center mb-8">
         {{-- 大頭貼照片 --}}
         <div>
-            <img class="rounded-full h-36 w-36" src="{{ $user->gravatar('500') }}" alt="{{ $user->name }}">
+            <img class="rounded-full h-36 w-36" src="{{ $user->gravatar }}" alt="{{ $user->name }}">
         </div>
 
         <div class="flex mt-4 dark:text-gray-50">

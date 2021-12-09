@@ -33,16 +33,30 @@ class CommentsGroup extends Component
     {
         $comments = Post::findOrFail($this->postId)
             ->comments()
-            ->select('comments.*', 'posts.user_id as post_user_id')
+            ->selectRaw('
+                comments.*,
+                posts.user_id AS post_user_id,
+                users.name AS user_name,
+                MD5(LOWER(TRIM(users.email))) AS user_email_hash
+            ')
             ->join('posts', 'posts.id', '=', 'comments.post_id')
+            ->join('users', 'users.id', '=', 'comments.user_id')
             ->whereNull('parent_id')
+            ->with(['subComments' => function ($query) {
+                $query->selectRaw('
+                    comments.*,
+                    users.name AS user_name,
+                    MD5(LOWER(TRIM(users.email))) AS user_email_hash
+                ')
+                    ->join('users', 'users.id', '=', 'comments.user_id')
+                    ->oldest();
+            }])
             ->latest()
             ->limit($this->perPage)
             ->offset($this->offset)
-            ->with(['subComments' => function ($query) {
-                $query->oldest();
-            }])
             ->get();
+
+        // dd($comments);
 
         return view('livewire.comments-group', ['comments' => $comments]);
     }

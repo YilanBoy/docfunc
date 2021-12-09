@@ -76,9 +76,9 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->unreadNotifications->markAsRead();
     }
 
-    public function gravatar(string $size = '100'): string
+    public function getGravatarAttribute(): string
     {
         $hash = md5(strtolower(trim($this->email)));
-        return 'https://www.gravatar.com/avatar/' . $hash . '?s=' . $size . '&d=mp';
+        return 'https://www.gravatar.com/avatar/' . $hash . '?s=400&d=mp';
     }
 }

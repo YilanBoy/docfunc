@@ -37,7 +37,7 @@ class PostComment extends Notification
             'comment_content' => $this->comment->content,
             'user_id' => $this->comment->user->id,
             'user_name' => $this->comment->user->name,
-            'user_avatar' => $this->comment->user->gravatar(),
+            'user_avatar' => $this->comment->user->gravatar,
             'post_link' => $link,
             'post_id' => $post->id,
             'post_title' => $post->title,
@@ -47,7 +47,7 @@ class PostComment extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     // public function toMail($notifiable)

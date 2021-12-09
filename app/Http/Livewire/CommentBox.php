@@ -12,13 +12,10 @@ class CommentBox extends Component
     public int $postId;
     public int $commentCount;
     public string $content = '';
-    public int $commentId = 0;
-    public bool $commentBoxOpen = false;
 
     protected $listeners = ['updateCommentCount'];
 
     protected array $rules = [
-        'commentId' => ['required', 'numeric'],
         'content' => ['required', 'min:5', 'max:400'],
     ];
 
@@ -28,21 +25,9 @@ class CommentBox extends Component
         'content.max' => '留言內容至多 400 個字元',
     ];
 
-    // 確認是否有登入
-    public function authCheck()
-    {
-        if (!auth()->check()) {
-            return redirect()->route('login');
-        }
-    }
-
     // 儲存留言
-    public function store()
+    public function store(int $parentCommentId)
     {
-        if (!auth()->check()) {
-            return abort(403);
-        }
-
         $this->validate();
 
         $post = Post::findOrFail($this->postId);
@@ -51,7 +36,7 @@ class CommentBox extends Component
             [
                 'post_id' => $post->id,
                 'user_id' => auth()->id(),
-                'parent_id' => $this->commentId === 0 ? null : $this->commentId,
+                'parent_id' => $parentCommentId === 0 ? null : $parentCommentId,
                 'content' => preg_replace(
                     '/(\s*(\\r\\n|\\r|\\n)\s*){3,}/u',
                     PHP_EOL . PHP_EOL,
@@ -67,9 +52,9 @@ class CommentBox extends Component
 
         // 清空留言表單的內容
         $this->content = '';
-        // 關閉 comment box modal
-        $this->commentBoxOpen = false;
-        // 啟用 scroll bar
+        // 觸發 alpine.js 的事件，關閉 comment box modal
+        $this->dispatchBrowserEvent('set-comment-box-open', ['open' => false]);
+        // 觸發啟用 scroll bar 的事件
         $this->dispatchBrowserEvent('enableScroll');
         // 更新頁面上的留言數量
         $this->updateCommentCount();

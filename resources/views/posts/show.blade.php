@@ -241,7 +241,9 @@
                 </x-card>
 
                 {{-- 留言回覆 --}}
-                <livewire:comment-box :postId="$post->id" :commentCount="$post->comment_count"/>
+                @auth
+                    <livewire:comment-box :postId="$post->id" :commentCount="$post->comment_count"/>
+                @endauth
 
                 {{-- 留言列表 --}}
                 <livewire:comments :postId="$post->id"/>

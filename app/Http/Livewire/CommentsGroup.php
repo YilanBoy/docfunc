@@ -31,10 +31,10 @@ class CommentsGroup extends Component
 
     public function render()
     {
-        $post = Post::findOrFail($this->postId);
-
-        $comments = $post->comments()
-            // 不撈取子留言
+        $comments = Post::findOrFail($this->postId)
+            ->comments()
+            ->select('comments.*', 'posts.user_id as post_user_id')
+            ->join('posts', 'posts.id', '=', 'comments.post_id')
             ->whereNull('parent_id')
             ->latest()
             ->limit($this->perPage)
@@ -44,6 +44,6 @@ class CommentsGroup extends Component
             }])
             ->get();
 
-        return view('livewire.comments-group', ['post' => $post, 'comments' => $comments]);
+        return view('livewire.comments-group', ['comments' => $comments]);
     }
 }

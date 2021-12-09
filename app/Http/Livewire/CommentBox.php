@@ -37,11 +37,7 @@ class CommentBox extends Component
                 'post_id' => $post->id,
                 'user_id' => auth()->id(),
                 'parent_id' => $parentCommentId === 0 ? null : $parentCommentId,
-                'content' => preg_replace(
-                    '/(\s*(\\r\\n|\\r|\\n)\s*){3,}/u',
-                    PHP_EOL . PHP_EOL,
-                    $this->content
-                ),
+                'content' => $this->content,
             ]
         );
 

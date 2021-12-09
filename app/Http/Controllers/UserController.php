@@ -67,12 +67,7 @@ class UserController extends Controller
         // 更新會員資料
         $user->update([
             'name' => $request->name,
-            // 替換連續兩次以上空白與換行的混合
-            'introduction' => preg_replace(
-                '/(\s*(\\r\\n|\\r|\\n)\s*){2,}/u',
-                PHP_EOL,
-                $request->introduction
-            ),
+            'introduction' => $request->introduction,
         ]);
 
         return redirect()

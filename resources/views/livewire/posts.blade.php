@@ -57,7 +57,7 @@
         <x-card
             x-data="cardLink"
             x-on:click="directToCardLink($event, $refs)"
-            class="flex flex-col justify-between cursor-pointer md:flex-row"
+            class="group flex flex-col justify-between cursor-pointer md:flex-row"
         >
             {{-- 大頭貼 --}}
             <div class="flex-none">
@@ -74,7 +74,7 @@
                     <a
                         x-ref="cardLinkUrl"
                         href="{{ $post->link_with_slug }}"
-                        class="fancy-link"
+                        class="group-gradient-underline-grow"
                     >{{ $post->title }}</a>
                 </h1>
 

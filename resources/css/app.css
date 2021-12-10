@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .group-gradient-underline-grow {
+        @apply bg-left-bottom bg-no-repeat
+        bg-gradient-to-r from-purple-500 to-pink-500
+        dark:from-purple-300 dark:to-pink-300
+        bg-[length:0_3px] group-hover:bg-[length:100%_3px]
+        transition-all duration-200 ease-in;
+    }
+}
+
 /* Alpine.js */
 [x-cloak] {
     display: none !important;
@@ -56,23 +66,6 @@
 
 .dark .comment-with-responses .responses > :last-child:after {
     background: #1f2937;
-}
-
-/* multi-line underline text-gradient animation */
-.fancy-link {
-    background-image: linear-gradient(90deg, #dc2626, #4f46e5);
-    background-size: 0% 3px;
-    background-repeat: no-repeat;
-    background-position: left bottom;
-    transition: background-size 300ms ease;
-}
-
-.dark .fancy-link {
-    background-image: linear-gradient(90deg, #fca5a5, #a5b4fc);
-}
-
-.fancy-link:hover {
-    background-size: 100% 3px;
 }
 
 /* scroll bar */

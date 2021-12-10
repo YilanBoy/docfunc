@@ -224,7 +224,7 @@
                 </x-card>
 
                 {{-- 作者簡介 --}}
-                <x-card class="flex items-center justify-start w-full mt-6 xl:w-2/3">
+                <x-card class="group flex items-center justify-start w-full mt-6 xl:w-2/3">
                     <div class="flex-none p-2 mr-4 none md:flex md:justify-center md:items-center">
                         <img class="w-16 h-16 rounded-full" src="{{ $post->user->gravatar }}">
                     </div>
@@ -232,7 +232,7 @@
                         <div class="text-gray-400">WRITEN BY</div>
                         <a
                             href="{{ route('users.index', ['user' => $post->user->id]) }}"
-                            class="inline-block text-2xl font-bold fancy-link dark:text-gray-50"
+                            class="group-gradient-underline-grow inline-block text-2xl font-bold dark:text-gray-50"
                         >
                             {{ $post->user->name }}
                         </a>

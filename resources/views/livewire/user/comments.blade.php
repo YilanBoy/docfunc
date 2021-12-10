@@ -4,7 +4,7 @@
         <x-card
             x-data="cardLink"
             x-on:click="directToCardLink($event, $refs)"
-            class="flex flex-col md:flex-row justify-between cursor-pointer"
+            class="group flex flex-col md:flex-row justify-between cursor-pointer"
         >
             {{-- 留言相關資訊 --}}
             <div class="w-full flex justify-between">
@@ -14,7 +14,7 @@
                         <a
                             x-ref="cardLinkUrl"
                             href="{{ $comment->post->link_with_slug }}#comments"
-                            class="fancy-link"
+                            class="group-gradient-underline-grow"
                         >
                             {{ $comment->post->title }}
                         </a>

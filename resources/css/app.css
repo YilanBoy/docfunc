@@ -10,6 +10,14 @@
         bg-[length:0_3px] group-hover:bg-[length:100%_3px]
         transition-all duration-200 ease-in;
     }
+
+    .gradient-underline-grow {
+        @apply bg-left-bottom bg-no-repeat
+        bg-gradient-to-r from-purple-500 to-pink-500
+        dark:from-purple-300 dark:to-pink-300
+        bg-[length:0_3px] hover:bg-[length:100%_3px]
+        transition-all duration-200 ease-in;
+    }
 }
 
 /* Alpine.js */

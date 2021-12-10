@@ -35,7 +35,7 @@
             x-transition:leave-end="opacity-0"
             class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0"
         >
-            <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" aria-hidden="true"></div>
+            <div class="-z-10 fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" aria-hidden="true"></div>
 
             <div
                 x-cloak
@@ -50,7 +50,7 @@
                     searchBoxOpen = false
                     enableScroll()
                 "
-                class="inline-block w-full max-w-md mt-16 transition-all transform"
+                class="inline-block w-full max-w-md mt-16 transition-all"
             >
                 {{-- 搜尋欄 --}}
                 <div class="relative">

@@ -57,7 +57,7 @@
         <x-card
             x-data="cardLink"
             x-on:click="directToCardLink($event, $refs)"
-            class="flex flex-col justify-between transition duration-150 ease-in transform cursor-pointer md:flex-row hover:shadow-xl hover:-translate-x-1"
+            class="flex flex-col justify-between cursor-pointer md:flex-row"
         >
             {{-- 大頭貼 --}}
             <div class="flex-none">
@@ -141,7 +141,7 @@
 
     @empty
         <x-card
-            class="flex items-center justify-center w-full transition duration-150 ease-in transform h-36 hover:-translate-x-2 hover:shadow-xl dark:text-gray-50">
+            class="flex items-center justify-center w-full transition duration-150 ease-in h-36 hover:-translate-x-2 hover:shadow-xl dark:text-gray-50">
             <span>Whoops！此分類底下還沒有文章，趕緊寫一篇吧！</span>
         </x-card>
     @endforelse

@@ -22,8 +22,9 @@
                 {{ $category->name }}
             </div>
             <div class="flex items-center col-span-11">
-                <div class="h-4 transition-all duration-300 rounded-sm growing-bar bg-gradient-to-r from-green-400 to-blue-400"
-                style="width: {{ $category->posts->count() ? (int)($category->posts->count() / $user->posts->count() * 100) : 0.2 }}rem;">
+                <div
+                    class="h-4 transition-all duration-300 rounded-sm growing-bar bg-gradient-to-r from-emerald-400 to-blue-400"
+                    style="width: {{ $category->posts->count() ? (int)($category->posts->count() / $user->posts->count() * 100) : 0.2 }}rem;">
                 </div>
             </div>
             <div class="flex items-center justify-end col-span-1 text-lg">

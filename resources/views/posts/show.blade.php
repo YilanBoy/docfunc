@@ -26,7 +26,7 @@
     <div class="relative mt-6">
         {{-- 置頂按鈕 --}}
         <button id="scroll-to-top-btn" title="Go to top"
-                class="fixed z-10 justify-center hidden w-16 h-16 font-bold transition duration-150 ease-in transform bg-blue-600 rounded-full shadow-md bottom-7 right-7 text-gray-50 hover:scale-125 hover:shadow-xl">
+                class="fixed z-10 justify-center hidden w-16 h-16 font-bold transition duration-150 ease-in bg-blue-600 rounded-full shadow-md bottom-7 right-7 text-gray-50 hover:scale-125 hover:shadow-xl">
             <span class="mt-4 text-3xl animate-bounce">
                 <i class="bi bi-arrow-up"></i>
             </span>
@@ -47,12 +47,12 @@
                                 {{-- 編輯文章 --}}
                                 <a
                                     href="{{ route('posts.edit', ['post' => $post->id]) }}"
-                                    class="relative inline-flex w-16 h-16 border border-green-600 group rounded-xl"
+                                    class="relative inline-flex w-16 h-16 border border-emerald-600 group rounded-xl"
                                 >
                                     <span
-                                        class="absolute inset-0 inline-flex items-center self-stretch justify-center text-2xl font-medium text-center transition-transform transform bg-green-600 text-gray-50 rounded-xl ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                        class="absolute inset-0 inline-flex items-center self-stretch justify-center text-2xl font-medium text-center transition-transform bg-emerald-600 text-gray-50 rounded-xl ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                         <span
-                                            class="transition duration-150 ease-in transform group-hover:scale-125 group-hover:-rotate-45">
+                                            class="transition duration-150 ease-in group-hover:scale-125 group-hover:-rotate-45">
                                             <i class="bi bi-pencil-fill"></i>
                                         </span>
                                     </span>
@@ -73,10 +73,10 @@
                                         }
                                     "
                                     type="button"
-                                    class="relative inline-flex w-16 h-16 mt-4 border border-yellow-600 group rounded-xl focus:outline-none"
+                                    class="relative inline-flex w-16 h-16 mt-4 border border-amber-600 group rounded-xl focus:outline-none"
                                 >
                                     <span
-                                        class="absolute inset-0 inline-flex items-center self-stretch justify-center text-2xl font-medium text-center transition-transform transform bg-yellow-600 text-gray-50 rounded-xl ring-1 ring-yellow-600 ring-offset-1 ring-offset-yellow-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                        class="absolute inset-0 inline-flex items-center self-stretch justify-center text-2xl font-medium text-center transition-transform bg-amber-600 text-gray-50 rounded-xl ring-1 ring-amber-600 ring-offset-1 ring-offset-amber-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                         <i class="bi bi-file-earmark-x-fill"></i>
                                     </span>
                                 </button>
@@ -86,7 +86,7 @@
 
                     <div class="flex justify-between">
                         {{-- 文章標題 --}}
-                        <h1 class="flex-grow text-3xl font-bold dark:text-gray-50">{{ $post->title }}</h1>
+                        <h1 class="grow text-3xl font-bold dark:text-gray-50">{{ $post->title }}</h1>
 
                         {{-- 文章選單-行動裝置 --}}
                         @if(auth()->id() === $post->user_id)

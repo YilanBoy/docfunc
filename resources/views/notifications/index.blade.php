@@ -16,15 +16,15 @@
                     <x-card
                         x-data="cardLink"
                         x-on:click="directToCardLink($event, $refs)"
-                        class="flex flex-col justify-between w-full transition duration-150 ease-in transform cursor-pointer md:flex-row hover:shadow-xl hover:-translate-x-1"
+                        class="flex flex-col justify-between w-full cursor-pointer md:flex-row"
                     >
                         {{-- 大頭貼 --}}
                         <div class="flex-none">
                             <a href="{{ route('users.index', ['user' => $notification->data['user_id']]) }}">
                                 <img
-                                alt="{{ $notification->data['user_name'] }}"
-                                src="{{ $notification->data['user_avatar'] }}"
-                                class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400">
+                                    alt="{{ $notification->data['user_name'] }}"
+                                    src="{{ $notification->data['user_avatar'] }}"
+                                    class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400">
                             </a>
                         </div>
 
@@ -62,7 +62,8 @@
                     </x-card>
 
                 @empty
-                    <x-card class="flex items-center justify-center w-full h-24 transition duration-150 ease-in transform cursor-pointer hover:shadow-xl hover:-translate-x-1 dark:text-gray-50">
+                    <x-card
+                        class="flex items-center justify-center w-full h-24 dark:text-gray-50">
                         <span>沒有消息通知！</span>
                     </x-card>
                 @endforelse

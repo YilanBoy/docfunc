@@ -5,8 +5,7 @@
         <x-card
             x-data="cardLink"
             x-on:click="directToCardLink($event, $refs)"
-            class="flex flex-col md:flex-row justify-between hover:shadow-xl
-            transform hover:-translate-x-1 transition duration-150 ease-in cursor-pointer"
+            class="flex flex-col md:flex-row justify-between cursor-pointer"
         >
             {{-- 文章 --}}
             <div class="w-full flex flex-col justify-between">
@@ -131,11 +130,11 @@
                         <a
                             href="{{ route('posts.edit', ['post' => $post->id]) }}"
                             class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-gray-50
-                            bg-green-600 hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900
-                            focus:ring ring-green-300 transition ease-in-out duration-150"
+                            bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-900 focus:outline-none focus:border-emerald-900
+                            focus:ring ring-emerald-300 transition ease-in-out duration-150"
                         >
                             <span
-                                class="transform group-hover:scale-125 group-hover:-rotate-45 transition duration-150 ease-in">
+                                class="group-hover:scale-125 group-hover:-rotate-45 transition duration-150 ease-in">
                                 <i class="bi bi-pencil-fill"></i>
                             </span>
                         </a>
@@ -150,8 +149,8 @@
                             "
                             type="button"
                             class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-gray-50
-                            bg-yellow-600 hover:bg-yellow-700 active:bg-yellow-900 focus:outline-none focus:border-yellow-900
-                            focus:ring ring-yellow-300 transition ease-in-out duration-150"
+                            bg-amber-600 hover:bg-amber-700 active:bg-amber-900 focus:outline-none focus:border-amber-900
+                            focus:ring ring-amber-300 transition ease-in-out duration-150"
                         >
                             <i class="bi bi-file-earmark-x-fill"></i>
                         </button>
@@ -161,9 +160,7 @@
         </x-card>
 
     @empty
-        <x-card class="w-full h-36 flex justify-center items-center
-        transform hover:-translate-x-1 transition duration-150 ease-in hover:shadow-xl
-        dark:text-gray-50">
+        <x-card class="w-full h-36 flex justify-center items-center dark:text-gray-50">
             <span>目前沒有文章，有沒有什麼事情想要分享呢？</span>
         </x-card>
     @endforelse

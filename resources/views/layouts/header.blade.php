@@ -70,7 +70,7 @@
                         @endif
 
                         <a href="{{ route('login') }}"
-                           class="px-4 py-2 text-green-400 bg-transparent border border-green-400 rounded-md hover:bg-green-400 hover:text-gray-50 hover:border-transparent">
+                           class="px-4 py-2 text-emerald-400 bg-transparent border border-emerald-400 rounded-md hover:bg-emerald-400 hover:text-gray-50 hover:border-transparent">
                             登入
                         </a>
                         {{-- 手機版-已登入 --}}
@@ -281,8 +281,8 @@
                 </a>
 
                 <a href="{{ route('login') }}"
-                   class="flex items-center justify-center h-10 px-3 text-green-400 transition duration-150 bg-transparent
-                   border border-green-400 rounded-lg hover:bg-green-400 hover:text-gray-50 hover:border-transparent">
+                   class="flex items-center justify-center h-10 px-3 text-emerald-400 transition duration-150 bg-transparent
+                   border border-emerald-400 rounded-lg hover:bg-emerald-400 hover:text-gray-50 hover:border-transparent">
                     <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
                 </a>
                 {{-- 電腦版-已登入 --}}

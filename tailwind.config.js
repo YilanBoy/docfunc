@@ -1,16 +1,14 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-    mode: 'jit',
     darkMode: 'class',
-    purge: [
+    content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/*.js',
         './resources/ts/*.ts',
     ],
-
     theme: {
         extend: {
             fontFamily: {
@@ -136,14 +134,6 @@ module.exports = {
             }),
         },
     },
-
-    // just in time 預設已經開起所有 variants
-    // variants: {
-    //     extend: {
-    //         opacity: ['disabled'],
-    //     },
-    // },
-
     plugins: [
         require("@tailwindcss/forms")({
             strategy: 'class',

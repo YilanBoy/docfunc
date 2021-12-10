@@ -28,9 +28,9 @@
                     </span>
                     <div class="flex items-center justify-center mt-7">
                         <a href="{{ route('posts.create') }}"
-                           class="relative inline-flex w-64 h-12 border border-green-600 rounded-lg group focus:outline-none">
+                           class="relative inline-flex w-64 h-12 border border-emerald-600 rounded-lg group focus:outline-none">
                             <span
-                                class="absolute inset-0 inline-flex items-center self-stretch justify-center py-2 font-medium text-center transition-transform transform bg-green-600 rounded-lg text-gray-50 ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                class="absolute inset-0 inline-flex items-center self-stretch justify-center py-2 font-medium text-center transition-transform bg-emerald-600 rounded-lg text-gray-50 ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
                                 <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
                             </span>
                         </a>

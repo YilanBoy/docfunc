@@ -12,7 +12,10 @@ class Posts extends Component
 
     public string $currentUrl;
     public int $categoryId;
+    public string $categoryName;
+    public string $categoryDescription;
     public int $tagId;
+    public string $tagName;
     public string $order = '';
 
     protected $queryString = [

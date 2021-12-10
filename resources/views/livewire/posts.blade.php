@@ -34,20 +34,20 @@
         </nav>
 
         {{-- 文章分類訊息-桌面裝置 --}}
-        @if(isset($category))
+        @if($categoryId)
             <div
                 class="flex items-center justify-center px-4 py-2 mb-2 text-blue-700 border border-blue-700 rounded-xl bg-gradient-to-br from-blue-100 to-blue-300 md:mb-0">
-                <span class="font-bold">{{ $category->name }}：</span>
-                <span>{{ $category->description }}</span>
+                <span class="font-bold">{{ $categoryName }}：</span>
+                <span>{{ $categoryDescription }}</span>
             </div>
         @endif
 
         {{-- 文章標籤訊息-桌面裝置 --}}
-        @if(isset($tag))
+        @if($tagId)
             <div
                 class="flex items-center justify-center px-4 py-2 mb-2 text-gray-700 border border-gray-700 rounded-xl bg-gradient-to-br from-gray-100 to-gray-300 md:mb-0">
                 <span>標籤：</span>
-                <span class="font-bold">{{ $tag->name }}</span>
+                <span class="font-bold">{{ $tagName }}</span>
             </div>
         @endif
     </div>

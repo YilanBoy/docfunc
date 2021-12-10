@@ -8,10 +8,10 @@ Array.prototype.forEach.call(themeSwitch, (element) => {
 
             document.documentElement.classList.add('dark');
             // Store in local storage
-            localStorage.setItem('theme', 'dark');
+            localStorage.setItem('mode', 'dark');
         } else if (document.documentElement.className === "dark") {
             document.documentElement.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
+            localStorage.setItem('mode', 'light');
         }
     });
 })

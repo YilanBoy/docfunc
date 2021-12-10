@@ -27,25 +27,23 @@ module.exports = {
                         {
                             a: {
                                 color: theme('colors.blue.400'),
-                                '&:hover': {
-                                    color: theme('colors.blue.500'),
-                                    'text-decoration': 'underline',
-                                },
                                 'text-decoration': 'none',
+                            },
+                            'a:hover': {
+                                color: theme('colors.blue.500'),
+                                'text-decoration': 'underline',
+                            },
+                            'ol > li::marker': {
+                                color: theme('colors.gray.900'),
+                            },
+                            'ul > li::marker': {
+                                color: theme('colors.gray.900'),
                             },
                             pre: {
                                 'white-space': 'pre-wrap !important',
                             },
                             code: {
                                 'white-space': 'pre-wrap !important',
-                            },
-                            'a code': {
-                                color: theme('colors.blue.400'),
-                                '&:hover': {
-                                    color: theme('colors.blue.500'),
-                                    'text-decoration': 'underline',
-                                },
-                                'text-decoration': 'none',
                             },
                             'code::before': {
                                 content: '',
@@ -60,24 +58,13 @@ module.exports = {
                     css: [
                         {
                             color: theme('colors.gray.50'),
-                            '[class~="lead"]': {
-                                color: theme('colors.gray.300'),
-                            },
                             a: {
                                 color: theme('colors.blue.400'),
-                                '&:hover': {
-                                    color: theme('colors.blue.300'),
-                                    'text-decoration': 'underline',
-                                },
                                 'text-decoration': 'none',
                             },
-                            'a code': {
-                                color: theme('colors.blue.400'),
-                                '&:hover': {
-                                    color: theme('colors.blue.300'),
-                                    'text-decoration': 'underline',
-                                },
-                                'text-decoration': 'none',
+                            'a:hover': {
+                                color: theme('colors.blue.300'),
+                                'text-decoration': 'underline',
                             },
                             strong: {
                                 color: theme('colors.gray.50'),
@@ -85,11 +72,11 @@ module.exports = {
                             'mark strong': {
                                 color: theme('colors.gray.900'),
                             },
-                            'ol > li::before': {
-                                color: theme('colors.gray.400'),
+                            'ol > li::marker': {
+                                color: theme('colors.gray.50'),
                             },
-                            'ul > li::before': {
-                                backgroundColor: theme('colors.gray.400'),
+                            'ul > li::marker': {
+                                color: theme('colors.gray.50'),
                             },
                             hr: {
                                 borderColor: theme('colors.gray.200'),
@@ -111,8 +98,8 @@ module.exports = {
                                 color: theme('colors.gray.50'),
                             },
                             'figure figcaption': {
-                                color: theme('colors.gray.50'),
-                                backgroundColor: theme('colors.gray.500'),
+                                'color': '#f9fafb !important',
+                                'backgroundColor': '#6b7280 !important'
                             },
                             code: {
                                 color: theme('colors.gray.50'),
@@ -121,12 +108,8 @@ module.exports = {
                                 color: theme('colors.gray.200'),
                                 backgroundColor: theme('colors.gray.800'),
                             },
-                            thead: {
+                            'thead th': {
                                 color: theme('colors.gray.50'),
-                                borderBottomColor: theme('colors.gray.400'),
-                            },
-                            'tbody tr': {
-                                borderBottomColor: theme('colors.gray.600'),
                             },
                         },
                     ],

@@ -6,7 +6,7 @@
         class="shadow-md bg-gray-50 lg:hidden dark:bg-gray-700"
     >
         <div class="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="relative flex items-center justify-between h-18">
+            <div class="relative flex items-center justify-between h-[4.5rem]">
                 <div
                     class="absolute inset-y-0 left-0 flex items-center"
                 >

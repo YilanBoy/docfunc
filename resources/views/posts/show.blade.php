@@ -34,8 +34,6 @@
     <script src="{{ asset('embedly/embedly.js') }}" async></script>
     {{-- 程式碼區塊高亮 --}}
     <script src="{{ asset('prism/prism.js') }}"></script>
-    {{-- 社交分享按鈕 --}}
-    <script src="{{ asset('js/sharer.min.js') }}"></script>
     {{-- 程式碼複製按鈕  --}}
     <script src="{{ asset('js/copy-code-btn.js')}}"></script>
 @endsection
@@ -59,7 +57,7 @@
                     {{-- 文章選單-桌面裝置 --}}
                     <div
                         x-data="{}"
-                        class="absolute top-0 hidden w-16 h-full xl:block left-103/100"
+                        class="absolute top-0 hidden w-16 h-full xl:block left-[102%]"
                     >
                         <div class="sticky flex flex-col items-center justify-center top-7">
                             @if(auth()->id() === $post->user_id)
@@ -224,22 +222,6 @@
                     <div class="prose max-w-none dark:prose-dark mt-4 ck-content dark:text-gray-50">
                         {!! $post->body !!}
                     </div>
-
-                    {{-- 分享文章 --}}
-                    <div class="flex justify-end mt-4 space-x-4">
-                        <button type="button" title="分享此篇文章至 Facebook" data-sharer="facebook"
-                                data-url="{{ request()->fullUrl() }}"
-                                class="text-4xl text-gray-400 duration-300 hover:text-gray-700 dark:hover:text-gray-50">
-                            <i class="bi bi-facebook"></i>
-                        </button>
-
-                        <button type="button" title="分享此篇文章至 Twitter" data-sharer="twitter"
-                                data-url="{{ request()->fullUrl() }}"
-                                class="text-4xl text-gray-400 duration-300 hover:text-gray-700 dark:hover:text-gray-50">
-                            <i class="bi bi-twitter"></i>
-                        </button>
-                    </div>
-
                 </x-card>
 
                 {{-- 作者簡介 --}}

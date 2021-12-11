@@ -27,7 +27,7 @@
                 {{-- 文章編輯資訊-桌面裝置 --}}
                 <x-card class="relative w-full">
                     <div
-                        class="hidden xl:block absolute top-0 left-103/100 w-52 h-full"
+                        class="hidden xl:block absolute top-0 left-[102%] w-52 h-full"
                     >
                         <div class="sticky top-9 flex flex-col">
                             {{-- 字數提示 --}}

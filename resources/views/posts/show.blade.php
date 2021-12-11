@@ -5,6 +5,25 @@
 @section('css')
     <link href="{{ asset('css/content-styles.css') }}" rel="stylesheet">
     <link href="{{ asset('prism/prism.css') }}" rel="stylesheet">
+
+    <style>
+        /* fade in post*/
+        .fade-in-post {
+            animation: fade-in 1s;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(1%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0%);
+            }
+        }
+    </style>
 @endsection
 
 @section('scripts')
@@ -12,7 +31,7 @@
     <script src="{{ asset('js/scroll-to-top-btn.js') }}"></script>
     {{-- 文章中的嵌入影片顯示 --}}
     <script async charset="utf-8" src="{{ asset('embedly/platform.js') }}"></script>
-    <script src="{{ asset('embedly/embedly.js') }}"></script>
+    <script src="{{ asset('embedly/embedly.js') }}" async></script>
     {{-- 程式碼區塊高亮 --}}
     <script src="{{ asset('prism/prism.js') }}"></script>
     {{-- 社交分享按鈕 --}}
@@ -23,7 +42,7 @@
 
 {{-- 文章內容 --}}
 <x-app-layout>
-    <div class="relative mt-6">
+    <div class="fade-in-post relative mt-6">
         {{-- 置頂按鈕 --}}
         <button id="scroll-to-top-btn" title="Go to top"
                 class="fixed z-10 justify-center hidden w-16 h-16 font-bold transition duration-150 ease-in bg-blue-600 rounded-full shadow-md bottom-7 right-7 text-gray-50 hover:scale-125 hover:shadow-xl">

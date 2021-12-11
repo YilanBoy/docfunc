@@ -95,14 +95,3 @@
 ::-webkit-scrollbar-thumb:hover {
     background: hsl(217, 19%, 27%);
 }
-
-/* grow bar */
-.growing-bar {
-    animation: grow 1s forwards;
-}
-
-@keyframes grow {
-    0% {
-        width: 0;
-    }
-}

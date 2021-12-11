@@ -1,5 +1,19 @@
 @section('title', $user->name . ' 的個人頁面')
 
+@section('css')
+    <style>
+        /* grow bar */
+        .growing-bar {
+            animation: grow 1s forwards;
+        }
+
+        @keyframes grow {
+            0% {
+                width: 0;
+            }
+        }
+    </style>
+@endsection
 {{-- 個人頁面 --}}
 <x-app-layout>
     <div class="container mx-auto max-w-7xl">

@@ -9,7 +9,7 @@
     <style>
         /* fade in post*/
         .fade-in-post {
-            animation: fade-in 1s;
+            animation: fade-in 0.5s;
         }
 
         @keyframes fade-in {

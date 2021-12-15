@@ -91,7 +91,7 @@
                                 }
                             "
                             type="button"
-                            class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-gray-50
+                            class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md text-gray-50
                             bg-blue-600 hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900
                             focus:ring ring-blue-300 transition ease-in-out duration-150"
                         >
@@ -106,7 +106,7 @@
                                 }
                             "
                             type="button"
-                            class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-gray-50
+                            class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md text-gray-50
                             bg-red-600 hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900
                             focus:ring ring-red-300 transition ease-in-out duration-150"
                         >
@@ -129,14 +129,11 @@
                         {{-- 編輯文章 --}}
                         <a
                             href="{{ route('posts.edit', ['post' => $post->id]) }}"
-                            class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-gray-50
+                            class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md text-gray-50
                             bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-900 focus:outline-none focus:border-emerald-900
                             focus:ring ring-emerald-300 transition ease-in-out duration-150"
                         >
-                            <span
-                                class="group-hover:scale-125 group-hover:-rotate-45 transition duration-150 ease-in">
-                                <i class="bi bi-pencil-fill"></i>
-                            </span>
+                            <i class="bi bi-pencil-fill"></i>
                         </a>
 
                         {{-- 軟刪除 --}}
@@ -148,7 +145,7 @@
                                 }
                             "
                             type="button"
-                            class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md font-semibold text-gray-50
+                            class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md text-gray-50
                             bg-amber-600 hover:bg-amber-700 active:bg-amber-900 focus:outline-none focus:border-amber-900
                             focus:ring ring-amber-300 transition ease-in-out duration-150"
                         >

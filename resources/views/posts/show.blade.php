@@ -64,14 +64,13 @@
                                 {{-- 編輯文章 --}}
                                 <a
                                     href="{{ route('posts.edit', ['post' => $post->id]) }}"
-                                    class="relative inline-flex w-16 h-16 border border-emerald-600 group rounded-xl"
+                                    class="group w-16 h-16 inline-flex justify-center items-center border border-transparent rounded-xl text-gray-50
+                                    bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-900 focus:outline-none focus:border-emerald-900
+                                    focus:ring ring-emerald-300 transition ease-in-out duration-150"
                                 >
                                     <span
-                                        class="absolute inset-0 inline-flex items-center self-stretch justify-center text-2xl font-medium text-center transition-transform bg-emerald-600 text-gray-50 rounded-xl ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
-                                        <span
-                                            class="transition duration-150 ease-in group-hover:scale-125 group-hover:-rotate-45">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </span>
+                                        class="group-hover:scale-125 group-hover:-rotate-12 transition duration-150 ease-in text-2xl">
+                                        <i class="bi bi-pencil-fill"></i>
                                     </span>
                                 </a>
 
@@ -90,10 +89,12 @@
                                         }
                                     "
                                     type="button"
-                                    class="relative inline-flex w-16 h-16 mt-4 border border-amber-600 group rounded-xl focus:outline-none"
+                                    class="group w-16 h-16 mt-4 inline-flex justify-center items-center border border-transparent rounded-xl text-gray-50
+                                    bg-amber-600 hover:bg-amber-700 active:bg-amber-900 focus:outline-none focus:border-amber-900
+                                    focus:ring ring-amber-300 transition ease-in-out duration-150"
                                 >
                                     <span
-                                        class="absolute inset-0 inline-flex items-center self-stretch justify-center text-2xl font-medium text-center transition-transform bg-amber-600 text-gray-50 rounded-xl ring-1 ring-amber-600 ring-offset-1 ring-offset-amber-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0">
+                                        class="group-hover:scale-125 group-hover:rotate-12 transition duration-150 ease-in text-2xl">
                                         <i class="bi bi-file-earmark-x-fill"></i>
                                     </span>
                                 </button>

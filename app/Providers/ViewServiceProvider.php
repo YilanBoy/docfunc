@@ -24,7 +24,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // 將分類綁定至上方選單的 View 中
+        // 將分類綁定至上方選單的 View 中
         View::composer(
             ['layouts.header', 'posts.create', 'posts.edit'],
             'App\Http\View\Composers\CategoryComposer'

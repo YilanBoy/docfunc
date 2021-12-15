@@ -22,7 +22,7 @@
                     >{{ $post->title }}</a>
                 </span>
 
-                {{-- 文章相關資訊 --}}
+                {{-- 文章相關資訊 --}}
                 <div class="flex items-center text-sm text-gray-400 mt-2 space-x-2">
                     {{-- 文章分類資訊 --}}
                     <div>

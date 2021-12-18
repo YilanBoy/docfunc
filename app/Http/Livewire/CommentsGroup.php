@@ -31,22 +31,30 @@ class CommentsGroup extends Component
 
     public function render()
     {
-        $comments = Post::findOrFail($this->postId)
-            ->comments()
+        $comments = Comment::query()
             ->selectRaw('
                 comments.*,
                 posts.user_id AS post_user_id,
                 users.name AS user_name,
-                MD5(LOWER(TRIM(users.email))) AS user_email_hash
+                CONCAT(
+                    "https://www.gravatar.com/avatar/",
+                    MD5(LOWER(TRIM(users.email))),
+                    "?s=400&d=mp"
+                ) AS gravatar_url
             ')
             ->join('posts', 'posts.id', '=', 'comments.post_id')
             ->join('users', 'users.id', '=', 'comments.user_id')
+            ->where('post_id', $this->postId)
             ->whereNull('parent_id')
             ->with(['subComments' => function ($query) {
                 $query->selectRaw('
                     comments.*,
                     users.name AS user_name,
-                    MD5(LOWER(TRIM(users.email))) AS user_email_hash
+                    CONCAT(
+                        "https://www.gravatar.com/avatar/",
+                        MD5(LOWER(TRIM(users.email))),
+                        "?s=400&d=mp"
+                    ) AS gravatar_url
                 ')
                     ->join('users', 'users.id', '=', 'comments.user_id')
                     ->oldest();
@@ -55,8 +63,6 @@ class CommentsGroup extends Component
             ->limit($this->perPage)
             ->offset($this->offset)
             ->get();
-
-        // dd($comments);
 
         return view('livewire.comments-group', ['comments' => $comments]);
     }

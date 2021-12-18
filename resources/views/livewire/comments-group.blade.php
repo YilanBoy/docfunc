@@ -6,7 +6,7 @@
                 {{-- 大頭貼 --}}
                 <div class="flex-none">
                     <a href="{{ route('users.index', ['user' => $comment->user_id]) }}">
-                        <img src="{{ 'https://www.gravatar.com/avatar/' . $comment->user_email_hash . '?s=400&d=mp' }}"
+                        <img src="{{ $comment->gravatar_url }}"
                              alt="{{ $comment->user_name }}"
                              class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400">
                     </a>
@@ -73,7 +73,7 @@
                                 <div class="flex-none">
                                     <a href="{{ route('users.index', ['user' => $subComment->user_id]) }}">
                                         <img
-                                            src="{{ 'https://www.gravatar.com/avatar/' . $subComment->user_email_hash . '?s=400&d=mp' }}"
+                                            src="{{ $subComment->gravatar_url }}"
                                             alt="{{ $subComment->user_name }}"
                                             class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400">
                                     </a>

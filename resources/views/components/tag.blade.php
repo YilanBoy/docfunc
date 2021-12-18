@@ -1,4 +1,8 @@
 <a href="{{ $href }}"
-class="inline-flex items-center px-3 py-1 m-1 text-xs font-bold text-gray-700 uppercase bg-gray-200 rounded-full leading-sm hover:bg-gray-400 ring-1 ring-gray-700 dark:text-gray-50 dark:bg-gray-500 dark:hover:bg-gray-400 dark:ring-gray-50">
+   class="inline-flex items-center px-3 py-1 m-1
+    text-xs font-bold text-gray-700 uppercase
+    bg-zinc-200 rounded-full hover:bg-zinc-300 ring-1 ring-zinc-700
+    dark:text-gray-50 dark:bg-zinc-600 dark:hover:bg-zinc-500 dark:ring-zinc-50"
+>
     {{ $slot }}
 </a>

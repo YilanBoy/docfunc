@@ -65,8 +65,8 @@
                                 <a
                                     href="{{ route('posts.edit', ['post' => $post->id]) }}"
                                     class="group w-16 h-16 inline-flex justify-center items-center border border-transparent rounded-xl text-gray-50
-                                    bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-900 focus:outline-none focus:border-emerald-900
-                                    focus:ring ring-emerald-300 transition ease-in-out duration-150"
+                                    bg-green-500 hover:bg-green-600 active:bg-green-700 focus:outline-none focus:border-green-700
+                                    focus:ring ring-green-300 transition ease-in-out duration-150"
                                 >
                                     <span
                                         class="group-hover:scale-125 group-hover:-rotate-12 transition duration-150 ease-in text-2xl">
@@ -90,8 +90,8 @@
                                     "
                                     type="button"
                                     class="group w-16 h-16 mt-4 inline-flex justify-center items-center border border-transparent rounded-xl text-gray-50
-                                    bg-amber-600 hover:bg-amber-700 active:bg-amber-900 focus:outline-none focus:border-amber-900
-                                    focus:ring ring-amber-300 transition ease-in-out duration-150"
+                                    bg-orange-500 hover:bg-orange-600 active:bg-orange-700 focus:outline-none focus:border-orange-700
+                                    focus:ring ring-orange-300 transition ease-in-out duration-150"
                                 >
                                     <span
                                         class="group-hover:scale-125 group-hover:rotate-12 transition duration-150 ease-in text-2xl">

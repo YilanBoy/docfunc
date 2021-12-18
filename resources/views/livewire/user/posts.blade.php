@@ -18,7 +18,10 @@
                     <a
                         x-ref="cardLinkUrl"
                         href="{{ $post->trashed() ? '#' : $post->link_with_slug }}"
-                        class="group-gradient-underline-grow"
+                        @class([
+                            '',
+                            'group-gradient-underline-grow' => !$post->trashed(),
+                        ])
                     >{{ $post->title }}</a>
                 </span>
 
@@ -92,7 +95,7 @@
                             "
                             type="button"
                             class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md text-gray-50
-                            bg-blue-600 hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900
+                            bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-700
                             focus:ring ring-blue-300 transition ease-in-out duration-150"
                         >
                             <i class="bi bi-file-earmark-check-fill"></i>
@@ -107,7 +110,7 @@
                             "
                             type="button"
                             class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md text-gray-50
-                            bg-red-600 hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900
+                            bg-red-500 hover:bg-red-600 active:bg-red-700 focus:outline-none focus:border-red-700
                             focus:ring ring-red-300 transition ease-in-out duration-150"
                         >
                             <i class="bi bi-trash-fill"></i>
@@ -130,8 +133,8 @@
                         <a
                             href="{{ route('posts.edit', ['post' => $post->id]) }}"
                             class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md text-gray-50
-                            bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-900 focus:outline-none focus:border-emerald-900
-                            focus:ring ring-emerald-300 transition ease-in-out duration-150"
+                            bg-green-500 hover:bg-green-600 active:bg-green-700 focus:outline-none focus:border-green-700
+                            focus:ring ring-green-300 transition ease-in-out duration-150"
                         >
                             <i class="bi bi-pencil-fill"></i>
                         </a>
@@ -146,8 +149,8 @@
                             "
                             type="button"
                             class="w-10 h-10 inline-flex justify-center items-center border border-transparent rounded-md text-gray-50
-                            bg-amber-600 hover:bg-amber-700 active:bg-amber-900 focus:outline-none focus:border-amber-900
-                            focus:ring ring-amber-300 transition ease-in-out duration-150"
+                            bg-orange-500 hover:bg-orange-600 active:bg-orange-700 focus:outline-none focus:border-orange-700
+                            focus:ring ring-orange-300 transition ease-in-out duration-150"
                         >
                             <i class="bi bi-file-earmark-x-fill"></i>
                         </button>

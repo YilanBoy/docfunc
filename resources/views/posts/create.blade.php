@@ -42,7 +42,7 @@
                             <button
                                 type="submit" form="create-post"
                                 class="group w-16 h-16 mt-4 inline-flex justify-center items-center border border-transparent rounded-xl text-gray-50
-                                bg-blue-600 hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900
+                                bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-700
                                 focus:ring ring-blue-300 transition ease-in-out duration-150"
                             >
                                 <span

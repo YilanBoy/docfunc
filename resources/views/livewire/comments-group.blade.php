@@ -35,7 +35,7 @@
                             x-on:click="
                                 $dispatch('set-comment-box-open', { open: true })
                                 $dispatch('set-comment-id', {{ $comment->id }})
-                                $dispatch('set-comment-to', '回覆{{ $comment->user_name }}')
+                                $dispatch('set-comment-to', '回覆 ➡ {{ $comment->user_name }}')
                                 $dispatch('comment-box-focus')
                                 disableScroll()
                             "

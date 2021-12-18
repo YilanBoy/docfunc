@@ -30,7 +30,18 @@ class CommentBox extends Component
     {
         $this->validate();
 
-        $post = Post::findOrFail($this->postId);
+        $post = Post::where('id', $this->postId)
+            ->with(['comments' => function ($query) {
+                $query->select('id', 'post_id')
+                    ->whereNull('parent_id');
+            }])
+            ->first();
+
+        // 判斷父留言是否為當前文章的留言
+        abort_if(
+            $parentCommentId !== 0 && !$post->comments->pluck('id')->contains($parentCommentId),
+            403
+        );
 
         $comment = Comment::create(
             [

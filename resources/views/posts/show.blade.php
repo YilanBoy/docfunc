@@ -84,7 +84,7 @@
                                 {{-- 軟刪除 --}}
                                 <button
                                     x-on:click="
-                                        if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以還原）')) {
+                                        if (confirm('您確定標記此文章為刪除狀態嗎？（30 天內還可以還原）')) {
                                             document.getElementById('soft-delete-post').submit()
                                         }
                                     "
@@ -144,7 +144,7 @@
                                     {{-- 軟刪除 --}}
                                     <button
                                         x-on:click="
-                                            if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以還原）')) {
+                                            if (confirm('您確定標記此文章為刪除狀態嗎？（30 天內還可以還原）')) {
                                                 document.getElementById('soft-delete-post').submit()
                                             }
                                         "

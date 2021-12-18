@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Http\Livewire\Posts;
 use App\Models\Category;
+use Illuminate\Support\Facades\Artisan;
 use Livewire\Livewire;
 use App\Models\User;
 use App\Models\Post;
@@ -141,7 +142,6 @@ class PostTest extends TestCase
         $response = $this->post(route('posts.store'), [
             'title' => 'This is a test post title',
             'category_id' => 1,
-            'body' => 'This is a test post body'
         ]);
 
         $response->assertStatus(302)
@@ -180,7 +180,6 @@ class PostTest extends TestCase
             'title' => 'This is a test post title',
             'user_id' => $user->id,
             'category_id' => 1,
-            'body' => 'This is a test post body'
         ]);
 
         $response = $this->actingAs($user)
@@ -188,5 +187,31 @@ class PostTest extends TestCase
 
         $response->assertStatus(302)
             ->assertRedirect(route('users.index', ['user' => $user->id]));
+    }
+
+    public function test_prune_the_stale_post()
+    {
+        $user = User::factory()->create();
+
+        Post::factory()->create([
+            'title' => 'This is a stale post',
+            'user_id' => $user->id,
+            'category_id' => 1,
+            'deleted_at' => now()->subDays(31),
+        ]);
+
+        Post::factory()->create([
+            'title' => 'This is a normal post',
+            'user_id' => $user->id,
+            'category_id' => 1,
+        ]);
+
+        $this->artisan('model:prune');
+
+        $this->assertDatabaseCount('posts', 1);
+        $this->assertDatabaseHas('posts', [
+            'title' => 'This is a normal post',
+            'category_id' => 1,
+        ]);
     }
 }

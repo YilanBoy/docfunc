@@ -139,7 +139,7 @@
                         {{-- 軟刪除 --}}
                         <button
                             x-on:click.prevent.stop="
-                                if (confirm('您確定標記此文章為刪除狀態嗎？（時間內還可以恢復）'))
+                                if (confirm('您確定標記此文章為刪除狀態嗎？（30 天內還可以恢復）'))
                                 {
                                     document.getElementById('soft-delete-post-{{ $post->id }}').submit()
                                 }

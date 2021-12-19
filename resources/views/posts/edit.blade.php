@@ -112,17 +112,7 @@
                         </div>
 
                         {{-- 文章內容 --}}
-                        <div
-                            class="max-w-none mt-5
-                            prose prose-slate dark:prose-invert prose-headings:text-indigo-500 dark:prose-headings:text-indigo-400
-                            prose-a:no-underline hover:prose-a:underline
-                            prose-a:text-teal-600 hover:prose-a:text-teal-500 dark:prose-a:text-teal-500 dark:hover:prose-a:text-teal-400
-                            prose-li:marker:text-gray-500 dark:prose-li:marker:text-gray-400
-                            prose-pre:!whitespace-pre-wrap prose-code:!whitespace-pre-wrap prose-code:before:content-none prose-code:after:content-none
-                            dark:prose-figcaption:!bg-slate-500 dark:prose-figcaption:!text-slate-100
-                            dark:prose-hr:bg-slate-500
-                            dark:prose-code:text-slate-100"
-                        >
+                        <div class="blog-post max-w-none mt-5">
                             <label for="editor" class="hidden">內文</label>
 
                             <textarea

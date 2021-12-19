@@ -1,6 +1,6 @@
 /*
  * CKEditor 5 (v31.1.0) content styles.
- * Generated on Tue, 07 Dec 2021 11:56:49 GMT.
+ * Generated on Fri, 17 Dec 2021 06:54:01 GMT.
  * For more information, check out https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/content-styles.html
  */
 
@@ -95,6 +95,18 @@
     margin-left: var(--ck-inline-image-style-spacing);
 }
 
+/* ckeditor5-image/theme/imagecaption.css */
+.ck-content .image > figcaption {
+    display: table-caption;
+    caption-side: bottom;
+    word-break: break-word;
+    color: var(--ck-color-image-caption-text);
+    background-color: var(--ck-color-image-caption-background);
+    padding: .6em;
+    font-size: .75em;
+    outline-offset: -1px;
+}
+
 /* ckeditor5-font/theme/fontsize.css */
 .ck-content .text-tiny {
     font-size: .7em;
@@ -113,18 +125,6 @@
 /* ckeditor5-font/theme/fontsize.css */
 .ck-content .text-huge {
     font-size: 1.8em;
-}
-
-/* ckeditor5-image/theme/imagecaption.css */
-.ck-content .image > figcaption {
-    display: table-caption;
-    caption-side: bottom;
-    word-break: break-word;
-    color: var(--ck-color-image-caption-text);
-    background-color: var(--ck-color-image-caption-background);
-    padding: .6em;
-    font-size: .75em;
-    outline-offset: -1px;
 }
 
 /* ckeditor5-highlight/theme/highlight.css */
@@ -157,6 +157,31 @@
 .ck-content .pen-green {
     color: var(--ck-highlight-pen-green);
     background-color: transparent;
+}
+
+/* ckeditor5-horizontal-line/theme/horizontalline.css */
+.ck-content hr {
+    margin: 15px 0;
+    height: 4px;
+    background: hsl(0, 0%, 87%);
+    border: 0;
+}
+
+/* ckeditor5-image/theme/imageresize.css */
+.ck-content .image.image_resized {
+    max-width: 100%;
+    display: block;
+    box-sizing: border-box;
+}
+
+/* ckeditor5-image/theme/imageresize.css */
+.ck-content .image.image_resized img {
+    width: 100%;
+}
+
+/* ckeditor5-image/theme/imageresize.css */
+.ck-content .image.image_resized > figcaption {
+    display: block;
 }
 
 /* ckeditor5-image/theme/image.css */
@@ -201,31 +226,6 @@
     max-width: 100%;
 }
 
-/* ckeditor5-image/theme/imageresize.css */
-.ck-content .image.image_resized {
-    max-width: 100%;
-    display: block;
-    box-sizing: border-box;
-}
-
-/* ckeditor5-image/theme/imageresize.css */
-.ck-content .image.image_resized img {
-    width: 100%;
-}
-
-/* ckeditor5-image/theme/imageresize.css */
-.ck-content .image.image_resized > figcaption {
-    display: block;
-}
-
-/* ckeditor5-horizontal-line/theme/horizontalline.css */
-.ck-content hr {
-    margin: 15px 0;
-    height: 4px;
-    background: hsl(0, 0%, 87%);
-    border: 0;
-}
-
 /* ckeditor5-block-quote/theme/blockquote.css */
 .ck-content blockquote {
     overflow: hidden;
@@ -248,19 +248,6 @@
     background-color: hsla(0, 0%, 78%, 0.3);
     padding: .15em;
     border-radius: 2px;
-}
-
-/* ckeditor5-table/theme/tablecaption.css */
-.ck-content .table > figcaption {
-    display: table-caption;
-    caption-side: top;
-    word-break: break-word;
-    text-align: center;
-    color: var(--ck-color-table-caption-text);
-    background-color: var(--ck-color-table-caption-background);
-    padding: .6em;
-    font-size: .75em;
-    outline-offset: -1px;
 }
 
 /* ckeditor5-table/theme/table.css */
@@ -300,6 +287,19 @@
 /* ckeditor5-table/theme/table.css */
 .ck-content[dir="ltr"] .table th {
     text-align: left;
+}
+
+/* ckeditor5-table/theme/tablecaption.css */
+.ck-content .table > figcaption {
+    display: table-caption;
+    caption-side: top;
+    word-break: break-word;
+    text-align: center;
+    color: var(--ck-color-table-caption-text);
+    background-color: var(--ck-color-table-caption-background);
+    padding: .6em;
+    font-size: .75em;
+    outline-offset: -1px;
 }
 
 /* ckeditor5-page-break/theme/pagebreak.css */

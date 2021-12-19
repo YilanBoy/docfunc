@@ -27,22 +27,13 @@ module.exports = {
                                 color: theme('colors.blue.500'),
                                 'text-decoration': 'underline',
                             },
-                            'ol > li::marker': {
+                            'ol > li::marker, ul > li::marker': {
                                 color: theme('colors.gray.900'),
                             },
-                            'ul > li::marker': {
-                                color: theme('colors.gray.900'),
-                            },
-                            pre: {
+                            'pre, code': {
                                 'white-space': 'pre-wrap !important',
                             },
-                            code: {
-                                'white-space': 'pre-wrap !important',
-                            },
-                            'code::before': {
-                                content: '',
-                            },
-                            'code::after': {
+                            'code::before, code::after': {
                                 content: '',
                             },
                         },
@@ -66,10 +57,7 @@ module.exports = {
                             'mark strong': {
                                 color: theme('colors.gray.900'),
                             },
-                            'ol > li::marker': {
-                                color: theme('colors.gray.50'),
-                            },
-                            'ul > li::marker': {
+                            'ol > li::marker, ul > li::marker': {
                                 color: theme('colors.gray.50'),
                             },
                             hr: {
@@ -79,16 +67,7 @@ module.exports = {
                                 color: theme('colors.gray.50'),
                                 borderLeftColor: theme('colors.gray.400'),
                             },
-                            h1: {
-                                color: theme('colors.gray.50'),
-                            },
-                            h2: {
-                                color: theme('colors.gray.50'),
-                            },
-                            h3: {
-                                color: theme('colors.gray.50'),
-                            },
-                            h4: {
+                            'h1, h2, h3, h4': {
                                 color: theme('colors.gray.50'),
                             },
                             'figure figcaption': {

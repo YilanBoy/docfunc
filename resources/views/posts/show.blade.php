@@ -220,7 +220,17 @@
                     @endif
 
                     {{-- 文章內容 --}}
-                    <div class="prose max-w-none dark:prose-dark mt-4 ck-content dark:text-gray-50">
+                    <div
+                        class="ck-content max-w-none mt-4
+                        prose prose-slate dark:prose-invert prose-headings:text-indigo-500 dark:prose-headings:text-indigo-400
+                        prose-a:no-underline hover:prose-a:underline
+                        prose-a:text-teal-600 hover:prose-a:text-teal-500 dark:prose-a:text-teal-500 dark:hover:prose-a:text-teal-400
+                        prose-li:marker:text-gray-500 dark:prose-li:marker:text-gray-400
+                        prose-pre:!whitespace-pre-wrap prose-code:!whitespace-pre-wrap prose-code:before:content-none prose-code:after:content-none
+                        dark:prose-figcaption:!bg-slate-500 dark:prose-figcaption:!text-slate-100
+                        dark:prose-hr:bg-slate-500
+                        dark:prose-code:text-slate-100"
+                    >
                         {!! $post->body !!}
                     </div>
                 </x-card>

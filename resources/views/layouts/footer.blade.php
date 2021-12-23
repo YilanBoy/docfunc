@@ -77,6 +77,14 @@
         Laravel Taiwan
       </a>
       <a
+        href="https://laravel-livewire.com/"
+        target="_blank"
+        rel="nofollow noopener noreferrer"
+        class="block my-3 font-medium text-gray-300 duration-300 hover:text-gray-500"
+      >
+        Laravel Livewire
+      </a>
+      <a
         href="https://tailwindcss.com/"
         target="_blank"
         rel="nofollow noopener noreferrer"
@@ -91,14 +99,6 @@
         class="block my-3 font-medium text-gray-300 duration-300 hover:text-gray-500"
       >
         Alpine.js
-      </a>
-      <a
-        href="https://www.flaticon.com/authors/freepik"
-        target="_blank"
-        rel="nofollow noopener noreferrer"
-        class="block my-3 font-medium text-gray-300 duration-300 hover:text-gray-500"
-      >
-        Frepik from flaction
       </a>
     </div>
   </div>

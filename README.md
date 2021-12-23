@@ -4,25 +4,25 @@
 
 ## Introduction
 
-This is a simple blog made by [TALL stack](https://tallstack.dev/)  
+This is a simple blog made by [TALL stack](https://tallstack.dev/)
+
 TALL stack includes
-- [Laravel](https://laravel.com/)
-- [Livewire](https://laravel-livewire.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Alpine.js](https://alpinejs.dev/)
+
+-   [Laravel](https://laravel.com/)
+-   [Livewire](https://laravel-livewire.com/)
+-   [Tailwind CSS](https://tailwindcss.com/)
+-   [Alpine.js](https://alpinejs.dev/)
 
 The features of this blog include
 
-- authentication
-- create post
-- post tags
-- multiple layer comments
-- post search
+-   authentication
+-   create post
+-   post tags
+-   multiple layer comments
+-   post search
 
 Post editor use [CKEditor 5](https://ckeditor.com/), You can upload image to AWS S3 in blog post.  
 You can search post by [Algolia](https://www.algolia.com/)
-
-Blog logo made by [Freepik](https://www.freepik.com) from [Flaticon](https://www.flaticon.com/)
 
 ## Requirements
 
@@ -33,42 +33,50 @@ Blog logo made by [Freepik](https://www.freepik.com) from [Flaticon](https://www
 ## Installation
 
 Clone the repository to your local machine, and change the current working directory to the repository
+
 ```sh
 $ cd simple-blog
 ```
 
 Install the composer package
+
 ```sh
 $ composer install
 ```
 
 Install the npm package
+
 ```sh
 $ npm install
 ```
 
 Running laravel mix
+
 ```sh
 $ npm run dev
 ```
 
 Make a .env file.  
 Set up the .env file, such as database connection, reCAPTCHA key, S3 key, mail service and etc.
+
 ```sh
 $ cp .env-example .env
 ```
 
 Running migrations
+
 ```sh
 $ php artisan migrate
 ```
 
 Generate ide-helper
+
 ```sh
 $ php artisan ide-helper:generate
 ```
 
-Generate model ide-helper 
+Generate model ide-helper
+
 ```sh
 $ php artisan ide-helper:models
 ```

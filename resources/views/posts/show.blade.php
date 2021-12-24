@@ -248,7 +248,7 @@
             >
           </div>
           <div class="space-y-2">
-            <div class="text-gray-400">WRITTEN BY</div>
+            <div class="text-gray-400 uppercase">written by</div>
             <a
               href="{{ route('users.index', ['user' => $post->user->id]) }}"
               class="inline-block text-2xl font-bold gradient-underline-grow dark:text-gray-50"

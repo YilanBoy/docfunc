@@ -59,7 +59,7 @@
 
           {{-- 文章選單-桌面裝置 --}}
           <div
-            x-data="{}"
+            x-data
             class="absolute top-0 hidden w-16 h-full xl:block left-[102%]"
           >
             <div class="sticky flex flex-col items-center justify-center top-7">
@@ -248,7 +248,7 @@
             >
           </div>
           <div class="space-y-2">
-            <div class="text-gray-400">WRITEN BY</div>
+            <div class="text-gray-400">WRITTEN BY</div>
             <a
               href="{{ route('users.index', ['user' => $post->user->id]) }}"
               class="inline-block text-2xl font-bold gradient-underline-grow dark:text-gray-50"
@@ -268,7 +268,7 @@
         @endauth
 
         {{-- 留言列表 --}}
-        <livewire:comments :postId="$post->id" />
+        <livewire:comments :postId="$post->id"/>
 
         <script>
           window.addEventListener('enableScroll', () => {

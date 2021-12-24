@@ -224,9 +224,10 @@
     {{-- 電腦版-Logo --}}
     <a
       href="{{ route('root') }}"
-      class="absolute font-mono text-2xl font-bold top-4 left-4 dark:text-gray-50"
+      class="absolute flex items-center top-3 left-4"
     >
-      {{ config('app.name') }}
+      <img src="{{ asset('images/icon/icon.svg') }}" alt="logo" class="w-10 h-10 rotate-12">
+      <span class="ml-3 font-mono text-2xl font-bold dark:text-gray-50">{{ config('app.name') }}</span>
     </a>
 
     <ul class="flex space-x-6">

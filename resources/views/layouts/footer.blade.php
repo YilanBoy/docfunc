@@ -42,6 +42,15 @@
       >
         Laracasts
       </a>
+
+      <a
+        href="https://www.jetbrains.com/academy/"
+        target="_blank"
+        rel="nofollow noopener noreferrer"
+        class="block my-3 font-medium text-gray-300 duration-300 hover:text-gray-500"
+      >
+        JetBrains Academy
+      </a>
     </div>
 
     {{-- Col-3 --}}
@@ -90,7 +99,15 @@
         rel="nofollow noopener noreferrer"
         class="block my-3 font-medium text-gray-300 duration-300 hover:text-gray-500"
       >
-        TailwindCSS
+        Tailwind CSS
+      </a>
+      <a
+        href="https://getbootstrap.com/"
+        target="_blank"
+        rel="nofollow noopener noreferrer"
+        class="block my-3 font-medium text-gray-300 duration-300 hover:text-gray-500"
+      >
+        Bootstrap
       </a>
       <a
         href="https://alpinejs.dev/"

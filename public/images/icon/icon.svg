@@ -1,10 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
     <defs>
         <linearGradient id="itmeo-branding" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" style="stop-color:#009efd;stop-opacity:1" />
             <stop offset="100%" style="stop-color:#2af598;stop-opacity:1" />
         </linearGradient>
     </defs>
-    <path fill="url(#itmeo-branding)" d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-    <path fill="url(#itmeo-branding)" fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+    <g fill="url(#itmeo-branding)" transform="rotate(12, 10, 10)">
+        <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+        <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+    </g>
 </svg>

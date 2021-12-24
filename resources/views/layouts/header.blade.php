@@ -226,7 +226,7 @@
       href="{{ route('root') }}"
       class="absolute flex items-center top-3 left-4"
     >
-      <img src="{{ asset('images/icon/icon.svg') }}" alt="logo" class="w-10 h-10 rotate-12">
+      <img src="{{ asset('images/icon/icon.svg') }}" alt="logo" class="w-10 h-10">
       <span class="ml-3 font-mono text-2xl font-bold dark:text-gray-50">{{ config('app.name') }}</span>
     </a>
 

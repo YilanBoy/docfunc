@@ -16,7 +16,9 @@
 </head>
 
 <body class="flex items-center justify-center min-h-screen antialiased bg-gray-100 font-noto">
-  <x-card>
+  <x-card
+    x-data
+  >
     <h3 class="pb-3 mb-3 text-lg font-semibold text-center border-b-2 border-black">
       <i class="bi bi-person-x-fill"></i><span class="ml-2">刪除帳號</span>
     </h3>
@@ -29,8 +31,12 @@
     <div class="flex items-center justify-center mt-4">
       {{-- Delete User Button --}}
       <a
+        x-on:click.prevent="
+          if (confirm('您確定要刪除帳號嗎？此動作無法復原')) {
+            $el.click()
+          }
+        "
         href="{{ $destroyLink }}"
-        onClick="return confirm('您確定要刪除帳號嗎？此動作無法復原');"
         class="inline-flex items-center justify-center px-4 py-2 font-semibold tracking-widest uppercase transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md text-gray-50 hover:bg-red-500 active:bg-red-900 focus:outline-none focus:border-red-900 focus:ring ring-red-300 disabled:opacity-25"
       >
         <i class="bi bi-exclamation-triangle-fill"></i><span class="ml-2">確認刪除帳號</span>

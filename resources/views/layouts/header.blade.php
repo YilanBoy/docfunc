@@ -1,5 +1,19 @@
 {{-- Header --}}
-<nav id="header" class="z-20">
+<nav
+  x-data
+  id="header"
+  class="z-20"
+>
+  {{-- 登出表單 --}}
+  <form
+    x-ref="logout"
+    action="{{ route('logout') }}"
+    method="POST"
+    class="hidden"
+  >
+    @csrf
+  </form>
+
   {{-- 手機版選單 --}}
   <div
     x-data="{ mobileMenuIsOpen: false }"
@@ -36,12 +50,13 @@
         </div>
 
         <div class="flex items-center mx-auto">
-          <span class="hidden font-mono text-xl font-bold md:block dark:text-gray-50">
+          <img src="{{ asset('images/icon/icon.svg') }}" alt="logo" class="hidden w-10 h-10 md:inline-block">
+          <span class="hidden ml-3 font-mono text-xl font-bold md:block dark:text-gray-50">
             {{ config('app.name') }}
           </span>
         </div>
 
-        <div class="absolute inset-y-0 right-0 flex items-center space-x-3">
+        <div class="absolute inset-y-0 right-0 flex items-center space-x-6">
           {{-- 明亮 / 暗黑模式切換 --}}
           <button
             type="button"
@@ -56,26 +71,27 @@
             </span>
           </button>
 
-          {{-- 手機版-未登入 --}}
           @guest
-            @if (!config('settings.disable_signup'))
+            {{-- 手機版-未登入 --}}
+            <a
+              href="{{ route('register') }}"
+              class="px-4 py-2 text-blue-400 bg-transparent border border-blue-400 rounded-md hover:bg-blue-400 hover:text-gray-50 hover:border-transparent"
+            >
+              註冊
+            </a>
+
+            @if (request()->url() !== route('login'))
               <a
-                href="{{ route('register') }}"
-                class="px-4 py-2 text-blue-400 bg-transparent border border-blue-400 rounded-md hover:bg-blue-400 hover:text-gray-50 hover:border-transparent"
+                href="{{ route('login') }}"
+                class="px-4 py-2 bg-transparent border rounded-md text-emerald-400 border-emerald-400 hover:bg-emerald-400 hover:text-gray-50 hover:border-transparent"
               >
-                註冊
+                登入
               </a>
             @endif
 
-            <a
-              href="{{ route('login') }}"
-              class="px-4 py-2 bg-transparent border rounded-md text-emerald-400 border-emerald-400 hover:bg-emerald-400 hover:text-gray-50 hover:border-transparent"
-            >
-              登入
-            </a>
-
-          {{-- 手機版-已登入 --}}
           @else
+            {{-- 手機版-已登入 --}}
+
             {{-- 手機版-通知 --}}
             <span class="relative inline-flex rounded-md shadow-sm">
               <a
@@ -157,19 +173,13 @@
                   <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
                 </a>
 
-                <form
-                  id="logout"
-                  action="{{ route('logout') }}"
-                  method="POST"
-                  onSubmit="return confirm('您確定要登出？');"
-                  class="hidden"
-                >
-                  @csrf
-                </form>
-
                 <button
-                  type="submit"
-                  form="logout"
+                  x-on:click.prevent="
+                    if (confirm('您確定要登出？')) {
+                      $refs.logout.submit()
+                    }
+                  "
+                  type="button"
                   role="menuitem"
                   tabindex="-1"
                   class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600"
@@ -291,9 +301,8 @@
         </span>
       </button>
 
-
-      {{-- 電腦版-未登入 --}}
       @guest
+        {{-- 電腦版-未登入 --}}
         <a
           href="{{ route('register') }}"
           class="flex items-center justify-center h-10 px-3 text-blue-400 transition duration-150 bg-transparent border border-blue-400 rounded-lg hover:bg-blue-400 hover:text-gray-50 hover:border-transparent"
@@ -301,14 +310,17 @@
           註冊
         </a>
 
+        @if (request()->url() !== route('login'))
         <a
           href="{{ route('login') }}"
           class="flex items-center justify-center h-10 px-3 transition duration-150 bg-transparent border rounded-lg text-emerald-400 border-emerald-400 hover:bg-emerald-400 hover:text-gray-50 hover:border-transparent"
         >
           <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
         </a>
-        {{-- 電腦版-已登入 --}}
+        @endif
       @else
+        {{-- 電腦版-已登入 --}}
+
         {{-- 電腦版-通知 --}}
         <span class="relative inline-flex rounded-md shadow-sm">
           <a
@@ -390,8 +402,12 @@
             </a>
 
             <button
-              type="submit"
-              form="logout"
+              x-on:click.prevent="
+                if (confirm('您確定要登出？')) {
+                  $refs.logout.submit()
+                }
+              "
+              type="button"
               role="menuitem"
               tabindex="-1"
               class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600"

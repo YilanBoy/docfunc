@@ -1,7 +1,12 @@
 <div class="mt-6 space-y-6">
   @forelse ($comments as $comment)
     {{-- 第一階層留言 --}}
-    <x-card class="relative flex group">
+    <x-card
+      x-data="{
+        commentId: {{ $comment->id }},
+      }"
+      class="relative flex group"
+    >
       <div class="flex flex-col flex-1 md:flex-row">
         {{-- 大頭貼 --}}
         <div class="flex-none">
@@ -47,8 +52,11 @@
 
             @if (in_array(auth()->id(), [$comment->user_id, $comment->post_user_id]))
               <button
-                onclick="confirm('您確定要刪除此留言嗎？') || event.stopImmediatePropagation()"
-                wire:click="destroy({{ $comment->id }})"
+                x-on:click="
+                  if (confirm('您確定要刪除此留言嗎？')) {
+                    $wire.destroy(commentId)
+                  }
+                "
                 class="inline-flex items-center justify-center w-10 h-10 font-semibold transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md text-gray-50 hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:ring ring-red-300"
               >
                 <i class="bi bi-trash-fill"></i>
@@ -64,7 +72,12 @@
       <div class="space-y-6 responses">
         @forelse ($comment->subComments as $subComment)
           <div class="relative">
-            <x-card class="flex group">
+            <x-card
+              x-data="{
+                subCommentId: {{ $subComment->id }},
+              }"
+              class="flex group"
+            >
               <div class="flex flex-col flex-1 md:flex-row">
                 {{-- 大頭貼 --}}
                 <div class="flex-none">
@@ -98,8 +111,11 @@
                     class="flex items-center justify-start mt-2 transition duration-150 opacity-0 md:mt-0 group-hover:opacity-100"
                   >
                     <button
-                      onclick="confirm('您確定要刪除此留言嗎？') || event.stopImmediatePropagation()"
-                      wire:click="destroy({{ $subComment->id }})"
+                      x-on:click="
+                        if (confirm('您確定要刪除此留言嗎？')) {
+                          $wire.destroy(subCommentId)
+                        }
+                      "
                       class="inline-flex items-center justify-center w-10 h-10 font-semibold transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md text-gray-50 hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:ring ring-red-300"
                     >
                       <i class="bi bi-trash-fill"></i>

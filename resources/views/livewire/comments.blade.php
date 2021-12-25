@@ -1,10 +1,7 @@
 {{-- 留言列表 --}}
 <div id="comments" class="w-full xl:w-2/3">
 
-  <div
-    x-data
-    class="w-full"
-  >
+  <div class="w-full">
     @for ($offset = 0; $offset < $count; $offset += $perPage)
       <livewire:comments-group
         :postId="$postId"

@@ -66,4 +66,8 @@ async function insertTwitterIframe(url: string, element: Element): Promise<void>
 
     // append the iframe after the element
     element.insertAdjacentHTML('afterend', data.html);
+    // scan blog post and embed tweets
+    window.twttr.widgets.load(
+        document.getElementById('blog-post')
+    );
 }

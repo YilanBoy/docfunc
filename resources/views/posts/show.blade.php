@@ -38,7 +38,7 @@
   <script src="{{ asset('js/scroll-to-top-btn.js') }}"></script>
   {{-- media embed --}}
   <script src="{{ asset('js/twitter-widgets.js') }}"></script>
-  <script src="{{ asset('js/oembed-media-embed.js') }}" async></script>
+  <script src="{{ asset('js/oembed-media-embed.js') }}"></script>
   {{-- 程式碼區塊高亮 --}}
   <script src="{{ asset('prism/prism.js') }}"></script>
   {{-- 程式碼複製按鈕 --}}

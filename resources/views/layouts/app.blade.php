@@ -19,7 +19,7 @@
   {{-- Styles --}}
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   {{-- Icon --}}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
   {{-- Font --}}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,7 @@
 
   @yield('css')
 
-  <livewire:styles />
+  <livewire:styles/>
 
   {{-- Head Scripts --}}
   @yield('scriptsInHead')
@@ -35,35 +35,35 @@
 
 <body class="antialiased text-gray-900 bg-gray-200 dark:bg-gray-800 font-noto">
 
-  <div class="relative flex flex-col justify-between">
+<div class="relative flex flex-col justify-between">
 
-    @include('layouts.header')
+  @include('layouts.header')
 
-    {{ $slot }}
+  {{ $slot }}
 
-    @include('layouts.footer')
+  @include('layouts.footer')
 
-  </div>
+</div>
 
-  {{-- Scripts --}}
-  <livewire:scripts />
+{{-- Scripts --}}
+<livewire:scripts/>
 
-  <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 
-  @foreach (['warning', 'success', 'info'] as $message)
-    @if (session()->has($message))
-      <script>
-        const sweetalert2Title = '{{ session()->get($message) }}';
-        const sweetalert2Icon = '{{ $message }}';
-      </script>
+@foreach (['warning', 'success', 'info'] as $message)
+  @if (session()->has($message))
+    <script>
+      const sweetalert2Title = '{{ session()->get($message) }}';
+      const sweetalert2Icon = '{{ $message }}';
+    </script>
 
-      <script src="{{ asset('js/sweet-alert.js') }}"></script>
-    @endif
-  @endforeach
+    <script src="{{ asset('js/sweet-alert.js') }}"></script>
+  @endif
+@endforeach
 
-  <script src="{{ asset('js/theme-switch.js') }}"></script>
+<script src="{{ asset('js/theme-switch.js') }}"></script>
 
-  @yield('scripts')
+@yield('scripts')
 </body>
 
 </html>

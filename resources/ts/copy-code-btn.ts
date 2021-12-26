@@ -3,7 +3,8 @@ let preTags: HTMLCollectionOf<HTMLPreElement> = document.getElementsByTagName('p
 // use Tailwind CSS class names
 let buttonClassList: string[] = [
     'copy-code-button', 'absolute', 'top-2', 'right-2',
-    'text-gray-50', 'bg-blue-400', 'rounded-md', 'px-2', 'py-1', 'text-sm',
+    'h-8', 'w-8', 'flex', 'justify-center', 'items-center',
+    'text-gray-50', 'bg-blue-400', 'rounded-md', 'text-lg',
     'hover:bg-blue-500', 'active:bg-blue-400',
     'opacity-0', 'group-hover:opacity-100', 'transition-all', 'duration-200'
 ];
@@ -15,7 +16,7 @@ for (let i = 0, preTagsLength = preTags.length; i < preTagsLength; i++) {
     // create copy button
     let copyButton: HTMLButtonElement = document.createElement('button');
     copyButton.classList.add(...buttonClassList);
-    copyButton.innerHTML = 'Copy';
+    copyButton.innerHTML = '<i class="bi bi-clipboard"></i>';
 
     // when copy button is clicked, copy code to clipboard
     copyButton.addEventListener('click', function (this: HTMLButtonElement) {
@@ -26,10 +27,10 @@ for (let i = 0, preTagsLength = preTags.length; i < preTagsLength; i++) {
         navigator.clipboard.writeText(codeText)
             .then(() => console.log('Copied to clipboard'), () => console.log('Failed to copy to clipboard'));
 
-        // change button inner text to "Copied!" for 2 seconds
-        this.innerText = 'Copied!';
+        // change button icon to "Copied!" for 2 seconds
+        this.innerHTML = '<i class="bi bi-clipboard-check"></i>';
         setTimeout(function (this: HTMLButtonElement) {
-            this.innerText = 'Copy';
+            this.innerHTML = '<i class="bi bi-clipboard"></i>';
         }.bind(this), 2000);
     });
 

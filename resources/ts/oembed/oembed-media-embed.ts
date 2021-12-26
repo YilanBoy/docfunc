@@ -6,7 +6,7 @@ const twitterUrlRegex = /(?:https?:\/\/)?(?:www\.)?twitter\.com\/(?:[^\/]+\/)+st
 // get all oembed elements
 const allOembedElement: NodeListOf<Element> = document.querySelectorAll('figure.media > oembed');
 
-//foreach oembed element
+// foreach oembed element
 allOembedElement.forEach((oembed: Element) => {
     // get the url
     const oembedUrl: string | null = oembed.getAttribute('url');
@@ -38,8 +38,8 @@ async function insertYoutubeIframe(url: string, element: Element): Promise<void>
             body: JSON.stringify(body),
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
         });
 
     let data = await response.json();
@@ -58,8 +58,8 @@ async function insertTwitterIframe(url: string, element: Element): Promise<void>
             body: JSON.stringify(body),
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
         });
 
     let data = await response.json();

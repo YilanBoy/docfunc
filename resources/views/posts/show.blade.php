@@ -23,15 +23,22 @@
         transform: translateY(0%);
       }
     }
+
+    /* media embed */
+    iframe,
+    .twitter-tweet {
+      margin-left: auto;
+      margin-right: auto;
+    }
   </style>
 @endsection
 
 @section('scripts')
   {{-- 至頂按鈕 --}}
   <script src="{{ asset('js/scroll-to-top-btn.js') }}"></script>
-  {{-- 文章中的嵌入影片顯示 --}}
-  <script src="{{ asset('embedly/platform.js') }}" charset="utf-8" async></script>
-  <script src="{{ asset('embedly/embedly.js') }}" async></script>
+  {{-- media embed --}}
+  <script src="{{ asset('js/twitter-widgets.js') }}"></script>
+  <script src="{{ asset('js/oembed-media-embed.js') }}" async></script>
   {{-- 程式碼區塊高亮 --}}
   <script src="{{ asset('prism/prism.js') }}"></script>
   {{-- 程式碼複製按鈕 --}}

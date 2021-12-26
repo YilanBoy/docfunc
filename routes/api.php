@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\Oembed\TwitterController;
+use App\Http\Controllers\Api\Oembed\YoutubeController;
+use App\Http\Controllers\Api\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('tags', TagController::class);
+
+Route::post('oembed/twitter', TwitterController::class);
+Route::post('oembed/youtube', YoutubeController::class);

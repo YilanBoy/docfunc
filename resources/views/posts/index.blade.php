@@ -70,7 +70,7 @@
                   rel="nofollow noopener noreferrer"
                   class="block p-2 rounded-md hover:bg-gray-200 dark:text-gray-50 dark:hover:bg-gray-600"
                 >
-                  {{ $link->title }}
+                  <i class="bi bi-link-45deg"></i><span class="ml-2">{{ $link->title }}</span>
                 </a>
               @endforeach
             </div>

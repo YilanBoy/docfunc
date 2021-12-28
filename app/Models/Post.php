@@ -110,7 +110,7 @@ class Post extends Model
         $array = $this->transform($array);
 
         $array['author_name'] = $this->user->name;
-        $array['url'] = $this->getLinkWithSlugAttribute();
+        $array['url'] = $this->link_with_slug;
 
         return $array;
     }

@@ -84,7 +84,7 @@
           x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
           x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           x-on:click.outside="
-            commentBoxOpen = false,
+            commentBoxOpen = false
             enableScroll()
           "
           class="inline-block p-5 overflow-hidden text-left align-bottom transition-all rounded-lg shadow-xl bg-gray-50 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full dark:bg-gray-700"

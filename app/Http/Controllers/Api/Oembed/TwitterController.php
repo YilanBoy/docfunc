@@ -24,8 +24,8 @@ class TwitterController extends Controller
 
         $response = Http::get($apiUrl);
 
-        return $response->successful() ?
-            $response :
-            response()->json(['html' => '<p style="font-size:1.5em;">Twitter 連結發生錯誤... 🥲</p>']);
+        return $response->successful()
+            ? $response
+            : response()->json(['html' => '<p style="font-size:1.5em;">Twitter 連結發生錯誤... 🥲</p>']);
     }
 }

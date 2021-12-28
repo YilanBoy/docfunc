@@ -128,7 +128,7 @@
                   <span class="sr-only">Open user menu</span>
                   <img
                     class="w-10 h-10 rounded-full "
-                    src="{{ auth()->user()->gravatar }}"
+                    src="{{ auth()->user()->gravatar_url }}"
                     alt=""
                   >
                 </button>
@@ -356,7 +356,7 @@
               <span class="sr-only">Open user menu</span>
               <img
                 class="w-10 h-10 rounded-full"
-                src="{{ auth()->user()->gravatar }}"
+                src="{{ auth()->user()->gravatar_url }}"
                 alt=""
               >
             </button>

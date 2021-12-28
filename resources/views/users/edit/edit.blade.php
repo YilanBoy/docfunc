@@ -8,7 +8,7 @@
     <div>
       <img
         class="rounded-full h-36 w-36"
-        src="{{ $user->gravatar }}"
+        src="{{ $user->gravatar_url }}"
         alt="{{ $user->name }}"
       >
     </div>

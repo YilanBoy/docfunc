@@ -250,7 +250,7 @@
           <div class="flex-none p-2 mr-4 none md:flex md:justify-center md:items-center">
             <img
               class="w-16 h-16 rounded-full"
-              src="{{ $post->user->gravatar }}"
+              src="{{ $post->user->gravatar_url }}"
               alt="{{ $post->user->name }}"
             >
           </div>

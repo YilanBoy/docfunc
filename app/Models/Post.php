@@ -3,8 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\MassPrunable;
@@ -17,23 +21,23 @@ class Post extends Model
         'title', 'body', 'category_id', 'excerpt', 'slug',
     ];
 
-    public function comments()
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
     // 定義與標籤的關聯
-    public function tags()
+    public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
     }
@@ -61,21 +65,25 @@ class Post extends Model
     }
 
     // 將連結加上文章的 slug
-    public function getLinkWithSlugAttribute(): string
+    public function linkWithSlug(): Attribute
     {
-        return route('posts.show', [
-            'post' => $this->id,
-            'slug' => $this->slug,
-        ]);
+        return new Attribute(
+            get: fn ($value) => route('posts.show', [
+                'post' => $this->id,
+                'slug' => $this->slug,
+            ])
+        );
     }
 
-    public function getTagsJsonAttribute(): string
+    public function tagsJson(): Attribute
     {
         // 生成包含 tag ID 與 tag name 的 json 字串
         // [{"id":"2","value":"C#"},{"id":"5","value":"Dart"}]
-        return $this->tags
-            ->map(fn($tag) => ['id' => $tag->id, 'value' => $tag->name])
-            ->toJson();
+        return new Attribute(
+            get: fn ($value) => $this->tags
+                ->map(fn($tag) => ['id' => $tag->id, 'value' => $tag->name])
+                ->toJson()
+        );
     }
 
     // 更新留言數量
@@ -94,7 +102,7 @@ class Post extends Model
     }
 
     // 調整匯入 Algolia 的 Model 資料
-    public function toSearchableArray()
+    public function toSearchableArray(): array
     {
         $array = $this->toArray();
 

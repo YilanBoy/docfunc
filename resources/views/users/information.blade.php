@@ -4,7 +4,7 @@
   <x-card class="flex flex-col items-center justify-between col-span-2 md:col-span-1">
     <img
       class="rounded-full h-36 w-36"
-      src="{{ $user->gravatar }}"
+      src="{{ $user->gravatar_url }}"
       alt="{{ $user->name }}"
     >
 

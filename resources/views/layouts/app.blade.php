@@ -7,9 +7,15 @@
   {{-- CSRF Token --}}
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{ config('app.name') }} - @yield('title', '生活記錄函數')</title>
+  <title>{{ config('app.name') }} - @yield('title', '生活記錄函式')</title>
+  <meta name="description" content="@yield('description', config('app.name') . ' - 生活記錄函式')">
 
-  <meta name="description" content="@yield('description', config('app.name') . ' - 生活記錄函數')">
+  {{-- Facebook Meta Tags --}}
+  <meta property="og:url" content="{{ config('app.url') }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ config('app.name') }} - @yield('title', '生活記錄函式')">
+  <meta property="og:description" content="@yield('description', config('app.name') . ' - 生活記錄函式')">
+  <meta property="og:image" content="{{ asset('images/icon/icon.svg') }}">
 
   {{-- Favicon --}}
   <link rel="shortcut icon" href="{{ asset('images/icon/icon.svg') }}" type="image/x-icon">

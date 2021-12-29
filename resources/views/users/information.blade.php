@@ -47,8 +47,8 @@
           >
           </div>
         </div>
-        <div class="flex items-center justify-end col-span-1 text-lg">
-          {{ $category->posts->count() }} 篇
+        <div class="flex items-center justify-end col-span-1 text-lg font-semibold text-sky-500">
+          {{ $category->posts->count() }}
         </div>
       @endforeach
     </div>

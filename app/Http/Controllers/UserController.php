@@ -18,8 +18,8 @@ class UserController extends Controller
     // 建構子
     public function __construct()
     {
-        // 除了 show function，其他 function 必須是登入的狀態
-        $this->middleware('auth', ['except' => ['show']]);
+        // 除了 index，其他 function 必須是登入的狀態
+        $this->middleware('auth', ['except' => ['index']]);
     }
 
     /**

@@ -34,6 +34,10 @@ class UserController extends Controller
             $query->where('user_id', $user->id);
         }])->get();
 
+        $user->loadCount(['posts as posts_count_in_this_year' => function ($query) {
+            $query->whereYear('created_at', date('Y'));
+        }]);
+
         return view('users.index', ['user' => $user, 'categories' => $categories]);
     }
 

@@ -1,7 +1,7 @@
 {{-- 會員基本資訊 --}}
-<div class="grid w-full grid-cols-2 gap-6 dark:text-gray-50">
-  {{-- 大頭貼 --}}
-  <x-card class="flex flex-col items-center justify-between col-span-2 md:col-span-1">
+<div class="grid w-full grid-cols-6 gap-6 dark:text-gray-50">
+  <x-card class="flex flex-col items-center justify-between col-span-6 md:col-span-2">
+    {{-- 大頭貼 --}}
     <img
       class="rounded-full h-36 w-36"
       src="{{ $user->gravatar_url }}"
@@ -12,42 +12,27 @@
     <span class="flex items-center justify-center mt-2 text-3xl font-semibold">
       {{ $user->name }}
     </span>
-  </x-card>
 
-  {{-- 資訊 --}}
-  <x-card class="flex flex-col items-start justify-between col-span-2 md:col-span-1 dark:text-gray-50">
-    <span class="text-lg">撰寫文章</span>
-    <div class="flex my-1 text-xl">
-      <span class="font-semibold text-sky-500">{{ $user->posts->count() }}</span>
-      <span class="ml-2 font-semibold">篇</span>
-    </div>
-
-    <span class="text-lg">文章留言</span>
-    <div class="flex my-1 text-xl">
-      <span class="font-semibold text-sky-500">{{ $user->comments->count() }}</span>
-      <span class="ml-2 font-semibold">次</span>
-    </div>
-
-    <span class="text-xs">
+    <span class="mt-2 text-xs">
       註冊於 {{ $user->created_at->format('Y / m / d') . '（' . $user->created_at->diffForHumans() . '）' }}
     </span>
   </x-card>
 
-  <x-card class="col-span-2 dark:text-gray-50">
-    <h3 class="w-full pb-3 mb-3 text-lg font-semibold border-b-2 border-black dark:border-white">
+  <x-card class="col-span-6 md:col-span-4 dark:text-gray-50">
+    <h3 class="w-full pb-3 mb-3 text-2xl font-semibold border-b-2 border-black dark:border-white">
       <span class="ml-2">個人簡介</span>
     </h3>
 
     @if ($user->introduction)
-      <span class="flex items-center justify-start w-full">{!! nl2br(e($user->introduction)) !!}</span>
+      <p class="flex items-center justify-start w-full">{!! nl2br(e($user->introduction)) !!}</p>
     @else
-      <span class="flex items-center justify-center w-full">目前尚無個人簡介～</span>
+      <p class="flex items-center justify-center w-full">目前尚無個人簡介～</p>
     @endif
   </x-card>
 
-  <x-card class="col-span-2 dark:text-gray-50">
-    <h3 class="w-full pb-3 mb-3 text-lg font-semibold border-b-2 border-black dark:border-white">
-      <span class="ml-2">文章統計</span>
+  <x-card class="col-span-6 dark:text-gray-50">
+    <h3 class="w-full pb-3 mb-3 text-2xl font-semibold border-b-2 border-black dark:border-white">
+      <span class="ml-2">各類文章統計</span>
     </h3>
 
     <div class="grid grid-cols-12 gap-1">
@@ -69,4 +54,21 @@
     </div>
   </x-card>
 
+  <x-card class="flex flex-col items-start justify-between col-span-6 md:col-span-2 dark:text-gray-50">
+    <div class="w-full text-2xl text-left">文章總數</div>
+    <div class="w-full font-semibold text-center text-8xl text-sky-500">{{ $user->posts->count() }}</div>
+    <div class="w-full text-2xl text-right">篇</div>
+  </x-card>
+
+  <x-card class="flex flex-col items-start justify-between col-span-6 md:col-span-2 dark:text-gray-50">
+    <div class="w-full text-2xl text-left">留言回覆</div>
+    <div class="w-full font-semibold text-center text-8xl text-sky-500">{{ $user->comments->count() }}</div>
+    <div class="w-full text-2xl text-right">次</div>
+  </x-card>
+
+  <x-card class="flex flex-col items-start justify-between col-span-6 md:col-span-2 dark:text-gray-50">
+    <div class="w-full text-2xl text-left">今年寫了</div>
+    <div class="w-full font-semibold text-center text-8xl text-sky-500">{{ $user->posts_count_in_this_year }}</div>
+    <div class="w-full text-2xl text-right">篇</div>
+  </x-card>
 </div>

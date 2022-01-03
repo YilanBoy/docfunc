@@ -4,7 +4,6 @@
     x-on:click="
       searchBoxOpen = !searchBoxOpen
       $nextTick(() => { $refs.searchBox.focus() })
-      disableScroll()
     "
     type="button"
     class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50"
@@ -16,10 +15,7 @@
   <div
     x-cloak
     x-show="searchBoxOpen"
-    x-on:keydown.window.escape="
-      searchBoxOpen = false
-      enableScroll()
-    "
+    x-on:keydown.window.escape="searchBoxOpen = false"
     class="fixed inset-0 z-20 overflow-y-auto"
     aria-labelledby="modal-title"
     role="dialog"
@@ -50,10 +46,8 @@
         x-transition:leave="ease-in duration-200"
         x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-        x-on:click.outside="
-          searchBoxOpen = false
-          enableScroll()
-        "
+        x-on:click.outside="searchBoxOpen = false"
+        x-trap.noscroll="searchBoxOpen"
         class="inline-block w-full max-w-md mt-16 transition-all"
       >
         {{-- 搜尋欄 --}}
@@ -77,10 +71,12 @@
             wire:loading
             class="absolute right-0 top-3"
           >
-            <svg class="w-5 h-5 mr-3 -ml-1 text-gray-700 animate-spin dark:text-gray-50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            <svg class="w-5 h-5 mr-3 -ml-1 text-gray-700 animate-spin dark:text-gray-50"
+                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
             >
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              <path class="opacity-75" fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
               ></path>
             </svg>
           </div>
@@ -88,7 +84,8 @@
 
         {{-- 搜尋結果列表 --}}
         @if (strlen($search) >= 2)
-          <div class="w-full p-2 mt-4 shadow-md bg-gray-50 rounded-xl ring-1 ring-black ring-opacity-20 dark:bg-gray-700 dark:text-gray-50">
+          <div
+            class="w-full p-2 mt-4 shadow-md bg-gray-50 rounded-xl ring-1 ring-black ring-opacity-20 dark:bg-gray-700 dark:text-gray-50">
             @if ($results->count() > 0)
               <div class="flex items-center justify-center pb-2 mb-2 border-b-2 border-gray-400">
                 <span>搜尋結果</span>

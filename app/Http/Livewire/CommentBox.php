@@ -61,8 +61,6 @@ class CommentBox extends Component
         $this->content = '';
         // 觸發 alpine.js 的事件，關閉 comment box modal
         $this->dispatchBrowserEvent('set-comment-box-open', ['open' => false]);
-        // 觸發啟用 scroll bar 的事件
-        $this->dispatchBrowserEvent('enableScroll');
         // 更新頁面上的留言數量
         $this->updateCommentCount();
 

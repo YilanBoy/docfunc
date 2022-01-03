@@ -24,7 +24,6 @@
         commentId = 0
         commentTo = '回覆此文章'
         $nextTick(() => { $refs.commentBox.focus() })
-        disableScroll()
       "
       type="button"
       class="relative inline-flex w-40 h-12 border border-blue-600 rounded-lg group focus:outline-none"
@@ -42,10 +41,7 @@
     <div
       x-cloak
       x-show="commentBoxOpen"
-      x-on:keydown.window.escape="
-        commentBoxOpen = false
-        enableScroll()
-      "
+      x-on:keydown.window.escape="commentBoxOpen = false"
       class="fixed inset-0 z-20 overflow-y-auto"
       aria-labelledby="modal-title"
       role="dialog"
@@ -83,14 +79,11 @@
           x-transition:leave="ease-in duration-200"
           x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
           x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          x-on:click.outside="
-            commentBoxOpen = false
-            enableScroll()
-          "
+          x-on:click.outside="commentBoxOpen = false"
+          x-trap.noscroll="commentBoxOpen"
           class="inline-block p-5 overflow-hidden text-left align-bottom transition-all rounded-lg shadow-xl bg-gray-50 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full dark:bg-gray-700"
         >
           {{-- 留言提示 --}}
-
           <div class="text-gray-700 dark:text-gray-50">
             <div x-text="commentTo"></div>
           </div>
@@ -119,10 +112,7 @@
               留言
             </button>
             <button
-              x-on:click="
-                commentBoxOpen = false
-                enableScroll()
-              "
+              x-on:click="commentBoxOpen = false"
               type="button"
               class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 border border-gray-300 rounded-md shadow-sm bg-gray-50 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm dark:bg-gray-500 dark:text-gray-50 dark:hover:bg-gray-600"
             >

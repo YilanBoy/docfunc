@@ -36,14 +36,14 @@
 
         {{-- 新增第二階層留言與刪除留言 --}}
         @auth
-          <div class="flex items-center justify-start mt-2 space-x-2 transition duration-150 opacity-0 md:mt-0 group-hover:opacity-100">
+          <div
+            class="flex items-center justify-start mt-2 space-x-2 transition duration-150 opacity-0 md:mt-0 group-hover:opacity-100">
             <button
               x-on:click="
                 $dispatch('set-comment-box-open', { open: true })
                 $dispatch('set-comment-id', {{ $comment->id }})
                 $dispatch('set-comment-to', '回覆 ➡ {{ $comment->user_name }}')
                 $dispatch('comment-box-focus')
-                disableScroll()
               "
               class="inline-flex items-center justify-center w-10 h-10 font-semibold transition duration-150 ease-in-out bg-blue-600 border border-transparent rounded-md text-gray-50 hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300"
             >

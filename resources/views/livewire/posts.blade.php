@@ -9,8 +9,8 @@
         href="{{ $currentUrl . '?order=latest' }}"
         @class([
           'w-1/3 flex justify-center py-2 rounded-lg transition duration-300',
-          'bg-gray-50 dark:bg-gray-600' => $order === 'latest',
-          'hover:bg-gray-50 dark:hover:bg-gray-600' => $order !== 'latest',
+          'bg-gray-50 dark:bg-gray-700' => $order === 'latest',
+          'hover:bg-gray-50 dark:hover:bg-gray-700' => $order !== 'latest',
         ])
       >最新文章</a>
       <a
@@ -18,8 +18,8 @@
         href="{{ $currentUrl . '?order=recent' }}"
         @class([
           'w-1/3 flex justify-center px-4 py-2 rounded-lg transition duration-300',
-          'bg-gray-50 dark:bg-gray-600' => $order === 'recent',
-          'hover:bg-gray-50 dark:hover:bg-gray-600' => $order !== 'recent',
+          'bg-gray-50 dark:bg-gray-700' => $order === 'recent',
+          'hover:bg-gray-50 dark:hover:bg-gray-700' => $order !== 'recent',
         ])
       >最近更新</a>
       <a
@@ -27,15 +27,16 @@
         href="{{ $currentUrl . '?order=comment' }}"
         @class([
           'w-1/3 flex justify-center px-4 py-2 rounded-lg transition duration-300',
-          'bg-gray-50 dark:bg-gray-600' => $order === 'comment',
-          'hover:bg-gray-50 dark:hover:bg-gray-600' => $order !== 'comment',
+          'bg-gray-50 dark:bg-gray-700' => $order === 'comment',
+          'hover:bg-gray-50 dark:hover:bg-gray-700' => $order !== 'comment',
         ])
       >最多留言</a>
     </nav>
 
     {{-- 文章分類訊息-桌面裝置 --}}
     @if ($categoryId)
-      <div class="flex items-center justify-center px-4 py-2 mb-2 text-blue-700 border border-blue-700 rounded-xl bg-gradient-to-br from-blue-100 to-blue-300 md:mb-0">
+      <div
+        class="flex items-center justify-center px-4 py-2 mb-2 text-blue-700 border border-blue-700 rounded-xl bg-gradient-to-br from-blue-100 to-blue-300 md:mb-0">
         <span class="font-bold">{{ $categoryName }}：</span>
         <span>{{ $categoryDescription }}</span>
       </div>
@@ -43,7 +44,8 @@
 
     {{-- 文章標籤訊息-桌面裝置 --}}
     @if ($tagId)
-      <div class="flex items-center justify-center px-4 py-2 mb-2 text-gray-700 border border-gray-700 rounded-xl bg-gradient-to-br from-gray-100 to-gray-300 md:mb-0">
+      <div
+        class="flex items-center justify-center px-4 py-2 mb-2 text-gray-700 border border-gray-700 rounded-xl bg-gradient-to-br from-gray-100 to-gray-300 md:mb-0">
         <span>標籤：</span>
         <span class="font-bold">{{ $tagName }}</span>
       </div>
@@ -149,7 +151,8 @@
     </x-card>
 
   @empty
-    <x-card class="flex items-center justify-center w-full transition duration-150 ease-in h-36 hover:-translate-x-2 hover:shadow-xl dark:text-gray-50">
+    <x-card
+      class="flex items-center justify-center w-full transition duration-150 ease-in h-36 hover:-translate-x-2 hover:shadow-xl dark:text-gray-50">
       <span>Whoops！此分類底下還沒有文章，趕緊寫一篇吧！</span>
     </x-card>
   @endforelse

@@ -25,28 +25,28 @@
       {{-- 文章列表側邊欄 --}}
       <div class="w-full space-y-6 xl:w-80">
         {{-- 介紹 --}}
-        <x-card class="dark:text-gray-50">
-          <h3 class="pb-3 mb-3 text-lg font-semibold text-center border-b-2 border-black dark:border-white">
-            歡迎來到 <span class="font-mono">{{ config('app.name') }}</span>！
-          </h3>
-          <span>
-            紀錄生活上的大小事
-            <br>
-            此部落格使用 Laravel、Alpine.js 與 Tailwind CSS 開發
-          </span>
-          <div class="flex items-center justify-center mt-7">
-            <a
-              href="{{ route('posts.create') }}"
-              class="relative inline-flex w-64 h-12 border rounded-lg border-emerald-600 group focus:outline-none"
-            >
-              <span
-                class="absolute inset-0 inline-flex items-center self-stretch justify-center py-2 text-xl font-semibold text-center transition-transform rounded-lg text-gray-50 bg-emerald-600 ring-1 ring-green-600 ring-offset-1 ring-offset-green-600 group-hover:-translate-y-2 group-hover:-translate-x-2 group-active:-translate-y-0 group-active:-translate-x-0"
+        <div class="p-0.5 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 rounded-xl">
+          <div class="p-5 bg-gray-50 rounded-xl dark:bg-gray-700 dark:text-gray-50">
+            <h3 class="pb-3 mb-3 text-lg font-semibold text-center border-b-2 border-black dark:border-white">
+              歡迎來到 <span class="font-mono">{{ config('app.name') }}</span>！
+            </h3>
+            <span>
+              紀錄生活上的大小事
+              <br>
+              此部落格使用 Laravel、Alpine.js 與 Tailwind CSS 開發
+            </span>
+            <div class="flex items-center justify-center mt-7">
+              <a
+                href="{{ route('posts.create') }}"
+                class="block group [transform:translateZ(0)] px-6 py-3 rounded-xl overflow-hidden bg-emerald-500 relative before:absolute before:bg-blue-600 before:top-1/2 before:left-1/2 before:h-8 before:w-8 before:-translate-y-1/2 before:-translate-x-1/2 before:rounded-full before:scale-[0] before:opacity-0 hover:before:scale-[6] hover:before:opacity-100 before:transition before:ease-in-out before:duration-700"
               >
-                <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
-              </span>
-            </a>
+                <span class="relative z-0 text-xl font-semibold text-gray-200 transition duration-700 ease-in-out">
+                  <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
+                </span>
+              </a>
+            </div>
           </div>
-        </x-card>
+        </div>
 
         {{-- 熱門標籤 --}}
         @if ($popularTags->count())

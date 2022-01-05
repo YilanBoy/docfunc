@@ -52,9 +52,9 @@
     <button
       id="scroll-to-top-btn"
       title="Go to top"
-      class="fixed z-10 justify-center hidden w-16 h-16 font-bold transition duration-150 ease-in bg-blue-600 rounded-full shadow-md bottom-7 right-7 text-gray-50 hover:scale-125 hover:shadow-xl"
+      class="fixed z-10 hidden w-16 h-16 transition duration-150 ease-in bg-blue-600 rounded-full shadow-md bottom-7 right-7 text-gray-50 hover:scale-110 hover:shadow-xl"
     >
-      <span class="mt-4 text-3xl animate-bounce">
+      <span class="m-auto text-3xl font-bold">
         <i class="bi bi-arrow-up"></i>
       </span>
     </button>

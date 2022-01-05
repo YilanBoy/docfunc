@@ -30,8 +30,8 @@
             x-on:click.prevent="tab = 'information'"
             href="#"
             :class="{
-              'bg-gray-50 dark:bg-gray-600': tab === 'information',
-              'hover:bg-gray-50 dark:hover:bg-gray-600': tab !== 'information'
+              'bg-gray-50 dark:bg-gray-700': tab === 'information',
+              'hover:bg-gray-50 dark:hover:bg-gray-700': tab !== 'information'
             }"
             class="flex justify-center w-1/3 px-4 py-2 transition duration-300 rounded-lg"
           >會員資訊</a>
@@ -39,8 +39,8 @@
             x-on:click.prevent="tab = 'posts'"
             href="#"
             :class="{
-              'bg-gray-50 dark:bg-gray-600': tab === 'posts',
-              'hover:bg-gray-50 dark:hover:bg-gray-600': tab !== 'posts'
+              'bg-gray-50 dark:bg-gray-700': tab === 'posts',
+              'hover:bg-gray-50 dark:hover:bg-gray-700': tab !== 'posts'
             }"
             class="flex justify-center w-1/3 px-4 py-2 transition duration-300 rounded-lg"
           >發布文章</a>
@@ -48,8 +48,8 @@
             x-on:click.prevent="tab = 'comments'"
             href="#"
             :class="{
-              'bg-gray-50 dark:bg-gray-600': tab === 'comments',
-              'hover:bg-gray-50 dark:hover:bg-gray-600': tab !== 'comments'
+              'bg-gray-50 dark:bg-gray-700': tab === 'comments',
+              'hover:bg-gray-50 dark:hover:bg-gray-700': tab !== 'comments'
             }"
             class="flex justify-center w-1/3 px-4 py-2 transition duration-300 rounded-lg"
           >留言紀錄</a>

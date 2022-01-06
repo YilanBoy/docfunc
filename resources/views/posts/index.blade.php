@@ -25,7 +25,7 @@
       {{-- 文章列表側邊欄 --}}
       <div class="w-full space-y-6 xl:w-80">
         {{-- 介紹 --}}
-        <div class="p-0.5 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 rounded-xl">
+        <div class="p-0.5 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 rounded-xl shadow-md">
           <div class="p-5 bg-gray-50 rounded-xl dark:bg-gray-700 dark:text-gray-50">
             <h3 class="pb-3 mb-3 text-lg font-semibold text-center border-b-2 border-black dark:border-white">
               歡迎來到 <span class="font-mono">{{ config('app.name') }}</span>！

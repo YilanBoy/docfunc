@@ -1,12 +1,4 @@
-@php
-  $currentRouteName = request()->route()->getName();
-@endphp
-
-@if ($currentRouteName === 'posts.index')
-  @section('title', '全部文章')
-@elseif ($currentRouteName === 'categories.show')
-  @section('title', $category->name)
-@endif
+@section('title', $pageTitle)
 
 {{-- 文章列表 --}}
 <x-app-layout>

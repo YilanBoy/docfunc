@@ -13,6 +13,7 @@ use App\Http\Requests\PostRequest;
 use App\Services\PostService;
 use App\Services\FormatTransferService;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Route;
 
 class PostController extends Controller
 {
@@ -30,7 +31,11 @@ class PostController extends Controller
      */
     public function index(): Application|Factory|View
     {
-        return view('posts.index');
+        $pageTitle = (Route::currentRouteName() === 'root')
+            ? '生活記錄函式'
+            : '所有文章';
+
+        return view('posts.index', compact('pageTitle'));
     }
 
     /**

@@ -24,7 +24,9 @@ class CategoryController extends Controller
             return redirect($category->link_with_name, 301);
         }
 
+        $pageTitle = $category->name;
+
         // 傳參變量文章和分類到模板中
-        return view('posts.index', ['category' => $category]);
+        return view('posts.index', compact('category', 'pageTitle'));
     }
 }

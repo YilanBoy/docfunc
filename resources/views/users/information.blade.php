@@ -56,19 +56,20 @@
 
   <x-card class="flex flex-col items-start justify-between col-span-6 md:col-span-2 dark:text-gray-50">
     <div class="w-full text-2xl text-left">文章總數</div>
-    <div class="w-full font-semibold text-center text-8xl text-sky-500">{{ $user->posts->count() }}</div>
+    <div class="w-full font-semibold text-center text-8xl text-sky-500 count-up">{{ $user->posts->count() }}</div>
     <div class="w-full text-2xl text-right">篇</div>
   </x-card>
 
   <x-card class="flex flex-col items-start justify-between col-span-6 md:col-span-2 dark:text-gray-50">
     <div class="w-full text-2xl text-left">今年寫了</div>
-    <div class="w-full font-semibold text-center text-8xl text-sky-500">{{ $user->posts_count_in_this_year }}</div>
+    <div
+      class="w-full font-semibold text-center text-8xl text-sky-500 count-up">{{ $user->posts_count_in_this_year }}</div>
     <div class="w-full text-2xl text-right">篇</div>
   </x-card>
 
   <x-card class="flex flex-col items-start justify-between col-span-6 md:col-span-2 dark:text-gray-50">
     <div class="w-full text-2xl text-left">留言回覆</div>
-    <div class="w-full font-semibold text-center text-8xl text-sky-500">{{ $user->comments->count() }}</div>
+    <div class="w-full font-semibold text-center text-8xl text-sky-500 count-up">{{ $user->comments->count() }}</div>
     <div class="w-full text-2xl text-right">次</div>
   </x-card>
 </div>

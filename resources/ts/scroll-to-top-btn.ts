@@ -4,7 +4,7 @@ scrollToTopButton?.addEventListener('click', scrollToTop);
 
 // 滾動至網頁最頂部
 function scrollToTop(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 // 監聽滾動
@@ -22,7 +22,7 @@ if (footer !== null) {
     // 根據 footer 是否出現在畫面上調整按鈕的樣式
     let footerObserver = new IntersectionObserver(
         function (entries) {
-            if (entries[0].isIntersecting === true) {
+            if (entries[0].isIntersecting) {
                 // footer 在畫面上
                 scrollToTopButton?.classList.remove('fixed');
                 scrollToTopButton?.classList.add('absolute');
@@ -32,7 +32,7 @@ if (footer !== null) {
                 scrollToTopButton?.classList.remove('absolute');
             }
         },
-        { threshold: [0] }
+        {threshold: [0]}
     );
 
     footerObserver.observe(footer);

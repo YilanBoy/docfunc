@@ -14,6 +14,11 @@
     }
   </style>
 @endsection
+
+@section('scripts')
+  <script src="{{ asset('js/count-up.js') }}"></script>
+@endsection
+
 {{-- 個人頁面 --}}
 <x-app-layout>
   <div class="container mx-auto max-w-7xl">
@@ -25,7 +30,8 @@
         class="w-full space-y-6 lg:w-2/3"
       >
         {{-- 切換顯示選單 --}}
-        <nav class="flex w-full p-1 space-x-1 md:w-4/5 lg:w-1/2 rounded-xl bg-gray-400/30 dark:bg-white/30 dark:text-gray-50">
+        <nav
+          class="flex w-full p-1 space-x-1 md:w-4/5 lg:w-1/2 rounded-xl bg-gray-400/30 dark:bg-white/30 dark:text-gray-50">
           <a
             x-on:click.prevent="tab = 'information'"
             href="#"
@@ -70,7 +76,7 @@
           x-show="tab === 'posts'"
           x-transition:enter.duration.300ms
         >
-          <livewire:user.posts :userId="$user->id" />
+          <livewire:user.posts :userId="$user->id"/>
         </div>
 
         {{-- 會員留言 --}}
@@ -79,7 +85,7 @@
           x-show="tab === 'comments'"
           x-transition:enter.duration.300ms
         >
-          <livewire:user.comments :userId="$user->id" />
+          <livewire:user.comments :userId="$user->id"/>
         </div>
       </div>
     </div>

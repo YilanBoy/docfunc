@@ -17,7 +17,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag): Application|Factory|View
     {
-        $pageTitle = '標籤：' . $tag->name;
+        $pageTitle = $tag->name;
 
         // 傳參變量文章和分類到模板中
         return view('posts.index', compact('tag', 'pageTitle'));

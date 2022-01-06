@@ -7,23 +7,6 @@
   <link href="{{ asset('prism/prism.css') }}" rel="stylesheet">
 
   <style>
-    /* fade in post*/
-    .fade-in-post {
-      animation: fade-in 0.5s;
-    }
-
-    @keyframes fade-in {
-      from {
-        opacity: 0;
-        transform: translateY(1%);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0%);
-      }
-    }
-
     /* media embed */
     iframe,
     .twitter-tweet {
@@ -47,7 +30,7 @@
 
 {{-- 文章內容 --}}
 <x-app-layout>
-  <div class="relative mt-6 fade-in-post">
+  <div class="relative mt-6 animate-fade-in">
     {{-- 置頂按鈕 --}}
     <button
       id="scroll-to-top-btn"

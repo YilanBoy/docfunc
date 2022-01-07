@@ -41,23 +41,30 @@
           {{ $category->name }}
         </div>
         <div class="flex items-center col-span-11">
+
+          @php
+            $barWidth = $category->posts->count()
+                ? (int) (($category->posts->count() / $user->posts->count()) * 100)
+                : 0.2
+          @endphp
+
           <div
             x-data="{
-              barGrowsfrom: 0.2,
-              barGrowsto: {{ $category->posts->count() ? (int) (($category->posts->count() / $user->posts->count()) * 100) : 0.2 }},
-              interval: 0,
+              barGrowsFrom: 0.2,
+              barGrowsTo: {{ $barWidth }},
+              interval: 0
             }"
             x-init="
-              interval = 100 * (1 / barGrowsto)
+              interval = 100 * (1 / barGrowsTo)
 
               let growBar = setInterval(() => {
-                  $el.style.width = String(barGrowsfrom) + 'rem'
+                $el.style.width = String(barGrowsFrom) + 'rem'
 
-                  if (barGrowsfrom >= barGrowsto) {
-                      clearInterval(growBar)
-                  }
+                if (barGrowsFrom >= barGrowsTo) {
+                    clearInterval(growBar)
+                }
 
-                  barGrowsfrom += 1
+                barGrowsFrom++
               }, interval)
             "
             class="h-4 transition-all duration-300 rounded-sm bg-gradient-to-r from-emerald-400 to-blue-400"

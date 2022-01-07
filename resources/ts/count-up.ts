@@ -1,9 +1,9 @@
 // select all elements with class="count-up"
 const countUps = document.querySelectorAll('.count-up');
 
-countUps.forEach(countUP => {
+countUps.forEach(countUp => {
     let from = 0;
-    let to = Number(countUP.textContent);
+    let to = Number(countUp.textContent);
     let interval = 1000 * (1 / to);
 
     if (from === to) {
@@ -11,10 +11,12 @@ countUps.forEach(countUP => {
     }
 
     let counter = setInterval(() => {
-        from += 1;
-        countUP.textContent = String(from);
+        countUp.textContent = String(from);
+
         if (from === to) {
             clearInterval(counter);
         }
+
+        from++;
     }, interval);
 });

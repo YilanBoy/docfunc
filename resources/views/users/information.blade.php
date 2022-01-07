@@ -42,8 +42,25 @@
         </div>
         <div class="flex items-center col-span-11">
           <div
-            class="h-4 transition-all duration-300 rounded-sm growing-bar bg-gradient-to-r from-emerald-400 to-blue-400"
-            style="width: {{ $category->posts->count() ? (int) (($category->posts->count() / $user->posts->count()) * 100) : 0.2 }}rem;"
+            x-data="{
+              barGrowsfrom: 0.2,
+              barGrowsto: {{ $category->posts->count() ? (int) (($category->posts->count() / $user->posts->count()) * 100) : 0.2 }},
+              interval: 0,
+            }"
+            x-init="
+              interval = 100 * (1 / barGrowsto)
+
+              let growBar = setInterval(() => {
+                  $el.style.width = String(barGrowsfrom) + 'rem'
+
+                  if (barGrowsfrom >= barGrowsto) {
+                      clearInterval(growBar)
+                  }
+
+                  barGrowsfrom += 1
+              }, interval)
+            "
+            class="h-4 transition-all duration-300 rounded-sm bg-gradient-to-r from-emerald-400 to-blue-400"
           >
           </div>
         </div>

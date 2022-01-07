@@ -1,20 +1,5 @@
 @section('title', $user->name . ' 的個人頁面')
 
-@section('css')
-  <style>
-    /* grow bar */
-    .growing-bar {
-      animation: grow 1s forwards;
-    }
-
-    @keyframes grow {
-      0% {
-        width: 0;
-      }
-    }
-  </style>
-@endsection
-
 @section('scripts')
   <script src="{{ asset('js/count-up.js') }}"></script>
 @endsection

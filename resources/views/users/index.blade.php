@@ -11,14 +11,21 @@
 
       {{-- 會員資訊、文章與留言 --}}
       <div
-        x-data="{ tab: 'information' }"
+        x-data="{
+          url: new URL(window.location.href),
+          tab: new URLSearchParams(location.search).get('tab') || 'information'
+        }"
         class="w-full space-y-6 lg:w-2/3"
       >
         {{-- 切換顯示選單 --}}
         <nav
           class="flex w-full p-1 space-x-1 md:w-4/5 lg:w-1/2 rounded-xl bg-gray-400/30 dark:bg-white/30 dark:text-gray-50">
           <a
-            x-on:click.prevent="tab = 'information'"
+            x-on:click.prevent="
+              tab = 'information'
+              url.searchParams.set('tab', 'information')
+              history.pushState(null, document.title, url.toString())
+            "
             href="#"
             :class="{
               'bg-gray-50 dark:bg-gray-700': tab === 'information',
@@ -27,7 +34,11 @@
             class="flex justify-center w-1/3 px-4 py-2 transition duration-300 rounded-lg"
           >會員資訊</a>
           <a
-            x-on:click.prevent="tab = 'posts'"
+            x-on:click.prevent="
+              tab = 'posts'
+              url.searchParams.set('tab', 'posts')
+              history.pushState(null, document.title, url.toString())
+            "
             href="#"
             :class="{
               'bg-gray-50 dark:bg-gray-700': tab === 'posts',
@@ -36,7 +47,11 @@
             class="flex justify-center w-1/3 px-4 py-2 transition duration-300 rounded-lg"
           >發布文章</a>
           <a
-            x-on:click.prevent="tab = 'comments'"
+            x-on:click.prevent="
+              tab = 'comments'
+              url.searchParams.set('tab', 'comments')
+              history.pushState(null, document.title, url.toString())
+            "
             href="#"
             :class="{
               'bg-gray-50 dark:bg-gray-700': tab === 'comments',

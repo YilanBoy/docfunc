@@ -20,8 +20,7 @@ class PostController extends Controller
     public function __construct(
         protected PostService           $postService,
         protected FormatTransferService $formatTransferService
-    )
-    {
+    ) {
     }
 
     /**
@@ -139,7 +138,7 @@ class PostController extends Controller
         $post->delete();
 
         return redirect()
-            ->route('users.index', ['user' => auth()->id()])
+            ->route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
             ->with('success', '成功標記文章為刪除狀態！');
     }
 
@@ -158,7 +157,8 @@ class PostController extends Controller
 
         $softDeletedPost->restore();
 
-        return redirect($softDeletedPost->link_with_slug)
+        return redirect()
+            ->route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
             ->with('success', '成功恢復文章！');
     }
 
@@ -178,7 +178,7 @@ class PostController extends Controller
         $softDeletedPost->forceDelete();
 
         return redirect()
-            ->route('users.index', ['user' => auth()->id()])
+            ->route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
             ->with('success', '成功刪除文章！');
     }
 }

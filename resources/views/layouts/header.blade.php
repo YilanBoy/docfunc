@@ -93,7 +93,7 @@
             {{-- 手機版-已登入 --}}
 
             {{-- 手機版-通知 --}}
-            <span class="relative inline-flex rounded-md shadow-sm">
+            <span class="relative inline-flex rounded-md">
               <a
                 href="{{ route('notifications.index') }}"
                 class="text-gray-400 rounded-full hover:text-gray-700 dark:hover:text-gray-50"
@@ -322,7 +322,7 @@
         {{-- 電腦版-已登入 --}}
 
         {{-- 電腦版-通知 --}}
-        <span class="relative inline-flex rounded-md shadow-sm">
+        <span class="relative inline-flex rounded-md">
           <a
             href="{{ route('notifications.index') }}"
             class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50"

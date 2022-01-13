@@ -29,7 +29,7 @@
         /* code */
         prose-code:before:!content-none prose-code:after:!content-none
         /* code block */
-        prose-pre:!whitespace-pre-wrap prose-code:!whitespace-pre-wrap dark:prose-code:!text-slate-100
+        dark:prose-code:!text-slate-100
         prose-pre:!border-none prose-pre:!rounded-lg
         /* image */
         prose-figcaption:!bg-slate-200 dark:prose-figcaption:!bg-slate-500 dark:prose-figcaption:!text-slate-100

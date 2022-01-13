@@ -2,7 +2,7 @@ let preTags: HTMLCollectionOf<HTMLPreElement> = document.getElementsByTagName('p
 
 // use Tailwind CSS class names
 let buttonClassList: string[] = [
-    'copy-code-button', 'absolute', 'top-2', 'right-2',
+    'copy-code-button', 'fixed', 'top-2', 'right-2',
     'h-8', 'w-8', 'flex', 'justify-center', 'items-center',
     'text-gray-50', 'bg-blue-400', 'rounded-md', 'text-lg',
     'hover:bg-blue-500', 'active:bg-blue-400',
@@ -11,7 +11,16 @@ let buttonClassList: string[] = [
 
 // add copy button to all pre tags
 for (let i = 0, preTagsLength = preTags.length; i < preTagsLength; i++) {
-    preTags[i].classList.add('relative', 'group');
+    // to make the copy button fixed in the container, we wrap it in the container
+    let wrapper: HTMLDivElement = document.createElement('div');
+    // add 'translate-x-0' to make wrapper be a container
+    // make sure the copy button won't fixed in viewport but container
+    wrapper.classList.add('group', 'translate-x-0');
+
+    // set the wrapper as sibling of the pre tag
+    preTags[i].parentNode?.insertBefore(wrapper, preTags[i]);
+    // set element as child of wrapper
+    wrapper.appendChild(preTags[i]);
 
     // create copy button
     let copyButton: HTMLButtonElement = document.createElement('button');
@@ -34,5 +43,5 @@ for (let i = 0, preTagsLength = preTags.length; i < preTagsLength; i++) {
         }.bind(this), 2000);
     });
 
-    preTags[i].appendChild(copyButton);
+    wrapper.appendChild(copyButton);
 }

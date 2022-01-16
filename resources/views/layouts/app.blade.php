@@ -66,8 +66,6 @@
   @endif
 @endforeach
 
-<script src="{{ asset('js/theme-switch.js') }}"></script>
-
 @yield('scripts')
 </body>
 

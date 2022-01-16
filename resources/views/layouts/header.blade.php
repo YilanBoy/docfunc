@@ -59,8 +59,18 @@
         <div class="absolute inset-y-0 right-0 flex items-center space-x-6">
           {{-- 明亮 / 暗黑模式切換 --}}
           <button
+            x-data="{ html: document.documentElement }"
+            x-on:click="
+              if (html.classList.contains('dark')) {
+                html.classList.remove('dark')
+                localStorage.setItem('mode', 'light')
+              } else {
+                html.classList.add('dark')
+                localStorage.setItem('mode', 'dark')
+              }
+            "
             type="button"
-            class="text-gray-400 theme-switch hover:text-gray-700 dark:hover:text-gray-50"
+            class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
           >
             <span class="dark:hidden">
               <i class="bi bi-sun-fill"></i>
@@ -289,8 +299,18 @@
 
       {{-- 明亮 / 暗黑模式切換 --}}
       <button
+        x-data="{ html: document.documentElement }"
+        x-on:click="
+          if (html.classList.contains('dark')) {
+            html.classList.remove('dark')
+            localStorage.setItem('mode', 'light')
+          } else {
+            html.classList.add('dark')
+            localStorage.setItem('mode', 'dark')
+          }
+        "
         type="button"
-        class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg theme-switch hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50"
+        class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50"
       >
         <span class="dark:hidden">
           <i class="bi bi-sun-fill"></i>

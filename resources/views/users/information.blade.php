@@ -55,7 +55,7 @@
               interval: 0
             }"
             x-init="
-              interval = 1
+              interval = 10
               let growBar = setInterval(() => {
                 $el.style.width = String(barGrowsFrom) + 'rem'
 

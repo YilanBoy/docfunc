@@ -1,9 +1,9 @@
 require('./bootstrap');
 
 import Alpine from 'alpinejs'
-import trap from '@alpinejs/trap'
+import focus from '@alpinejs/focus'
 
-Alpine.plugin(trap)
+Alpine.plugin(focus)
 window.Alpine = Alpine
 
 Alpine.data('cardLink', () => ({

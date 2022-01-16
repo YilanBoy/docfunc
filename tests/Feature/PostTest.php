@@ -186,7 +186,7 @@ class PostTest extends TestCase
             ->delete(route('posts.destroy', ['id' => $post->id]));
 
         $response->assertStatus(302)
-            ->assertRedirect(route('users.index', ['user' => $user->id]));
+            ->assertRedirect(route('users.index', ['user' => $user->id, 'tab' => 'posts']));
     }
 
     public function test_prune_the_stale_post()

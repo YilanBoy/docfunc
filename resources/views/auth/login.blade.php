@@ -37,13 +37,13 @@
             </div>
 
             {{-- 密碼 --}}
-            <div class="mt-10">
+            <div class="mt-5">
               <x-floating-label-input :type="'password'" :name="'password'" :placeholder="'密碼'" required>
               </x-floating-label-input>
             </div>
 
             {{-- 記住我 --}}
-            <div class="block mt-4">
+            <div class="block mt-5">
               <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" name="remember"
                   class="text-indigo-400 border-gray-300 rounded shadow-sm form-checkbox focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
@@ -56,7 +56,7 @@
               <x-recaptcha />
             @endif
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-end mt-5">
               @if (Route::has('password.request'))
                 <a class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
                   href="{{ route('password.request') }}">

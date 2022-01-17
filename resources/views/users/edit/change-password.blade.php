@@ -26,7 +26,7 @@
     </div>
 
     {{-- 新密碼 --}}
-    <div class="mt-10">
+    <div class="mt-5">
       <x-floating-label-input
         :type="'password'"
         :name="'new_password'"
@@ -36,7 +36,7 @@
     </div>
 
     {{-- 確認新密碼 --}}
-    <div class="mt-10">
+    <div class="mt-5">
       <x-floating-label-input
         :type="'password'"
         :name="'new_password_confirmation'"
@@ -45,7 +45,7 @@
       ></x-floating-label-input>
     </div>
 
-    <div class="flex items-center justify-end mt-4">
+    <div class="flex items-center justify-end mt-5">
       {{-- 儲存按鈕 --}}
       <x-button>
         <i class="bi bi-save2-fill"></i><span class="ml-2">修改密碼</span>

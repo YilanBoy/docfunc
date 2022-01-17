@@ -38,7 +38,7 @@
             </div>
 
             {{-- 信箱 --}}
-            <div class="mt-10">
+            <div class="mt-5">
               <x-floating-label-input
                 :type="'text'"
                 :name="'email'"
@@ -49,7 +49,7 @@
             </div>
 
             {{-- 密碼 --}}
-            <div class="mt-10">
+            <div class="mt-5">
               <x-floating-label-input
                 :type="'password'"
                 :name="'password'"
@@ -60,7 +60,7 @@
             </div>
 
             {{-- 確認密碼 --}}
-            <div class="mt-10">
+            <div class="mt-5">
               <x-floating-label-input
                 :type="'password'"
                 :name="'password_confirmation'"
@@ -75,7 +75,7 @@
               <x-recaptcha />
             @endif
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-end mt-5">
               <a
                 href="{{ route('login') }}"
                 class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"

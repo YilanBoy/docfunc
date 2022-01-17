@@ -1,4 +1,4 @@
-<div class="relative">
+<div class="relative px-4 pt-6 pb-4 rounded-lg bg-slate-100 dark:bg-slate-600">
   <input
     type="{{ $type }}"
     name="{{ $name }}"
@@ -10,7 +10,7 @@
 
   <label
     for="{{ $name }}"
-    class="absolute left-0 -top-3.5 text-gray-600 dark:text-gray-50 text-sm pointer-events-none transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm selection:dark:text-gray-50 dark:peer-placeholder-shown:text-gray-50 dark:peer-focus:text-gray-50"
+    class="absolute text-sm text-gray-600 transition-all pointer-events-none left-4 top-2 dark:text-gray-50 peer-placeholder-shown:text-lg peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-6 peer-focus:top-2 peer-focus:text-gray-600 peer-focus:text-sm selection:dark:text-gray-50 dark:peer-placeholder-shown:text-gray-50 dark:peer-focus:text-gray-50"
   >
     {{ $placeholder }}
   </label>

@@ -2,7 +2,7 @@ let preTags: HTMLCollectionOf<HTMLPreElement> = document.getElementsByTagName('p
 
 // use Tailwind CSS class names
 let buttonClassList: string[] = [
-    'copy-code-button', 'fixed', 'top-2', 'right-2',
+    'fixed', 'top-2', 'right-2',
     'h-8', 'w-8', 'flex', 'justify-center', 'items-center',
     'text-gray-50', 'bg-blue-400', 'rounded-md', 'text-lg',
     'hover:bg-blue-500', 'active:bg-blue-400',

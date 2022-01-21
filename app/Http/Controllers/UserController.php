@@ -99,7 +99,6 @@ class UserController extends Controller
      * @param Request $request
      * @param User $user
      * @return RedirectResponse
-     * @throws AuthorizationException
      */
     public function destroy(Request $request, User $user): RedirectResponse
     {
@@ -108,9 +107,7 @@ class UserController extends Controller
             abort(401);
         }
 
-        $this->authorize('update', $user);
-
-        Auth::logout();
+        Auth::guard('web')->logout();
 
         $request->session()->invalidate();
 

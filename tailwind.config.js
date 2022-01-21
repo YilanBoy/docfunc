@@ -26,9 +26,18 @@ module.exports = {
                         transform: 'translateY(0%)',
                     },
                 },
+                'grow-width': {
+                    from: {
+                        width: 0,
+                    },
+                    to: {
+                        width: '100%',
+                    }
+                },
             },
             animation: {
                 'fade-in': 'fade-in 0.5s ease-in-out',
+                'grow-width': 'grow-width 1s forwards',
             },
         },
     },

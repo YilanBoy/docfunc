@@ -48,27 +48,10 @@
                 : 0.2
           @endphp
 
-          <div
-            x-data="{
-              barGrowsFrom: 0.2,
-              barGrowsTo: {{ $barWidth }},
-              interval: 0
-            }"
-            x-init="
-              interval = 10
-              let growBar = setInterval(() => {
-                $el.style.width = String(barGrowsFrom) + 'rem'
-
-                if (barGrowsFrom >= barGrowsTo) {
-                    clearInterval(growBar)
-                }
-
-                barGrowsFrom++
-              }, interval)
-            "
-            class="h-4 transition-all duration-300 rounded-sm bg-gradient-to-r from-emerald-400 to-blue-400"
-          >
+          <div style="width: {{ $barWidth }}%">
+            <div class="h-4 transition-all duration-300 rounded-sm animate-grow-width bg-gradient-to-r from-emerald-400 to-blue-400"></div>
           </div>
+
         </div>
         <div class="flex items-center justify-end col-span-1 text-lg font-semibold text-sky-500">
           {{ $category->posts->count() }}

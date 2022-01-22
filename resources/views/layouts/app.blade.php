@@ -38,7 +38,7 @@
   @yield('scriptsInHead')
 </head>
 
-<body class="antialiased text-gray-900 bg-gray-200 dark:bg-gray-800 font-noto">
+<body class="antialiased text-gray-900 bg-gray-200 overscroll-y-none dark:bg-gray-800 font-noto">
 
 <div class="relative flex flex-col justify-between">
 

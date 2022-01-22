@@ -25,10 +25,12 @@ mix.js('resources/js/app.js', 'public/js')
     .ts('resources/ts/copy-code-btn.ts', 'public/js')
     .ts('resources/ts/oembed/oembed-media-embed.ts', 'public/js')
     .ts('resources/ts/count-up.ts', 'public/js')
-    .js('resources/ts/oembed/twitter-widgets.ts', 'public/js')
+    .ts('resources/ts/oembed/twitter-widgets.ts', 'public/js')
+    .ts('resources/ts/progress-bar.ts', 'public/js')
     .copy('node_modules/@yaireo/tagify/dist/tagify.css', 'public/css/tagify.css')
     .css('resources/css/content-styles.css', 'public/css')
     .css('resources/css/editor.css', 'public/css')
+    .css('resources/css/progress-bar.css', 'public/css')
     .options({
         terser: {
             extractComments: false

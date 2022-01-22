@@ -5,6 +5,7 @@
 @section('css')
   <link href="{{ asset('css/content-styles.css') }}" rel="stylesheet">
   <link href="{{ asset('prism/prism.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/progress-bar.css') }}" rel="stylesheet">
 
   <style>
     /* media embed */
@@ -26,6 +27,8 @@
   <script src="{{ asset('prism/prism.js') }}"></script>
   {{-- 程式碼複製按鈕 --}}
   <script src="{{ asset('js/copy-code-btn.js') }}"></script>
+
+  <script src="{{ asset('js/progress-bar.js') }}"></script>
 @endsection
 
 {{-- 文章內容 --}}
@@ -45,7 +48,7 @@
     <div class="container mx-auto max-w-7xl">
       <div class="flex flex-col items-center justify-start min-h-screen px-4 xl:px-0">
 
-        <x-card class="relative w-full xl:w-2/3">
+        <x-card id="section" class="relative w-full xl:w-2/3">
 
           {{-- 文章選單-桌面裝置 --}}
           <div
@@ -262,4 +265,6 @@
       </div>
     </div>
   </div>
+
+  <div id="progress-bar"></div>
 </x-app-layout>

@@ -2,15 +2,17 @@
     "/js/app.js": "/js/app.js",
     "/js/sweet-alert.js": "/js/sweet-alert.js",
     "/js/editor.js": "/js/editor.js",
-    "/js/twitter-widgets.js": "/js/twitter-widgets.js",
     "/js/tagify.js": "/js/tagify.js",
     "/js/scroll-to-top-btn.js": "/js/scroll-to-top-btn.js",
     "/js/set-theme.js": "/js/set-theme.js",
     "/js/copy-code-btn.js": "/js/copy-code-btn.js",
     "/js/oembed-media-embed.js": "/js/oembed-media-embed.js",
     "/js/count-up.js": "/js/count-up.js",
+    "/js/twitter-widgets.js": "/js/twitter-widgets.js",
+    "/js/progress-bar.js": "/js/progress-bar.js",
     "/css/editor.css": "/css/editor.css",
     "/css/content-styles.css": "/css/content-styles.css",
     "/css/app.css": "/css/app.css",
+    "/css/progress-bar.css": "/css/progress-bar.css",
     "/css/tagify.css": "/css/tagify.css"
 }

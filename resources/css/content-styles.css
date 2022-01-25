@@ -102,19 +102,19 @@
     word-break: break-word;
     color: var(--ck-color-image-caption-text);
     background-color: var(--ck-color-image-caption-background);
-    padding: .6em;
-    font-size: .75em;
+    padding: 0.6em;
+    font-size: 0.75em;
     outline-offset: -1px;
 }
 
 /* ckeditor5-font/theme/fontsize.css */
 .ck-content .text-tiny {
-    font-size: .7em;
+    font-size: 0.7em;
 }
 
 /* ckeditor5-font/theme/fontsize.css */
 .ck-content .text-small {
-    font-size: .85em;
+    font-size: 0.85em;
 }
 
 /* ckeditor5-font/theme/fontsize.css */
@@ -246,7 +246,7 @@
 /* ckeditor5-basic-styles/theme/code.css */
 .ck-content code {
     background-color: hsla(0, 0%, 78%, 0.3);
-    padding: .15em;
+    padding: 0.15em;
     border-radius: 2px;
 }
 
@@ -269,7 +269,7 @@
 .ck-content .table table td,
 .ck-content .table table th {
     min-width: 2em;
-    padding: .4em;
+    padding: 0.4em;
     border: 1px solid hsl(0, 0%, 75%);
 }
 
@@ -297,8 +297,8 @@
     text-align: center;
     color: var(--ck-color-table-caption-text);
     background-color: var(--ck-color-table-caption-background);
-    padding: .6em;
-    font-size: .75em;
+    padding: 0.6em;
+    font-size: 0.75em;
     outline-offset: -1px;
 }
 
@@ -314,7 +314,7 @@
 
 /* ckeditor5-page-break/theme/pagebreak.css */
 .ck-content .page-break::after {
-    content: '';
+    content: "";
     position: absolute;
     border-bottom: 2px dashed hsl(0, 0%, 77%);
     width: 100%;
@@ -324,7 +324,7 @@
 .ck-content .page-break__label {
     position: relative;
     z-index: 1;
-    padding: .3em .6em;
+    padding: 0.3em 0.6em;
     display: block;
     text-transform: uppercase;
     border: 1px solid hsl(0, 0%, 77%);
@@ -384,12 +384,13 @@
     display: block;
     position: absolute;
     box-sizing: border-box;
-    content: '';
+    content: "";
     width: 100%;
     height: 100%;
     border: 1px solid hsl(0, 0%, 20%);
     border-radius: 2px;
-    transition: 250ms ease-in-out box-shadow, 250ms ease-in-out background, 250ms ease-in-out border;
+    transition: 250ms ease-in-out box-shadow, 250ms ease-in-out background,
+        250ms ease-in-out border;
 }
 
 /* ckeditor5-list/theme/todolist.css */
@@ -398,14 +399,15 @@
     position: absolute;
     box-sizing: content-box;
     pointer-events: none;
-    content: '';
+    content: "";
     left: calc(var(--ck-todo-list-checkmark-size) / 3);
     top: calc(var(--ck-todo-list-checkmark-size) / 5.3);
     width: calc(var(--ck-todo-list-checkmark-size) / 5.3);
     height: calc(var(--ck-todo-list-checkmark-size) / 2.6);
     border-style: solid;
     border-color: transparent;
-    border-width: 0 calc(var(--ck-todo-list-checkmark-size) / 8) calc(var(--ck-todo-list-checkmark-size) / 8) 0;
+    border-width: 0 calc(var(--ck-todo-list-checkmark-size) / 8)
+        calc(var(--ck-todo-list-checkmark-size) / 8) 0;
     transform: rotate(45deg);
 }
 

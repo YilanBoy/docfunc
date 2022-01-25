@@ -1,15 +1,19 @@
 // youtube url regex
-const youtubeUrlRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g;
+const youtubeUrlRegex =
+    /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g;
 // twitter url regex
-const twitterUrlRegex = /(?:https?:\/\/)?(?:www\.)?twitter\.com\/(?:[^\/]+\/)+status(?:es)?\/(\d+)/g;
+const twitterUrlRegex =
+    /(?:https?:\/\/)?(?:www\.)?twitter\.com\/(?:[^\/]+\/)+status(?:es)?\/(\d+)/g;
 
 // get all oembed elements
-const allOembedElement: NodeListOf<Element> = document.querySelectorAll('figure.media > oembed');
+const allOembedElement: NodeListOf<Element> = document.querySelectorAll(
+    "figure.media > oembed"
+);
 
 // foreach oembed element
 allOembedElement.forEach((oembed: Element) => {
     // get the url
-    const oembedUrl: string | null = oembed.getAttribute('url');
+    const oembedUrl: string | null = oembed.getAttribute("url");
 
     // if url is not null
     if (oembedUrl !== null) {
@@ -19,55 +23,56 @@ allOembedElement.forEach((oembed: Element) => {
 
 function embedMedia(url: string, element: Element): void {
     if (url.match(youtubeUrlRegex)) {
-
-        insertYoutubeIframe(url, element).catch(error => console.error(error));
-
+        insertYoutubeIframe(url, element).catch((error) =>
+            console.error(error)
+        );
     } else if (url.match(twitterUrlRegex)) {
-
-        insertTwitterIframe(url, element).catch(error => console.error(error));
+        insertTwitterIframe(url, element).catch((error) =>
+            console.error(error)
+        );
     }
 }
 
-async function insertYoutubeIframe(url: string, element: Element): Promise<void> {
-    let body = {url: url};
+async function insertYoutubeIframe(
+    url: string,
+    element: Element
+): Promise<void> {
+    let body = { url: url };
 
-    const response = await fetch(
-        `/api/oembed/youtube`,
-        {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-        });
+    const response = await fetch(`/api/oembed/youtube`, {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+    });
 
     let data = await response.json();
 
     // append the iframe after the element
-    element.insertAdjacentHTML('afterend', data.html);
+    element.insertAdjacentHTML("afterend", data.html);
 }
 
-async function insertTwitterIframe(url: string, element: Element): Promise<void> {
-    let body = {url: url};
+async function insertTwitterIframe(
+    url: string,
+    element: Element
+): Promise<void> {
+    let body = { url: url };
 
-    const response = await fetch(
-        '/api/oembed/twitter',
-        {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-        });
+    const response = await fetch("/api/oembed/twitter", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+    });
 
     let data = await response.json();
 
     // append the iframe after the element
-    element.insertAdjacentHTML('afterend', data.html);
+    element.insertAdjacentHTML("afterend", data.html);
     // scan blog post and embed tweets
-    window.twttr.widgets.load(
-        document.getElementById('blog-post')
-    );
+    window.twttr.widgets.load(document.getElementById("blog-post"));
 }

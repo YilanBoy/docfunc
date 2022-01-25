@@ -7,12 +7,14 @@ export default class {
 
     // Starts the upload process.
     upload() {
-        return this.loader.file
-            .then(file => new Promise((resolve, reject) => {
-                this._initRequest();
-                this._initListeners(resolve, reject, file);
-                this._sendRequest(file);
-            }));
+        return this.loader.file.then(
+            (file) =>
+                new Promise((resolve, reject) => {
+                    this._initRequest();
+                    this._initListeners(resolve, reject, file);
+                    this._sendRequest(file);
+                })
+        );
     }
 
     // Aborts the upload process.
@@ -24,15 +26,18 @@ export default class {
 
     // Initializes the XMLHttpRequest object using the URL passed to the constructor.
     _initRequest() {
-        const xhr = this.xhr = new XMLHttpRequest();
+        const xhr = (this.xhr = new XMLHttpRequest());
 
         // Note that your request may look different. It is up to you and your editor
         // integration to choose the right communication channel. This example uses
         // a POST request with JSON as a data structure but your configuration
         // could be different.
-        xhr.open('POST', "/images/upload", true);
-        xhr.setRequestHeader('x-csrf-token', document.querySelector('meta[name="csrf-token"]').content)
-        xhr.responseType = 'json';
+        xhr.open("POST", "/images/upload", true);
+        xhr.setRequestHeader(
+            "x-csrf-token",
+            document.querySelector('meta[name="csrf-token"]').content
+        );
+        xhr.responseType = "json";
     }
 
     // Initializes XMLHttpRequest listeners.
@@ -41,9 +46,9 @@ export default class {
         const loader = this.loader;
         const genericErrorText = `Couldn't upload file: ${file.name}.`;
 
-        xhr.addEventListener('error', () => reject(genericErrorText));
-        xhr.addEventListener('abort', () => reject());
-        xhr.addEventListener('load', () => {
+        xhr.addEventListener("error", () => reject(genericErrorText));
+        xhr.addEventListener("abort", () => reject());
+        xhr.addEventListener("load", () => {
             const response = xhr.response;
 
             // This example assumes the XHR server's "response" object will come with
@@ -53,7 +58,11 @@ export default class {
             // Your integration may handle upload errors in a different way so make sure
             // it is done properly. The reject() function must be called when the upload fails.
             if (!response || response.error) {
-                return reject(response && response.error ? response.error.message : genericErrorText);
+                return reject(
+                    response && response.error
+                        ? response.error.message
+                        : genericErrorText
+                );
             }
 
             // If the upload is successful, resolve the upload promise with an object containing
@@ -61,7 +70,7 @@ export default class {
             // This URL will be used to display the image in the content. Learn more in the
             // UploadAdapter#upload documentation.
             resolve({
-                default: response.url
+                default: response.url,
             });
         });
 
@@ -69,7 +78,7 @@ export default class {
         // properties which are used e.g. to display the upload progress bar in the editor
         // user interface.
         if (xhr.upload) {
-            xhr.upload.addEventListener('progress', evt => {
+            xhr.upload.addEventListener("progress", (evt) => {
                 if (evt.lengthComputable) {
                     loader.uploadTotal = evt.total;
                     loader.uploaded = evt.loaded;
@@ -83,7 +92,7 @@ export default class {
         // Prepare the form data.
         const data = new FormData();
 
-        data.append('upload', file);
+        data.append("upload", file);
 
         // Important note: This is the right place to implement security mechanisms
         // like authentication and CSRF protection. For instance, you can use

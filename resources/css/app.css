@@ -4,39 +4,22 @@
 
 @layer components {
     .group-gradient-underline-grow {
-        @apply bg-left-bottom bg-no-repeat
-        bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500
-        bg-[length:0_3px] group-hover:bg-[length:100%_3px]
-        transition-all duration-200 ease-in;
+        @apply bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-[length:0_3px] bg-left-bottom bg-no-repeat transition-all duration-200 ease-in group-hover:bg-[length:100%_3px];
     }
 
     .gradient-underline-grow {
-        @apply bg-left-bottom bg-no-repeat
-        bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500
-        bg-[length:0_3px] hover:bg-[length:100%_3px]
-        transition-all duration-200 ease-in;
+        @apply bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-[length:0_3px] bg-left-bottom bg-no-repeat transition-all duration-200 ease-in hover:bg-[length:100%_3px];
     }
 
     .blog-post {
         @apply prose prose-slate dark:prose-invert
-        /* headings */
-        prose-headings:!text-indigo-500 dark:prose-headings:!text-indigo-400
-        /* links */
-        prose-a:!no-underline hover:prose-a:!underline
-        prose-a:!text-teal-600 hover:prose-a:!text-teal-500 dark:prose-a:!text-teal-500 dark:hover:prose-a:!text-teal-400
-        /* lists */
-        prose-li:marker:!text-gray-500 dark:prose-li:marker:!text-gray-400
-        /* code */
-        prose-code:before:!content-none prose-code:after:!content-none
-        /* code block */
-        dark:prose-code:!text-slate-100
-        prose-pre:!border-none prose-pre:!rounded-lg
-        /* image */
-        prose-figcaption:!bg-slate-200 dark:prose-figcaption:!bg-slate-500 dark:prose-figcaption:!text-slate-100
-        /* horizontal line */
-        prose-hr:!my-3 prose-hr:!h-1 prose-hr:!border-none prose-hr:!bg-slate-300 dark:prose-hr:!bg-slate-500
-        /* blockquote */
-        dark:prose-blockquote:!border-slate-500;
+        /* headings */ prose-headings:!text-indigo-500 dark:prose-headings:!text-indigo-400
+        /* links */ prose-a:!no-underline hover:prose-a:!underline prose-a:!text-teal-600 hover:prose-a:!text-teal-500 dark:prose-a:!text-teal-500 dark:hover:prose-a:!text-teal-400
+        /* lists */ prose-li:marker:!text-gray-500 dark:prose-li:marker:!text-gray-400
+        /* code */ prose-code:before:!content-none prose-code:after:!content-none
+        /* code */ dark:prose-code:!text-slate-100 prose-pre:!border-none prose-pre:!rounded-lg
+        /* image */ prose-figcaption:!bg-slate-200 dark:prose-figcaption:!bg-slate-500 dark:prose-figcaption:!text-slate-100 /* horizontal line */ prose-hr:!my-3 prose-hr:!h-1 prose-hr:!border-none prose-hr:!bg-slate-300 dark:prose-hr:!bg-slate-500
+        /* blockquote */ dark:prose-blockquote:!border-slate-500 block;
     }
 }
 

@@ -7,15 +7,15 @@
   {{-- CSRF Token --}}
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{ config('app.name') }} - @yield('title', '生活記錄函式')</title>
-  <meta name="description" content="@yield('description', config('app.name') . ' - 生活記錄函式')">
+  <title>@yield('title', config('app.name'))</title>
+  <meta name="description" content="@yield('description', config('app.name'))">
 
   {{-- Facebook Meta Tags --}}
-  <meta property="og:url" content="{{ config('app.url') }}">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="{{ config('app.name') }} - @yield('title', '生活記錄函式')">
-  <meta property="og:description" content="@yield('description', config('app.name') . ' - 生活記錄函式')">
-  <meta property="og:image" content="{{ asset('images/icon/icon.svg') }}">
+  <meta property="og:url" content="{{ url()->full() }}">
+  <meta property="og:type" content="{{ request()->route()->getName() === 'posts.show' ? 'article' : 'website' }}">
+  <meta property="og:title" content="@yield('title', config('app.name'))">
+  <meta property="og:description" content="@yield('description', config('app.name'))">
+  <meta property="og:image" content="https://recode-blog-files.s3.ap-northeast-2.amazonaws.com/share.jpg">
 
   {{-- Favicon --}}
   <link rel="shortcut icon" href="{{ asset('images/icon/icon.svg') }}" type="image/x-icon">

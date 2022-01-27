@@ -20,7 +20,8 @@ class PostController extends Controller
     public function __construct(
         protected PostService           $postService,
         protected FormatTransferService $formatTransferService
-    ) {
+    )
+    {
     }
 
     /**
@@ -31,7 +32,7 @@ class PostController extends Controller
     public function index(): Application|Factory|View
     {
         $pageTitle = (Route::currentRouteName() === 'root')
-            ? '生活記錄函式'
+            ? config('app.name')
             : '所有文章';
 
         return view('posts.index', compact('pageTitle'));

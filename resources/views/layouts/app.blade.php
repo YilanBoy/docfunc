@@ -10,7 +10,7 @@
   <title>@yield('title', config('app.name'))</title>
   <meta name="description" content="@yield('description', config('app.name'))">
 
-  {{-- Facebook Meta Tags --}}
+  {{-- Open Graph --}}
   <meta property="og:url" content="{{ url()->full() }}">
   <meta property="og:type" content="{{ request()->route()->getName() === 'posts.show' ? 'article' : 'website' }}">
   <meta property="og:title" content="@yield('title', config('app.name'))">
@@ -55,16 +55,14 @@
 
 <script src="{{ asset('js/app.js') }}"></script>
 
-@foreach (['warning', 'success', 'info'] as $message)
-  @if (session()->has($message))
-    <script>
-      const sweetalert2Title = '{{ session()->get($message) }}';
-      const sweetalert2Icon = '{{ $message }}';
-    </script>
+{{-- Flash Alert --}}
+@if (session()->has('alert'))
+  <script>
+    const flashAlert = @json(session()->get('alert'));
+  </script>
 
-    <script src="{{ asset('js/sweet-alert.js') }}"></script>
-  @endif
-@endforeach
+  <script src="{{ asset('js/sweet-alert.js') }}"></script>
+@endif
 
 @yield('scripts')
 </body>

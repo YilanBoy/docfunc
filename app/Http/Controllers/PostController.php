@@ -80,7 +80,8 @@ class PostController extends Controller
         // 在關聯表新增關聯
         $post->tags()->attach($tagIdsArray);
 
-        return redirect($post->link_with_slug)->with('success', '成功新增文章！');
+        return redirect($post->link_with_slug)
+            ->with('alert', ['icon' => 'success', 'title' => '成功新增文章！']);
     }
 
     /**
@@ -122,7 +123,8 @@ class PostController extends Controller
         // 關聯表更新
         $post->tags()->sync($tagIdsArray);
 
-        return redirect($post->link_with_slug)->with('success', '成功更新文章！');
+        return redirect($post->link_with_slug)
+            ->with('alert', ['icon' => 'success', 'title' => '成功更新文章！']);
     }
 
     /**
@@ -140,7 +142,7 @@ class PostController extends Controller
 
         return redirect()
             ->route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
-            ->with('success', '成功標記文章為刪除狀態！');
+            ->with('alert', ['icon' => 'success', 'title' => '成功標記文章為刪除狀態！']);
     }
 
     /**
@@ -160,7 +162,7 @@ class PostController extends Controller
 
         return redirect()
             ->route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
-            ->with('success', '成功恢復文章！');
+            ->with('alert', ['icon' => 'success', 'title' => '成功恢復文章！']);
     }
 
     /**
@@ -180,6 +182,6 @@ class PostController extends Controller
 
         return redirect()
             ->route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
-            ->with('success', '成功刪除文章！');
+            ->with('alert', ['icon' => 'success', 'title' => '成功刪除文章！']);
     }
 }

@@ -96,53 +96,19 @@ class PostService
     }
 
     /**
-     * 取得所有文章中的圖片連結
+     * 取得文章中的圖片連結
      *
+     * @param Post $post
      * @return array
      */
-    public static function imageList(): array
+    public static function imagesInPost(Post $post): array
     {
-        $allPostsBody = Post::pluck('body')->toArray();
+        preg_match_all(
+            '/images\/(\d{4}_\d{2}_\d{2}_\d{2}_\d{2}_\d{2}_[a-zA-Z0-9]+\.(jpeg|png|jpg|gif|svg))/U',
+            $post->body,
+            $matches,
+        );
 
-        $imageList = [];
-
-        foreach ($allPostsBody as $body) {
-            // 圖片名稱範例格式 images/2021_10_30_22_37_44_617d589b50eb1.jpg
-            preg_match_all(
-                '/images\/\d{4}_\d{2}_\d{2}_\d{2}_\d{2}_\d{2}_[a-zA-Z0-9]+\.(jpeg|png|jpg|gif|svg)/U',
-                $body,
-                $match
-            );
-
-            if (!empty($match[0])) {
-                foreach ($match[0] as $image) {
-                    $imageList[] = $image;
-                }
-            }
-        }
-
-        return $imageList;
-    }
-
-    /**
-     * 取得所有已未在文章中使用，但仍儲存於雲端中的圖片名稱
-     *
-     * @return array
-     */
-    public static function unusedImages(): array
-    {
-        $imageList = self::imageList();
-
-        $imagesOnCloud = Storage::disk('s3')->allFiles('images');
-
-        $unusedImages = [];
-
-        foreach ($imagesOnCloud as $image) {
-            if (!in_array($image, $imageList)) {
-                $unusedImages[] = $image;
-            }
-        }
-
-        return $unusedImages;
+        return $matches[1];
     }
 }

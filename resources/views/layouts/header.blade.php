@@ -70,13 +70,12 @@
               }
             "
             type="button"
-            class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
           >
-            <span class="dark:hidden">
+            <span class="text-amber-400 dark:hidden hover:text-amber-500">
               <i class="bi bi-sun-fill"></i>
             </span>
 
-            <span class="hidden dark:inline">
+            <span class="hidden text-blue-500 dark:inline hover:text-blue-400">
               <i class="bi bi-moon-stars-fill"></i>
             </span>
           </button>
@@ -294,9 +293,6 @@
 
     <div class="absolute flex space-x-3 top-3 right-4">
 
-      {{-- 電腦版-搜尋 --}}
-      <livewire:search />
-
       {{-- 明亮 / 暗黑模式切換 --}}
       <button
         x-data="{ html: document.documentElement }"
@@ -310,16 +306,19 @@
           }
         "
         type="button"
-        class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50"
+        class="flex items-center justify-center w-10 h-10 group"
       >
-        <span class="dark:hidden">
+        <span class="transition duration-150 text-amber-400 dark:hidden group-hover:text-amber-500">
           <i class="bi bi-sun-fill"></i>
         </span>
 
-        <span class="hidden dark:inline">
+        <span class="hidden text-blue-500 transition duration-150 dark:inline group-hover:text-blue-400">
           <i class="bi bi-moon-stars-fill"></i>
         </span>
       </button>
+
+      {{-- 電腦版-搜尋 --}}
+      <livewire:search/>
 
       @guest
         {{-- 電腦版-未登入 --}}
@@ -331,12 +330,12 @@
         </a>
 
         @if (request()->url() !== route('login'))
-        <a
-          href="{{ route('login') }}"
-          class="flex items-center justify-center h-10 px-3 transition duration-150 bg-transparent border rounded-lg text-emerald-400 border-emerald-400 hover:bg-emerald-400 hover:text-gray-50 hover:border-transparent"
-        >
-          <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
-        </a>
+          <a
+            href="{{ route('login') }}"
+            class="flex items-center justify-center h-10 px-3 transition duration-150 bg-transparent border rounded-lg text-emerald-400 border-emerald-400 hover:bg-emerald-400 hover:text-gray-50 hover:border-transparent"
+          >
+            <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
+          </a>
         @endif
       @else
         {{-- 電腦版-已登入 --}}

@@ -1,6 +1,6 @@
 /*
- * CKEditor 5 (v31.1.0) content styles.
- * Generated on Fri, 17 Dec 2021 06:54:01 GMT.
+ * CKEditor 5 (v32.0.0) content styles.
+ * Generated on Thu, 03 Feb 2022 09:10:09 GMT.
  * For more information, check out https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/content-styles.html
  */
 
@@ -20,6 +20,136 @@
     --ck-image-style-spacing: 1.5em;
     --ck-inline-image-style-spacing: calc(var(--ck-image-style-spacing) / 2);
     --ck-todo-list-checkmark-size: 16px;
+}
+
+/* ckeditor5-block-quote/theme/blockquote.css */
+.ck-content blockquote {
+    overflow: hidden;
+    padding-right: 1.5em;
+    padding-left: 1.5em;
+    margin-left: 0;
+    margin-right: 0;
+    font-style: italic;
+    border-left: solid 5px hsl(0, 0%, 80%);
+}
+
+/* ckeditor5-block-quote/theme/blockquote.css */
+.ck-content[dir="rtl"] blockquote {
+    border-left: 0;
+    border-right: solid 5px hsl(0, 0%, 80%);
+}
+
+/* ckeditor5-basic-styles/theme/code.css */
+.ck-content code {
+    background-color: hsla(0, 0%, 78%, 0.3);
+    padding: .15em;
+    border-radius: 2px;
+}
+
+/* ckeditor5-highlight/theme/highlight.css */
+.ck-content .marker-yellow {
+    background-color: var(--ck-highlight-marker-yellow);
+}
+
+/* ckeditor5-highlight/theme/highlight.css */
+.ck-content .marker-green {
+    background-color: var(--ck-highlight-marker-green);
+}
+
+/* ckeditor5-highlight/theme/highlight.css */
+.ck-content .marker-pink {
+    background-color: var(--ck-highlight-marker-pink);
+}
+
+/* ckeditor5-highlight/theme/highlight.css */
+.ck-content .marker-blue {
+    background-color: var(--ck-highlight-marker-blue);
+}
+
+/* ckeditor5-highlight/theme/highlight.css */
+.ck-content .pen-red {
+    color: var(--ck-highlight-pen-red);
+    background-color: transparent;
+}
+
+/* ckeditor5-highlight/theme/highlight.css */
+.ck-content .pen-green {
+    color: var(--ck-highlight-pen-green);
+    background-color: transparent;
+}
+
+/* ckeditor5-font/theme/fontsize.css */
+.ck-content .text-tiny {
+    font-size: .7em;
+}
+
+/* ckeditor5-font/theme/fontsize.css */
+.ck-content .text-small {
+    font-size: .85em;
+}
+
+/* ckeditor5-font/theme/fontsize.css */
+.ck-content .text-big {
+    font-size: 1.4em;
+}
+
+/* ckeditor5-font/theme/fontsize.css */
+.ck-content .text-huge {
+    font-size: 1.8em;
+}
+
+/* ckeditor5-image/theme/image.css */
+.ck-content .image {
+    display: table;
+    clear: both;
+    text-align: center;
+    margin: 0.9em auto;
+    min-width: 50px;
+}
+
+/* ckeditor5-image/theme/image.css */
+.ck-content .image img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    min-width: 100%;
+}
+
+/* ckeditor5-image/theme/image.css */
+.ck-content .image-inline {
+    /*
+     * Normally, the .image-inline would have "display: inline-block" and "img { width: 100% }" (to follow the wrapper while resizing).;
+     * Unfortunately, together with "srcset", it gets automatically stretched up to the width of the editing root.
+     * This strange behavior does not happen with inline-flex.
+     */
+    display: inline-flex;
+    max-width: 100%;
+    align-items: flex-start;
+}
+
+/* ckeditor5-image/theme/image.css */
+.ck-content .image-inline picture {
+    display: flex;
+}
+
+/* ckeditor5-image/theme/image.css */
+.ck-content .image-inline picture,
+.ck-content .image-inline img {
+    flex-grow: 1;
+    flex-shrink: 1;
+    max-width: 100%;
+}
+
+/* ckeditor5-image/theme/imagecaption.css */
+.ck-content .image > figcaption {
+    display: table-caption;
+    caption-side: bottom;
+    word-break: break-word;
+    color: var(--ck-color-image-caption-text);
+    background-color: var(--ck-color-image-caption-background);
+    padding: .6em;
+    font-size: .75em;
+    outline-offset: -1px;
 }
 
 /* ckeditor5-image/theme/imagestyle.css */
@@ -95,78 +225,6 @@
     margin-left: var(--ck-inline-image-style-spacing);
 }
 
-/* ckeditor5-image/theme/imagecaption.css */
-.ck-content .image > figcaption {
-    display: table-caption;
-    caption-side: bottom;
-    word-break: break-word;
-    color: var(--ck-color-image-caption-text);
-    background-color: var(--ck-color-image-caption-background);
-    padding: 0.6em;
-    font-size: 0.75em;
-    outline-offset: -1px;
-}
-
-/* ckeditor5-font/theme/fontsize.css */
-.ck-content .text-tiny {
-    font-size: 0.7em;
-}
-
-/* ckeditor5-font/theme/fontsize.css */
-.ck-content .text-small {
-    font-size: 0.85em;
-}
-
-/* ckeditor5-font/theme/fontsize.css */
-.ck-content .text-big {
-    font-size: 1.4em;
-}
-
-/* ckeditor5-font/theme/fontsize.css */
-.ck-content .text-huge {
-    font-size: 1.8em;
-}
-
-/* ckeditor5-highlight/theme/highlight.css */
-.ck-content .marker-yellow {
-    background-color: var(--ck-highlight-marker-yellow);
-}
-
-/* ckeditor5-highlight/theme/highlight.css */
-.ck-content .marker-green {
-    background-color: var(--ck-highlight-marker-green);
-}
-
-/* ckeditor5-highlight/theme/highlight.css */
-.ck-content .marker-pink {
-    background-color: var(--ck-highlight-marker-pink);
-}
-
-/* ckeditor5-highlight/theme/highlight.css */
-.ck-content .marker-blue {
-    background-color: var(--ck-highlight-marker-blue);
-}
-
-/* ckeditor5-highlight/theme/highlight.css */
-.ck-content .pen-red {
-    color: var(--ck-highlight-pen-red);
-    background-color: transparent;
-}
-
-/* ckeditor5-highlight/theme/highlight.css */
-.ck-content .pen-green {
-    color: var(--ck-highlight-pen-green);
-    background-color: transparent;
-}
-
-/* ckeditor5-horizontal-line/theme/horizontalline.css */
-.ck-content hr {
-    margin: 15px 0;
-    height: 4px;
-    background: hsl(0, 0%, 87%);
-    border: 0;
-}
-
 /* ckeditor5-image/theme/imageresize.css */
 .ck-content .image.image_resized {
     max-width: 100%;
@@ -184,169 +242,9 @@
     display: block;
 }
 
-/* ckeditor5-image/theme/image.css */
-.ck-content .image {
-    display: table;
-    clear: both;
-    text-align: center;
-    margin: 0.9em auto;
-    min-width: 50px;
-}
-
-/* ckeditor5-image/theme/image.css */
-.ck-content .image img {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
-    min-width: 100%;
-}
-
-/* ckeditor5-image/theme/image.css */
-.ck-content .image-inline {
-    /*
-     * Normally, the .image-inline would have "display: inline-block" and "img { width: 100% }" (to follow the wrapper while resizing).;
-     * Unfortunately, together with "srcset", it gets automatically stretched up to the width of the editing root.
-     * This strange behavior does not happen with inline-flex.
-     */
-    display: inline-flex;
-    max-width: 100%;
-    align-items: flex-start;
-}
-
-/* ckeditor5-image/theme/image.css */
-.ck-content .image-inline picture {
-    display: flex;
-}
-
-/* ckeditor5-image/theme/image.css */
-.ck-content .image-inline picture,
-.ck-content .image-inline img {
-    flex-grow: 1;
-    flex-shrink: 1;
-    max-width: 100%;
-}
-
-/* ckeditor5-block-quote/theme/blockquote.css */
-.ck-content blockquote {
-    overflow: hidden;
-    padding-right: 1.5em;
-    padding-left: 1.5em;
-    margin-left: 0;
-    margin-right: 0;
+/* ckeditor5-language/theme/language.css */
+.ck-content span[lang] {
     font-style: italic;
-    border-left: solid 5px hsl(0, 0%, 80%);
-}
-
-/* ckeditor5-block-quote/theme/blockquote.css */
-.ck-content[dir="rtl"] blockquote {
-    border-left: 0;
-    border-right: solid 5px hsl(0, 0%, 80%);
-}
-
-/* ckeditor5-basic-styles/theme/code.css */
-.ck-content code {
-    background-color: hsla(0, 0%, 78%, 0.3);
-    padding: 0.15em;
-    border-radius: 2px;
-}
-
-/* ckeditor5-table/theme/table.css */
-.ck-content .table {
-    margin: 0.9em auto;
-    display: table;
-}
-
-/* ckeditor5-table/theme/table.css */
-.ck-content .table table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    height: 100%;
-    border: 1px double hsl(0, 0%, 70%);
-}
-
-/* ckeditor5-table/theme/table.css */
-.ck-content .table table td,
-.ck-content .table table th {
-    min-width: 2em;
-    padding: 0.4em;
-    border: 1px solid hsl(0, 0%, 75%);
-}
-
-/* ckeditor5-table/theme/table.css */
-.ck-content .table table th {
-    font-weight: bold;
-    background: hsla(0, 0%, 0%, 5%);
-}
-
-/* ckeditor5-table/theme/table.css */
-.ck-content[dir="rtl"] .table th {
-    text-align: right;
-}
-
-/* ckeditor5-table/theme/table.css */
-.ck-content[dir="ltr"] .table th {
-    text-align: left;
-}
-
-/* ckeditor5-table/theme/tablecaption.css */
-.ck-content .table > figcaption {
-    display: table-caption;
-    caption-side: top;
-    word-break: break-word;
-    text-align: center;
-    color: var(--ck-color-table-caption-text);
-    background-color: var(--ck-color-table-caption-background);
-    padding: 0.6em;
-    font-size: 0.75em;
-    outline-offset: -1px;
-}
-
-/* ckeditor5-page-break/theme/pagebreak.css */
-.ck-content .page-break {
-    position: relative;
-    clear: both;
-    padding: 5px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* ckeditor5-page-break/theme/pagebreak.css */
-.ck-content .page-break::after {
-    content: "";
-    position: absolute;
-    border-bottom: 2px dashed hsl(0, 0%, 77%);
-    width: 100%;
-}
-
-/* ckeditor5-page-break/theme/pagebreak.css */
-.ck-content .page-break__label {
-    position: relative;
-    z-index: 1;
-    padding: 0.3em 0.6em;
-    display: block;
-    text-transform: uppercase;
-    border: 1px solid hsl(0, 0%, 77%);
-    border-radius: 2px;
-    font-family: Helvetica, Arial, Tahoma, Verdana, Sans-Serif;
-    font-size: 0.75em;
-    font-weight: bold;
-    color: hsl(0, 0%, 20%);
-    background: hsl(0, 0%, 100%);
-    box-shadow: 2px 2px 1px hsla(0, 0%, 0%, 0.15);
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-/* ckeditor5-media-embed/theme/mediaembed.css */
-.ck-content .media {
-    clear: both;
-    margin: 0.9em 0;
-    display: block;
-    min-width: 15em;
 }
 
 /* ckeditor5-list/theme/todolist.css */
@@ -384,13 +282,12 @@
     display: block;
     position: absolute;
     box-sizing: border-box;
-    content: "";
+    content: '';
     width: 100%;
     height: 100%;
     border: 1px solid hsl(0, 0%, 20%);
     border-radius: 2px;
-    transition: 250ms ease-in-out box-shadow, 250ms ease-in-out background,
-        250ms ease-in-out border;
+    transition: 250ms ease-in-out box-shadow, 250ms ease-in-out background, 250ms ease-in-out border;
 }
 
 /* ckeditor5-list/theme/todolist.css */
@@ -399,15 +296,14 @@
     position: absolute;
     box-sizing: content-box;
     pointer-events: none;
-    content: "";
+    content: '';
     left: calc(var(--ck-todo-list-checkmark-size) / 3);
     top: calc(var(--ck-todo-list-checkmark-size) / 5.3);
     width: calc(var(--ck-todo-list-checkmark-size) / 5.3);
     height: calc(var(--ck-todo-list-checkmark-size) / 2.6);
     border-style: solid;
     border-color: transparent;
-    border-width: 0 calc(var(--ck-todo-list-checkmark-size) / 8)
-        calc(var(--ck-todo-list-checkmark-size) / 8) 0;
+    border-width: 0 calc(var(--ck-todo-list-checkmark-size) / 8) calc(var(--ck-todo-list-checkmark-size) / 8) 0;
     transform: rotate(45deg);
 }
 
@@ -427,9 +323,111 @@
     vertical-align: middle;
 }
 
-/* ckeditor5-language/theme/language.css */
-.ck-content span[lang] {
-    font-style: italic;
+/* ckeditor5-page-break/theme/pagebreak.css */
+.ck-content .page-break {
+    position: relative;
+    clear: both;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ckeditor5-page-break/theme/pagebreak.css */
+.ck-content .page-break::after {
+    content: '';
+    position: absolute;
+    border-bottom: 2px dashed hsl(0, 0%, 77%);
+    width: 100%;
+}
+
+/* ckeditor5-page-break/theme/pagebreak.css */
+.ck-content .page-break__label {
+    position: relative;
+    z-index: 1;
+    padding: .3em .6em;
+    display: block;
+    text-transform: uppercase;
+    border: 1px solid hsl(0, 0%, 77%);
+    border-radius: 2px;
+    font-family: Helvetica, Arial, Tahoma, Verdana, Sans-Serif;
+    font-size: 0.75em;
+    font-weight: bold;
+    color: hsl(0, 0%, 20%);
+    background: hsl(0, 0%, 100%);
+    box-shadow: 2px 2px 1px hsla(0, 0%, 0%, 0.15);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* ckeditor5-media-embed/theme/mediaembed.css */
+.ck-content .media {
+    clear: both;
+    margin: 0.9em 0;
+    display: block;
+    min-width: 15em;
+}
+
+/* ckeditor5-table/theme/table.css */
+.ck-content .table {
+    margin: 0.9em auto;
+    display: table;
+}
+
+/* ckeditor5-table/theme/table.css */
+.ck-content .table table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px double hsl(0, 0%, 70%);
+}
+
+/* ckeditor5-table/theme/table.css */
+.ck-content .table table td,
+.ck-content .table table th {
+    min-width: 2em;
+    padding: .4em;
+    border: 1px solid hsl(0, 0%, 75%);
+}
+
+/* ckeditor5-table/theme/table.css */
+.ck-content .table table th {
+    font-weight: bold;
+    background: hsla(0, 0%, 0%, 5%);
+}
+
+/* ckeditor5-table/theme/table.css */
+.ck-content[dir="rtl"] .table th {
+    text-align: right;
+}
+
+/* ckeditor5-table/theme/table.css */
+.ck-content[dir="ltr"] .table th {
+    text-align: left;
+}
+
+/* ckeditor5-table/theme/tablecaption.css */
+.ck-content .table > figcaption {
+    display: table-caption;
+    caption-side: top;
+    word-break: break-word;
+    text-align: center;
+    color: var(--ck-color-table-caption-text);
+    background-color: var(--ck-color-table-caption-background);
+    padding: .6em;
+    font-size: .75em;
+    outline-offset: -1px;
+}
+
+/* ckeditor5-horizontal-line/theme/horizontalline.css */
+.ck-content hr {
+    margin: 15px 0;
+    height: 4px;
+    background: hsl(0, 0%, 87%);
+    border: 0;
 }
 
 /* ckeditor5-code-block/theme/codeblock.css */

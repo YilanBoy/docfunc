@@ -57,7 +57,7 @@
         class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0"
       >
         <div
-          class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75 -z-10"
+          class="fixed inset-0 transition-opacity bg-gray-500/75 -z-10"
           aria-hidden="true"
         ></div>
 

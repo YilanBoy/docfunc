@@ -48,7 +48,7 @@ class PostService
         $config->set('HTML.DefinitionRev', 1);
         // 過濾規則讀取是使用快取，下面這一行是用來清除快取，正式上線時必須移除
         // $config->set('Cache.DefinitionImpl', null);
-        // 允許連結使用 taget="_blank"
+        // 允許連結使用 target="_blank"
         $config->set('Attr.AllowedFrameTargets', ['_blank']);
         // 允許連結使用 rel 標籤
         $config->set('Attr.AllowedRel', ['nofollow', 'noreferrer', 'noopener']);

@@ -75,7 +75,7 @@
               <i class="bi bi-sun-fill"></i>
             </span>
 
-            <span class="hidden text-blue-500 dark:inline hover:text-blue-400">
+            <span class="hidden text-sky-500 dark:inline hover:text-sky-400">
               <i class="bi bi-moon-stars-fill"></i>
             </span>
           </button>
@@ -112,7 +112,8 @@
 
               @if (auth()->user()->notification_count > 0)
                 <span class="absolute flex w-3 h-3 -mt-1 -mr-1 top-2 right-2">
-                  <span class="absolute inline-flex w-full h-full bg-red-400 rounded-full opacity-75 animate-ping"></span>
+                  <span
+                    class="absolute inline-flex w-full h-full bg-red-400 rounded-full opacity-75 animate-ping"></span>
                   <span class="relative inline-flex w-3 h-3 bg-red-500 rounded-full"></span>
                 </span>
               @endif
@@ -239,7 +240,8 @@
   </div>
 
   {{-- 電腦版選單 --}}
-  <div class="relative items-center justify-center hidden w-full h-16 transition-all duration-300 shadow-md lg:flex bg-gray-50 dark:bg-gray-700">
+  <div
+    class="relative items-center justify-center hidden w-full h-16 transition-all duration-300 shadow-md lg:flex bg-gray-50 dark:bg-gray-700">
     {{-- 電腦版-Logo --}}
     <a
       href="{{ route('root') }}"
@@ -312,7 +314,7 @@
           <i class="bi bi-sun-fill"></i>
         </span>
 
-        <span class="hidden text-blue-500 transition duration-150 dark:inline group-hover:text-blue-400">
+        <span class="hidden transition duration-150 text-sky-500 dark:inline group-hover:text-sky-400">
           <i class="bi bi-moon-stars-fill"></i>
         </span>
       </button>

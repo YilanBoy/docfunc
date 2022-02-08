@@ -1,1 +1,0 @@
-(()=>{"use strict";"light"===localStorage.mode||!("mode"in localStorage)&&window.matchMedia("(prefers-color-scheme: light)").matches?document.documentElement.classList.remove("dark"):document.documentElement.classList.add("dark")})();

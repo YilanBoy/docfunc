@@ -1,1 +1,0 @@
-(()=>{"use strict";var t,e,r,n,s,i;window.twttr=(t=document,e="script",r="twitter-wjs",s=t.getElementsByTagName(e)[0],i=window.twttr||{},t.getElementById(r)||((n=t.createElement(e)).id=r,n.src="https://platform.twitter.com/widgets.js",null!==s.parentNode&&s.parentNode.insertBefore(n,s),i._e=[],i.ready=function(t){i._e.push(t)}),i)})();

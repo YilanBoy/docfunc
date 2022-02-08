@@ -1,1 +1,0 @@
-(()=>{"use strict";document.querySelectorAll(".count-up").forEach((function(t){var e=0,n=Number(t.textContent);if(e!==n)var r=setInterval((function(){t.textContent=String(e),e===n&&clearInterval(r),e++}),1/n*1e3)}))})();

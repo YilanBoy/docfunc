@@ -79,10 +79,9 @@
                 required
                 class="w-full h-10 border border-gray-300 rounded-md shadow-sm form-select focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50"
               >
-                <option value="" hidden disabled {{ $post->id ? '' : 'selected' }}>請選擇分類</option>
                 {{-- 這裡的 $categories 使用的是 view composer 來取得值，詳細可查看 ViewServiceProvider --}}
                 @foreach ($categories as $category)
-                  <option value="{{ $category->id }}" {{ $post->category_id == $category->id ? 'selected' : '' }}>
+                  <option value="{{ $category->id }}" @selected($post->category_id == $category->id)>
                     {{ $category->name }}
                   </option>
                 @endforeach

@@ -3,8 +3,6 @@
 namespace App\Services;
 
 use App\Models\Post;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use HTMLPurifier;
 use HTMLPurifier_Config;
 use JetBrains\PhpStorm\Pure;
@@ -92,7 +90,7 @@ class PostService
     #[Pure]
     public static function makeExcerpt(string $body, int $length = 200): string
     {
-        return Str::limit(strip_tags($body), $length);
+        return str()->limit(strip_tags($body), $length);
     }
 
     /**

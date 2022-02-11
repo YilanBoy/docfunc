@@ -6,8 +6,8 @@
 
 {{-- 個人頁面 --}}
 <x-app-layout>
-  <div class="container mx-auto max-w-7xl">
-    <div class="flex flex-col items-center justify-start min-h-screen px-4 mt-6">
+  <div class="container flex-1 mx-auto max-w-7xl">
+    <div class="flex flex-col items-center justify-start px-4 mt-6">
 
       {{-- 會員資訊、文章與留言 --}}
       <div

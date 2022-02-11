@@ -46,7 +46,7 @@
     </button>
 
     <div class="container mx-auto max-w-7xl">
-      <div class="flex flex-col items-center justify-start min-h-screen px-4 xl:px-0">
+      <div class="flex flex-col items-center justify-start px-4 xl:px-0">
 
         <x-card id="section" class="relative w-full xl:w-2/3">
 

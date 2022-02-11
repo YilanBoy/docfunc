@@ -2,8 +2,8 @@
 
 {{-- 通知列表 --}}
 <x-app-layout>
-  <div class="container mx-auto max-w-7xl">
-    <div class="flex items-start justify-center min-h-screen px-4 mt-6 xl:px-0">
+  <div class="container flex-1 mx-auto max-w-7xl">
+    <div class="flex items-start justify-center px-4 mt-6 xl:px-0">
 
       <div class="flex flex-col items-center justify-center w-full space-y-6 md:w-2/3 xl:w-1/2">
         {{-- 頁面標題 --}}

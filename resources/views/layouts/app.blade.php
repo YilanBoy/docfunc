@@ -40,7 +40,7 @@
 
 <body class="antialiased text-gray-900 bg-gray-200 overscroll-y-none dark:bg-gray-800 font-noto">
 
-<div class="relative flex flex-col justify-between">
+<div class="relative flex flex-col justify-between min-h-screen">
 
   @include('layouts.header')
 

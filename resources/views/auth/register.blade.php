@@ -9,7 +9,7 @@
 
 <x-app-layout>
   <div class="container mx-auto max-w-7xl">
-    <div class="flex items-center justify-center min-h-screen px-4 xl:px-0">
+    <div class="flex items-center justify-center px-4 xl:px-0">
 
       <div class="flex flex-col items-center justify-center w-full">
         {{-- 頁面標題 --}}

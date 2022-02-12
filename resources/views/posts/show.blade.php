@@ -33,7 +33,7 @@
 
 {{-- 文章內容 --}}
 <x-app-layout>
-  <div class="relative mt-6 animate-fade-in">
+  <div class="relative animate-fade-in">
     {{-- 置頂按鈕 --}}
     <button
       id="scroll-to-top-btn"

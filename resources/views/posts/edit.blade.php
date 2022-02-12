@@ -16,7 +16,7 @@
 {{-- 編輯文章 --}}
 <x-app-layout>
   <div class="container mx-auto max-w-7xl">
-    <div class="flex items-start justify-center px-4 mt-6 xl:px-0">
+    <div class="flex items-start justify-center px-4 xl:px-0">
 
       <div class="flex flex-col items-center justify-center w-full space-y-6 xl:w-2/3">
         {{-- 頁面標題 --}}

@@ -2,7 +2,7 @@
 <nav
   x-data
   id="header"
-  class="z-20"
+  class="z-20 mb-6"
 >
   {{-- 登出表單 --}}
   <form

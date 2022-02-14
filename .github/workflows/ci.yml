@@ -24,8 +24,10 @@ jobs:
           composer install --no-scripts
 
       - name: Prepare Laravel Application
+        env:
+          LARAVEL_TEST_ENV: ${{ secrets.LARAVEL_TEST_ENV }}
         run: |
-          cp .env.ci .env
+          printf "%s" "$LARAVEL_TEST_ENV" > .env
           php artisan key:generate
 
       - name: Run Testsuite

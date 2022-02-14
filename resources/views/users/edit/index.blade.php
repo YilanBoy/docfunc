@@ -1,7 +1,7 @@
 {{-- 會員中心 --}}
 <x-app-layout>
   <div class="container flex-1 mx-auto max-w-7xl">
-    <div class="flex flex-col items-start justify-center px-4 mt-6 md:flex-row xl:px-0">
+    <div class="flex flex-col items-start justify-center px-4 md:flex-row xl:px-0">
 
       {{-- 選項 --}}
       <x-card class="flex flex-col items-center justify-center w-full md:w-60 xl:w-80 md:mr-6 dark:text-gray-50">

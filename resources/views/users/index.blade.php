@@ -76,7 +76,7 @@
           x-show="tab === 'posts'"
           x-transition:enter.duration.300ms
         >
-          <livewire:user.posts :userId="$user->id"/>
+          <livewire:users.posts :userId="$user->id"/>
         </div>
 
         {{-- 會員留言 --}}
@@ -85,7 +85,7 @@
           x-show="tab === 'comments'"
           x-transition:enter.duration.300ms
         >
-          <livewire:user.comments :userId="$user->id"/>
+          <livewire:users.comments :userId="$user->id"/>
         </div>
       </div>
     </div>

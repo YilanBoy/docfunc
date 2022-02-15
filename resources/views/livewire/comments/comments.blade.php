@@ -3,7 +3,7 @@
 
   <div class="w-full">
     @for ($offset = 0; $offset < $count; $offset += $perPage)
-      <livewire:comments-group
+      <livewire:comments.comments-group
         :postId="$postId"
         :perPage="$perPage"
         :offset="$offset"

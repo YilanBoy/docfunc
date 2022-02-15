@@ -254,14 +254,14 @@
 
         {{-- 留言回覆 --}}
         @auth
-          <livewire:comment-box
+          <livewire:comments.comment-box
             :postId="$post->id"
             :commentCount="$post->comment_count"
           />
         @endauth
 
         {{-- 留言列表 --}}
-        <livewire:comments :postId="$post->id"/>
+        <livewire:comments.comments :postId="$post->id"/>
       </div>
     </div>
   </div>

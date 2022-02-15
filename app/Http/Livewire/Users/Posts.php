@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\User;
+namespace App\Http\Livewire\Users;
 
 use App\Models\User;
 use Livewire\Component;
@@ -25,6 +25,6 @@ class Posts extends Component
 
         $this->dispatchBrowserEvent('scroll-to-top');
 
-        return view('livewire.user.posts', ['posts' => $posts]);
+        return view('livewire.users.posts', ['posts' => $posts]);
     }
 }

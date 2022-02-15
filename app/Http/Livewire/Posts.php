@@ -27,6 +27,11 @@ class Posts extends Component
         $this->order = request()->order ?? 'latest';
     }
 
+    public function hydrate()
+    {
+        $this->dispatchBrowserEvent('scroll-to-top');
+    }
+
     public function orderChange($newOrder)
     {
         // 回到第一頁
@@ -50,8 +55,6 @@ class Posts extends Component
             ->withCount('tags') // 計算標籤數目
             ->paginate(10)
             ->withQueryString();
-
-        $this->dispatchBrowserEvent('scroll-to-top');
 
         return view('livewire.posts', ['posts' => $posts]);
     }

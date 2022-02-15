@@ -12,6 +12,11 @@ class Comments extends Component
 
     public int $userId;
 
+    public function hydrate()
+    {
+        $this->dispatchBrowserEvent('scroll-to-top');
+    }
+
     public function render()
     {
         // 該會員的留言
@@ -23,8 +28,6 @@ class Comments extends Component
             ->latest()
             ->paginate(10, ['*'], 'commentsPage')
             ->withQueryString();
-
-        $this->dispatchBrowserEvent('scroll-to-top');
 
         return view('livewire.users.comments', ['comments' => $comments]);
     }

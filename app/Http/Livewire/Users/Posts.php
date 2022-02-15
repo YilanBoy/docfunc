@@ -12,6 +12,11 @@ class Posts extends Component
 
     public int $userId;
 
+    public function hydrate()
+    {
+        $this->dispatchBrowserEvent('scroll-to-top');
+    }
+
     public function render()
     {
         // 該會員的文章
@@ -22,8 +27,6 @@ class Posts extends Component
             ->latest()
             ->paginate(10, ['*'], 'postsPage')
             ->withQueryString();
-
-        $this->dispatchBrowserEvent('scroll-to-top');
 
         return view('livewire.users.posts', ['posts' => $posts]);
     }

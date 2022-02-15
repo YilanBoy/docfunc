@@ -51,6 +51,8 @@ class Posts extends Component
             ->paginate(10)
             ->withQueryString();
 
+        $this->dispatchBrowserEvent('scroll-to-top');
+
         return view('livewire.posts', ['posts' => $posts]);
     }
 }

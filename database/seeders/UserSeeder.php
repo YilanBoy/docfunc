@@ -10,7 +10,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         // 生成數據集合
-        User::factory()->count(10)->create();
+        User::factory()->count(3)->create();
 
         // 單獨處理第一個會員的數據
         $user = User::find(1);

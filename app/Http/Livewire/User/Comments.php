@@ -24,6 +24,8 @@ class Comments extends Component
             ->paginate(10, ['*'], 'commentsPage')
             ->withQueryString();
 
+        $this->dispatchBrowserEvent('scroll-to-top');
+
         return view('livewire.user.comments', ['comments' => $comments]);
     }
 }

@@ -14,6 +14,9 @@ jobs:
       CACHE_DRIVER: redis
       QUEUE_CONNECTION: redis
       SESSION_DRIVER: redis
+      SCOUT_PREFIX: dev_posts
+      ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+      ALGOLIA_SECRET: ${{ secrets.ALGOLIA_SECRET }}
 
     services:
       mysql:

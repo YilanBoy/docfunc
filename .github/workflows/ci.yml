@@ -7,23 +7,29 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     env:
-      DB_DATABASE: laravel
+      DB_DATABASE: blog_tests
       DB_USERNAME: root
       DB_PASSWORD: password
       BROADCAST_DRIVER: log
       CACHE_DRIVER: redis
       QUEUE_CONNECTION: redis
       SESSION_DRIVER: redis
+      MAIL_MAILER: smtp
+      MAIL_HOST: smtp.mailtrap.io
+      MAIL_PORT: 2525
+      MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+      MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+      MAIL_ENCRYPTION: tls
       SCOUT_PREFIX: dev_posts
       ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
       ALGOLIA_SECRET: ${{ secrets.ALGOLIA_SECRET }}
 
     services:
       mysql:
-        image: mysql:8
+        image: mysql:latest
         env:
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: laravel
+          MYSQL_DATABASE: blog_tests
         ports:
           - 3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3

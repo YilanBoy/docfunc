@@ -1,11 +1,19 @@
 @section('title', '登入')
 
-@section('scriptsInHead')
+@section('scripts')
   {{-- Google reCAPTCHA --}}
-  @if (app()->isProduction())
-    {{-- async defer 同時使用會優先使用 async，當瀏覽器不支援 async 才會使用 defer --}}
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-  @endif
+  <script>
+    document.getElementById("login").addEventListener("submit", function (event) {
+      event.preventDefault();
+      grecaptcha.ready(function () {
+        grecaptcha.execute("{{ config('services.recaptcha.site_key') }}", {action: "submit"})
+          .then(function (response) {
+            document.getElementById("g-recaptcha-response").value = response;
+            document.getElementById("login").submit();
+          });
+      });
+    });
+  </script>
 @endsection
 
 <x-app-layout>
@@ -22,13 +30,16 @@
         <x-card class="w-full mt-4 overflow-hidden sm:max-w-md">
 
           {{-- Session 狀態訊息 --}}
-          <x-auth-session-status class="mb-4" :status="session('status')" />
+          <x-auth-session-status class="mb-4" :status="session('status')"/>
 
           {{-- 驗證錯誤訊息 --}}
-          <x-auth-validation-errors class="mb-4" :errors="$errors" />
+          <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
-          <form method="POST" action="{{ route('login') }}">
+          <form id="login" method="POST" action="{{ route('login') }}">
             @csrf
+
+            {{-- reCAPTCHA --}}
+            <input type="hidden" class="g-recaptcha" name="g-recaptcha-response" id="g-recaptcha-response">
 
             {{-- 信箱 --}}
             <div class="mt-5">
@@ -46,20 +57,15 @@
             <div class="block mt-5">
               <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" name="remember"
-                  class="text-indigo-400 border-gray-300 rounded shadow-sm form-checkbox focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                       class="text-indigo-400 border-gray-300 rounded shadow-sm form-checkbox focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 <span class="ml-2 text-sm text-gray-600 dark:text-gray-50">{{ __('Remember me') }}</span>
               </label>
             </div>
 
-            {{-- reCAPTCHA --}}
-            @if (app()->isProduction())
-              <x-recaptcha />
-            @endif
-
             <div class="flex items-center justify-end mt-5">
               @if (Route::has('password.request'))
                 <a class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
-                  href="{{ route('password.request') }}">
+                   href="{{ route('password.request') }}">
                   {{ __('Forgot your password?') }}
                 </a>
               @endif

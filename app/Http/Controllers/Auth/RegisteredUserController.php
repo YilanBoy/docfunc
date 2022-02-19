@@ -27,7 +27,7 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -42,14 +42,11 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', $passwordRule],
         ];
 
-        $messages = [];
-
         if (app()->isProduction()) {
             $rules['g-recaptcha-response'] = ['required', new Recaptcha()];
-            $messages['g-recaptcha-response.required'] = '請完成驗證';
         }
 
-        $request->validate($rules, $messages);
+        $request->validate($rules);
 
         $user = User::create([
             'name' => $request->name,

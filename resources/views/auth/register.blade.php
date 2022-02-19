@@ -1,10 +1,19 @@
 @section('title', '註冊')
 
-@section('scriptsInHead')
+@section('scripts')
   {{-- Google reCAPTCHA --}}
-  @if (app()->isProduction())
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-  @endif
+  <script>
+    document.getElementById("register").addEventListener("submit", function (event) {
+      event.preventDefault();
+      grecaptcha.ready(function () {
+        grecaptcha.execute("{{ config('services.recaptcha.site_key') }}", {action: "submit"})
+          .then(function (response) {
+            document.getElementById("g-recaptcha-response").value = response;
+            document.getElementById("register").submit();
+          });
+      });
+    });
+  </script>
 @endsection
 
 <x-app-layout>
@@ -20,10 +29,13 @@
         <x-card class="w-full mt-4 overflow-hidden sm:max-w-md">
 
           {{-- 驗證錯誤訊息 --}}
-          <x-auth-validation-errors class="mb-4" :errors="$errors" />
+          <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
-          <form method="POST" action="{{ route('register') }}">
+          <form id="register" method="POST" action="{{ route('register') }}">
             @csrf
+
+            {{-- reCAPTCHA --}}
+            <input type="hidden" class="g-recaptcha" name="g-recaptcha-response" id="g-recaptcha-response">
 
             {{-- 會員名稱 --}}
             <div class="mt-5">
@@ -69,11 +81,6 @@
               >
               </x-floating-label-input>
             </div>
-
-            {{-- reCAPTCHA --}}
-            @if (app()->isProduction())
-              <x-recaptcha />
-            @endif
 
             <div class="flex items-center justify-end mt-5">
               <a

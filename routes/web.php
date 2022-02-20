@@ -46,8 +46,8 @@ Route::prefix('posts')->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('posts.index');
 
     Route::middleware(['auth', 'verified'])->group(function () {
-        Route::view('/create', 'posts/create')->middleware('post.limit')->name('posts.create');
-        Route::post('/', [PostController::class, 'store'])->middleware('post.limit')->name('posts.store');
+        Route::view('/create', 'posts/create')->name('posts.create');
+        Route::post('/', [PostController::class, 'store'])->name('posts.store');
         Route::get('/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
         Route::put('/{post}', [PostController::class, 'update'])->name('posts.update');
         Route::delete('/{post}', [PostController::class, 'softDelete'])->name('posts.softDelete');

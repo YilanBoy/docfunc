@@ -128,7 +128,7 @@ class PostTest extends TestCase
             ->assertRedirect(route('login'));
     }
 
-    public function test_login_user_can_visit_create_post_page()
+    public function test_authenticated_user_can_visit_create_post_page()
     {
         $user = User::factory()->create();
 
@@ -150,14 +150,16 @@ class PostTest extends TestCase
         $this->assertDatabaseCount('posts', 0);
     }
 
-    public function test_login_user_can_create_post()
+    public function test_authenticated_user_can_create_post()
     {
         $user = User::factory()->create();
+
+        $randomString = str()->random(1000);
 
         $response = $this->actingAs($user)->post(route('posts.store'), [
             'title' => 'This is a test post title',
             'category_id' => 1,
-            'body' => 'This is a test post body'
+            'body' => $randomString
         ]);
 
         $latestPost = Post::latest()->first();
@@ -168,7 +170,7 @@ class PostTest extends TestCase
         $this->assertDatabaseHas('posts', [
             'title' => 'This is a test post title',
             'category_id' => 1,
-            'body' => 'This is a test post body'
+            'body' => $randomString,
         ]);
     }
 

@@ -17,7 +17,7 @@ class PostRequest extends FormRequest
         return [
             'title' => ['required', 'min:4', 'max:50'],
             'category_id' => ['required', 'numeric', 'exists:categories,id'],
-            'body' => ['required', 'min:9', 'max:400000'],
+            'body' => ['required', 'min:1000', 'max:400000'],
         ];
     }
 
@@ -31,7 +31,7 @@ class PostRequest extends FormRequest
             'category_id.numeric' => '分類資料錯誤',
             'category_id.exists' => '分類不存在',
             'body.required' => '請填寫文章內容',
-            'body.min' => '文章內容至少 9 個字元',
+            'body.min' => '文章內容至少 1000 個字元',
             'body.max' => '文章內容字數已超過限制',
         ];
     }

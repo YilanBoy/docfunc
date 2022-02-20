@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Http\Livewire\Comments\CommentBox;
+use App\Http\Livewire\Comments\CommentsGroup;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
@@ -59,5 +60,37 @@ class CommentTest extends TestCase
                 ->where('parent_id', $comment->id)
                 ->exists()
         );
+    }
+
+    public function test_comment_author_can_delete_own_comment()
+    {
+        $comment = Comment::factory()->create();
+
+        $this->actingAs(User::find($comment->user_id));
+
+        Livewire::test(CommentsGroup::class, [
+            'postId' => $comment->post_id,
+            'offset' => 0,
+            'perPage' => 10
+        ])
+            ->call('destroy', $comment->id);
+
+        $this->assertFalse(Comment::where('id', $comment->id)->exists());
+    }
+
+    public function test_post_author_can_delete_the_other_user_comment()
+    {
+        $comment = Comment::factory()->create();
+
+        $this->actingAs(User::find($comment->post->user_id));
+
+        Livewire::test(CommentsGroup::class, [
+            'postId' => $comment->post_id,
+            'offset' => 0,
+            'perPage' => 10
+        ])
+            ->call('destroy', $comment->id);
+
+        $this->assertFalse(Comment::where('id', $comment->id)->exists());
     }
 }

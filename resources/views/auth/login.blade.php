@@ -2,18 +2,20 @@
 
 @section('scripts')
   {{-- Google reCAPTCHA --}}
-  <script>
-    document.getElementById("login").addEventListener("submit", function (event) {
-      event.preventDefault();
-      grecaptcha.ready(function () {
-        grecaptcha.execute("{{ config('services.recaptcha.site_key') }}", {action: "submit"})
-          .then(function (response) {
-            document.getElementById("g-recaptcha-response").value = response;
-            document.getElementById("login").submit();
-          });
+  @if (app()->isProduction())
+    <script>
+      document.getElementById("login").addEventListener("submit", function (event) {
+        event.preventDefault();
+        grecaptcha.ready(function () {
+          grecaptcha.execute("{{ config('services.recaptcha.site_key') }}", {action: "submit"})
+            .then(function (response) {
+              document.getElementById("g-recaptcha-response").value = response;
+              document.getElementById("login").submit();
+            });
+        });
       });
-    });
-  </script>
+    </script>
+  @endif
 @endsection
 
 <x-app-layout>

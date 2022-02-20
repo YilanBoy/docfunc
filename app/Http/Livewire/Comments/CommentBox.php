@@ -39,7 +39,9 @@ class CommentBox extends Component
 
         // 判斷父留言是否為當前文章的留言
         abort_if(
-            $parentCommentId !== 0 && !$post->comments->pluck('id')->contains($parentCommentId),
+            !auth()->check() ||
+            $parentCommentId !== 0 &&
+            !$post->comments->pluck('id')->contains($parentCommentId),
             403
         );
 

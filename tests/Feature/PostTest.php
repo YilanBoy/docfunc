@@ -3,8 +3,6 @@
 namespace Tests\Feature;
 
 use App\Http\Livewire\Posts;
-use App\Models\Category;
-use Illuminate\Support\Facades\Artisan;
 use Livewire\Livewire;
 use App\Models\User;
 use App\Models\Post;
@@ -15,12 +13,13 @@ use Tests\TestCase;
 class PostTest extends TestCase
 {
     use RefreshDatabase;
+    use WithFaker;
 
     public function test_posts_index_can_be_rendered()
     {
         $user = User::factory()->create();
 
-        $posts = Post::factory(10)->create(
+        Post::factory(10)->create(
             [
                 'category_id' => rand(1, 3),
                 'user_id' => $user->id,
@@ -154,7 +153,7 @@ class PostTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $randomString = str()->random(1000);
+        $randomString = $this->faker->sentence(1000);
 
         $response = $this->actingAs($user)->post(route('posts.store'), [
             'title' => 'This is a test post title',

@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('tags', TagController::class);
+Route::get('tags', TagController::class)->name('api.tags');
 
 Route::post('oembed/twitter', TwitterController::class);
 Route::post('oembed/youtube', YoutubeController::class);

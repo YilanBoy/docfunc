@@ -15,7 +15,7 @@
     </span>
 
     {{-- 文章相關資訊 --}}
-    <div class="flex items-center mt-2 space-x-2 text-sm text-gray-400">
+    <div class="flex items-center mt-2 space-x-2 text-sm text-gray-500 dark:text-gray-300">
       {{-- 文章分類資訊 --}}
       <div>
         <a

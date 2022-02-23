@@ -4,13 +4,13 @@
   <div class="flex flex-col-reverse w-full md:flex-row md:justify-between">
 
     <nav
-      class="flex w-full p-1 space-x-1 md:w-1/2 lg:w-2/5 rounded-xl bg-gray-400/30 dark:bg-white/30 dark:text-gray-50">
+      class="flex w-full p-1 space-x-1 md:w-1/2 rounded-xl bg-gray-400/30 dark:bg-white/30 dark:text-gray-50">
 
       @php
         $tabs = [
-          ['value' => 'latest', 'text' => '最新文章'],
-          ['value' => 'recent', 'text' => '最近更新'],
-          ['value' => 'comment', 'text' => '最多留言'],
+          ['value' => 'latest', 'text' => '最新文章', 'icon' => 'bi bi-stars'],
+          ['value' => 'recent', 'text' => '最近更新', 'icon' => 'bi bi-wrench-adjustable'],
+          ['value' => 'comment', 'text' => '最多留言', 'icon' => 'bi bi-chat-square-text-fill'],
         ]
       @endphp
 
@@ -19,11 +19,14 @@
           wire:click.prevent="orderChange('{{ $tab['value'] }}')"
           href="{{ $currentUrl . '?order=' . $tab['value'] }}"
           @class([
-            'flex justify-center w-1/3 px-4 py-2 text-sm transition duration-300 rounded-lg',
+            'flex justify-center w-1/3 px-2 py-2 transition duration-300 rounded-lg',
             'bg-gray-50 dark:bg-gray-700' => $order === $tab['value'],
             'hover:bg-gray-50 dark:hover:bg-gray-700' => $order !== $tab['value'],
           ])
-        >{{ $tab['text'] }}</a>
+        >
+          <i class="{{ $tab['icon'] }}"></i>
+          <span class="ml-2">{{ $tab['text'] }}</span>
+        </a>
       @endforeach
     </nav>
 

@@ -15,7 +15,7 @@
       />
 
       {{-- 文章列表側邊欄 --}}
-      <div class="w-full space-y-6 xl:w-80">
+      <div class="w-full space-y-6 xl:w-1/4">
         {{-- 介紹 --}}
         <div class="p-0.5 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 rounded-xl shadow-md">
           <div class="p-5 bg-gray-50 rounded-xl dark:bg-gray-700 dark:text-gray-50">

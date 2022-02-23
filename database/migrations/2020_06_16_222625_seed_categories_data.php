@@ -21,7 +21,7 @@ return new class extends Migration
             ],
             [
                 'name' => '電玩遊戲',
-                'icon' => 'bi bi-controller',
+                'icon' => 'bi bi-dpad-fill',
                 'description' => '電玩遊戲話題與心得',
             ],
         ];

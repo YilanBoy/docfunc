@@ -19,13 +19,13 @@
       >
         {{-- 切換顯示選單 --}}
         <nav
-          class="flex w-full p-1 space-x-1 md:w-4/5 lg:w-5/12 rounded-xl bg-gray-400/30 dark:bg-white/30 dark:text-gray-50">
+          class="flex w-full p-1 space-x-1 md:w-4/5 lg:w-1/2 rounded-xl bg-gray-400/30 dark:bg-white/30 dark:text-gray-50">
 
           @php
             $tabs = [
-              ['value' => 'information', 'text' => '個人資訊'],
-              ['value' => 'posts', 'text' => '發布文章'],
-              ['value' => 'comments', 'text' => '留言紀錄']
+              ['value' => 'information', 'text' => '個人資訊', 'icon' => 'bi bi-person-lines-fill'],
+              ['value' => 'posts', 'text' => '發布文章', 'icon' => 'bi bi-file-earmark-post-fill'],
+              ['value' => 'comments', 'text' => '留言紀錄', 'icon' => 'bi bi-chat-square-text-fill'],
             ]
           @endphp
 
@@ -41,8 +41,11 @@
                 'bg-gray-50 dark:bg-gray-700': tab === '{{ $tab['value'] }}',
                 'hover:bg-gray-50 dark:hover:bg-gray-700': tab !== '{{ $tab['value'] }}'
               }"
-              class="flex justify-center w-1/3 px-4 py-2 transition duration-300 rounded-lg text-sm"
-            >{{ $tab['text'] }}</a>
+              class="flex justify-center w-1/3 px-2 py-2 transition duration-300 rounded-lg"
+            >
+              <i class="{{ $tab['icon'] }}"></i>
+              <span class="ml-2">{{ $tab['text'] }}</span>
+            </a>
           @endforeach
         </nav>
 

@@ -1,22 +1,26 @@
 @section('title', '登入')
 
-@section('scripts')
-  {{-- Google reCAPTCHA --}}
-  @if (app()->isProduction())
-    <script>
-      document.getElementById("login").addEventListener("submit", function (event) {
-        event.preventDefault();
-        grecaptcha.ready(function () {
-          grecaptcha.execute("{{ config('services.recaptcha.site_key') }}", {action: "submit"})
-            .then(function (response) {
-              document.getElementById("g-recaptcha-response").value = response;
-              document.getElementById("login").submit();
-            });
+{{-- Google reCAPTCHA --}}
+@if (app()->isProduction())
+  @section('scriptsInHead')
+    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+  @endsection
+
+  @section('scripts')
+      <script>
+        document.getElementById("login").addEventListener("submit", function (event) {
+          event.preventDefault();
+          grecaptcha.ready(function () {
+            grecaptcha.execute("{{ config('services.recaptcha.site_key') }}", {action: "submit"})
+              .then(function (response) {
+                document.getElementById("g-recaptcha-response").value = response;
+                document.getElementById("login").submit();
+              });
+          });
         });
-      });
-    </script>
-  @endif
-@endsection
+      </script>
+  @endsection
+@endif
 
 <x-app-layout>
   <div class="container mx-auto max-w-7xl">

@@ -98,8 +98,3 @@
 ::-webkit-scrollbar-thumb:hover {
     background: hsl(217, 19%, 27%);
 }
-
-/* Hide reCAPTCHA v3 badge */
-.grecaptcha-badge {
-    visibility: hidden;
-}

@@ -56,11 +56,15 @@ Running laravel mix
 $ npm run dev
 ```
 
-Make a .env file.  
-Set up the .env file, such as database connection, reCAPTCHA key, S3 key, mail service and etc.
+Create the **.env** file, and set up the config, such as database connection, reCAPTCHA key, S3 key, mail service etc.
 
 ```sh
 $ cp .env-example .env
+```
+
+Generate application key.
+```sh
+$ php artisan key:generate
 ```
 
 Running migrations

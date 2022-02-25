@@ -15,13 +15,13 @@
     </span>
 
     {{-- 文章相關資訊 --}}
-    <div class="flex items-center mt-2 space-x-2 text-sm text-gray-500 dark:text-gray-300">
+    <div class="flex items-center mt-2 space-x-2 text-sm text-slate-400">
       {{-- 文章分類資訊 --}}
       <div>
         <a
           href="{{ $post->category->link_with_name }}"
           title="{{ $post->category->name }}"
-          class="hover:text-gray-700 dark:hover:text-gray-50"
+          class="hover:text-slate-500 dark:hover:text-slate-300"
         >
           <i class="{{ $post->category->icon }}"></i><span class="ml-2">{{ $post->category->name }}</span>
         </a>
@@ -31,7 +31,7 @@
       <div>
         <a
           href="{{ $post->link_with_slug }}"
-          class="hover:text-gray-700 dark:hover:text-gray-50"
+          class="hover:text-slate-500 dark:hover:text-slate-300"
           title="文章發布於：{{ $post->created_at }}"
         >
           <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
@@ -41,7 +41,7 @@
       <div>
         {{-- 文章留言數 --}}
         <a
-          class="hover:text-gray-700 dark:hover:text-gray-50"
+          class="hover:text-slate-500 dark:hover:text-slate-300"
           href="{{ $post->link_with_slug . '#post-' . $post->id . '-comments' }}"
         >
           <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->comment_count }}</span>

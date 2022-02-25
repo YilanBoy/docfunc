@@ -158,11 +158,11 @@
           </div>
 
           {{-- 文章資訊 --}}
-          <div class="flex items-center mt-4 space-x-2 text-gray-500 dark:text-gray-300">
+          <div class="flex items-center mt-4 space-x-2 text-slate-400">
             {{-- 分類 --}}
             <div>
               <a
-                class="hover:text-gray-700 dark:hover:text-gray-50"
+                class="hover:text-slate-500 dark:hover:text-slate-300"
                 href="{{ $post->category->link_with_name }}"
                 title="{{ $post->category->name }}"
               >
@@ -176,7 +176,7 @@
             {{-- 作者 --}}
             <div>
               <a
-                class="hover:text-gray-700 dark:hover:text-gray-50"
+                class="hover:text-slate-500 dark:hover:text-slate-300"
                 href="{{ route('users.index', ['user' => $post->user_id]) }}"
                 title="{{ $post->user->name }}"
               >
@@ -189,7 +189,7 @@
             {{-- 發布時間 --}}
             <div class="hidden md:block">
               <a
-                class="hover:text-gray-700 dark:hover:text-gray-50"
+                class="hover:text-slate-500 dark:hover:text-slate-300"
                 href="{{ $post->link_with_slug }}"
                 title="文章發布於：{{ $post->created_at }}"
               >
@@ -203,7 +203,7 @@
             {{-- 留言數 --}}
             <div class="hidden md:block">
               <a
-                class="hover:text-gray-700 dark:hover:text-gray-50"
+                class="hover:text-slate-500 dark:hover:text-slate-300"
                 href="{{ $post->link_with_slug }}#comments"
               >
                 <i class="bi bi-chat-square-text-fill"></i><span

@@ -207,7 +207,7 @@
     <div
       x-cloak
       x-show="mobileMenuIsOpen"
-      x-transition.origin.top
+      x-collapse
       class="lg:hidden"
     >
       <div class="px-2 pt-2 pb-3 space-y-1">

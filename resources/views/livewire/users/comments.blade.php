@@ -20,9 +20,7 @@
             </a>
           </span>
 
-          <span class="mt-2 text-gray-400">
-            {!! nl2br(e($comment->content)) !!}
-          </span>
+          <p class="mt-2 text-gray-400 whitespace-pre-wrap">{{ $comment->content }}</p>
 
           <span class="mt-2 text-slate-400 xl:hidden">
             <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>

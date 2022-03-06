@@ -248,7 +248,7 @@
             >
               {{ $post->user->name }}
             </a>
-            <div class="dark:text-gray-50">{!! nl2br(e($post->user->introduction)) !!}</div>
+            <p class="dark:text-gray-50 whitespace-pre-wrap">{{ $post->user->introduction }}</p>
           </div>
         </x-card>
 

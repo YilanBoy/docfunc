@@ -24,9 +24,9 @@
     </h3>
 
     @if ($user->introduction)
-      <p class="flex items-center justify-start w-full">{!! nl2br(e($user->introduction)) !!}</p>
+      <p class="flex items-center justify-start w-full whitespace-pre-wrap">{{ $user->introduction }}</p>
     @else
-      <p class="flex items-center justify-center w-full">目前尚無個人簡介～</p>
+      <p class="flex items-center justify-center w-full whitespace-pre-wrap">目前尚無個人簡介～</p>
     @endif
   </x-card>
 
@@ -49,7 +49,8 @@
           @endphp
 
           <div style="width: {{ $barWidth }}%">
-            <div class="h-4 transition-all duration-300 rounded-sm animate-grow-width bg-gradient-to-r from-emerald-400 to-blue-400"></div>
+            <div
+              class="h-4 transition-all duration-300 rounded-sm animate-grow-width bg-gradient-to-r from-emerald-400 to-blue-400"></div>
           </div>
 
         </div>

@@ -23,9 +23,9 @@
               歡迎來到 <span class="font-mono">{{ config('app.name') }}</span>！
             </h3>
             <span>
-              紀錄生活上的大小事
+              紀錄生活上的大小事！
               <br>
-              此部落格使用 Laravel、Alpine.js 與 Tailwind CSS 開發
+              此部落格使用 Laravel、Alpine.js 與 Tailwind CSS 開發～
             </span>
             <div class="flex items-center justify-center mt-7">
               <a

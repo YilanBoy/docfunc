@@ -18,8 +18,8 @@ return [
              */
             'url' => '/posts-feed',
 
-            'title' => 'DocFunc Web Feed',
-            'description' => 'Get the latest post.',
+            'title' => 'DocFunc',
+            'description' => '紀錄生活上的大小事！',
 
             /*
              * The image to display for the feed.  For Atom feeds, this is displayed as

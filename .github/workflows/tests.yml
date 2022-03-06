@@ -89,32 +89,3 @@ jobs:
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [ tests ]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Deployment
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          username: ${{ secrets.SSH_USERNAME }}
-          script: |
-            sudo supervisorctl stop all
-            sudo service mysql stop
-            sudo service redis stop
-            cd /var/www/blog
-            sudo -u www-data git pull --ff-only
-            sudo -u www-data composer install --no-progress --prefer-dist --optimize-autoloader --no-dev
-            sudo -u www-data npm install
-            sudo -u www-data npm run production
-            sudo -u www-data php artisan view:cache
-            sudo -u www-data php artisan config:cache
-            sudo -u www-data php artisan route:cache
-            sudo service mysql start
-            sudo service redis start
-            sudo supervisorctl start all

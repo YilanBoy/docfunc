@@ -10,6 +10,9 @@
   <title>@yield('title', config('app.name'))</title>
   <meta name="description" content="@yield('description', config('app.name'))">
 
+  {{-- Ｗeb Feed --}}
+  @include('feed::links')
+
   {{-- Open Graph --}}
   <meta property="og:url" content="{{ url()->full() }}">
   <meta property="og:type" content="{{ request()->route()->getName() === 'posts.show' ? 'article' : 'website' }}">
@@ -19,7 +22,7 @@
 
   {{-- Favicon --}}
   <link rel="shortcut icon" href="{{ asset('images/icon/icon.svg') }}" type="image/x-icon">
-  {{-- Set theme --}}
+  {{-- Set Theme --}}
   <script src="{{ asset('js/set-theme.js') }}"></script>
   {{-- Styles --}}
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">

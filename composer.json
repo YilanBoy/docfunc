@@ -18,7 +18,8 @@
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",
         "league/flysystem-aws-s3-v3": "^3.0",
-        "livewire/livewire": "^2.3"
+        "livewire/livewire": "^2.3",
+        "spatie/laravel-feed": "^4.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

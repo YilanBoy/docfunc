@@ -72,3 +72,6 @@ Route::get('tags/{tag}', [TagController::class, 'show'])->name('tags.show');
 
 // 上傳圖片至 S3
 Route::post('/images/upload', [ImageController::class, 'store'])->middleware(['auth', 'verified'])->name('images.store');
+
+// Web Feed
+Route::feeds();

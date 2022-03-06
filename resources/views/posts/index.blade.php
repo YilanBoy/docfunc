@@ -56,6 +56,22 @@
           </x-card>
         @endif
 
+        <x-card class="dark:text-gray-50">
+          <h3 class="pb-3 mb-3 text-lg font-semibold text-center border-b-2 border-black dark:border-white">
+            <i class="bi bi-newspaper"></i><span class="ml-2">網站資源</span>
+          </h3>
+          <div class="flex flex-col">
+            <a
+              href="/posts-feed"
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              class="flex p-2 rounded-md hover:bg-gray-200 dark:text-gray-50 dark:hover:bg-gray-600"
+            >
+              <i class="bi bi-rss-fill"></i><span class="ml-2">訂閱文章</span>
+            </a>
+          </div>
+        </x-card>
+
         {{-- 學習資源推薦 --}}
         @if ($links->count())
           <x-card class="dark:text-gray-50">

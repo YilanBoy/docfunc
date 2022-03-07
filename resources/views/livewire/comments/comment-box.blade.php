@@ -1,9 +1,9 @@
 <div
   x-data="{
-      commentId: 0,
-      commentTo: '',
-      commentBoxOpen: false
-    }"
+    commentId: 0,
+    commentTo: '',
+    commentBoxOpen: false
+  }"
   @set-comment-box-open.window="commentBoxOpen = $event.detail.open"
   @set-comment-id.window="commentId = $event.detail"
   @set-comment-to.window="commentTo = $event.detail"

@@ -21,7 +21,7 @@
 
         {{-- 留言 --}}
         <div class="w-full md:mx-4">
-          <p class="mt-3 text-gray-600 sm:mt-0 dark:text-gray-50 whitespace-pre-wrap">{{ $comment->content }}</p>
+          <p class="mt-3 text-gray-600 whitespace-pre-wrap sm:mt-0 dark:text-gray-50">{{ $comment->content }}</p>
 
           <div class="flex items-center justify-between mt-3">
             <div class="flex items-center space-x-2 text-sm text-gray-400">
@@ -91,7 +91,7 @@
                 {{-- 留言 --}}
                 <div class="w-full md:mx-4">
                   <p
-                    class="mt-3 text-gray-600 sm:mt-0 dark:text-gray-50 whitespace-pre-wrap">{{ $subComment->content }}</p>
+                    class="mt-3 text-gray-600 whitespace-pre-wrap sm:mt-0 dark:text-gray-50">{{ $subComment->content }}</p>
 
                   <div class="flex items-center justify-between mt-3">
                     <div class="flex items-center space-x-2 text-sm text-gray-400">

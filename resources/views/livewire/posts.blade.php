@@ -42,7 +42,7 @@
     {{-- 文章標籤訊息-桌面裝置 --}}
     @if ($tagId)
       <div
-        class="flex items-center justify-end pb-2 pl-6 mb-6 text-sm border-b-2 border-gray-900 dark:text-gray-50 dark:border-gray-50 md:mb-0">
+        class="flex items-center justify-end pb-2 pl-6 mb-6 border-b-2 border-gray-900 dark:text-gray-50 dark:border-gray-50 md:mb-0">
         <span>標籤：</span>
         <span class="font-bold">{{ $tagName }}</span>
       </div>

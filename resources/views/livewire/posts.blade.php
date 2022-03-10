@@ -4,7 +4,7 @@
   <div class="flex flex-col-reverse w-full md:flex-row md:justify-between">
 
     <nav
-      class="flex w-full p-1 space-x-1 md:w-1/2 rounded-xl bg-gray-400/30 dark:bg-white/30 dark:text-gray-50">
+      class="flex w-full p-1 space-x-1 md:w-auto rounded-xl bg-gray-400/30 dark:bg-white/30 dark:text-gray-50">
 
       @php
         $tabs = [
@@ -19,7 +19,7 @@
           wire:click.prevent="orderChange('{{ $tab['value'] }}')"
           href="{{ $currentUrl . '?order=' . $tab['value'] }}"
           @class([
-            'flex justify-center w-1/3 px-2 py-2 transition duration-300 rounded-lg',
+            'flex w-1/3 md:w-auto justify-center px-4 py-2 transition duration-300 rounded-lg',
             'bg-gray-50 dark:bg-gray-700' => $order === $tab['value'],
             'hover:bg-gray-50 dark:hover:bg-gray-700' => $order !== $tab['value'],
           ])
@@ -33,7 +33,7 @@
     {{-- 文章分類訊息-桌面裝置 --}}
     @if ($categoryId)
       <div
-        class="flex items-center justify-center px-4 py-2 mb-2 text-blue-700 border border-blue-700 rounded-xl bg-gradient-to-br from-blue-100 to-blue-300 md:mb-0">
+        class="flex items-center justify-end pb-2 pl-6 mb-6 border-b-2 border-gray-900 dark:text-gray-50 dark:border-gray-50 md:mb-0">
         <span class="font-bold">{{ $categoryName }}：</span>
         <span>{{ $categoryDescription }}</span>
       </div>
@@ -42,7 +42,7 @@
     {{-- 文章標籤訊息-桌面裝置 --}}
     @if ($tagId)
       <div
-        class="flex items-center justify-center px-4 py-2 mb-2 text-gray-700 border border-gray-700 rounded-xl bg-gradient-to-br from-gray-100 to-gray-300 md:mb-0">
+        class="flex items-center justify-end pb-2 pl-6 mb-6 text-sm border-b-2 border-gray-900 dark:text-gray-50 dark:border-gray-50 md:mb-0">
         <span>標籤：</span>
         <span class="font-bold">{{ $tagName }}</span>
       </div>

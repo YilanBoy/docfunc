@@ -9,7 +9,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
     steps:
+      - run: echo "tests workflow is ${{ github.event.workflow_run.conclusion }}"
+
       - name: Checkout
         uses: actions/checkout@v2
 

@@ -24,10 +24,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           username: ${{ secrets.SSH_USERNAME }}
           script: |
-            sudo supervisorctl stop all
-            sudo service mysql stop
-            sudo service redis stop
             cd /var/www/html/blog
+            sudo -u www-data php artisan down
             sudo -u www-data git pull --ff-only
             sudo -u www-data composer install --no-progress --prefer-dist --optimize-autoloader --no-dev
             sudo -u www-data npm install
@@ -35,6 +33,5 @@ jobs:
             sudo -u www-data php artisan view:cache
             sudo -u www-data php artisan config:cache
             sudo -u www-data php artisan route:cache
-            sudo service mysql start
-            sudo service redis start
-            sudo supervisorctl start all
+            sudo supervisorctl restart all
+            sudo -u www-data php artisan up

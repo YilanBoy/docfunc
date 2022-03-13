@@ -5,8 +5,6 @@
     commentBoxOpen: false
   }"
   @set-comment-box-open.window="commentBoxOpen = $event.detail.open"
-  @set-comment-id.window="commentId = $event.detail"
-  @set-comment-to.window="commentTo = $event.detail"
   @comment-box-focus.window="$nextTick(() => { $refs.commentBox.focus() })"
   class="w-full xl:w-2/3"
 >
@@ -21,8 +19,6 @@
     <button
       x-on:click="
         commentBoxOpen = true
-        commentId = 0
-        commentTo = '回覆此文章'
         $nextTick(() => { $refs.commentBox.focus() })
       "
       type="button"
@@ -82,9 +78,9 @@
           class="inline-block p-5 overflow-hidden text-left align-bottom transition-all rounded-lg shadow-xl bg-gray-50 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full dark:bg-gray-700"
         >
           {{-- 留言提示 --}}
-          <div class="text-gray-700 dark:text-gray-50">
-            <div x-text="commentTo"></div>
-          </div>
+          <span class="text-gray-700 dark:text-gray-50">
+            回覆此文章
+          </span>
 
           <div class="mt-5 sm:flex sm:items-start">
             <label
@@ -103,7 +99,7 @@
 
           <div class="mt-5 sm:flex sm:flex-row-reverse">
             <button
-              x-on:click="$wire.store(commentId)"
+              x-on:click="$wire.store()"
               type="button"
               class="inline-flex justify-center w-full px-4 py-2 text-base font-medium bg-blue-600 border border-transparent rounded-md shadow-sm text-gray-50 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
             >

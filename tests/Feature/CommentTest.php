@@ -24,7 +24,7 @@ class CommentTest extends TestCase
 
         Livewire::test(CommentBox::class, ['postId' => $post->id])
             ->set('content', $content)
-            ->call('store', 0)
+            ->call('store')
             ->assertForbidden();
     }
 
@@ -38,28 +38,9 @@ class CommentTest extends TestCase
 
         Livewire::test(CommentBox::class, ['postId' => $post->id])
             ->set('content', $content)
-            ->call('store', 0);
+            ->call('store');
 
         $this->assertTrue(Comment::where('content', $content)->exists());
-    }
-
-    public function test_authenticated_user_can_reply_the_comment()
-    {
-        $this->actingAs(User::factory()->create());
-
-        $comment = Comment::factory()->create();
-
-        $content = 'This is a reply';
-
-        Livewire::test(CommentBox::class, ['postId' => $comment->post_id])
-            ->set('content', $content)
-            ->call('store', $comment->id);
-
-        $this->assertTrue(
-            Comment::where('content', $content)
-                ->where('parent_id', $comment->id)
-                ->exists()
-        );
     }
 
     public function test_comment_author_can_delete_own_comment()

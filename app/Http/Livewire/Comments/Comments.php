@@ -11,17 +11,17 @@ class Comments extends Component
     public int $count = 10;
     public int $perPage = 10;
     public bool $showMoreButtonIsActive = false;
-    public int $parentCommentsCount = 0;
+    public int $commentsCount = 0;
 
     public function mount()
     {
-        // 父留言的數目
-        $this->parentCommentsCount = Post::findOrFail($this->postId)->comments()
-            ->whereNull('parent_id')
+        // 留言的數目
+        $this->commentsCount = Post::findOrFail($this->postId)
+            ->comments()
             ->count();
 
-        // 當父留言總數大於每頁數目，需要顯示「顯示更多留言」的按鈕
-        if ($this->parentCommentsCount > $this->perPage) {
+        // 當留言總數大於每頁數目，需要顯示「顯示更多留言」的按鈕
+        if ($this->commentsCount > $this->perPage) {
             $this->showMoreButtonIsActive = true;
         }
     }
@@ -32,7 +32,7 @@ class Comments extends Component
         $this->count += $this->perPage;
 
         // 當父留言顯示數目已經超過文章的父留言總數，不顯示「顯示更多留言」的按鈕
-        if ($this->count >= $this->parentCommentsCount) {
+        if ($this->count >= $this->commentsCount) {
             $this->showMoreButtonIsActive = false;
         }
     }

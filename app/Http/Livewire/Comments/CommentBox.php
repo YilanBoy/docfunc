@@ -26,30 +26,21 @@ class CommentBox extends Component
     ];
 
     // 儲存留言
-    public function store(int $parentCommentId)
+    public function store()
     {
         $this->validate();
 
         $post = Post::where('id', $this->postId)
-            ->with(['comments' => function ($query) {
-                $query->select('id', 'post_id')
-                    ->whereNull('parent_id');
-            }])
+            ->with('comments')
             ->first();
 
         // 判斷父留言是否為當前文章的留言
-        abort_if(
-            !auth()->check() ||
-            $parentCommentId !== 0 &&
-            !$post->comments->pluck('id')->contains($parentCommentId),
-            403
-        );
+        abort_if(!auth()->check(), 403);
 
         $comment = Comment::create(
             [
                 'post_id' => $post->id,
                 'user_id' => auth()->id(),
-                'parent_id' => $parentCommentId === 0 ? null : $parentCommentId,
                 'content' => $this->content,
             ]
         );

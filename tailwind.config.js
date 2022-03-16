@@ -1,50 +1,50 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-    darkMode: 'class',
+    darkMode: "class",
     content: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
-        './resources/js/*.js',
-        './resources/ts/*.ts',
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+        "./storage/framework/views/*.php",
+        "./resources/views/**/*.blade.php",
+        "./resources/js/*.js",
+        "./resources/ts/*.ts",
     ],
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-                noto: "'Noto Sans TC', sans-serif"
+                sans: ["Nunito", ...defaultTheme.fontFamily.sans],
+                noto: "'Noto Sans TC', sans-serif",
             },
             keyframes: {
-                'fade-in': {
+                "fade-in": {
                     from: {
                         opacity: 0,
-                        transform: 'translateY(1%)',
+                        transform: "translateY(20px)",
                     },
                     to: {
                         opacity: 1,
-                        transform: 'translateY(0%)',
+                        transform: "translateY(0)",
                     },
                 },
-                'grow-width': {
+                "grow-width": {
                     from: {
                         width: 0,
                     },
                     to: {
-                        width: '100%',
-                    }
+                        width: "100%",
+                    },
                 },
             },
             animation: {
-                'fade-in': 'fade-in 0.5s ease-in-out',
-                'grow-width': 'grow-width 1s forwards',
+                "fade-in": "fade-in 0.5s ease-in-out",
+                "grow-width": "grow-width 1s forwards",
             },
         },
     },
     plugins: [
         require("@tailwindcss/forms")({
-            strategy: 'class',
+            strategy: "class",
         }),
-        require('@tailwindcss/typography'),
+        require("@tailwindcss/typography"),
     ],
 };

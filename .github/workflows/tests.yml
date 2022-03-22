@@ -61,7 +61,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Cache composer dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: cache-php-packages
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
@@ -69,10 +69,8 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install composer dependencies
-        if: steps.cache-php-packages.outputs.cache-hit != true
-        run: |
-          echo ${{ steps.cache-php-packages.outputs.cache-hit }}
-          composer install --no-progress --prefer-dist --optimize-autoloader
+        if: steps.cache-php-packages.outputs.cache-hit != 'true'
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Prepare the application
         run: |

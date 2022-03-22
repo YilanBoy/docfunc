@@ -56,20 +56,19 @@ jobs:
       - name: Start mysql service
         run: sudo systemctl start mysql
 
-      - name: Get composer cache directory
+      - name: Get Composer Cache Directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-      - name: Cache composer dependencies
-        uses: actions/cache@v3
-        id: cache-php-packages
+      - uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
+          restore-keys: |
+            ${{ runner.os }}-composer-
 
       - name: Install composer dependencies
-        if: steps.cache-php-packages.outputs.cache-hit != 'true'
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Prepare the application

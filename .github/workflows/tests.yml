@@ -43,7 +43,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       # Docs: https://github.com/shivammathur/setup-php
       - name: Setup PHP
@@ -62,15 +62,16 @@ jobs:
 
       - name: Cache composer dependencies
         uses: actions/cache@v2
+        id: cache-php-packages
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          # Use composer.json for key, if composer.lock is not committed.
-          # key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install composer dependencies
+        if: ${{ steps.cache-packages.outputs.cache-hit != 'true' }}
         run: |
+          echo ${{ steps.cache-php-packages.outputs.cache-hit }}
           composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Prepare the application

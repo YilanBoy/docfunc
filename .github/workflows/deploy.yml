@@ -15,7 +15,7 @@ jobs:
       - run: echo "tests workflow is ${{ github.event.workflow_run.conclusion }}"
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Deployment
         uses: appleboy/ssh-action@master

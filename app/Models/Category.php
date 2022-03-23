@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property string $link_with_name 帶有 name slug 的分類連結，set by linkWithName()
+ */
 class Category extends Model
 {
     use HasFactory;
@@ -26,7 +29,7 @@ class Category extends Model
     public function linkWithName(): Attribute
     {
         return new Attribute(
-            get: fn ($value) => route('categories.show', [
+            get: fn($value) => route('categories.show', [
                 'category' => $this->id,
                 'name' => $this->name,
             ])

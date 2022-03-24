@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
-use App\Models\Category;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -30,15 +29,7 @@ class UserController extends Controller
      */
     public function index(User $user): Application|Factory|View
     {
-        $categories = Category::with(['posts' => function ($query) use ($user) {
-            $query->where('user_id', $user->id);
-        }])->get();
-
-        $user->loadCount(['posts as posts_count_in_this_year' => function ($query) {
-            $query->whereYear('created_at', date('Y'));
-        }]);
-
-        return view('users.index', ['user' => $user, 'categories' => $categories]);
+        return view('users.index', ['user' => $user]);
     }
 
     /**

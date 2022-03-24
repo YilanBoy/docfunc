@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Users;
+namespace App\Http\Livewire\Users\Posts;
 
 use App\Models\User;
 use Livewire\Component;
@@ -20,7 +20,8 @@ class Posts extends Component
     public function render()
     {
         // 該會員的文章
-        $posts = User::findOrFail($this->userId)->posts()
+        $posts = User::findOrFail($this->userId)
+            ->posts()
             ->withTrashed()
             ->with('category')
             ->orderBy('deleted_at', 'desc')
@@ -28,6 +29,6 @@ class Posts extends Component
             ->paginate(10, ['*'], 'postsPage')
             ->withQueryString();
 
-        return view('livewire.users.posts', ['posts' => $posts]);
+        return view('livewire.users.posts.posts', ['posts' => $posts]);
     }
 }

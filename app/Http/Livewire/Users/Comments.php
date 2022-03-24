@@ -20,7 +20,8 @@ class Comments extends Component
     public function render()
     {
         // 該會員的留言
-        $comments = User::findOrFail($this->userId)->comments()
+        $comments = User::findOrFail($this->userId)
+            ->comments()
             ->whereHas('post', function ($query) {
                 $query->whereNull('deleted_at');
             })

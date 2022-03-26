@@ -53,7 +53,7 @@ for (let i = 0, preTagsLength = preTags.length; i < preTagsLength; i++) {
         );
 
         // change button icon to "Copied!" for 2 seconds
-        this.innerHTML = `<i class="bi bi-clipboard-check"></i>`;
+        this.innerHTML = `<i class="bi bi-check-lg"></i>`;
         setTimeout(
             function (this: HTMLButtonElement) {
                 this.innerHTML = `<i class="bi bi-clipboard"></i>`;

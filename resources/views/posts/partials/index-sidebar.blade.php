@@ -64,8 +64,8 @@
     x-data="{ webFeedUrl: $el.getAttribute('href') }"
     x-on:click.prevent="
       navigator.clipboard.writeText(webFeedUrl).then(
-        () => $el.innerHTML = `<i class='bi bi-check-lg'></i><span class='ml-2'>連結複製成功！</span>`,
-        () => $el.innerHTML = `<i class='bi bi-x-lg'></i><span class='ml-2'>連結複製失敗！</span>`
+        () => $el.innerHTML = `<i class='bi bi-check-lg'></i><span class='ml-2'>複製成功</span>`,
+        () => $el.innerHTML = `<i class='bi bi-x-lg'></i><span class='ml-2'>複製失敗</span>`
       );
 
       setTimeout(() => $el.innerHTML = `<i class='bi bi-rss-fill'></i><span class='ml-2'>訂閱文章</span>`, 2000);
@@ -73,7 +73,7 @@
     href="{{ route('feeds.main') }}"
     target="_blank"
     rel="nofollow noopener"
-    class="flex items-center justify-center w-full p-2 text-lg rounded-xl bg-amber-400 hover:bg-amber-500"
+    class="inline-flex items-center justify-center px-4 py-2 font-semibold tracking-widest text-gray-900 transition duration-150 ease-in-out border border-transparent rounded-lg bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:outline-none focus:border-amber-700 focus:ring ring-amber-300"
   >
     <i class="bi bi-rss-fill"></i><span class="ml-2">訂閱文章</span>
   </a>

@@ -15,7 +15,7 @@ yarn-error.log
 /.vscode
 _ide_helper.php
 _ide_helper_models.php
-docker/*
+/docker
 docker-compose.yml
 /public/css
 /public/js

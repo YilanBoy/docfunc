@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Posts;
 
 use App\Models\Post;
 use Livewire\Component;
@@ -56,6 +56,6 @@ class Posts extends Component
             ->paginate(10)
             ->withQueryString();
 
-        return view('livewire.posts', ['posts' => $posts]);
+        return view('livewire.posts.posts', ['posts' => $posts]);
     }
 }

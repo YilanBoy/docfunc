@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Http\Livewire\Posts;
+use App\Http\Livewire\Posts\Posts;
 use Livewire\Livewire;
 use App\Models\User;
 use App\Models\Post;
@@ -28,7 +28,7 @@ class PostTest extends TestCase
 
         $this->get(route('posts.index'))
             ->assertStatus(200)
-            ->assertSeeLivewire('posts');
+            ->assertSeeLivewire('posts.posts');
     }
 
     public function test_category_can_filter_posts()

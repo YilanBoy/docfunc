@@ -15,7 +15,7 @@
       />
 
       {{-- 文章列表側邊欄 --}}
-      @include('posts.partials.index-sidebar')
+      <livewire:posts.partials.index-sidebar />
 
     </div>
   </div>

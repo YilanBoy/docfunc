@@ -29,17 +29,5 @@ class ViewServiceProvider extends ServiceProvider
             ['layouts.header', 'posts.create', 'posts.edit'],
             'App\Http\View\Composers\CategoryComposer'
         );
-
-        // 熱門標籤
-        View::composer(
-            ['posts.partials.index-sidebar'],
-            'App\Http\View\Composers\PopularTagComposer'
-        );
-
-        // 側邊欄學習資源推薦
-        View::composer(
-            ['posts.partials.index-sidebar'],
-            'App\Http\View\Composers\LinkComposer'
-        );
     }
 }

@@ -1,15 +1,13 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\DestroyEmailController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
-use App\Http\Controllers\ImageController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,9 +67,6 @@ Route::get('notifications', [NotificationController::class, 'index'])->name('not
 
 // 文章標籤
 Route::get('tags/{tag}', [TagController::class, 'show'])->name('tags.show');
-
-// 上傳圖片至 S3
-Route::post('/images/upload', [ImageController::class, 'store'])->middleware(['auth', 'verified'])->name('images.store');
 
 // Web Feed
 Route::feeds();

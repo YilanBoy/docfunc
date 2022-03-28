@@ -32,7 +32,7 @@ export default class {
         // integration to choose the right communication channel. This example uses
         // a POST request with JSON as a data structure but your configuration
         // could be different.
-        xhr.open("POST", "/images/upload", true);
+        xhr.open("POST", "/api/images/upload", true);
         xhr.setRequestHeader(
             "x-csrf-token",
             document.querySelector('meta[name="csrf-token"]').content

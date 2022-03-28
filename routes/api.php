@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ImageController;
 use App\Http\Controllers\Api\Oembed\TwitterController;
 use App\Http\Controllers\Api\Oembed\YoutubeController;
 use App\Http\Controllers\Api\TagController;
@@ -20,6 +21,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// 上傳圖片至 S3
+Route::middleware('auth:sanctum')
+    ->post('/images/upload', [ImageController::class, 'store'])
+    ->name('images.store');
 
 Route::get('tags', TagController::class)->name('api.tags');
 

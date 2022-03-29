@@ -3,7 +3,6 @@
 @section('description', $post->excerpt)
 
 @section('css')
-  <link href="{{ asset('css/content-styles.css') }}" rel="stylesheet">
   <link href="{{ asset('prism/prism.css') }}" rel="stylesheet">
   <link href="{{ asset('css/progress-bar.css') }}" rel="stylesheet">
 
@@ -131,7 +130,7 @@
           @endif
 
           {{-- 文章內容 --}}
-          <div id="blog-post" class="mt-4 ck-content blog-post max-w-none">
+          <div id="blog-post" class="mt-4 blog-post max-w-none">
             {!! $post->body !!}
           </div>
         </x-card>

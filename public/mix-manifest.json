@@ -10,9 +10,8 @@
     "/js/count-up.js": "/js/count-up.js",
     "/js/twitter-widgets.js": "/js/twitter-widgets.js",
     "/js/progress-bar.js": "/js/progress-bar.js",
-    "/css/editor.css": "/css/editor.css",
-    "/css/content-styles.css": "/css/content-styles.css",
-    "/css/app.css": "/css/app.css",
     "/css/progress-bar.css": "/css/progress-bar.css",
+    "/css/editor.css": "/css/editor.css",
+    "/css/app.css": "/css/app.css",
     "/css/tagify.css": "/css/tagify.css"
 }

@@ -1,7 +1,6 @@
 @section('title', '新增文章')
 
 @section('css')
-  <link href="{{ asset('css/missing-content-styles.css') }}" rel="stylesheet">
   <link href="{{ asset('css/editor.css') }}" rel="stylesheet">
   <link href="{{ asset('css/tagify.css') }}" rel="stylesheet">
 @endsection
@@ -51,7 +50,7 @@
           </div>
 
           {{-- 驗證錯誤訊息 --}}
-          <x-auth-validation-errors class="mb-4" :errors="$errors" />
+          <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
           <form id="create-post" action="{{ route('posts.store') }}" method="POST">
             @csrf

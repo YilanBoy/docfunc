@@ -10,6 +10,10 @@ const allOembedElement: NodeListOf<Element> = document.querySelectorAll(
     "figure.media > oembed"
 );
 
+const csrfMeta: HTMLMetaElement | null = document.querySelector(
+    'meta[name="csrf-token"]'
+);
+
 // foreach oembed element
 allOembedElement.forEach((oembed: Element) => {
     // get the url
@@ -45,6 +49,7 @@ async function insertYoutubeIframe(
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
+            "x-csrf-token": csrfMeta ? csrfMeta.content : "",
         },
     });
 
@@ -66,6 +71,7 @@ async function insertTwitterIframe(
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
+            "x-csrf-token": csrfMeta ? csrfMeta.content : "",
         },
     });
 

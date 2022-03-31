@@ -50,6 +50,14 @@ figure.image-style-side {
     margin-top: 0;
 }
 
+span.text-tiny {
+    font-size: 0.7em;
+}
+
+span.text-big {
+    font-size: 1.4em;
+}
+
 /* Alpine.js */
 [x-cloak] {
     display: none !important;

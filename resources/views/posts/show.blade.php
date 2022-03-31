@@ -13,6 +13,7 @@
       margin-left: auto;
       margin-right: auto;
     }
+
   </style>
 @endsection
 
@@ -47,7 +48,10 @@
     <div class="container mx-auto max-w-7xl">
       <div class="flex flex-col items-center justify-start px-4 xl:px-0">
 
-        <x-card id="section" class="relative w-full xl:w-2/3">
+        <x-card
+          id="section"
+          class="relative w-full xl:w-7/12"
+        >
 
           {{-- 文章選單-桌面裝置 --}}
           @includeWhen(auth()->id() === $post->user_id, 'posts.partials.desktop-show-menu')
@@ -70,8 +74,8 @@
                 href="{{ $post->category->link_with_name }}"
                 title="{{ $post->category->name }}"
               >
-                <i class="{{ $post->category->icon }}"></i><span
-                  class="ml-2">{{ $post->category->name }}</span>
+                <i class="{{ $post->category->icon }}"></i>
+                <span class="ml-2">{{ $post->category->name }}</span>
               </a>
             </div>
 
@@ -97,8 +101,8 @@
                 href="{{ $post->link_with_slug }}"
                 title="文章發布於：{{ $post->created_at }}"
               >
-                <i class="bi bi-clock-fill"></i><span
-                  class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
+                <i class="bi bi-clock-fill"></i>
+                <span class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
               </a>
             </div>
 
@@ -130,13 +134,16 @@
           @endif
 
           {{-- 文章內容 --}}
-          <div id="blog-post" class="mt-4 blog-post max-w-none">
+          <div
+            id="blog-post"
+            class="mt-4 blog-post max-w-none"
+          >
             {!! $post->body !!}
           </div>
         </x-card>
 
         {{-- 作者簡介 --}}
-        <x-card class="flex items-center justify-start w-full mt-6 xl:w-2/3">
+        <x-card class="flex items-center justify-start w-full mt-6 xl:w-7/12">
           <div class="flex-none p-2 mr-4 none md:flex md:justify-center md:items-center">
             <img
               class="w-16 h-16 rounded-full"
@@ -165,7 +172,7 @@
         @endauth
 
         {{-- 留言列表 --}}
-        <livewire:comments.comments :postId="$post->id"/>
+        <livewire:comments.comments :postId="$post->id" />
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 {{-- 留言列表 --}}
-<div id="comments" class="w-full xl:w-2/3">
+<div id="comments" class="w-full xl:w-7/12">
 
   <div class="w-full">
     @for ($offset = 0; $offset < $count; $offset += $perPage)

@@ -15,7 +15,7 @@
           url: new URL(window.location.href),
           tab: new URLSearchParams(location.search).get('tab') || 'information'
         }"
-        class="w-full space-y-6 lg:w-2/3"
+        class="w-full space-y-6 lg:w-7/12"
       >
         {{-- 切換顯示選單 --}}
         <nav

@@ -27,7 +27,7 @@ class UserController extends Controller
      * @param User $user
      * @return Application|Factory|View
      */
-    public function index(User $user): Application|Factory|View
+    public function index(User $user)
     {
         return view('users.index', ['user' => $user]);
     }
@@ -39,7 +39,7 @@ class UserController extends Controller
      * @return Application|Factory|View
      * @throws AuthorizationException
      */
-    public function edit(User $user): Application|Factory|View
+    public function edit(User $user)
     {
         // 會員只能進入自己的頁面，規則寫在 UserPolicy
         $this->authorize('update', $user);
@@ -55,7 +55,7 @@ class UserController extends Controller
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function update(UserRequest $request, User $user): RedirectResponse
+    public function update(UserRequest $request, User $user)
     {
         $this->authorize('update', $user);
 
@@ -77,7 +77,7 @@ class UserController extends Controller
      * @return Application|Factory|View
      * @throws AuthorizationException
      */
-    public function delete(User $user): Application|Factory|View
+    public function delete(User $user)
     {
         $this->authorize('update', $user);
 
@@ -91,7 +91,7 @@ class UserController extends Controller
      * @param User $user
      * @return RedirectResponse
      */
-    public function destroy(Request $request, User $user): RedirectResponse
+    public function destroy(Request $request, User $user)
     {
         // 確認網址是否有效
         if (!$request->hasValidSignature()) {

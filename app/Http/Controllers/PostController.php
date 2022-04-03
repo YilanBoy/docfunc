@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use App\Services\FormatTransferService;
 use App\Services\PostService;
@@ -29,7 +30,7 @@ class PostController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index(): Application|Factory|View
+    public function index()
     {
         $pageTitle = (Route::currentRouteName() === 'root')
             ? config('app.name')
@@ -45,7 +46,7 @@ class PostController extends Controller
      * @param Post $post
      * @return Application|Factory|View|RedirectResponse|Redirector
      */
-    public function show(Request $request, Post $post): Application|Factory|View|RedirectResponse|Redirector
+    public function show(Request $request, Post $post)
     {
         // URL 修正，使用帶 slug 的網址
         if ($post->slug && $post->slug !== $request->slug) {
@@ -56,13 +57,23 @@ class PostController extends Controller
     }
 
     /**
+     * 創建文章頁面
+     *
+     * @return Application|Factory|View
+     */
+    public function create()
+    {
+        return view('posts.create', ['categories' => Category::all()]);
+    }
+
+    /**
      * 新增文章
      *
      * @param PostRequest $request
      * @param Post $post
      * @return Application|RedirectResponse|Redirector
      */
-    public function store(PostRequest $request, Post $post): Application|RedirectResponse|Redirector
+    public function store(PostRequest $request, Post $post)
     {
         $post->fill($request->validated());
         $post->user_id = auth()->id();
@@ -91,12 +102,12 @@ class PostController extends Controller
      * @return Application|Factory|View
      * @throws AuthorizationException
      */
-    public function edit(Post $post): View|Factory|Application
+    public function edit(Post $post)
     {
         // 只能編輯自己發佈的文章，規則寫在 PostPolicy
         $this->authorize('update', $post);
 
-        return view('posts.edit', ['post' => $post]);
+        return view('posts.edit', ['post' => $post, 'categories' => Category::all()]);
     }
 
     /**
@@ -107,7 +118,7 @@ class PostController extends Controller
      * @return Application|RedirectResponse|Redirector
      * @throws AuthorizationException
      */
-    public function update(PostRequest $request, Post $post): Application|RedirectResponse|Redirector
+    public function update(PostRequest $request, Post $post)
     {
         $this->authorize('update', $post);
 
@@ -134,7 +145,7 @@ class PostController extends Controller
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function softDelete(Post $post): RedirectResponse
+    public function softDelete(Post $post)
     {
         $this->authorize('destroy', $post);
 
@@ -149,10 +160,10 @@ class PostController extends Controller
      * 恢復軟刪除的文章
      *
      * @param int $id 文章的 ID
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function restore(int $id): Application|RedirectResponse|Redirector
+    public function restore(int $id)
     {
         $softDeletedPost = Post::withTrashed()->find($id);
 
@@ -172,7 +183,7 @@ class PostController extends Controller
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function destroy(int $id): RedirectResponse
+    public function destroy(int $id)
     {
         $softDeletedPost = Post::withTrashed()->find($id);
 

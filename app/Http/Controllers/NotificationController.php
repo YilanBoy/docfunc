@@ -18,7 +18,7 @@ class NotificationController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index(): Application|Factory|View
+    public function index()
     {
         // 獲取登入會員的所有通知
         $notifications = auth()->user()->notifications()->paginate(20);

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use App\Models\Tag;
 
 class TagController extends Controller
 {
@@ -15,7 +15,7 @@ class TagController extends Controller
      * @param Tag $tag
      * @return Application|Factory|View
      */
-    public function show(Tag $tag): Application|Factory|View
+    public function show(Tag $tag)
     {
         $pageTitle = $tag->name;
 

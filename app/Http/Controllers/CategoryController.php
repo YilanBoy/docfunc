@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\Category;
 use Illuminate\Routing\Redirector;
 
 class CategoryController extends Controller
@@ -17,7 +17,7 @@ class CategoryController extends Controller
      * @param Request $request
      * @return Application|Factory|View|RedirectResponse|Redirector
      */
-    public function show(Category $category, Request $request): Application|Factory|View|RedirectResponse|Redirector
+    public function show(Category $category, Request $request)
     {
         // URL 修正，使用帶標籤名稱的網址
         if ($category->name && $category->name !== $request->name) {

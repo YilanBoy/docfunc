@@ -16,7 +16,7 @@ class DestroyEmailController extends Controller
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function store(User $user): RedirectResponse
+    public function store(User $user)
     {
         $this->authorize('update', $user);
 

@@ -22,7 +22,7 @@ class ChangePasswordController extends Controller
      * @return Application|Factory|View
      * @throws AuthorizationException
      */
-    public function edit(User $user): Application|Factory|View
+    public function edit(User $user)
     {
         $this->authorize('update', $user);
 
@@ -37,7 +37,7 @@ class ChangePasswordController extends Controller
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function update(Request $request, User $user): RedirectResponse
+    public function update(Request $request, User $user)
     {
         $this->authorize('update', $user);
 

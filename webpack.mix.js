@@ -33,6 +33,7 @@ mix.js("resources/js/app.js", "public/js")
     )
     .css("resources/css/editor.css", "public/css")
     .css("resources/css/progress-bar.css", "public/css")
+    .css("resources/css/missing-content-style.css", "public/css")
     .options({
         terser: {
             extractComments: false,

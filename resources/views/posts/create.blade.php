@@ -3,14 +3,7 @@
 @section('css')
   <link href="{{ asset('css/editor.css') }}" rel="stylesheet">
   <link href="{{ asset('css/tagify.css') }}" rel="stylesheet">
-
-  <style>
-    /* fix code block text color */
-    .dark code,
-    .dark pre code {
-      color: #f1f5f9;
-    }
-  </style>
+  <link href="{{ asset('css/missing-content-style.css') }}" rel="stylesheet">
 @endsection
 
 @section('scripts')
@@ -115,7 +108,7 @@
             </div>
 
             {{-- 文章內容 --}}
-            <div class="mt-5 blog-post max-w-none">
+            <div class="mt-5 max-w-none">
               <label for="editor" class="hidden">內文</label>
 
               <textarea id="editor" name="body" placeholder="分享一些很棒的事情吧!">{{ old('body') }}</textarea>

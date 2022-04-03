@@ -1,0 +1,116 @@
+/* Tailwind CSS Compatibility With CKEditor 5 */
+
+.ck-content {
+    color: #111827;
+}
+
+/* generic block-level elements */
+.ck-content p {
+    display: block;
+    margin: 1em 0;
+}
+
+/* heading elements */
+.ck-content h2,
+.ck-content h3,
+.ck-content h4 {
+    display: block;
+    font-weight: bold;
+    color: #6366f1;
+}
+
+.ck-content h2 {
+    font-size: 1.5em;
+    margin: 0.83em 0;
+
+}
+
+.ck-content h3 {
+    font-size: 1.17em;
+    margin: 1em 0;
+}
+
+.ck-content h4 {
+    margin: 1.33em 0;
+}
+
+/* lists */
+.ck-content ul {
+    display: block;
+    list-style-type: disc;
+    margin: 1em 0;
+    padding-left: 40px;
+}
+
+.ck-content ol {
+    display: block;
+    list-style-type: decimal;
+    margin: 1em 0;
+    padding-left: 40px;
+}
+
+.ck-content li {
+    display: list-item;
+    margin: 1em 0;
+    text-align: -webkit-match-parent;
+}
+
+.ck-content ul ul,
+.ck-content ol ul {
+    list-style-type: circle;
+}
+
+.ck-content ol ol ul,
+.ck-content ol ul ul,
+.ck-content ul ol ul,
+.ck-content ul ul ul {
+    list-style-type: square;
+}
+
+.ck-content ol ul,
+.ck-content ul ol,
+.ck-content ul ul,
+.ck-content ol ol {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+/* links */
+.ck-content a {
+    color: #0d9488;
+    cursor: pointer;
+}
+
+.ck-content a:hover {
+    color: #14b8a6;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* block quote */
+.ck-content blockquote {
+    margin: 1em 0;
+}
+
+/* dark mode */
+.dark .ck-content {
+    color: #f1f5f9;
+}
+
+.dark .ck-content h2,
+.dark .ck-content h3,
+.dark .ck-content h4 {
+    color: #818cf8;
+}
+
+.dark .ck-content a {
+    color: #14b8a6;
+}
+
+.dark .ck-content a:hover {
+    color: #2dd4bf;
+}
+
+.dark .ck-content pre code {
+    color: #f1f5f9;
+}

@@ -3,6 +3,14 @@
 @section('css')
   <link href="{{ asset('css/editor.css') }}" rel="stylesheet">
   <link href="{{ asset('css/tagify.css') }}" rel="stylesheet">
+
+  <style>
+    /* fix code block text color */
+    .dark code,
+    .dark pre code {
+      color: #f1f5f9;
+    }
+  </style>
 @endsection
 
 @section('scripts')
@@ -29,7 +37,8 @@
           <div class="hidden xl:block absolute top-0 left-[102%] w-52 h-full">
             <div class="sticky flex flex-col top-9">
               {{-- 字數提示 --}}
-              <div class="flex items-center justify-start w-full p-4 bg-gradient-to-r from-white to-white/0 rounded-xl dark:text-gray-50 dark:from-gray-700 dark:to-gray-700/0">
+              <div
+                class="flex items-center justify-start w-full p-4 bg-gradient-to-r from-white to-white/0 rounded-xl dark:text-gray-50 dark:from-gray-700 dark:to-gray-700/0">
                 <span class="update-post-characters"></span>
               </div>
 
@@ -47,7 +56,7 @@
           </div>
 
           {{-- 驗證錯誤訊息 --}}
-          <x-auth-validation-errors class="mb-4" :errors="$errors" />
+          <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
           <form id="edit-post" action="{{ route('posts.update', ['post' => $post->id]) }}" method="POST">
             @method('PUT')
@@ -79,7 +88,6 @@
                 required
                 class="w-full h-10 border border-gray-300 rounded-md shadow-sm form-select focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50"
               >
-                {{-- 這裡的 $categories 使用的是 view composer 來取得值，詳細可查看 ViewServiceProvider --}}
                 @foreach ($categories as $category)
                   <option value="{{ $category->id }}" @selected($post->category_id == $category->id)>
                     {{ $category->name }}

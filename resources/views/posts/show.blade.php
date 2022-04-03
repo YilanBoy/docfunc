@@ -172,7 +172,7 @@
         @endauth
 
         {{-- 留言列表 --}}
-        <livewire:comments.comments :postId="$post->id" />
+        <livewire:comments.comments :postId="$post->id"/>
       </div>
     </div>
   </div>

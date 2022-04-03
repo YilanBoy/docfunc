@@ -21,9 +21,10 @@
             /* lists */
         prose-li:marker:text-gray-500 dark:prose-li:marker:text-gray-400
             /* code */
-        prose-code:before:content-none prose-code:after:content-none
+        prose-code:before:content-none prose-code:after:content-none prose-code:rounded prose-code:p-1
+        prose-code:bg-blue-100 prose-code:text-blue-600
             /* code */
-        dark:prose-code:text-slate-100 prose-pre:border-none prose-pre:rounded-lg
+        prose-pre:border-none prose-pre:rounded-lg
             /* figure */
         prose-figure:table prose-figure:mx-auto
             /* image */

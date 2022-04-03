@@ -3,6 +3,14 @@
 @section('css')
   <link href="{{ asset('css/editor.css') }}" rel="stylesheet">
   <link href="{{ asset('css/tagify.css') }}" rel="stylesheet">
+
+  <style>
+    /* fix code block text color */
+    .dark code,
+    .dark pre code {
+      color: #f1f5f9;
+    }
+  </style>
 @endsection
 
 @section('scripts')
@@ -84,7 +92,6 @@
                 <option value="" hidden disabled @selected(!old('category_id'))>
                   請選擇分類
                 </option>
-                {{-- 這裡的 $categories 使用的是 view composer 來取得值，詳細可查看 ViewServiceProvider --}}
                 @foreach ($categories as $category)
                   <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>
                     {{ $category->name }}

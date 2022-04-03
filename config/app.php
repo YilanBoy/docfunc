@@ -176,9 +176,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        // 視圖合成器
-        App\Providers\ViewServiceProvider::class,
-
     ],
 
     /*

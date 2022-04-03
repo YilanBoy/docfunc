@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Components;
 
 use Livewire\Component;
 use App\Models\Post;
@@ -17,6 +17,6 @@ class Search extends Component
             $results = Post::search($this->search)->take(10)->get();
         }
 
-        return view('livewire.search', ['results' => $results]);
+        return view('livewire.components.search', ['results' => $results]);
     }
 }

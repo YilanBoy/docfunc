@@ -320,7 +320,7 @@
       </button>
 
       {{-- 電腦版-搜尋 --}}
-      <livewire:search/>
+      <livewire:components.search/>
 
       @guest
         {{-- 電腦版-未登入 --}}

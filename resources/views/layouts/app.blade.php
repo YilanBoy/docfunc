@@ -49,11 +49,11 @@
 
 <div class="relative flex flex-col justify-between min-h-screen">
 
-  @include('layouts.header')
+  <livewire:layouts.header/>
 
   {{ $slot }}
 
-  @include('layouts.footer')
+  <livewire:layouts.footer/>
 
 </div>
 

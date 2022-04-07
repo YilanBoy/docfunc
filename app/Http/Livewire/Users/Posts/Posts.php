@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Users\Posts;
 
-use App\Models\User;
+use App\Models\Post;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -20,8 +20,7 @@ class Posts extends Component
     public function render()
     {
         // 該會員的文章
-        $posts = User::findOrFail($this->userId)
-            ->posts()
+        $posts = Post::whereUserId($this->userId)
             ->withTrashed()
             ->with('category')
             ->orderBy('deleted_at', 'desc')

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Users;
 
-use App\Models\User;
+use App\Models\Comment;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -20,8 +20,7 @@ class Comments extends Component
     public function render()
     {
         // 該會員的留言
-        $comments = User::findOrFail($this->userId)
-            ->comments()
+        $comments = Comment::whereUserId($this->userId)
             ->whereHas('post', function ($query) {
                 $query->whereNull('deleted_at');
             })

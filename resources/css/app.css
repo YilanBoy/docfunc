@@ -24,7 +24,7 @@
         prose-code:before:content-none prose-code:after:content-none prose-code:rounded prose-code:p-1
         prose-code:bg-blue-100 prose-code:text-blue-600
             /* code */
-        prose-pre:border-none prose-pre:rounded-lg prose-pre:bg-[#282c34]
+        prose-pre:border-none prose-pre:rounded-lg prose-pre:p-0
             /* figure */
         prose-figure:table prose-figure:mx-auto
             /* image */

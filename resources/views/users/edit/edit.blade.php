@@ -3,7 +3,7 @@
 @section('title', '會員中心-編輯個人資料')
 
 @section('users.content')
-  <div class="flex flex-col items-center justify-center mb-8">
+  <div class="flex flex-col items-center justify-center mt-8">
     {{-- 大頭貼照片 --}}
     <div>
       <img
@@ -26,7 +26,7 @@
   </div>
 
   {{-- 驗證錯誤訊息 --}}
-  <x-auth-validation-errors class="mb-4" :errors="$errors" />
+  <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
   <form method="POST" action="{{ route('users.update', ['user' => $user->id]) }}" class="w-full">
     @method('PUT')

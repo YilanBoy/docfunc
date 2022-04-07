@@ -3,7 +3,9 @@
 @section('description', $post->excerpt)
 
 @section('css')
-  <link href="{{ asset('prism/prism.css') }}" rel="stylesheet">
+  {{-- 程式碼區塊高亮 --}}
+  <link href="{{ asset('css/atom-one-dark.css') }}" rel="stylesheet">
+  {{-- 文章閱讀進度條 --}}
   <link href="{{ asset('css/progress-bar.css') }}" rel="stylesheet">
 
   <style>
@@ -24,7 +26,7 @@
   <script src="{{ asset('js/twitter-widgets.js') }}"></script>
   <script src="{{ asset('js/oembed-media-embed.js') }}"></script>
   {{-- 程式碼區塊高亮 --}}
-  <script src="{{ asset('prism/prism.js') }}"></script>
+  <script src="{{ asset('js/highlight.js') }}"></script>
   {{-- 程式碼複製按鈕 --}}
   <script src="{{ asset('js/copy-code-btn.js') }}"></script>
 

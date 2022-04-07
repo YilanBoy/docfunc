@@ -19,6 +19,7 @@ mix.js("resources/js/app.js", "public/js")
     ])
     .js("resources/js/sweet-alert.js", "public/js")
     .js("resources/js/editor.js", "public/js")
+    .js("resources/js/highlight.js", "public/js")
     .ts("resources/ts/tagify.ts", "public/js")
     .ts("resources/ts/scroll-to-top-btn.ts", "public/js")
     .ts("resources/ts/set-theme.ts", "public/js")
@@ -34,6 +35,7 @@ mix.js("resources/js/app.js", "public/js")
     .css("resources/css/editor.css", "public/css")
     .css("resources/css/progress-bar.css", "public/css")
     .css("resources/css/missing-content-style.css", "public/css")
+    .sass("node_modules/highlight.js/scss/atom-one-dark.scss", "public/css")
     .options({
         terser: {
             extractComments: false,

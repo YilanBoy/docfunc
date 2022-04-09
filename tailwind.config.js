@@ -39,6 +39,14 @@ module.exports = {
                 "fade-in": "fade-in 0.5s ease-in-out",
                 "grow-width": "grow-width 1s forwards",
             },
+            typography: {
+                DEFAULT: {
+                    css: {
+                        "blockquote p:first-of-type::before": null,
+                        "blockquote p:last-of-type::after": null,
+                    },
+                },
+            },
         },
     },
     plugins: [

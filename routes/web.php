@@ -56,7 +56,9 @@ Route::prefix('posts')->group(function () {
     });
 
     // {slug?} 當中的問號代表此參數可給可不給
-    Route::get('/{post}/{slug?}', [PostController::class, 'show'])->name('posts.show');
+    Route::get('/{post}/{slug?}', [PostController::class, 'show'])
+        ->missing(fn() => redirect()->route('posts.index'))
+        ->name('posts.show');
 });
 
 // 文章分類

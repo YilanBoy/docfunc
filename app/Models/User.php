@@ -83,7 +83,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $hash = md5(strtolower(trim($this->email)));
 
         return new Attribute(
-            get: fn ($value) => 'https://www.gravatar.com/avatar/' . $hash . '?s=400&d=mp'
+            get: fn($value) => 'https://www.gravatar.com/avatar/' . $hash . '?s=400&d=mp'
         );
     }
 }

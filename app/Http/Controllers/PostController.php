@@ -70,23 +70,24 @@ class PostController extends Controller
      * 新增文章
      *
      * @param PostRequest $request
-     * @param Post $post
      * @return Application|RedirectResponse|Redirector
      */
-    public function store(PostRequest $request, Post $post)
+    public function store(PostRequest $request)
     {
-        $post->fill($request->validated());
-        $post->user_id = auth()->id();
-        $post->slug = $this->postService->makeSlug($request->title);
-        // XSS 過濾
-        $post->body = $this->postService->htmlPurifier($request->body);
-        // 生成摘錄
-        $post->excerpt = $this->postService->makeExcerpt($post->body);
-        $post->save();
+        // 過濾文章中可能造成 XSS 的內容
+        $body = $this->postService->htmlPurifier($request->body);
+
+        $post = Post::create([
+            'user_id' => auth()->id(),
+            'title' => $request->title,
+            'category_id' => $request->category_id,
+            'body' => $body,
+            'slug' => $this->postService->makeSlug($request->title),
+            'excerpt' => $this->postService->makeExcerpt($body),
+        ]);
 
         // 將傳過來的 JSON 資料轉成 array
-        $tagIdsArray = $this->formatTransferService
-            ->tagsJsonToTagIdsArray($request->tags);
+        $tagIdsArray = $this->formatTransferService->tagsJsonToTagIdsArray($request->tags);
 
         // 在關聯表新增關聯
         $post->tags()->attach($tagIdsArray);
@@ -128,8 +129,7 @@ class PostController extends Controller
         $post->excerpt = $this->postService->makeExcerpt($post->body);
         $post->save();
 
-        $tagIdsArray = $this->formatTransferService
-            ->tagsJsonToTagIdsArray($request->tags);
+        $tagIdsArray = $this->formatTransferService->tagsJsonToTagIdsArray($request->tags);
 
         // 關聯表更新
         $post->tags()->sync($tagIdsArray);

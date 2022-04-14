@@ -25,7 +25,7 @@ class Post extends Model implements Feedable
     use HasFactory, Searchable, SoftDeletes, MassPrunable;
 
     protected $fillable = [
-        'title', 'body', 'category_id', 'excerpt', 'slug',
+        'title', 'body', 'user_id', 'category_id', 'excerpt', 'slug',
     ];
 
     public function comments(): HasMany

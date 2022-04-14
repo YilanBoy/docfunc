@@ -31,9 +31,12 @@ function embedMedia(url: string, element: Element): void {
             console.error(error)
         );
     } else if (url.match(twitterUrlRegex)) {
-        insertTwitterIframe(url, element).catch((error) =>
-            console.error(error)
-        );
+        insertTwitterIframe(url, element)
+            .then(() => {
+                // scan blog post and embed tweets
+                window.twttr.widgets.load(document.getElementById("blog-post"));
+            })
+            .catch((error) => console.error(error));
     }
 }
 
@@ -41,44 +44,37 @@ async function insertYoutubeIframe(
     url: string,
     element: Element
 ): Promise<void> {
-    let body = { url: url };
-
-    const response = await fetch(`/api/oembed/youtube`, {
+    fetch(`/api/oembed/youtube`, {
         method: "POST",
-        body: JSON.stringify(body),
+        body: JSON.stringify({ url: url }),
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
             "x-csrf-token": csrfMeta ? csrfMeta.content : "",
         },
-    });
-
-    let data = await response.json();
-
-    // append the iframe after the element
-    element.insertAdjacentHTML("afterend", data.html);
+    })
+        .then((response) => response.json())
+        .then((responseJson) =>
+            // append the iframe after the element
+            element.insertAdjacentHTML("afterend", responseJson.html)
+        );
 }
 
 async function insertTwitterIframe(
     url: string,
     element: Element
 ): Promise<void> {
-    let body = { url: url };
-
-    const response = await fetch("/api/oembed/twitter", {
+    fetch("/api/oembed/twitter", {
         method: "POST",
-        body: JSON.stringify(body),
+        body: JSON.stringify({ url: url }),
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
             "x-csrf-token": csrfMeta ? csrfMeta.content : "",
         },
-    });
-
-    let data = await response.json();
-
-    // append the iframe after the element
-    element.insertAdjacentHTML("afterend", data.html);
-    // scan blog post and embed tweets
-    window.twttr.widgets.load(document.getElementById("blog-post"));
+    })
+        .then((response) => response.json())
+        .then((responseJson) =>
+            element.insertAdjacentHTML("afterend", responseJson.html)
+        );
 }

@@ -9,34 +9,38 @@ const twitterUrlRegex =
 const allOembedElement: NodeListOf<Element> = document.querySelectorAll(
     "figure.media > oembed"
 );
+// turn NodeListOf (array-like) into Array instance
+const allOembedElementArray: Array<Element> = Array.from(
+    allOembedElement,
+    (element) => element
+);
 
 const csrfMeta: HTMLMetaElement | null = document.querySelector(
     'meta[name="csrf-token"]'
 );
 
 // foreach oembed element
-allOembedElement.forEach((oembed: Element) => {
-    // get the url
-    const oembedUrl: string | null = oembed.getAttribute("url");
+async function embedAllMedia() {
+    for (const oembed of allOembedElementArray) {
+        // get the url
+        const oembedUrl: string | null = oembed.getAttribute("url");
 
-    // if url is not null
-    if (oembedUrl !== null) {
-        embedMedia(oembedUrl, oembed);
+        // if url is not null
+        if (oembedUrl !== null) {
+            await embedMedia(oembedUrl, oembed);
+        }
     }
-});
+}
 
-function embedMedia(url: string, element: Element): void {
+async function embedMedia(url: string, element: Element): Promise<void> {
     if (url.match(youtubeUrlRegex)) {
-        insertYoutubeIframe(url, element).catch((error) =>
+        await insertYoutubeIframe(url, element).catch((error) =>
             console.error(error)
         );
     } else if (url.match(twitterUrlRegex)) {
-        insertTwitterIframe(url, element)
-            .then(() => {
-                // scan blog post and embed tweets
-                window.twttr.widgets.load(document.getElementById("blog-post"));
-            })
-            .catch((error) => console.error(error));
+        await insertTwitterIframe(url, element).catch((error) =>
+            console.error(error)
+        );
     }
 }
 
@@ -44,7 +48,7 @@ async function insertYoutubeIframe(
     url: string,
     element: Element
 ): Promise<void> {
-    fetch(`/api/oembed/youtube`, {
+    await fetch(`/api/oembed/youtube`, {
         method: "POST",
         body: JSON.stringify({ url: url }),
         headers: {
@@ -64,7 +68,7 @@ async function insertTwitterIframe(
     url: string,
     element: Element
 ): Promise<void> {
-    fetch("/api/oembed/twitter", {
+    await fetch("/api/oembed/twitter", {
         method: "POST",
         body: JSON.stringify({ url: url }),
         headers: {
@@ -78,3 +82,8 @@ async function insertTwitterIframe(
             element.insertAdjacentHTML("afterend", responseJson.html)
         );
 }
+
+embedAllMedia().then(() => {
+    // scan blog post and embed tweets
+    window.twttr.widgets.load(document.getElementById("blog-post"));
+});

@@ -10,16 +10,16 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "@alpinejs/collapse": "^3.9.5",
-        "@alpinejs/focus": "^3.9.5",
+        "@alpinejs/collapse": "^3.9.6",
+        "@alpinejs/focus": "^3.9.6",
         "@tailwindcss/forms": "^0.5.0",
         "@tailwindcss/typography": "^0.5.2",
         "@types/yaireo__tagify": "^4.9.0",
-        "@yaireo/tagify": "^4.10.0",
-        "alpinejs": "^3.9.5",
+        "@yaireo/tagify": "^4.11.0",
+        "alpinejs": "^3.9.6",
         "autoprefixer": "^10.4.4",
         "axios": "^0.26",
-        "highlight.js": "^11.5.0",
+        "highlight.js": "^11.5.1",
         "laravel-mix": "^6.0.43",
         "lodash": "^4.17.21",
         "postcss": "^8.4.12",
@@ -30,7 +30,7 @@
         "sass": "^1.50.0",
         "sass-loader": "^12.6.0",
         "sweetalert2": "^11.4.8",
-        "tailwindcss": "^3.0.23",
+        "tailwindcss": "^3.0.24",
         "ts-loader": "^9.2.8",
         "typescript": "^4.6.3"
     }

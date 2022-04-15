@@ -17,7 +17,8 @@ class PostRequest extends FormRequest
         return [
             'title' => ['required', 'min:4', 'max:50'],
             'category_id' => ['required', 'numeric', 'exists:categories,id'],
-            'body' => ['required', 'min:1000', 'max:400000'],
+            'body' => ['required'],
+            'remove_tags_and_newline_body' => ['min:500', 'max:20000']
         ];
     }
 
@@ -31,8 +32,15 @@ class PostRequest extends FormRequest
             'category_id.numeric' => '分類資料錯誤',
             'category_id.exists' => '分類不存在',
             'body.required' => '請填寫文章內容',
-            'body.min' => '文章內容至少 1000 個字元',
-            'body.max' => '文章內容字數已超過限制',
+            'remove_tags_and_newline_body.min' => '文章內容至少 500 個字元',
+            'remove_tags_and_newline_body.max' => '文章內容字數已超過限制',
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'remove_tags_and_newline_body' => preg_replace('/[\r\n]/u', '', strip_tags($this->body)),
+        ]);
     }
 }

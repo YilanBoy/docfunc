@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Jobs\SendDestroyUserEmail;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 
-class DestroyEmailController extends Controller
+class SendDestroyUserEmailController extends Controller
 {
     /**
      * 寄出刪除帳號的信件

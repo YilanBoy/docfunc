@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ChangePasswordController;
-use App\Http\Controllers\DestroyEmailController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\Post\PostController;
+use App\Http\Controllers\Post\RestorePostController;
+use App\Http\Controllers\Post\SoftDeletePostController;
 use App\Http\Controllers\TagController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\User\ChangePasswordController;
+use App\Http\Controllers\User\DeleteUserController;
+use App\Http\Controllers\User\SendDestroyUserEmailController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,13 +33,13 @@ Route::prefix('users')->group(function () {
     Route::get('/{user}', [UserController::class, 'index'])->name('users.index');
     Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
-    Route::get('/{user}/delete', [UserController::class, 'delete'])->name('users.delete');
+    Route::get('/{user}/delete', [DeleteUserController::class, 'index'])->name('users.delete');
     Route::get('/{user}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
 
     Route::get('/{user}/change-password', [ChangePasswordController::class, 'edit'])->name('users.changePassword');
     Route::put('/{user}/change-password', [ChangePasswordController::class, 'update'])->name('users.updatePassword');
 
-    Route::post('/{user}/send-destroy-email', [DestroyEmailController::class, 'store'])->name('users.sendDestroyEmail');
+    Route::post('/{user}/send-destroy-email', [SendDestroyUserEmailController::class, 'store'])->name('users.sendDestroyEmail');
 });
 
 // 文章列表與內容
@@ -48,9 +51,9 @@ Route::prefix('posts')->group(function () {
         Route::post('/', [PostController::class, 'store'])->name('posts.store');
         Route::get('/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
         Route::put('/{post}', [PostController::class, 'update'])->name('posts.update');
-        Route::delete('/{post}', [PostController::class, 'softDelete'])->name('posts.softDelete');
+        Route::delete('/{post}', [SoftDeletePostController::class, 'destroy'])->name('posts.softDelete');
         // 恢復軟刪除的文章
-        Route::post('/{id}/restore', [PostController::class, 'restore'])->name('posts.restore');
+        Route::post('/{id}/restore', [RestorePostController::class, 'update'])->name('posts.restore');
         // 完全刪除文章
         Route::delete('/{id}/destroy', [PostController::class, 'destroy'])->name('posts.destroy');
     });

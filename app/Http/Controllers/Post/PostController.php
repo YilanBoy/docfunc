@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Post;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Category;
 use App\Models\Post;
@@ -139,45 +140,7 @@ class PostController extends Controller
     }
 
     /**
-     * 軟刪除文章
-     *
-     * @param Post $post
-     * @return RedirectResponse
-     * @throws AuthorizationException
-     */
-    public function softDelete(Post $post)
-    {
-        $this->authorize('destroy', $post);
-
-        $post->delete();
-
-        return redirect()
-            ->route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
-            ->with('alert', ['icon' => 'success', 'title' => '成功標記文章為刪除狀態！']);
-    }
-
-    /**
-     * 恢復軟刪除的文章
-     *
-     * @param int $id 文章的 ID
-     * @return RedirectResponse
-     * @throws AuthorizationException
-     */
-    public function restore(int $id)
-    {
-        $softDeletedPost = Post::withTrashed()->find($id);
-
-        $this->authorize('update', $softDeletedPost);
-
-        $softDeletedPost->restore();
-
-        return redirect()
-            ->route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
-            ->with('alert', ['icon' => 'success', 'title' => '成功恢復文章！']);
-    }
-
-    /**
-     * 完全刪除文章
+     * 刪除文章
      *
      * @param int $id 文章的 ID
      * @return RedirectResponse

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -68,20 +69,6 @@ class UserController extends Controller
         return redirect()
             ->route('users.index', ['user' => $user->id])
             ->with('alert', ['icon' => 'success', 'title' => '個人資料更新成功！']);
-    }
-
-    /**
-     * 用戶刪除頁面
-     *
-     * @param User $user
-     * @return Application|Factory|View
-     * @throws AuthorizationException
-     */
-    public function delete(User $user)
-    {
-        $this->authorize('update', $user);
-
-        return view('users.edit.delete', ['user' => $user]);
     }
 
     /**

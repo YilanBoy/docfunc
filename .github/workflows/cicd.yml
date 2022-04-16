@@ -3,6 +3,11 @@ on:
   push:
     branches:
       - main
+
+env:
+  ARTIFACTS_PATH: /var/www/html/artifacts/blog
+  RELEASE_PATH: /var/www/html/release/blog
+
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -143,7 +148,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           username: ${{ secrets.SSH_USERNAME }}
           source: ${{ github.sha }}.tar.gz
-          target: /var/www/html/artifacts/blog
+          target: ${{ env.ARTIFACTS_PATH }}
 
       - name: Active release
         uses: appleboy/ssh-action@master
@@ -152,13 +157,24 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           username: ${{ secrets.SSH_USERNAME }}
           script: |
-            mkdir /var/www/html/release/blog/${{ github.sha }}
-            tar -xzf /var/www/html/artifacts/blog/${{ github.sha }}.tar.gz -C /var/www/html/release/blog/${{ github.sha }}
-            printf "%s" '${{ secrets.BLOG_ENV }}' > "/var/www/html/release/blog/${{ github.sha }}/.env"
-            sudo ln -sfn /var/www/html/release/blog/${{ github.sha }} /var/www/html/blog
+            # extract to release dir
+            mkdir ${{ env.RELEASE_PATH }}/${{ github.sha }}
+            tar -xzf ${{ env.ARTIFACTS_PATH }}/${{ github.sha }}.tar.gz -C ${{ env.RELEASE_PATH }}/${{ github.sha }}
+
+            # make env file
+            printf "%s" '${{ secrets.BLOG_ENV }}' > "${{ env.RELEASE_PATH }}/${{ github.sha }}/.env"
+
+            # change soft link to new version application
+            sudo ln -sfn ${{ env.RELEASE_PATH }}/${{ github.sha }} /var/www/html/blog
+
+            # change application permission
             sudo chown -R www-data:www-data /var/www/html/blog/
+
+            # optimize laravel application
             cd /var/www/html/blog
             sudo -u www-data php artisan view:cache
             sudo -u www-data php artisan config:cache
             sudo -u www-data php artisan route:cache
+
+            # restart web server process
             sudo supervisorctl restart all

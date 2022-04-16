@@ -117,7 +117,7 @@ jobs:
         run: composer install --no-progress --prefer-dist --optimize-autoloader --no-dev
 
       - name: Create deployment artifact
-        run: tar -czf "${{ github.sha }}" --exclude=*.git --exclude=node_modules *
+        run: tar -czf "${{ github.sha }}.tar.gz" --exclude=.git --exclude=node_modules *
 
       - name: Store artifact for distribution
         uses: actions/upload-artifact@v3
@@ -130,6 +130,8 @@ jobs:
     name: Deploy to server
     needs: create-deployment-artifacts
     steps:
+      - uses: actions/checkout@v3
+
       - uses: actions/download-artifact@v3
         with:
           name: app-build

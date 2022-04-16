@@ -154,9 +154,9 @@ jobs:
           script: |
             mkdir /var/www/html/release/${{ github.sha }}
             tar -xzf /var/www/html/artifacts/${{ github.sha }}.tar.gz -C /var/www/html/release/${{ github.sha }}
-            printf "%s" "${{ secrets.BLOG_ENV }}" > "/var/www/html/release/${{ github.sha }}/.env"
+            printf "%s" '${{ secrets.BLOG_ENV }}' > "/var/www/html/release/${{ github.sha }}/.env"
             sudo ln -sfn /var/www/html/release/${{ github.sha }} /var/www/html/blog
-            sudo chown -R www-data:www-data /var/www/html/blog
+            sudo chown -R www-data:www-data /var/www/html/blog/
             cd /var/www/html/blog
             sudo -u www-data php artisan view:cache
             sudo -u www-data php artisan config:cache

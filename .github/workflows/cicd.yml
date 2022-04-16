@@ -1,11 +1,14 @@
-name: CI
+name: cicd
 on:
   push:
     branches:
-      - deprecated
+      - main
 jobs:
   tests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: [ 8.0, 8.1 ]
     env:
       DB_DATABASE: blog_tests
       DB_USERNAME: root
@@ -24,6 +27,8 @@ jobs:
       SCOUT_PREFIX: dev_posts
       ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
       ALGOLIA_SECRET: ${{ secrets.ALGOLIA_SECRET }}
+
+    name: ${{ matrix.php }}
 
     services:
       mysql:
@@ -49,8 +54,9 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
-          extensions: mbstring, dom, fileinfo, mysql, redis
+          php-version: ${{ matrix.php }}
+          # https://laravel.com/docs/9.x/deployment#server-requirements
+          extensions: bcmatch, ctype, curl, dom, fileinfo, json, mbstring, openssl, pcre, pdo, tokenizer, xml, redis
           coverage: xdebug
 
       - name: Start mysql service
@@ -87,3 +93,52 @@ jobs:
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
+
+  create-deployment-artifacts:
+    runs-on: ubuntu-latest
+    name: Create deployment artifacts
+    needs: tests
+    steps:
+      - uses: action/checkout@v3
+
+      - name: Complie CSS and JavaScript
+        run: |
+          npm install
+          npm run prod
+
+      - name: Configure PHP 8.1
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          extensions: bcmatch, ctype, curl, dom, fileinfo, json, mbstring, openssl, pcre, pdo, tokenizer, xml, redis
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev -no-interaction --prefer-dist
+
+      - name: Create deployment artifact
+        run: tar -czf "${{ github.sha }}" --exclude=*.git --exclude=node_modules *
+
+      - name: Store artifact for distribution
+        uses: action/upload-artifact@v3
+        with:
+          name: app-build
+          path: ${{ github.sha }}.tar.gz
+
+  deploy-to-server:
+    runs-on: ubuntu-latest
+    name: Deploy to server
+    needs: create-deployment-artifacts
+    steps:
+      - uses: artions/download-artifact@v3
+        with:
+          name: app-build
+
+      - name: Upload
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          username: ${{ secrets.SSH_USERNAME }}
+          source: ${{ github.sha }}.tar.gz
+          target: /var/www/html/test

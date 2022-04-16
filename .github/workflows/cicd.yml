@@ -143,4 +143,21 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           username: ${{ secrets.SSH_USERNAME }}
           source: ${{ github.sha }}.tar.gz
-          target: /var/www/html/test
+          target: /var/www/html/artifacts
+
+      - name: Active release
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          username: ${{ secrets.SSH_USERNAME }}
+          script: |
+            tar -xzf /var/www/html/artifacts/${{ github.sha }}.tar.gz -C /var/www/html/release/${{ github.sha }}
+            printf "%s" "${{ secrets.BLOG_ENV }}" > "/var/www/html/release/${{ github.sha }}/.env"
+            sudo ln -sfn /var/www/html/release/${{ github.sha }} /var/www/html/blog
+            sudo chown -R www-data:www-data /var/www/html/blog
+            cd /var/www/html/blog
+            sudo -u www-data php artisan view:cache
+            sudo -u www-data php artisan config:cache
+            sudo -u www-data php artisan route:cache
+            sudo supervisorctl restart all

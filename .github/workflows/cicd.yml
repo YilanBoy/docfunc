@@ -28,7 +28,7 @@ jobs:
       ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
       ALGOLIA_SECRET: ${{ secrets.ALGOLIA_SECRET }}
 
-    name: ${{ matrix.php }}
+    name: php-version-${{ matrix.php }}-test
 
     services:
       mysql:
@@ -114,7 +114,7 @@ jobs:
           coverage: none
 
       - name: Install Composer dependencies
-        run: composer install --no-dev -no-interaction --prefer-dist
+        run: composer install --no-progress --prefer-dist --optimize-autoloader --no-dev
 
       - name: Create deployment artifact
         run: tar -czf "${{ github.sha }}" --exclude=*.git --exclude=node_modules *

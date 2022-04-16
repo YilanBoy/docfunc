@@ -120,7 +120,7 @@ jobs:
         run: tar -czf "${{ github.sha }}" --exclude=*.git --exclude=node_modules *
 
       - name: Store artifact for distribution
-        uses: action/upload-artifact@v3
+        uses: actions/upload-artifact@v3
         with:
           name: app-build
           path: ${{ github.sha }}.tar.gz

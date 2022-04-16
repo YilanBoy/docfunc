@@ -152,6 +152,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           username: ${{ secrets.SSH_USERNAME }}
           script: |
+            mkdir /var/www/html/release/${{ github.sha }}
             tar -xzf /var/www/html/artifacts/${{ github.sha }}.tar.gz -C /var/www/html/release/${{ github.sha }}
             printf "%s" "${{ secrets.BLOG_ENV }}" > "/var/www/html/release/${{ github.sha }}/.env"
             sudo ln -sfn /var/www/html/release/${{ github.sha }} /var/www/html/blog

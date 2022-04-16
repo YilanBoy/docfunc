@@ -99,7 +99,7 @@ jobs:
     name: Create deployment artifacts
     needs: tests
     steps:
-      - uses: action/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Complie CSS and JavaScript
         run: |
@@ -130,7 +130,7 @@ jobs:
     name: Deploy to server
     needs: create-deployment-artifacts
     steps:
-      - uses: artions/download-artifact@v3
+      - uses: actions/download-artifact@v3
         with:
           name: app-build
 

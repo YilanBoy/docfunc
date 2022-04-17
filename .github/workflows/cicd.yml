@@ -165,7 +165,7 @@ jobs:
             printf "%s" '${{ secrets.BLOG_ENV }}' > "${{ env.RELEASE_PATH }}/${{ github.sha }}/.env"
 
             # change soft link to new version application
-            sudo ln -sfn ${{ env.RELEASE_PATH }}/${{ github.sha }} /var/www/html/blog
+            sudo -u www-data ln -sfn ${{ env.RELEASE_PATH }}/${{ github.sha }} /var/www/html/blog
 
             # change application permission
             sudo chown -R www-data:www-data /var/www/html/blog/

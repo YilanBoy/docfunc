@@ -81,9 +81,7 @@ class UserController extends Controller
     public function destroy(Request $request, User $user)
     {
         // 確認網址是否有效
-        if (!$request->hasValidSignature()) {
-            abort(401);
-        }
+        abort_if(!$request->hasValidSignature(), 401);
 
         Auth::guard('web')->logout();
 

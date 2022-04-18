@@ -19,7 +19,7 @@ class PostService
         // 去掉特殊字元，只留中文與英文
         $title = preg_replace('/[^A-Za-z0-9 \p{Han}]+/u', '', $title);
         // 將空白替換成 '-'
-        $title = str_replace(' ', '-', $title);
+        $title = preg_replace('/\s+/u', '-', $title);
         // 英文全部改為小寫
         $title = strtolower($title);
 

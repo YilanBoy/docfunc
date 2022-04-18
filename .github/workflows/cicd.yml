@@ -4,10 +4,6 @@ on:
     branches:
       - main
 
-env:
-  ARTIFACTS_PATH: /var/www/html/artifacts/blog
-  RELEASE_PATH: /var/www/html/release/blog
-
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -134,6 +130,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy to server
     needs: create-deployment-artifacts
+    env:
+      ARTIFACTS_PATH: /var/www/blog/artifacts
+      RELEASE_PATH: /var/www/blog/release
+      APP_PATH: /var/www/blog/current
     steps:
       - uses: actions/checkout@v3
 
@@ -165,13 +165,13 @@ jobs:
             printf "%s" '${{ secrets.BLOG_ENV }}' > "${{ env.RELEASE_PATH }}/${{ github.sha }}/.env"
 
             # change soft link to new version application
-            sudo -u www-data ln -sfn ${{ env.RELEASE_PATH }}/${{ github.sha }} /var/www/html/blog
+            sudo -u www-data ln -sfn ${{ env.RELEASE_PATH }}/${{ github.sha }} ${{ env.APP_PATH }}
 
             # change application permission
-            sudo chown -R www-data:www-data /var/www/html/blog/
+            sudo chown -R www-data:www-data ${{ env.APP_PATH }}/
 
             # optimize laravel application
-            cd /var/www/html/blog
+            cd ${{ env.APP_PATH }}
             sudo -u www-data php artisan view:cache
             sudo -u www-data php artisan config:cache
             sudo -u www-data php artisan route:cache

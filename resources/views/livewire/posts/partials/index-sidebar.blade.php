@@ -73,7 +73,7 @@
     href="{{ route('feeds.main') }}"
     target="_blank"
     rel="nofollow noopener"
-    class="inline-flex items-center justify-center px-4 py-2 font-semibold tracking-widest text-gray-900 transition duration-150 ease-in-out border border-transparent rounded-lg bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:outline-none focus:border-amber-700 focus:ring ring-amber-300"
+    class="w-full inline-flex items-center justify-center px-4 py-2 font-semibold tracking-widest text-gray-900 transition duration-150 ease-in-out border border-transparent rounded-lg bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:outline-none focus:border-amber-700 focus:ring ring-amber-300"
   >
     <i class="bi bi-rss-fill"></i><span class="ml-2">訂閱文章</span>
   </a>

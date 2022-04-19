@@ -178,3 +178,7 @@ jobs:
 
             # restart web server process
             sudo supervisorctl restart all
+
+            # keep the latest 6 artifacts and release file, and remove the others
+            cd ${{ env.ARTIFACTS_PATH }} && ls -t -1 | tail -n +6 | xargs sudo rm -rf
+            cd ${{ env.RELEASE_PATH }} && ls -t -1 | tail -n +6 | xargs sudo rm -rf

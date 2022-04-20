@@ -1,29 +1,14 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\Tag;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
+use function Pest\Laravel\get;
 
-class TagTest extends TestCase
-{
-    public function test_get_posts_with_specific_tag()
-    {
-        $tag = Tag::all()->random();
+test('guest can visit tag show page', function () {
+    $tag = Tag::all()->random();
 
-        $response = $this->get(route('tags.show', $tag->id));
+    get(route('tags.show', $tag->id))
+        ->assertSuccessful()
+        ->assertSee($tag->name);
+});
 
-        $response->assertSuccessful()
-            ->assertSee($tag->name);
-    }
-
-    public function test_get_tag_list_api()
-    {
-        $response = $this->get(route('api.tags'));
-
-        $response->assertStatus(200)
-            ->assertJsonCount(Tag::count());
-    }
-}
+it('can get all tags')->getJson('api/tags')->assertStatus(200);

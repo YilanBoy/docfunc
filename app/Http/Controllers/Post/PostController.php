@@ -140,22 +140,20 @@ class PostController extends Controller
     }
 
     /**
-     * 刪除文章
+     * 軟刪除文章
      *
-     * @param int $id 文章的 ID
+     * @param Post $post
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function destroy(int $id)
+    public function destroy(Post $post)
     {
-        $softDeletedPost = Post::withTrashed()->find($id);
+        $this->authorize('destroy', $post);
 
-        $this->authorize('destroy', $softDeletedPost);
-
-        $softDeletedPost->forceDelete();
+        $post->delete();
 
         return redirect()
             ->route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
-            ->with('alert', ['icon' => 'success', 'title' => '成功刪除文章！']);
+            ->with('alert', ['icon' => 'success', 'title' => '成功標記文章為刪除狀態！']);
     }
 }

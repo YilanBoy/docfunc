@@ -183,11 +183,33 @@ class PostTest extends TestCase
             'category_id' => 1,
         ]);
 
-        $response = $this->actingAs($user)
-            ->delete(route('posts.destroy', ['id' => $post->id]));
-
-        $response->assertStatus(302)
+        $this->actingAs($user)
+            ->delete(route('posts.destroy', $post->id))
+            ->assertStatus(302)
             ->assertRedirect(route('users.index', ['user' => $user->id, 'tab' => 'posts']));
+
+        $this->assertSoftDeleted('posts', ['id' => $post->id]);
+    }
+
+    public function test_author_can_restore_deleted_post()
+    {
+        $user = User::factory()->create();
+
+        $post = Post::factory()->create([
+            'title' => 'This is a test post title',
+            'user_id' => $user->id,
+            'category_id' => 1,
+            'deleted_at' => now()
+        ]);
+
+        $this->assertSoftDeleted('posts', ['id' => $post->id]);
+
+        $this->actingAs($user)
+            ->post(route('posts.restore', ['id' => $post->id]))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index', ['user' => $user->id, 'tab' => 'posts']));
+
+        $this->assertNotSoftDeleted('posts', ['id' => $post->id]);
     }
 
     public function test_prune_the_stale_post()

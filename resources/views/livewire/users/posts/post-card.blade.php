@@ -54,7 +54,7 @@
     {{-- 軟刪除隱藏表單 --}}
     <form
       id="soft-delete-post-{{ $postId }}"
-      action="{{ route('posts.softDelete', ['post' => $postId]) }}"
+      action="{{ route('posts.destroy', ['post' => $postId]) }}"
       method="POST"
       class="hidden"
     >

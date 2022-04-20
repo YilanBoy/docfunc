@@ -46,7 +46,7 @@
   {{-- 完全刪除隱藏表單 --}}
   <form
     id="destroy-post-{{ $postId }}"
-    action="{{ route('posts.destroy', ['id' => $postId]) }}"
+    action="{{ route('posts.forceDelete', ['id' => $postId]) }}"
     method="POST"
     class="hidden"
   >

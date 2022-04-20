@@ -7,23 +7,25 @@ use App\Models\Post;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 
-class SoftDeletePostController extends Controller
+class ForceDeletePostController extends Controller
 {
     /**
-     * 軟刪除文章
+     * 完全刪除文章
      *
-     * @param Post $post
+     * @param int $id 文章的 ID
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function destroy(Post $post)
+    public function destroy(int $id)
     {
-        $this->authorize('destroy', $post);
+        $softDeletedPost = Post::withTrashed()->find($id);
 
-        $post->delete();
+        $this->authorize('destroy', $softDeletedPost);
+
+        $softDeletedPost->forceDelete();
 
         return redirect()
             ->route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
-            ->with('alert', ['icon' => 'success', 'title' => '成功標記文章為刪除狀態！']);
+            ->with('alert', ['icon' => 'success', 'title' => '成功刪除文章！']);
     }
 }

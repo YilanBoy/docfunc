@@ -4,7 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Post\PostController;
 use App\Http\Controllers\Post\RestorePostController;
-use App\Http\Controllers\Post\SoftDeletePostController;
+use App\Http\Controllers\Post\ForceDeletePostController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\User\DeleteUserController;
@@ -47,18 +47,21 @@ Route::prefix('posts')->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('posts.index');
 
     Route::middleware(['auth', 'verified'])->group(function () {
-        Route::get('/create', [PostController::class, 'create'])->name('posts.create');
-        Route::post('/', [PostController::class, 'store'])->name('posts.store');
-        Route::get('/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-        Route::put('/{post}', [PostController::class, 'update'])->name('posts.update');
-        Route::delete('/{post}', [SoftDeletePostController::class, 'destroy'])->name('posts.softDelete');
+        Route::controller(PostController::class)->group(function () {
+            Route::get('/create', 'create')->name('posts.create');
+            Route::post('/', 'store')->name('posts.store');
+            Route::get('/{post}/edit', 'edit')->name('posts.edit');
+            Route::put('/{post}', 'update')->name('posts.update');
+            // 軟刪除文章
+            Route::delete('/{post}', 'destroy')->name('posts.destroy');
+        });
+        // 完全刪除文章f
+        Route::delete('/{id}/force-delete', [ForceDeletePostController::class, 'destroy'])->name('posts.forceDelete');
         // 恢復軟刪除的文章
         Route::post('/{id}/restore', [RestorePostController::class, 'update'])->name('posts.restore');
-        // 完全刪除文章
-        Route::delete('/{id}/destroy', [PostController::class, 'destroy'])->name('posts.destroy');
     });
 
-    // {slug?} 當中的問號代表此參數可給可不給
+    // {slug?} 當中的問號代表參數為選擇性
     Route::get('/{post}/{slug?}', [PostController::class, 'show'])
         ->missing(fn() => redirect()->route('posts.index'))
         ->name('posts.show');

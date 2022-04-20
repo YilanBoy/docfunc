@@ -89,8 +89,8 @@ jobs:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
 
-      - name: Test with phpunit
-        run: vendor/bin/phpunit --coverage-text
+      - name: Test with pest
+        run: vendor/bin/pest --coverage
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}

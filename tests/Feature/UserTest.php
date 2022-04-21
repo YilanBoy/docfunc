@@ -90,6 +90,34 @@ class UserTest extends TestCase
             ->assertSessionHas('status', '密碼修改成功！');
     }
 
+    public function test_user_can_not_change_password_with_wrong_current_password()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $this->put(route('users.changePassword', $user->id), [
+            'current_password' => 'WrongPassword',
+            'new_password' => 'NewPassword101',
+            'new_password_confirmation' => 'NewPassword101',
+        ])
+            ->assertSessionHasErrors('current_password');
+    }
+
+    public function test_user_can_not_change_password_with_invalid_new_password()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $this->put(route('users.changePassword', $user->id), [
+            'current_password' => 'Password101',
+            'new_password' => 'NewPassword',
+            'new_password_confirmation' => 'NewPassword',
+        ])
+            ->assertSessionHasErrors('new_password');
+    }
+
     public function test_user_can_visit_delete_account_page()
     {
         $user = User::factory()->create();

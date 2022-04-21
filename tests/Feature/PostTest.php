@@ -155,11 +155,12 @@ class PostTest extends TestCase
 
         $randomString = $this->faker->sentence(1000);
 
-        $response = $this->actingAs($user)->post(route('posts.store'), [
-            'title' => 'This is a test post title',
-            'category_id' => 1,
-            'body' => $randomString
-        ]);
+        $response = $this->actingAs($user)
+            ->post(route('posts.store'), [
+                'title' => 'This is a test post title',
+                'category_id' => 1,
+                'body' => $randomString
+            ]);
 
         $latestPost = Post::latest()->first();
 
@@ -169,6 +170,34 @@ class PostTest extends TestCase
         $this->assertDatabaseHas('posts', [
             'title' => 'This is a test post title',
             'category_id' => 1,
+            'body' => $randomString,
+        ]);
+    }
+
+    public function test_author_can_update_his_post()
+    {
+        $post = Post::factory()->create();
+
+        $this->actingAs($post->user);
+
+        $newPostTitle = 'This is a new test post title';
+        $newCategoryId = 2;
+        $randomString = $this->faker->sentence(1000);
+
+        $response = $this->put(route('posts.update', ['post' => $post->id]), [
+            'title' => $newPostTitle,
+            'category_id' => $newCategoryId,
+            'body' => $randomString
+        ]);
+
+        $latestPost = Post::latest()->first();
+
+        $response->assertStatus(302)
+            ->assertRedirect(route('posts.show', ['post' => $latestPost->id, 'slug' => $latestPost->slug]));
+
+        $this->assertDatabaseHas('posts', [
+            'title' => $newPostTitle,
+            'category_id' => $newCategoryId,
             'body' => $randomString,
         ]);
     }
@@ -210,6 +239,26 @@ class PostTest extends TestCase
             ->assertRedirect(route('users.index', ['user' => $user->id, 'tab' => 'posts']));
 
         $this->assertNotSoftDeleted('posts', ['id' => $post->id]);
+    }
+
+    public function test_author_can_force_delete_post()
+    {
+        $user = User::factory()->create();
+
+        $post = Post::factory()->create([
+            'title' => 'This is a test post title',
+            'user_id' => $user->id,
+            'category_id' => 1,
+        ]);
+
+        $this->assertDatabaseHas('posts', ['id' => $post->id]);
+
+        $this->actingAs($user)
+            ->delete(route('posts.forceDelete', ['id' => $post->id]))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index', ['user' => $user->id, 'tab' => 'posts']));
+
+        $this->assertDatabaseMissing('posts', ['id' => $post->id]);
     }
 
     public function test_prune_the_stale_post()

@@ -13,9 +13,9 @@
       <div class="flex items-center justify-center mt-7">
         <a
           href="{{ route('posts.create') }}"
-          class="block group [transform:translateZ(0)] px-6 py-3 rounded-xl overflow-hidden bg-emerald-500 relative before:absolute before:bg-blue-600 before:top-1/2 before:left-1/2 before:h-8 before:w-8 before:-translate-y-1/2 before:-translate-x-1/2 before:rounded-full before:scale-[0] before:opacity-0 hover:before:scale-[6] hover:before:opacity-100 before:transition before:ease-in-out before:duration-700"
+          class="block group [transform:translateZ(0)] px-4 py-2 rounded-lg overflow-hidden bg-emerald-600 relative before:absolute before:bg-blue-600 before:top-1/2 before:left-1/2 before:h-8 before:w-8 before:-translate-y-1/2 before:-translate-x-1/2 before:rounded-full before:scale-[0] before:opacity-0 hover:before:scale-[10] hover:before:opacity-100 before:transition before:ease-in-out before:duration-700 w-full flex justify-center items-center"
         >
-          <span class="relative z-0 text-xl font-semibold text-gray-200 transition duration-700 ease-in-out">
+          <span class="relative z-0 text-lg font-semibold text-gray-200 transition duration-700 ease-in-out">
             <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
           </span>
         </a>
@@ -73,7 +73,7 @@
     href="{{ route('feeds.main') }}"
     target="_blank"
     rel="nofollow noopener"
-    class="w-full inline-flex items-center justify-center px-4 py-2 font-semibold tracking-widest text-gray-900 transition duration-150 ease-in-out border border-transparent rounded-lg bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:outline-none focus:border-amber-700 focus:ring ring-amber-300"
+    class="inline-flex items-center justify-center w-full px-4 py-2 text-lg font-semibold tracking-widest transition duration-150 ease-in-out border border-transparent rounded-lg text-gray-50 bg-zinc-500 hover:bg-zinc-600 active:bg-zinc-700 focus:outline-none focus:border-zinc-700 focus:ring ring-zinc-300"
   >
     <i class="bi bi-rss-fill"></i><span class="ml-2">訂閱文章</span>
   </a>

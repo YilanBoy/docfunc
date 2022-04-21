@@ -16,7 +16,7 @@ return [
             /*
              * The feed will be available on this url.
              */
-            'url' => '/feed',
+            'url' => '/post/feed',
 
             'title' => 'DocFunc',
             'description' => '紀錄生活上的大小事！',

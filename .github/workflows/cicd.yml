@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: [ 8.0, 8.1 ]
+        php: [8.0, 8.1]
     env:
       DB_DATABASE: blog_tests
       DB_USERNAME: root
@@ -90,7 +90,7 @@ jobs:
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
 
       - name: Test with pest
-        run: vendor/bin/pest --coverage
+        run: vendor/bin/pest --parallel --coverage
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}

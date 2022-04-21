@@ -10,27 +10,29 @@ use function Pest\Livewire\livewire;
 
 uses(RefreshDatabase::class);
 
-test('guest can not comment', function () {
+test('the guest can\'t make a comment', function () {
     $post = Post::factory()->create();
 
     $content = 'This is a comment';
 
-    livewire(CommentBox::class, ['postId' => $post->id])
+    livewire(CommentBox::class, ['postId' => $post->id, 'commentCount' => $post->comment_count])
         ->set('content', $content)
         ->call('store')
         ->assertForbidden();
 });
 
-test('the authenticated user can make comment', function () {
+test('the authenticated user can make a comment', function () {
     $this->actingAs(User::factory()->create());
 
     $post = Post::factory()->create();
 
     $content = 'This is a comment';
 
-    livewire(CommentBox::class, ['postId' => $post->id])
+    livewire(CommentBox::class, ['postId' => $post->id, 'commentCount' => $post->comment_count])
         ->set('content', $content)
-        ->call('store');
+        ->call('store')
+        ->assertSet('commentCount', 1)
+        ->assertSee(1);
 
     $this->assertDatabaseHas('comments', [
         'content' => $content

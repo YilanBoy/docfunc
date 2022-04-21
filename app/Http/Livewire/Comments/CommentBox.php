@@ -28,22 +28,20 @@ class CommentBox extends Component
     // 儲存留言
     public function store()
     {
+        abort_if(!auth()->check(), 403);
+
         $this->validate();
 
-        $post = Post::where('id', $this->postId)
+        $post = Post::query()
+            ->where('id', $this->postId)
             ->with('comments')
             ->first();
 
-        // 判斷父留言是否為當前文章的留言
-        abort_if(!auth()->check(), 403);
-
-        $comment = Comment::create(
-            [
-                'post_id' => $post->id,
-                'user_id' => auth()->id(),
-                'content' => $this->content,
-            ]
-        );
+        $comment = Comment::create([
+            'post_id' => $post->id,
+            'user_id' => auth()->id(),
+            'content' => $this->content,
+        ]);
 
         // 更新資料庫的文章留言數
         $post->updateCommentCount();
@@ -64,7 +62,9 @@ class CommentBox extends Component
     // 更新頁面上的留言數量
     public function updateCommentCount()
     {
-        $this->commentCount = Post::findOrFail($this->postId)->comment_count;
+        $post = Post::findOrFail($this->postId);
+
+        $this->commentCount = $post->comment_count;
     }
 
     public function render()

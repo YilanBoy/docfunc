@@ -13,7 +13,7 @@
       <div class="flex items-center justify-center mt-7">
         <a
           href="{{ route('posts.create') }}"
-          class="block group [transform:translateZ(0)] px-4 py-2 rounded-lg overflow-hidden bg-emerald-500 relative before:absolute before:bg-blue-600 before:top-1/2 before:left-1/2 before:h-8 before:w-8 before:-translate-y-1/2 before:-translate-x-1/2 before:rounded-full before:scale-[0] before:opacity-0 hover:before:scale-[10] hover:before:opacity-100 before:transition before:ease-in-out before:duration-700 w-full flex justify-center items-center"
+          class="group [transform:translateZ(0)] px-4 py-2 rounded-lg overflow-hidden bg-emerald-500 relative before:absolute before:bg-blue-600 before:top-1/2 before:left-1/2 before:h-8 before:w-8 before:-translate-y-1/2 before:-translate-x-1/2 before:rounded-full before:scale-[0] before:opacity-0 hover:before:scale-[10] hover:before:opacity-100 before:transition before:ease-in-out before:duration-700 w-full flex justify-center items-center"
         >
           <span class="relative z-0 text-lg font-semibold text-gray-200 transition duration-700 ease-in-out">
             <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>

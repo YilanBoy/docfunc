@@ -29,8 +29,8 @@
   <script src="{{ asset('js/highlight.js') }}"></script>
   {{-- 程式碼複製按鈕 --}}
   <script src="{{ asset('js/copy-code-btn.js') }}"></script>
-
   <script src="{{ asset('js/progress-bar.js') }}"></script>
+  <script src="{{ asset('js/sharer.js') }}"></script>
 @endsection
 
 {{-- 文章內容 --}}
@@ -54,9 +54,19 @@
           id="section"
           class="relative w-full xl:w-7/12"
         >
+          {{-- 軟刪除文章 form --}}
+          <form
+            id="soft-delete-post"
+            action="{{ route('posts.destroy', ['post' => $post->id]) }}"
+            method="POST"
+            class="hidden"
+          >
+            @csrf
+            @method('DELETE')
+          </form>
 
           {{-- 文章選單-桌面裝置 --}}
-          @includeWhen(auth()->id() === $post->user_id, 'posts.partials.desktop-show-menu')
+          @include('posts.partials.desktop-show-menu')
 
           <div class="flex justify-between">
             {{-- 文章標題 --}}

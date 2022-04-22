@@ -41,7 +41,7 @@
               <button
                 type="submit"
                 form="create-post"
-                class="inline-flex items-center justify-center w-16 h-16 mt-4 transition duration-150 ease-in-out bg-blue-500 border border-transparent save-post group rounded-xl text-gray-50 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring ring-blue-300"
+                class="inline-flex items-center justify-center w-14 h-14 mt-4 transition duration-150 ease-in-out bg-blue-500 border border-transparent save-post group rounded-xl text-gray-50 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring ring-blue-300"
               >
                 <span class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:rotate-12">
                   <i class="bi bi-save2-fill"></i>

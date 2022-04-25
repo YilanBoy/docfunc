@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire\Comments;
 
-use App\Models\Post;
-use Livewire\Component;
+use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
+use App\Models\Post;
 use App\Notifications\PostComment;
+use Livewire\Component;
 
 class CommentBox extends Component
 {
@@ -15,15 +16,15 @@ class CommentBox extends Component
 
     protected $listeners = ['updateCommentCount'];
 
-    protected array $rules = [
-        'content' => ['required', 'min:5', 'max:400'],
-    ];
+    protected function rules()
+    {
+        return (new CommentRequest())->rules();
+    }
 
-    protected array $messages = [
-        'content.required' => '請填寫留言內容',
-        'content.min' => '留言內容至少 5 個字元',
-        'content.max' => '留言內容至多 400 個字元',
-    ];
+    protected function messages()
+    {
+        return (new CommentRequest())->messages();
+    }
 
     // 儲存留言
     public function store()

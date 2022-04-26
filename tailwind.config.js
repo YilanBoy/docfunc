@@ -42,6 +42,9 @@ module.exports = {
             typography: (theme) => ({
                 DEFAULT: {
                     css: {
+                        blockquote: {
+                            borderColor: theme("colors.slate.500"),
+                        },
                         "blockquote p:first-of-type::before": null,
                         "blockquote p:last-of-type::after": null,
                         code: {
@@ -60,6 +63,11 @@ module.exports = {
                         ".dark :not(pre) > code": {
                             backgroundColor: theme("colors.gray.500"),
                             color: theme("colors.gray.100"),
+                        },
+                        pre: {
+                            border: 0,
+                            padding: 0,
+                            borderRadius: "0.75rem",
                         },
                     },
                 },

@@ -16,12 +16,12 @@ class CommentBox extends Component
 
     protected $listeners = ['updateCommentCount'];
 
-    protected function rules()
+    protected function rules(): array
     {
         return (new CommentRequest())->rules();
     }
 
-    protected function messages()
+    protected function messages(): array
     {
         return (new CommentRequest())->messages();
     }

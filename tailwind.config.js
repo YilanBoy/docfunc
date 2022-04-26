@@ -39,14 +39,27 @@ module.exports = {
                 "fade-in": "fade-in 0.5s ease-in-out",
                 "grow-width": "grow-width 1s forwards",
             },
-            typography: {
+            typography: (theme) => ({
                 DEFAULT: {
                     css: {
                         "blockquote p:first-of-type::before": null,
                         "blockquote p:last-of-type::after": null,
+                        code: {
+                            backgroundColor: theme("colors.blue.100"),
+                            color: theme("colors.blue.600"),
+                            padding: "0.25rem",
+                            fontWeight: "600",
+                            borderRadius: "0.25rem",
+                        },
+                        "code::before": {
+                            content: '""',
+                        },
+                        "code::after": {
+                            content: '""',
+                        },
                     },
                 },
-            },
+            }),
         },
     },
     plugins: [

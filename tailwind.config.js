@@ -57,6 +57,10 @@ module.exports = {
                         "code::after": {
                             content: '""',
                         },
+                        ".dark :not(pre) > code": {
+                            backgroundColor: theme("colors.gray.500"),
+                            color: theme("colors.gray.100"),
+                        },
                     },
                 },
             }),

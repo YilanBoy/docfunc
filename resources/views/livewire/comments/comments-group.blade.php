@@ -12,7 +12,7 @@
         <div class="flex-none">
           <a href="{{ route('users.index', ['user' => $comment->user_id]) }}">
             <img
-              src="{{ $comment->gravatar_url }}"
+              src="{{ get_gravatar($comment->user_email) }}"
               alt="{{ $comment->user_name }}"
               class="w-14 h-14 rounded-xl hover:ring-4 hover:ring-blue-400"
             >

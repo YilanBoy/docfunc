@@ -36,11 +36,7 @@ class CommentsGroup extends Component
                 comments.*,
                 posts.user_id AS post_user_id,
                 users.name AS user_name,
-                CONCAT(
-                    "https://www.gravatar.com/avatar/",
-                    MD5(LOWER(TRIM(users.email))),
-                    "?s=400&d=mp"
-                ) AS gravatar_url
+                users.email AS user_email
             ')
             ->join('posts', 'posts.id', '=', 'comments.post_id')
             ->join('users', 'users.id', '=', 'comments.user_id')

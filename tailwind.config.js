@@ -43,10 +43,15 @@ module.exports = {
                 DEFAULT: {
                     css: {
                         blockquote: {
-                            borderColor: theme("colors.slate.500"),
+                            borderColor: theme("colors.slate.300"),
+                            color: theme("colors.slate.500")
                         },
                         "blockquote p:first-of-type::before": null,
                         "blockquote p:last-of-type::after": null,
+                        ".dark blockquote": {
+                            borderColor: theme("colors.slate.600"),
+                            color: theme("colors.slate.400")
+                        },
                         code: {
                             backgroundColor: theme("colors.blue.100"),
                             color: theme("colors.blue.600"),

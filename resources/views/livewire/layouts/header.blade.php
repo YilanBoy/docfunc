@@ -17,7 +17,7 @@
   {{-- 手機版選單 --}}
   <div
     x-data="{ mobileMenuIsOpen: false }"
-    class="shadow-md bg-gray-50 lg:hidden dark:bg-gray-700"
+    class="shadow-lg bg-gray-50 lg:hidden dark:bg-gray-700"
   >
     <div class="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-[4.5rem]">
@@ -241,7 +241,7 @@
 
   {{-- 電腦版選單 --}}
   <div
-    class="relative items-center justify-center hidden w-full h-16 transition-all duration-300 shadow-md lg:flex bg-gray-50 dark:bg-gray-700">
+    class="relative items-center justify-center hidden w-full h-16 transition-all duration-300 shadow-lg lg:flex bg-gray-50 dark:bg-gray-700">
     {{-- 電腦版-Logo --}}
     <a
       href="{{ route('root') }}"

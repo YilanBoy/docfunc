@@ -34,7 +34,6 @@ mix.js("resources/js/app.js", "public/js")
         "public/css/tagify.css"
     )
     .css("resources/css/editor.css", "public/css")
-    .css("resources/css/progress-bar.css", "public/css")
     .css("resources/css/missing-content-style.css", "public/css")
     .sass("node_modules/highlight.js/scss/atom-one-dark.scss", "public/css")
     .options({

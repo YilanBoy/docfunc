@@ -5,8 +5,6 @@
 @section('css')
   {{-- 程式碼區塊高亮 --}}
   <link href="{{ asset('css/atom-one-dark.css') }}" rel="stylesheet">
-  {{-- 文章閱讀進度條 --}}
-  <link href="{{ asset('css/progress-bar.css') }}" rel="stylesheet">
 
   <style>
     /* media embed */
@@ -189,5 +187,6 @@
     </div>
   </div>
 
-  <div id="progress-bar"></div>
+  <div id="progress-bar"
+       class="fixed top-0 left-0 w-0 h-[5px] bg-gradient-to-r from-green-500 via-teal-500 to-sky-500 dark:from-pink-500 dark:via-purple-500 dark:to-indigo- z-[100] transition-all duration-300 ease-out"></div>
 </x-app-layout>

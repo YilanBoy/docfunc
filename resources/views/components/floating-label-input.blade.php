@@ -5,7 +5,7 @@
     value="{{ $value ?? '' }}"
     placeholder="{{ $placeholder }}"
     {{ $attributes }}
-    class="w-full h-10 text-gray-900 placeholder-transparent transition duration-150 ease-in bg-transparent border-b-2 border-gray-300 peer focus:outline-none focus:border-blue-500 dark:text-gray-50 dark:border-gray-400 dark:focus:border-red-500"
+    class="w-full h-10 text-gray-900 placeholder-transparent transition duration-150 ease-in bg-transparent border-b-2 border-gray-300 peer focus:outline-none focus:border-emerald-500 dark:text-gray-50 dark:border-gray-400 dark:focus:border-blue-500"
   >
 
   <label

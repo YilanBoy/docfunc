@@ -57,7 +57,8 @@
   class="antialiased text-gray-900 bg-gray-200 overscroll-y-none dark:bg-gray-800 font-noto"
 >
 
-<div class="relative flex flex-col justify-between min-h-screen selection:bg-fuchsia-300 selection:text-fuchsia-900">
+<div
+  class="relative flex flex-col justify-between min-h-screen selection:bg-green-300 selection:text-green-900 dark:selection:bg-purple-300 dark:selection:text-purple-900">
 
   <livewire:layouts.header/>
 

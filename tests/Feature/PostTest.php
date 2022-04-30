@@ -19,12 +19,10 @@ class PostTest extends TestCase
     {
         $user = User::factory()->create();
 
-        Post::factory(10)->create(
-            [
-                'category_id' => rand(1, 3),
-                'user_id' => $user->id,
-            ]
-        );
+        Post::factory(10)->create([
+            'category_id' => rand(1, 3),
+            'user_id' => $user->id,
+        ]);
 
         $this->get(route('posts.index'))
             ->assertStatus(200)

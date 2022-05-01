@@ -1,6 +1,6 @@
 # Simple-Blog
 
-![CI/CD](https://github.com/YilanBoy/simple-blog/actions/workflows/cicd.yml/badge.svg)
+![CI/CD](https://github.com/YilanBoy/simple-blog/actions/workflows/build.yml/badge.svg)
 
 ## Preview
 

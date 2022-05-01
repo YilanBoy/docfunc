@@ -165,7 +165,7 @@ user=www-data
 numprocs=2
 redirect_stderr=true
 stopwaitsecs=3600
-stdout_logfile=/var/log/blog/simple-blog-worker.log
+stdout_logfile=/var/log/simple-blog-worker.log
 ```
 
 Set crontab to run [Laravel Task Schedule](https://laravel.com/docs/9.x/scheduling).

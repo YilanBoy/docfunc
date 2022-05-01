@@ -4,12 +4,10 @@
 
 ## Preview
 
----
 <img src="https://recode-blog-files.s3.ap-northeast-2.amazonaws.com/2021_08_21_11_03_46_61206d123c717.jpg" width="70%">
 
 ## Introduction
 
----
 This is a simple blog made by [TALL stack](https://tallstack.dev/).
 
 TALL stack includes:
@@ -33,14 +31,12 @@ You can search post by [Algolia](https://www.algolia.com/).
 
 ## Requirements
 
----
 [php](https://www.php.net/) ^8.0  
 [composer](https://getcomposer.org/)  
 [npm](https://www.npmjs.com/)
 
 ## Installation
 
----
 Clone the repository to your local machine:
 
 ```sh
@@ -103,7 +99,6 @@ php artisan ide-helper:models
 
 ## Deployment
 
----
 You could deploy this project use [Laravel Octane](https://laravel.com/docs/9.x/octane), supercharges the performance by
 serving application using [Swoole](https://github.com/swoole/swoole-src).
 
@@ -157,7 +152,7 @@ Using supervisor to start laravel queue worker process, we have to create a `sim
 in `/etc/supervisor/conf.d/`.
 
 ```
-[program:blog-laravel-worker]
+[program:simple-blog-worker]
 process_name=%(program_name)s_%(process_num)02d
 command=php /var/www/simple-blog/artisan queue:work --sleep=3 --tries=3 --max-time=3600
 autostart=true

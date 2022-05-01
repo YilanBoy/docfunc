@@ -1,6 +1,6 @@
 # Simple-Blog
 
-![CI/CD](https://github.com/YilanBoy/simple-blog/actions/workflows/build.yml/badge.svg)
+![build](https://github.com/YilanBoy/simple-blog/actions/workflows/build.yml/badge.svg)
 
 ## Preview
 
@@ -20,11 +20,12 @@ TALL stack includes:
 The features of this blog include:
 
 - authentication
-- create post
+- creating post
 - post tags
-- multiple layer comments
+- comments
 - post search
 - web feed url
+- dark mode
 
 Post editor use [CKEditor 5](https://ckeditor.com/), You can upload image to AWS S3 in blog post.  
 You can search post by [Algolia](https://www.algolia.com/).

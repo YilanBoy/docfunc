@@ -1,6 +1,7 @@
 # Simple-Blog
 
 ![build](https://github.com/YilanBoy/simple-blog/actions/workflows/build.yml/badge.svg)
+[![codecov](https://codecov.io/gh/YilanBoy/simple-blog/branch/main/graph/badge.svg?token=K2V2ANX2LW)](https://codecov.io/gh/YilanBoy/simple-blog)
 
 ## Preview
 

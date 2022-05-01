@@ -153,15 +153,15 @@
         </x-card>
 
         {{-- 作者簡介 --}}
-        <x-card class="flex items-center justify-start w-full mt-6 xl:w-7/12">
-          <div class="flex-none p-2 mr-4 none md:flex md:justify-center md:items-center">
+        <x-card class="grid grid-cols-12 gap-4 w-full mt-6 xl:w-7/12">
+          <div class="col-span-12 md:col-span-2 flex justify-start md:justify-center items-center">
             <img
               class="w-16 h-16 rounded-full"
               src="{{ $post->user->gravatar_url }}"
               alt="{{ $post->user->name }}"
             >
           </div>
-          <div class="space-y-2">
+          <div class="col-span-12 md:col-span-10 space-y-2">
             <div class="text-gray-400 uppercase">written by</div>
             <a
               href="{{ route('users.index', ['user' => $post->user->id]) }}"

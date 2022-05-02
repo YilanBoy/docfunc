@@ -2,7 +2,17 @@
   x-data
   class="absolute top-0 hidden w-14 h-full xl:block left-[102%]"
 >
-  <div class="sticky top-1/4 flex flex-col items-center justify-center space-y-3">
+  <div class="sticky top-1/2 -translate-y-1/2 flex flex-col items-center justify-center space-y-3">
+    {{-- Home --}}
+    <a
+      href="{{ route('posts.index') }}"
+      class="inline-flex items-center justify-center w-14 h-14 transition duration-150 ease-in-out border border-transparent bg-green-500 group rounded-xl text-gray-50 active:bg-green-700 focus:outline-none focus:border-green-700 focus:ring ring-green-300"
+    >
+        <span class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:rotate-12">
+          <i class="bi bi-house-fill"></i>
+        </span>
+    </a>
+
     <!-- Facebook share button -->
     <button
       type="button"

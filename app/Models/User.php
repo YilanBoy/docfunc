@@ -16,7 +16,9 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -87,7 +89,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $hash = md5(strtolower(trim($this->email)));
 
         return new Attribute(
-            get: fn($value) => 'https://www.gravatar.com/avatar/' . $hash . '?s=400&d=mp'
+            get: fn ($value) => 'https://www.gravatar.com/avatar/' . $hash . '?s=400&d=mp'
         );
     }
 }

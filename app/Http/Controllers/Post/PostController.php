@@ -20,10 +20,9 @@ use Illuminate\Support\Facades\Route;
 class PostController extends Controller
 {
     public function __construct(
-        protected PostService           $postService,
+        protected PostService $postService,
         protected FormatTransferService $formatTransferService
-    )
-    {
+    ) {
     }
 
     /**

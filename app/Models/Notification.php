@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notification extends Model
 {
-    use HasFactory, MassPrunable;
+    use HasFactory;
+    use MassPrunable;
 
     public function prunable()
     {

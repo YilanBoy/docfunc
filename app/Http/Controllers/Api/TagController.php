@@ -20,7 +20,7 @@ class TagController extends Controller
             // 傳過去的格式會長這樣
             // [{"id":"2","value":"C#"},{"id":"5","value":"Dart"}]
             return Tag::all()
-                ->map(fn($tag) => ['id' => $tag->id, 'value' => $tag->name])
+                ->map(fn ($tag) => ['id' => $tag->id, 'value' => $tag->name])
                 ->all();
         });
 

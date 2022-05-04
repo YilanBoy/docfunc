@@ -29,7 +29,7 @@ class Category extends Model
     public function linkWithName(): Attribute
     {
         return new Attribute(
-            get: fn($value) => route('categories.show', [
+            get: fn ($value) => route('categories.show', [
                 'category' => $this->id,
                 'name' => $this->name,
             ])

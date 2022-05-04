@@ -23,7 +23,10 @@ use Spatie\Feed\FeedItem;
  */
 class Post extends Model implements Feedable
 {
-    use HasFactory, Searchable, SoftDeletes, MassPrunable;
+    use HasFactory;
+    use Searchable;
+    use SoftDeletes;
+    use MassPrunable;
 
     protected $fillable = [
         'title', 'body', 'user_id', 'category_id', 'excerpt', 'slug',
@@ -76,7 +79,7 @@ class Post extends Model implements Feedable
     public function linkWithSlug(): Attribute
     {
         return new Attribute(
-            get: fn($value) => route('posts.show', [
+            get: fn ($value) => route('posts.show', [
                 'post' => $this->id,
                 'slug' => $this->slug,
             ])
@@ -88,8 +91,8 @@ class Post extends Model implements Feedable
         // 生成包含 tag ID 與 tag name 的 json 字串
         // [{"id":"2","value":"C#"},{"id":"5","value":"Dart"}]
         return new Attribute(
-            get: fn($value) => $this->tags
-                ->map(fn($tag) => ['id' => $tag->id, 'value' => $tag->name])
+            get: fn ($value) => $this->tags
+                ->map(fn ($tag) => ['id' => $tag->id, 'value' => $tag->name])
                 ->toJson()
         );
     }

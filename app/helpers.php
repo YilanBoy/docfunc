@@ -20,16 +20,16 @@ if (!function_exists('get_gravatar')) {
         string $r = 'g',
         bool   $img = false,
         array  $atts = []
-    ): string
-    {
+    ): string {
         $url = 'https://www.gravatar.com/avatar/';
         $url .= md5(strtolower(trim($email)));
         $url .= "?s={$s}&d={$d}&r={$r}";
 
         if ($img) {
             $url = '<img src="' . $url . '"';
-            foreach ($atts as $key => $val)
+            foreach ($atts as $key => $val) {
                 $url .= ' ' . $key . '="' . $val . '"';
+            }
             $url .= ' />';
         }
 

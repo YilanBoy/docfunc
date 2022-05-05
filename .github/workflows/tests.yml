@@ -54,7 +54,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           # https://laravel.com/docs/9.x/deployment#server-requirements
-          extensions: bcmatch, ctype, curl, dom, fileinfo, json, mbstring, openssl, pcre, pdo, tokenizer, xml, redis
+          extensions: bcmath, ctype, curl, dom, fileinfo, json, mbstring, openssl, pcre, pdo, tokenizer, xml, redis
           coverage: xdebug
 
       - name: Start mysql service

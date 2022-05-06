@@ -10,9 +10,9 @@
           <i class="bi bi-question-circle"></i><span class="ml-4">重設密碼</span>
         </div>
 
-        <x-card class="w-full mt-4 overflow-hidden sm:max-w-md">
+        <x-card class="w-full mt-4 overflow-hidden sm:max-w-md space-y-6">
           {{-- 驗證錯誤訊息 --}}
-          <x-auth-validation-errors class="mb-4" :errors="$errors" />
+          <x-auth-validation-errors :errors="$errors"/>
 
           <form method="POST" action="{{ route('password.update') }}">
             @csrf
@@ -21,7 +21,7 @@
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
             {{-- 信箱 --}}
-            <div class="mt-5">
+            <div>
               <x-floating-label-input
                 :type="'text'"
                 :name="'email'"
@@ -33,7 +33,7 @@
             </div>
 
             {{-- 密碼 --}}
-            <div class="mt-10">
+            <div class="mt-6">
               <x-floating-label-input
                 :type="'password'"
                 :name="'password'"
@@ -45,7 +45,7 @@
             </div>
 
             {{-- 確認密碼 --}}
-            <div class="mt-10">
+            <div class="mt-6">
               <x-floating-label-input
                 :type="'password'"
                 :name="'password_confirmation'"
@@ -54,7 +54,7 @@
               ></x-floating-label-input>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-end mt-6">
               <x-button>
                 {{ __('Reset Password') }}
               </x-button>

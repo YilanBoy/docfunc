@@ -7,18 +7,18 @@
   @endsection
 
   @section('scripts')
-      <script>
-        document.getElementById("register").addEventListener("submit", function (event) {
-          event.preventDefault();
-          grecaptcha.ready(function () {
-            grecaptcha.execute("{{ config('services.recaptcha.site_key') }}", {action: "submit"})
-              .then(function (response) {
-                document.getElementById("g-recaptcha-response").value = response;
-                document.getElementById("register").submit();
-              });
-          });
+    <script>
+      document.getElementById("register").addEventListener("submit", function (event) {
+        event.preventDefault();
+        grecaptcha.ready(function () {
+          grecaptcha.execute("{{ config('services.recaptcha.site_key') }}", {action: "submit"})
+            .then(function (response) {
+              document.getElementById("g-recaptcha-response").value = response;
+              document.getElementById("register").submit();
+            });
         });
-      </script>
+      });
+    </script>
   @endsection
 @endif
 
@@ -32,10 +32,10 @@
           <i class="bi bi-person-plus-fill"></i><span class="ml-4">註冊</span>
         </div>
 
-        <x-card class="w-full mt-4 overflow-hidden sm:max-w-md">
+        <x-card class="w-full mt-4 overflow-hidden sm:max-w-md space-y-6">
 
           {{-- 驗證錯誤訊息 --}}
-          <x-auth-validation-errors class="mb-4" :errors="$errors"/>
+          <x-auth-validation-errors :errors="$errors"/>
 
           <form id="register" method="POST" action="{{ route('register') }}">
             @csrf
@@ -44,11 +44,11 @@
             <input type="hidden" class="g-recaptcha" name="g-recaptcha-response" id="g-recaptcha-response">
 
             {{-- 會員名稱 --}}
-            <div class="mt-5">
+            <div>
               <x-floating-label-input
                 :type="'text'"
                 :name="'name'"
-                :placeholder="'會員名稱'"
+                :placeholder="'會員名稱 (只能使用英文、數字、_ 或是 -)'"
                 :value="old('name')"
                 required
                 autofocus
@@ -56,7 +56,7 @@
             </div>
 
             {{-- 信箱 --}}
-            <div class="mt-5">
+            <div class="mt-6">
               <x-floating-label-input
                 :type="'text'"
                 :name="'email'"
@@ -67,7 +67,7 @@
             </div>
 
             {{-- 密碼 --}}
-            <div class="mt-5">
+            <div class="mt-6">
               <x-floating-label-input
                 :type="'password'"
                 :name="'password'"
@@ -78,7 +78,7 @@
             </div>
 
             {{-- 確認密碼 --}}
-            <div class="mt-5">
+            <div class="mt-6">
               <x-floating-label-input
                 :type="'password'"
                 :name="'password_confirmation'"
@@ -88,7 +88,7 @@
               </x-floating-label-input>
             </div>
 
-            <div class="flex items-center justify-end mt-5">
+            <div class="flex items-center justify-end mt-6">
               <a
                 href="{{ route('login') }}"
                 class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"

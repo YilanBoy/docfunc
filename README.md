@@ -1,22 +1,14 @@
-# Simple-Blog
+# Simple Blog
 
 ![build](https://github.com/YilanBoy/simple-blog/actions/workflows/build.yml/badge.svg)
 [![codecov](https://codecov.io/gh/YilanBoy/simple-blog/branch/main/graph/badge.svg?token=K2V2ANX2LW)](https://codecov.io/gh/YilanBoy/simple-blog)
 
-## Preview
+This is a simple blog made by [TALL stack](https://tallstack.dev/):
 
-<img src="https://recode-blog-files.s3.ap-northeast-2.amazonaws.com/2021_08_21_11_03_46_61206d123c717.jpg" width="70%">
-
-## Introduction
-
-This is a simple blog made by [TALL stack](https://tallstack.dev/).
-
-TALL stack includes:
-
-- [Laravel](https://laravel.com/)
-- [Laravel Livewire](https://laravel-livewire.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Alpine.js](https://alpinejs.dev/)
+- [Laravel](https://laravel.com/)
+- [Laravel Livewire](https://laravel-livewire.com/)
 
 The features of this blog include:
 
@@ -28,8 +20,12 @@ The features of this blog include:
 - web feed url
 - dark mode
 
-Post editor use [CKEditor 5](https://ckeditor.com/), You can upload image to AWS S3 in blog post.  
-You can search post by [Algolia](https://www.algolia.com/).
+Post editor use [CKEditor 5](https://ckeditor.com/), You can upload image to AWS S3 in blog post. You can search post
+by [Algolia](https://www.algolia.com/).
+
+## Preview
+
+<img src="https://recode-blog-files.s3.ap-northeast-2.amazonaws.com/2021_08_21_11_03_46_61206d123c717.jpg" width="70%">
 
 ## Requirements
 

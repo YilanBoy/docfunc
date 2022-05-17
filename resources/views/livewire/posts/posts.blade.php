@@ -4,7 +4,7 @@
   <div class="flex flex-col-reverse w-full md:flex-row md:justify-between">
 
     <nav
-      class="flex w-full p-1 space-x-1 md:w-auto rounded-xl bg-gray-400/30 dark:bg-white/30 dark:text-gray-50">
+      class="flex w-full p-1 space-x-1 md:w-auto rounded-xl bg-gray-400/20 dark:bg-gray-400/40 dark:text-gray-50">
 
       @php
         $tabs = [

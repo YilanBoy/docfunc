@@ -15,13 +15,13 @@
     </span>
 
     {{-- 文章相關資訊 --}}
-    <div class="flex items-center mt-2 space-x-2 text-sm text-slate-400">
+    <div class="flex items-center mt-2 space-x-2 text-sm text-neutral-400">
       {{-- 文章分類資訊 --}}
       <div>
         <a
           href="{{ $categoryLink }}"
           title="{{ $categoryName }}"
-          class="hover:text-slate-500 dark:hover:text-slate-300"
+          class="hover:text-neutral-500 dark:hover:text-neutral-300"
         >
           <i class="{{ $categoryIcon }}"></i><span class="ml-2">{{ $categoryName }}</span>
         </a>
@@ -31,7 +31,7 @@
       <div>
         <a
           href="{{ $link }}"
-          class="hover:text-slate-500 dark:hover:text-slate-300"
+          class="hover:text-neutral-500 dark:hover:text-neutral-300"
           title="文章發布於：{{ $createdAt }}"
         >
           <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $createdAtDiffForHumans }}</span>
@@ -41,7 +41,7 @@
       <div>
         {{-- 文章留言數 --}}
         <a
-          class="hover:text-slate-500 dark:hover:text-slate-300"
+          class="hover:text-neutral-500 dark:hover:text-neutral-300"
           href="{{ $link . '#post-' . $postId . '-comments' }}"
         >
           <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $commentCount }}</span>

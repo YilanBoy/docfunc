@@ -28,7 +28,7 @@
         </div>
 
         {{-- 文章發布時間 --}}
-        <span class="items-center justify-center hidden text-gray-500 dark:text-gray-300 xl:flex">
+        <span class="items-center justify-center hidden text-neutral-400 xl:flex">
           <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>
         </span>
 

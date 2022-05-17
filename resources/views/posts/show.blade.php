@@ -76,11 +76,11 @@
           </div>
 
           {{-- 文章資訊 --}}
-          <div class="flex items-center mt-4 space-x-2 text-slate-400">
+          <div class="flex items-center mt-4 space-x-2 text-neutral-400">
             {{-- 分類 --}}
             <div>
               <a
-                class="hover:text-slate-500 dark:hover:text-slate-300"
+                class="hover:text-neutral-500 dark:hover:text-neutral-300"
                 href="{{ $post->category->link_with_name }}"
                 title="{{ $post->category->name }}"
               >
@@ -94,7 +94,7 @@
             {{-- 作者 --}}
             <div>
               <a
-                class="hover:text-slate-500 dark:hover:text-slate-300"
+                class="hover:text-neutral-500 dark:hover:text-neutral-300"
                 href="{{ route('users.index', ['user' => $post->user_id]) }}"
                 title="{{ $post->user->name }}"
               >
@@ -107,7 +107,7 @@
             {{-- 發布時間 --}}
             <div class="hidden md:block">
               <a
-                class="hover:text-slate-500 dark:hover:text-slate-300"
+                class="hover:text-neutral-500 dark:hover:text-neutral-300"
                 href="{{ $post->link_with_slug }}"
                 title="文章發布於：{{ $post->created_at }}"
               >
@@ -121,7 +121,7 @@
             {{-- 留言數 --}}
             <div class="hidden md:block">
               <a
-                class="hover:text-slate-500 dark:hover:text-slate-300"
+                class="hover:text-neutral-500 dark:hover:text-neutral-300"
                 href="{{ $post->link_with_slug }}#comments"
               >
                 <i class="bi bi-chat-square-text-fill"></i><span
@@ -133,7 +133,7 @@
           {{-- 文章標籤 --}}
           @if ($post->tags()->exists())
             <div class="flex items-center mt-4">
-              <span class="mr-1 text-slate-400"><i class="bi bi-tags-fill"></i></span>
+              <span class="mr-1 text-neutral-400"><i class="bi bi-tags-fill"></i></span>
 
               @foreach ($post->tags as $tag)
                 <x-tag :href="route('tags.show', ['tag' => $tag->id])">
@@ -153,15 +153,15 @@
         </x-card>
 
         {{-- 作者簡介 --}}
-        <x-card class="grid grid-cols-12 gap-4 w-full mt-6 xl:w-7/12">
-          <div class="col-span-12 md:col-span-2 flex justify-start md:justify-center items-center">
+        <x-card class="grid w-full grid-cols-12 gap-4 mt-6 xl:w-7/12">
+          <div class="flex items-center justify-start col-span-12 md:col-span-2 md:justify-center">
             <img
               class="w-16 h-16 rounded-full"
               src="{{ $post->user->gravatar_url }}"
               alt="{{ $post->user->name }}"
             >
           </div>
-          <div class="col-span-12 md:col-span-10 space-y-2">
+          <div class="col-span-12 space-y-2 md:col-span-10">
             <div class="text-gray-400 uppercase">written by</div>
             <a
               href="{{ route('users.index', ['user' => $post->user->id]) }}"

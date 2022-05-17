@@ -75,7 +75,7 @@
         {{-- 文章標籤 --}}
         @if ($post->tags_count > 0)
           <div class="flex flex-wrap items-center mt-2">
-            <span class="mr-1 text-slate-400"><i class="bi bi-tags-fill"></i></span>
+            <span class="mr-1 text-neutral-400"><i class="bi bi-tags-fill"></i></span>
 
             @foreach ($post->tags as $tag)
               <x-tag :href="route('tags.show', ['tag' => $tag->id])">
@@ -86,13 +86,13 @@
         @endif
 
         {{-- 文章相關資訊 --}}
-        <div class="flex items-center mt-2 space-x-2 text-sm text-slate-400">
+        <div class="flex items-center mt-2 space-x-2 text-sm text-neutral-400">
           {{-- 文章分類資訊 --}}
           <div>
             <a
               href="{{ $post->category->link_with_name }}"
               title="{{ $post->category->name }}"
-              class="hover:text-slate-500 dark:hover:text-slate-300"
+              class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
               <i class="{{ $post->category->icon }}"></i><span
                 class="hidden ml-2 md:inline">{{ $post->category->name }}</span>
@@ -104,7 +104,7 @@
             <a
               href="{{ route('users.index', ['user' => $post->user_id]) }}"
               title="{{ $post->user->name }}"
-              class="hover:text-slate-500 dark:hover:text-slate-300"
+              class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
               <i class="bi bi-person-fill"></i><span class="hidden ml-2 md:inline">{{ $post->user->name }}</span>
             </a>
@@ -115,7 +115,7 @@
             <a
               href="{{ $post->link_with_slug }}"
               title="文章發布於：{{ $post->created_at }}"
-              class="hover:text-slate-500 dark:hover:text-slate-300"
+              class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
               <i class="bi bi-clock-fill"></i><span
                 class="hidden ml-2 md:inline">{{ $post->created_at->diffForHumans() }}</span>
@@ -126,7 +126,7 @@
             {{-- 文章留言數 --}}
             <a
               href="{{ $post->link_with_slug }}#comments"
-              class="hover:text-slate-500 dark:hover:text-slate-300"
+              class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
               <i class="bi bi-chat-square-text-fill"></i><span
                 class="hidden ml-2 md:inline">{{ $post->comment_count }}</span>

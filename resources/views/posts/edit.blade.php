@@ -22,7 +22,7 @@
       <div class="flex flex-col items-center justify-center w-full space-y-6 xl:w-3/5">
         {{-- 頁面標題 --}}
         <div class="text-2xl text-gray-700 fill-current dark:text-gray-50">
-          <i class="bi bi-pencil-fill"></i><span class="ml-4">編輯文章</span>
+          <i class="bi bi-pencil-square"></i><span class="ml-4">編輯文章</span>
         </div>
 
         {{-- 文章編輯資訊-桌面裝置 --}}

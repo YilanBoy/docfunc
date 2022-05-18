@@ -46,8 +46,8 @@
       href="{{ route('posts.edit', ['post' => $post->id]) }}"
       class="flex items-center justify-center text-gray-400 w-14 h-14 group"
     >
-      <span class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:-rotate-12">
-        <i class="bi bi-pencil-fill"></i>
+      <span class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:rotate-12">
+        <i class="bi bi-pencil-square"></i>
       </span>
     </a>
 

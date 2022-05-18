@@ -19,7 +19,7 @@
   <div class="container mx-auto max-w-7xl">
     <div class="flex items-start justify-center px-4 xl:px-0">
 
-      <div class="flex flex-col items-center justify-center w-full space-y-6 xl:w-7/12">
+      <div class="flex flex-col items-center justify-center w-full space-y-6 xl:w-3/5">
         {{-- 頁面標題 --}}
         <div class="text-2xl text-gray-700 fill-current dark:text-gray-50">
           <i class="bi bi-pencil-fill"></i><span class="ml-4">新增文章</span>
@@ -41,7 +41,7 @@
               <button
                 type="submit"
                 form="create-post"
-                class="inline-flex items-center justify-center w-14 h-14 mt-4 transition duration-150 ease-in-out bg-blue-500 border border-transparent save-post group rounded-xl text-gray-50 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring ring-blue-300"
+                class="inline-flex items-center justify-center mt-4 transition duration-150 ease-in-out bg-blue-500 border border-transparent w-14 h-14 save-post group rounded-xl text-gray-50 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring ring-blue-300"
               >
                 <span class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:rotate-12">
                   <i class="bi bi-save2-fill"></i>

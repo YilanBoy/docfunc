@@ -6,7 +6,7 @@
   }"
   @set-comment-box-open.window="commentBoxOpen = $event.detail.open"
   @comment-box-focus.window="$nextTick(() => { $refs.commentBox.focus() })"
-  class="w-full xl:w-7/12"
+  class="w-full"
 >
 
   <div class="flex justify-between mt-6">

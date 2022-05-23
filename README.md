@@ -100,20 +100,21 @@ php artisan ide-helper:models
 You could deploy this project use [Laravel Octane](https://laravel.com/docs/9.x/octane), supercharges the performance by
 serving application using [Swoole](https://github.com/swoole/swoole-src).
 
-If you want to use swoole server, you must install swoole extension first.
-
-**Using PECL**:
-
-```sh
-pecl install swoole
-```
-
-**Using package manager (Linux)**:
-
-```sh
-sudo add-apt-repository ppa:ondrej/php
-sudo apt-get php8.1-swoole
-```
+> **Note**
+> If you want to use swoole server, you must install swoole extension first.
+>
+> **Using PECL**:
+>
+> ```sh
+> pecl install swoole
+> ```
+>
+> **Using package manager (Linux)**:
+>
+> ```sh
+> sudo add-apt-repository ppa:ondrej/php
+> sudo apt-get php8.1-swoole
+> ```
 
 Setting octane in `.env` file
 

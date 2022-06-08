@@ -151,8 +151,7 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect()
-            ->route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
+        return to_route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
             ->with('alert', ['icon' => 'success', 'title' => '成功標記文章為刪除狀態！']);
     }
 }

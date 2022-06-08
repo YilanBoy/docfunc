@@ -24,8 +24,7 @@ class ForceDeletePostController extends Controller
 
         $softDeletedPost->forceDelete();
 
-        return redirect()
-            ->route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
+        return to_route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
             ->with('alert', ['icon' => 'success', 'title' => '成功刪除文章！']);
     }
 }

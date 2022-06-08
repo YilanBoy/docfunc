@@ -66,8 +66,7 @@ class UserController extends Controller
             'introduction' => $request->introduction,
         ]);
 
-        return redirect()
-            ->route('users.index', ['user' => $user->id])
+        return to_route('users.index', ['user' => $user->id])
             ->with('alert', ['icon' => 'success', 'title' => '個人資料更新成功！']);
     }
 
@@ -91,8 +90,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()
-            ->route('posts.index')
+        return to_route('posts.index')
             ->with('alert', ['icon' => 'success', 'title' => '帳號已刪除！']);
     }
 }

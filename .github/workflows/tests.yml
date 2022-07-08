@@ -48,6 +48,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Compile CSS and JavaScript
+        run: |
+          npm install
+          npm run build
+
       # Docs: https://github.com/shivammathur/setup-php
       - name: Setup PHP
         uses: shivammathur/setup-php@v2

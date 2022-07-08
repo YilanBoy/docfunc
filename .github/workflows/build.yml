@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Complie CSS and JavaScript
+      - name: Compile CSS and JavaScript
         run: |
           npm install
           npm run build

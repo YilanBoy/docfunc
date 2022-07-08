@@ -1,4 +1,5 @@
 /node_modules
+/public/build
 /public/hot
 /public/storage
 /storage/*.key
@@ -17,5 +18,3 @@ _ide_helper.php
 _ide_helper_models.php
 /docker
 docker-compose.yml
-/public/css
-/public/js

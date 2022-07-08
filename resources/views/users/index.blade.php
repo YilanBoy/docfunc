@@ -1,7 +1,7 @@
 @section('title', $user->name . ' 的個人頁面')
 
 @section('scripts')
-  <script src="{{ asset('js/count-up.js') }}"></script>
+  @vite('resources/ts/count-up.ts')
 @endsection
 
 {{-- 個人頁面 --}}

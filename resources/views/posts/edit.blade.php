@@ -1,17 +1,19 @@
 @section('title', '編輯文章')
 
 @section('css')
-  <link href="{{ asset('css/editor.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/tagify.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/missing-content-style.css') }}" rel="stylesheet">
+  @vite([
+    'resources/css/editor.css',
+    'node_modules/@yaireo/tagify/dist/tagify.css',
+    'resources/css/missing-content-style.css',
+  ])
 @endsection
 
 @section('scripts')
-  {{-- 載入 Ckeditor --}}
+  {{-- Ckeditor --}}
   <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-  <script src="{{ asset('js/editor.js') }}"></script>
-  {{-- 載入 Tagify --}}
-  <script src="{{ asset('js/tagify.js') }}"></script>
+  @vite('resources/js/editor.js')
+  {{-- Tagify --}}
+  @vite('resources/ts/tagify.ts')
 @endsection
 
 {{-- 編輯文章 --}}

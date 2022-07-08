@@ -32,10 +32,20 @@
 
   {{-- Favicon --}}
   <link rel="shortcut icon" href="{{ asset('images/icon/icon.svg') }}" type="image/x-icon">
-  {{-- Set Theme --}}
-  <script src="{{ asset('js/set-theme.js') }}"></script>
+  {{-- Set theme --}}
+  <script>
+    if (
+      localStorage.mode === "light" ||
+      (!("mode" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: light)").matches)
+    ) {
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+    }
+  </script>
   {{-- Styles --}}
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  @vite('resources/css/app.css')
   {{-- Icon --}}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
   {{-- Font --}}
@@ -71,7 +81,7 @@
 {{-- Scripts --}}
 <livewire:scripts/>
 
-<script src="{{ asset('js/app.js') }}"></script>
+@vite('resources/js/app.js')
 
 {{-- Flash Alert --}}
 @if (session()->has('alert'))
@@ -79,7 +89,7 @@
     const flashAlert = @json(session()->get('alert'));
   </script>
 
-  <script src="{{ asset('js/sweet-alert.js') }}"></script>
+  @vite('resources/js/sweet-alert.js')
 @endif
 
 @yield('scripts')

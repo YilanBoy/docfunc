@@ -4,7 +4,7 @@
 
 @section('css')
   {{-- 程式碼區塊高亮 --}}
-  <link href="{{ asset('css/atom-one-dark.css') }}" rel="stylesheet">
+  @vite('node_modules/highlight.js/scss/atom-one-dark.scss')
 
   <style>
     /* media embed */
@@ -19,16 +19,16 @@
 
 @section('scripts')
   {{-- 至頂按鈕 --}}
-  <script src="{{ asset('js/scroll-to-top-btn.js') }}"></script>
+  @vite('resources/ts/scroll-to-top-btn.ts')
   {{-- media embed --}}
-  <script src="{{ asset('js/twitter-widgets.js') }}"></script>
-  <script src="{{ asset('js/oembed-media-embed.js') }}"></script>
+  @vite('resources/ts/oembed/twitter-widgets.ts')
+  @vite('resources/ts/oembed/oembed-media-embed.ts')
   {{-- 程式碼區塊高亮 --}}
-  <script src="{{ asset('js/highlight.js') }}"></script>
+  @vite('resources/ts/highlight.ts')
   {{-- 程式碼複製按鈕 --}}
-  <script src="{{ asset('js/copy-code-btn.js') }}"></script>
-  <script src="{{ asset('js/progress-bar.js') }}"></script>
-  <script src="{{ asset('js/sharer.js') }}"></script>
+  @vite('resources/ts/copy-code-btn.ts')
+  @vite('resources/ts/progress-bar.ts')
+  @vite('resources/ts/progress-bar.ts')
 @endsection
 
 {{-- 文章內容 --}}
@@ -181,8 +181,8 @@
           <livewire:comments.comments :postId="$post->id"/>
         </div>
         <div class="hidden xl:block xl:col-span-1">
-            {{-- 文章選單-桌面裝置 --}}
-            @include('posts.partials.desktop-show-menu')
+          {{-- 文章選單-桌面裝置 --}}
+          @include('posts.partials.desktop-show-menu')
         </div>
       </div>
     </div>

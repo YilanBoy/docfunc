@@ -29,7 +29,7 @@ by [Algolia](https://www.algolia.com/).
 
 ## Requirements
 
-[php](https://www.php.net/) ^8.0  
+[php](https://www.php.net/) ^8.1  
 [composer](https://getcomposer.org/)  
 [npm](https://www.npmjs.com/)
 

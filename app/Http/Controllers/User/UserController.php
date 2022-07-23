@@ -67,7 +67,7 @@ class UserController extends Controller
         ]);
 
         return to_route('users.index', ['user' => $user->id])
-            ->with('alert', ['icon' => 'success', 'title' => '個人資料更新成功！']);
+            ->with('alert', ['status' => 'success', 'message' => '個人資料更新成功！']);
     }
 
     /**
@@ -91,6 +91,6 @@ class UserController extends Controller
         $user->delete();
 
         return to_route('posts.index')
-            ->with('alert', ['icon' => 'success', 'title' => '帳號已刪除！']);
+            ->with('alert', ['status' => 'success', 'message' => '帳號已刪除！']);
     }
 }

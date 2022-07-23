@@ -25,6 +25,6 @@ class RestorePostController extends Controller
         $softDeletedPost->restore();
 
         return to_route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
-            ->with('alert', ['icon' => 'success', 'title' => '成功恢復文章！']);
+            ->with('alert', ['status' => 'success', 'message' => '成功恢復文章！']);
     }
 }

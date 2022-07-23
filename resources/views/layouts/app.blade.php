@@ -62,7 +62,16 @@
 </head>
 
 <body
-  x-data
+  x-data="alertComponent(@js(session()->get('alert')))"
+  x-init="
+    if (alert !== null) {
+      showAlert(alert.status, alert.message)
+
+      setTimeout(function () {
+        openAlertBox = false
+      }, 3000);
+    }
+  "
   @scroll-to-top.window="window.scrollTo({ top: 0, behavior: 'smooth' })"
   class="antialiased text-gray-900 bg-gray-200 overscroll-y-none dark:bg-gray-800 font-noto"
 >
@@ -84,13 +93,7 @@
 @vite('resources/js/app.js')
 
 {{-- Flash Alert --}}
-@if (session()->has('alert'))
-  <script>
-    const flashAlert = @json(session()->get('alert'));
-  </script>
-
-  @vite('resources/js/sweet-alert.js')
-@endif
+<x-alert/>
 
 @yield('scripts')
 </body>

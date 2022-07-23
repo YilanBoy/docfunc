@@ -53,7 +53,8 @@ class PostController extends Controller
             return redirect($post->link_with_slug, 301);
         }
 
-        return view('posts.show', ['post' => $post]);
+        return view('posts.show', ['post' => $post])
+            ->with('alert', ['status' => 'success', 'message' => '成功新增文章！']);
     }
 
     /**
@@ -93,7 +94,7 @@ class PostController extends Controller
         $post->tags()->attach($tagIdsArray);
 
         return redirect($post->link_with_slug)
-            ->with('alert', ['icon' => 'success', 'title' => '成功新增文章！']);
+            ->with('alert', ['status' => 'success', 'message' => '成功新增文章！']);
     }
 
     /**
@@ -135,7 +136,7 @@ class PostController extends Controller
         $post->tags()->sync($tagIdsArray);
 
         return redirect($post->link_with_slug)
-            ->with('alert', ['icon' => 'success', 'title' => '成功更新文章！']);
+            ->with('alert', ['status' => 'success', 'message' => '成功更新文章！']);
     }
 
     /**
@@ -152,6 +153,6 @@ class PostController extends Controller
         $post->delete();
 
         return to_route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
-            ->with('alert', ['icon' => 'success', 'title' => '成功標記文章為刪除狀態！']);
+            ->with('alert', ['status' => 'success', 'message' => '成功標記文章為刪除狀態！']);
     }
 }

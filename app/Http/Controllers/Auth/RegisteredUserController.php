@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
+use App\Rules\Recaptcha;
+use App\Services\SettingService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Rules\Recaptcha;
 use Illuminate\Validation\Rules\Password;
 
 class RegisteredUserController extends Controller
@@ -21,6 +21,8 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
+        abort_if(!SettingService::isRegisterAllowed(), 503);
+
         return view('auth.register');
     }
 
@@ -34,6 +36,8 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        abort_if(!SettingService::isRegisterAllowed(), 503);
+
         $passwordRule = Password::min(8)->letters()->mixedCase()->numbers();
 
         $rules = [

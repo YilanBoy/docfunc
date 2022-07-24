@@ -82,12 +82,14 @@
 
           @guest
             {{-- 手機版-未登入 --}}
-            <a
-              href="{{ route('register') }}"
-              class="px-4 py-2 text-blue-400 bg-transparent border border-blue-400 rounded-md hover:bg-blue-400 hover:text-gray-50 hover:border-transparent"
-            >
-              註冊
-            </a>
+            @if ($showRegisterButton)
+              <a
+                href="{{ route('register') }}"
+                class="px-4 py-2 text-blue-400 bg-transparent border border-blue-400 rounded-md hover:bg-blue-400 hover:text-gray-50 hover:border-transparent"
+              >
+                註冊
+              </a>
+            @endif
 
             @if (request()->url() !== route('login'))
               <a
@@ -324,12 +326,14 @@
 
       @guest
         {{-- 電腦版-未登入 --}}
-        <a
-          href="{{ route('register') }}"
-          class="flex items-center justify-center h-10 px-3 text-blue-400 transition duration-150 bg-transparent border border-blue-400 rounded-lg hover:bg-blue-400 hover:text-gray-50 hover:border-transparent"
-        >
-          註冊
-        </a>
+        @if ($showRegisterButton)
+          <a
+            href="{{ route('register') }}"
+            class="flex items-center justify-center h-10 px-3 text-blue-400 transition duration-150 bg-transparent border border-blue-400 rounded-lg hover:bg-blue-400 hover:text-gray-50 hover:border-transparent"
+          >
+            註冊
+          </a>
+        @endif
 
         @if (request()->url() !== route('login'))
           <a

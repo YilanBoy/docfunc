@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Layouts;
 
 use App\Models\Category;
+use App\Services\SettingService;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 
@@ -15,6 +16,9 @@ class Header extends Component
             return Category::all();
         });
 
-        return view('livewire.layouts.header', compact('categories'));
+        // 是否顯示註冊按鈕
+        $showRegisterButton = SettingService::isRegisterAllowed();
+
+        return view('livewire.layouts.header', compact('categories', 'showRegisterButton'));
     }
 }

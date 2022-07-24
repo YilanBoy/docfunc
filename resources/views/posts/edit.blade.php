@@ -58,7 +58,7 @@
             @csrf
 
             {{-- 文章標題 --}}
-            <div>
+            <div class="mt-2">
               <label for="title" class="hidden">文章標題</label>
 
               <input
@@ -69,7 +69,7 @@
                 value="{{ old('title', $post->title) }}"
                 required
                 autofocus
-                class="w-full mt-2 border border-gray-300 rounded-md shadow-sm form-input focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+                class="w-full border border-gray-300 rounded-md shadow-sm form-input focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
               >
             </div>
 
@@ -102,6 +102,20 @@
                 value="{{ old('tags', $post->tags_json) }}"
                 placeholder="標籤（最多 5 個）"
                 class="h-10 text-sm bg-white rounded-md dark:bg-gray-600"
+              >
+            </div>
+
+            {{-- 文章預覽圖 --}}
+            <div class="mt-5">
+              <label for="preview_url" class="hidden">預覽圖連結(未設定則使用預設值)</label>
+
+              <input
+                type="text"
+                id="preview_url"
+                name="preview_url"
+                placeholder="預覽圖連結(未設定則使用預設值)"
+                value="{{ old('preview_url', $post->preview_url) }}"
+                class="w-full border border-gray-300 rounded-md shadow-sm form-input focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
               >
             </div>
 

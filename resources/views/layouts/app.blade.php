@@ -18,14 +18,16 @@
   <meta property="og:type" content="{{ request()->route()->getName() === 'posts.show' ? 'article' : 'website' }}">
   <meta property="og:title" content="@yield('title', config('app.name'))">
   <meta property="og:description" content="@yield('description', config('app.name'))">
-  <meta property="og:image" content="https://recode-blog-files.s3.ap-northeast-2.amazonaws.com/share.jpg">
+  <meta property="og:image"
+        content="@yield('preview_url', 'https://recode-blog-files.s3.ap-northeast-2.amazonaws.com/share.jpg')">
 
   {{-- Twitter--}}
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="{{ url()->full() }}">
   <meta property="twitter:title" content="@yield('title', config('app.name'))">
   <meta property="twitter:description" content="@yield('description', config('app.name'))">
-  <meta property="twitter:image" content="https://recode-blog-files.s3.ap-northeast-2.amazonaws.com/share.jpg">
+  <meta property="twitter:image"
+        content="@yield('preview_url', 'https://recode-blog-files.s3.ap-northeast-2.amazonaws.com/share.jpg')">
 
   {{-- Ｗeb Feed --}}
   @include('feed::links')

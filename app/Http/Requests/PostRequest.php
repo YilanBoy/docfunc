@@ -17,6 +17,7 @@ class PostRequest extends FormRequest
         return [
             'title' => ['required', 'min:4', 'max:50'],
             'category_id' => ['required', 'numeric', 'exists:categories,id'],
+            'preview_url' => ['nullable', 'url', 'regex:/(.jpeg|.jpg|.png)$/U'],
             'body' => ['required'],
             'remove_tags_and_newline_body' => ['min:500', 'max:20000']
         ];
@@ -31,6 +32,8 @@ class PostRequest extends FormRequest
             'category_id.required' => '請選擇文章分類',
             'category_id.numeric' => '分類資料錯誤',
             'category_id.exists' => '分類不存在',
+            'preview_url.url' => '預覽圖連結有誤',
+            'preview_url.regex' => '預覽圖連結非圖片格式 ( jpeg | jpg | png )',
             'body.required' => '請填寫文章內容',
             'remove_tags_and_newline_body.min' => '文章內容至少 500 個字元',
             'remove_tags_and_newline_body.max' => '文章內容字數已超過限制',

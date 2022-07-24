@@ -29,7 +29,13 @@ class Post extends Model implements Feedable
     use MassPrunable;
 
     protected $fillable = [
-        'title', 'body', 'user_id', 'category_id', 'excerpt', 'slug',
+        'title',
+        'body',
+        'user_id',
+        'category_id',
+        'excerpt',
+        'slug',
+        'preview_url'
     ];
 
     public function comments(): HasMany
@@ -129,7 +135,7 @@ class Post extends Model implements Feedable
     public function toFeedItem(): FeedItem
     {
         return FeedItem::create()
-            ->id((string) $this->id)
+            ->id((string)$this->id)
             ->title($this->title)
             ->summary($this->excerpt)
             ->updated($this->updated_at)

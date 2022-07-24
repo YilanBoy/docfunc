@@ -84,6 +84,7 @@ class PostController extends Controller
             'category_id' => $request->category_id,
             'body' => $body,
             'slug' => $this->postService->makeSlug($request->title),
+            'preview_url' => $request->preview_url,
             'excerpt' => $this->postService->makeExcerpt($body),
         ]);
 

@@ -2,6 +2,10 @@
 
 @section('description', $post->excerpt)
 
+@if(!is_null($post->preview_url))
+  @section('preview_url', $post->preview_url)
+@endif
+
 @section('css')
   {{-- 程式碼區塊高亮 --}}
   @vite('node_modules/highlight.js/scss/atom-one-dark.scss')

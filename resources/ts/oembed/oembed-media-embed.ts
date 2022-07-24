@@ -45,7 +45,7 @@ async function embedMedia(url: string, element: Element): Promise<void> {
 function insertYoutubeIframe(url: string, element: Element): Promise<void> {
     return fetch(`/api/oembed/youtube`, {
         method: "POST",
-        body: JSON.stringify({ url: url }),
+        body: JSON.stringify({url: url}),
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -66,7 +66,7 @@ function insertYoutubeIframe(url: string, element: Element): Promise<void> {
 function insertTwitterIframe(url: string, element: Element): Promise<void> {
     return fetch("/api/oembed/twitter", {
         method: "POST",
-        body: JSON.stringify({ url: url }),
+        body: JSON.stringify({url: url}),
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -86,5 +86,5 @@ function insertTwitterIframe(url: string, element: Element): Promise<void> {
 embedAllMedia().then(() => {
     console.log("load twitter card");
     // scan blog post and embed tweets
-    window.twttr.widgets.load(document.getElementById("blog-post"));
+    window.twttr.widgets?.load(document.getElementById("blog-post"));
 });

@@ -31,8 +31,10 @@
   @vite('resources/ts/highlight.ts')
   {{-- 程式碼複製按鈕 --}}
   @vite('resources/ts/copy-code-btn.ts')
+  {{-- 文章閱讀進度條 --}}
   @vite('resources/ts/progress-bar.ts')
-  @vite('resources/ts/progress-bar.ts')
+  {{-- 社群分享 --}}
+  @vite('resources/ts/sharer.ts')
 @endsection
 
 {{-- 文章內容 --}}

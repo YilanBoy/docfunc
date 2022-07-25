@@ -110,17 +110,53 @@
             </div>
 
             {{-- 文章預覽圖 --}}
-            <div class="mt-5">
-              <label for="preview_url" class="hidden">預覽圖連結(未設定則使用預設值)</label>
+            <div
+              x-data="{
+                showPreviewUrlInput: false,
+                previewUrl: ''
+              }"
+              class="mt-5"
+            >
+              <div class="flex items-center">
+                <input
+                  x-on:click="showPreviewUrlInput = !showPreviewUrlInput"
+                  x-bind:checked="showPreviewUrlInput"
+                  id="show_preview_url_input"
+                  type="checkbox"
+                  value=""
+                  class="form-checkbox w-5 h-5 rounded"
+                >
+                <label
+                  for="show_preview_url_input"
+                  class="ml-2 font-medium dark:text-gray-50"
+                >預覽圖設定</label>
+              </div>
+
+              <label for="preview_url" class="hidden">預覽圖連結</label>
 
               <input
+                x-cloak
+                x-show="showPreviewUrlInput"
+                x-transition.origin.top.left
+                x-bind:required="showPreviewUrlInput"
+                x-bind:disabled="!showPreviewUrlInput"
+                x-model="previewUrl"
                 type="text"
                 id="preview_url"
                 name="preview_url"
-                placeholder="預覽圖連結(未設定則使用預設值)"
+                placeholder="預覽圖連結"
                 value="{{ old('preview_url') }}"
-                class="w-full border border-gray-300 rounded-md shadow-sm form-input focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+                class="w-full border border-gray-300 rounded-md shadow-sm form-input focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white mt-5"
               >
+
+              <template x-if="previewUrl !== '' && showPreviewUrlInput">
+                <img
+                  x-bind:src="previewUrl"
+                  class="w-64 rounded-md border border-gray-700 dark:border-gray-200 dark:text-gray-50 mt-5"
+                  alt="圖片連結有誤"
+                >
+              </template>
+
             </div>
 
             {{-- 文章內容 --}}

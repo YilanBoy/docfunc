@@ -129,6 +129,7 @@ class PostController extends Controller
         $post->slug = $this->postService->makeSlug($request->title);
         $post->body = $this->postService->htmlPurifier($request->body);
         $post->excerpt = $this->postService->makeExcerpt($post->body);
+        $post->preview_url = $request->preview_url;
         $post->save();
 
         $tagIdsArray = $this->formatTransferService->tagsJsonToTagIdsArray($request->tags);

@@ -152,7 +152,7 @@
               <template x-if="previewUrl !== '' && showPreviewUrlInput">
                 <img
                   x-bind:src="previewUrl"
-                  class="w-64 rounded-md border border-gray-700 dark:border-gray-200 dark:text-gray-50 mt-5"
+                  class="w-64 rounded-md dark:border dark:border-gray-300 dark:text-gray-50 mt-5"
                   alt="圖片連結有誤"
                 >
               </template>

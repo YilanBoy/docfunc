@@ -19,7 +19,7 @@
   <meta property="og:title" content="@yield('title', config('app.name'))">
   <meta property="og:description" content="@yield('description', config('app.name'))">
   <meta property="og:image"
-        content="@yield('preview_url', 'https://recode-blog-files.s3.ap-northeast-2.amazonaws.com/share.jpg')">
+        content="@yield('preview_url', 'https://blog-archives.s3.ap-northeast-2.amazonaws.com/share.jpg')">
 
   {{-- Twitter--}}
   <meta property="twitter:card" content="summary_large_image">
@@ -27,7 +27,7 @@
   <meta property="twitter:title" content="@yield('title', config('app.name'))">
   <meta property="twitter:description" content="@yield('description', config('app.name'))">
   <meta property="twitter:image"
-        content="@yield('preview_url', 'https://recode-blog-files.s3.ap-northeast-2.amazonaws.com/share.jpg')">
+        content="@yield('preview_url', 'https://blog-archives.s3.ap-northeast-2.amazonaws.com/share.jpg')">
 
   {{-- Ｗeb Feed --}}
   @include('feed::links')

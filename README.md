@@ -25,7 +25,7 @@ by [Algolia](https://www.algolia.com/).
 
 ## Preview
 
-<img src="https://recode-blog-files.s3.ap-northeast-2.amazonaws.com/2021_08_21_11_03_46_61206d123c717.jpg" width="70%">
+<img src="https://blog-archives.s3.ap-northeast-2.amazonaws.com/2021_08_21_11_03_46_61206d123c717.jpg" width="70%">
 
 ## Requirements
 

@@ -132,22 +132,22 @@
                 >預覽圖設定</label>
               </div>
 
-              <label for="preview_url" class="hidden">預覽圖連結</label>
+              <template x-if="showPreviewUrlInput">
+                <div class="mt-5">
+                  <label for="preview_url" class="hidden">預覽圖連結</label>
 
-              <input
-                x-cloak
-                x-show="showPreviewUrlInput"
-                x-transition.origin.top.left
-                x-bind:required="showPreviewUrlInput"
-                x-bind:disabled="!showPreviewUrlInput"
-                x-model="previewUrl"
-                type="text"
-                id="preview_url"
-                name="preview_url"
-                placeholder="預覽圖連結"
-                value="{{ old('preview_url') }}"
-                class="w-full border border-gray-300 rounded-md shadow-sm form-input focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white mt-5"
-              >
+                  <input
+                    x-bind:required="showPreviewUrlInput"
+                    x-model="previewUrl"
+                    type="text"
+                    id="preview_url"
+                    name="preview_url"
+                    placeholder="預覽圖連結"
+                    value="{{ old('preview_url') }}"
+                    class="w-full border border-gray-300 rounded-md shadow-sm form-input focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+                  >
+                </div>
+              </template>
 
               <template x-if="previewUrl !== '' && showPreviewUrlInput">
                 <img

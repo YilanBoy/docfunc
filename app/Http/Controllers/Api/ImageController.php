@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rules\File;
 
 use function response;
 
@@ -20,13 +21,7 @@ class ImageController extends Controller
     public function store(Request $request): JsonResponse
     {
         $request->validate([
-            'upload' => [
-                'required',
-                'image',
-                'mimes:jpeg,png,jpg,gif,svg',
-                // 檔案最大 512 KB
-                'max:512'
-            ],
+            'upload' => ['required', File::image()->max(512)],
         ]);
 
         $file = $request->file('upload');

@@ -13,8 +13,8 @@ use Illuminate\Routing\Redirector;
 class CategoryController extends Controller
 {
     /**
-     * @param Category $category
-     * @param Request $request
+     * @param  Category  $category
+     * @param  Request  $request
      * @return Application|Factory|View|RedirectResponse|Redirector
      */
     public function show(Category $category, Request $request)

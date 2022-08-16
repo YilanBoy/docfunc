@@ -12,7 +12,7 @@ class TagController extends Controller
     /**
      * 特定標籤的文章列表
      *
-     * @param Tag $tag
+     * @param  Tag  $tag
      * @return Application|Factory|View
      */
     public function show(Tag $tag)

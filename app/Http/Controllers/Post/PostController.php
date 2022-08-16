@@ -42,8 +42,8 @@ class PostController extends Controller
     /**
      * 文章內容
      *
-     * @param Request $request
-     * @param Post $post
+     * @param  Request  $request
+     * @param  Post  $post
      * @return Application|Factory|View|RedirectResponse|Redirector
      */
     public function show(Request $request, Post $post)
@@ -70,7 +70,7 @@ class PostController extends Controller
     /**
      * 新增文章
      *
-     * @param PostRequest $request
+     * @param  PostRequest  $request
      * @return Application|RedirectResponse|Redirector
      */
     public function store(PostRequest $request)
@@ -101,8 +101,9 @@ class PostController extends Controller
     /**
      * 文章編輯頁面
      *
-     * @param Post $post
+     * @param  Post  $post
      * @return Application|Factory|View
+     *
      * @throws AuthorizationException
      */
     public function edit(Post $post)
@@ -116,9 +117,10 @@ class PostController extends Controller
     /**
      * 更新文章
      *
-     * @param PostRequest $request
-     * @param Post $post
+     * @param  PostRequest  $request
+     * @param  Post  $post
      * @return Application|RedirectResponse|Redirector
+     *
      * @throws AuthorizationException
      */
     public function update(PostRequest $request, Post $post)
@@ -144,8 +146,9 @@ class PostController extends Controller
     /**
      * 軟刪除文章
      *
-     * @param Post $post
+     * @param  Post  $post
      * @return RedirectResponse
+     *
      * @throws AuthorizationException
      */
     public function destroy(Post $post)

@@ -19,7 +19,7 @@ class PostRequest extends FormRequest
             'category_id' => ['required', 'numeric', 'exists:categories,id'],
             'preview_url' => ['nullable', 'url', 'regex:/(.jpeg|.JPEG|.jpg|.JPG|.png|.PNG)$/u'],
             'body' => ['required'],
-            'remove_tags_and_newline_body' => ['min:500', 'max:20000']
+            'remove_tags_and_newline_body' => ['min:500', 'max:20000'],
         ];
     }
 

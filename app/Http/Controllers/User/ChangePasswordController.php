@@ -19,8 +19,9 @@ class ChangePasswordController extends Controller
     /**
      * 用戶更新密碼頁面
      *
-     * @param User $user
+     * @param  User  $user
      * @return Application|Factory|View
+     *
      * @throws AuthorizationException
      */
     public function edit(User $user)
@@ -33,9 +34,10 @@ class ChangePasswordController extends Controller
     /**
      * 用戶送出更新密碼
      *
-     * @param Request $request
-     * @param User $user
+     * @param  Request  $request
+     * @param  User  $user
      * @return RedirectResponse
+     *
      * @throws AuthorizationException
      */
     public function update(Request $request, User $user)

@@ -44,7 +44,6 @@ class RegistrationTest extends TestCase
         $response->assertRedirect('verify-email');
     }
 
-
     public function test_guest_can_not_visit_register_page_when_register_is_not_allowed()
     {
         Setting::query()->forceCreate([

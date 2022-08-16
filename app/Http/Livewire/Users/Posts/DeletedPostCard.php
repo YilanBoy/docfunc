@@ -8,15 +8,24 @@ class DeletedPostCard extends Component
 {
     // category
     public string $categoryLink;
+
     public string $categoryName;
+
     public string $categoryIcon;
+
     // post
     public int $postId;
+
     public string $link;
+
     public string $title;
+
     public string $createdAt;
+
     public string $createdAtDiffForHumans;
+
     public int $commentCount;
+
     public string $destroyDate;
 
     public function render()

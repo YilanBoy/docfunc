@@ -19,6 +19,7 @@ use Spatie\Feed\FeedItem;
 /**
  * @property string $link_with_slug 帶有 slug 的文章連結，set by linkWithSlug()
  * @property string $tags_json json 格式的標籤列表, set by tagsJson()
+ *
  * @method transform($array, $transformers = null) Algolia method
  */
 class Post extends Model implements Feedable
@@ -35,7 +36,7 @@ class Post extends Model implements Feedable
         'category_id',
         'excerpt',
         'slug',
-        'preview_url'
+        'preview_url',
     ];
 
     public function comments(): HasMany
@@ -135,7 +136,7 @@ class Post extends Model implements Feedable
     public function toFeedItem(): FeedItem
     {
         return FeedItem::create()
-            ->id((string)$this->id)
+            ->id((string) $this->id)
             ->title($this->title)
             ->summary($this->excerpt)
             ->updated($this->updated_at)

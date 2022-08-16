@@ -21,7 +21,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        abort_if(!SettingService::isRegisterAllowed(), 503);
+        abort_if(! SettingService::isRegisterAllowed(), 503);
 
         return view('auth.register');
     }
@@ -29,14 +29,14 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
-        abort_if(!SettingService::isRegisterAllowed(), 503);
+        abort_if(! SettingService::isRegisterAllowed(), 503);
 
         $passwordRule = Password::min(8)->letters()->mixedCase()->numbers();
 

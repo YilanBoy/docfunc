@@ -13,12 +13,12 @@ class TwitterController extends Controller
     /**
      * 取得 Twitter Oembed 資訊
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Response|JsonResponse
      */
     public function __invoke(Request $request): Response|JsonResponse
     {
-        $apiUrl = 'https://publish.twitter.com/oembed?url=' . $request->url;
+        $apiUrl = 'https://publish.twitter.com/oembed?url='.$request->url;
         $apiUrl .= '&theme=dark';
         $apiUrl .= '&omit_script=true';
 

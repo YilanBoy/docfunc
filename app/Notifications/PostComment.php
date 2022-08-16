@@ -2,11 +2,10 @@
 
 namespace App\Notifications;
 
+use App\Models\Comment;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Models\Comment;
 
 class PostComment extends Notification
 {
@@ -29,7 +28,7 @@ class PostComment extends Notification
     public function toDatabase($notifiable)
     {
         $post = $this->comment->post;
-        $link = $post->link_with_slug . '#comments';
+        $link = $post->link_with_slug.'#comments';
 
         // 存入資料庫裡的數據
         return [
@@ -47,7 +46,7 @@ class PostComment extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     // public function toMail($notifiable)

@@ -12,8 +12,9 @@ class ForceDeletePostController extends Controller
     /**
      * 完全刪除文章
      *
-     * @param int $id 文章的 ID
+     * @param  int  $id 文章的 ID
      * @return RedirectResponse
+     *
      * @throws AuthorizationException
      */
     public function destroy(int $id)

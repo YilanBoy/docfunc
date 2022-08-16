@@ -35,7 +35,7 @@ test('the authenticated user can make a comment', function () {
         ->assertSee(1);
 
     $this->assertDatabaseHas('comments', [
-        'content' => $content
+        'content' => $content,
     ]);
 });
 
@@ -47,7 +47,7 @@ test('the author can delete his comment', function () {
     livewire(CommentsGroup::class, [
         'postId' => $comment->post_id,
         'offset' => 0,
-        'perPage' => 10
+        'perPage' => 10,
     ])
         ->call('destroy', $comment->id);
 
@@ -62,7 +62,7 @@ test('post author can delete other users comment', function () {
     livewire(CommentsGroup::class, [
         'postId' => $comment->post_id,
         'offset' => 0,
-        'perPage' => 10
+        'perPage' => 10,
     ])
         ->call('destroy', $comment->id);
 

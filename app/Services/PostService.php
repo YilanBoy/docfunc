@@ -11,7 +11,7 @@ class PostService
     /**
      * 生成用來優化 SEO 的 slug
      *
-     * @param string $title 標題
+     * @param  string  $title 標題
      * @return string
      */
     public static function makeSlug(string $title): string
@@ -24,13 +24,13 @@ class PostService
         $title = strtolower($title);
 
         // 後面加個 '-post' 是為了避免 slug 只有 'edit' 時，會與編輯頁面的路由發生衝突
-        return $title . '-post';
+        return $title.'-post';
     }
 
     /**
      * 過濾 html 格式的文章內容，避免 XSS 攻擊
      *
-     * @param string $html
+     * @param  string  $html
      * @return string
      */
     public static function htmlPurifier(string $html): string
@@ -85,8 +85,8 @@ class PostService
     /**
      * 生成文章內容的摘錄
      *
-     * @param string $body
-     * @param int $length
+     * @param  string  $body
+     * @param  int  $length
      * @return string
      */
     public static function makeExcerpt(string $body, int $length = 200): string
@@ -97,7 +97,7 @@ class PostService
     /**
      * 取得文章中的圖片連結
      *
-     * @param Post $post
+     * @param  Post  $post
      * @return array
      */
     public static function imagesInPost(Post $post): array

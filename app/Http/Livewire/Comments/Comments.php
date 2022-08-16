@@ -8,9 +8,13 @@ use Livewire\Component;
 class Comments extends Component
 {
     public int $postId;
+
     public int $count = 10;
+
     public int $perPage = 10;
+
     public bool $showMoreButtonIsActive = false;
+
     public int $commentsCount = 0;
 
     public function mount()

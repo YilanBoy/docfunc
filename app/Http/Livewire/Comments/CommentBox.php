@@ -11,7 +11,9 @@ use Livewire\Component;
 class CommentBox extends Component
 {
     public int $postId;
+
     public int $commentCount;
+
     public string $content = '';
 
     protected $listeners = ['updateCommentCount'];
@@ -29,7 +31,7 @@ class CommentBox extends Component
     // 儲存留言
     public function store()
     {
-        abort_if(!auth()->check(), 403);
+        abort_if(! auth()->check(), 403);
 
         $this->validate();
 

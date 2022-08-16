@@ -13,12 +13,12 @@ class YoutubeController extends Controller
     /**
      * 取得 Youtube Oembed 資訊
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Response|JsonResponse
      */
     public function __invoke(Request $request): Response|JsonResponse
     {
-        $apiUrl = 'https://www.youtube.com/oembed?url=' . $request->url;
+        $apiUrl = 'https://www.youtube.com/oembed?url='.$request->url;
         $apiUrl .= '&format=json';
         $apiUrl .= '&maxwidth=640';
         $apiUrl .= '&maxheight=360';

@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\Post\ForceDeletePostController;
 use App\Http\Controllers\Post\PostController;
 use App\Http\Controllers\Post\RestorePostController;
-use App\Http\Controllers\Post\ForceDeletePostController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\User\DeleteUserController;
@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 // 首頁
 Route::get('/', [PostController::class, 'index'])->name('root');
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
 
 // 會員相關頁面
 Route::prefix('users')->group(function () {
@@ -63,7 +63,7 @@ Route::prefix('posts')->group(function () {
 
     // {slug?} 當中的問號代表參數為選擇性
     Route::get('/{post}/{slug?}', [PostController::class, 'show'])
-        ->missing(fn() => redirect()->route('posts.index'))
+        ->missing(fn () => redirect()->route('posts.index'))
         ->name('posts.show');
 });
 

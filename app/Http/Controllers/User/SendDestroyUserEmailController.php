@@ -15,8 +15,9 @@ class SendDestroyUserEmailController extends Controller
     /**
      * 寄出刪除帳號的信件
      *
-     * @param User $user
+     * @param  User  $user
      * @return RedirectResponse
+     *
      * @throws AuthorizationException
      */
     public function store(User $user)

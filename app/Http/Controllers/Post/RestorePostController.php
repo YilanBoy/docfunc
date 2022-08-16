@@ -12,8 +12,9 @@ class RestorePostController extends Controller
     /**
      * 恢復軟刪除的文章
      *
-     * @param int $id 文章的 ID
+     * @param  int  $id 文章的 ID
      * @return RedirectResponse
+     *
      * @throws AuthorizationException
      */
     public function update(int $id)

@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Components;
 
-use Livewire\Component;
 use App\Models\Post;
+use Livewire\Component;
 
 class Search extends Component
 {

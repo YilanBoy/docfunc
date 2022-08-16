@@ -3,11 +3,11 @@
 namespace Tests\Feature;
 
 use App\Http\Livewire\Posts\Posts;
-use Livewire\Livewire;
-use App\Models\User;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class PostTest extends TestCase
@@ -112,7 +112,7 @@ class PostTest extends TestCase
         $post->category_id = 3;
         $post->save();
 
-        $this->get('/posts/' . $post->id)
+        $this->get('/posts/'.$post->id)
             ->assertStatus(200)
             ->assertSee($post->title)
             ->assertSee($post->body);
@@ -157,7 +157,7 @@ class PostTest extends TestCase
             ->post(route('posts.store'), [
                 'title' => 'This is a test post title',
                 'category_id' => 1,
-                'body' => $randomString
+                'body' => $randomString,
             ]);
 
         $latestPost = Post::latest()->first();
@@ -185,7 +185,7 @@ class PostTest extends TestCase
         $response = $this->put(route('posts.update', ['post' => $post->id]), [
             'title' => $newPostTitle,
             'category_id' => $newCategoryId,
-            'body' => $randomString
+            'body' => $randomString,
         ]);
 
         $latestPost = Post::latest()->first();
@@ -226,7 +226,7 @@ class PostTest extends TestCase
             'title' => 'This is a test post title',
             'user_id' => $user->id,
             'category_id' => 1,
-            'deleted_at' => now()
+            'deleted_at' => now(),
         ]);
 
         $this->assertSoftDeleted('posts', ['id' => $post->id]);

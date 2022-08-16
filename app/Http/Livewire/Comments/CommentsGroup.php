@@ -2,17 +2,19 @@
 
 namespace App\Http\Livewire\Comments;
 
-use App\Models\Post;
-use Livewire\Component;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Comment;
+use App\Models\Post;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Livewire\Component;
 
 class CommentsGroup extends Component
 {
     use AuthorizesRequests;
 
     public int $postId;
+
     public int $offset;
+
     public int $perPage;
 
     protected $listeners = ['refreshCommentsGroup' => '$refresh'];

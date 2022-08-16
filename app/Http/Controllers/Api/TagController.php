@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Tag;
-use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
+use App\Models\Tag;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 
 class TagController extends Controller
 {

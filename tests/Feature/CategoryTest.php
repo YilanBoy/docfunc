@@ -16,6 +16,6 @@ test('visit category show page and url don\'t include slug', function () {
         ->assertStatus(301)
         ->assertRedirect(route('categories.show', [
             'category' => $category->id,
-            'name' => $category->name
+            'name' => $category->name,
         ]));
 });

@@ -14,8 +14,9 @@ class DeleteUserController extends Controller
     /**
      * 用戶刪除頁面
      *
-     * @param User $user
+     * @param  User  $user
      * @return Application|Factory|View
+     *
      * @throws AuthorizationException
      */
     public function index(User $user)

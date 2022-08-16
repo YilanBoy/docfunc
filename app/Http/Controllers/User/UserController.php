@@ -25,7 +25,7 @@ class UserController extends Controller
     /**
      * 用戶個人頁面
      *
-     * @param User $user
+     * @param  User  $user
      * @return Application|Factory|View
      */
     public function index(User $user)
@@ -36,8 +36,9 @@ class UserController extends Controller
     /**
      * 編輯用戶個人資料
      *
-     * @param User $user
+     * @param  User  $user
      * @return Application|Factory|View
+     *
      * @throws AuthorizationException
      */
     public function edit(User $user)
@@ -51,9 +52,10 @@ class UserController extends Controller
     /**
      * 更新用戶個人資料
      *
-     * @param UserRequest $request
-     * @param User $user
+     * @param  UserRequest  $request
+     * @param  User  $user
      * @return RedirectResponse
+     *
      * @throws AuthorizationException
      */
     public function update(UserRequest $request, User $user)
@@ -73,14 +75,14 @@ class UserController extends Controller
     /**
      * 刪除用戶帳號
      *
-     * @param Request $request
-     * @param User $user
+     * @param  Request  $request
+     * @param  User  $user
      * @return RedirectResponse
      */
     public function destroy(Request $request, User $user)
     {
         // 確認網址是否有效
-        abort_if(!$request->hasValidSignature(), 401);
+        abort_if(! $request->hasValidSignature(), 401);
 
         Auth::guard('web')->logout();
 

@@ -105,7 +105,7 @@
                 name="tags"
                 value="{{ old('tags') }}"
                 placeholder="標籤 (最多 5 個)"
-                class="h-10 text-sm bg-white rounded-md dark:bg-gray-600"
+                class="w-full h-10 text-sm bg-white rounded-md dark:bg-gray-600"
               >
             </div>
 

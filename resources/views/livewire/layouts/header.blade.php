@@ -321,7 +321,7 @@
         </span>
       </button>
 
-      {{-- 電腦版-搜尋 --}}
+      {{-- dektop search --}}
       <livewire:components.search/>
 
       @guest

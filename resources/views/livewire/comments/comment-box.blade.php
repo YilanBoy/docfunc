@@ -31,95 +31,87 @@
   </div>
 
   @auth
-    {{-- 留言表單 Modal --}}
+    {{-- reply modal --}}
     <div
       x-cloak
       x-show="commentBoxOpen"
       x-on:keydown.window.escape="commentBoxOpen = false"
-      class="fixed inset-0 z-20 overflow-y-auto"
+      class="fixed inset-0 z-30 overflow-y-auto"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
     >
-      <div
-        x-cloak
-        x-show="commentBoxOpen"
-        x-transition:enter="ease-out duration-300"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="ease-in duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-        class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0"
-      >
-        <div
-          class="fixed inset-0 transition-opacity bg-gray-500/75 -z-10"
-          aria-hidden="true"
-        ></div>
+      <div class="flex items-end justify-center min-h-full p-4 text-center sm:items-center sm:p-0">
 
-        {{-- This element is to trick the browser into centering the modal contents. --}}
-        <span
-          class="hidden sm:inline-block sm:align-middle sm:h-screen"
-          aria-hidden="true"
-        >&#8203;</span>
-
-        {{-- 留言表單 --}}
+        {{-- modal --}}
         <div
-          x-cloak
           x-show="commentBoxOpen"
           x-transition:enter="ease-out duration-300"
-          x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100"
           x-transition:leave="ease-in duration-200"
-          x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-          x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          x-on:click.outside="commentBoxOpen = false"
-          x-trap.noscroll="commentBoxOpen"
-          class="inline-block p-5 overflow-hidden text-left align-bottom transition-all rounded-lg shadow-xl bg-gray-50 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full dark:bg-gray-700"
-        >
-          {{-- 留言提示 --}}
-          <span class="text-gray-700 dark:text-gray-50">
-            回覆此文章
-          </span>
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0"
+          x-description="Background backdrop, show/hide based on modal state."
+          class="fixed inset-0 transition-opacity bg-gray-500/75"
+        ></div>
 
-          <div class="mt-5 sm:flex sm:items-start">
-            <label
-              for="commentBox"
-              class="hidden"
-            >留言內容</label>
-            <textarea
-              id="commentBox"
-              x-ref="commentBox"
-              wire:model.lazy="content"
-              placeholder="分享你的想法 ~"
-              rows="5"
-              class="w-full border border-gray-300 rounded-md shadow-sm form-textarea focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
-            ></textarea>
-          </div>
-
-          <div class="mt-5 sm:flex sm:flex-row-reverse">
-            <button
-              x-on:click="$wire.store()"
-              type="button"
-              class="inline-flex justify-center w-full px-4 py-2 text-base font-medium bg-blue-600 border border-transparent rounded-md shadow-sm text-gray-50 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+        {{-- reply form --}}
+        <div class="fixed inset-0 z-10 overflow-y-auto">
+          <div class="flex items-end justify-center min-h-full p-4 text-center sm:items-center sm:p-0">
+            <div
+              x-show="commentBoxOpen"
+              x-transition:enter="ease-out duration-300"
+              x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+              x-transition:leave="ease-in duration-200"
+              x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+              x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              x-on:click.outside="commentBoxOpen = false"
+              x-trap.noscroll="commentBoxOpen"
+              class="inline-block p-5 overflow-hidden text-left align-bottom transition-all rounded-lg shadow-xl bg-gray-50 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full dark:bg-gray-700"
             >
-              留言
-            </button>
-            <button
-              x-on:click="commentBoxOpen = false"
-              type="button"
-              class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 border border-gray-300 rounded-md shadow-sm bg-gray-50 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm dark:bg-gray-500 dark:text-gray-50 dark:hover:bg-gray-600"
-            >
-              取消
-            </button>
+              <div class="sm:flex sm:items-start">
+                <label
+                  for="commentBox"
+                  class="hidden"
+                >留言內容</label>
+                <textarea
+                  id="commentBox"
+                  x-ref="commentBox"
+                  wire:model.lazy="content"
+                  placeholder="分享你的想法 ~"
+                  rows="5"
+                  class="w-full border border-gray-300 rounded-md shadow-sm form-textarea focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+                ></textarea>
+              </div>
 
-            <div class="flex justify-start flex-1">
-              <div class="flex items-center justify-center">
-                @error('content') <span class="text-red-400">{{ $message }}</span> @enderror
+              <div class="mt-5 sm:flex sm:flex-row-reverse">
+                <button
+                  x-on:click="$wire.store()"
+                  type="button"
+                  class="inline-flex justify-center w-full px-4 py-2 text-base font-medium bg-blue-600 border border-transparent rounded-md shadow-sm text-gray-50 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+                >
+                  留言
+                </button>
+                <button
+                  x-on:click="commentBoxOpen = false"
+                  type="button"
+                  class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 border border-gray-300 rounded-md shadow-sm bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm dark:bg-gray-500 dark:text-gray-50 dark:hover:bg-gray-600"
+                >
+                  取消
+                </button>
+
+                <div class="flex justify-start flex-1">
+                  <div class="flex items-center justify-center">
+                    @error('content') <span class="text-red-400">{{ $message }}</span> @enderror
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   @endauth

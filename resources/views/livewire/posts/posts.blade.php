@@ -1,4 +1,4 @@
-<div class="w-full mr-0 space-y-6 xl:w-7/12 xl:mr-6">
+<div class="w-full mr-0 space-y-6 lg:w-2/3 xl:w-7/12 xl:mr-6">
 
   {{-- 文章排序 --}}
   <div class="flex flex-col-reverse w-full md:flex-row md:justify-between">

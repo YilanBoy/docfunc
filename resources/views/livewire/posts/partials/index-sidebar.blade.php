@@ -4,10 +4,10 @@
     class="p-0.5 bg-gradient-to-br from-green-500 via-teal-500 to-sky-500 rounded-xl shadow-lg dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500">
     <div class="p-5 bg-gray-50 rounded-xl dark:bg-gray-700 dark:text-gray-50">
       <h3 class="pb-3 mb-3 text-lg font-semibold text-center border-b-2 border-black dark:border-white">
-        來到 <span class="font-mono">{{ config('app.name') }}</span>！
+        歡迎來到 <span class="font-mono">{{ config('app.name') }}</span>！
       </h3>
       <span>
-        紀錄生活上的大小事！
+        紀錄學習與生活上的大小事！
         <br>
         此部落格使用 Laravel、Alpine.js 與 Tailwind CSS 開發～
       </span>

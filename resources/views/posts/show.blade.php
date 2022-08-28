@@ -52,9 +52,10 @@
     </button>
 
     <div class="container mx-auto max-w-7xl">
-      <div class="grid grid-cols-5 gap-4">
-        <div class="hidden xl:block xl:col-span-1"></div>
-        <div class="flex flex-col items-center justify-start col-span-10 px-4 xl:col-span-3 xl:px-0">
+      <div class="grid grid-cols-6 gap-4">
+        <div class="hidden lg:block lg:col-span-1"></div>
+
+        <div class="flex flex-col items-center justify-start col-span-6 px-4 lg:col-span-4 lg:px-0">
 
           <x-card id="section" class="w-full">
             {{-- 軟刪除文章 form --}}
@@ -186,7 +187,8 @@
           {{-- 留言列表 --}}
           <livewire:comments.comments :postId="$post->id"/>
         </div>
-        <div class="hidden xl:block xl:col-span-1">
+
+        <div class="hidden lg:block lg:col-span-1">
           {{-- 文章選單-桌面裝置 --}}
           @include('posts.partials.desktop-show-menu')
         </div>

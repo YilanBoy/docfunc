@@ -42,6 +42,7 @@ module.exports = {
             typography: (theme) => ({
                 DEFAULT: {
                     css: {
+                        "font-size": "1.125rem",
                         blockquote: {
                             borderColor: theme("colors.slate.300"),
                             color: theme("colors.slate.500")

@@ -50,7 +50,7 @@
                   value="{{ old('title', $post->title) }}"
                   required
                   autofocus
-                  class="w-full border border-gray-300 rounded-md shadow-sm form-input focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+                  class="w-full h-12 border border-gray-300 rounded-md shadow-sm form-input text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
                 >
               </div>
 
@@ -62,7 +62,7 @@
                   id="category_id"
                   name="category_id"
                   required
-                  class="w-full h-10 border border-gray-300 rounded-md shadow-sm form-select focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50"
+                  class="w-full h-12 border border-gray-300 rounded-md shadow-sm form-select text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50"
                 >
                   @foreach ($categories as $category)
                     <option value="{{ $category->id }}" @selected($post->category_id == $category->id)>
@@ -82,7 +82,7 @@
                   name="tags"
                   value="{{ old('tags', $post->tags_json) }}"
                   placeholder="標籤（最多 5 個）"
-                  class="w-full h-10 text-sm bg-white rounded-md dark:bg-gray-600"
+                  class="w-full h-12 bg-white rounded-md dark:bg-gray-600"
                 >
               </div>
 

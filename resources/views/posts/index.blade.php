@@ -3,7 +3,7 @@
 {{-- 文章列表 --}}
 <x-app-layout>
   <div class="container mx-auto max-w-7xl">
-    <div class="flex flex-col justify-center items-center px-4 space-y-6 xl:space-y-0 xl:flex-row xl:px-0">
+    <div class="flex flex-col justify-center items-start px-4 space-y-6 xl:space-y-0 xl:flex-row xl:px-0">
       {{-- 文章列表 --}}
       <livewire:posts.posts
         :currentUrl="url()->current()"

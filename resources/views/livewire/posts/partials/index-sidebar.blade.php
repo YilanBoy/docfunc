@@ -1,4 +1,4 @@
-<div class="w-full space-y-6 lg:w-[700px] xl:w-[320px] xl:self-start">
+<div class="w-full space-y-6 lg:w-[700px] xl:w-[320px]">
   {{-- 介紹 --}}
   <div
     class="p-0.5 bg-gradient-to-br from-green-500 via-teal-500 to-sky-500 rounded-xl shadow-lg dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500">

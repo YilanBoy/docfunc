@@ -68,7 +68,7 @@
         </h1>
 
         {{-- 文章大綱 --}}
-        <div class="mt-2 text-gray-400">
+        <div class="mt-2 text-gray-400 text-base">
           {{ $post->excerpt }}
         </div>
 
@@ -86,7 +86,7 @@
         @endif
 
         {{-- 文章相關資訊 --}}
-        <div class="flex items-center mt-2 space-x-2 text-sm text-neutral-400">
+        <div class="flex items-center mt-2 space-x-2 text-base text-neutral-400">
           {{-- 文章分類資訊 --}}
           <div>
             <a

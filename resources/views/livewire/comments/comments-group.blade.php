@@ -24,7 +24,7 @@
           <p class="mt-3 text-gray-600 whitespace-pre-wrap sm:mt-0 dark:text-gray-50">{{ $comment->content }}</p>
 
           <div class="flex items-center justify-between mt-3">
-            <div class="flex items-center space-x-2 text-sm text-gray-400">
+            <div class="flex items-center space-x-2 text-base text-gray-400">
               <div>{{ $comment->user_name }}</div>
               <div>&bull;</div>
               <div>{{ $comment->created_at->diffForHumans() }}</div>

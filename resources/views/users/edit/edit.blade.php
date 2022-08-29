@@ -46,7 +46,7 @@
         value="{{ $user->email }}"
         placeholder="信箱"
         disabled
-        class="mt-2 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400  disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:shadow-none dark:disabled:bg-slate-700 dark:disabled:text-slate-400 dark:disabled:border-slate-500"
+        class="mt-2 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:shadow-none dark:disabled:bg-slate-700 dark:disabled:text-slate-400 dark:disabled:border-slate-500"
       >
     </div>
 
@@ -65,7 +65,7 @@
         placeholder="給自己取個有趣的暱稱吧！"
         required
         autofocus
-        class="w-full mt-2 border border-gray-300 rounded-md shadow-sm form-input focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+        class="w-full mt-2 border border-gray-300 rounded-md shadow-sm form-input text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
       >
     </div>
 
@@ -78,7 +78,7 @@
         name="introduction"
         placeholder="介紹一下你自己吧！"
         rows="5"
-        class="w-full mt-2 border border-gray-300 rounded-md shadow-sm form-textarea focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+        class="w-full mt-2 border border-gray-300 rounded-md shadow-sm form-textarea text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
       >{{ old('introduction', $user->introduction) }}</textarea>
     </div>
 

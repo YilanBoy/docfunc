@@ -15,7 +15,7 @@
     </span>
 
     {{-- 文章相關資訊 --}}
-    <div class="flex items-center mt-2 space-x-2 text-sm text-neutral-400">
+    <div class="flex items-center mt-2 space-x-2 text-base text-neutral-400">
       {{-- 文章分類資訊 --}}
       <div>
         <a

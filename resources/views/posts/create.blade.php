@@ -19,10 +19,10 @@
 {{-- create new post --}}
 <x-app-layout>
   <div class="container mx-auto max-w-7xl">
-    <div class="grid grid-cols-6 gap-4">
-      <div class="hidden lg:block lg:col-span-1"></div>
+    <div class="flex items-stretch justify-center space-x-4">
+      <div class="hidden lg:block lg:w-[200px]"></div>
 
-      <div class="col-span-6 px-4 lg:px-0 lg:col-span-4">
+      <div class="w-[750px] px-4 lg:px-0">
         <div class="flex flex-col items-center justify-center w-full space-y-6">
           {{-- title --}}
           <div class="text-2xl text-gray-800 fill-current dark:text-gray-50">
@@ -49,7 +49,7 @@
                   value="{{ old('title') }}"
                   required
                   autofocus
-                  class="w-full h-12 border border-gray-300 rounded-md shadow-sm form-input text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+                  class="w-full h-12 text-lg border border-gray-300 rounded-md shadow-sm form-input focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
                 >
               </div>
 
@@ -61,7 +61,7 @@
                   id="category_id"
                   name="category_id"
                   required
-                  class="w-full h-12 border border-gray-300 rounded-md shadow-sm form-select text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50"
+                  class="w-full h-12 text-lg border border-gray-300 rounded-md shadow-sm form-select focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50"
                 >
                   <option value="" hidden disabled @selected(!old('category_id'))>
                     請選擇分類
@@ -103,7 +103,7 @@
                     id="show_preview_url_input"
                     type="checkbox"
                     value=""
-                    class="form-checkbox w-5 h-5 rounded"
+                    class="w-5 h-5 rounded form-checkbox"
                   >
                   <label
                     for="show_preview_url_input"
@@ -131,7 +131,7 @@
                 <template x-if="previewUrl !== '' && showPreviewUrlInput">
                   <img
                     x-bind:src="previewUrl"
-                    class="w-64 rounded-md dark:border dark:border-gray-300 dark:text-gray-50 mt-5"
+                    class="w-64 mt-5 rounded-md dark:border dark:border-gray-300 dark:text-gray-50"
                     alt="圖片連結有誤"
                   >
                 </template>
@@ -164,7 +164,7 @@
       </div>
 
       {{-- desktop sidebar --}}
-      <div class="hidden h-full lg:block lg:col-span-1">
+      <div class="hidden lg:block lg:w-[200px]">
         <div class="sticky flex flex-col w-full -translate-y-1/2 top-1/2">
           {{-- charactor count --}}
           <div

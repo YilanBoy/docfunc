@@ -4,13 +4,12 @@
     commentTo: '',
     commentBoxOpen: false
   }"
-  @set-comment-box-open.window="commentBoxOpen = $event.detail.open"
-  @comment-box-focus.window="$nextTick(() => { $refs.commentBox.focus() })"
+  @comment-box-open.window="commentBoxOpen = $event.detail.open"
   class="w-full"
 >
 
   <div class="flex justify-between mt-6">
-    {{-- 顯示留言數目 --}}
+    {{-- show comments count --}}
     <span class="flex items-center dark:text-gray-50">
       <i class="bi bi-chat-square-text-fill"></i>
       <span class="ml-2">{{ $commentCount }} 則留言</span>

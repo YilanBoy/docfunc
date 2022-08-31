@@ -74,6 +74,7 @@
       }, 3000);
     }
   "
+  {{-- when change page, scroll to top --}}
   @scroll-to-top.window="window.scrollTo({ top: 0, behavior: 'smooth' })"
   class="antialiased text-gray-900 bg-gray-200 overscroll-y-none dark:bg-gray-800 font-noto text-lg"
 >

@@ -35,6 +35,7 @@ class Posts extends Component
 
     public function hydrate()
     {
+        // when change page, scroll to top
         $this->dispatchBrowserEvent('scroll-to-top');
     }
 

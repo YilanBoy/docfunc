@@ -28,7 +28,7 @@ class CommentBox extends Component
         return (new CommentRequest())->messages();
     }
 
-    // 儲存留言
+    // save the comment
     public function store()
     {
         abort_if(! auth()->check(), 403);
@@ -46,23 +46,23 @@ class CommentBox extends Component
             'content' => $this->content,
         ]);
 
-        // 更新資料庫的文章留言數
+        // update comment count in post table
         $post->updateCommentCount();
-        // 通知文章作者有新的評論
+        // notify the article author of new comments
         $post->user->postNotify(new PostComment($comment));
 
-        // 清空留言表單的內容
+        // empty the contents of the comment form
         $this->content = '';
-        // 觸發 alpine.js 的事件，關閉 comment box modal
-        $this->dispatchBrowserEvent('set-comment-box-open', ['open' => false]);
-        // 更新頁面上的留言數量
+        // dispatch the event of alpine.js, close the comment box modal
+        $this->dispatchBrowserEvent('comment-box-open', ['open' => false]);
+
         $this->updateCommentCount();
 
-        // 更新留言列表
+        // refresh comment list
         $this->emit('refreshCommentsGroup');
     }
 
-    // 更新頁面上的留言數量
+    // update comment count in post show page
     public function updateCommentCount()
     {
         $post = Post::findOrFail($this->postId);

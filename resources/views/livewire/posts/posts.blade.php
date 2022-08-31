@@ -1,7 +1,7 @@
 <div class="w-full mr-0 space-y-6 md:w-[700px] xl:mr-6">
 
   {{-- 文章排序 --}}
-  <div class="flex flex-col-reverse w-full md:flex-row md:justify-between">
+  <div class="flex flex-col-reverse w-full md:flex-row md:justify-between text-sm">
 
     <nav
       class="flex w-full p-1 space-x-1 md:w-auto rounded-xl bg-gray-300 dark:bg-gray-600 dark:text-gray-50">
@@ -74,7 +74,7 @@
 
         {{-- 文章標籤 --}}
         @if ($post->tags_count > 0)
-          <div class="flex flex-wrap items-center mt-2">
+          <div class="flex flex-wrap items-center mt-2 text-base">
             <span class="mr-1 text-neutral-400"><i class="bi bi-tags-fill"></i></span>
 
             @foreach ($post->tags as $tag)

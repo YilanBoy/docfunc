@@ -19,7 +19,7 @@
       >
         {{-- 切換顯示選單 --}}
         <nav
-          class="flex w-full p-1 space-x-1 md:w-4/5 lg:w-1/2 rounded-xl bg-gray-300 dark:bg-gray-600 dark:text-gray-50">
+          class="flex w-full p-1 space-x-1 md:w-4/5 lg:w-1/2 rounded-xl bg-gray-300 dark:bg-gray-600 dark:text-gray-50 text-sm">
 
           @php
             $tabs = [

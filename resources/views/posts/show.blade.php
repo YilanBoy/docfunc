@@ -79,7 +79,7 @@
             </div>
 
             {{-- 文章資訊 --}}
-            <div class="flex items-center mt-4 space-x-2 text-neutral-400">
+            <div class="flex items-center mt-4 space-x-2 text-neutral-400 text-base">
               {{-- 分類 --}}
               <div>
                 <a
@@ -135,7 +135,7 @@
 
             {{-- 文章標籤 --}}
             @if ($post->tags()->exists())
-              <div class="flex items-center mt-4">
+              <div class="flex items-center mt-4 text-base">
                 <span class="mr-1 text-neutral-400"><i class="bi bi-tags-fill"></i></span>
 
                 @foreach ($post->tags as $tag)

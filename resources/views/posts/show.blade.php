@@ -53,7 +53,7 @@
 
     <div class="container mx-auto max-w-7xl">
       <div class="flex space-x-4 justify-center items-stretch">
-        <div class="hidden lg:block lg:w-[200px]"></div>
+        <div class="hidden lg:block lg:w-[100px]"></div>
 
         <div class="flex flex-col items-center justify-start w-[750px] px-4 lg:px-0">
 
@@ -188,7 +188,7 @@
           <livewire:comments.comments :postId="$post->id"/>
         </div>
 
-        <div class="hidden lg:block lg:w-[200px]">
+        <div class="hidden lg:block lg:w-[100px]">
           {{-- 文章選單-桌面裝置 --}}
           @include('posts.partials.desktop-show-menu')
         </div>

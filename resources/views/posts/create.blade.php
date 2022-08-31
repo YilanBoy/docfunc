@@ -20,7 +20,7 @@
 <x-app-layout>
   <div class="container mx-auto max-w-7xl">
     <div class="flex items-stretch justify-center space-x-4">
-      <div class="hidden lg:block lg:w-[200px]"></div>
+      <div class="hidden xl:block xl:w-[200px]"></div>
 
       <div class="w-[750px] px-4 lg:px-0">
         <div class="flex flex-col items-center justify-center w-full space-y-6">
@@ -164,7 +164,7 @@
       </div>
 
       {{-- desktop sidebar --}}
-      <div class="hidden lg:block lg:w-[200px]">
+      <div class="hidden xl:block xl:w-[200px]">
         <div class="sticky flex flex-col w-full -translate-y-1/2 top-1/2">
           {{-- charactor count --}}
           <div

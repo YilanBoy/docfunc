@@ -20,7 +20,7 @@
       {{-- 文章發布時間 --}}
       <div>
         <span title="文章發布於：{{ $createdAt }}">
-          <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $createdAtDiffForHumans }}</span>
+          <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $createdAtToDateString }}</span>
         </span>
       </div>
       <div>&bull;</div>

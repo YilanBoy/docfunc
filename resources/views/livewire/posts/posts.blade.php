@@ -114,11 +114,11 @@
           <div>
             <a
               href="{{ $post->link_with_slug }}"
-              title="文章發布於：{{ $post->created_at }}"
+              title="文章發布於：{{ $post->created_at->toDateString() }}"
               class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
               <i class="bi bi-clock-fill"></i><span
-                class="hidden ml-2 md:inline">{{ $post->created_at->diffForHumans() }}</span>
+                class="hidden ml-2 md:inline">{{ $post->created_at->toDateString() }}</span>
             </a>
           </div>
           <div>&bull;</div>

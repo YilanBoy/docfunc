@@ -22,7 +22,7 @@ class PostCard extends Component
 
     public string $createdAt;
 
-    public string $createdAtDiffForHumans;
+    public string $createdAtToDateString;
 
     public int $commentCount;
 

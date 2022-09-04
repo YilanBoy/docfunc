@@ -34,7 +34,7 @@
           class="hover:text-neutral-500 dark:hover:text-neutral-300"
           title="文章發布於：{{ $createdAt }}"
         >
-          <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $createdAtDiffForHumans }}</span>
+          <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $createdAtToDateString }}</span>
         </a>
       </div>
       <div>&bull;</div>

@@ -7,7 +7,7 @@
 @endif
 
 @section('css')
-  {{-- 程式碼區塊高亮 --}}
+  {{-- highlight code block --}}
   @vite('node_modules/highlight.js/scss/atom-one-dark.scss')
 
   <style>
@@ -22,25 +22,24 @@
 @endsection
 
 @section('scripts')
-  {{-- 至頂按鈕 --}}
+  {{-- to the top button --}}
   @vite('resources/ts/scroll-to-top-btn.ts')
   {{-- media embed --}}
   @vite('resources/ts/oembed/twitter-widgets.ts')
   @vite('resources/ts/oembed/oembed-media-embed.ts')
-  {{-- 程式碼區塊高亮 --}}
+  {{-- highlight code block --}}
   @vite('resources/ts/highlight.ts')
-  {{-- 程式碼複製按鈕 --}}
+  {{-- code block copy button --}}
   @vite('resources/ts/copy-code-btn.ts')
-  {{-- 文章閱讀進度條 --}}
+  {{-- post read pregress bar --}}
   @vite('resources/ts/progress-bar.ts')
-  {{-- 社群分享 --}}
+  {{-- social media share button --}}
   @vite('resources/ts/sharer.ts')
 @endsection
 
-{{-- 文章內容 --}}
 <x-app-layout>
   <div class="relative animate-fade-in">
-    {{-- 置頂按鈕 --}}
+    {{-- to the top button --}}
     <button
       id="scroll-to-top-btn"
       title="Go to top"
@@ -53,12 +52,12 @@
 
     <div class="container mx-auto max-w-7xl">
       <div class="flex space-x-4 justify-center items-stretch">
-        <div class="hidden lg:block lg:w-[100px]"></div>
+        <div class="hidden lg:block lg:w-1/6"></div>
 
-        <div class="flex flex-col items-center justify-start w-[750px] px-4 lg:px-0">
+        <div class="flex flex-col items-center justify-start w-full lg:w-2/3 xl:w-7/12 px-4 lg:px-0">
 
           <x-card id="section" class="w-full">
-            {{-- 軟刪除文章 form --}}
+            {{-- soft delete form --}}
             <form
               id="soft-delete-post"
               action="{{ route('posts.destroy', ['post' => $post->id]) }}"
@@ -70,17 +69,17 @@
             </form>
 
             <div class="flex justify-between">
-              {{-- 文章標題 --}}
+              {{-- post title --}}
               <h1 class="text-3xl font-bold grow dark:text-gray-50">{{ $post->title }}</h1>
 
-              {{-- 文章選單-行動裝置 --}}
+              {{-- mobile post sidebar --}}
               @includeWhen(auth()->id() === $post->user_id, 'posts.partials.mobile-show-menu')
 
             </div>
 
-            {{-- 文章資訊 --}}
+            {{-- post information --}}
             <div class="flex items-center mt-4 space-x-2 text-neutral-400 text-base">
-              {{-- 分類 --}}
+              {{-- classfication --}}
               <div>
                 <a
                   class="hover:text-neutral-500 dark:hover:text-neutral-300"
@@ -94,7 +93,7 @@
 
               <div>&bull;</div>
 
-              {{-- 作者 --}}
+              {{-- author --}}
               <div>
                 <a
                   class="hover:text-neutral-500 dark:hover:text-neutral-300"
@@ -107,21 +106,26 @@
 
               <div class="hidden md:block">&bull;</div>
 
-              {{-- 發布時間 --}}
+              {{-- post created time --}}
               <div class="hidden md:block">
                 <a
                   class="hover:text-neutral-500 dark:hover:text-neutral-300"
                   href="{{ $post->link_with_slug }}"
-                  title="文章發布於：{{ $post->created_at }}"
+                  title="發表時間：{{ $post->created_at->toDateString() }}"
                 >
                   <i class="bi bi-clock-fill"></i>
-                  <span class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
+                  <span class="ml-2">{{ $post->created_at->toDateString() }}</span>
+
+                  @if ($post->created_at->toDateString() !== $post->updated_at->toDateString())
+                    <span>{{ '(最後更新於 ' . $post->updated_at->toDateString() . ')' }}</span>
+                  @endif
+
                 </a>
               </div>
 
               <div class="hidden md:block">&bull;</div>
 
-              {{-- 留言數 --}}
+              {{-- comments count --}}
               <div class="hidden md:block">
                 <a
                   class="hover:text-neutral-500 dark:hover:text-neutral-300"
@@ -131,9 +135,10 @@
                     class="ml-2">{{ $post->comment_count }}</span>
                 </a>
               </div>
+
             </div>
 
-            {{-- 文章標籤 --}}
+            {{-- post tags --}}
             @if ($post->tags()->exists())
               <div class="flex items-center mt-4 text-base">
                 <span class="mr-1 text-neutral-400"><i class="bi bi-tags-fill"></i></span>
@@ -146,7 +151,7 @@
               </div>
             @endif
 
-            {{-- 文章內容 --}}
+            {{-- post body --}}
             <div
               id="blog-post"
               class="mt-4 blog-post max-w-none"
@@ -155,7 +160,7 @@
             </div>
           </x-card>
 
-          {{-- 作者簡介 --}}
+          {{-- about author --}}
           <x-card class="grid w-full grid-cols-12 gap-4 mt-6">
             <div class="flex items-center justify-start col-span-12 md:col-span-2 md:justify-center">
               <img
@@ -176,7 +181,7 @@
             </div>
           </x-card>
 
-          {{-- 留言回覆 --}}
+          {{-- comment box --}}
           @auth
             <livewire:comments.comment-box
               :postId="$post->id"
@@ -184,11 +189,11 @@
             />
           @endauth
 
-          {{-- 留言列表 --}}
+          {{-- comments list --}}
           <livewire:comments.comments :postId="$post->id"/>
         </div>
 
-        <div class="hidden lg:block lg:w-[100px]">
+        <div class="hidden lg:block lg:w-1/6">
           {{-- 文章選單-桌面裝置 --}}
           @include('posts.partials.desktop-show-menu')
         </div>

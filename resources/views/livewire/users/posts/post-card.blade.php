@@ -65,7 +65,7 @@
     <div class="flex items-center mt-2 space-x-2 md:mt-0">
       {{-- 編輯文章 --}}
       <a
-        href="{{ route('posts.edit', ['post' => $postId]) }}"
+        href="{{ route('posts.edit', ['id' => $postId]) }}"
         class="inline-flex items-center justify-center w-10 h-10 transition duration-150 ease-in-out bg-green-500 border border-transparent rounded-md text-gray-50 hover:bg-green-600 active:bg-green-700 focus:outline-none focus:border-green-700 focus:ring ring-green-300"
       >
         <i class="bi bi-pencil-square"></i>

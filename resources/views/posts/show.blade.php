@@ -21,7 +21,7 @@
   </style>
 @endsection
 
-@section('scripts')
+@push('script')
   {{-- to the top button --}}
   @vite('resources/ts/scroll-to-top-btn.ts')
   {{-- media embed --}}
@@ -35,7 +35,7 @@
   @vite('resources/ts/progress-bar.ts')
   {{-- social media share button --}}
   @vite('resources/ts/sharer.ts')
-@endsection
+@endpush
 
 <x-app-layout>
   <div class="relative animate-fade-in">

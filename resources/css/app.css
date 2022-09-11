@@ -65,3 +65,23 @@ span.text-big {
 ::-webkit-scrollbar-thumb:hover {
     background: hsl(217, 19%, 27%);
 }
+
+progress {
+    width: 100%;
+}
+
+progress::-webkit-progress-bar {
+    border-radius: 0.25rem;
+    background-color: transparent;
+}
+
+progress::-webkit-progress-value {
+    border-radius: 0.25rem;
+    background-color: limegreen;
+}
+
+.dark progress::-webkit-progress-value {
+    border-radius: 0.25rem;
+    background-color: dodgerblue;
+}
+

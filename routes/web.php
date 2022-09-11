@@ -49,13 +49,11 @@ Route::prefix('posts')->group(function () {
     Route::middleware(['auth', 'verified'])->group(function () {
         Route::controller(PostController::class)->group(function () {
             Route::get('/create', 'create')->name('posts.create');
-            Route::post('/', 'store')->name('posts.store');
-            Route::get('/{post}/edit', 'edit')->name('posts.edit');
-            Route::put('/{post}', 'update')->name('posts.update');
+            Route::get('/{id}/edit', 'edit')->name('posts.edit');
             // 軟刪除文章
             Route::delete('/{post}', 'destroy')->name('posts.destroy');
         });
-        // 完全刪除文章f
+        // 完全刪除文章
         Route::delete('/{id}/force-delete', [ForceDeletePostController::class, 'destroy'])->name('posts.forceDelete');
         // 恢復軟刪除的文章
         Route::post('/{id}/restore', [RestorePostController::class, 'update'])->name('posts.restore');

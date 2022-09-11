@@ -1,4 +1,4 @@
-import './bootstrap';
+import "./bootstrap";
 
 import Alpine from "alpinejs";
 import focus from "@alpinejs/focus";
@@ -50,7 +50,7 @@ Alpine.data("alertComponent", (alertObject = null) => ({
         }
 
         this.openAlertBox = true;
-    }
+    },
 }));
 
 Alpine.start();

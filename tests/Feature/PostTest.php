@@ -134,71 +134,71 @@ class PostTest extends TestCase
             ->assertSuccessful();
     }
 
-    public function test_guest_can_not_create_post()
-    {
-        $response = $this->post(route('posts.store'), [
-            'title' => 'This is a test post title',
-            'category_id' => 1,
-        ]);
+    // public function test_guest_can_not_create_post()
+    // {
+    //     $response = $this->post(route('posts.store'), [
+    //         'title' => 'This is a test post title',
+    //         'category_id' => 1,
+    //     ]);
+    //
+    //     $response->assertStatus(302)
+    //         ->assertRedirect(route('login'));
+    //
+    //     $this->assertDatabaseCount('posts', 0);
+    // }
 
-        $response->assertStatus(302)
-            ->assertRedirect(route('login'));
+    // public function test_authenticated_user_can_create_post()
+    // {
+    //     $user = User::factory()->create();
+    //
+    //     $randomString = $this->faker->sentence(1000);
+    //
+    //     $response = $this->actingAs($user)
+    //         ->post(route('posts.store'), [
+    //             'title' => 'This is a test post title',
+    //             'category_id' => 1,
+    //             'body' => $randomString,
+    //         ]);
+    //
+    //     $latestPost = Post::latest()->first();
+    //
+    //     $response->assertStatus(302)
+    //         ->assertRedirect(route('posts.show', ['post' => $latestPost->id, 'slug' => $latestPost->slug]));
+    //
+    //     $this->assertDatabaseHas('posts', [
+    //         'title' => 'This is a test post title',
+    //         'category_id' => 1,
+    //         'body' => $randomString,
+    //     ]);
+    // }
 
-        $this->assertDatabaseCount('posts', 0);
-    }
-
-    public function test_authenticated_user_can_create_post()
-    {
-        $user = User::factory()->create();
-
-        $randomString = $this->faker->sentence(1000);
-
-        $response = $this->actingAs($user)
-            ->post(route('posts.store'), [
-                'title' => 'This is a test post title',
-                'category_id' => 1,
-                'body' => $randomString,
-            ]);
-
-        $latestPost = Post::latest()->first();
-
-        $response->assertStatus(302)
-            ->assertRedirect(route('posts.show', ['post' => $latestPost->id, 'slug' => $latestPost->slug]));
-
-        $this->assertDatabaseHas('posts', [
-            'title' => 'This is a test post title',
-            'category_id' => 1,
-            'body' => $randomString,
-        ]);
-    }
-
-    public function test_author_can_update_his_post()
-    {
-        $post = Post::factory()->create();
-
-        $this->actingAs($post->user);
-
-        $newPostTitle = 'This is a new test post title';
-        $newCategoryId = 2;
-        $randomString = $this->faker->sentence(1000);
-
-        $response = $this->put(route('posts.update', ['post' => $post->id]), [
-            'title' => $newPostTitle,
-            'category_id' => $newCategoryId,
-            'body' => $randomString,
-        ]);
-
-        $latestPost = Post::latest()->first();
-
-        $response->assertStatus(302)
-            ->assertRedirect(route('posts.show', ['post' => $latestPost->id, 'slug' => $latestPost->slug]));
-
-        $this->assertDatabaseHas('posts', [
-            'title' => $newPostTitle,
-            'category_id' => $newCategoryId,
-            'body' => $randomString,
-        ]);
-    }
+    // public function test_author_can_update_his_post()
+    // {
+    //     $post = Post::factory()->create();
+    //
+    //     $this->actingAs($post->user);
+    //
+    //     $newPostTitle = 'This is a new test post title';
+    //     $newCategoryId = 2;
+    //     $randomString = $this->faker->sentence(1000);
+    //
+    //     $response = $this->put(route('posts.update', ['post' => $post->id]), [
+    //         'title' => $newPostTitle,
+    //         'category_id' => $newCategoryId,
+    //         'body' => $randomString,
+    //     ]);
+    //
+    //     $latestPost = Post::latest()->first();
+    //
+    //     $response->assertStatus(302)
+    //         ->assertRedirect(route('posts.show', ['post' => $latestPost->id, 'slug' => $latestPost->slug]));
+    //
+    //     $this->assertDatabaseHas('posts', [
+    //         'title' => $newPostTitle,
+    //         'category_id' => $newCategoryId,
+    //         'body' => $randomString,
+    //     ]);
+    // }
 
     public function test_author_can_soft_delete_own_post()
     {

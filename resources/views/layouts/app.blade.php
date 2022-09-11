@@ -59,8 +59,7 @@
 
   <livewire:styles/>
 
-  {{-- Head Scripts --}}
-  @yield('scriptsInHead')
+  @stack('scriptInHead')
 </head>
 
 <body
@@ -98,7 +97,7 @@
 {{-- Flash Alert --}}
 <x-alert/>
 
-@yield('scripts')
+@stack('script')
 </body>
 
 </html>

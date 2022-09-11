@@ -43,7 +43,7 @@
 
     <a
       role="button"
-      href="{{ route('posts.edit', ['post' => $post->id]) }}"
+      href="{{ route('posts.edit', ['id' => $post->id]) }}"
       class="flex items-center justify-center text-gray-400 w-14 h-14 group"
     >
       <span class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:rotate-12">

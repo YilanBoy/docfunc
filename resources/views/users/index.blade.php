@@ -1,8 +1,8 @@
 @section('title', $user->name . ' 的個人頁面')
 
-@section('scripts')
+@push('script')
   @vite('resources/ts/count-up.ts')
-@endsection
+@endpush
 
 {{-- 個人頁面 --}}
 <x-app-layout>

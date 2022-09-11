@@ -1,11 +1,11 @@
 import Tagify from "@yaireo/tagify";
 
-const tagInput = <HTMLInputElement>document.querySelector("#tag-input");
+const tags = <HTMLInputElement>document.querySelector("#tags");
 
 fetch("/api/tags")
     .then((response) => response.json())
     .then(function (tagsJson) {
-        let tagify = new Tagify(tagInput, {
+        new Tagify(tags, {
             whitelist: tagsJson,
             enforceWhitelist: true,
             maxTags: 5,

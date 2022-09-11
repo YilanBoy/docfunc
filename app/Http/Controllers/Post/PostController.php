@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PostRequest;
-use App\Models\Category;
 use App\Models\Post;
 use App\Services\FormatTransferService;
 use App\Services\PostService;
@@ -64,83 +62,18 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create', ['categories' => Category::all()]);
-    }
-
-    /**
-     * 新增文章
-     *
-     * @param  PostRequest  $request
-     * @return Application|RedirectResponse|Redirector
-     */
-    public function store(PostRequest $request)
-    {
-        // 過濾文章中可能造成 XSS 的內容
-        $body = $this->postService->htmlPurifier($request->body);
-
-        $post = Post::create([
-            'user_id' => auth()->id(),
-            'title' => $request->title,
-            'category_id' => $request->category_id,
-            'body' => $body,
-            'slug' => $this->postService->makeSlug($request->title),
-            'preview_url' => $request->preview_url,
-            'excerpt' => $this->postService->makeExcerpt($body),
-        ]);
-
-        // 將傳過來的 JSON 資料轉成 array
-        $tagIdsArray = $this->formatTransferService->tagsJsonToTagIdsArray($request->tags);
-
-        // 在關聯表新增關聯
-        $post->tags()->attach($tagIdsArray);
-
-        return redirect($post->link_with_slug)
-            ->with('alert', ['status' => 'success', 'message' => '成功新增文章！']);
+        return view('posts.create');
     }
 
     /**
      * 文章編輯頁面
      *
-     * @param  Post  $post
+     * @param  int  $id
      * @return Application|Factory|View
-     *
-     * @throws AuthorizationException
      */
-    public function edit(Post $post)
+    public function edit(int $id)
     {
-        // 只能編輯自己發佈的文章，規則寫在 PostPolicy
-        $this->authorize('update', $post);
-
-        return view('posts.edit', ['post' => $post, 'categories' => Category::all()]);
-    }
-
-    /**
-     * 更新文章
-     *
-     * @param  PostRequest  $request
-     * @param  Post  $post
-     * @return Application|RedirectResponse|Redirector
-     *
-     * @throws AuthorizationException
-     */
-    public function update(PostRequest $request, Post $post)
-    {
-        $this->authorize('update', $post);
-
-        $post->fill($request->validated());
-        $post->slug = $this->postService->makeSlug($request->title);
-        $post->body = $this->postService->htmlPurifier($request->body);
-        $post->excerpt = $this->postService->makeExcerpt($post->body);
-        $post->preview_url = $request->preview_url;
-        $post->save();
-
-        $tagIdsArray = $this->formatTransferService->tagsJsonToTagIdsArray($request->tags);
-
-        // 關聯表更新
-        $post->tags()->sync($tagIdsArray);
-
-        return redirect($post->link_with_slug)
-            ->with('alert', ['status' => 'success', 'message' => '成功更新文章！']);
+        return view('posts.edit', compact('id'));
     }
 
     /**

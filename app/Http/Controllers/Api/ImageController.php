@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Services\FileService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -24,10 +25,9 @@ class ImageController extends Controller
         ]);
 
         $file = $request->file('upload');
-        $imageName = date('Y_m_d_H_i_s').'_'.uniqid().'.'.$file->getClientOriginalExtension();
-        $filePath = 'images/'.$imageName;
-        Storage::disk('s3')->put($filePath, file_get_contents($file));
+        $imageName = FileService::generateImageFileName($file);
+        Storage::disk('s3')->put('images/'.$imageName, file_get_contents($file));
 
-        return response()->json(['url' => Storage::disk('s3')->url($filePath)]);
+        return response()->json(['url' => Storage::disk('s3')->url('images/'.$imageName)]);
     }
 }

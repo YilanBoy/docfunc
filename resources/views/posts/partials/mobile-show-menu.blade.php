@@ -27,7 +27,7 @@
   >
     {{-- 編輯文章 --}}
     <a
-      href="{{ route('posts.edit', ['post' => $post->id]) }}"
+      href="{{ route('posts.edit', ['id' => $post->id]) }}"
       role="menuitem"
       tabindex="-1"
       class="block px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100 dark:hover:bg-gray-600"

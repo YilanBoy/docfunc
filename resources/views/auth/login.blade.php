@@ -2,11 +2,11 @@
 
 {{-- Google reCAPTCHA --}}
 @if (app()->isProduction())
-  @section('scriptsInHead')
+  @push('scriptInHead')
     <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
-  @endsection
+  @endpush
 
-  @section('scripts')
+  @push('script')
     <script>
       document.getElementById("login").addEventListener("submit", function (event) {
         event.preventDefault();
@@ -19,7 +19,7 @@
         });
       });
     </script>
-  @endsection
+  @endpush
 @endif
 
 <x-app-layout>

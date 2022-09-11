@@ -9,14 +9,13 @@
         "prettier-plugin-tailwindcss": "^0.1.11"
     },
     "dependencies": {
-        "@alpinejs/persist": "^3.10.3",
         "@alpinejs/collapse": "^3.10.2",
         "@alpinejs/focus": "^3.10.2",
         "@tailwindcss/forms": "^0.5.2",
         "@tailwindcss/typography": "^0.5.2",
         "@types/yaireo__tagify": "^4.12.0",
         "@yaireo/tagify": "^4.12.0",
-        "alpinejs": "^3.10.2",
+        "alpinejs": "^3.10.3",
         "autoprefixer": "^10.4.7",
         "axios": "^0.27",
         "highlight.js": "^11.5.1",

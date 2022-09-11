@@ -13,7 +13,7 @@
 >
   <div class="hidden xl:block xl:w-1/6"></div>
 
-  <div class="w-full lg:w-2/3 xl:7/12 px-4 lg:px-0">
+  <div class="w-full px-4 lg:w-2/3 xl:7/12 lg:px-0">
     <div class="flex flex-col items-center justify-center w-full space-y-6">
 
       <div class="text-2xl text-gray-700 fill-current dark:text-gray-50">
@@ -137,8 +137,7 @@
           <div wire:ignore class="mt-5 max-w-none">
             <label for="editor" class="hidden">內文</label>
 
-            <textarea id="editor" name="body"
-                      placeholder="分享一些很棒的事情吧!">{{ $this->body }}</textarea>
+            <div id="editor">{!! $this->body !!}</div>
           </div>
 
           {{-- mobile device --}}
@@ -236,9 +235,9 @@
 
       const editorInstance = domEditableElement.ckeditorInstance;
 
-      domEditableElement.addEventListener('DOMSubtreeModified', () => {
+      editorInstance.model.document.on('change:data', () => {
         debounce(() => {
-          @this.set('body', editorInstance.getData())
+          @this.set('body', editorInstance.getData());
         }, 500);
       });
     });

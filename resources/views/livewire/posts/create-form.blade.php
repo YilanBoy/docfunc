@@ -1,7 +1,5 @@
 <div
-  x-data="{
-    loadFinish: false
-  }"
+  x-data="{ loadFinish: false }"
   x-init="
     window.addEventListener('load', () => {
       loadFinish = true;
@@ -240,7 +238,8 @@
 
       editorInstance.model.document.on('change:data', () => {
         debounce(() => {
-          @this.set('body', editorInstance.getData());
+          @this.
+          set('body', editorInstance.getData());
         }, 500);
       });
     });

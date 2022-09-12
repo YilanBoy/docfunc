@@ -1,7 +1,5 @@
 <div
-  x-data="{
-    loadFinish: false
-  }"
+  x-data="{ loadFinish: false }"
   x-init="
     window.addEventListener('load', () => {
       loadFinish = true;
@@ -190,7 +188,8 @@
         form="edit-post"
         class="inline-flex items-center justify-center mt-4 transition duration-150 ease-in-out bg-blue-500 border border-transparent w-14 h-14 group rounded-xl text-gray-50 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring ring-blue-300"
       >
-        <span wire:loading.remove class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:rotate-12">
+        <span wire:loading.remove
+              class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:rotate-12">
           <i class="bi bi-save2-fill"></i>
         </span>
 
@@ -215,7 +214,8 @@
     let tags = document.querySelector('#tags');
 
     tags.addEventListener('change', function (event) {
-      @this.set('tags', event.target.value);
+      @this.
+      set('tags', event.target.value);
     });
   </script>
 
@@ -237,7 +237,8 @@
 
       editorInstance.model.document.on('change:data', () => {
         debounce(() => {
-          @this.set('body', editorInstance.getData());
+          @this.
+          set('body', editorInstance.getData());
         }, 500);
       });
     });

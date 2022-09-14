@@ -3,10 +3,14 @@
 use App\Http\Livewire\Posts\CreateForm;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Redis;
 use function Pest\Laravel\get;
+
+const REDIS_KEY_EXISTS_RETURN_VALUE = 1;
 
 uses(RefreshDatabase::class);
 
@@ -41,15 +45,12 @@ test('authenticated user can create post', function ($categoryId) {
 test('title at least 4 characters', function () {
     $this->actingAs(User::factory()->create());
 
-    $title = str()->random(3);
-    $randomString = str()->random(500);
-
     Livewire::test(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
     ])
-        ->set('title', $title)
+        ->set('title', str()->random(3))
         ->set('category_id', Category::pluck('id')->random())
-        ->set('body', $randomString)
+        ->set('body', str()->random(500))
         ->call('store')
         ->assertHasErrors(['title' => 'min:4']);
 });
@@ -57,15 +58,12 @@ test('title at least 4 characters', function () {
 test('category id can\'t be null', function () {
     $this->actingAs(User::factory()->create());
 
-    $title = str()->random(4);
-    $randomString = str()->random(500);
-
     Livewire::test(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
     ])
-        ->set('title', $title)
+        ->set('title', str()->random(4))
         ->set('category_id')
-        ->set('body', $randomString)
+        ->set('body', str()->random(500))
         ->call('store')
         ->assertHasErrors(['category_id' => 'required']);
 });
@@ -73,24 +71,30 @@ test('category id can\'t be null', function () {
 test('body at least 500 characters', function () {
     $this->actingAs(User::factory()->create());
 
-    $title = str()->random(4);
-    $randomString = str()->random(499);
-
     Livewire::test(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
     ])
-        ->set('title', $title)
+        ->set('title', str()->random(4))
         ->set('category_id', Category::pluck('id')->random())
-        ->set('body', $randomString)
+        ->set('body', str()->random(499))
         ->call('store')
         ->assertHasErrors(['body' => 'min:500']);
 });
 
-it('can upload image', function () {
+it('can check image immediately', function () {
     $this->actingAs(User::factory()->create());
 
-    $title = str()->random(4);
-    $randomString = str()->random(500);
+    $file = UploadedFile::fake()->image('photo.jpg')->size(1025);
+
+    Livewire::test(CreateForm::class, [
+        'categories' => Category::all(['id', 'name']),
+    ])
+        ->set('photo', $file)
+        ->assertHasErrors(['photo' => 'max:1024']);
+});
+
+it('can upload image', function () {
+    $this->actingAs(User::factory()->create());
 
     Storage::fake('s3');
 
@@ -99,11 +103,11 @@ it('can upload image', function () {
     Livewire::test(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
     ])
-        ->set('title', $title)
+        ->set('title', str()->random(4))
         ->set('category_id', Category::pluck('id')->random())
         // filename will be converted before store to s3
         ->set('photo', $file)
-        ->set('body', $randomString)
+        ->set('body', str()->random(500))
         ->call('store')
         ->assertHasNoErrors();
 
@@ -114,11 +118,8 @@ it('can upload image', function () {
     Storage::disk('s3')->assertExists("preview/{$filename}");
 });
 
-it('can\' not upload non image', function () {
+it('can\'t upload non image', function () {
     $this->actingAs(User::factory()->create());
-
-    $title = str()->random(4);
-    $randomString = str()->random(500);
 
     Storage::fake('s3');
 
@@ -127,11 +128,63 @@ it('can\' not upload non image', function () {
     Livewire::test(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
     ])
-        ->set('title', $title)
+        ->set('title', str()->random(4))
         ->set('category_id', Category::pluck('id')->random())
         // filename will be converted before store to s3
         ->set('photo', $file)
-        ->set('body', $randomString)
+        ->set('body', str()->random(500))
         ->call('store')
         ->assertHasErrors(['photo' => 'image']);
+});
+
+it('can get auto save key property', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user);
+
+    Livewire::test(CreateForm::class, [
+        'categories' => Category::all(['id', 'name']),
+    ])->assertSet('auto_save_key', 'user_'.$user->id.'_post_auto_save');
+});
+
+it('can auto save the post to redis', function () {
+    $user = User::factory()->create();
+
+    $autoSaveKey = 'user_'.$user->id.'_post_auto_save';
+
+    // clean the redis data, like refresh database
+    if (Redis::exists($autoSaveKey)) {
+        Redis::del($autoSaveKey);
+    }
+
+    $this->actingAs($user);
+
+    $title = str()->random(4);
+    $categoryId = Category::pluck('id')->random();
+    $tags = Tag::inRandomOrder()
+        ->limit(5)
+        ->get()
+        ->map(fn ($tag) => ['id' => $tag->id, 'value' => $tag->name])
+        ->toJson(JSON_UNESCAPED_UNICODE);
+    $body = str()->random(500);
+
+    Livewire::test(CreateForm::class, [
+        'categories' => Category::all(['id', 'name']),
+    ])
+        ->set('title', $title)
+        ->set('category_id', $categoryId)
+        ->set('tags', $tags)
+        ->set('body', $body);
+
+    $this->assertEquals(REDIS_KEY_EXISTS_RETURN_VALUE, Redis::exists('user_'.$user->id.'_post_auto_save'));
+
+    $this->assertEquals(
+        [
+            'title' => $title,
+            'category_id' => (string) $categoryId,
+            'tags' => $tags,
+            'body' => $body,
+        ],
+        json_decode(Redis::get($autoSaveKey), true)
+    );
 });

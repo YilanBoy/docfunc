@@ -10,7 +10,7 @@ class FormatTransferService
      * @param  string|null  $tagsJson
      * @return array
      */
-    public function tagsJsonToTagIdsArray(?string $tagsJson): array
+    public static function tagsJsonToTagIdsArray(?string $tagsJson): array
     {
         // 沒有設定標籤
         if (is_null($tagsJson)) {

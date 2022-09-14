@@ -2,22 +2,19 @@
 
 namespace App\Http\Livewire\Posts;
 
+use App\Http\Traits\LivewirePostForm;
 use App\Models\Category;
-use App\Models\Post;
-use App\Services\FileService;
-use App\Services\FormatTransferService;
-use App\Services\PostService;
 use Illuminate\Support\Facades\Redis;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
+/**
+ * @property string $auto_save_key set by getAutoSaveKeyProperty()
+ */
 class CreateForm extends Component
 {
+    use LivewirePostForm;
     use WithFileUploads;
-
-    public string $autoSaveKey;
 
     public $categories;
 
@@ -33,11 +30,10 @@ class CreateForm extends Component
 
     public function mount()
     {
-        $this->autoSaveKey = 'user_'.auth()->id().'_post_auto_save';
         $this->categories = Category::all(['id', 'name']);
 
-        if (Redis::exists($this->autoSaveKey)) {
-            $autoSavePostData = json_decode(Redis::get($this->autoSaveKey), true);
+        if (Redis::exists($this->auto_save_key)) {
+            $autoSavePostData = json_decode(Redis::get($this->auto_save_key), true);
 
             $this->title = $autoSavePostData['title'];
             $this->category_id = (int) $autoSavePostData['category_id'];
@@ -46,10 +42,16 @@ class CreateForm extends Component
         }
     }
 
+    // computed property
+    public function getAutoSaveKeyProperty(): string
+    {
+        return 'user_'.auth()->id().'_post_auto_save';
+    }
+
     // when data update, auto save it to redis
     public function updated()
     {
-        Redis::set($this->autoSaveKey, json_encode(
+        Redis::set($this->auto_save_key, json_encode(
             [
                 'title' => $this->title,
                 'category_id' => $this->category_id,
@@ -59,98 +61,21 @@ class CreateForm extends Component
         );
 
         // set ttl to 7 days
-        Redis::expire($this->autoSaveKey, 604_800);
+        Redis::expire($this->auto_save_key, 604_800);
     }
 
     public function updatedPhoto()
     {
-        $validator = Validator::make(
-            ['photo' => $this->photo],
-            [
-                'photo' => ['image', 'max:1024'], // 1MB Max
-            ],
-            [
-                'photo.image' => '圖片格式有誤',
-                'photo.max' => '圖片大小不能超過 1024 KB',
-            ]
-        );
-
-        if ($validator->fails()) {
-            $this->dispatchBrowserEvent('scroll-to-top');
-        }
-
-        $validator->validate();
+        $this->validatePhoto();
     }
 
     public function store()
     {
-        $validator = Validator::make(
-            [
-                'title' => $this->title,
-                'category_id' => $this->category_id,
-                'photo' => $this->photo,
-                // validate body text character count
-                'body' => preg_replace('/[\r\n]/u', '', strip_tags($this->body)),
-            ],
-            [
-                'title' => ['required', 'min:4', 'max:50'],
-                'category_id' => ['required', 'numeric', 'exists:categories,id'],
-                'photo' => ['nullable', 'image', 'max:1024'],
-                'body' => ['required', 'min:500', 'max:20000'],
-            ],
-            [
-                'title.required' => '請填寫標題',
-                'title.min' => '標題至少 4 個字元',
-                'title.max' => '標題至多 50 個字元',
-                'category_id.required' => '請選擇文章分類',
-                'category_id.numeric' => '分類資料錯誤',
-                'category_id.exists' => '分類不存在',
-                'photo.image' => '圖片格式有誤',
-                'photo.max' => '圖片大小不能超過 1024 KB',
-                'body.required' => '請填寫文章內容',
-                'body.min' => '文章內容至少 500 個字元',
-                'body.max' => '文章內容字數已超過 20,000 個字元',
-            ]
-        );
+        $this->validatePost();
 
-        if ($validator->fails()) {
-            $this->dispatchBrowserEvent('scroll-to-top');
-        }
+        $post = $this->createPost();
 
-        $validator->validate();
-
-        $postService = new PostService();
-        $formatTransferService = new FormatTransferService();
-
-        // xss filter
-        $body = $postService->htmlPurifier($this->body);
-
-        $previewUrl = null;
-
-        // upload photo
-        if ($this->photo) {
-            $imageName = FileService::generateImageFileName($this->photo);
-            $uploadFilePath = $this->photo->storeAs('preview', $imageName, 's3');
-            $previewUrl = Storage::disk('s3')->url($uploadFilePath);
-        }
-
-        $post = Post::create([
-            'user_id' => auth()->id(),
-            'title' => $this->title,
-            'category_id' => $this->category_id,
-            'body' => $body,
-            'slug' => $postService->makeSlug($this->title),
-            'preview_url' => $previewUrl,
-            'excerpt' => $postService->makeExcerpt($body),
-        ]);
-
-        // convert tags json string to array
-        $tagIdsArray = $formatTransferService->tagsJsonToTagIdsArray($this->tags);
-
-        // create new tags relation with post in database
-        $post->tags()->attach($tagIdsArray);
-
-        Redis::del($this->autoSaveKey);
+        Redis::del($this->auto_save_key);
 
         $this->dispatchBrowserEvent('leaveThePage', ['permit' => true]);
 

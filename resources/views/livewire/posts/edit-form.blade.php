@@ -46,7 +46,7 @@
             <label for="category_id" class="hidden">分類</label>
 
             <select
-              wire:model="category_id"
+              wire:model="categoryId"
               id="category_id"
               name="category_id"
               required

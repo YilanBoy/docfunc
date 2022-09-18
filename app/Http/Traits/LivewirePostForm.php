@@ -36,14 +36,14 @@ trait LivewirePostForm
         $validator = Validator::make(
             [
                 'title' => $this->title,
-                'category_id' => $this->category_id,
+                'categoryId' => $this->categoryId,
                 'photo' => $this->photo,
                 // validate body text character count
                 'body' => preg_replace('/[\r\n]/u', '', strip_tags($this->body)),
             ],
             [
                 'title' => ['required', 'min:4', 'max:50'],
-                'category_id' => ['required', 'numeric', 'exists:categories,id'],
+                'categoryId' => ['required', 'numeric', 'exists:categories,id'],
                 'photo' => ['nullable', 'image', 'max:1024'],
                 'body' => ['required', 'min:500', 'max:20000'],
             ],
@@ -51,9 +51,9 @@ trait LivewirePostForm
                 'title.required' => '請填寫標題',
                 'title.min' => '標題至少 4 個字元',
                 'title.max' => '標題至多 50 個字元',
-                'category_id.required' => '請選擇文章分類',
-                'category_id.numeric' => '分類資料錯誤',
-                'category_id.exists' => '分類不存在',
+                'categoryId.required' => '請選擇文章分類',
+                'categoryId.numeric' => '分類資料錯誤',
+                'categoryId.exists' => '分類不存在',
                 'photo.image' => '圖片格式有誤',
                 'photo.max' => '圖片大小不能超過 1024 KB',
                 'body.required' => '請填寫文章內容',
@@ -86,7 +86,7 @@ trait LivewirePostForm
         $post = Post::create([
             'user_id' => auth()->id(),
             'title' => $this->title,
-            'category_id' => $this->category_id,
+            'category_id' => $this->categoryId,
             'body' => $body,
             'slug' => PostService::makeSlug($this->title),
             'preview_url' => $previewUrl,
@@ -108,7 +108,7 @@ trait LivewirePostForm
 
         $this->post->title = $this->title;
         $this->post->slug = PostService::makeSlug($this->title);
-        $this->post->category_id = $this->category_id;
+        $this->post->category_id = $this->categoryId;
         $this->post->body = $body;
         $this->post->excerpt = PostService::makeExcerpt($body);
 

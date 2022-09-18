@@ -1,11 +1,17 @@
 import Tagify from "@yaireo/tagify";
 
+declare global {
+    interface Window {
+        tagify: any;
+    }
+}
+
 const tags = <HTMLInputElement>document.querySelector("#tags");
 
 fetch("/api/tags")
     .then((response) => response.json())
     .then(function (tagsJson) {
-        new Tagify(tags, {
+        window.tagify = new Tagify(tags, {
             whitelist: tagsJson,
             enforceWhitelist: true,
             maxTags: 5,

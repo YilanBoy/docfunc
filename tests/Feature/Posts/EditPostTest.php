@@ -16,7 +16,7 @@ test('author can update his post', function ($categoryId) {
 
     Livewire::test(EditForm::class, ['postId' => $post->id])
         ->set('title', $newTitle)
-        ->set('category_id', $categoryId)
+        ->set('categoryId', $categoryId)
         ->set('body', $newBody)
         ->call('update')
         ->assertHasNoErrors();

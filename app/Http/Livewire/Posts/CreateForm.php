@@ -16,17 +16,21 @@ class CreateForm extends Component
     use LivewirePostForm;
     use WithFileUploads;
 
+    public bool $showDialog = false;
+
     public $categories;
 
     public string $title = '';
 
-    public ?int $category_id = null;
+    public int $categoryId = 1;
 
     public string $tags = '';
 
     public $photo;
 
     public string $body = '';
+
+    protected $listeners = ['resetForm'];
 
     public function mount()
     {
@@ -35,8 +39,13 @@ class CreateForm extends Component
         if (Redis::exists($this->auto_save_key)) {
             $autoSavePostData = json_decode(Redis::get($this->auto_save_key), true);
 
+            // if data is not default value
+            if ($autoSavePostData !== ['title' => '', 'category_id' => 1, 'tags' => '', 'body' => '']) {
+                $this->showDialog = true;
+            }
+
             $this->title = $autoSavePostData['title'];
-            $this->category_id = (int) $autoSavePostData['category_id'];
+            $this->categoryId = (int) $autoSavePostData['category_id'];
             $this->tags = $autoSavePostData['tags'];
             $this->body = $autoSavePostData['body'];
         }
@@ -54,7 +63,7 @@ class CreateForm extends Component
         Redis::set($this->auto_save_key, json_encode(
             [
                 'title' => $this->title,
-                'category_id' => $this->category_id,
+                'category_id' => $this->categoryId,
                 'tags' => $this->tags,
                 'body' => $this->body,
             ], JSON_UNESCAPED_UNICODE)
@@ -82,6 +91,17 @@ class CreateForm extends Component
         return redirect()
             ->to($post->link_with_slug)
             ->with('alert', ['status' => 'success', 'message' => '成功新增文章！']);
+    }
+
+    public function resetForm()
+    {
+        $this->title = '';
+        $this->categoryId = 1;
+        $this->tags = '';
+        $this->body = '';
+
+        $this->dispatchBrowserEvent('removeAllTags');
+        $this->dispatchBrowserEvent('resetCkeditorContent');
     }
 
     public function render()

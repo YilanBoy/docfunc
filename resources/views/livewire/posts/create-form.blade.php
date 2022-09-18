@@ -11,7 +11,7 @@
 >
   <div class="hidden xl:block xl:w-1/6"></div>
 
-  <div class="w-full px-4 lg:w-2/3 xl:w-7/12 lg:px-0">
+  <div class="w-full px-4 lg:w-2/3 xl:w-7/12 lg:px-0 z-0">
     <div class="flex flex-col items-center justify-center w-full space-y-6">
       {{-- title --}}
       <div class="text-2xl text-gray-800 fill-current dark:text-gray-50">
@@ -47,15 +47,12 @@
             <label for="category_id" class="hidden">分類</label>
 
             <select
-              wire:model="category_id"
+              wire:model="categoryId"
               id="category_id"
               name="category_id"
               required
               class="w-full h-12 text-lg border border-gray-300 rounded-md shadow-sm form-select focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50"
             >
-              <option value="" hidden disabled>
-                請選擇分類
-              </option>
               @foreach ($categories as $category)
                 <option value="{{ $category->id }}">
                   {{ $category->name }}
@@ -207,6 +204,9 @@
       </button>
     </div>
   </div>
+
+  <livewire:posts.partials.keep-auto-save-dialog
+    :show-dialog="$showDialog"></livewire:posts.partials.keep-auto-save-dialog>
 </div>
 
 @push('script')
@@ -217,6 +217,10 @@
     tags.addEventListener('change', function (event) {
       @this.
       set('tags', event.target.value);
+    });
+
+    window.addEventListener('removeAllTags', () => {
+      tagify.removeAllTags();
     });
   </script>
 
@@ -241,6 +245,10 @@
           @this.
           set('body', editorInstance.getData());
         }, 500);
+      });
+
+      window.addEventListener('resetCkeditorContent', () => {
+        editorInstance.setData('');
       });
     });
   </script>

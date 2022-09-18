@@ -23,7 +23,7 @@ class EditForm extends Component
 
     public string $title;
 
-    public int $category_id;
+    public int $categoryId;
 
     public string $tags;
 
@@ -42,7 +42,7 @@ class EditForm extends Component
         $this->categories = Category::all(['id', 'name']);
 
         $this->title = $this->post->title;
-        $this->category_id = $this->post->category_id;
+        $this->categoryId = $this->post->category_id;
         $this->tags = $this->post->tags_json;
         $this->previewUrl = $this->post->preview_url;
         $this->body = $this->post->body;

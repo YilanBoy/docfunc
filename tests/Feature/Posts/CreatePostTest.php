@@ -30,7 +30,7 @@ test('authenticated user can create post', function ($categoryId) {
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('title', $title)
-        ->set('category_id', $categoryId)
+        ->set('categoryId', $categoryId)
         ->set('body', $randomString)
         ->call('store')
         ->assertHasNoErrors();
@@ -49,23 +49,10 @@ test('title at least 4 characters', function () {
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('title', str()->random(3))
-        ->set('category_id', Category::pluck('id')->random())
+        ->set('categoryId', Category::pluck('id')->random())
         ->set('body', str()->random(500))
         ->call('store')
         ->assertHasErrors(['title' => 'min:4']);
-});
-
-test('category id can\'t be null', function () {
-    $this->actingAs(User::factory()->create());
-
-    Livewire::test(CreateForm::class, [
-        'categories' => Category::all(['id', 'name']),
-    ])
-        ->set('title', str()->random(4))
-        ->set('category_id')
-        ->set('body', str()->random(500))
-        ->call('store')
-        ->assertHasErrors(['category_id' => 'required']);
 });
 
 test('body at least 500 characters', function () {
@@ -75,7 +62,7 @@ test('body at least 500 characters', function () {
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('title', str()->random(4))
-        ->set('category_id', Category::pluck('id')->random())
+        ->set('categoryId', Category::pluck('id')->random())
         ->set('body', str()->random(499))
         ->call('store')
         ->assertHasErrors(['body' => 'min:500']);
@@ -104,7 +91,7 @@ it('can upload image', function () {
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('title', str()->random(4))
-        ->set('category_id', Category::pluck('id')->random())
+        ->set('categoryId', Category::pluck('id')->random())
         // filename will be converted before store to s3
         ->set('photo', $file)
         ->set('body', str()->random(500))
@@ -129,7 +116,7 @@ it('can\'t upload non image', function () {
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('title', str()->random(4))
-        ->set('category_id', Category::pluck('id')->random())
+        ->set('categoryId', Category::pluck('id')->random())
         // filename will be converted before store to s3
         ->set('photo', $file)
         ->set('body', str()->random(500))
@@ -172,7 +159,7 @@ it('can auto save the post to redis', function () {
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('title', $title)
-        ->set('category_id', $categoryId)
+        ->set('categoryId', $categoryId)
         ->set('tags', $tags)
         ->set('body', $body);
 

@@ -27,6 +27,6 @@ class YoutubeController extends Controller
 
         return $response->successful()
             ? $response
-            : response()->json(['html' => '<p style="font-size:1.5em;">Youtube 影片連結發生錯誤... 🥲</p>']);
+            : response()->json(['html' => '<p style="font-size:1.5em;">Youtube 影片連結發生錯誤... 🥲</p>'], 404);
     }
 }

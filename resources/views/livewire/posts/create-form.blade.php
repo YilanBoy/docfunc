@@ -192,7 +192,7 @@
         </span>
 
         <span wire:loading>
-          <svg class="w-10 h-10 text-gray-700 animate-spin dark:text-gray-50"
+          <svg class="w-10 h-10 text-gray-700 animate-spin text-gray-50"
                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
           >
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -202,11 +202,21 @@
           </svg>
         </span>
       </button>
+
+      {{-- show dialog --}}
+      <button
+        x-on:click="$dispatch('reset')"
+        type="button"
+        class="inline-flex items-center justify-center mt-4 transition duration-150 ease-in-out bg-red-500 border border-transparent w-14 h-14 group rounded-xl text-gray-50 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring ring-red-300"
+      >
+        <span class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:rotate-12">
+          <i class="bi bi-arrow-counterclockwise"></i>
+        </span>
+      </button>
     </div>
   </div>
 
-  <livewire:posts.partials.keep-auto-save-dialog
-    :show-dialog="$showDialog"></livewire:posts.partials.keep-auto-save-dialog>
+  <livewire:posts.partials.reset-dialog></livewire:posts.partials.reset-dialog>
 </div>
 
 @push('script')

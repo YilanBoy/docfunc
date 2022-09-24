@@ -16,8 +16,6 @@ class CreateForm extends Component
     use LivewirePostForm;
     use WithFileUploads;
 
-    public bool $showDialog = false;
-
     public $categories;
 
     public string $title = '';
@@ -38,11 +36,6 @@ class CreateForm extends Component
 
         if (Redis::exists($this->auto_save_key)) {
             $autoSavePostData = json_decode(Redis::get($this->auto_save_key), true);
-
-            // if data is not default value
-            if ($autoSavePostData !== ['title' => '', 'category_id' => 1, 'tags' => '', 'body' => '']) {
-                $this->showDialog = true;
-            }
 
             $this->title = $autoSavePostData['title'];
             $this->categoryId = (int) $autoSavePostData['category_id'];

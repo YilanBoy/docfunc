@@ -43,18 +43,7 @@
     @csrf
   </form>
 
-  {{-- 完全刪除隱藏表單 --}}
-  <form
-    id="destroy-post-{{ $postId }}"
-    action="{{ route('posts.forceDelete', ['id' => $postId]) }}"
-    method="POST"
-    class="hidden"
-  >
-    @csrf
-    @method('DELETE')
-  </form>
-
-  <div class="flex items-center mt-2 space-x-2 md:mt-0">
+  <div class="flex items-center mt-2 md:mt-0">
     {{-- 還原文章 --}}
     <button
       x-on:click.stop="
@@ -65,20 +54,7 @@
       type="button"
       class="inline-flex items-center justify-center w-10 h-10 transition duration-150 ease-in-out bg-blue-500 border border-transparent rounded-md text-gray-50 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring ring-blue-300"
     >
-      <i class="bi bi-file-earmark-check-fill"></i>
-    </button>
-
-    {{-- 完全刪除 --}}
-    <button
-      x-on:click.stop="
-        if(confirm('您確定要完全刪除此文章嗎？（此動作無法復原）')) {
-          document.getElementById('destroy-post-{{ $postId }}').submit()
-        }
-      "
-      type="button"
-      class="inline-flex items-center justify-center w-10 h-10 transition duration-150 ease-in-out bg-red-500 border border-transparent rounded-md text-gray-50 hover:bg-red-600 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring ring-red-300"
-    >
-      <i class="bi bi-trash-fill"></i>
+      <i class="bi bi-arrow-counterclockwise"></i>
     </button>
   </div>
 </x-card>

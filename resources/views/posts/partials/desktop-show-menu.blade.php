@@ -51,19 +51,19 @@
       </span>
     </a>
 
-    {{-- 軟刪除 --}}
+    {{-- 刪除 --}}
     <button
       x-on:click="
-        if (confirm('您確定標記此文章為刪除狀態嗎？（30 天內還可以還原）')) {
-          document.getElementById('soft-delete-post').submit()
+        if (confirm('您確定刪除文章嗎？（7 天內還可以還原）')) {
+          document.getElementById('delete-post').submit()
         }
       "
       type="button"
-      title="標記為刪除狀態"
+      title="刪除文章"
       class="flex items-center justify-center text-gray-400 w-14 h-14 group"
     >
       <span class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:rotate-12">
-        <i class="bi bi-file-earmark-x-fill"></i>
+        <i class="bi bi-trash-fill"></i>
       </span>
     </button>
   @endif

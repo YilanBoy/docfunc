@@ -53,7 +53,7 @@
   @if (auth()->id() === $authorId)
     {{-- 軟刪除隱藏表單 --}}
     <form
-      id="soft-delete-post-{{ $postId }}"
+      id="delete-post-{{ $postId }}"
       action="{{ route('posts.destroy', ['post' => $postId]) }}"
       method="POST"
       class="hidden"
@@ -71,18 +71,17 @@
         <i class="bi bi-pencil-square"></i>
       </a>
 
-      {{-- 軟刪除 --}}
+      {{-- 刪除 --}}
       <button
         x-on:click.prevent.stop="
-          if (confirm('您確定標記此文章為刪除狀態嗎？（30 天內還可以恢復）'))
-          {
-            document.getElementById('soft-delete-post-{{ $postId }}').submit()
+          if (confirm('您確定刪除文章嗎？（7 天內還可以還原）')) {
+            document.getElementById('delete-post-{{ $postId }}').submit()
           }
         "
         type="button"
-        class="inline-flex items-center justify-center w-10 h-10 transition duration-150 ease-in-out bg-orange-500 border border-transparent rounded-md text-gray-50 hover:bg-orange-600 active:bg-orange-700 focus:outline-none focus:border-orange-700 focus:ring ring-orange-300"
+        class="inline-flex items-center justify-center w-10 h-10 transition duration-150 ease-in-out bg-red-500 border border-transparent rounded-md text-gray-50 hover:bg-red-600 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring ring-red-300"
       >
-        <i class="bi bi-file-earmark-x-fill"></i>
+        <i class="bi bi-trash-fill"></i>
       </button>
     </div>
   @endif

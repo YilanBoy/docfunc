@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\Post\ForceDeletePostController;
 use App\Http\Controllers\Post\PostController;
 use App\Http\Controllers\Post\RestorePostController;
 use App\Http\Controllers\TagController;
@@ -50,12 +49,9 @@ Route::prefix('posts')->group(function () {
         Route::controller(PostController::class)->group(function () {
             Route::get('/create', 'create')->name('posts.create');
             Route::get('/{id}/edit', 'edit')->name('posts.edit');
-            // 軟刪除文章
             Route::delete('/{post}', 'destroy')->name('posts.destroy');
         });
-        // 完全刪除文章
-        Route::delete('/{id}/force-delete', [ForceDeletePostController::class, 'destroy'])->name('posts.forceDelete');
-        // 恢復軟刪除的文章
+        // 恢復刪除的文章
         Route::post('/{id}/restore', [RestorePostController::class, 'update'])->name('posts.restore');
     });
 

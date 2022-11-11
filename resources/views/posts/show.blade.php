@@ -59,7 +59,7 @@
           <x-card id="section" class="w-full">
             {{-- soft delete form --}}
             <form
-              id="soft-delete-post"
+              id="delete-post"
               action="{{ route('posts.destroy', ['post' => $post->id]) }}"
               method="POST"
               class="hidden"

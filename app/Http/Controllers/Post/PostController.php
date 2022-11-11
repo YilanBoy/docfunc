@@ -77,7 +77,7 @@ class PostController extends Controller
     }
 
     /**
-     * 軟刪除文章
+     * 刪除文章 (軟刪除)
      *
      * @param  Post  $post
      * @return RedirectResponse
@@ -91,6 +91,6 @@ class PostController extends Controller
         $post->delete();
 
         return to_route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
-            ->with('alert', ['status' => 'success', 'message' => '成功標記文章為刪除狀態！']);
+            ->with('alert', ['status' => 'success', 'message' => '成功刪除文章！']);
     }
 }

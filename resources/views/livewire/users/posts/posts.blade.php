@@ -31,7 +31,7 @@
         :created-at="$post->created_at"
         :created-at-to-date-string="$post->created_at->toDateString()"
         :comment-count="$post->comment_count"
-        :destroy-date="$post->deleted_at->addDays(30)->diffForHumans()"
+        :destroy-date="$post->deleted_at->addDays(7)->diffForHumans()"
         wire:key="post-{{ $post->id }}"
       />
     @endif

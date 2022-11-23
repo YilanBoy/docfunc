@@ -74,7 +74,7 @@
             >
           </div>
 
-          {{-- photo --}}
+          {{-- image --}}
           <div
             x-data="{ isUploading: false, progress: 0 }"
             x-on:livewire-upload-start="isUploading = true"
@@ -88,7 +88,7 @@
               class="relative flex flex-col items-center px-4 py-6 mt-4 tracking-wide text-green-500 transition-all duration-300 bg-transparent border-2 border-green-500 border-dashed rounded-lg cursor-pointer dark:text-blue-400 dark:border-blue-400 hover:text-green-600 dark:hover:text-blue-300 hover:border-green-600 dark:hover:border-blue-300"
             >
               <input
-                wire:model="photo"
+                wire:model="image"
                 x-on:dragenter="
                   $refs.uploadBlock.classList.remove('text-green-500', 'dark:text-blue-400', 'border-green-500', 'dark:border-blue-400')
                   $refs.uploadBlock.classList.add('text-green-600', 'dark:text-blue-300', 'border-green-600', 'dark:border-blue-300')
@@ -122,12 +122,12 @@
               <progress max="100" x-bind:value="progress"></progress>
             </div>
 
-            @if ($previewUrl && empty($photo))
+            @if ($previewUrl && empty($image))
               <img src="{{ $previewUrl }}" alt="preview image" class="h-48 mt-4 rounded-lg">
             @endif
 
-            @if ($photo && !$errors->any())
-              <img src="{{ $photo->temporaryUrl() }}" alt="preview image" class="h-48 mt-4 rounded-lg">
+            @if ($image && !$errors->any())
+              <img src="{{ $image->temporaryUrl() }}" alt="preview image" class="h-48 mt-4 rounded-lg">
             @endif
           </div>
 

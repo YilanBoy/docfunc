@@ -2,9 +2,14 @@
 
 namespace App\Http\Livewire\Posts;
 
-use App\Http\Traits\LivewirePostForm;
+use App\Http\Traits\LivewirePostValidation;
 use App\Models\Category;
+use App\Models\Post;
+use App\Services\FileService;
+use App\Services\FormatTransferService;
+use App\Services\PostService;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -13,7 +18,7 @@ use Livewire\WithFileUploads;
  */
 class CreateForm extends Component
 {
-    use LivewirePostForm;
+    use LivewirePostValidation;
     use WithFileUploads;
 
     public $categories;
@@ -24,7 +29,9 @@ class CreateForm extends Component
 
     public string $tags = '';
 
-    public $photo;
+    public ?string $previewUrl = null;
+
+    public $image;
 
     public string $body = '';
 
@@ -66,16 +73,40 @@ class CreateForm extends Component
         Redis::expire($this->auto_save_key, 604_800);
     }
 
-    public function updatedPhoto()
+    public function updatedImage()
     {
-        $this->validatePhoto();
+        $this->validateImage();
     }
 
     public function store()
     {
         $this->validatePost();
 
-        $post = $this->createPost();
+        // xss filter
+        $body = PostService::htmlPurifier($this->body);
+
+        // upload image
+        if ($this->image) {
+            $imageName = FileService::generateImageFileName($this->image);
+            $uploadFilePath = $this->image->storeAs('preview', $imageName, 's3');
+            $this->previewUrl = Storage::disk('s3')->url($uploadFilePath);
+        }
+
+        $post = Post::query()->create([
+            'user_id' => auth()->id(),
+            'title' => $this->title,
+            'category_id' => $this->categoryId,
+            'body' => $body,
+            'slug' => PostService::makeSlug($this->title),
+            'preview_url' => $this->previewUrl,
+            'excerpt' => PostService::makeExcerpt($body),
+        ]);
+
+        // convert tags json string to array
+        $tagIdsArray = FormatTransferService::tagsJsonToTagIdsArray($this->tags);
+
+        // create new tags relation with post in database
+        $post->tags()->attach($tagIdsArray);
 
         Redis::del($this->auto_save_key);
 

@@ -71,13 +71,13 @@ test('body at least 500 characters', function () {
 it('can check image immediately', function () {
     $this->actingAs(User::factory()->create());
 
-    $file = UploadedFile::fake()->image('photo.jpg')->size(1025);
+    $file = UploadedFile::fake()->image('image.jpg')->size(1025);
 
     Livewire::test(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
     ])
-        ->set('photo', $file)
-        ->assertHasErrors(['photo' => 'max:1024']);
+        ->set('image', $file)
+        ->assertHasErrors(['image' => 'max:1024']);
 });
 
 it('can upload image', function () {
@@ -85,7 +85,7 @@ it('can upload image', function () {
 
     Storage::fake('s3');
 
-    $file = UploadedFile::fake()->image('photo.jpg');
+    $file = UploadedFile::fake()->image('image.jpg');
 
     Livewire::test(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
@@ -93,7 +93,7 @@ it('can upload image', function () {
         ->set('title', str()->random(4))
         ->set('categoryId', Category::pluck('id')->random())
         // filename will be converted before store to s3
-        ->set('photo', $file)
+        ->set('image', $file)
         ->set('body', str()->random(500))
         ->call('store')
         ->assertHasNoErrors();
@@ -118,10 +118,10 @@ it('can\'t upload non image', function () {
         ->set('title', str()->random(4))
         ->set('categoryId', Category::pluck('id')->random())
         // filename will be converted before store to s3
-        ->set('photo', $file)
+        ->set('image', $file)
         ->set('body', str()->random(500))
         ->call('store')
-        ->assertHasErrors(['photo' => 'image']);
+        ->assertHasErrors(['image' => 'image']);
 });
 
 it('can get auto save key property', function () {

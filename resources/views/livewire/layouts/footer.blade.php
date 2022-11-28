@@ -9,7 +9,7 @@
       </div>
       {{-- Links --}}
       <a
-        href="https://github.com/YilanBoy/simple-blog"
+        href="https://github.com/YilanBoy/blog"
         target="_blank"
         rel="nofollow noopener noreferrer"
         class="block my-3 font-medium text-gray-300 duration-300 hover:text-gray-500"

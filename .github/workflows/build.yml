@@ -42,9 +42,9 @@ jobs:
     environment:
       name: production
     env:
-      ARTIFACTS_PATH: /var/www/blog/artifacts
-      RELEASE_PATH: /var/www/blog/release
-      APP_PATH: /var/www/blog/current
+      ARTIFACTS_PATH: /var/www/app/artifacts
+      RELEASE_PATH: /var/www/app/release
+      APP_PATH: /var/www/app/current
     steps:
       - uses: actions/checkout@v3
 

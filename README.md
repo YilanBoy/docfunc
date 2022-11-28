@@ -1,7 +1,7 @@
-# Simple Blog
+# Blog
 
-![build](https://github.com/YilanBoy/simple-blog/actions/workflows/build.yml/badge.svg)
-[![codecov](https://codecov.io/gh/YilanBoy/simple-blog/branch/main/graph/badge.svg?token=K2V2ANX2LW)](https://codecov.io/gh/YilanBoy/simple-blog)
+![build](https://github.com/YilanBoy/blog/actions/workflows/build.yml/badge.svg)
+[![codecov](https://codecov.io/gh/YilanBoy/blog/branch/main/graph/badge.svg?token=K2V2ANX2LW)](https://codecov.io/gh/YilanBoy/blog)
 
 This is a simple blog made by [TALL stack](https://tallstack.dev/):
 
@@ -38,13 +38,13 @@ by [Algolia](https://www.algolia.com/).
 Clone the repository to your local machine:
 
 ```sh
-git clone https://github.com/YilanBoy/simple-blog.git
+git clone https://github.com/YilanBoy/blog.git
 ```
 
 Change the current working directory to the repository:
 
 ```sh
-cd simple-blog
+cd blog
 ```
 
 Install the composer package:
@@ -133,28 +133,28 @@ php artisan ocatane:start
 In production, we use [Supervisor](https://github.com/Supervisor/supervisor) to start swoole server and laravel queue
 worker.
 
-Using supervisor to start swoole server process, we have to create a `simple-blog-octane.conf` config file
+Using supervisor to start swoole server process, we have to create a `blog-octane-worker.conf` config file
 in `/etc/supervisor/conf.d/`.
 
 ```text
-[program:simple-blog-octane]
-command=/usr/bin/php -d variables_order=EGPCS /var/www/simple-blog/artisan octane:start --workers=2 --server=swoole --host=0.0.0.0 --port=8000
+[program:blog-octane-worker]
+command=/usr/bin/php -d variables_order=EGPCS /var/www/blog/artisan octane:start --workers=2 --server=swoole --host=0.0.0.0 --port=8000
 user=www-data
 autostart=true
 autorestart=true
 stopasgroup=true
 killasgroup=true
 redirect_stderr=true
-stdout_logfile=/var/log/simple-blog-octane.log
+stdout_logfile=/var/log/blog-octane-worker.log
 ```
 
-Using supervisor to start laravel queue worker process, we have to create a `simple-blog-worker.conf` config file
+Using supervisor to start laravel queue worker process, we have to create a `blog-queue-worker.conf` config file
 in `/etc/supervisor/conf.d/`.
 
 ```text
-[program:simple-blog-worker]
+[program:blog-queue-worker]
 process_name=%(program_name)s_%(process_num)02d
-command=php /var/www/simple-blog/artisan queue:work --sleep=3 --tries=3 --max-time=3600
+command=php /var/www/blog/artisan queue:work --sleep=3 --tries=3 --max-time=3600
 autostart=true
 autorestart=true
 stopasgroup=true
@@ -163,7 +163,7 @@ user=www-data
 numprocs=2
 redirect_stderr=true
 stopwaitsecs=3600
-stdout_logfile=/var/log/simple-blog-worker.log
+stdout_logfile=/var/log/blog-queue-worker.log
 ```
 
 Set crontab to run [Laravel Task Schedule](https://laravel.com/docs/9.x/scheduling).
@@ -177,5 +177,5 @@ crontab -e
 Add this line to run the Scheduler.
 
 ```text
-0 * * * * cd /var/www/simple-blog && php artisan schedule:run >> /dev/null 2>&1
+0 * * * * cd /var/www/blog && php artisan schedule:run >> /dev/null 2>&1
 ```

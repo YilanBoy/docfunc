@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.0",
         "algolia/scout-extended": "^2.0",
+        "aws/aws-sdk-php": "^3.247",
         "ezyang/htmlpurifier": "^4.13",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.2",

@@ -30,6 +30,8 @@ class DestroyUser extends Mailable
      */
     public function build()
     {
-        return $this->subject('刪除帳號確認')->view('emails.destroy-user');
+        return $this
+            ->subject('刪除帳號確認')
+            ->view('emails.destroy-user');
     }
 }

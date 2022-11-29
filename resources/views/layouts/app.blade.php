@@ -81,7 +81,7 @@
 <div
   class="relative flex flex-col justify-between min-h-screen selection:bg-green-300 selection:text-green-900 dark:selection:bg-indigo-300 dark:selection:text-indigo-900">
 
-  <livewire:layouts.header/>
+  <livewire:layouts.header.nav/>
 
   {{ $slot }}
 

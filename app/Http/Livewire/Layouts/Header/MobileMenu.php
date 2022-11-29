@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Layouts;
+namespace App\Http\Livewire\Layouts\Header;
 
 use App\Models\Category;
 use App\Services\SettingService;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 
-class Header extends Component
+class MobileMenu extends Component
 {
     public function render()
     {
@@ -19,6 +19,6 @@ class Header extends Component
         // 是否顯示註冊按鈕
         $showRegisterButton = SettingService::isRegisterAllowed();
 
-        return view('livewire.layouts.header', compact('categories', 'showRegisterButton'));
+        return view('livewire.layouts.header.mobile-menu', compact('categories', 'showRegisterButton'));
     }
 }

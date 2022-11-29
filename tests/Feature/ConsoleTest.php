@@ -4,32 +4,26 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
-use Tests\TestCase;
 
-class ConsoleTest extends TestCase
-{
-    use RefreshDatabase;
+uses(RefreshDatabase::class);
 
-    public function test_create_user_command()
-    {
-        $this->artisan('user:create')
-            ->expectsQuestion('name', 'John')
-            ->expectsQuestion('email', 'john@email.com')
-            ->expectsOutput('User created, default password is "Password101"')
-            ->assertExitCode(0);
-    }
+it('can create user', function () {
+    $this->artisan('user:create')
+        ->expectsQuestion('name', 'John')
+        ->expectsQuestion('email', 'john@email.com')
+        ->expectsOutput('User created, default password is "Password101"')
+        ->assertExitCode(0);
+});
 
-    public function test_create_user_command_will_fail_if_the_email_is_already_in_use()
-    {
-        Artisan::call('user:create', [
-            'name' => 'John',
-            'email' => 'john@email.com',
-        ]);
+test('create user command will fail if the email is already in use', function () {
+    Artisan::call('user:create', [
+        'name' => 'John',
+        'email' => 'john@email.com',
+    ]);
 
-        $this->artisan('user:create')
-            ->expectsQuestion('name', 'John')
-            ->expectsQuestion('email', 'john@email.com')
-            ->expectsOutput('This email has been used')
-            ->assertExitCode(2);
-    }
-}
+    $this->artisan('user:create')
+        ->expectsQuestion('name', 'John')
+        ->expectsQuestion('email', 'john@email.com')
+        ->expectsOutput('This email has been used')
+        ->assertExitCode(2);
+});

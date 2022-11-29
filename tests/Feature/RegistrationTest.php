@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Http\Livewire\Layouts\Header;
+use App\Http\Livewire\Layouts\Header\Nav;
 use App\Models\Setting;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
@@ -63,7 +63,7 @@ class RegistrationTest extends TestCase
             'value' => 'false',
         ]);
 
-        Livewire::test(Header::class)
+        Livewire::test(Nav::class)
             ->assertDontSeeText('註冊');
     }
 

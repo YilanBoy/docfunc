@@ -11,6 +11,14 @@ class Nav extends Component
 {
     public function render()
     {
-        return view('livewire.layouts.header.nav');
+        // 因為分類不常調整，這裡使用快取減少對資料庫的讀取，快取時效性設定 1 天
+        $categories = Cache::remember('categories', now()->addDay(), function () {
+            return Category::all();
+        });
+
+        // 是否顯示註冊按鈕
+        $showRegisterButton = SettingService::isRegisterAllowed();
+
+        return view('livewire.layouts.header.nav', compact('categories', 'showRegisterButton'));
     }
 }

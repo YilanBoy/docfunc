@@ -131,7 +131,7 @@
                     @if ($page == $paginator->currentPage())
                       <span aria-current="page">
                         <span
-                          class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium leading-5 text-gray-500 bg-blue-100 border border-gray-300 cursor-default dark:text-gray-50 dark:bg-gray-800"
+                          class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium leading-5 text-gray-500 bg-green-100 border border-gray-300 cursor-default dark:text-gray-50 dark:bg-gray-800"
                         >
                           {{ $page }}
                         </span>

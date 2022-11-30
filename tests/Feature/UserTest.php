@@ -1,185 +1,170 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Mail\DestroyUser;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
-use Tests\TestCase;
 
-class UserTest extends TestCase
-{
-    use RefreshDatabase;
-    use WithFaker;
+use function Pest\Faker\faker;
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
+use function Pest\Laravel\put;
 
-    public function test_user_can_view_own_profile()
-    {
-        $user = User::factory()->create();
+uses(RefreshDatabase::class);
 
-        $this->get(route('users.index', $user->id))
-            ->assertStatus(200);
-    }
+test("user can view own profile", function () {
+    $user = User::factory()->create();
 
-    public function test_guest_can_not_visit_edit_page()
-    {
-        $user = User::factory()->create();
+    get(route('users.index', $user->id))
+        ->assertStatus(200);
+});
 
-        $this->get(route('users.edit', $user->id))
-            ->assertStatus(302)
-            ->assertRedirect(route('login'));
-    }
+test("guest can not visit edit page", function () {
+    $user = User::factory()->create();
 
-    public function test_user_can_not_visit_others_edit_page()
-    {
-        $user = User::factory()->create();
+    get(route('users.edit', $user->id))
+        ->assertStatus(302)
+        ->assertRedirect(route('login'));
+});
 
-        $otherUser = User::factory()->create();
+test("user can not visit others edit page", function () {
+    $user = User::factory()->create();
 
-        $this->actingAs($user)
-            ->get(route('users.edit', $otherUser->id))
-            ->assertStatus(403);
-    }
+    $otherUser = User::factory()->create();
 
-    public function test_user_can_edit_own_information()
-    {
-        $user = User::factory()->create();
+    $this->actingAs($user)
+        ->get(route('users.edit', $otherUser->id))
+        ->assertStatus(403);
+});
 
-        $this->actingAs($user);
+test("user can edit own information", function () {
+    $user = User::factory()->create();
 
-        // legal name
-        $this->put(route('users.update', $user->id), [
-            'name' => 'New_legal_Name',
-            'introduction' => $this->faker->realText(119),
-        ])
-            ->assertStatus(302)
-            ->assertRedirect(route('users.index', ['user' => $user->id]));
+    $this->actingAs($user);
 
-        // illegal name
-        $this->put(route('users.update', $user->id), [
-            'name' => 'New illegal Name',
-            'introduction' => $this->faker->realText(119),
-        ])
-            ->assertSessionHasErrors('name');
-    }
+    // legal name
+    put(route('users.update', $user->id), [
+        'name' => 'New_legal_Name',
+        'introduction' => faker()->realText(119),
+    ])
+        ->assertStatus(302)
+        ->assertRedirect(route('users.index', ['user' => $user->id]));
 
-    public function test_user_can_visit_change_password_page()
-    {
-        $user = User::factory()->create();
+    // illegal name
+    put(route('users.update', $user->id), [
+        'name' => 'New illegal Name',
+        'introduction' => faker()->realText(119),
+    ])
+        ->assertSessionHasErrors('name');
+});
 
-        $this->actingAs($user);
+test("user can visit change password page", function () {
+    $user = User::factory()->create();
 
-        $this->get(route('users.changePassword', $user->id))
-            ->assertSuccessful();
-    }
+    $this->actingAs($user);
 
-    public function test_user_can_change_password()
-    {
-        $user = User::factory()->create();
+    get(route('users.changePassword', $user->id))
+        ->assertSuccessful();
+});
 
-        $this->actingAs($user);
+test("user can change password", function () {
+    $user = User::factory()->create();
 
-        $this->put(route('users.changePassword', $user->id), [
-            'current_password' => 'Password101',
-            'new_password' => 'NewPassword101',
-            'new_password_confirmation' => 'NewPassword101',
-        ])
-            ->assertStatus(302)
-            ->assertSessionHas('status', '密碼修改成功！');
-    }
+    $this->actingAs($user);
 
-    public function test_user_can_not_change_password_with_wrong_current_password()
-    {
-        $user = User::factory()->create();
+    put(route('users.changePassword', $user->id), [
+        'current_password' => 'Password101',
+        'new_password' => 'NewPassword101',
+        'new_password_confirmation' => 'NewPassword101',
+    ])
+        ->assertStatus(302)
+        ->assertSessionHas('status', '密碼修改成功！');
+});
 
-        $this->actingAs($user);
+test("user can not change password with wrong current password", function () {
+    $user = User::factory()->create();
 
-        $this->put(route('users.changePassword', $user->id), [
-            'current_password' => 'WrongPassword',
-            'new_password' => 'NewPassword101',
-            'new_password_confirmation' => 'NewPassword101',
-        ])
-            ->assertSessionHasErrors('current_password');
-    }
+    $this->actingAs($user);
 
-    public function test_user_can_not_change_password_with_invalid_new_password()
-    {
-        $user = User::factory()->create();
+    put(route('users.changePassword', $user->id), [
+        'current_password' => 'WrongPassword',
+        'new_password' => 'NewPassword101',
+        'new_password_confirmation' => 'NewPassword101',
+    ])
+        ->assertSessionHasErrors('current_password');
+});
 
-        $this->actingAs($user);
+test("user can not change password with invalid new password", function () {
+    $user = User::factory()->create();
 
-        $this->put(route('users.changePassword', $user->id), [
-            'current_password' => 'Password101',
-            'new_password' => 'NewPassword',
-            'new_password_confirmation' => 'NewPassword',
-        ])
-            ->assertSessionHasErrors('new_password');
-    }
+    $this->actingAs($user);
 
-    public function test_user_can_visit_delete_account_page()
-    {
-        $user = User::factory()->create();
+    put(route('users.changePassword', $user->id), [
+        'current_password' => 'Password101',
+        'new_password' => 'NewPassword',
+        'new_password_confirmation' => 'NewPassword',
+    ])
+        ->assertSessionHasErrors('new_password');
+});
 
-        $this->actingAs($user);
+test("user can visit delete account page", function () {
+    $user = User::factory()->create();
 
-        $this->get(route('users.delete', $user->id))
-            ->assertSuccessful();
-    }
+    $this->actingAs($user);
 
-    public function test_send_destroy_user_email_queue()
-    {
-        Mail::fake();
+    get(route('users.delete', $user->id))
+        ->assertSuccessful();
+});
 
-        $user = User::factory()->create();
+test("send destroy user email queue", function () {
+    Mail::fake();
 
-        $this->actingAs($user);
+    $user = User::factory()->create();
 
-        $this->post(route('users.sendDestroyEmail', $user->id))
-            ->assertStatus(302);
+    $this->actingAs($user);
 
-        Mail::assertQueued(DestroyUser::class);
-    }
+    post(route('users.sendDestroyEmail', $user->id))
+        ->assertStatus(302);
 
-    public function test_user_can_delete_own_account()
-    {
-        $user = User::factory()->create();
+    Mail::assertQueued(DestroyUser::class);
+});
 
-        $this->assertDatabaseHas('users', ['id' => $user->id]);
+test("user can delete own account", function () {
+    $user = User::factory()->create();
 
-        $this->actingAs($user);
+    $this->assertDatabaseHas('users', ['id' => $user->id]);
 
-        $destroyUserLink = URL::temporarySignedRoute(
-            'users.destroy',
-            now()->addMinutes(5),
-            ['user' => $user->id]
-        );
+    $this->actingAs($user);
 
-        $this->get($destroyUserLink)->assertStatus(302);
+    $destroyUserLink = URL::temporarySignedRoute(
+        'users.destroy',
+        now()->addMinutes(5),
+        ['user' => $user->id]
+    );
 
-        $this->assertDatabaseMissing('users', ['id' => $user->id]);
-    }
+    get($destroyUserLink)->assertStatus(302);
 
-    public function test_user_can_not_delete_own_account_if_url_is_invalid()
-    {
-        $user = User::factory()->create();
+    $this->assertDatabaseMissing('users', ['id' => $user->id]);
+});
 
-        $this->assertDatabaseHas('users', ['id' => $user->id]);
+test("user can not delete own account if url is invalid", function () {
+    $user = User::factory()->create();
 
-        $this->actingAs($user);
+    $this->assertDatabaseHas('users', ['id' => $user->id]);
 
-        $destroyUserLink = URL::temporarySignedRoute(
-            'users.destroy',
-            now()->addMinutes(5),
-            ['user' => $user->id]
-        );
+    $this->actingAs($user);
 
-        // 讓時間經過 6 分鐘，使連結失效
-        $this->travel(6)->minutes();
+    $destroyUserLink = URL::temporarySignedRoute(
+        'users.destroy',
+        now()->addMinutes(5),
+        ['user' => $user->id]
+    );
 
-        $this->get($destroyUserLink)->assertStatus(401);
+    // 讓時間經過 6 分鐘，使連結失效
+    $this->travel(6)->minutes();
 
-        $this->assertDatabaseHas('users', ['id' => $user->id]);
-    }
-}
+    get($destroyUserLink)->assertStatus(401);
+
+    $this->assertDatabaseHas('users', ['id' => $user->id]);
+});

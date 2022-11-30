@@ -3,10 +3,12 @@
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 
+use function Pest\Laravel\post;
+
 test('guest can\'t upload image', function () {
     Storage::fake('s3');
 
-    $this->post(route('images.store'), [
+    post(route('images.store'), [
         'upload' => UploadedFile::fake()->image('photo.jpg')->size(100),
     ])
         ->assertStatus(302)
@@ -20,10 +22,9 @@ test('login user can upload image', function () {
 
     Storage::fake('s3');
 
-    $this->post(route('images.store'), [
+    post(route('images.store'), [
         'upload' => UploadedFile::fake()->image('photo.jpg')->size(100),
-    ])
-        ->assertStatus(200);
+    ])->assertStatus(200);
 });
 
 test('image must smaller than 512 kb', function () {
@@ -31,7 +32,7 @@ test('image must smaller than 512 kb', function () {
 
     Storage::fake('s3');
 
-    $this->post(route('images.store'), [
+    post(route('images.store'), [
         'upload' => UploadedFile::fake()->image('photo.jpg')->size(513),
     ])->assertStatus(302);
 });

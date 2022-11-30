@@ -1,85 +1,74 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Http\Livewire\Layouts\Header\Nav;
 use App\Models\Setting;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Livewire\Livewire;
-use Tests\TestCase;
 
-class RegistrationTest extends TestCase
-{
-    use RefreshDatabase;
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
+use function Pest\Livewire\livewire;
 
-    public function test_registration_screen_can_be_rendered()
-    {
-        Setting::query()->forceCreate([
-            'name' => '開放註冊',
-            'key' => 'allow_register',
-            'value' => 'true',
-        ]);
+uses(RefreshDatabase::class);
 
-        $response = $this->get('/register');
+test("registration screen can be rendered", function () {
+    Setting::query()->forceCreate([
+        'name' => '開放註冊',
+        'key' => 'allow_register',
+        'value' => 'true',
+    ]);
 
-        $response->assertStatus(200);
-    }
+    get('/register')->assertStatus(200);
+});
 
-    public function test_guest_can_register()
-    {
-        Setting::query()->forceCreate([
-            'name' => '開放註冊',
-            'key' => 'allow_register',
-            'value' => 'true',
-        ]);
+test("guest can register", function () {
+    Setting::query()->forceCreate([
+        'name' => '開放註冊',
+        'key' => 'allow_register',
+        'value' => 'true',
+    ]);
 
-        $response = $this->post('/register', [
-            'name' => 'Test_User',
-            'email' => 'test@example.com',
-            'password' => 'Password101',
-            'password_confirmation' => 'Password101',
-        ]);
+    $response = $this->post('/register', [
+        'name' => 'Test_User',
+        'email' => 'test@example.com',
+        'password' => 'Password101',
+        'password_confirmation' => 'Password101',
+    ]);
 
-        $this->assertAuthenticated();
-        $response->assertRedirect('verify-email');
-    }
+    $this->assertAuthenticated();
+    $response->assertRedirect('verify-email');
+});
 
-    public function test_guest_can_not_visit_register_page_when_register_is_not_allowed()
-    {
-        Setting::query()->forceCreate([
-            'name' => '開放註冊',
-            'key' => 'allow_register',
-            'value' => 'false',
-        ]);
+test("guest can not visit register page when register is not allowed", function () {
+    Setting::query()->forceCreate([
+        'name' => '開放註冊',
+        'key' => 'allow_register',
+        'value' => 'false',
+    ]);
 
-        $this->get(route('register'))->assertStatus(503);
-    }
+    get(route('register'))->assertStatus(503);
+});
 
-    public function test_guest_can_not_see_register_button()
-    {
-        Setting::query()->forceCreate([
-            'name' => '開放註冊',
-            'key' => 'allow_register',
-            'value' => 'false',
-        ]);
+test("guest can not see register button", function () {
+    Setting::query()->forceCreate([
+        'name' => '開放註冊',
+        'key' => 'allow_register',
+        'value' => 'false',
+    ]);
 
-        Livewire::test(Nav::class)
-            ->assertDontSeeText('註冊');
-    }
+    livewire(Nav::class)->assertDontSeeText('註冊');
+});
 
-    public function test_guest_can_not_register_when_register_is_not_allowed()
-    {
-        Setting::query()->forceCreate([
-            'name' => '開放註冊',
-            'key' => 'allow_register',
-            'value' => 'false',
-        ]);
+test("guest can not register when register is not allowed", function () {
+    Setting::query()->forceCreate([
+        'name' => '開放註冊',
+        'key' => 'allow_register',
+        'value' => 'false',
+    ]);
 
-        $this->post(route('register'), [
-            'name' => 'John',
-            'email' => 'John@email.com',
-            'password' => 'Password01!',
-            'password_confirmation' => 'Password01!',
-        ])->assertStatus(503);
-    }
-}
+    post(route('register'), [
+        'name' => 'John',
+        'email' => 'John@email.com',
+        'password' => 'Password01!',
+        'password_confirmation' => 'Password01!',
+    ])->assertStatus(503);
+});

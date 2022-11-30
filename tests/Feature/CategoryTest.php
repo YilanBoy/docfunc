@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+
 use function Pest\Laravel\get;
 
 test('guest can visit category show page', function () {
@@ -15,8 +16,10 @@ test('visit category show page and url don\'t include slug', function () {
 
     get(route('categories.show', ['category' => $category->id]))
         ->assertStatus(301)
-        ->assertRedirect(route('categories.show', [
-            'category' => $category->id,
-            'name' => $category->name,
-        ]));
+        ->assertRedirect(
+            route('categories.show', [
+                'category' => $category->id,
+                'name' => $category->name,
+            ])
+        );
 });

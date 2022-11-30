@@ -8,7 +8,9 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Redis;
+
 use function Pest\Laravel\get;
+use function Pest\Livewire\livewire;
 
 const REDIS_KEY_EXISTS_RETURN_VALUE = 1;
 
@@ -26,7 +28,7 @@ test('authenticated user can create post', function ($categoryId) {
     $title = str()->random(4);
     $randomString = str()->random(500);
 
-    Livewire::test(CreateForm::class, [
+    livewire(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('title', $title)
@@ -45,7 +47,7 @@ test('authenticated user can create post', function ($categoryId) {
 test('title at least 4 characters', function () {
     $this->actingAs(User::factory()->create());
 
-    Livewire::test(CreateForm::class, [
+    livewire(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('title', str()->random(3))
@@ -58,7 +60,7 @@ test('title at least 4 characters', function () {
 test('body at least 500 characters', function () {
     $this->actingAs(User::factory()->create());
 
-    Livewire::test(CreateForm::class, [
+    livewire(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('title', str()->random(4))
@@ -73,7 +75,7 @@ it('can check image immediately', function () {
 
     $file = UploadedFile::fake()->image('image.jpg')->size(1025);
 
-    Livewire::test(CreateForm::class, [
+    livewire(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('image', $file)
@@ -87,7 +89,7 @@ it('can upload image', function () {
 
     $file = UploadedFile::fake()->image('image.jpg');
 
-    Livewire::test(CreateForm::class, [
+    livewire(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('title', str()->random(4))
@@ -112,7 +114,7 @@ it('can\'t upload non image', function () {
 
     $file = UploadedFile::fake()->create('document.pdf', 512);
 
-    Livewire::test(CreateForm::class, [
+    livewire(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('title', str()->random(4))
@@ -129,15 +131,15 @@ it('can get auto save key property', function () {
 
     $this->actingAs($user);
 
-    Livewire::test(CreateForm::class, [
+    livewire(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
-    ])->assertSet('auto_save_key', 'user_'.$user->id.'_post_auto_save');
+    ])->assertSet('auto_save_key', 'user_' . $user->id . '_post_auto_save');
 });
 
 it('can auto save the post to redis', function () {
     $user = User::factory()->create();
 
-    $autoSaveKey = 'user_'.$user->id.'_post_auto_save';
+    $autoSaveKey = 'user_' . $user->id . '_post_auto_save';
 
     // clean the redis data, like refresh database
     if (Redis::exists($autoSaveKey)) {
@@ -155,7 +157,7 @@ it('can auto save the post to redis', function () {
         ->toJson(JSON_UNESCAPED_UNICODE);
     $body = str()->random(500);
 
-    Livewire::test(CreateForm::class, [
+    livewire(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('title', $title)
@@ -163,12 +165,12 @@ it('can auto save the post to redis', function () {
         ->set('tags', $tags)
         ->set('body', $body);
 
-    $this->assertEquals(REDIS_KEY_EXISTS_RETURN_VALUE, Redis::exists('user_'.$user->id.'_post_auto_save'));
+    $this->assertEquals(REDIS_KEY_EXISTS_RETURN_VALUE, Redis::exists('user_' . $user->id . '_post_auto_save'));
 
     $this->assertEquals(
         [
             'title' => $title,
-            'category_id' => (string) $categoryId,
+            'category_id' => (string)$categoryId,
             'tags' => $tags,
             'body' => $body,
         ],

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Http;
 
+use function Pest\Laravel\postJson;
+
 test('youtube oembed api could work', function () {
     $fakeResponse = [
         'title' => 'Amazing Nintendo Facts',
@@ -23,9 +25,7 @@ test('youtube oembed api could work', function () {
         'https://www.youtube.com/oembed*' => Http::response($fakeResponse),
     ]);
 
-    $response = $this->postJson('/api/oembed/youtube', ['url' => 'https://www.youtube.com/watch?v=M3r2XDceM6A']);
-
-    $response
+    postJson('/api/oembed/youtube', ['url' => 'https://www.youtube.com/watch?v=M3r2XDceM6A'])
         ->assertStatus(200)
         ->assertJson($fakeResponse);
 });
@@ -35,9 +35,7 @@ test('embed youtube url is not found', function () {
         'https://www.youtube.com/oembed*' => Http::response('Not Found', 404),
     ]);
 
-    $response = $this->postJson('/api/oembed/youtube', ['url' => 'https://www.youtube.com/watch?v=ABCDEFGHIJK']);
-
-    $response
+    postJson('/api/oembed/youtube', ['url' => 'https://www.youtube.com/watch?v=ABCDEFGHIJK'])
         ->assertStatus(404)
         ->assertJson(['html' => '<p style="font-size:1.5em;">Youtube 影片連結發生錯誤... 🥲</p>']);
 });

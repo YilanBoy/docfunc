@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Tag;
+
 use function Pest\Laravel\get;
 
 test('guest can visit tag show page', function () {

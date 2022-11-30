@@ -4,6 +4,8 @@ use App\Http\Livewire\Posts\EditForm;
 use App\Models\Post;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+use function Pest\Livewire\livewire;
+
 uses(RefreshDatabase::class);
 
 test('author can update his post', function ($categoryId) {
@@ -14,7 +16,7 @@ test('author can update his post', function ($categoryId) {
     $newTitle = str()->random(4);
     $newBody = str()->random(500);
 
-    Livewire::test(EditForm::class, ['postId' => $post->id])
+    livewire(EditForm::class, ['postId' => $post->id])
         ->set('title', $newTitle)
         ->set('categoryId', $categoryId)
         ->set('body', $newBody)

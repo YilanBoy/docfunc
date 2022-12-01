@@ -21,4 +21,13 @@ class PostFactory extends Factory
             'updated_at' => now(),
         ];
     }
+
+    public function userId(int $userId)
+    {
+        return $this->state(function (array $attributes) use ($userId) {
+            return [
+                'user_id' => $userId,
+            ];
+        });
+    }
 }

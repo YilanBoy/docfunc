@@ -2,31 +2,12 @@
 
 namespace App\Http\Livewire\Users\Posts;
 
+use App\Models\Post;
 use Livewire\Component;
 
 class PostCard extends Component
 {
-    // category
-    public string $categoryLink;
-
-    public string $categoryName;
-
-    public string $categoryIcon;
-
-    // post
-    public int $postId;
-
-    public string $link;
-
-    public string $title;
-
-    public string $createdAt;
-
-    public string $createdAtToDateString;
-
-    public int $commentCount;
-
-    public int $authorId;
+    public Post $post;
 
     public function render()
     {

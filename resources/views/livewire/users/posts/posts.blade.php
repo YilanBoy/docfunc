@@ -5,35 +5,11 @@
 
     {{--    @includeWhen(!$post->trashed(), 'users.posts.card')--}}
     @if (!$post->trashed())
-      <livewire:users.posts.post-card
-        :category-link="$post->category->link_with_name"
-        :category-name="$post->category->name"
-        :category-icon="$post->category->icon"
-        :post-id="$post->id"
-        :link="$post->link_with_slug"
-        :title="$post->title"
-        :created-at="$post->created_at"
-        :created-at-to-date-string="$post->created_at->toDateString()"
-        :comment-count="$post->comment_count"
-        :author-id="$post->user_id"
-        wire:key="post-{{ $post->id }}"
-      />
+      <livewire:users.posts.post-card :post="$post" wire:key="post-{{ $post->id }}"/>
     @endif
 
     @if ($post->trashed() && auth()->id() === $post->user_id)
-      <livewire:users.posts.deleted-post-card
-        :category-link="$post->category->link_with_name"
-        :category-name="$post->category->name"
-        :category-icon="$post->category->icon"
-        :post-id="$post->id"
-        :link="$post->link_with_slug"
-        :title="$post->title"
-        :created-at="$post->created_at"
-        :created-at-to-date-string="$post->created_at->toDateString()"
-        :comment-count="$post->comment_count"
-        :destroy-date="$post->deleted_at->addDays(7)->diffForHumans()"
-        wire:key="post-{{ $post->id }}"
-      />
+      <livewire:users.posts.deleted-post-card :post="$post" wire:key="deleted-post-{{ $post->id }}"/>
     @endif
 
   @empty

@@ -118,7 +118,7 @@
               class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
               <i class="bi bi-clock-fill"></i><span
-                class="hidden ml-2 md:inline">{{ $post->created_at->toDateString() }}</span>
+                class="hidden ml-2 md:inline">{{ $post->created_at->diffForHumans() }}</span>
             </a>
           </div>
           <div>&bull;</div>

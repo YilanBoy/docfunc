@@ -23,13 +23,13 @@
           <p class="mt-2 text-gray-400 whitespace-pre-wrap text-base">{{ $comment->content }}</p>
 
           <span class="mt-2 text-slate-400 xl:hidden">
-            <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $comment->created_at->toDateString() }}</span>
+            <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>
           </span>
         </div>
 
         {{-- 文章發布時間 --}}
         <span class="items-center justify-center hidden text-neutral-400 xl:flex text-base">
-          <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $comment->created_at->toDateString() }}</span>
+          <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>
         </span>
 
       </div>

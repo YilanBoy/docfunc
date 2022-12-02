@@ -33,14 +33,6 @@
     }
 }
 
-span.text-tiny {
-    font-size: 0.7em;
-}
-
-span.text-big {
-    font-size: 1.4em;
-}
-
 /* Alpine.js */
 [x-cloak] {
     display: none !important;
@@ -48,40 +40,28 @@ span.text-big {
 
 /* scroll bar */
 ::-webkit-scrollbar {
-    width: 1em;
+    height: .8em;
+    width: .8em;
 }
 
 ::-webkit-scrollbar-track {
-    background: hsl(216, 12%, 84%);
+    background: transparent;
     border-radius: 100vw;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: hsl(220, 9%, 46%);
-    border: 0.15em solid hsl(216, 12%, 84%);
+    background: #6b7280;
     border-radius: 100vw;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: hsl(217, 19%, 27%);
+    background: #4b5563;
 }
 
-progress {
-    width: 100%;
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
 }
 
-progress::-webkit-progress-bar {
-    border-radius: 0.25rem;
-    background-color: transparent;
+#blog-post ::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
 }
-
-progress::-webkit-progress-value {
-    border-radius: 0.25rem;
-    background-color: limegreen;
-}
-
-.dark progress::-webkit-progress-value {
-    border-radius: 0.25rem;
-    background-color: dodgerblue;
-}
-

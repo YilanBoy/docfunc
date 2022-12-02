@@ -84,7 +84,7 @@
           <i class="bi bi-sun-fill"></i>
         </span>
 
-      <span class="hidden transition duration-150 text-sky-500 dark:inline group-hover:text-sky-400">
+      <span class="hidden transition duration-150 text-indigo-500 dark:inline group-hover:text-indigo-400">
           <i class="bi bi-moon-stars-fill"></i>
         </span>
     </button>

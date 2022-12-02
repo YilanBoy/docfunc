@@ -27,15 +27,15 @@
         href="{{ route('posts.index') }}"
         @class([
           'peer flex items-center justify-center h-10 transition duration-150',
-          'text-gray-400 hover:text-blue-400' => request()->url() !== route('posts.index'),
-          'text-blue-400' => request()->url() === route('posts.index'),
+          'text-gray-400 hover:text-green-400 dark:hover:text-indigo-400' => request()->url() !== route('posts.index'),
+          'text-green-400 dark:text-indigo-400' => request()->url() === route('posts.index'),
         ])
       >
         <i class="bi bi-house-fill"></i><span class="ml-2">全部文章</span>
       </a>
 
       <span @class([
-          'absolute left-0 w-full h-1 transition-all duration-300 bg-blue-400 rounded-full pointer-events-none',
+          'absolute left-0 w-full h-1 transition-all duration-300 bg-green-400 dark:bg-indigo-400 rounded-full pointer-events-none',
           'opacity-0 -bottom-5 peer-hover:opacity-100 peer-hover:-bottom-3' => request()->url() !== route('posts.index'),
           'opacity-100 -bottom-3' => request()->url() === route('posts.index'),
         ])></span>
@@ -47,15 +47,15 @@
           href="{{ $category->link_with_name }}"
           @class([
             'peer flex items-center justify-center h-10 transition duration-150',
-            'text-gray-400 hover:text-blue-400' => request()->url() !== $category->link_with_name,
-            'text-blue-400' => request()->url() === $category->link_with_name,
+            'text-gray-400 hover:text-green-400 dark:hover:text-indigo-400' => request()->url() !== $category->link_with_name,
+            'text-green-400 dark:text-indigo-400' => request()->url() === $category->link_with_name,
           ])
         >
           <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>
         </a>
 
         <span @class([
-            'absolute left-0 w-full h-1 transition-all duration-300 bg-blue-400 rounded-full pointer-events-none',
+            'absolute left-0 w-full h-1 transition-all duration-300 bg-green-400 dark:bg-indigo-400 rounded-full pointer-events-none',
             'opacity-0 -bottom-5 peer-hover:opacity-100 peer-hover:-bottom-3' => request()->url() !== $category->link_with_name,
             'opacity-100 -bottom-3' => request()->url() === $category->link_with_name,
           ])></span>

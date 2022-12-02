@@ -2,6 +2,6 @@
 
 use function Pest\Laravel\get;
 
-test("example", function () {
+test('example', function () {
     get('/')->assertStatus(200);
 });

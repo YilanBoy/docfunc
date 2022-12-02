@@ -6,11 +6,12 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 
+use function Pest\Faker\faker;
 use function Pest\Laravel\get;
 
 uses(RefreshDatabase::class);
 
-test("posts index can be rendered", function () {
+test('posts index can be rendered', function () {
     $user = User::factory()->create();
 
     Post::factory(10)->create([
@@ -23,7 +24,16 @@ test("posts index can be rendered", function () {
         ->assertSeeLivewire('posts.posts');
 });
 
-test("category can filter posts", function () {
+it('will be redirect if slug is not in the url', function () {
+    $post = Post::factory()->create([
+        'slug' => faker()->word(),
+    ]);
+
+    get(route('posts.show', ['post' => $post->id]))
+        ->assertRedirect();
+});
+
+test('category can filter posts', function () {
     $user = User::factory()->create();
 
     $categoryOnePost = Post::factory()->make([
@@ -51,7 +61,7 @@ test("category can filter posts", function () {
     });
 });
 
-test("order query string filters correctly", function () {
+test('order query string filters correctly', function () {
     $user = User::factory()->create();
 
     Post::factory()->create([
@@ -95,7 +105,7 @@ test("order query string filters correctly", function () {
     }
 });
 
-test("user can view a post", function () {
+test('user can view a post', function () {
     $user = User::factory()->create();
 
     $post = Post::factory()->make();
@@ -103,19 +113,19 @@ test("user can view a post", function () {
     $post->category_id = 3;
     $post->save();
 
-    get('/posts/' . $post->id)
+    get($post->link_with_slug)
         ->assertStatus(200)
         ->assertSee($post->title)
         ->assertSee($post->body);
 });
 
-test("guest can not visit create post page", function () {
+test('guest can not visit create post page', function () {
     get(route('posts.create'))
         ->assertStatus(302)
         ->assertRedirect(route('login'));
 });
 
-test("authenticated user can visit create post page", function () {
+test('authenticated user can visit create post page', function () {
     $user = User::factory()->create();
 
     $this->actingAs($user)
@@ -123,7 +133,7 @@ test("authenticated user can visit create post page", function () {
         ->assertSuccessful();
 });
 
-test("author can soft delete own post", function () {
+test('author can soft delete own post', function () {
     $user = User::factory()->create();
 
     $post = Post::factory()->create([
@@ -140,7 +150,7 @@ test("author can soft delete own post", function () {
     $this->assertSoftDeleted('posts', ['id' => $post->id]);
 });
 
-test("author can restore deleted post", function () {
+test('author can restore deleted post', function () {
     $user = User::factory()->create();
 
     $post = Post::factory()->create([
@@ -160,7 +170,7 @@ test("author can restore deleted post", function () {
     $this->assertNotSoftDeleted('posts', ['id' => $post->id]);
 });
 
-test("prune the stale post", function () {
+test('prune the stale post', function () {
     $user = User::factory()->create();
 
     Post::factory()->create([

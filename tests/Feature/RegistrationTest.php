@@ -10,7 +10,7 @@ use function Pest\Livewire\livewire;
 
 uses(RefreshDatabase::class);
 
-test("registration screen can be rendered", function () {
+test('registration screen can be rendered', function () {
     Setting::query()->forceCreate([
         'name' => '開放註冊',
         'key' => 'allow_register',
@@ -20,7 +20,7 @@ test("registration screen can be rendered", function () {
     get('/register')->assertStatus(200);
 });
 
-test("guest can register", function () {
+test('guest can register', function () {
     Setting::query()->forceCreate([
         'name' => '開放註冊',
         'key' => 'allow_register',
@@ -38,7 +38,7 @@ test("guest can register", function () {
     $response->assertRedirect('verify-email');
 });
 
-test("guest can not visit register page when register is not allowed", function () {
+test('guest can not visit register page when register is not allowed', function () {
     Setting::query()->forceCreate([
         'name' => '開放註冊',
         'key' => 'allow_register',
@@ -48,7 +48,7 @@ test("guest can not visit register page when register is not allowed", function 
     get(route('register'))->assertStatus(503);
 });
 
-test("guest can not see register button", function () {
+test('guest can not see register button', function () {
     Setting::query()->forceCreate([
         'name' => '開放註冊',
         'key' => 'allow_register',
@@ -58,7 +58,7 @@ test("guest can not see register button", function () {
     livewire(Nav::class)->assertDontSeeText('註冊');
 });
 
-test("guest can not register when register is not allowed", function () {
+test('guest can not register when register is not allowed', function () {
     Setting::query()->forceCreate([
         'name' => '開放註冊',
         'key' => 'allow_register',

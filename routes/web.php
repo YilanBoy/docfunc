@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 // 首頁
 Route::get('/', [PostController::class, 'index'])->name('root');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // 會員相關頁面
 Route::prefix('users')->group(function () {
@@ -38,7 +38,8 @@ Route::prefix('users')->group(function () {
     Route::get('/{user}/change-password', [ChangePasswordController::class, 'edit'])->name('users.changePassword');
     Route::put('/{user}/change-password', [ChangePasswordController::class, 'update'])->name('users.updatePassword');
 
-    Route::post('/{user}/send-destroy-email', [SendDestroyUserEmailController::class, 'store'])->name('users.sendDestroyEmail');
+    Route::post('/{user}/send-destroy-email', [SendDestroyUserEmailController::class, 'store'])
+        ->name('users.sendDestroyEmail');
 });
 
 // 文章列表與內容

@@ -40,8 +40,8 @@ class PostController extends Controller
     /**
      * 文章內容
      *
-     * @param  Request  $request
-     * @param  Post  $post
+     * @param Request $request
+     * @param Post $post
      * @return Application|Factory|View|RedirectResponse|Redirector
      */
     public function show(Request $request, Post $post)
@@ -68,7 +68,7 @@ class PostController extends Controller
     /**
      * 文章編輯頁面
      *
-     * @param  int  $id
+     * @param int $id
      * @return Application|Factory|View
      */
     public function edit(int $id)
@@ -79,7 +79,7 @@ class PostController extends Controller
     /**
      * 刪除文章 (軟刪除)
      *
-     * @param  Post  $post
+     * @param Post $post
      * @return RedirectResponse
      *
      * @throws AuthorizationException

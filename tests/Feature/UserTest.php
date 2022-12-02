@@ -13,14 +13,14 @@ use function Pest\Laravel\put;
 
 uses(RefreshDatabase::class);
 
-test("user can view own profile", function () {
+test('user can view own profile', function () {
     $user = User::factory()->create();
 
     get(route('users.index', $user->id))
         ->assertStatus(200);
 });
 
-test("guest can not visit edit page", function () {
+test('guest can not visit edit page', function () {
     $user = User::factory()->create();
 
     get(route('users.edit', $user->id))
@@ -28,7 +28,7 @@ test("guest can not visit edit page", function () {
         ->assertRedirect(route('login'));
 });
 
-test("user can not visit others edit page", function () {
+test('user can not visit others edit page', function () {
     $user = User::factory()->create();
 
     $otherUser = User::factory()->create();
@@ -38,7 +38,7 @@ test("user can not visit others edit page", function () {
         ->assertStatus(403);
 });
 
-test("user can edit own information", function () {
+test('user can edit own information', function () {
     $user = User::factory()->create();
 
     $this->actingAs($user);
@@ -59,7 +59,7 @@ test("user can edit own information", function () {
         ->assertSessionHasErrors('name');
 });
 
-test("user can visit change password page", function () {
+test('user can visit change password page', function () {
     $user = User::factory()->create();
 
     $this->actingAs($user);
@@ -68,7 +68,7 @@ test("user can visit change password page", function () {
         ->assertSuccessful();
 });
 
-test("user can change password", function () {
+test('user can change password', function () {
     $user = User::factory()->create();
 
     $this->actingAs($user);
@@ -82,7 +82,7 @@ test("user can change password", function () {
         ->assertSessionHas('status', '密碼修改成功！');
 });
 
-test("user can not change password with wrong current password", function () {
+test('user can not change password with wrong current password', function () {
     $user = User::factory()->create();
 
     $this->actingAs($user);
@@ -95,7 +95,7 @@ test("user can not change password with wrong current password", function () {
         ->assertSessionHasErrors('current_password');
 });
 
-test("user can not change password with invalid new password", function () {
+test('user can not change password with invalid new password', function () {
     $user = User::factory()->create();
 
     $this->actingAs($user);
@@ -108,7 +108,7 @@ test("user can not change password with invalid new password", function () {
         ->assertSessionHasErrors('new_password');
 });
 
-test("user can visit delete account page", function () {
+test('user can visit delete account page', function () {
     $user = User::factory()->create();
 
     $this->actingAs($user);
@@ -117,7 +117,7 @@ test("user can visit delete account page", function () {
         ->assertSuccessful();
 });
 
-test("send destroy user email queue", function () {
+test('send destroy user email queue', function () {
     Mail::fake();
 
     $user = User::factory()->create();
@@ -130,7 +130,7 @@ test("send destroy user email queue", function () {
     Mail::assertQueued(DestroyUser::class);
 });
 
-test("user can delete own account", function () {
+test('user can delete own account', function () {
     $user = User::factory()->create();
 
     $this->assertDatabaseHas('users', ['id' => $user->id]);
@@ -148,7 +148,7 @@ test("user can delete own account", function () {
     $this->assertDatabaseMissing('users', ['id' => $user->id]);
 });
 
-test("user can not delete own account if url is invalid", function () {
+test('user can not delete own account if url is invalid', function () {
     $user = User::factory()->create();
 
     $this->assertDatabaseHas('users', ['id' => $user->id]);

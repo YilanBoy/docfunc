@@ -10,14 +10,15 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->text(30),
-            'body' => $this->faker->paragraph(10),
-            'excerpt' => $this->faker->sentence,
-            'category_id' => $this->faker->numberBetween(1, 3),
+            'title' => fake()->text(30),
+            'body' => fake()->paragraph(10),
+            'slug' => fake()->word(),
+            'excerpt' => fake()->sentence,
+            'category_id' => fake()->numberBetween(1, 3),
             'comment_count' => 0,
             'user_id' => User::factory()->create()->id,
             // 隨機取一個月以內，但早於現在的時間
-            'created_at' => $this->faker->dateTimeThisMonth(now()),
+            'created_at' => fake()->dateTimeThisMonth(now()),
             'updated_at' => now(),
         ];
     }

@@ -75,12 +75,12 @@
 
 /* links */
 .ck-content a {
-    color: #0d9488;
+    color: #3b82f6;
     cursor: pointer;
 }
 
 .ck-content a:hover {
-    color: #14b8a6;
+    color: #2563eb;
     cursor: pointer;
     text-decoration: underline;
 }
@@ -96,11 +96,11 @@
 }
 
 .dark .ck-content a {
-    color: #14b8a6;
+    color: #60a5fa;
 }
 
 .dark .ck-content a:hover {
-    color: #2dd4bf;
+    color: #93c5fd;
 }
 
 .dark .ck-content pre code {

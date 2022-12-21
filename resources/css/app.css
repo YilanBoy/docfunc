@@ -14,10 +14,10 @@
     .blog-post {
         @apply prose prose-slate dark:prose-invert
             /* headings */
-        prose-headings:text-blue-500 dark:prose-headings:text-blue-400
+        prose-headings:text-green-500 dark:prose-headings:text-indigo-400
             /* links */
-        prose-a:no-underline hover:prose-a:underline prose-a:text-teal-600 hover:prose-a:text-teal-500
-        dark:prose-a:text-teal-500 dark:hover:prose-a:text-teal-400
+        prose-a:no-underline hover:prose-a:underline prose-a:text-green-600 hover:prose-a:text-green-500
+        dark:prose-a:text-indigo-400 dark:hover:prose-a:text-indigo-300
             /* lists */
         prose-li:marker:text-gray-500 dark:prose-li:marker:text-gray-400
             /* figure */

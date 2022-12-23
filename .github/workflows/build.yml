@@ -73,7 +73,7 @@ jobs:
             sudo tar -xzf ${{ env.ARTIFACTS_PATH }}/${{ github.sha }}.tar.gz -C ${{ env.RELEASE_PATH }}/${{ github.sha }}
 
             # make env file
-            cat <<'EOF' > ${{ env.RELEASE_PATH }}/${{ github.sha }}/.env
+            sudo cat <<'EOF' > ${{ env.RELEASE_PATH }}/${{ github.sha }}/.env
             ${{ secrets.BLOG_ENV }}
             EOF
 

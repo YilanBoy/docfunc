@@ -73,7 +73,9 @@ jobs:
             sudo tar -xzf ${{ env.ARTIFACTS_PATH }}/${{ github.sha }}.tar.gz -C ${{ env.RELEASE_PATH }}/${{ github.sha }}
 
             # make env file
-            sudo printf "%s" '${{ secrets.BLOG_ENV }}' > "${{ env.RELEASE_PATH }}/${{ github.sha }}/.env"
+            cat <<'EOF' > ${{ env.RELEASE_PATH }}/${{ github.sha }}/.env
+            ${{ secrets.BLOG_ENV }}
+            EOF
 
             # change soft link to new version application
             sudo ln -sfn ${{ env.RELEASE_PATH }}/${{ github.sha }} ${{ env.APP_PATH }}

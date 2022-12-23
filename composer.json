@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "algolia/scout-extended": "^2.0",
         "aws/aws-sdk-php": "^3.247",
         "ezyang/htmlpurifier": "^4.13",

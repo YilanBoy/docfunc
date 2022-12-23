@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: [ 8.1 ]
+        php: [ 8.1, 8.2 ]
     env:
       DB_DATABASE: blog_tests
       DB_USERNAME: root

@@ -2,11 +2,6 @@
 
 namespace App\Http\Traits;
 
-use App\Models\Post;
-use App\Services\FileService;
-use App\Services\FormatTransferService;
-use App\Services\PostService;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 trait LivewirePostValidation

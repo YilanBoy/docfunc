@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 // 首頁
 Route::get('/', [PostController::class, 'index'])->name('root');
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
 
 // 會員相關頁面
 Route::prefix('users')->group(function () {

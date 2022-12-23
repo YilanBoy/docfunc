@@ -6,7 +6,6 @@ use Livewire\Component;
 
 class DesktopMenu extends Component
 {
-
     public $categories;
 
     public $showRegisterButton;

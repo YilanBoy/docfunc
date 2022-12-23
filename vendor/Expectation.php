@@ -3,6 +3,8 @@
 namespace Pest;
 
 /**
- * @method mixed toBeOne()
+ * @method  toBeOne()
  */
-final class Expectation {}
+final class Expectation
+{
+}

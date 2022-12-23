@@ -11,6 +11,7 @@ if (! function_exists('get_gravatar')) {
      * @param  bool  $img True to return a complete IMG tag False for just the URL
      * @param  array  $atts Optional, additional key/value attributes to include in the IMG tag
      * @return string containing either just a URL or a complete image tag
+     *
      * @source https://gravatar.com/site/implement/images/php/
      */
     function get_gravatar(

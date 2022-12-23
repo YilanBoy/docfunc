@@ -69,11 +69,11 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           script: |
             # extract to release dir
-            mkdir ${{ env.RELEASE_PATH }}/${{ github.sha }}
-            tar -xzf ${{ env.ARTIFACTS_PATH }}/${{ github.sha }}.tar.gz -C ${{ env.RELEASE_PATH }}/${{ github.sha }}
+            sudo mkdir ${{ env.RELEASE_PATH }}/${{ github.sha }}
+            sudo tar -xzf ${{ env.ARTIFACTS_PATH }}/${{ github.sha }}.tar.gz -C ${{ env.RELEASE_PATH }}/${{ github.sha }}
 
             # make env file
-            printf "%s" '${{ secrets.BLOG_ENV }}' > "${{ env.RELEASE_PATH }}/${{ github.sha }}/.env"
+            sudo printf "%s" '${{ secrets.BLOG_ENV }}' > "${{ env.RELEASE_PATH }}/${{ github.sha }}/.env"
 
             # change soft link to new version application
             sudo ln -sfn ${{ env.RELEASE_PATH }}/${{ github.sha }} ${{ env.APP_PATH }}

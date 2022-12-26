@@ -37,12 +37,11 @@ test('authenticated user can create post', function ($categoryId) {
         ->call('store')
         ->assertHasNoErrors();
 
-    $this->assertDatabaseHas('posts', [
-        'title' => $title,
-        'category_id' => $categoryId,
-        'body' => $randomString,
-    ]);
-})->with([1, 2, 3]);
+    expect(Post::latest()->first())
+        ->title->toBe($title)
+        ->category_id->toBe($categoryId)
+        ->body->toBe($randomString);
+})->with('defaultCategoryIds');
 
 test('title at least 4 characters', function () {
     $this->actingAs(User::factory()->create());
@@ -165,15 +164,13 @@ it('can auto save the post to redis', function () {
         ->set('tags', $tags)
         ->set('body', $body);
 
-    $this->assertEquals(REDIS_KEY_EXISTS_RETURN_VALUE, Redis::exists('user_'.$user->id.'_post_auto_save'));
-
-    $this->assertEquals(
-        [
+    expect(Redis::exists('user_'.$user->id.'_post_auto_save'))
+        ->toBe(REDIS_KEY_EXISTS_RETURN_VALUE)
+        ->and(json_decode(Redis::get($autoSaveKey), true))
+        ->toBe([
             'title' => $title,
-            'category_id' => (string) $categoryId,
+            'category_id' => $categoryId,
             'tags' => $tags,
             'body' => $body,
-        ],
-        json_decode(Redis::get($autoSaveKey), true)
-    );
+        ]);
 });

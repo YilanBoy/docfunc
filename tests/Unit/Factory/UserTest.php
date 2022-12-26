@@ -12,8 +12,5 @@ it('can change user_id when creating the post', function () {
     $user = User::factory()->create();
     Post::factory()->userId($user->id)->create();
 
-    $this->assertDatabaseCount('posts', $user->id);
-    $this->assertDatabaseHas('posts', [
-        'user_id' => $user->id,
-    ]);
+    expect(Post::latest()->first())->user_id->toBe($user->id);
 });

@@ -2,40 +2,23 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Contracts\Validation\InvokableRule;
 use Illuminate\Support\Facades\Hash;
 
-class MatchOldPassword implements Rule
+class MatchOldPassword implements InvokableRule
 {
     /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * Determine if the validation rule passes.
+     * Run the validation rule.
      *
      * @param  string  $attribute
      * @param  mixed  $value
-     * @return bool
+     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     * @return void
      */
-    public function passes($attribute, $value)
+    public function __invoke($attribute, $value, $fail): void
     {
-        return Hash::check($value, auth()->user()->password);
-    }
-
-    /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
-    public function message()
-    {
-        return '密碼錯誤';
+        if (! Hash::check($value, auth()->user()->password)) {
+            $fail('密碼錯誤');
+        }
     }
 }

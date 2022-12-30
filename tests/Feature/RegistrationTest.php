@@ -2,30 +2,31 @@
 
 use App\Http\Livewire\Layouts\Header\Nav;
 use App\Models\Setting;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 use function Pest\Livewire\livewire;
 
-uses(RefreshDatabase::class);
+uses(LazilyRefreshDatabase::class);
 
 test('registration screen can be rendered', function () {
-    Setting::query()->forceCreate([
-        'name' => '開放註冊',
-        'key' => 'allow_register',
-        'value' => 'true',
-    ]);
+    $registerSetting = Setting::query()
+        ->where('key', 'allow_register')
+        ->firstOrFail();
+
+    $registerSetting->update(['value' => true]);
+
+    expect($registerSetting->value)->toBeTrue();
 
     get('/register')->assertStatus(200);
 });
 
 test('guest can register', function () {
-    Setting::query()->forceCreate([
-        'name' => '開放註冊',
-        'key' => 'allow_register',
-        'value' => 'true',
-    ]);
+    Setting::query()
+        ->where('key', 'allow_register')
+        ->firstOrFail()
+        ->update(['value' => true]);
 
     $response = $this->post('/register', [
         'name' => 'Test_User',
@@ -39,31 +40,31 @@ test('guest can register', function () {
 });
 
 test('guest can not visit register page when register is not allowed', function () {
-    Setting::query()->forceCreate([
-        'name' => '開放註冊',
-        'key' => 'allow_register',
-        'value' => 'false',
-    ]);
+    $registerSetting = Setting::query()
+        ->where('key', 'allow_register')
+        ->firstOrFail();
+
+    expect($registerSetting->value)->toBeFalse();
 
     get(route('register'))->assertStatus(503);
 });
 
 test('guest can not see register button', function () {
-    Setting::query()->forceCreate([
-        'name' => '開放註冊',
-        'key' => 'allow_register',
-        'value' => 'false',
-    ]);
+    $registerSetting = Setting::query()
+        ->where('key', 'allow_register')
+        ->firstOrFail();
+
+    expect($registerSetting->value)->toBeFalse();
 
     livewire(Nav::class)->assertDontSeeText('註冊');
 });
 
 test('guest can not register when register is not allowed', function () {
-    Setting::query()->forceCreate([
-        'name' => '開放註冊',
-        'key' => 'allow_register',
-        'value' => 'false',
-    ]);
+    $registerSetting = Setting::query()
+        ->where('key', 'allow_register')
+        ->firstOrFail();
+
+    expect($registerSetting->value)->toBeFalse();
 
     post(route('register'), [
         'name' => 'John',

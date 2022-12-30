@@ -9,5 +9,7 @@ class Setting extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = ['value'];
+
+    protected $casts = ['value' => 'json'];
 }

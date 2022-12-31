@@ -33,6 +33,15 @@
     }
 }
 
+/* ckeditor5-font/theme/fontsize.css */
+.blog-post .text-tiny {
+    font-size: .7em;
+}
+
+.blog-post .text-big {
+    font-size: 1.4em;
+}
+
 /* Alpine.js */
 [x-cloak] {
     display: none !important;

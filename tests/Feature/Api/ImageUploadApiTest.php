@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Services\FileService;
 use Illuminate\Http\UploadedFile;
 
 use function Pest\Laravel\post;
@@ -22,8 +23,16 @@ test('login user can upload image', function () {
 
     Storage::fake('s3');
 
+    $file = UploadedFile::fake()->image('photo.jpg')->size(100);
+    $filename = 'fake_converted_image.jpg';
+
+    mock('alias:'.FileService::class)
+        ->shouldReceive('generateImageFileName')
+        ->once()
+        ->andReturn($filename);
+
     post(route('images.store'), [
-        'upload' => UploadedFile::fake()->image('photo.jpg')->size(100),
+        'upload' => $file,
     ])->assertStatus(200);
 });
 

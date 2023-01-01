@@ -5,6 +5,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
+use App\Services\FileService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Redis;
@@ -86,7 +87,13 @@ it('can upload image', function () {
 
     Storage::fake('s3');
 
-    $file = UploadedFile::fake()->image('image.jpg');
+    $file = UploadedFile::fake()->image('fake_image.jpg');
+    $filename = 'fake_converted_image.jpg';
+
+    mock('alias:'.FileService::class)
+        ->shouldReceive('generateImageFileName')
+        ->once()
+        ->andReturn($filename);
 
     livewire(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
@@ -98,10 +105,6 @@ it('can upload image', function () {
         ->set('body', str()->random(500))
         ->call('store')
         ->assertHasNoErrors();
-
-    $post = Post::latest()->first();
-    // get the converted filename
-    $filename = basename($post->preview_url);
 
     Storage::disk('s3')->assertExists("preview/{$filename}");
 });

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Post;
+use DOMDocument;
 use HTMLPurifier;
 use HTMLPurifier_Config;
 
@@ -102,12 +103,27 @@ class PostService
      */
     public static function imagesInPost(Post $post): array
     {
-        preg_match_all(
-            '/images\/(\d{4}_\d{2}_\d{2}_\d{2}_\d{2}_\d{2}_[a-zA-Z0-9]+\.(jpeg|png|jpg|gif|svg))/U',
-            $post->body,
-            $matches,
-        );
+        $dom = new DOMDocument();
+        $dom->loadHTML($post->body, LIBXML_NOERROR);
 
-        return $matches[1];
+        $imageList = [];
+
+        foreach ($dom->getElementsByTagName('img') as $img) {
+            $pattern = '/\d{4}_\d{2}_\d{2}_\d{2}_\d{2}_\d{2}_[a-zA-Z0-9]+\.(jpeg|png|jpg|gif|svg)/u';
+
+            $imageName = basename($img->getAttribute('src'));
+
+            if (preg_match($pattern, $imageName)) {
+                $imageList[] = $imageName;
+            }
+        }
+
+        // format:
+        // [
+        //     '2023_01_01_10_18_21_63b0ed6d06d52.jpg',
+        //     '2022_12_30_22_39_21_63aef81999216.jpg',
+        //     ...
+        // ]
+        return $imageList;
     }
 }

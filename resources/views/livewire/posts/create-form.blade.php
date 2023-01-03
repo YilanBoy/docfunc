@@ -123,7 +123,8 @@
               <progress max="100" x-bind:value="progress"></progress>
             </div>
 
-            @if ($image && !$errors->any())
+            {{-- getSize() can get file size (bytes) --}}
+            @if ($image && $image->getSize() <= 1_000_000)
               <img src="{{ $image->temporaryUrl() }}" alt="preview image" class="h-48 mt-4 rounded-lg">
             @endif
           </div>

@@ -19,7 +19,7 @@ class ImageController extends Controller
     }
 
     /**
-     * 在文章中上傳圖片至 AWS S3 的 API
+     * upload the image in the post to AWS S3
      *
      * @param  Request  $request
      * @return JsonResponse
@@ -27,7 +27,7 @@ class ImageController extends Controller
     public function store(Request $request): JsonResponse
     {
         $request->validate([
-            'upload' => ['required', File::image()->max(512)],
+            'upload' => ['required', File::image()->max(1024)],
         ]);
 
         $file = $request->file('upload');

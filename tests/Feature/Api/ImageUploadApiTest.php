@@ -7,7 +7,7 @@ use function Pest\Laravel\post;
 
 beforeEach(fn () => Storage::fake('s3'));
 
-test('guest can\'t upload image', function () {
+test('a guest can\'t upload image', function () {
     post(route('images.store'), [
         'upload' => UploadedFile::fake()->image('photo.jpg')->size(100),
     ])
@@ -17,7 +17,7 @@ test('guest can\'t upload image', function () {
     Storage::disk('s3')->assertDirectoryEmpty('images');
 });
 
-test('login user can upload image', function () {
+test('an authenticated user can upload image', function () {
     $this->actingAs(User::factory()->create());
 
     $file = UploadedFile::fake()->image('photo.jpg')->size(100);
@@ -29,11 +29,11 @@ test('login user can upload image', function () {
     expect(Storage::disk('s3')->allFiles())->not->toBeEmpty();
 });
 
-test('image must smaller than 512 kb', function () {
+test('images must be less than 1024 kb', function () {
     $this->actingAs(User::factory()->create());
 
     post(route('images.store'), [
-        'upload' => UploadedFile::fake()->image('photo.jpg')->size(513),
+        'upload' => UploadedFile::fake()->image('photo.jpg')->size(1025),
     ])->assertStatus(302);
 
     Storage::disk('s3')->assertDirectoryEmpty('images');

@@ -62,6 +62,8 @@ class EditForm extends Component
     public function updatedImage()
     {
         $this->validateImage();
+
+        $this->resetValidation('image');
     }
 
     public function update()

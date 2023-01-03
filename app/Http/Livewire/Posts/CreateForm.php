@@ -64,6 +64,14 @@ class CreateForm extends Component
         return 'user_'.auth()->id().'_post_auto_save';
     }
 
+    // when image property update, trigger validation
+    public function updatedImage()
+    {
+        $this->validateImage();
+
+        $this->resetValidation('image');
+    }
+
     // when data update, auto save it to redis
     public function updated()
     {
@@ -80,9 +88,15 @@ class CreateForm extends Component
         Redis::expire($this->auto_save_key, 604_800);
     }
 
-    public function updatedImage()
+    public function resetForm()
     {
-        $this->validateImage();
+        $this->title = '';
+        $this->categoryId = 1;
+        $this->tags = '';
+        $this->body = '';
+
+        $this->dispatchBrowserEvent('removeAllTags');
+        $this->dispatchBrowserEvent('resetCkeditorContent');
     }
 
     public function store()
@@ -122,17 +136,6 @@ class CreateForm extends Component
         return redirect()
             ->to($post->link_with_slug)
             ->with('alert', ['status' => 'success', 'message' => '成功新增文章！']);
-    }
-
-    public function resetForm()
-    {
-        $this->title = '';
-        $this->categoryId = 1;
-        $this->tags = '';
-        $this->body = '';
-
-        $this->dispatchBrowserEvent('removeAllTags');
-        $this->dispatchBrowserEvent('resetCkeditorContent');
     }
 
     public function render()

@@ -126,7 +126,7 @@
               <img src="{{ $previewUrl }}" alt="preview image" class="h-48 mt-4 rounded-lg">
             @endif
 
-            @if ($image && !$errors->any())
+            @if ($image && $image->getSize() <= 1_000_000)
               <img src="{{ $image->temporaryUrl() }}" alt="preview image" class="h-48 mt-4 rounded-lg">
             @endif
           </div>

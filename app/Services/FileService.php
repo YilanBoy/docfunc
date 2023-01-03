@@ -4,9 +4,11 @@ namespace App\Services;
 
 class FileService
 {
-    public static function generateImageFileName($file): string
+    public function generateFileName(string $fileExtension): string
     {
-        // format: 2023_01_01_10_18_21_63b0ed6d06d52.jpg
-        return date('Y_m_d_H_i_s').'_'.uniqid().'.'.strtolower($file->getClientOriginalExtension());
+        $bytes = random_bytes(6);
+
+        // format: 2023_01_01_10_18_21_63b0ed6d06d5.jpg
+        return date('Y_m_d_H_i_s').'_'.bin2hex($bytes).'.'.strtolower($fileExtension);
     }
 }

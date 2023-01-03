@@ -13,6 +13,11 @@ use function response;
 
 class ImageController extends Controller
 {
+    public function __construct(
+        protected FileService $fileService
+    ) {
+    }
+
     /**
      * 在文章中上傳圖片至 AWS S3 的 API
      *
@@ -26,7 +31,7 @@ class ImageController extends Controller
         ]);
 
         $file = $request->file('upload');
-        $imageName = FileService::generateImageFileName($file);
+        $imageName = $this->fileService->generateFileName($file->getClientOriginalExtension());
         Storage::disk('s3')->put('images/'.$imageName, file_get_contents($file));
 
         return response()->json(['url' => Storage::disk('s3')->url('images/'.$imageName)]);

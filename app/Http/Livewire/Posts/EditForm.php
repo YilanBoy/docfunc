@@ -19,6 +19,8 @@ class EditForm extends Component
     use AuthorizesRequests;
     use WithFileUploads;
 
+    protected FileService $fileService;
+
     public $categories;
 
     public int $postId;
@@ -36,6 +38,11 @@ class EditForm extends Component
     public $image;
 
     public string $body;
+
+    public function boot(FileService $fileService)
+    {
+        $this->fileService = $fileService;
+    }
 
     public function mount()
     {
@@ -71,7 +78,7 @@ class EditForm extends Component
 
         // upload image
         if ($this->image) {
-            $imageName = FileService::generateImageFileName($this->image);
+            $imageName = $this->fileService->generateFileName($this->image->getClientOriginalExtension());
             $uploadFilePath = $this->image->storeAs('preview', $imageName, 's3');
             $this->previewUrl = Storage::disk('s3')->url($uploadFilePath);
         }

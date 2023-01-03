@@ -21,6 +21,8 @@ class CreateForm extends Component
     use LivewirePostValidation;
     use WithFileUploads;
 
+    protected FileService $fileService;
+
     public $categories;
 
     public string $title = '';
@@ -36,6 +38,11 @@ class CreateForm extends Component
     public string $body = '';
 
     protected $listeners = ['resetForm'];
+
+    public function boot(FileService $fileService)
+    {
+        $this->fileService = $fileService;
+    }
 
     public function mount()
     {
@@ -87,7 +94,7 @@ class CreateForm extends Component
 
         // upload image
         if ($this->image) {
-            $imageName = FileService::generateImageFileName($this->image);
+            $imageName = $this->fileService->generateFileName($this->image->getClientOriginalExtension());
             $uploadFilePath = $this->image->storeAs('preview', $imageName, 's3');
             $this->previewUrl = Storage::disk('s3')->url($uploadFilePath);
         }

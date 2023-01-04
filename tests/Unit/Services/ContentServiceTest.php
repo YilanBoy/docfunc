@@ -1,12 +1,32 @@
 <?php
 
 use App\Models\Post;
-use App\Services\PostService;
+use App\Services\ContentService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 uses(TestCase::class);
 uses(RefreshDatabase::class);
+
+beforeEach(fn () => $this->contentService = $this->app->make(ContentService::class));
+
+it('can filter the dangerous tag', function () {
+    $body = <<<'EOF'
+        <body onload="alert('this a xss attack')">
+            <script>alert('this a xss attack');</script>
+            <button onclick="alert('this an another xss attack')"></button>
+            <!-- a=&\#X41 (UTF-8) -->
+            <IMG SRC=j&#X41vascript:alert('test2')>
+            <span>This normal tag</span>
+        </body>
+    EOF;
+
+    expect($this->contentService->htmlPurifier($body))
+        ->not->toContain('<body onload="alert(\'this a xss attack\')">')
+        ->not->toContain('<script>alert(\'this a xss attack\');</script>')
+        ->not->toContain('<IMG SRC=j&#X41vascript:alert(\'test2\')>')
+        ->toContain('<span>This normal tag</span>');
+});
 
 it('can find all images in the post body', function () {
     $fakeImageNames = [
@@ -25,7 +45,7 @@ it('can find all images in the post body', function () {
 
     $post = Post::factory()->create(['body' => $body]);
 
-    expect(PostService::imagesInPost($post))
+    expect($this->contentService->imagesInContent($post->body))
         ->toBeArray()
         ->not->toBeEmpty()
         ->toBe($fakeImageNames);
@@ -40,7 +60,7 @@ it('will return empty array if no images in the post body', function () {
 
     $post = Post::factory()->create(['body' => $body]);
 
-    expect(PostService::imagesInPost($post))
+    expect($this->contentService->imagesInContent($post->body))
         ->toBeArray()
         ->toBeEmpty();
 });

@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
-use App\Models\Post;
 use DOMDocument;
 use HTMLPurifier;
 use HTMLPurifier_Config;
 
-class PostService
+class ContentService
 {
     /**
      * 生成用來優化 SEO 的 slug
@@ -15,7 +14,7 @@ class PostService
      * @param  string  $title 標題
      * @return string
      */
-    public static function makeSlug(string $title): string
+    public function makeSlug(string $title): string
     {
         // 去掉特殊字元，只留中文與英文
         $title = preg_replace('/[^A-Za-z0-9 \p{Han}]+/u', '', $title);
@@ -34,7 +33,7 @@ class PostService
      * @param  string  $html
      * @return string
      */
-    public static function htmlPurifier(string $html): string
+    public function htmlPurifier(string $html): string
     {
         // 設定 XSS 過濾規則
         $config = HTMLPurifier_Config::createDefault();
@@ -90,7 +89,7 @@ class PostService
      * @param  int  $length
      * @return string
      */
-    public static function makeExcerpt(string $body, int $length = 200): string
+    public function makeExcerpt(string $body, int $length = 200): string
     {
         return str()->limit(strip_tags($body), $length);
     }
@@ -98,13 +97,13 @@ class PostService
     /**
      * 取得文章中的圖片連結
      *
-     * @param  Post  $post
+     * @param  string  $body
      * @return array
      */
-    public static function imagesInPost(Post $post): array
+    public function imagesInContent(string $body): array
     {
         $dom = new DOMDocument();
-        $dom->loadHTML($post->body, LIBXML_NOERROR);
+        $dom->loadHTML($body, LIBXML_NOERROR);
 
         $imageList = [];
 

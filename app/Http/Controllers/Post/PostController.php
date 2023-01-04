@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use App\Services\FormatTransferService;
-use App\Services\PostService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -17,12 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 class PostController extends Controller
 {
-    public function __construct(
-        protected PostService $postService,
-        protected FormatTransferService $formatTransferService
-    ) {
-    }
-
     /**
      * 文章首頁
      *

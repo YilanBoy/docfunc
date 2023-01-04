@@ -5,9 +5,9 @@ namespace App\Http\Livewire\Posts;
 use App\Http\Traits\LivewirePostValidation;
 use App\Models\Category;
 use App\Models\Post;
+use App\Services\ContentService;
 use App\Services\FileService;
 use App\Services\FormatTransferService;
-use App\Services\PostService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -18,6 +18,10 @@ class EditForm extends Component
     use LivewirePostValidation;
     use AuthorizesRequests;
     use WithFileUploads;
+
+    protected ContentService $contentService;
+
+    protected FormatTransferService $formatTransferService;
 
     protected FileService $fileService;
 
@@ -39,8 +43,13 @@ class EditForm extends Component
 
     public string $body;
 
-    public function boot(FileService $fileService)
-    {
+    public function boot(
+        ContentService $contentService,
+        FormatTransferService $formatTransferService,
+        FileService $fileService
+    ) {
+        $this->contentService = $contentService;
+        $this->formatTransferService = $formatTransferService;
         $this->fileService = $fileService;
     }
 
@@ -71,12 +80,12 @@ class EditForm extends Component
         $this->validatePost();
 
         $this->post->title = $this->title;
-        $this->post->slug = PostService::makeSlug($this->title);
+        $this->post->slug = $this->contentService->makeSlug($this->title);
         $this->post->category_id = $this->categoryId;
 
-        $body = PostService::htmlPurifier($this->body);
+        $body = $this->contentService->htmlPurifier($this->body);
         $this->post->body = $body;
-        $this->post->excerpt = PostService::makeExcerpt($body);
+        $this->post->excerpt = $this->contentService->makeExcerpt($body);
 
         // upload image
         if ($this->image) {
@@ -88,7 +97,7 @@ class EditForm extends Component
         $this->post->preview_url = $this->previewUrl;
         $this->post->save();
 
-        $tagIdsArray = FormatTransferService::tagsJsonToTagIdsArray($this->tags);
+        $tagIdsArray = $this->formatTransferService->tagsJsonToTagIdsArray($this->tags);
 
         $this->post->tags()->sync($tagIdsArray);
 

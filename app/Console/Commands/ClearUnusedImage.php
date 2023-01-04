@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Post;
-use App\Services\PostService;
+use App\Services\ContentService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,13 +28,13 @@ class ClearUnusedImage extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(ContentService $contentService)
     {
         $imagesInPosts = [];
 
-        Post::select(['id', 'body'])->chunkById(200, function ($posts) use (&$imagesInPosts) {
+        Post::select(['id', 'body'])->chunkById(200, function ($posts) use (&$imagesInPosts, $contentService) {
             foreach ($posts as $post) {
-                array_push($imagesInPosts, ...PostService::imagesInPost($post));
+                array_push($imagesInPosts, ...$contentService->imagesInContent($post->body));
             }
         });
 

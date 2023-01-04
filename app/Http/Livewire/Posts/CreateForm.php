@@ -5,9 +5,9 @@ namespace App\Http\Livewire\Posts;
 use App\Http\Traits\LivewirePostValidation;
 use App\Models\Category;
 use App\Models\Post;
+use App\Services\ContentService;
 use App\Services\FileService;
 use App\Services\FormatTransferService;
-use App\Services\PostService;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -20,6 +20,10 @@ class CreateForm extends Component
 {
     use LivewirePostValidation;
     use WithFileUploads;
+
+    protected ContentService $contentService;
+
+    protected FormatTransferService $formatTransferService;
 
     protected FileService $fileService;
 
@@ -39,8 +43,13 @@ class CreateForm extends Component
 
     protected $listeners = ['resetForm'];
 
-    public function boot(FileService $fileService)
-    {
+    public function boot(
+        ContentService $contentService,
+        FormatTransferService $formatTransferService,
+        FileService $fileService
+    ) {
+        $this->contentService = $contentService;
+        $this->formatTransferService = $formatTransferService;
         $this->fileService = $fileService;
     }
 
@@ -104,7 +113,7 @@ class CreateForm extends Component
         $this->validatePost();
 
         // xss filter
-        $body = PostService::htmlPurifier($this->body);
+        $body = $this->contentService->htmlPurifier($this->body);
 
         // upload image
         if ($this->image) {
@@ -118,13 +127,13 @@ class CreateForm extends Component
             'title' => $this->title,
             'category_id' => $this->categoryId,
             'body' => $body,
-            'slug' => PostService::makeSlug($this->title),
+            'slug' => $this->contentService->makeSlug($this->title),
             'preview_url' => $this->previewUrl,
-            'excerpt' => PostService::makeExcerpt($body),
+            'excerpt' => $this->contentService->makeExcerpt($body),
         ]);
 
         // convert tags json string to array
-        $tagIdsArray = FormatTransferService::tagsJsonToTagIdsArray($this->tags);
+        $tagIdsArray = $this->formatTransferService->tagsJsonToTagIdsArray($this->tags);
 
         // create new tags relation with post in database
         $post->tags()->attach($tagIdsArray);

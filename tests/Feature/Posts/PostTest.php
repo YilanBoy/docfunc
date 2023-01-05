@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Posts\Posts;
+use App\Http\Livewire\Users\Posts\DeletedPostCard;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -153,6 +154,8 @@ test('author can soft delete own post', function () {
 test('author can restore deleted post', function () {
     $user = User::factory()->create();
 
+    $this->actingAs($user);
+
     $post = Post::factory()->create([
         'title' => 'This is a test post title',
         'user_id' => $user->id,
@@ -162,12 +165,32 @@ test('author can restore deleted post', function () {
 
     $this->assertSoftDeleted('posts', ['id' => $post->id]);
 
-    $this->actingAs($user)
-        ->post(route('posts.restore', ['id' => $post->id]))
-        ->assertStatus(302)
+    Livewire::test(DeletedPostCard::class, ['post' => $post])
+        ->call('restore', $post->id)
         ->assertRedirect(route('users.index', ['user' => $user->id, 'tab' => 'posts']));
 
     $this->assertNotSoftDeleted('posts', ['id' => $post->id]);
+});
+
+test('users cannot restore other users\' post', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user);
+
+    $author = User::factory()->create();
+
+    $post = Post::factory()->create([
+        'title' => 'This is a test post title',
+        'user_id' => $author->id,
+        'category_id' => 1,
+        'deleted_at' => now(),
+    ]);
+
+    Livewire::test(DeletedPostCard::class, ['post' => $post])
+        ->call('restore', $post->id)
+        ->assertForbidden();
+
+    $this->assertSoftDeleted('posts', ['id' => $post->id]);
 });
 
 test('prune the stale post', function () {

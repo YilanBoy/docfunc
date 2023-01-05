@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\Post\PostController;
-use App\Http\Controllers\Post\RestorePostController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\User\DeleteUserController;
@@ -52,8 +51,6 @@ Route::prefix('posts')->group(function () {
             Route::get('/{id}/edit', 'edit')->name('posts.edit');
             Route::delete('/{post}', 'destroy')->name('posts.destroy');
         });
-        // 恢復刪除的文章
-        Route::post('/{id}/restore', [RestorePostController::class, 'update'])->name('posts.restore');
     });
 
     // {slug?} 當中的問號代表參數為選擇性

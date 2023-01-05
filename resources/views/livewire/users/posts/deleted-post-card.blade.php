@@ -33,24 +33,11 @@
     </div>
   </div>
 
-  {{-- 還原文章隱藏表單 --}}
-  <form
-    id="restore-post-{{ $post->id }}"
-    action="{{ route('posts.restore', ['id' => $post->id]) }}"
-    method="POST"
-    class="hidden"
-  >
-    @csrf
-  </form>
-
   <div class="flex items-center mt-2 md:mt-0">
     {{-- 還原文章 --}}
     <button
-      x-on:click.stop="
-        if (confirm('您確定恢復此文章嗎？')) {
-          document.getElementById('restore-post-{{ $post->id }}').submit()
-        }
-      "
+      onclick="confirm('你確定要還原該文章？') || event.stopImmediatePropagation()"
+      wire:click="restore({{ $post->id }})"
       type="button"
       class="inline-flex items-center justify-center w-10 h-10 transition duration-150 ease-in-out bg-blue-500 border border-transparent rounded-md text-gray-50 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring ring-blue-300"
     >

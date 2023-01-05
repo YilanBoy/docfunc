@@ -1,4 +1,4 @@
-@section('title', '新增文章')
+@section('title', '編輯文章')
 
 @section('css')
   @vite([
@@ -16,9 +16,7 @@
   @vite('resources/ts/tagify.ts')
 @endpush
 
-{{-- create new post --}}
-<x-app-layout>
-  <div class="container mx-auto max-w-7xl">
-    <livewire:posts.create-form></livewire:posts.create-form>
-  </div>
-</x-app-layout>
+{{-- edit post --}}
+<div class="container mx-auto max-w-7xl">
+  <livewire:posts.edit-form :postId="$id"></livewire:posts.edit-form>
+</div>

@@ -37,7 +37,7 @@
   @vite('resources/ts/sharer.ts')
 @endpush
 
-<x-app-layout>
+<div>
   <div class="relative animate-fade-in">
     {{-- to the top button --}}
     <button
@@ -203,4 +203,4 @@
 
   <div id="progress-bar"
        class="fixed top-0 left-0 w-0 h-[5px] bg-gradient-to-r from-green-500 via-teal-500 to-sky-500 dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500 z-20 transition-all duration-300 ease-out"></div>
-</x-app-layout>
+</div>

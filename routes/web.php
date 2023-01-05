@@ -1,13 +1,17 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\TagController;
 use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\SendDestroyUserEmailController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Livewire\Categories\Show as CategoryShow;
+use App\Http\Livewire\Posts\Create as PostCreate;
+use App\Http\Livewire\Posts\Edit as PostEdit;
+use App\Http\Livewire\Posts\Index as PostIndex;
+use App\Http\Livewire\Posts\Show as PostShow;
+use App\Http\Livewire\Tags\Show as TagShow;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +26,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 // 首頁
-Route::get('/', [PostController::class, 'index'])->name('root');
+Route::get('/', PostIndex::class)->name('root');
 
 require __DIR__.'/auth.php';
 
@@ -43,30 +47,28 @@ Route::prefix('users')->group(function () {
 
 // 文章列表與內容
 Route::prefix('posts')->group(function () {
-    Route::get('/', [PostController::class, 'index'])->name('posts.index');
+    Route::get('/', PostIndex::class)->name('posts.index');
 
     Route::middleware(['auth', 'verified'])->group(function () {
-        Route::controller(PostController::class)->group(function () {
-            Route::get('/create', 'create')->name('posts.create');
-            Route::get('/{id}/edit', 'edit')->name('posts.edit');
-            Route::delete('/{post}', 'destroy')->name('posts.destroy');
-        });
+        Route::get('/create', PostCreate::class)->name('posts.create');
+        Route::get('/{id}/edit', PostEdit::class)->name('posts.edit');
+        Route::delete('/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
     });
 
     // {slug?} 當中的問號代表參數為選擇性
-    Route::get('/{post}/{slug?}', [PostController::class, 'show'])
+    Route::get('/{post}/{slug?}', PostShow::class)
         ->missing(fn () => redirect()->route('posts.index'))
         ->name('posts.show');
 });
 
 // 文章分類
-Route::get('categories/{category}/{name?}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('categories/{category}/{name?}', CategoryShow::class)->name('categories.show');
+
+// 文章標籤
+Route::get('tags/{tag}', TagShow::class)->name('tags.show');
 
 // 通知列表
 Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
-
-// 文章標籤
-Route::get('tags/{tag}', [TagController::class, 'show'])->name('tags.show');
 
 // Web Feed
 Route::feeds();

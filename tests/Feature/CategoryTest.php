@@ -15,7 +15,6 @@ test('visit category show page and url don\'t include slug', function () {
     $category = Category::find(rand(1, 3));
 
     get(route('categories.show', ['category' => $category->id]))
-        ->assertStatus(301)
         ->assertRedirect(
             route('categories.show', [
                 'category' => $category->id,

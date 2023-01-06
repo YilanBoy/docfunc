@@ -12,15 +12,15 @@ class Posts extends Component
 
     public string $currentUrl;
 
-    public int $categoryId;
+    public int $categoryId = 0;
 
-    public string $categoryName;
+    public string $categoryName = '';
 
-    public string $categoryDescription;
+    public string $categoryDescription = '';
 
-    public int $tagId;
+    public int $tagId = 0;
 
-    public string $tagName;
+    public string $tagName = '';
 
     public string $order = '';
 

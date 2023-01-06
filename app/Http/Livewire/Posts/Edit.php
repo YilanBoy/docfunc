@@ -6,11 +6,12 @@ use Livewire\Component;
 
 class Edit extends Component
 {
-    public $id;
+    // we can't use id for naming property, it's livewire internal usage
+    public $postId;
 
     public function mount(int $id)
     {
-        $this->id = $id;
+        $this->postId = $id;
     }
 
     public function render()

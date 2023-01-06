@@ -18,5 +18,5 @@
 
 {{-- edit post --}}
 <div class="container mx-auto max-w-7xl">
-  <livewire:posts.edit-form :postId="$id"></livewire:posts.edit-form>
+  <livewire:posts.edit-form :postId="$postId"></livewire:posts.edit-form>
 </div>

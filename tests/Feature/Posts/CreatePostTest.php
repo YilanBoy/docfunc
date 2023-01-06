@@ -16,10 +16,18 @@ const REDIS_KEY_EXISTS_RETURN_VALUE = 1;
 
 uses(RefreshDatabase::class);
 
-test('guest can\'t visit create post page', function () {
+test('guest cannot visit create post page', function () {
     get(route('posts.create'))
         ->assertStatus(302)
         ->assertRedirect(route('login'));
+});
+
+test('authenticated user can visit create post page', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user)
+        ->get(route('posts.create'))
+        ->assertSuccessful();
 });
 
 test('authenticated user can create post', function ($categoryId) {

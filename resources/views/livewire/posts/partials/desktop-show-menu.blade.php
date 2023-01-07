@@ -27,7 +27,7 @@
   <button
     type="button"
     data-sharer="twitter"
-    data-title="{{ $post->title }}"
+    data-title="{{ $postTitle }}"
     data-hashtags="{{ config('app.name') }}"
     data-url="{{ request()->fullUrl() }}"
     class="flex items-center justify-center text-gray-400 w-14 h-14 group"
@@ -38,12 +38,12 @@
   </button>
 
   {{-- 編輯文章 --}}
-  @if (auth()->id() === $post->user_id)
+  @if (auth()->id() === $authorId)
     <div class="h-[2px] w-14 bg-gray-300 dark:bg-gray-600"></div>
 
     <a
       role="button"
-      href="{{ route('posts.edit', ['id' => $post->id]) }}"
+      href="{{ route('posts.edit', ['id' => $postId]) }}"
       class="flex items-center justify-center text-gray-400 w-14 h-14 group"
     >
       <span class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:rotate-12">
@@ -53,11 +53,8 @@
 
     {{-- 刪除 --}}
     <button
-      x-on:click="
-        if (confirm('您確定刪除文章嗎？（7 天內還可以還原）')) {
-          document.getElementById('delete-post').submit()
-        }
-      "
+      onclick="confirm('你確定要刪除文章嗎？（7 天之內可以還原）') || event.stopImmediatePropagation()"
+      wire:click="deletePost({{ $postId }})"
       type="button"
       title="刪除文章"
       class="flex items-center justify-center text-gray-400 w-14 h-14 group"
@@ -67,5 +64,4 @@
       </span>
     </button>
   @endif
-
 </div>

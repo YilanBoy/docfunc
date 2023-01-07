@@ -18,19 +18,7 @@ class UserController extends Controller
     // 建構子
     public function __construct()
     {
-        // 除了 index，其他 function 必須是登入的狀態
-        $this->middleware('auth', ['except' => ['index']]);
-    }
-
-    /**
-     * 用戶個人頁面
-     *
-     * @param  User  $user
-     * @return Application|Factory|View
-     */
-    public function index(User $user)
-    {
-        return view('users.index', ['user' => $user]);
+        $this->middleware('auth');
     }
 
     /**

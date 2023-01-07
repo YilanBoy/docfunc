@@ -10,7 +10,21 @@ class DeletedPostCard extends Component
 {
     use AuthorizesRequests;
 
-    public Post $post;
+    public $postId; //$post->id
+
+    public $postTitle; // $post->title
+
+    public $postCreatedAtDateString; // $post->created_at->toDateString()
+
+    public $postCreatedAtDiffForHuman; // $post->created_at->diffForHumans()
+
+    public $postWillDeletedAtDiffForHuman;
+
+    public $postCommentCount; // $post->comment_count
+
+    public $categoryName; // $post->category->name
+
+    public $categoryIcon; // $post->category->icon
 
     public function restore(int $id)
     {
@@ -20,8 +34,9 @@ class DeletedPostCard extends Component
 
         $post->restore();
 
-        return to_route('users.index', ['user' => auth()->id(), 'tab' => 'posts'])
-            ->with('alert', ['status' => 'success', 'message' => '成功恢復文章！']);
+        $this->emit('refreshUserPosts');
+
+        $this->dispatchBrowserEvent('info-badge', ['status' => 'success', 'message' => '文章已恢復']);
     }
 
     public function render()

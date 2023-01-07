@@ -27,7 +27,7 @@
   >
     {{-- 編輯文章 --}}
     <a
-      href="{{ route('posts.edit', ['id' => $post->id]) }}"
+      href="{{ route('posts.edit', ['id' => $postId]) }}"
       role="menuitem"
       tabindex="-1"
       class="block px-4 py-2 rounded-md hover:bg-gray-200 active:bg-gray-100 dark:hover:bg-gray-600"
@@ -37,11 +37,8 @@
 
     {{-- 軟刪除 --}}
     <button
-      x-on:click="
-        if (confirm('您確定標記此文章為刪除狀態嗎？（30 天內還可以還原）')) {
-          document.getElementById('soft-delete-post').submit()
-        }
-      "
+      onclick="confirm('你確定要刪除文章嗎？（7 天之內可以還原）') || event.stopImmediatePropagation()"
+      wire:click="deletePost({{ $postId }})"
       type="button"
       role="menuitem"
       tabindex="-1"

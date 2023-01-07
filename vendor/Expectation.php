@@ -5,4 +5,6 @@ namespace Pest;
 /**
  * @method  toBeOne()
  */
-final class Expectation {}
+final class Expectation
+{
+}

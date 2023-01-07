@@ -12,6 +12,8 @@ class Posts extends Component
 
     public int $userId;
 
+    protected $listeners = ['refreshUserPosts' => '$refresh'];
+
     public function hydrate()
     {
         $this->dispatchBrowserEvent('scroll-to-top');
@@ -19,7 +21,6 @@ class Posts extends Component
 
     public function render()
     {
-        // 該會員的文章
         $posts = Post::whereUserId($this->userId)
             ->withTrashed()
             ->with('category')
@@ -28,6 +29,7 @@ class Posts extends Component
             ->paginate(10, ['*'], 'postsPage')
             ->withQueryString();
 
+        // 該會員的文章
         return view('livewire.users.posts.posts', ['posts' => $posts]);
     }
 }

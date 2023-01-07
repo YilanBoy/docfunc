@@ -57,23 +57,15 @@
         <div class="flex flex-col items-center justify-start w-full lg:w-2/3 xl:w-7/12 px-4 lg:px-0">
 
           <x-card id="section" class="w-full">
-            {{-- soft delete form --}}
-            <form
-              id="delete-post"
-              action="{{ route('posts.destroy', ['post' => $post->id]) }}"
-              method="POST"
-              class="hidden"
-            >
-              @csrf
-              @method('DELETE')
-            </form>
 
             <div class="flex justify-between">
               {{-- post title --}}
               <h1 class="text-3xl font-bold grow dark:text-gray-50">{{ $post->title }}</h1>
 
               {{-- mobile post sidebar --}}
-              @includeWhen(auth()->id() === $post->user_id, 'posts.partials.mobile-show-menu')
+              @if (auth()->id() === $post->user_id)
+                <livewire:posts.partials.mobile-show-menu :post-id="$post->id"/>
+              @endif
 
             </div>
 
@@ -195,7 +187,11 @@
 
         <div class="hidden lg:block lg:w-1/6">
           {{-- 文章選單-桌面裝置 --}}
-          @include('posts.partials.desktop-show-menu')
+          <livewire:posts.partials.desktop-show-menu
+            :post-id="$post->id"
+            :post-title="$post->title"
+            :author-id="$post->user_id"
+          />
         </div>
       </div>
     </div>

@@ -69,9 +69,16 @@
       showAlert(alert.status, alert.message)
 
       setTimeout(function () {
-        openAlertBox = false
+      openAlertBox=false
       }, 3000);
     }
+  "
+  @info-badge.window="
+    showAlert(event.detail.status, event.detail.message)
+
+    setTimeout(function () {
+      openAlertBox=false
+    }, 3000);
   "
   {{-- when change page, scroll to top --}}
   @scroll-to-top.window="window.scrollTo({ top: 0, behavior: 'smooth' })"

@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\SendDestroyUserEmailController;
@@ -12,6 +11,7 @@ use App\Http\Livewire\Posts\Edit as PostEdit;
 use App\Http\Livewire\Posts\Index as PostIndex;
 use App\Http\Livewire\Posts\Show as PostShow;
 use App\Http\Livewire\Tags\Show as TagShow;
+use App\Http\Livewire\Users\Index as UserIndex;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +32,7 @@ require __DIR__.'/auth.php';
 
 // 會員相關頁面
 Route::prefix('users')->group(function () {
-    Route::get('/{user}', [UserController::class, 'index'])->name('users.index');
+    Route::get('/{user}', UserIndex::class)->name('users.index');
     Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
     Route::get('/{user}/delete', [DeleteUserController::class, 'index'])->name('users.delete');
@@ -52,7 +52,6 @@ Route::prefix('posts')->group(function () {
     Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/create', PostCreate::class)->name('posts.create');
         Route::get('/{id}/edit', PostEdit::class)->name('posts.edit');
-        Route::delete('/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
     });
 
     // {slug?} 當中的問號代表參數為選擇性

@@ -3,7 +3,7 @@
 namespace Pest;
 
 /**
- * @method  toBeOne()
+ * @method mixed toBeOne()
  */
 final class Expectation
 {

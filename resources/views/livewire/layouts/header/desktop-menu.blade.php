@@ -116,19 +116,20 @@
 
       {{-- 電腦版-通知 --}}
       <span class="relative inline-flex rounded-md">
-          <a
-            href="{{ route('notifications.index') }}"
-            class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50"
-          >
-            <i class="bi bi-bell-fill"></i>
-          </a>
-          @if (auth()->user()->notification_count > 0)
+        <a
+          href="{{ route('notifications.index') }}"
+          class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50"
+        >
+          <i class="bi bi-bell-fill"></i>
+        </a>
+
+        @if (auth()->user()->notification_count > 0)
           <span class="absolute flex w-3 h-3 -mt-1 -mr-1 top-2 right-2">
-              <span class="absolute inline-flex w-full h-full bg-red-400 rounded-full opacity-75 animate-ping"></span>
-              <span class="relative inline-flex w-3 h-3 bg-red-500 rounded-full"></span>
-            </span>
+            <span class="absolute inline-flex w-full h-full bg-red-400 rounded-full opacity-75 animate-ping"></span>
+            <span class="relative inline-flex w-3 h-3 bg-red-500 rounded-full"></span>
+          </span>
         @endif
-        </span>
+      </span>
 
       {{-- 電腦版-會員選單 --}}
       <div
@@ -182,7 +183,7 @@
             tabindex="-1"
             class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600"
           >
-            <i class="bi bi-person-fill"></i><span class="ml-2">個人頁面</span>
+            <i class="bi bi-info-circle-fill"></i><span class="ml-2">個人資訊</span>
           </a>
 
           <a

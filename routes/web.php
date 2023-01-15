@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\SendDestroyUserEmailController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Livewire\Categories\Show as CategoryShow;
+use App\Http\Livewire\Notifications\Index as NotificationIndex;
 use App\Http\Livewire\Posts\Create as PostCreate;
 use App\Http\Livewire\Posts\Edit as PostEdit;
 use App\Http\Livewire\Posts\Index as PostIndex;
@@ -67,7 +67,7 @@ Route::get('categories/{category}/{name?}', CategoryShow::class)->name('categori
 Route::get('tags/{tag}', TagShow::class)->name('tags.show');
 
 // 通知列表
-Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
+Route::get('notifications', NotificationIndex::class)->name('notifications.index');
 
 // Web Feed
 Route::feeds();

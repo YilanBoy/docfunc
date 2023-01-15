@@ -1,10 +1,10 @@
-@section('title', $user->name . ' 的個人頁面')
+@section('title', $user->name . ' 的個人資訊')
 
 @push('script')
   @vite('resources/ts/count-up.ts')
 @endpush
 
-{{-- 個人頁面 --}}
+{{-- 個人資訊 --}}
 <div class="container flex-1 mx-auto max-w-7xl">
   <div class="flex flex-col items-center justify-start px-4">
 
@@ -22,7 +22,7 @@
 
         @php
           $tabs = [
-            ['value' => 'information', 'text' => '個人資訊', 'icon' => 'bi bi-person-lines-fill'],
+            ['value' => 'information', 'text' => '個人資訊', 'icon' => 'bi bi-info-circle-fill'],
             ['value' => 'posts', 'text' => '發布文章', 'icon' => 'bi bi-file-earmark-post-fill'],
             ['value' => 'comments', 'text' => '留言紀錄', 'icon' => 'bi bi-chat-square-text-fill'],
           ]

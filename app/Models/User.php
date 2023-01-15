@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\PostComment;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -66,7 +67,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->id === $model->user_id;
     }
 
-    public function postNotify($instance): void
+    public function postNotify(PostComment $instance): void
     {
         // 如果要通知的人是當前用戶，就不必通知了！
         if ($this->id === auth()->id()) {

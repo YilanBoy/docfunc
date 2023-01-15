@@ -46,9 +46,7 @@
       </x-card>
 
       {{-- 選項表單 --}}
-      <x-card class="flex flex-col justify-center w-full mt-6 md:w-1/2 md:mt-0 space-y-6">
-        @yield('users.content')
-      </x-card>
+      @yield('users.content')
 
     </div>
   </div>

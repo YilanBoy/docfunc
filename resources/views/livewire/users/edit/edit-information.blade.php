@@ -1,15 +1,13 @@
-@extends('users.edit.index')
-
 @section('title', '會員中心-編輯個人資料')
 
-@section('users.content')
+<x-card class="flex flex-col justify-center w-full mt-6 md:w-1/2 md:mt-0 space-y-6">
   <div class="flex flex-col items-center justify-center">
     {{-- 大頭貼照片 --}}
     <div>
       <img
         class="rounded-full h-36 w-36"
         src="{{ $user->gravatar_url }}"
-        alt="{{ $user->name }}"
+        alt="{{ $name }}"
       >
     </div>
 
@@ -28,10 +26,7 @@
   {{-- 驗證錯誤訊息 --}}
   <x-auth-validation-errors :errors="$errors"/>
 
-  <form method="POST" action="{{ route('users.update', ['user' => $user->id]) }}" class="w-full">
-    @method('PUT')
-    @csrf
-
+  <form wire:submit.prevent="update" class="w-full">
     {{-- 信箱 --}}
     <div>
       <label
@@ -40,7 +35,7 @@
       >信箱</label>
 
       <input
-        id="name"
+        id="email"
         type="text"
         name="email"
         value="{{ $user->email }}"
@@ -58,10 +53,11 @@
       >會員名稱 (只能使用英文、數字、_ 或是 -)</label>
 
       <input
+        wire:model.lazy="name"
         id="name"
         type="text"
         name="name"
-        value="{{ old('name', $user->name) }}"
+        value="{{ old('name', $name) }}"
         placeholder="給自己取個有趣的暱稱吧！"
         required
         autofocus
@@ -74,12 +70,13 @@
       <label for="introduction" class="text-gray-600 dark:text-gray-50">個人介紹 (最多 80 個字)</label>
 
       <textarea
+        wire:model.lazy="introduction"
         id="introduction"
         name="introduction"
         placeholder="介紹一下你自己吧！"
         rows="5"
         class="w-full mt-2 border border-gray-300 rounded-md shadow-sm form-textarea text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
-      >{{ old('introduction', $user->introduction) }}</textarea>
+      >{{ old('introduction', $introduction) }}</textarea>
     </div>
 
     <div class="flex items-center justify-end mt-6">
@@ -89,4 +86,4 @@
       </x-button>
     </div>
   </form>
-@endsection
+</x-card>

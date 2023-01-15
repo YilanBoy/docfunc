@@ -1,15 +1,15 @@
 <?php
 
+use App\Http\Livewire\Users\Edit\EditInformation;
 use App\Models\User;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
 use function Pest\Faker\faker;
 use function Pest\Laravel\get;
-use function Pest\Laravel\put;
 
 uses(LazilyRefreshDatabase::class);
 
-test('guest can not visit edit page', function () {
+test('non-logged-in users cannot access the user edit page', function () {
     $user = User::factory()->create();
 
     get(route('users.edit', $user->id))
@@ -17,16 +17,16 @@ test('guest can not visit edit page', function () {
         ->assertRedirect(route('login'));
 });
 
-test('user can visit own edit page', function () {
+test('users can access their own user edit page', function () {
     $user = User::factory()->create();
 
     $this->actingAs($user);
 
     get(route('users.edit', $user->id))
-        ->assertStatus(200);
+        ->assertSuccessful();
 });
 
-test('user can not visit others edit page', function () {
+test('users cannot access other people\'s user edit pages', function () {
     $user = User::factory()->create();
 
     $otherUser = User::factory()->create();
@@ -36,23 +36,50 @@ test('user can not visit others edit page', function () {
         ->assertStatus(403);
 });
 
-test('user can edit own information', function () {
+test('users can update their own information', function () {
     $user = User::factory()->create();
 
     $this->actingAs($user);
 
-    // legal name
-    put(route('users.update', $user->id), [
-        'name' => 'New_legal_Name',
-        'introduction' => faker()->realText(119),
+    Livewire::test(EditInformation::class, [
+        'user' => $user,
+        'name' => $user->name,
+        'introduction' => $user->introduction,
     ])
-    ->assertStatus(302)
-    ->assertRedirect(route('users.index', ['user' => $user->id]));
+        ->set('name', 'New_legal_name')
+        ->set('introduction', faker()->realText(120))
+        ->call('update')
+        ->assertDispatchedBrowserEvent('info-badge', ['status' => 'success', 'message' => '個人資料更新成功']);
+});
 
-    // illegal name
-    put(route('users.update', $user->id), [
-        'name' => 'New illegal Name',
-        'introduction' => faker()->realText(119),
+test('if the name format is not correct, the name cannot be updated', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user);
+
+    Livewire::test(EditInformation::class, [
+        'user' => $user,
+        'name' => $user->name,
+        'introduction' => $user->introduction,
     ])
-    ->assertSessionHasErrors('name');
+        ->set('name', 'Wrong Format Name')
+        ->set('introduction', faker()->realText(120))
+        ->call('update')
+        ->assertHasErrors('name');
+});
+
+test('if the number of words in the introduction exceeds the limit, the introduction cannot be updated', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user);
+
+    Livewire::test(EditInformation::class, [
+        'user' => $user,
+        'name' => $user->name,
+        'introduction' => $user->introduction,
+    ])
+        ->set('name', 'New_legal_name')
+        ->set('introduction', faker()->words(500, true))
+        ->call('update')
+        ->assertHasErrors('introduction');
 });

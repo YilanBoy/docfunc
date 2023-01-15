@@ -1,9 +1,6 @@
 <?php
 
-use App\Http\Controllers\User\ChangePasswordController;
-use App\Http\Controllers\User\DeleteUserController;
-use App\Http\Controllers\User\SendDestroyUserEmailController;
-use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\DestroyUserController;
 use App\Http\Livewire\Categories\Show as CategoryShow;
 use App\Http\Livewire\Notifications\Index as NotificationIndex;
 use App\Http\Livewire\Posts\Create as PostCreate;
@@ -11,6 +8,9 @@ use App\Http\Livewire\Posts\Edit as PostEdit;
 use App\Http\Livewire\Posts\Index as PostIndex;
 use App\Http\Livewire\Posts\Show as PostShow;
 use App\Http\Livewire\Tags\Show as TagShow;
+use App\Http\Livewire\Users\Edit\ChangePassword;
+use App\Http\Livewire\Users\Edit\DeleteUser;
+use App\Http\Livewire\Users\Edit\EditInformation as UserEditInformation;
 use App\Http\Livewire\Users\Information\Index as UserInformationIndex;
 use Illuminate\Support\Facades\Route;
 
@@ -31,18 +31,18 @@ Route::get('/', PostIndex::class)->name('root');
 require __DIR__.'/auth.php';
 
 // 會員相關頁面
-Route::prefix('users')->group(function () {
-    Route::get('/{user}', UserInformationIndex::class)->name('users.index');
-    Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
-    Route::get('/{user}/delete', [DeleteUserController::class, 'index'])->name('users.delete');
-    Route::get('/{user}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
+Route::middleware('auth')->prefix('users')->group(function () {
+    Route::get('/{user}', UserInformationIndex::class)
+        ->name('users.index')
+        ->withoutMiddleware('auth');
 
-    Route::get('/{user}/change-password', [ChangePasswordController::class, 'edit'])->name('users.changePassword');
-    Route::put('/{user}/change-password', [ChangePasswordController::class, 'update'])->name('users.updatePassword');
+    Route::get('/{user}/edit', UserEditInformation::class)->name('users.edit');
+    Route::get('/{user}/change-password', ChangePassword::class)->name('users.changePassword');
+    Route::get('/{user}/delete', DeleteUser::class)->name('users.delete');
 
-    Route::post('/{user}/send-destroy-email', [SendDestroyUserEmailController::class, 'store'])
-        ->name('users.sendDestroyEmail');
+    Route::get('/{user}/destroy', DestroyUserController::class)
+        ->name('users.destroy')
+        ->withoutMiddleware('auth');
 });
 
 // 文章列表與內容

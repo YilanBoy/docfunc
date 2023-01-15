@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Users\Posts;
+namespace App\Http\Livewire\Users\Information\Posts;
 
 use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -41,6 +41,6 @@ class DeletedPostCard extends Component
 
     public function render()
     {
-        return view('livewire.users.posts.deleted-post-card');
+        return view('livewire.users.information.posts.deleted-post-card');
     }
 }

@@ -4,7 +4,7 @@
   @forelse ($posts as $post)
 
     @if (!$post->trashed())
-      <livewire:users.posts.post-card
+      <livewire:users.information.posts.post-card
         :postId="$post->id"
         :postTitle="$post->title"
         :postLink="$post->link_with_slug"
@@ -20,7 +20,7 @@
     @endif
 
     @if ($post->trashed() && auth()->id() === $post->user_id)
-      <livewire:users.posts.deleted-post-card
+      <livewire:users.information.posts.deleted-post-card
         :post-id="$post->id"
         :post-title="$post->title"
         :post-created-at-date-string="$post->created_at->toDateString()"

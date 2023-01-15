@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Users;
+namespace App\Http\Livewire\Users\Information;
 
 use App\Models\User;
 use Livewire\Component;
@@ -16,6 +16,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.users.index');
+        return view('livewire.users.information.index');
     }
 }

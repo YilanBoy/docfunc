@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Users\Posts;
+namespace App\Http\Livewire\Users\Information\Posts;
 
 use App\Models\Post;
 use Livewire\Component;
@@ -30,6 +30,6 @@ class Posts extends Component
             ->withQueryString();
 
         // 該會員的文章
-        return view('livewire.users.posts.posts', ['posts' => $posts]);
+        return view('livewire.users.information.posts.posts', ['posts' => $posts]);
     }
 }

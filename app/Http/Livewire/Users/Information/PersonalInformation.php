@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Users;
+namespace App\Http\Livewire\Users\Information;
 
 use App\Models\Category;
 use App\Models\User;
 use Livewire\Component;
 
-class Information extends Component
+class PersonalInformation extends Component
 {
     public string $userId;
 
@@ -21,6 +21,6 @@ class Information extends Component
             $query->where('user_id', $user->id);
         }])->get();
 
-        return view('livewire.users.information', compact('user', 'categories'));
+        return view('livewire.users.information.personal-information', compact('user', 'categories'));
     }
 }

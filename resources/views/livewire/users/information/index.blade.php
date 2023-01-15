@@ -54,7 +54,7 @@
         x-show="tab === 'information'"
         x-transition:enter.duration.300ms
       >
-        <livewire:users.information :user-id="$user->id"/>
+        <livewire:users.information.personal-information :user-id="$user->id"/>
       </div>
 
       {{-- 會員文章 --}}
@@ -63,7 +63,7 @@
         x-show="tab === 'posts'"
         x-transition:enter.duration.300ms
       >
-        <livewire:users.posts.posts :user-id="$user->id"/>
+        <livewire:users.information.posts.posts :user-id="$user->id"/>
       </div>
 
       {{-- 會員留言 --}}
@@ -72,7 +72,7 @@
         x-show="tab === 'comments'"
         x-transition:enter.duration.300ms
       >
-        <livewire:users.comments :user-id="$user->id"/>
+        <livewire:users.information.comments :user-id="$user->id"/>
       </div>
     </div>
   </div>

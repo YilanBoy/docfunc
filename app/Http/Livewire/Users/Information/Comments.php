@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Users;
+namespace App\Http\Livewire\Users\Information;
 
 use App\Models\Comment;
 use Livewire\Component;
@@ -29,6 +29,6 @@ class Comments extends Component
             ->paginate(10, ['*'], 'commentsPage')
             ->withQueryString();
 
-        return view('livewire.users.comments', ['comments' => $comments]);
+        return view('livewire.users.information.comments', ['comments' => $comments]);
     }
 }

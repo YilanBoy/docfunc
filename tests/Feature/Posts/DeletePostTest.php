@@ -2,8 +2,8 @@
 
 use App\Http\Livewire\Posts\Partials\DesktopShowMenu;
 use App\Http\Livewire\Posts\Partials\MobileShowMenu;
-use App\Http\Livewire\Users\Posts\DeletedPostCard;
-use App\Http\Livewire\Users\Posts\PostCard;
+use App\Http\Livewire\Users\Information\Posts\DeletedPostCard;
+use App\Http\Livewire\Users\Information\Posts\PostCard;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;

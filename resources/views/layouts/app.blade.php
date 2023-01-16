@@ -63,23 +63,7 @@
 </head>
 
 <body
-  x-data="alertComponent(@js(session()->get('alert')))"
-  x-init="
-    if (alert !== null) {
-      showAlert(alert.status, alert.message)
-
-      setTimeout(function () {
-      openAlertBox=false
-      }, 3000);
-    }
-  "
-  @info-badge.window="
-    showAlert(event.detail.status, event.detail.message)
-
-    setTimeout(function () {
-      openAlertBox=false
-    }, 3000);
-  "
+  x-data
   {{-- when change page, scroll to top --}}
   @scroll-to-top.window="window.scrollTo({ top: 0, behavior: 'smooth' })"
   class="antialiased text-gray-900 bg-gray-200 overscroll-y-none dark:bg-gray-800 font-noto text-lg"

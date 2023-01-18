@@ -36,7 +36,7 @@ class CreateUserCommand extends Command
         if (User::whereEmail($email)->exists()) {
             $this->info('This email has been used');
 
-            return self::INVALID;
+            return self::FAILURE;
         }
 
         User::forceCreate([

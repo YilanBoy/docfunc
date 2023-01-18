@@ -39,7 +39,7 @@ class EditForm extends Component
 
     public ?string $previewUrl = null;
 
-    public $image;
+    public $image = null;
 
     public string $body;
 

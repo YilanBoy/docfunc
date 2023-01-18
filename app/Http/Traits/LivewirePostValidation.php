@@ -11,7 +11,7 @@ trait LivewirePostValidation
         $validator = Validator::make(
             ['image' => $this->image],
             [
-                'image' => ['image', 'max:1024'], // 1MB Max
+                'image' => ['nullable', 'image', 'max:1024'], // 1MB Max
             ],
             [
                 'image.image' => '圖片格式有誤',

@@ -37,7 +37,7 @@ class CreateForm extends Component
 
     public ?string $previewUrl = null;
 
-    public $image;
+    public $image = null;
 
     public string $body = '';
 
@@ -78,6 +78,7 @@ class CreateForm extends Component
     {
         $this->validateImage();
 
+        // when the image pass the validation, clear the error message
         $this->resetValidation('image');
     }
 

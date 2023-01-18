@@ -2,12 +2,13 @@
 
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 use function Pest\Laravel\post;
 
 beforeEach(fn () => Storage::fake('s3'));
 
-test('a guest can\'t upload image', function () {
+test('users who are not logged in cannot upload images', function () {
     post(route('images.store'), [
         'upload' => UploadedFile::fake()->image('photo.jpg')->size(100),
     ])
@@ -17,7 +18,7 @@ test('a guest can\'t upload image', function () {
     Storage::disk('s3')->assertDirectoryEmpty('images');
 });
 
-test('an authenticated user can upload image', function () {
+test('logged-in users can upload images', function () {
     $this->actingAs(User::factory()->create());
 
     $file = UploadedFile::fake()->image('photo.jpg')->size(100);
@@ -29,7 +30,7 @@ test('an authenticated user can upload image', function () {
     expect(Storage::disk('s3')->allFiles())->not->toBeEmpty();
 });
 
-test('images must be less than 1024 kb', function () {
+test('the size of the uploaded image must be less than 1024 kb', function () {
     $this->actingAs(User::factory()->create());
 
     post(route('images.store'), [

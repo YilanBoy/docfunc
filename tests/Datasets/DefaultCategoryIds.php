@@ -1,5 +1,9 @@
 <?php
 
 dataset('defaultCategoryIds', function () {
-    return [1, 2, 3];
+    return [
+        'categoryOne' => 1,
+        'categoryTwo' => 2,
+        'categoryThree' => 3,
+    ];
 });

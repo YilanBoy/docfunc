@@ -25,7 +25,7 @@ beforeEach(function () {
     Storage::disk('s3')->put('images/'.$this->imageName3, $this->imageFile3);
 });
 
-it('can be stopped by answering no', function () {
+it('can terminate the program by answering "no"', function () {
     $body = <<<EOF
         <div>
             <img src="https://fake-url.com/images/{$this->imageName1}" alt="{$this->imageName1}" title="" style="">
@@ -73,7 +73,7 @@ it('can clear unused images', function () {
         ->assertMissing('images/'.$this->imageName3);
 });
 
-it('can bypass confirmed by using --force flag', function () {
+it('can skip confirmed by adding --force flag', function () {
     $body = <<<EOF
         <div>
             <img src="https://fake-url.com/images/{$this->imageName1}" alt="{$this->imageName1}" title="" style="">
@@ -96,7 +96,7 @@ it('can bypass confirmed by using --force flag', function () {
         ->assertMissing('images/'.$this->imageName3);
 });
 
-test('if there is no unused image, operation won\'t clear any image', function () {
+test('if there are no unused images, the program will not delete any of them', function () {
     $body1 = <<<EOF
         <div>
             <img src="https://fake-url.com/images/{$this->imageName1}" alt="{$this->imageName1}" title="" style="">

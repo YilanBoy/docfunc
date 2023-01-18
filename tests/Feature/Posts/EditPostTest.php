@@ -59,4 +59,4 @@ test('authors can update their posts', function ($categoryId) {
     $this->assertEquals($post->title, $newTitle);
     $this->assertEquals($post->category_id, $categoryId);
     $this->assertEquals($post->body, $newBody);
-})->with([1, 2, 3]);
+})->with('defaultCategoryIds');

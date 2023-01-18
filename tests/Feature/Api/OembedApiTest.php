@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Http;
 
 use function Pest\Laravel\postJson;
 
-test('youtube oembed api could work', function () {
+test('youtube\'s oembed api can be called', function () {
     $fakeResponse = [
         'title' => 'Amazing Nintendo Facts',
         'author_name' => 'ZackScott',
@@ -30,7 +30,7 @@ test('youtube oembed api could work', function () {
         ->assertJson($fakeResponse);
 });
 
-test('embed youtube url is not found', function () {
+test('if the embedded youtube link is an invalid link, return the alternative html content', function () {
     Http::fake([
         'https://www.youtube.com/oembed*' => Http::response('Not Found', 404),
     ]);
@@ -40,7 +40,7 @@ test('embed youtube url is not found', function () {
         ->assertJson(['html' => '<p style="font-size:1.5em;">Youtube 影片連結發生錯誤... 🥲</p>']);
 });
 
-test('twitter oembed api could work', function () {
+test('twitter\'s oembed api can be called', function () {
     $expectResponse = [
         'url' => 'https://twitter.com/TwitterDev/status/1603823063690199040',
         'author_name' => 'Twitter Dev',
@@ -60,7 +60,7 @@ test('twitter oembed api could work', function () {
         ->assertJson($expectResponse);
 });
 
-test('embed twitter url is not found', function () {
+test('if the embedded twitter link is an invalid link, return the alternative html content', function () {
     postJson('/api/oembed/twitter', ['url' => 'https://twitter.com/TwitterDev/status/123456789'])
         ->assertStatus(400)
         ->assertJson(['html' => '<p style="font-size:1.5em;">Twitter 連結發生錯誤... 🥲</p>']);

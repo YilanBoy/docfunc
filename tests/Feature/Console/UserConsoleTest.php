@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Artisan;
 
 uses(RefreshDatabase::class);
 
-it('can create user', function () {
+it('can create new users', function () {
     $this->artisan('user:create')
         ->expectsQuestion('name', 'John')
         ->expectsQuestion('email', 'john@email.com')
@@ -15,7 +15,7 @@ it('can create user', function () {
         ->assertExitCode(0);
 });
 
-test('create user command will fail if the email is already in use', function () {
+it('will fail, if the email is already in use', function () {
     Artisan::call('user:create', [
         'name' => 'John',
         'email' => 'john@email.com',
@@ -25,5 +25,5 @@ test('create user command will fail if the email is already in use', function ()
         ->expectsQuestion('name', 'John')
         ->expectsQuestion('email', 'john@email.com')
         ->expectsOutput('This email has been used')
-        ->assertExitCode(2);
+        ->assertExitCode(1);
 });

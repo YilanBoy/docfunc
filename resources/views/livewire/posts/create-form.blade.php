@@ -25,70 +25,19 @@
 
         <form wire:submit.prevent="store" id="create-post">
 
-          {{-- title --}}
-          <div class="mt-2">
-            <label for="title" class="hidden">文章標題</label>
-
-            <input
-              wire:model.lazy="title"
-              type="text"
-              id="title"
-              name="title"
-              placeholder="文章標題"
-              value=""
-              required
-              autofocus
-              class="w-full h-12 text-lg border border-gray-300 rounded-md shadow-sm form-input focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
-            >
-          </div>
-
-          {{-- classfication --}}
-          <div class="mt-5">
-            <label for="category_id" class="hidden">分類</label>
-
-            <select
-              wire:model="categoryId"
-              id="category_id"
-              name="category_id"
-              required
-              class="w-full h-12 text-lg border border-gray-300 rounded-md shadow-sm form-select focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50"
-            >
-              @foreach ($categories as $category)
-                <option value="{{ $category->id }}">
-                  {{ $category->name }}
-                </option>
-              @endforeach
-            </select>
-          </div>
-
-          {{-- tags --}}
-          <div wire:ignore class="mt-5">
-            <label for="tags" class="hidden">標籤 (最多 5 個)</label>
-
-            <input
-              id="tags"
-              type="text"
-              name="tags"
-              value="{{ $tags }}"
-              placeholder="標籤 (最多 5 個)"
-              class="w-full h-12 bg-white rounded-md dark:bg-gray-600"
-            >
-          </div>
-
           {{-- preview image --}}
-
           <div
             x-data="{ isUploading: false, progress: 0 }"
             x-on:livewire-upload-start="isUploading = true"
             x-on:livewire-upload-finish="isUploading = false"
             x-on:livewire-upload-error="isUploading = false"
             x-on:livewire-upload-progress="progress = $event.detail.progress"
-            class="mt-5 text-base"
+            class="text-base"
           >
             {{-- Upload Area --}}
             <div
               x-ref="uploadBlock"
-              class="relative flex flex-col items-center px-4 py-6 mt-4 tracking-wide text-green-500 transition-all duration-300 bg-transparent border-2 border-green-500 border-dashed rounded-lg cursor-pointer dark:text-indigo-400 dark:border-indigo-400 hover:text-green-600 dark:hover:text-indigo-300 hover:border-green-600 dark:hover:border-indigo-300"
+              class="relative flex flex-col items-center px-4 py-6 tracking-wide text-green-500 transition-all duration-300 bg-transparent border-2 border-green-500 border-dashed rounded-lg cursor-pointer dark:text-indigo-400 dark:border-indigo-400 hover:text-green-600 dark:hover:text-indigo-300 hover:border-green-600 dark:hover:border-indigo-300"
             >
               <input
                 wire:model="image"
@@ -150,6 +99,56 @@
                 </button>
               </div>
             @endif
+          </div>
+
+          {{-- title --}}
+          <div class="mt-4">
+            <label for="title" class="hidden">文章標題</label>
+
+            <input
+              wire:model.lazy="title"
+              type="text"
+              id="title"
+              name="title"
+              placeholder="文章標題"
+              value=""
+              required
+              autofocus
+              class="w-full h-12 text-lg border border-gray-300 rounded-md shadow-sm form-input focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+            >
+          </div>
+
+          {{-- classfication --}}
+          <div class="mt-5">
+            <label for="category_id" class="hidden">分類</label>
+
+            <select
+              wire:model="categoryId"
+              id="category_id"
+              name="category_id"
+              required
+              class="w-full h-12 text-lg border border-gray-300 rounded-md shadow-sm form-select focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50"
+            >
+              @foreach ($categories as $category)
+                <option value="{{ $category->id }}">
+                  {{ $category->name }}
+                </option>
+              @endforeach
+            </select>
+          </div>
+
+          {{-- tags --}}
+          <div wire:ignore class="mt-5">
+            <label for="tags" class="hidden">標籤 (最多 5 個)</label>
+
+            <input
+              id="tags"
+              type="text"
+              name="tags"
+              value="{{ $tags }}"
+              placeholder="標籤 (最多 5 個)"
+              class="w-full h-12 bg-white rounded-md dark:bg-gray-600"
+            >
           </div>
 
           {{-- body --}}

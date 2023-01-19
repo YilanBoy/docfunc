@@ -24,8 +24,106 @@
         <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
         <form wire:submit.prevent="update" id="edit-post">
+          {{-- image --}}
+          <div
+            x-data="{ isUploading: false, progress: 0 }"
+            x-on:livewire-upload-start="isUploading = true"
+            x-on:livewire-upload-finish="isUploading = false"
+            x-on:livewire-upload-error="isUploading = false"
+            x-on:livewire-upload-progress="progress = $event.detail.progress"
+            class="text-base"
+          >
+            {{-- Upload Area --}}
+            <div
+              x-ref="uploadBlock"
+              class="relative flex flex-col items-center px-4 py-6 tracking-wide text-green-500 transition-all duration-300 bg-transparent border-2 border-green-500 border-dashed rounded-lg cursor-pointer dark:text-indigo-400 dark:border-indigo-400 hover:text-green-600 dark:hover:text-indigo-300 hover:border-green-600 dark:hover:border-indigo-300"
+            >
+              <input
+                wire:model="image"
+                x-on:dragenter="
+                  $refs.uploadBlock.classList.remove('text-green-500', 'dark:text-indigo-400', 'border-green-500', 'dark:border-indigo-400')
+                  $refs.uploadBlock.classList.add('text-green-600', 'dark:text-indigo-300', 'border-green-600', 'dark:border-indigo-300')
+                "
+                x-on:dragleave="
+                  $refs.uploadBlock.classList.add('text-green-500', 'dark:text-indigo-400', 'border-green-500', 'dark:border-indigo-400')
+                  $refs.uploadBlock.classList.remove('text-green-600', 'dark:text-indigo-300', 'border-green-600', 'dark:border-indigo-300')
+                "
+                x-on:drop="
+                  $refs.uploadBlock.classList.add('text-green-500', 'dark:text-indigo-400', 'border-green-500', 'dark:border-indigo-400')
+                  $refs.uploadBlock.classList.remove('text-green-600', 'dark:text-indigo-300', 'border-green-600', 'dark:border-indigo-300')
+                "
+                type="file"
+                class="absolute inset-0 z-50 w-full h-full p-0 m-0 outline-none opacity-0 cursor-pointer"
+                title=""
+              >
+
+              <div class="flex flex-col items-center justify-center space-y-2 text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                     stroke="currentColor" class="w-10 h-10">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"/>
+                </svg>
+
+                <p>預覽圖 (jpg, jpeg, png, bmp, gif, svg, or webp)</p>
+              </div>
+            </div>
+
+            {{-- Progress Bar --}}
+            <div x-show="isUploading" class="relative pt-1 mt-4">
+              <div class="overflow-hidden h-4 mb-4 text-xs flex rounded bg-green-200 dark:bg-indigo-200">
+                <div
+                  x-bind:style="`width:${progress}%`"
+                  class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500 dark:bg-indigo-500"
+                ></div>
+              </div>
+            </div>
+
+            @if ($previewUrl && empty($image))
+              <div class="relative w-full md:w-1/2 mt-4">
+                <img src="{{ $previewUrl }}" alt="preview image" class="rounded-lg">
+
+                <button
+                  type="button"
+                  onclick="confirm('你確定要刪除預覽圖嗎？') || event.stopImmediatePropagation()"
+                  wire:click="$set('previewUrl', null)"
+                  class="absolute inset-0 flex flex-1 justify-center items-center
+                  group hover:bg-gray-600/50 hover:backdrop-blur-sm rounded-lg
+                  transition-all duration-150"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                       stroke="currentColor"
+                       class="w-24 h-24 opacity-0 group-hover:opacity-100 group-hover:text-gray-50 transition-all duration-150">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </button>
+              </div>
+            @endif
+
+            @if (!$errors->has('image') && $image)
+              <div class="relative w-full md:w-1/2 mt-4">
+                <img src="{{ $image->temporaryUrl() }}" alt="preview image" class="rounded-lg">
+
+                <button
+                  type="button"
+                  wire:click="$set('image', null)"
+                  class="absolute inset-0 flex flex-1 justify-center items-center
+                  group hover:bg-gray-600/50 hover:backdrop-blur-sm rounded-lg
+                  transition-all duration-150"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                       stroke="currentColor"
+                       class="w-24 h-24 opacity-0 group-hover:opacity-100 group-hover:text-gray-50 transition-all duration-150">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </button>
+              </div>
+            @endif
+          </div>
+
           {{-- title --}}
-          <div class="mt-2">
+          <div class="mt-4">
             <label for="title" class="hidden">文章標題</label>
 
             <input
@@ -72,86 +170,6 @@
               placeholder="標籤（最多 5 個）"
               class="w-full h-12 bg-white rounded-md dark:bg-gray-600"
             >
-          </div>
-
-          {{-- image --}}
-          <div
-            x-data="{ isUploading: false, progress: 0 }"
-            x-on:livewire-upload-start="isUploading = true"
-            x-on:livewire-upload-finish="isUploading = false"
-            x-on:livewire-upload-error="isUploading = false"
-            x-on:livewire-upload-progress="progress = $event.detail.progress"
-            class="mt-5 text-base"
-          >
-            {{-- Upload Area --}}
-            <div
-              x-ref="uploadBlock"
-              class="relative flex flex-col items-center px-4 py-6 mt-4 tracking-wide text-green-500 transition-all duration-300 bg-transparent border-2 border-green-500 border-dashed rounded-lg cursor-pointer dark:text-indigo-400 dark:border-indigo-400 hover:text-green-600 dark:hover:text-indigo-300 hover:border-green-600 dark:hover:border-indigo-300"
-            >
-              <input
-                wire:model="image"
-                x-on:dragenter="
-                  $refs.uploadBlock.classList.remove('text-green-500', 'dark:text-indigo-400', 'border-green-500', 'dark:border-indigo-400')
-                  $refs.uploadBlock.classList.add('text-green-600', 'dark:text-indigo-300', 'border-green-600', 'dark:border-indigo-300')
-                "
-                x-on:dragleave="
-                  $refs.uploadBlock.classList.add('text-green-500', 'dark:text-indigo-400', 'border-green-500', 'dark:border-indigo-400')
-                  $refs.uploadBlock.classList.remove('text-green-600', 'dark:text-indigo-300', 'border-green-600', 'dark:border-indigo-300')
-                "
-                x-on:drop="
-                  $refs.uploadBlock.classList.add('text-green-500', 'dark:text-indigo-400', 'border-green-500', 'dark:border-indigo-400')
-                  $refs.uploadBlock.classList.remove('text-green-600', 'dark:text-indigo-300', 'border-green-600', 'dark:border-indigo-300')
-                "
-                type="file"
-                class="absolute inset-0 z-50 w-full h-full p-0 m-0 outline-none opacity-0 cursor-pointer"
-                title=""
-              >
-
-              <div class="flex flex-col items-center justify-center space-y-2 text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="w-10 h-10">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"/>
-                </svg>
-
-                <p>預覽圖 (jpg, jpeg, png, bmp, gif, svg, or webp)</p>
-              </div>
-            </div>
-
-            {{-- Progress Bar --}}
-            <div x-show="isUploading" class="relative pt-1 mt-4">
-              <div class="overflow-hidden h-4 mb-4 text-xs flex rounded bg-green-200 dark:bg-indigo-200">
-                <div
-                  x-bind:style="`width:${progress}%`"
-                  class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500 dark:bg-indigo-500"
-                ></div>
-              </div>
-            </div>
-
-            @if ($previewUrl && empty($image))
-              <img src="{{ $previewUrl }}" alt="preview image" class="h-48 mt-4 rounded-lg">
-            @endif
-
-            @if (!$errors->has('image') && $image)
-              <div class="relative w-full md:w-1/2 mt-4">
-                <img src="{{ $image->temporaryUrl() }}" alt="preview image" class="rounded-lg">
-
-                <button
-                  type="button"
-                  wire:click="$set('image', null)"
-                  class="absolute inset-0 flex flex-1 justify-center items-center
-                  group hover:bg-gray-600/50 hover:backdrop-blur-sm rounded-lg
-                  transition-all duration-150"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                       stroke="currentColor"
-                       class="w-24 h-24 opacity-0 group-hover:opacity-100 group-hover:text-gray-50 transition-all duration-150">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                </button>
-              </div>
-            @endif
           </div>
 
           {{-- body --}}

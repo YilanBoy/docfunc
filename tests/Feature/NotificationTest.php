@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Comments\CommentBox;
+use App\Http\Livewire\Comments\CreateModal;
 use App\Http\Livewire\Notifications\Index as NotificationIndex;
 use App\Models\Post;
 use App\Models\User;
@@ -18,10 +18,8 @@ test('receive a notification when a post has a comment', function () {
 
     $this->actingAs($user);
 
-    Livewire::test(CommentBox::class)
-        ->set('postId', $post->id)
-        ->set('commentCount', $post->comment_count)
-        ->set('content', faker()->realText(100))
+    Livewire::test(CreateModal::class, ['postId' => $post->id])
+        ->set('body', faker()->realText(100))
         ->call('store');
 
     $author = User::find($post->user_id);
@@ -47,10 +45,8 @@ test('access the notification page to clear unread notifications', function () {
 
     $this->actingAs($user);
 
-    Livewire::test(CommentBox::class)
-        ->set('postId', $post->id)
-        ->set('commentCount', $post->comment_count)
-        ->set('content', faker()->realText(100))
+    Livewire::test(CreateModal::class, ['postId' => $post->id])
+        ->set('body', faker()->realText(100))
         ->call('store');
 
     $author = User::find($post->user_id);
@@ -72,10 +68,8 @@ test('if you reply to your own post, there will be no notification', function ()
 
     $this->actingAs($author);
 
-    Livewire::test(CommentBox::class)
-        ->set('postId', $post->id)
-        ->set('commentCount', $post->comment_count)
-        ->set('content', faker()->realText(100))
+    Livewire::test(CreateModal::class, ['postId' => $post->id])
+        ->set('body', faker()->realText(100))
         ->call('store');
 
     expect($author->unreadNotifications->count())

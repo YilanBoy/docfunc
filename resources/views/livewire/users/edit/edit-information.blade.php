@@ -75,7 +75,7 @@
         name="introduction"
         placeholder="介紹一下你自己吧！"
         rows="5"
-        class="w-full mt-2 border border-gray-300 rounded-md shadow-sm form-textarea text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+        class="w-full mt-2 border border-gray-300 rounded-md shadow-sm form-textarea text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white resize-none"
       >{{ old('introduction', $introduction) }}</textarea>
     </div>
 

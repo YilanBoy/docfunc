@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire\Comments;
 
-use App\Models\Post;
 use Livewire\Component;
 
 class Comments extends Component
 {
     public int $postId;
+
+    public int $commentsCount;
 
     public int $count = 10;
 
@@ -15,15 +16,8 @@ class Comments extends Component
 
     public bool $showMoreButtonIsActive = false;
 
-    public int $commentsCount = 0;
-
     public function mount()
     {
-        // 留言的數目
-        $this->commentsCount = Post::findOrFail($this->postId)
-            ->comments()
-            ->count();
-
         // 當留言總數大於每頁數目，需要顯示「顯示更多留言」的按鈕
         if ($this->commentsCount > $this->perPage) {
             $this->showMoreButtonIsActive = true;

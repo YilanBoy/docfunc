@@ -145,8 +145,8 @@
 
             {{-- post body --}}
             <div
-              id="blog-post"
-              class="mt-4 blog-post max-w-none"
+              id="post-body"
+              class="mt-4 post-body"
             >
               {!! $post->body !!}
             </div>
@@ -175,14 +175,14 @@
 
           {{-- comment box --}}
           @auth
-            <livewire:comments.comment-box
+            <livewire:comments.reply
               :postId="$post->id"
               :commentCount="$post->comment_count"
             />
           @endauth
 
           {{-- comments list --}}
-          <livewire:comments.comments :postId="$post->id"/>
+          <livewire:comments.comments :postId="$post->id" :comments-count="$post->comment_count"/>
         </div>
 
         <div class="hidden lg:block lg:w-1/6">
@@ -196,6 +196,10 @@
       </div>
     </div>
   </div>
+
+  <livewire:comments.create-modal :post-id="$post->id"/>
+
+  <livewire:comments.edit-modal/>
 
   <div id="progress-bar"
        class="fixed top-0 left-0 w-0 h-[5px] bg-gradient-to-r from-green-500 via-teal-500 to-sky-500 dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500 z-20 transition-all duration-300 ease-out"></div>

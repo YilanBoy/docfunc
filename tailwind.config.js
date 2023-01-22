@@ -42,7 +42,6 @@ module.exports = {
             typography: (theme) => ({
                 DEFAULT: {
                     css: {
-                        "font-size": "1.125rem",
                         blockquote: {
                             borderColor: theme("colors.slate.300"),
                             color: theme("colors.slate.500")
@@ -60,20 +59,9 @@ module.exports = {
                             fontWeight: "600",
                             borderRadius: "0.25rem",
                         },
-                        "code::before": {
-                            content: '""',
-                        },
-                        "code::after": {
-                            content: '""',
-                        },
                         ".dark :not(pre) > code": {
                             backgroundColor: theme("colors.gray.500"),
                             color: theme("colors.gray.100"),
-                        },
-                        pre: {
-                            border: 0,
-                            padding: 0,
-                            borderRadius: "0.75rem",
                         },
                     },
                 },

@@ -105,12 +105,15 @@ class Post extends Model implements Feedable
     }
 
     // 更新留言數量
-    public function updateCommentCount(): void
+    public function incrementCommentCount(): void
     {
         // 使用鎖表來更新 Model 中的 comment_count 資料
-        $this->comment_count = Comment::where('post_id', $this->id)->lockForUpdate()->count();
-        // 更新資料庫資料
-        $this->save();
+        $this->lockForUpdate()->increment('comment_count');
+    }
+
+    public function decrementCommentCount(): void
+    {
+        $this->lockForUpdate()->decrement('comment_count');
     }
 
     // 設定 Algolia 匯入的 index 名稱

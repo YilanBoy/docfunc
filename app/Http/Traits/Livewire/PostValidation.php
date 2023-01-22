@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Traits;
+namespace App\Http\Traits\Livewire;
 
 use Illuminate\Support\Facades\Validator;
 
-trait LivewirePostValidation
+trait PostValidation
 {
     public function validateImage(): void
     {

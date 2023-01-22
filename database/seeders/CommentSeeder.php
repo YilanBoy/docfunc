@@ -22,7 +22,17 @@ class CommentSeeder extends Seeder
             $data[] = [
                 'user_id' => rand(1, $userCount),
                 'post_id' => rand(1, $postCount),
-                'content' => fake()->sentence,
+                'body' => fake()->sentence,
+                'created_at' => fake()->dateTimeThisMonth(now()),
+                'updated_at' => now(),
+            ];
+        }
+
+        for ($i = 0; $i < 100; $i++) {
+            $data[] = [
+                'user_id' => rand(1, $userCount),
+                'post_id' => 1,
+                'body' => fake()->sentence,
                 'created_at' => fake()->dateTimeThisMonth(now()),
                 'updated_at' => now(),
             ];

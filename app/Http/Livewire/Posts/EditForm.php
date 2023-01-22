@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Posts;
 
-use App\Http\Traits\LivewirePostValidation;
+use App\Http\Traits\Livewire\PostValidation;
 use App\Models\Category;
 use App\Models\Post;
 use App\Services\ContentService;
@@ -15,7 +15,7 @@ use Livewire\WithFileUploads;
 
 class EditForm extends Component
 {
-    use LivewirePostValidation;
+    use PostValidation;
     use AuthorizesRequests;
     use WithFileUploads;
 

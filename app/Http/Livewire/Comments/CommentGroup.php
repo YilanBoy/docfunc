@@ -3,11 +3,10 @@
 namespace App\Http\Livewire\Comments;
 
 use App\Models\Comment;
-use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
-class CommentsGroup extends Component
+class CommentGroup extends Component
 {
     use AuthorizesRequests;
 
@@ -17,25 +16,16 @@ class CommentsGroup extends Component
 
     public int $perPage;
 
-    protected $listeners = ['refreshCommentsGroup' => '$refresh'];
-
-    // 刪除留言
-    public function destroy(Comment $comment)
-    {
-        $this->authorize('destroy', $comment);
-
-        $comment->delete();
-
-        Post::findOrFail($this->postId)->updateCommentCount();
-
-        $this->emit('updateCommentCount');
-    }
+    protected $listeners = ['refreshCommentGroup' => '$refresh'];
 
     public function render()
     {
         $comments = Comment::query()
             ->selectRaw('
-                comments.*,
+                comments.id,
+                comments.body,
+                comments.user_id,
+                comments.created_at,
                 posts.user_id AS post_user_id,
                 users.name AS user_name,
                 users.email AS user_email
@@ -43,11 +33,11 @@ class CommentsGroup extends Component
             ->join('posts', 'posts.id', '=', 'comments.post_id')
             ->join('users', 'users.id', '=', 'comments.user_id')
             ->where('post_id', $this->postId)
-            ->latest()
+            ->latest('id')
             ->limit($this->perPage)
             ->offset($this->offset)
             ->get();
 
-        return view('livewire.comments.comments-group', ['comments' => $comments]);
+        return view('livewire.comments.comment-group', ['comments' => $comments]);
     }
 }

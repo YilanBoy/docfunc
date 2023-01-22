@@ -4,4 +4,10 @@ import hljs from "highlight.js/lib/common";
 import dart from "highlight.js/lib/languages/dart";
 
 hljs.registerLanguage("dart", dart);
-hljs.highlightAll();
+
+// only highlight code in the blog post
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('#post-body pre code').forEach((el: HTMLElement) => {
+        hljs.highlightElement(el);
+    });
+});

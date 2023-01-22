@@ -15,16 +15,16 @@ class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => ['required', 'min:5', 'max:400'],
+            'body' => ['required', 'min:5', 'max:2000'],
         ];
     }
 
     public function messages()
     {
         return [
-            'content.required' => '請填寫留言內容',
-            'content.min' => '留言內容至少 5 個字元',
-            'content.max' => '留言內容至多 400 個字元',
+            'body.required' => '請填寫留言內容',
+            'body.min' => '留言內容至少 5 個字元',
+            'body.max' => '留言內容至多 2000 個字元',
         ];
     }
 }

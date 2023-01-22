@@ -10,10 +10,13 @@ class CommentFactory extends Factory
 {
     public function definition()
     {
+        $post = Post::factory()->create();
+        $post->incrementCommentCount();
+
         return [
             'user_id' => User::factory()->create()->id,
-            'post_id' => Post::factory()->create()->id,
-            'content' => fake()->sentence,
+            'post_id' => $post->id,
+            'body' => fake()->sentence,
             'created_at' => fake()->dateTimeThisMonth(now()),
             'updated_at' => now(),
         ];

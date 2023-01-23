@@ -77,6 +77,6 @@ it('can see the comment preview', function () {
         ->call('setEditComment', $comment->id, $commentGroupId)
         ->set('body', $body)
         ->set('convertToHtml', true)
-        ->assertSee('<h1>Title</h1>', false)
+        ->assertSee('Title', false)
         ->assertSee('<p>This is a <strong>comment</strong></p>', false);
 });

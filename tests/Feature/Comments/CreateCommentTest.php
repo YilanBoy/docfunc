@@ -51,6 +51,6 @@ it('can see the comment preview', function () {
     Livewire::test(CreateModal::class, ['postId' => $post->id])
         ->set('body', $body)
         ->set('convertToHtml', true)
-        ->assertSee('<h1>Title</h1>', false)
+        ->assertSee('Title', false)
         ->assertSee('<p>This is a <strong>comment</strong></p>', false);
 });

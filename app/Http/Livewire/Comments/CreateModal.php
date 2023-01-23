@@ -29,9 +29,20 @@ class CreateModal extends Component
 
     public function getConvertedBodyProperty(): string
     {
-        return Str::of($this->body)->markdown([
+        $html = Str::of($this->body)->markdown([
             'html_input' => 'strip',
         ]);
+
+        $prohibitedTag = [
+            '<h1>', '</h1>',
+            '<h2>', '</h2>',
+            '<h3>', '</h3>',
+            '<h4>', '</h4>',
+            '<h5>', '</h5>',
+            '<h6>', '</h6>',
+        ];
+
+        return str_replace($prohibitedTag, '', $html);
     }
 
     public function store()

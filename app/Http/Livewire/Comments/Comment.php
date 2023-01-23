@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Comments;
 
 use App\Models\Comment as CommentModel;
-use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Str;
@@ -47,11 +46,9 @@ class Comment extends Component
 
         $comment->delete();
 
-        Post::findOrFail($this->postId)->decrement('comment_counts');
-
         $this->emit('updateCommentCounts');
 
-        $this->emit('refreshCommentGroup'.$this->groupId);
+        $this->emit('refreshAllCommentGroup');
     }
 
     public function render()

@@ -10,6 +10,13 @@
     Livewire.on('closeEditCommentModal', () => {
       isOpen = false
     })
+
+    // when enable the preview, reload the scripts
+    Livewire.hook('message.processed', (el, component) => {
+      document.querySelectorAll('#editing-comment-preview pre code').forEach((element) => {
+        window.hljs.highlightElement(element)
+      })
+    })
   "
   x-show="isOpen"
   @keydown.escape.window="isOpen = false"
@@ -51,7 +58,7 @@
           <span>編輯留言</span>
         </div>
 
-        <form wire:submit.prevent="update" class="space-y-4">
+        <form wire:submit.prevent="update({{ $commentId }})" class="space-y-4">
           @if (! $convertToHtml)
             <div>
               <label for="body"></label>
@@ -72,7 +79,7 @@
               @enderror
             </div>
           @else
-            <div class="space-y-2">
+            <div id="editing-comment-preview" class="space-y-2">
               <div class="space-x-4">
                 <span class="font-semibold dark:text-gray-50">{{ auth()->user()->name }}</span>
                 <span class="text-gray-400">{{ now()->format('Y 年 m 月 d 日') }}</span>

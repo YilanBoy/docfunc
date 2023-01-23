@@ -1,5 +1,18 @@
 {{-- 留言列表 --}}
-<div id="comments" class="w-full">
+<div
+  x-data
+  x-init="
+    // after editing comment, reload the scripts
+    Livewire.hook('message.processed', (el, component) => {
+      document.querySelectorAll('#comments pre code').forEach((element) => {
+        window.hljs.highlightElement(element)
+      })
+
+      window.codeBlockCopyButton('#comments pre')
+    })
+  "
+  id="comments" class="w-full"
+>
 
   @for (
       $offset = 0, $groupId = 0;

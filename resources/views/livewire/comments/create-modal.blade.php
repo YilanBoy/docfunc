@@ -5,6 +5,13 @@
     Livewire.on('closeCreateCommentModal', () => {
       isOpen = false
     })
+
+    // when enable the preview, reload the scripts
+    Livewire.hook('message.processed', (el, component) => {
+      document.querySelectorAll('#creating-comment-preview pre code').forEach((element) => {
+        window.hljs.highlightElement(element)
+      })
+    })
   "
   x-show="isOpen"
   @keydown.escape.window="isOpen = false"
@@ -71,7 +78,7 @@
               @enderror
             </div>
           @else
-            <div class="space-y-2">
+            <div id="creating-comment-preview" class="space-y-2">
               <div class="space-x-4">
                 <span class="font-semibold dark:text-gray-50">{{ auth()->user()->name }}</span>
                 <span class="text-gray-400">{{ now()->format('Y 年 m 月 d 日') }}</span>

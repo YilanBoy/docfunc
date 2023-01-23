@@ -39,8 +39,6 @@
 
     .comment-body {
         @apply prose text-lg max-w-none prose-slate dark:prose-invert
-            /* headings */
-        prose-headings:text-green-500 dark:prose-headings:text-indigo-400
             /* links */
         prose-a:no-underline hover:prose-a:underline prose-a:text-green-600 hover:prose-a:text-green-500
         dark:prose-a:text-indigo-400 dark:hover:prose-a:text-indigo-300
@@ -53,7 +51,7 @@
             /* code */
         prose-code:before:content-none prose-code:after:content-none
             /* pre */
-        prose-pre:rounded-lg
+        prose-pre:p-0 prose-pre:rounded-lg
         ;
     }
 }

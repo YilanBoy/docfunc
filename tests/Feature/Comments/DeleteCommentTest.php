@@ -29,7 +29,7 @@ test('the author can delete his comment', function () {
     ])
         ->call('destroy', $comment->id)
         ->assertEmitted('updateCommentCounts')
-        ->assertEmitted('refreshCommentGroup'.$commentGroupId);
+        ->assertEmitted('refreshAllCommentGroup');
 
     $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
 });

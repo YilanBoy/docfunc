@@ -17,7 +17,7 @@ class EditModal extends Component
     // comment group id is used to refresh comment group component
     public int $groupId;
 
-    public CommentModel $comment;
+    public ?int $commentId = null;
 
     public string $body = '';
 
@@ -55,17 +55,17 @@ class EditModal extends Component
     {
         $this->convertToHtml = false;
         $this->groupId = $groupId;
-        $this->comment = $comment;
-        $this->body = $this->comment->body;
+        $this->commentId = $comment->id;
+        $this->body = $comment->body;
 
         $this->emit('editCommentWasSet');
     }
 
-    public function update()
+    public function update(CommentModel $comment)
     {
-        $this->authorize('update', $this->comment);
+        $this->authorize('update', $comment);
 
-        $this->comment->update([
+        $comment->update([
             'body' => $this->body,
         ]);
 

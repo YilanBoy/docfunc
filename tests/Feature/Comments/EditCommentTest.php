@@ -15,7 +15,7 @@ test('editing modal can load the data of the comment', function () {
     Livewire::test(EditModal::class)
         ->call('setEditComment', $comment->id, $commentGroupId)
         ->assertSet('groupId', $commentGroupId)
-        ->assertSet('comment', Comment::find($comment->id))
+        ->assertSet('commentId', $comment->id)
         ->assertSet('body', $comment->body)
         ->assertEmitted('editCommentWasSet');
 });
@@ -36,7 +36,7 @@ test('logged-in users can update their comments', function () {
     Livewire::test(EditModal::class)
         ->call('setEditComment', $comment->id, $commentGroupId)
         ->set('body', $body)
-        ->call('update')
+        ->call('update', $comment->id)
         ->assertEmitted('closeEditCommentModal')
         ->assertEmitted('refreshCommentGroup'.$commentGroupId);
 
@@ -55,7 +55,7 @@ test('users can\'t update others\' comments', function () {
     Livewire::test(EditModal::class)
         ->call('setEditComment', $comment->id, $commentGroupId)
         ->set('body', $body)
-        ->call('update')
+        ->call('update', $comment->id)
         ->assertForbidden();
 
     expect(Comment::find($comment->id, ['body']))

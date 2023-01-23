@@ -9,6 +9,8 @@
       :body="$comment->body"
       :created-at="$comment->created_at->format('Y 年 m 月 d 日')"
       :post-user-id="$comment->post_user_id"
+      :offset="$offset"
+      :group-id="$groupId"
       {{-- when the parent component is updated, the child component is updated together --}}
       {{-- reference: https://github.com/livewire/livewire/discussions/1895 --}}
       :wire:key="now()->toString()"

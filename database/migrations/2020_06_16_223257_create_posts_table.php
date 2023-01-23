@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('title')->index();
             $table->mediumText('body');
             $table->integer('category_id')->unsigned()->index();
-            $table->integer('comment_count')->unsigned()->default(0);
+            $table->integer('comment_counts')->unsigned()->default(0);
             $table->text('excerpt')->nullable();
             $table->string('slug')->nullable();
             $table->timestamps();

@@ -49,7 +49,7 @@ class CreateModal extends Component
         $post = Post::findOrFail($this->postId);
 
         // update comment count in post table
-        $post->incrementCommentCount();
+        $post->increment('comment_counts');
         // notify the article author of new comments
         $post->user->postNotify(new PostComment($comment));
 
@@ -58,10 +58,10 @@ class CreateModal extends Component
 
         $this->emit('closeCreateCommentModal');
 
-        $this->emit('updateCommentCount');
+        $this->emit('updateCommentCounts');
 
         // refresh comment list
-        $this->emit('refreshCommentGroup');
+        $this->emit('refreshAllCommentGroup');
     }
 
     public function render()

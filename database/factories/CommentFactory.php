@@ -11,7 +11,7 @@ class CommentFactory extends Factory
     public function definition()
     {
         $post = Post::factory()->create();
-        $post->incrementCommentCount();
+        $post->increment('comment_counts');
 
         return [
             'user_id' => User::factory()->create()->id,

@@ -12,11 +12,19 @@ class CommentGroup extends Component
 
     public int $postId;
 
-    public int $offset;
-
     public int $perPage;
 
-    protected $listeners = ['refreshCommentGroup' => '$refresh'];
+    public int $offset;
+
+    public int $groupId;
+
+    protected function getListeners()
+    {
+        return [
+            'refreshAllCommentGroup' => '$refresh',
+            'refreshCommentGroup'.$this->groupId => '$refresh',
+        ];
+    }
 
     public function render()
     {

@@ -22,7 +22,7 @@ class PostSeeder extends Seeder
                 'slug' => fake()->word(),
                 'excerpt' => fake()->sentence,
                 'category_id' => fake()->numberBetween(1, 3),
-                'comment_count' => 0,
+                'comment_counts' => 0,
                 'user_id' => rand(1, $userCount),
                 // 隨機取一個月以內，但早於現在的時間
                 'created_at' => fake()->dateTimeThisMonth(now()),

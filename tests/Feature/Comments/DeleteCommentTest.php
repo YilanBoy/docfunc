@@ -12,6 +12,8 @@ uses(RefreshDatabase::class);
 test('the author can delete his comment', function () {
     $comment = CommentModel::factory()->create();
 
+    $commentGroupId = 0;
+
     $this->actingAs(User::find($comment->user_id));
 
     livewire(Comment::class, [
@@ -23,14 +25,19 @@ test('the author can delete his comment', function () {
         'body' => $comment->body,
         'createdAtDiffForHuman' => $comment->created_at->diffForHumans(),
         'postUserId' => $comment->post->user->id,
+        'groupId' => $commentGroupId,
     ])
-        ->call('destroy', $comment->id);
+        ->call('destroy', $comment->id)
+        ->assertEmitted('updateCommentCounts')
+        ->assertEmitted('refreshCommentGroup'.$commentGroupId);
 
     $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
 });
 
 test('post author can delete other users comment', function () {
     $comment = CommentModel::factory()->create();
+
+    $commentGroupId = 0;
 
     $this->actingAs(User::find($comment->post->user_id));
 
@@ -43,6 +50,7 @@ test('post author can delete other users comment', function () {
         'body' => $comment->body,
         'createdAtDiffForHuman' => $comment->created_at->diffForHumans(),
         'postUserId' => $comment->post->user->id,
+        'groupId' => $commentGroupId,
     ])
         ->call('destroy', $comment->id);
 

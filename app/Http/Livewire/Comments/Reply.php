@@ -9,14 +9,14 @@ class Reply extends Component
 {
     public int $postId;
 
-    public int $commentCount;
+    public int $commentCounts;
 
-    protected $listeners = ['updateCommentCount'];
+    protected $listeners = ['updateCommentCounts'];
 
     // update comment count in post show page
-    public function updateCommentCount()
+    public function updateCommentCounts()
     {
-        $this->commentCount = Post::findOrFail($this->postId, ['comment_count'])->comment_count;
+        $this->commentCounts = Post::findOrFail($this->postId, ['comment_counts'])->comment_counts;
     }
 
     public function render()

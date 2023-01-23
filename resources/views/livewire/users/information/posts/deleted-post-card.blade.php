@@ -27,7 +27,7 @@
       <div>
         {{-- 文章留言數 --}}
         <span>
-          <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $postCommentCount }}</span>
+          <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $postCommentCounts }}</span>
         </span>
       </div>
     </div>

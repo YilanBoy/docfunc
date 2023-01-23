@@ -25,7 +25,7 @@
         @auth
           @if (auth()->id() === $userId)
             <button
-              wire:click="$emit('setEditComment', {{ $commentId }})"
+              wire:click="$emit('setEditComment', {{ $commentId }}, {{ $groupId }})"
               class="hover:text-gray-500 dark:hover:text-gray-300"
             >
               <i class="bi bi-pencil-fill"></i>

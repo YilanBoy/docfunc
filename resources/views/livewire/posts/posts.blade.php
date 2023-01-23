@@ -129,7 +129,7 @@
               class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
               <i class="bi bi-chat-square-text-fill"></i><span
-                class="hidden ml-2 md:inline">{{ $post->comment_count }}</span>
+                class="hidden ml-2 md:inline">{{ $post->comment_counts }}</span>
             </a>
           </div>
         </div>

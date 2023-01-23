@@ -7,7 +7,7 @@
     {{-- show comments count --}}
     <span class="flex items-center dark:text-gray-50">
       <i class="bi bi-chat-square-text-fill"></i>
-      <span class="ml-2">{{ $commentCount }} 則留言</span>
+      <span class="ml-2">{{ $commentCounts }} 則留言</span>
     </span>
 
     <button

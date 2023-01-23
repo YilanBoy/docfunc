@@ -20,7 +20,7 @@ class DeletedPostCard extends Component
 
     public $postWillDeletedAtDiffForHuman;
 
-    public $postCommentCount; // $post->comment_count
+    public $postCommentCounts; // $post->comment_counts
 
     public $categoryName; // $post->category->name
 

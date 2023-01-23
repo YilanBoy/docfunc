@@ -10,16 +10,22 @@ uses(RefreshDatabase::class);
 test('editing modal can load the data of the comment', function () {
     $comment = Comment::factory()->create();
 
+    $commentGroupId = 0;
+
     Livewire::test(EditModal::class)
-        ->call('setEditComment', $comment->id)
+        ->call('setEditComment', $comment->id, $commentGroupId)
+        ->assertSet('groupId', $commentGroupId)
         ->assertSet('comment', Comment::find($comment->id))
-        ->assertSet('body', $comment->body);
+        ->assertSet('body', $comment->body)
+        ->assertEmitted('editCommentWasSet');
 });
 
 test('logged-in users can update their comments', function () {
     $oldBody = 'old comment';
 
     $comment = Comment::factory()->create(['body' => $oldBody]);
+
+    $commentGroupId = 0;
 
     $this->assertDatabaseHas('comments', ['body' => $oldBody]);
 
@@ -28,9 +34,11 @@ test('logged-in users can update their comments', function () {
     $body = 'new comment';
 
     Livewire::test(EditModal::class)
-        ->call('setEditComment', $comment->id)
+        ->call('setEditComment', $comment->id, $commentGroupId)
         ->set('body', $body)
-        ->call('update');
+        ->call('update')
+        ->assertEmitted('closeEditCommentModal')
+        ->assertEmitted('refreshCommentGroup'.$commentGroupId);
 
     $this->assertDatabaseHas('comments', ['body' => $body]);
 });
@@ -38,22 +46,26 @@ test('logged-in users can update their comments', function () {
 test('users can\'t update others\' comments', function () {
     $comment = Comment::factory()->create();
 
+    $commentGroupId = 0;
+
     $this->actingAs(User::factory()->create());
 
     $body = 'new comment';
 
     Livewire::test(EditModal::class)
-        ->call('setEditComment', $comment->id)
+        ->call('setEditComment', $comment->id, $commentGroupId)
         ->set('body', $body)
         ->call('update')
         ->assertForbidden();
 
-    expect(Comment::find($comment->id))
+    expect(Comment::find($comment->id, ['body']))
         ->body->not->toBe($body);
 });
 
 it('can see the comment preview', function () {
     $comment = Comment::factory()->create();
+
+    $commentGroupId = 0;
 
     $this->actingAs(User::find($comment->user_id));
 
@@ -62,7 +74,7 @@ it('can see the comment preview', function () {
     $body .= 'This is a **comment**';
 
     Livewire::test(EditModal::class)
-        ->call('setEditComment', $comment->id)
+        ->call('setEditComment', $comment->id, $commentGroupId)
         ->set('body', $body)
         ->set('convertToHtml', true)
         ->assertSee('<h1>Title</h1>', false)

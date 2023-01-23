@@ -1,12 +1,17 @@
 {{-- 留言列表 --}}
 <div id="comments" class="w-full">
 
-  @for ($offset = 0; $offset < $count; $offset += $perPage)
+  @for (
+      $offset = 0, $groupId = 0;
+      $offset < $count;
+      $offset += $perPage, $groupId++
+  )
     <livewire:comments.comment-group
-      :postId="$postId"
-      :perPage="$perPage"
+      :post-id="$postId"
+      :per-page="$perPage"
       :offset="$offset"
-      :wire:key="'comment-group-' . $offset"
+      :group-id="$groupId"
+      :wire:key="'comment-group-' . $groupId"
     />
   @endfor
 

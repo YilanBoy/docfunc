@@ -20,7 +20,7 @@
             </a>
           </span>
 
-          <p class="mt-2 text-gray-400 whitespace-pre-wrap text-base">{{ $comment->content }}</p>
+          <p class="mt-2 text-gray-400 whitespace-pre-wrap text-base">{{ $comment->body }}</p>
 
           <span class="mt-2 text-slate-400 xl:hidden">
             <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>

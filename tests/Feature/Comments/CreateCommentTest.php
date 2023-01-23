@@ -29,7 +29,10 @@ test('logged-in users can leave a comment', function () {
 
     Livewire::test(CreateModal::class, ['postId' => $post->id])
         ->set('body', $body)
-        ->call('store');
+        ->call('store')
+        ->assertEmitted('closeCreateCommentModal')
+        ->assertEmitted('updateCommentCounts')
+        ->assertEmitted('refreshAllCommentGroup');
 
     $this->assertDatabaseHas('comments', [
         'body' => $body,

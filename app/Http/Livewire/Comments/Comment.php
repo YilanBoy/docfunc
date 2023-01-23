@@ -28,6 +28,11 @@ class Comment extends Component
 
     public string $postUserId;
 
+    public string $offset;
+
+    // comment group id is used to refresh comment group component
+    public int $groupId;
+
     public function getConvertedBodyProperty(): string
     {
         return Str::of($this->body)->markdown([
@@ -42,11 +47,11 @@ class Comment extends Component
 
         $comment->delete();
 
-        Post::findOrFail($this->postId)->decrementCommentCount();
+        Post::findOrFail($this->postId)->decrement('comment_counts');
 
-        $this->emit('updateCommentCount');
+        $this->emit('updateCommentCounts');
 
-        $this->emit('refreshCommentGroup');
+        $this->emit('refreshCommentGroup'.$this->groupId);
     }
 
     public function render()

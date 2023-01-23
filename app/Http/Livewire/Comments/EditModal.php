@@ -12,11 +12,14 @@ class EditModal extends Component
 {
     use AuthorizesRequests;
 
+    public bool $convertToHtml = false;
+
+    // comment group id is used to refresh comment group component
+    public int $groupId;
+
     public CommentModel $comment;
 
     public string $body = '';
-
-    public bool $convertToHtml = false;
 
     protected $listeners = ['setEditComment'];
 
@@ -37,10 +40,11 @@ class EditModal extends Component
         ]);
     }
 
-    public function setEditComment(int $commentId)
+    public function setEditComment(CommentModel $comment, int $groupId)
     {
         $this->convertToHtml = false;
-        $this->comment = CommentModel::findOrFail($commentId);
+        $this->groupId = $groupId;
+        $this->comment = $comment;
         $this->body = $this->comment->body;
 
         $this->emit('editCommentWasSet');
@@ -57,7 +61,7 @@ class EditModal extends Component
         $this->emit('closeEditCommentModal');
 
         // refresh comment list
-        $this->emit('refreshCommentGroup');
+        $this->emit('refreshCommentGroup'.$this->groupId);
     }
 
     public function render()

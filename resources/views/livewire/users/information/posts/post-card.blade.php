@@ -44,7 +44,7 @@
           class="hover:text-neutral-500 dark:hover:text-neutral-300"
           href="{{ $postLink . '#post-' . $postId . '-comments' }}"
         >
-          <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $postCommentCount }}</span>
+          <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $postCommentCounts }}</span>
         </a>
       </div>
     </div>

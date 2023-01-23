@@ -81,7 +81,7 @@ test('order query string filters correctly', function () {
     Post::factory()->create([
         'title' => 'this post has the most comments',
         'user_id' => $user->id,
-        'comment_count' => 10,
+        'comment_counts' => 10,
         'created_at' => now()->subDays(15),
         'updated_at' => now()->subDays(15),
     ]);

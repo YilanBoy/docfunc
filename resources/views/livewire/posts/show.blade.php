@@ -124,7 +124,7 @@
                   href="{{ $post->link_with_slug }}#comments"
                 >
                   <i class="bi bi-chat-square-text-fill"></i><span
-                    class="ml-2">{{ $post->comment_count }}</span>
+                    class="ml-2">{{ $post->comment_counts }}</span>
                 </a>
               </div>
 
@@ -177,12 +177,15 @@
           @auth
             <livewire:comments.reply
               :postId="$post->id"
-              :commentCount="$post->comment_count"
+              :commentCounts="$post->comment_counts"
             />
           @endauth
 
           {{-- comments list --}}
-          <livewire:comments.comments :postId="$post->id" :comments-count="$post->comment_count"/>
+          <livewire:comments.comments
+            :postId="$post->id"
+            :comment-counts="$post->comment_counts"
+          />
         </div>
 
         <div class="hidden lg:block lg:w-1/6">

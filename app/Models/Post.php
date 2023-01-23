@@ -66,7 +66,7 @@ class Post extends Model implements Feedable
         return $query->when($order, function ($query, $order) {
             return match ($order) {
                 'recent' => $query->orderBy('updated_at', 'desc'),
-                'comment' => $query->orderBy('comment_count', 'desc'),
+                'comment' => $query->orderBy('comment_counts', 'desc'),
                 default => $query->latest(),
             };
         });
@@ -102,18 +102,6 @@ class Post extends Model implements Feedable
                 ->map(fn ($tag) => ['id' => $tag->id, 'value' => $tag->name])
                 ->toJson()
         );
-    }
-
-    // 更新留言數量
-    public function incrementCommentCount(): void
-    {
-        // 使用鎖表來更新 Model 中的 comment_count 資料
-        $this->lockForUpdate()->increment('comment_count');
-    }
-
-    public function decrementCommentCount(): void
-    {
-        $this->lockForUpdate()->decrement('comment_count');
     }
 
     // 設定 Algolia 匯入的 index 名稱

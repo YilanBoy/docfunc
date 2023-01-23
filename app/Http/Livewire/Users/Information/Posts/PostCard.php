@@ -24,7 +24,7 @@ class PostCard extends Component
 
     public $postCreatedAtDiffForHuman; // $post->created_at->diffForHumans()
 
-    public $postCommentCount; // $post->comment_count
+    public $postCommentCounts; // $post->comment_counts
 
     public $categoryLink; // $post->category->link_with_name
 

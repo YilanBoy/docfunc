@@ -23,7 +23,7 @@
             /* figure */
         prose-figure:table prose-figure:mx-auto
             /* image */
-        prose-img:my-0 prose-img:w-full
+        prose-img:w-full
             /* figcaption */
         prose-figcaption:table-caption prose-figcaption:[caption-side:bottom] prose-figcaption:break-words
         prose-figcaption:p-1.5 prose-figcaption:text-center prose-figcaption:bg-slate-200
@@ -33,8 +33,16 @@
             /* code */
         prose-code:before:content-none prose-code:after:content-none
             /* pre */
-        prose-pre:p-0 prose-pre:rounded-lg
-        ;
+        prose-pre:p-0 prose-pre:rounded-lg;
+    }
+
+    /* ckeditor5-font/theme/fontsize.css */
+    .post-body .text-tiny {
+        @apply text-xs;
+    }
+
+    .post-body .text-big {
+        @apply text-2xl;
     }
 
     .comment-body {
@@ -45,24 +53,14 @@
             /* lists */
         prose-li:marker:text-gray-500 dark:prose-li:marker:text-gray-400
             /* image */
-        prose-img:my-0 prose-img:w-full
+        prose-img:w-full
             /* horizontal line */
         prose-hr:my-3 prose-hr:h-1 prose-hr:border-none prose-hr:bg-slate-300 dark:prose-hr:bg-slate-500
             /* code */
         prose-code:before:content-none prose-code:after:content-none
             /* pre */
-        prose-pre:p-0 prose-pre:rounded-lg
-        ;
+        prose-pre:p-0 prose-pre:rounded-lg;
     }
-}
-
-/* ckeditor5-font/theme/fontsize.css */
-.blog-post .text-tiny {
-    font-size: .7em;
-}
-
-.blog-post .text-big {
-    font-size: 1.4em;
 }
 
 /* Alpine.js */

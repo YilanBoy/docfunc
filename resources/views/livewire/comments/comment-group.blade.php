@@ -13,7 +13,7 @@
       :group-id="$groupId"
       {{-- when the parent component is updated, the child component is updated together --}}
       {{-- reference: https://github.com/livewire/livewire/discussions/1895 --}}
-      :wire:key="now()->toString()"
+      :wire:key="'comment-'.$comment->id.'-'.md5($comment->body)"
     />
   @endforeach
 </div>

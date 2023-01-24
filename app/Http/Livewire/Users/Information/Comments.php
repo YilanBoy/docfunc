@@ -21,10 +21,11 @@ class Comments extends Component
     {
         // 該會員的留言
         $comments = Comment::whereUserId($this->userId)
+            ->select(['created_at', 'post_id'])
             ->whereHas('post', function ($query) {
                 $query->whereNull('deleted_at');
             })
-            ->with('post')
+            ->with('post:id,title,slug')
             ->latest()
             ->paginate(10, ['*'], 'commentsPage')
             ->withQueryString();

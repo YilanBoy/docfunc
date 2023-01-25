@@ -65,6 +65,15 @@
 
               <textarea
                 x-ref="editComment"
+                {{-- change tab into 4 spaces --}}
+                x-on:keydown.tab.prevent="
+                  $el.setRangeText(
+                    '    ',
+                    $el.selectionStart,
+                    $el.selectionStart,
+                    'end'
+                  )
+                "
                 wire:model.lazy="body"
                 id="body"
                 name="body"

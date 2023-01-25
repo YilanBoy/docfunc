@@ -3,13 +3,10 @@
 namespace App\Http\Livewire\Comments;
 
 use App\Models\Comment;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class CommentGroup extends Component
 {
-    use AuthorizesRequests;
-
     public int $postId;
 
     public int $perPage;

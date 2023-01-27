@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Comments;
 
 use App\Http\Traits\Livewire\MarkdownConverter;
 use App\Models\Comment as CommentModel;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
@@ -30,16 +31,27 @@ class Comment extends Component
 
     public string $offset;
 
-    // comment group id is used to refresh comment group component
+    /**
+     * comment group id is used to refresh comment group component
+     *
+     * @var int
+     */
     public int $groupId;
 
     public function getConvertedBodyProperty(): string
     {
-        return $this->convertToMarkdown($this->body);
+        return $this->convertToHtml($this->body);
     }
 
-    // 刪除留言
-    public function destroy(CommentModel $comment)
+    /**
+     * delete comment
+     *
+     * @param  CommentModel  $comment
+     * @return void
+     *
+     * @throws AuthorizationException
+     */
+    public function destroy(CommentModel $comment): void
     {
         $this->authorize('destroy', $comment);
 

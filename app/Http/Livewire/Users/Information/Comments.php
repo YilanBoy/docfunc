@@ -12,7 +12,7 @@ class Comments extends Component
 
     public int $userId;
 
-    public function hydrate()
+    public function dehydrate()
     {
         $this->dispatchBrowserEvent('scroll-to-top');
     }

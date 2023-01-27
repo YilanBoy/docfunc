@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Comments;
 use App\Http\Requests\CommentRequest;
 use App\Http\Traits\Livewire\MarkdownConverter;
 use App\Models\Comment as CommentModel;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
@@ -18,7 +19,7 @@ class EditModal extends Component
     // comment group id is used to refresh comment group component
     public int $groupId;
 
-    public ?int $commentId = null;
+    public int $commentId;
 
     public string $body = '';
 
@@ -36,7 +37,7 @@ class EditModal extends Component
 
     public function getConvertedBodyProperty(): string
     {
-        return $this->convertToMarkdown($this->body);
+        return $this->convertToHtml($this->body);
     }
 
     public function setEditComment(CommentModel $comment, int $groupId)
@@ -49,7 +50,13 @@ class EditModal extends Component
         $this->emit('editCommentWasSet');
     }
 
-    public function update(CommentModel $comment)
+    /**
+     * @param  CommentModel  $comment
+     * @return void
+     *
+     * @throws AuthorizationException
+     */
+    public function update(CommentModel $comment): void
     {
         $this->authorize('update', $comment);
 

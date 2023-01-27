@@ -33,7 +33,7 @@ class Posts extends Component
         $this->order = request()->order ?? 'latest';
     }
 
-    public function hydrate()
+    public function dehydrate()
     {
         // when change page, scroll to top
         $this->dispatchBrowserEvent('scroll-to-top');

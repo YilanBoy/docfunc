@@ -31,10 +31,10 @@ class CreateModal extends Component
 
     public function getConvertedBodyProperty(): string
     {
-        return $this->convertToMarkdown($this->body);
+        return $this->convertToHtml($this->body);
     }
 
-    public function store()
+    public function store(): void
     {
         abort_if(! auth()->check(), 403);
 

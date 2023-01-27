@@ -14,7 +14,7 @@ class Posts extends Component
 
     protected $listeners = ['refreshUserPosts' => '$refresh'];
 
-    public function hydrate()
+    public function dehydrate()
     {
         $this->dispatchBrowserEvent('scroll-to-top');
     }

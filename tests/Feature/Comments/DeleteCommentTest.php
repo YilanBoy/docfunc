@@ -14,7 +14,7 @@ test('the author can delete his comment', function () {
 
     $commentGroupId = 0;
 
-    $this->actingAs(User::find($comment->user_id));
+    Livewire::actingAs(User::find($comment->user_id));
 
     livewire(Comment::class, [
         'postId' => $comment->post_id,
@@ -39,7 +39,7 @@ test('post author can delete other users comment', function () {
 
     $commentGroupId = 0;
 
-    $this->actingAs(User::find($comment->post->user_id));
+    Livewire::actingAs(User::find($comment->post->user_id));
 
     livewire(Comment::class, [
         'postId' => $comment->post_id,

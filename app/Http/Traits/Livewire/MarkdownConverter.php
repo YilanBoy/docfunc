@@ -2,11 +2,11 @@
 
 namespace App\Http\Traits\Livewire;
 
-use Str;
+use Illuminate\Support\Str;
 
 trait MarkdownConverter
 {
-    public function convertToMarkdown(string $body): string
+    public function convertToHtml(string $body): string
     {
         $html = Str::of($body)->markdown([
             'html_input' => 'strip',

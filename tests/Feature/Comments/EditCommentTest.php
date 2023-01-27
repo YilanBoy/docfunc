@@ -29,7 +29,7 @@ test('logged-in users can update their comments', function () {
 
     $this->assertDatabaseHas('comments', ['body' => $oldBody]);
 
-    $this->actingAs(User::find($comment->user_id));
+    Livewire::actingAs(User::find($comment->user_id));
 
     $body = 'new comment';
 
@@ -48,7 +48,7 @@ test('users can\'t update others\' comments', function () {
 
     $commentGroupId = 0;
 
-    $this->actingAs(User::factory()->create());
+    Livewire::actingAs(User::factory()->create());
 
     $body = 'new comment';
 
@@ -67,16 +67,32 @@ it('can see the comment preview', function () {
 
     $commentGroupId = 0;
 
-    $this->actingAs(User::find($comment->user_id));
+    Livewire::actingAs(User::find($comment->user_id));
 
-    $body = '# Title'.PHP_EOL;
-    $body .= PHP_EOL;
-    $body .= 'This is a **comment**';
+    $body = <<<'MARKDOWN'
+    # Title
+
+    This is a **comment**
+
+    Show a list
+
+    - item 1
+    - item 2
+    - item 3
+    MARKDOWN;
 
     Livewire::test(EditModal::class)
         ->call('setEditComment', $comment->id, $commentGroupId)
         ->set('body', $body)
         ->set('convertToHtml', true)
-        ->assertSee('Title', false)
-        ->assertSee('<p>This is a <strong>comment</strong></p>', false);
+        ->assertSeeHtmlInOrder([
+            '<p>Title</p>',
+            '<p>This is a <strong>comment</strong></p>',
+            '<p>Show a list</p>',
+            '<ul>',
+            '<li>item 1</li>',
+            '<li>item 2</li>',
+            '<li>item 3</li>',
+            '</ul>',
+        ]);
 });

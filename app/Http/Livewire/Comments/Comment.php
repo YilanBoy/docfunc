@@ -2,14 +2,15 @@
 
 namespace App\Http\Livewire\Comments;
 
+use App\Http\Traits\Livewire\MarkdownConverter;
 use App\Models\Comment as CommentModel;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
-use Str;
 
 class Comment extends Component
 {
     use AuthorizesRequests;
+    use MarkdownConverter;
 
     public int $postId;
 
@@ -34,9 +35,7 @@ class Comment extends Component
 
     public function getConvertedBodyProperty(): string
     {
-        return Str::of($this->body)->markdown([
-            'html_input' => 'strip',
-        ]);
+        return $this->convertToMarkdown($this->body);
     }
 
     // 刪除留言

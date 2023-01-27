@@ -3,14 +3,15 @@
 namespace App\Http\Livewire\Comments;
 
 use App\Http\Requests\CommentRequest;
+use App\Http\Traits\Livewire\MarkdownConverter;
 use App\Models\Comment as CommentModel;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
-use Str;
 
 class EditModal extends Component
 {
     use AuthorizesRequests;
+    use MarkdownConverter;
 
     public bool $convertToHtml = false;
 
@@ -35,20 +36,7 @@ class EditModal extends Component
 
     public function getConvertedBodyProperty(): string
     {
-        $html = Str::of($this->body)->markdown([
-            'html_input' => 'strip',
-        ]);
-
-        $prohibitedTag = [
-            '<h1>', '</h1>',
-            '<h2>', '</h2>',
-            '<h3>', '</h3>',
-            '<h4>', '</h4>',
-            '<h5>', '</h5>',
-            '<h6>', '</h6>',
-        ];
-
-        return str_replace($prohibitedTag, '', $html);
+        return $this->convertToMarkdown($this->body);
     }
 
     public function setEditComment(CommentModel $comment, int $groupId)

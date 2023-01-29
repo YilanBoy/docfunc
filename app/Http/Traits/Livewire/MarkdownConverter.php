@@ -10,6 +10,8 @@ trait MarkdownConverter
     {
         $html = Str::of($body)->markdown([
             'html_input' => 'strip',
+            'allow_unsafe_links' => false,
+            'max_nesting_level' => 10,
         ]);
 
         $search = [

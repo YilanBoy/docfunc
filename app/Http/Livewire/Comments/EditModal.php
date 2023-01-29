@@ -23,6 +23,8 @@ class EditModal extends Component
 
     public string $body = '';
 
+    public string $recaptcha;
+
     protected $listeners = ['setEditComment'];
 
     protected function rules(): array
@@ -56,8 +58,10 @@ class EditModal extends Component
      *
      * @throws AuthorizationException
      */
-    public function update(CommentModel $comment): void
+    public function update(): void
     {
+        $comment = CommentModel::find($this->commentId);
+
         $this->authorize('update', $comment);
 
         $comment->update([

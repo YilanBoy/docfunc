@@ -1,36 +1,22 @@
 {{-- Google reCAPTCHA --}}
-@if (app()->isProduction())
-  @push('css')
-    <style>
-      .grecaptcha-badge {
-        visibility: hidden;
-      }
-    </style>
-  @endpush
+@push('script')
+  <script>
+    document.getElementById("create-comment").addEventListener("submit", function (event) {
+      event.preventDefault();
+      grecaptcha.ready(function () {
+        grecaptcha.execute("{{ config('services.recaptcha.site_key') }}", {action: "submit"})
+          .then(function (response) {
 
-  @push('scriptInHead')
-    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
-  @endpush
+            @this.
+            set('recaptcha', response);
 
-  @push('script')
-    <script>
-      document.getElementById("create-comment").addEventListener("submit", function (event) {
-        event.preventDefault();
-        grecaptcha.ready(function () {
-          grecaptcha.execute("{{ config('services.recaptcha.site_key') }}", {action: "submit"})
-            .then(function (response) {
-
-              @this.
-              set('recaptcha', response);
-
-              @this.
-              store();
-            });
-        });
+            @this.
+            store();
+          });
       });
-    </script>
-  @endpush
-@endif
+    });
+  </script>
+@endpush
 
 <div
   x-cloak
@@ -91,13 +77,7 @@
           <span>新增留言</span>
         </div>
 
-        <form
-          @if (! app()->isProduction())
-            wire:submit.prevent="store"
-          @endif
-          id="create-comment"
-          class="space-y-4"
-        >
+        <form id="create-comment" class="space-y-4">
           @if (! $convertToHtml)
             <div>
               <label for="body"></label>
@@ -133,7 +113,7 @@
                   @if (auth()->check())
                     {{ auth()->user()->name }}
                   @else
-                    匿名
+                    訪客
                   @endif
                 </span>
                 <span class="text-gray-400">{{ now()->format('Y 年 m 月 d 日') }}</span>

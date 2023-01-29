@@ -11,6 +11,18 @@ use function Pest\Laravel\get;
 
 uses(LazilyRefreshDatabase::class);
 
+// fake google recaptcha API
+beforeEach(function () {
+    $fakeResponse = [
+        'success' => true,
+        'score' => 1,
+    ];
+
+    Http::fake([
+        'https://www.google.com/recaptcha/api/siteverify' => Http::response($fakeResponse),
+    ]);
+});
+
 test('receive a notification when a post has a comment', function () {
     $post = Post::factory()->create();
 
@@ -20,6 +32,7 @@ test('receive a notification when a post has a comment', function () {
 
     Livewire::test(CreateModal::class, ['postId' => $post->id])
         ->set('body', faker()->realText(100))
+        ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store');
 
     $author = User::find($post->user_id);
@@ -47,6 +60,7 @@ test('access the notification page to clear unread notifications', function () {
 
     Livewire::test(CreateModal::class, ['postId' => $post->id])
         ->set('body', faker()->realText(100))
+        ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store');
 
     $author = User::find($post->user_id);
@@ -70,6 +84,7 @@ test('if you reply to your own post, there will be no notification', function ()
 
     Livewire::test(CreateModal::class, ['postId' => $post->id])
         ->set('body', faker()->realText(100))
+        ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store');
 
     expect($author->unreadNotifications->count())

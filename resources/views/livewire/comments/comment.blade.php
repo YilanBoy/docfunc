@@ -13,7 +13,7 @@
 
         <span class="font-semibold dark:text-gray-50">{{ $userName }}</span>
       @else
-        <span class="font-semibold dark:text-gray-50">匿名</span>
+        <span class="font-semibold dark:text-gray-50">訪客</span>
       @endif
 
       <span class="text-gray-400">{{ $createdAt }}</span>

@@ -18,6 +18,13 @@
       margin-right: auto;
     }
   </style>
+
+  {{-- hide google recaptcha badge --}}
+  <style>
+    .grecaptcha-badge {
+      visibility: hidden;
+    }
+  </style>
 @endpush
 
 @push('script')

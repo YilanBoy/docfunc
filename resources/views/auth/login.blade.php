@@ -1,26 +1,20 @@
 @section('title', '登入')
 
 {{-- Google reCAPTCHA --}}
-@if (app()->isProduction())
-  @push('scriptInHead')
-    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
-  @endpush
-
-  @push('script')
-    <script>
-      document.getElementById("login").addEventListener("submit", function (event) {
-        event.preventDefault();
-        grecaptcha.ready(function () {
-          grecaptcha.execute("{{ config('services.recaptcha.site_key') }}", {action: "submit"})
-            .then(function (response) {
-              document.getElementById("g-recaptcha-response").value = response;
-              document.getElementById("login").submit();
-            });
-        });
+@push('script')
+  <script>
+    document.getElementById("login").addEventListener("submit", function (event) {
+      event.preventDefault();
+      grecaptcha.ready(function () {
+        grecaptcha.execute("{{ config('services.recaptcha.site_key') }}", {action: "submit"})
+          .then(function (response) {
+            document.getElementById("g-recaptcha-response").value = response;
+            document.getElementById("login").submit();
+          });
       });
-    </script>
-  @endpush
-@endif
+    });
+  </script>
+@endpush
 
 <x-app-layout>
   <div class="container mx-auto max-w-7xl">

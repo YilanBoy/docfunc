@@ -1,3 +1,23 @@
+{{-- Google reCAPTCHA --}}
+@push('script')
+  <script>
+    document.getElementById("edit-comment").addEventListener("submit", function (event) {
+      event.preventDefault();
+      grecaptcha.ready(function () {
+        grecaptcha.execute("{{ config('services.recaptcha.site_key') }}", {action: "submit"})
+          .then(function (response) {
+
+            @this.
+            set('recaptcha', response);
+
+            @this.
+            update();
+          });
+      });
+    });
+  </script>
+@endpush
+
 <div
   x-cloak
   x-data="{ isOpen: false }"
@@ -58,7 +78,7 @@
           <span>編輯留言</span>
         </div>
 
-        <form wire:submit.prevent="update({{ $commentId }})" class="space-y-4">
+        <form id="edit-comment" class="space-y-4">
           @if (! $convertToHtml)
             <div>
               <label for="body"></label>

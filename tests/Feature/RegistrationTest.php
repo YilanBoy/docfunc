@@ -10,6 +10,17 @@ use function Pest\Livewire\livewire;
 
 uses(LazilyRefreshDatabase::class);
 
+beforeEach(function () {
+    $fakeResponse = [
+        'success' => true,
+        'score' => 1,
+    ];
+
+    Http::fake([
+        'https://www.google.com/recaptcha/api/siteverify' => Http::response($fakeResponse),
+    ]);
+});
+
 test('registration screen can be rendered', function () {
     $registerSetting = Setting::query()
         ->where('key', 'allow_register')
@@ -33,6 +44,7 @@ test('guest can register', function () {
         'email' => 'test@example.com',
         'password' => 'Password101',
         'password_confirmation' => 'Password101',
+        'g-recaptcha-response' => 'fake-g-recaptcha-response',
     ]);
 
     $this->assertAuthenticated();
@@ -71,5 +83,6 @@ test('guest can not register when register is not allowed', function () {
         'email' => 'John@email.com',
         'password' => 'Password01!',
         'password_confirmation' => 'Password01!',
+        'g-recaptcha-response' => 'fake-g-recaptcha-response',
     ])->assertStatus(503);
 });

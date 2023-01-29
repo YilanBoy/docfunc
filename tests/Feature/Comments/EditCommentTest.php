@@ -7,6 +7,18 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
+// fake google recaptcha API
+beforeEach(function () {
+    $fakeResponse = [
+        'success' => true,
+        'score' => 1,
+    ];
+
+    Http::fake([
+        'https://www.google.com/recaptcha/api/siteverify' => Http::response($fakeResponse),
+    ]);
+});
+
 test('editing modal can load the data of the comment', function () {
     $comment = Comment::factory()->create();
 
@@ -36,7 +48,8 @@ test('logged-in users can update their comments', function () {
     Livewire::test(EditModal::class)
         ->call('setEditComment', $comment->id, $commentGroupId)
         ->set('body', $body)
-        ->call('update', $comment->id)
+        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->call('update')
         ->assertEmitted('closeEditCommentModal')
         ->assertEmitted('refreshCommentGroup'.$commentGroupId);
 
@@ -55,7 +68,8 @@ test('users can\'t update others\' comments', function () {
     Livewire::test(EditModal::class)
         ->call('setEditComment', $comment->id, $commentGroupId)
         ->set('body', $body)
-        ->call('update', $comment->id)
+        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->call('update')
         ->assertForbidden();
 
     expect(Comment::find($comment->id, ['body']))

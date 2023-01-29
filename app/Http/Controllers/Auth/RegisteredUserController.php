@@ -44,11 +44,8 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|regex:/^[A-Za-z0-9\-\_]+$/u|between:3,25|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', $passwordRule],
+            'g-recaptcha-response' => ['required', new Recaptcha()],
         ];
-
-        if (app()->isProduction()) {
-            $rules['g-recaptcha-response'] = ['required', new Recaptcha()];
-        }
 
         $request->validate($rules);
 

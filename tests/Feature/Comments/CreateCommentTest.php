@@ -7,6 +7,18 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
+// fake google recaptcha API
+beforeEach(function () {
+    $fakeResponse = [
+        'success' => true,
+        'score' => 1,
+    ];
+
+    Http::fake([
+        'https://www.google.com/recaptcha/api/siteverify' => Http::response($fakeResponse),
+    ]);
+});
+
 test('non-logged-in users can leave a anonymous comment', function () {
     $post = Post::factory()->create();
 
@@ -24,6 +36,7 @@ test('non-logged-in users can leave a anonymous comment', function () {
 
     Livewire::test(CreateModal::class, ['postId' => $post->id])
         ->set('body', $body)
+        ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store')
         ->assertEmitted('closeCreateCommentModal')
         ->assertEmitted('updateCommentCounts')
@@ -53,6 +66,7 @@ test('logged-in users can leave a comment', function () {
 
     Livewire::test(CreateModal::class, ['postId' => $post->id])
         ->set('body', $body)
+        ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store')
         ->assertEmitted('closeCreateCommentModal')
         ->assertEmitted('updateCommentCounts')
@@ -82,6 +96,7 @@ it('can see the comment preview', function () {
 
     Livewire::test(CreateModal::class, ['postId' => $post->id])
         ->set('body', $body)
+        ->set('recaptcha', 'fake-g-recaptcha-response')
         ->set('convertToHtml', true)
         ->assertSeeHtmlInOrder([
             '<p>Title</p>',

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Comments;
 
 use App\Http\Requests\CommentRequest;
+use App\Http\Traits\Livewire\GoogleReCaptcha;
 use App\Http\Traits\Livewire\MarkdownConverter;
 use App\Models\Comment;
 use App\Models\Post;
@@ -12,6 +13,7 @@ use Livewire\Component;
 class CreateModal extends Component
 {
     use MarkdownConverter;
+    use GoogleReCaptcha;
 
     public int $postId;
 
@@ -21,12 +23,24 @@ class CreateModal extends Component
 
     protected function rules(): array
     {
-        return (new CommentRequest())->rules();
+        $rules = (new CommentRequest())->rules();
+
+        if (app()->isProduction()) {
+            $rules = $this->addRecaptchaRules($rules);
+        }
+
+        return $rules;
     }
 
     protected function messages(): array
     {
-        return (new CommentRequest())->messages();
+        $messages = (new CommentRequest())->messages();
+
+        if (app()->isProduction()) {
+            $messages = $this->addRecaptchaRules($messages);
+        }
+
+        return $messages;
     }
 
     public function getConvertedBodyProperty(): string
@@ -36,13 +50,11 @@ class CreateModal extends Component
 
     public function store(): void
     {
-        abort_if(! auth()->check(), 403);
-
         $this->validate();
 
         $comment = Comment::create([
             'post_id' => $this->postId,
-            'user_id' => auth()->id(),
+            'user_id' => auth()->check() ? auth()->id() : null,
             'body' => $this->body,
         ]);
 

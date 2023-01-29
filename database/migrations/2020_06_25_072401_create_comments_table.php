@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->text('body');
             $table->timestamps();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('post_id')->constrained()->onDelete('cascade');
         });
     }

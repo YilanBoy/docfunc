@@ -2,15 +2,19 @@
   <div class="flex flex-col">
     {{-- 大頭貼 --}}
     <div class="space-x-4 flex items-center text-base">
-      <a href="{{ route('users.index', ['user' => $userId]) }}">
-        <img
-          src="{{ $userGravatarUrl }}"
-          alt="{{ $userName }}"
-          class="w-8 h-8 rounded-full hover:ring-2 hover:ring-blue-400"
-        >
-      </a>
+      @if ($userId !== 0)
+        <a href="{{ route('users.index', ['user' => $userId]) }}">
+          <img
+            src="{{ $userGravatarUrl }}"
+            alt="{{ $userName }}"
+            class="w-8 h-8 rounded-full hover:ring-2 hover:ring-blue-400"
+          >
+        </a>
 
-      <span class="font-semibold dark:text-gray-50">{{ $userName }}</span>
+        <span class="font-semibold dark:text-gray-50">{{ $userName }}</span>
+      @else
+        <span class="font-semibold dark:text-gray-50">匿名</span>
+      @endif
 
       <span class="text-gray-400">{{ $createdAt }}</span>
     </div>

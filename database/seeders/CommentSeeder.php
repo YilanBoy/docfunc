@@ -28,24 +28,28 @@ class CommentSeeder extends Seeder
             ];
         }
 
-        for ($i = 0; $i < 1_000; $i++) {
-            $data[] = [
-                'user_id' => 1,
-                'post_id' => 1,
-                'body' => fake()->sentence,
-                'created_at' => fake()->dateTimeThisMonth(now()),
-                'updated_at' => now(),
-            ];
-        }
-
         $chunks = array_chunk($data, $commentChunk);
 
         foreach ($chunks as $chunk) {
             Comment::query()->insert($chunk);
         }
 
-        Post::all()->each(function ($item, $key) {
-            $item->update(['comment_counts' => $item->comments()->count()]);
-        });
+        // update comment_counts of post table
+        $postCommentCountsData = Comment::query()->selectRaw('
+            post_id,
+            count(id) AS post_comment_counts
+        ')
+            ->groupBy('post_id')
+            ->orderBy('post_id')
+            ->get()
+            ->toArray();
+
+        foreach ($postCommentCountsData as $data) {
+            Post::query()
+                ->where('id', $data['post_id'])
+                ->update([
+                    'comment_counts' => $data['post_comment_counts'],
+                ]);
+        }
     }
 }

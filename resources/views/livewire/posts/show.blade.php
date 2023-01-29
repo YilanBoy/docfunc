@@ -6,7 +6,7 @@
   @section('preview_url', $post->preview_url)
 @endif
 
-@section('css')
+@push('css')
   {{-- highlight code block --}}
   @vite('node_modules/highlight.js/scss/atom-one-dark.scss')
 
@@ -17,9 +17,8 @@
       margin-left: auto;
       margin-right: auto;
     }
-
   </style>
-@endsection
+@endpush
 
 @push('script')
   {{-- to the top button --}}
@@ -174,12 +173,10 @@
           </x-card>
 
           {{-- comment box --}}
-          @auth
-            <livewire:comments.reply
-              :postId="$post->id"
-              :commentCounts="$post->comment_counts"
-            />
-          @endauth
+          <livewire:comments.reply
+            :postId="$post->id"
+            :commentCounts="$post->comment_counts"
+          />
 
           {{-- comments list --}}
           <livewire:comments.comments

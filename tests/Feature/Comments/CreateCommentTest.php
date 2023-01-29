@@ -5,17 +5,33 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-use function Pest\Faker\faker;
-
 uses(RefreshDatabase::class);
 
-test('non-logged-in users can\'t leave a comment', function () {
+test('non-logged-in users can leave a anonymous comment', function () {
     $post = Post::factory()->create();
 
+    $body = <<<'MARKDOWN'
+    # Title
+
+    This is a **comment**
+
+    Show a list
+
+    - item 1
+    - item 2
+    - item 3
+    MARKDOWN;
+
     Livewire::test(CreateModal::class, ['postId' => $post->id])
-        ->set('body', faker()->words(5, true))
+        ->set('body', $body)
         ->call('store')
-        ->assertForbidden();
+        ->assertEmitted('closeCreateCommentModal')
+        ->assertEmitted('updateCommentCounts')
+        ->assertEmitted('refreshAllCommentGroup');
+
+    $this->assertDatabaseHas('comments', [
+        'body' => $body,
+    ]);
 });
 
 test('logged-in users can leave a comment', function () {

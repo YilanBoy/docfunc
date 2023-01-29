@@ -1,3 +1,37 @@
+{{-- Google reCAPTCHA --}}
+@if (app()->isProduction())
+  @push('css')
+    <style>
+      .grecaptcha-badge {
+        visibility: hidden;
+      }
+    </style>
+  @endpush
+
+  @push('scriptInHead')
+    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+  @endpush
+
+  @push('script')
+    <script>
+      document.getElementById("create-comment").addEventListener("submit", function (event) {
+        event.preventDefault();
+        grecaptcha.ready(function () {
+          grecaptcha.execute("{{ config('services.recaptcha.site_key') }}", {action: "submit"})
+            .then(function (response) {
+
+              @this.
+              set('recaptcha', response);
+
+              @this.
+              store();
+            });
+        });
+      });
+    </script>
+  @endpush
+@endif
+
 <div
   x-cloak
   x-data="{ isOpen: false }"
@@ -57,7 +91,13 @@
           <span>新增留言</span>
         </div>
 
-        <form wire:submit.prevent="store" class="space-y-4">
+        <form
+          @if (! app()->isProduction())
+            wire:submit.prevent="store"
+          @endif
+          id="create-comment"
+          class="space-y-4"
+        >
           @if (! $convertToHtml)
             <div>
               <label for="body"></label>
@@ -89,7 +129,13 @@
           @else
             <div id="creating-comment-preview" class="space-y-2">
               <div class="space-x-4">
-                <span class="font-semibold dark:text-gray-50">{{ auth()->user()->name }}</span>
+                <span class="font-semibold dark:text-gray-50">
+                  @if (auth()->check())
+                    {{ auth()->user()->name }}
+                  @else
+                    匿名
+                  @endif
+                </span>
                 <span class="text-gray-400">{{ now()->format('Y 年 m 月 d 日') }}</span>
               </div>
               <div class="comment-body h-80 overflow-auto">

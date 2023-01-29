@@ -1,12 +1,12 @@
 @section('title', '編輯文章')
 
-@section('css')
+@push('css')
   @vite([
     'resources/css/editor.css',
     'node_modules/@yaireo/tagify/dist/tagify.css',
     'resources/css/missing-content-style.css',
   ])
-@endsection
+@endpush
 
 @push('script')
   {{-- Ckeditor --}}

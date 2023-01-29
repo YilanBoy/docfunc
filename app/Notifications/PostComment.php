@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use App\Models\Comment;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class PostComment extends Notification
@@ -33,10 +32,6 @@ class PostComment extends Notification
         // 存入資料庫裡的數據
         return [
             'comment_id' => $this->comment->id,
-            'comment_content' => $this->comment->content,
-            'user_id' => $this->comment->user->id,
-            'user_name' => $this->comment->user->name,
-            'user_avatar' => $this->comment->user->gravatar_url,
             'post_link' => $link,
             'post_id' => $post->id,
             'post_title' => $post->title,

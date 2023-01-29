@@ -41,7 +41,7 @@ class CommentGroup extends Component
                 users.email AS user_email
             ')
             ->join('posts', 'posts.id', '=', 'comments.post_id')
-            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->leftJoin('users', 'users.id', '=', 'comments.user_id')
             ->where('post_id', $this->postId)
             ->latest('id')
             ->limit($this->perPage)

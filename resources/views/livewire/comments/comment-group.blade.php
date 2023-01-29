@@ -3,9 +3,9 @@
     <livewire:comments.comment
       :post-id="$postId"
       :comment-id="$comment->id"
-      :user-id="$comment->user_id"
-      :user-gravatar-url="get_gravatar($comment->user_email)"
-      :user-name="$comment->user_name"
+      :user-id="$comment->user_id ?? 0"
+      :user-gravatar-url="$comment->user_email ? get_gravatar($comment->user_email) : ''"
+      :user-name="$comment->user_name ?? ''"
       :body="$comment->body"
       :created-at="$comment->created_at->format('Y 年 m 月 d 日')"
       :post-user-id="$comment->post_user_id"

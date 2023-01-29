@@ -13,6 +13,23 @@
 
 uses(Tests\TestCase::class)->in('Feature');
 
+// fake google recaptcha API
+uses()
+    ->beforeEach(function () {
+        $fakeResponse = [
+            'success' => true,
+            'score' => 1,
+        ];
+
+        Http::fake(['https://www.google.com/recaptcha/api/siteverify' => Http::response($fakeResponse)]);
+    })
+    ->in(
+        'Feature/Comments',
+        'Feature/NotificationTest.php',
+        'Feature/AuthenticationTest.php',
+        'Feature/RegistrationTest.php'
+    );
+
 /*
 |--------------------------------------------------------------------------
 | Expectations

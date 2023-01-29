@@ -8,17 +8,6 @@ use function Pest\Laravel\post;
 
 uses(RefreshDatabase::class);
 
-beforeEach(function () {
-    $fakeResponse = [
-        'success' => true,
-        'score' => 1,
-    ];
-
-    Http::fake([
-        'https://www.google.com/recaptcha/api/siteverify' => Http::response($fakeResponse),
-    ]);
-});
-
 test('login screen can be rendered', function () {
     get('/login')->assertStatus(200);
 });

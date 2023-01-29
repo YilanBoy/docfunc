@@ -11,18 +11,6 @@ use function Pest\Laravel\get;
 
 uses(LazilyRefreshDatabase::class);
 
-// fake google recaptcha API
-beforeEach(function () {
-    $fakeResponse = [
-        'success' => true,
-        'score' => 1,
-    ];
-
-    Http::fake([
-        'https://www.google.com/recaptcha/api/siteverify' => Http::response($fakeResponse),
-    ]);
-});
-
 test('receive a notification when a post has a comment', function () {
     $post = Post::factory()->create();
 

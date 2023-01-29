@@ -7,18 +7,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-// fake google recaptcha API
-beforeEach(function () {
-    $fakeResponse = [
-        'success' => true,
-        'score' => 1,
-    ];
-
-    Http::fake([
-        'https://www.google.com/recaptcha/api/siteverify' => Http::response($fakeResponse),
-    ]);
-});
-
 test('editing modal can load the data of the comment', function () {
     $comment = Comment::factory()->create();
 

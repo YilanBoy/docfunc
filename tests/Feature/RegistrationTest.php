@@ -10,17 +10,6 @@ use function Pest\Livewire\livewire;
 
 uses(LazilyRefreshDatabase::class);
 
-beforeEach(function () {
-    $fakeResponse = [
-        'success' => true,
-        'score' => 1,
-    ];
-
-    Http::fake([
-        'https://www.google.com/recaptcha/api/siteverify' => Http::response($fakeResponse),
-    ]);
-});
-
 test('registration screen can be rendered', function () {
     $registerSetting = Setting::query()
         ->where('key', 'allow_register')

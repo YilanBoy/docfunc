@@ -7,18 +7,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-// fake google recaptcha API
-beforeEach(function () {
-    $fakeResponse = [
-        'success' => true,
-        'score' => 1,
-    ];
-
-    Http::fake([
-        'https://www.google.com/recaptcha/api/siteverify' => Http::response($fakeResponse),
-    ]);
-});
-
 test('non-logged-in users can leave a anonymous comment', function () {
     $post = Post::factory()->create();
 

@@ -60,7 +60,7 @@
       <div class="flex space-x-4 justify-center items-stretch">
         <div class="hidden lg:block lg:w-1/6"></div>
 
-        <div class="flex flex-col items-center justify-start w-full lg:w-2/3 xl:w-7/12 px-4 lg:px-0">
+        <div class="flex flex-col items-center justify-start w-full md:w-[750px] p-2 lg:p-0">
 
           <x-card id="section" class="w-full">
 

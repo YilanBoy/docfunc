@@ -12,7 +12,7 @@ fetch("/api/tags")
     .then((response) => response.json())
     .then(function (tagsJson) {
         window.tagify = new Tagify(tags, {
-            whitelist: tagsJson,
+            whitelist: tagsJson.data,
             enforceWhitelist: true,
             maxTags: 5,
             dropdown: {

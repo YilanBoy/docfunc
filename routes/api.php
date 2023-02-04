@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\ImageController;
-use App\Http\Controllers\Api\Oembed\TwitterController;
-use App\Http\Controllers\Api\Oembed\YoutubeController;
-use App\Http\Controllers\Api\TagController;
+use App\Http\Controllers\Api\Oembed\TwitterOembedApiController;
+use App\Http\Controllers\Api\Oembed\YoutubeOembedApiController;
+use App\Http\Controllers\Api\ShowAllTagsController;
+use App\Http\Controllers\Api\UploadImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,10 +24,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // 上傳圖片至 S3
 Route::middleware('auth:sanctum')
-    ->post('/images/upload', [ImageController::class, 'store'])
+    ->post('/images/upload', UploadImageController::class)
     ->name('images.store');
 
-Route::get('tags', TagController::class)->name('api.tags');
+Route::get('tags', ShowAllTagsController::class)->name('api.tags');
 
-Route::post('oembed/twitter', TwitterController::class);
-Route::post('oembed/youtube', YoutubeController::class);
+Route::post('oembed/twitter', TwitterOembedApiController::class);
+Route::post('oembed/youtube', YoutubeOembedApiController::class);

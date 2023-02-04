@@ -11,7 +11,7 @@ use Illuminate\Validation\Rules\File;
 
 use function response;
 
-class ImageController extends Controller
+class UploadImageController extends Controller
 {
     public function __construct(
         protected FileService $fileService
@@ -24,7 +24,7 @@ class ImageController extends Controller
      * @param  Request  $request
      * @return JsonResponse
      */
-    public function store(Request $request): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $request->validate([
             'upload' => ['required', File::image()->max(1024)],
@@ -33,7 +33,8 @@ class ImageController extends Controller
         $file = $request->file('upload');
         $imageName = $this->fileService->generateFileName($file->getClientOriginalExtension());
         Storage::disk('s3')->put('images/'.$imageName, file_get_contents($file));
+        $url = Storage::disk('s3')->url('images/'.$imageName);
 
-        return response()->json(['url' => Storage::disk('s3')->url('images/'.$imageName)]);
+        return response()->json(['url' => $url]);
     }
 }

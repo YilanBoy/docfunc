@@ -11,7 +11,7 @@
 >
   <div class="hidden xl:block xl:w-1/6"></div>
 
-  <div class="w-full md:w-[750px] p-2 lg:p-0 z-0">
+  <div class="w-full md:w-[700px] p-2 lg:p-0 z-0">
     <div class="flex flex-col items-center justify-center w-full space-y-6">
       {{-- title --}}
       <div class="text-2xl text-gray-800 fill-current dark:text-gray-50">

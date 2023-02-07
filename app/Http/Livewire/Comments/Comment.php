@@ -4,9 +4,12 @@ namespace App\Http\Livewire\Comments;
 
 use App\Http\Traits\Livewire\MarkdownConverter;
 use App\Models\Comment as CommentModel;
+use App\Models\Post;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Throwable;
 
 class Comment extends Component
 {
@@ -50,12 +53,19 @@ class Comment extends Component
      * @return void
      *
      * @throws AuthorizationException
+     * @throws Throwable
      */
     public function destroy(CommentModel $comment): void
     {
         $this->authorize('destroy', $comment);
 
-        $comment->delete();
+        DB::transaction(function () use ($comment) {
+            $comment->delete();
+
+            $post = Post::findOrFail($this->postId);
+
+            $post->decrement('comment_counts');
+        });
 
         $this->emit('updateCommentCounts');
 

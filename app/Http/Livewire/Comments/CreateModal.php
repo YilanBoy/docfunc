@@ -7,7 +7,9 @@ use App\Http\Traits\Livewire\MarkdownConverter;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Notifications\PostComment;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Throwable;
 
 class CreateModal extends Component
 {
@@ -36,22 +38,29 @@ class CreateModal extends Component
         return $this->convertToHtml($this->body);
     }
 
+    /**
+     * @return void
+     *
+     * @throws Throwable
+     */
     public function store(): void
     {
         $this->validate();
 
-        $comment = Comment::create([
-            'post_id' => $this->postId,
-            'user_id' => auth()->check() ? auth()->id() : null,
-            'body' => $this->body,
-        ]);
+        DB::transaction(function () {
+            $comment = Comment::create([
+                'post_id' => $this->postId,
+                'user_id' => auth()->check() ? auth()->id() : null,
+                'body' => $this->body,
+            ]);
 
-        $post = Post::findOrFail($this->postId);
+            $post = Post::findOrFail($this->postId);
 
-        // update comment count in post table
-        $post->increment('comment_counts');
-        // notify the article author of new comments
-        $post->user->postNotify(new PostComment($comment));
+            // update comment count in post table
+            $post->increment('comment_counts');
+            // notify the article author of new comments
+            $post->user->postNotify(new PostComment($comment));
+        });
 
         // empty the body of the comment form
         $this->reset('body');

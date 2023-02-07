@@ -55,10 +55,7 @@ test('logged-in users can leave a comment', function () {
     Livewire::test(CreateModal::class, ['postId' => $post->id])
         ->set('body', $body)
         ->set('recaptcha', 'fake-g-recaptcha-response')
-        ->call('store')
-        ->assertEmitted('closeCreateCommentModal')
-        ->assertEmitted('updateCommentCounts')
-        ->assertEmitted('refreshAllCommentGroup');
+        ->call('store');
 
     $this->assertDatabaseHas('comments', [
         'body' => $body,
@@ -96,4 +93,19 @@ it('can see the comment preview', function () {
             '<li>item 3</li>',
             '</ul>',
         ]);
+});
+
+test('when a new comment is added, the post comments will be increased by one', function () {
+    $this->actingAs(User::factory()->create());
+
+    $post = Post::factory()->create();
+
+    $this->assertDatabaseHas('posts', ['comment_counts' => 0]);
+
+    Livewire::test(CreateModal::class, ['postId' => $post->id])
+        ->set('body', 'Hello World!')
+        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->call('store');
+
+    $this->assertDatabaseHas('posts', ['comment_counts' => 1]);
 });

@@ -233,13 +233,13 @@
         class="inline-flex items-center justify-center mt-4 transition duration-150 ease-in-out bg-red-500 border border-transparent w-14 h-14 group rounded-xl text-gray-50 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring ring-red-300"
       >
         <span class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:rotate-12">
-          <i class="bi bi-arrow-counterclockwise"></i>
+          <i class="bi bi-file-earmark-x-fill"></i>
         </span>
       </button>
     </div>
   </div>
 
-  <livewire:posts.partials.reset-dialog></livewire:posts.partials.reset-dialog>
+  <livewire:posts.partials.clear-dialog/>
 </div>
 
 @push('script')
@@ -280,7 +280,7 @@
         }, 500);
       });
 
-      window.addEventListener('resetCkeditorContent', () => {
+      window.addEventListener('clearCkeditorContent', () => {
         editorInstance.setData('');
       });
     });

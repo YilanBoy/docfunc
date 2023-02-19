@@ -4,10 +4,10 @@ namespace App\Http\Livewire\Posts\Partials;
 
 use Livewire\Component;
 
-class ResetDialog extends Component
+class ClearDialog extends Component
 {
     public function render()
     {
-        return view('livewire.posts.partials.reset-dialog');
+        return view('livewire.posts.partials.clear-dialog');
     }
 }

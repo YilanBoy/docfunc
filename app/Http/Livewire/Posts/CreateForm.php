@@ -41,7 +41,7 @@ class CreateForm extends Component
 
     public string $body = '';
 
-    protected $listeners = ['resetForm'];
+    protected $listeners = ['clearForm'];
 
     public function boot(
         ContentService $contentService,
@@ -51,6 +51,12 @@ class CreateForm extends Component
         $this->contentService = $contentService;
         $this->formatTransferService = $formatTransferService;
         $this->fileService = $fileService;
+    }
+
+    // computed property
+    public function getAutoSaveKeyProperty(): string
+    {
+        return 'auto_save_user_'.auth()->id().'_create_post';
     }
 
     public function mount()
@@ -65,12 +71,6 @@ class CreateForm extends Component
             $this->tags = $autoSavePostData['tags'];
             $this->body = $autoSavePostData['body'];
         }
-    }
-
-    // computed property
-    public function getAutoSaveKeyProperty(): string
-    {
-        return 'user_'.auth()->id().'_post_auto_save';
     }
 
     // when image property update, trigger validation
@@ -98,7 +98,7 @@ class CreateForm extends Component
         Redis::expire($this->auto_save_key, 604_800);
     }
 
-    public function resetForm()
+    public function clearForm()
     {
         $this->title = '';
         $this->categoryId = 1;
@@ -106,7 +106,7 @@ class CreateForm extends Component
         $this->body = '';
 
         $this->dispatchBrowserEvent('removeAllTags');
-        $this->dispatchBrowserEvent('resetCkeditorContent');
+        $this->dispatchBrowserEvent('clearCkeditorContent');
     }
 
     public function store()

@@ -136,13 +136,13 @@ it('can get auto save key property', function () {
 
     livewire(CreateForm::class, [
         'categories' => Category::all(['id', 'name']),
-    ])->assertSet('auto_save_key', 'user_'.$user->id.'_post_auto_save');
+    ])->assertSet('auto_save_key', 'auto_save_user_'.$user->id.'_create_post');
 });
 
 it('can auto save the post to redis', function () {
     $user = User::factory()->create();
 
-    $autoSaveKey = 'user_'.$user->id.'_post_auto_save';
+    $autoSaveKey = 'auto_save_user_'.$user->id.'_create_post';
 
     // clean the redis data, like refresh database
     if (Redis::exists($autoSaveKey)) {
@@ -168,7 +168,7 @@ it('can auto save the post to redis', function () {
         ->set('tags', $tags)
         ->set('body', $body);
 
-    expect(Redis::exists('user_'.$user->id.'_post_auto_save'))
+    expect(Redis::exists($autoSaveKey))
         ->toBe(REDIS_KEY_EXISTS_RETURN_VALUE)
         ->and(json_decode(Redis::get($autoSaveKey), true))
         ->toBe([

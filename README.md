@@ -23,10 +23,6 @@ The features of this blog include:
 Post editor use [CKEditor 5](https://ckeditor.com/), You can upload image to AWS S3 in blog post. You can search post
 by [Algolia](https://www.algolia.com/).
 
-## Preview
-
-<img src="https://blog-archives.s3.ap-northeast-2.amazonaws.com/2021_08_21_11_03_46_61206d123c717.jpg" width="70%">
-
 ## Requirements
 
 [php](https://www.php.net/) ^8.1  

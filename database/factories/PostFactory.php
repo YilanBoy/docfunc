@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PostFactory extends Factory
 {
-    public function definition()
+    /**
+     * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
+     */
+    public function definition(): array
     {
         return [
             'title' => fake()->text(30),
@@ -23,7 +26,7 @@ class PostFactory extends Factory
         ];
     }
 
-    public function userId(int $userId)
+    public function userId(int $userId): static
     {
         return $this->state(function (array $attributes) use ($userId) {
             return [

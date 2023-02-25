@@ -74,8 +74,6 @@ class Post extends Model implements Feedable
 
     /**
      * Get the prunable model query.
-     *
-     * @return Builder
      */
     public function prunable(): Builder
     {
@@ -114,9 +112,6 @@ class Post extends Model implements Feedable
     public function toSearchableArray(): array
     {
         $array = $this->toArray();
-
-        // Applies Scout Extended default transformations:
-        $array = $this->transform($array);
 
         $array['author_name'] = $this->user->name;
         $array['url'] = $this->link_with_slug;

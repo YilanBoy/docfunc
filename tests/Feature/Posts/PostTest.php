@@ -3,13 +3,10 @@
 use App\Http\Livewire\Posts\Posts;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 
 use function Pest\Faker\faker;
 use function Pest\Laravel\get;
-
-uses(RefreshDatabase::class);
 
 test('posts index can be rendered', function () {
     $user = User::factory()->create();

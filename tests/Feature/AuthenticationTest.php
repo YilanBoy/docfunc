@@ -1,12 +1,9 @@
 <?php
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
-
-uses(RefreshDatabase::class);
 
 test('login screen can be rendered', function () {
     get('/login')->assertStatus(200);

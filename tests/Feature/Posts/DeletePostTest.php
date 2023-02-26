@@ -6,10 +6,7 @@ use App\Http\Livewire\Users\Information\Posts\DeletedPostCard;
 use App\Http\Livewire\Users\Information\Posts\PostCard;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
-
-uses(RefreshDatabase::class);
 
 test('author can soft delete own post in desktop show post page', function () {
     $post = Post::factory()->create();

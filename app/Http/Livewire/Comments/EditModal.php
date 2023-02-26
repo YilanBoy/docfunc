@@ -54,7 +54,6 @@ class EditModal extends Component
 
     /**
      * @param  CommentModel  $comment
-     * @return void
      *
      * @throws AuthorizationException
      */

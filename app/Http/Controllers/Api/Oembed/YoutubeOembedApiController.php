@@ -12,9 +12,6 @@ class YoutubeOembedApiController extends Controller
 {
     /**
      * 取得 Youtube Oembed 資訊
-     *
-     * @param  Request  $request
-     * @return Response|JsonResponse
      */
     public function __invoke(Request $request): Response|JsonResponse
     {

@@ -6,9 +6,6 @@ class FormatTransferService
 {
     /**
      * 將 tag 的 JSON 資料轉成 array
-     *
-     * @param  string|null  $tagsJson
-     * @return array
      */
     public function tagsJsonToTagIdsArray(?string $tagsJson): array
     {

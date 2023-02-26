@@ -12,9 +12,6 @@ class TwitterOembedApiController extends Controller
 {
     /**
      * 取得 Twitter Oembed 資訊
-     *
-     * @param  Request  $request
-     * @return Response|JsonResponse
      */
     public function __invoke(Request $request): Response|JsonResponse
     {

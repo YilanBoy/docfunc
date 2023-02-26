@@ -3,9 +3,6 @@
 use App\Http\Livewire\Comments\CreateModal;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
-uses(RefreshDatabase::class);
 
 test('non-logged-in users can leave a anonymous comment', function () {
     $post = Post::factory()->create();

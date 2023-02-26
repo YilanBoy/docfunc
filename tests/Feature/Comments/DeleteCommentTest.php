@@ -3,11 +3,8 @@
 use App\Http\Livewire\Comments\Comment;
 use App\Models\Comment as CommentModel;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use function Pest\Livewire\livewire;
-
-uses(RefreshDatabase::class);
 
 test('the author can delete his comment', function () {
     $comment = CommentModel::factory()->create();

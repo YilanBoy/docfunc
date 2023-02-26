@@ -12,7 +12,6 @@ class ContentService
      * 生成用來優化 SEO 的 slug
      *
      * @param  string  $title 標題
-     * @return string
      */
     public function makeSlug(string $title): string
     {
@@ -29,9 +28,6 @@ class ContentService
 
     /**
      * 過濾 html 格式的文章內容，避免 XSS 攻擊
-     *
-     * @param  string  $html
-     * @return string
      */
     public function htmlPurifier(string $html): string
     {
@@ -84,10 +80,6 @@ class ContentService
 
     /**
      * 生成文章內容的摘錄
-     *
-     * @param  string  $body
-     * @param  int  $length
-     * @return string
      */
     public function makeExcerpt(string $body, int $length = 200): string
     {
@@ -96,9 +88,6 @@ class ContentService
 
     /**
      * 取得文章中的圖片連結
-     *
-     * @param  string  $body
-     * @return array
      */
     public function imagesInContent(string $body): array
     {

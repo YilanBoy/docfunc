@@ -3,11 +3,8 @@
 use App\Http\Livewire\Users\Edit\DeleteUser;
 use App\Mail\DestroyUser;
 use App\Models\User;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
 use function Pest\Laravel\get;
-
-uses(LazilyRefreshDatabase::class);
 
 test('non-logged-in users cannot access the delete user page', function () {
     $user = User::factory()->create();

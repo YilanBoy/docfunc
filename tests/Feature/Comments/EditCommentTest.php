@@ -3,9 +3,6 @@
 use App\Http\Livewire\Comments\EditModal;
 use App\Models\Comment;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
-uses(RefreshDatabase::class);
 
 test('editing modal can load the data of the comment', function () {
     $comment = Comment::factory()->create();

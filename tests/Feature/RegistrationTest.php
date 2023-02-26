@@ -2,13 +2,10 @@
 
 use App\Http\Livewire\Layouts\Header\Nav;
 use App\Models\Setting;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 use function Pest\Livewire\livewire;
-
-uses(LazilyRefreshDatabase::class);
 
 test('registration screen can be rendered', function () {
     $registerSetting = Setting::query()

@@ -4,12 +4,9 @@ use App\Http\Livewire\Comments\CreateModal;
 use App\Http\Livewire\Notifications\Index as NotificationIndex;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
 use function Pest\Faker\faker;
 use function Pest\Laravel\get;
-
-uses(LazilyRefreshDatabase::class);
 
 test('receive a notification when a post has a comment', function () {
     $post = Post::factory()->create();

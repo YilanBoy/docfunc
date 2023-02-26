@@ -2,11 +2,8 @@
 
 use App\Http\Livewire\Users\Edit\ChangePassword;
 use App\Models\User;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
 use function Pest\Laravel\get;
-
-uses(LazilyRefreshDatabase::class);
 
 test('non-logged-in users cannot access the update password page', function () {
     $user = User::factory()->create();

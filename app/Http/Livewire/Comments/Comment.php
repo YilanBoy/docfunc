@@ -36,8 +36,6 @@ class Comment extends Component
 
     /**
      * comment group id is used to refresh comment group component
-     *
-     * @var int
      */
     public int $groupId;
 
@@ -49,8 +47,6 @@ class Comment extends Component
     /**
      * delete comment
      *
-     * @param  CommentModel  $comment
-     * @return void
      *
      * @throws AuthorizationException
      * @throws Throwable

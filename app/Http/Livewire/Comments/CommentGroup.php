@@ -15,8 +15,6 @@ class CommentGroup extends Component
 
     /**
      * comment group id
-     *
-     * @var int
      */
     public int $groupId;
 

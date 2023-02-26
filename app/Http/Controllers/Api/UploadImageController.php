@@ -20,9 +20,6 @@ class UploadImageController extends Controller
 
     /**
      * upload the image in the post to AWS S3
-     *
-     * @param  Request  $request
-     * @return JsonResponse
      */
     public function __invoke(Request $request): JsonResponse
     {

@@ -3,12 +3,9 @@
 use App\Http\Livewire\Posts\EditForm;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
-
-uses(RefreshDatabase::class);
 
 test('visitors cannot access the edit pages of other people\'s post', function () {
     $post = Post::factory()->create();

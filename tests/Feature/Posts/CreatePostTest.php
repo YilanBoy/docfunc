@@ -5,7 +5,6 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Redis;
 
@@ -13,8 +12,6 @@ use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
 
 const REDIS_KEY_EXISTS_RETURN_VALUE = 1;
-
-uses(RefreshDatabase::class);
 
 test('guest cannot visit create post page', function () {
     get(route('posts.create'))

@@ -2,10 +2,7 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
-
-uses(RefreshDatabase::class);
 
 it('can create new users', function () {
     $this->artisan('user:create')

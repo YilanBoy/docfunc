@@ -3,11 +3,8 @@
 use App\Http\Livewire\Users\Information\Posts\Posts;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
 use function Pest\Laravel\get;
-
-uses(LazilyRefreshDatabase::class);
 
 test('guest can view user profile', function ($tabQueryString) {
     $user = User::factory()->create();

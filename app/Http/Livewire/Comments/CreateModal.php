@@ -39,8 +39,6 @@ class CreateModal extends Component
     }
 
     /**
-     * @return void
-     *
      * @throws Throwable
      */
     public function store(): void

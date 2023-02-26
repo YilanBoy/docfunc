@@ -2,12 +2,9 @@
 
 use App\Http\Livewire\Users\Edit\EditInformation;
 use App\Models\User;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
 use function Pest\Faker\faker;
 use function Pest\Laravel\get;
-
-uses(LazilyRefreshDatabase::class);
 
 test('non-logged-in users cannot access the user edit page', function () {
     $user = User::factory()->create();

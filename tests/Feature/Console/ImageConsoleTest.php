@@ -1,11 +1,8 @@
 <?php
 
 use App\Models\Post;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-
-uses(RefreshDatabase::class);
 
 // upload 3 fake image files to fake s3 storage
 beforeEach(function () {

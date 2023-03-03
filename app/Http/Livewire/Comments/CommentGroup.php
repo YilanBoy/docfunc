@@ -41,7 +41,7 @@ class CommentGroup extends Component
             ->join('posts', 'posts.id', '=', 'comments.post_id')
             ->leftJoin('users', 'users.id', '=', 'comments.user_id')
             ->where('post_id', $this->postId)
-            ->latest('id')
+            ->latest('comments.id')
             ->limit($this->perPage)
             ->offset($this->offset)
             ->get();

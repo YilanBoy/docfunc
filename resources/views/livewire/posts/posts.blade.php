@@ -75,7 +75,7 @@
         {{-- 文章標籤 --}}
         @if ($post->tags_count > 0)
           <div class="flex flex-wrap items-center mt-2 text-base">
-            <span class="mr-1 text-green-300 dark:text-indigo-300"><i class="bi bi-tags-fill"></i></span>
+            <span class="mr-1 text-green-300 dark:text-blue-300"><i class="bi bi-tags-fill"></i></span>
 
             @foreach ($post->tags as $tag)
               <x-tag :href="route('tags.show', ['tag' => $tag->id])">

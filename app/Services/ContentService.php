@@ -4,6 +4,7 @@ namespace App\Services;
 
 use DOMDocument;
 use HTMLPurifier;
+use HTMLPurifier_AttrDef_Enum;
 use HTMLPurifier_Config;
 
 class ContentService
@@ -36,10 +37,6 @@ class ContentService
         $config->set('Core.Encoding', 'utf-8');
         // 設置配置的名稱
         $config->set('HTML.DefinitionID', 'content');
-        // 允許連結使用 target="_blank"
-        $config->set('Attr.AllowedFrameTargets', ['_blank']);
-        // 允許連結使用 rel 標籤
-        $config->set('Attr.AllowedRel', ['nofollow', 'noreferrer', 'noopener']);
 
         $config->set('Cache.SerializerPath', config('cache.stores.file.path'));
 
@@ -51,19 +48,15 @@ class ContentService
         $def = $config->maybeGetRawHTMLDefinition();
 
         if ($def) {
+            // 允許連結使用 target="_blank" 與 rel="nofollow noreferrer noopener"
+            $def->addAttribute('a', 'target', new HTMLPurifier_AttrDef_Enum(['_blank']));
+            $def->addAttribute('a', 'rel', new HTMLPurifier_AttrDef_Enum(
+                ['nofollow', 'noreferrer', 'noopener']
+            ));
             // 圖片
-            $def->addElement(
-                'figure',
-                'Block',
-                'Optional: (figcaption, Flow) | (Flow, figcaption) | Flow',
-                'Common'
-            );
+            $def->addElement('figure', 'Block', 'Flow', 'Common');
             // 圖片底下的說明文字
-            $def->addElement('figcaption', 'Inline', 'Flow', 'Common');
-
-            // 螢光筆
-            $def->addElement('mark', 'Inline', 'Inline', 'Common');
-
+            $def->addElement('figcaption', 'Block', 'Flow', 'Common');
             // 影片嵌入
             $def->addElement(
                 'oembed', // 標籤名稱

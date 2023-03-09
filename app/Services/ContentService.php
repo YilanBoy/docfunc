@@ -31,20 +31,22 @@ class ContentService
      */
     public function htmlPurifier(string $html): string
     {
-        // 設定 XSS 過濾規則
         $config = HTMLPurifier_Config::createDefault();
+
+        $config->set('Core.Encoding', 'utf-8');
         // 設置配置的名稱
-        $config->set('HTML.DefinitionID', 'wysiwyg editon');
-        // 設置配置的版本
-        $config->set('HTML.DefinitionRev', 1);
-        // 清除過濾規則的快取，正式上線時必須移除
-        if (app()->isLocal()) {
-            $config->set('Cache.DefinitionImpl', null);
-        }
+        $config->set('HTML.DefinitionID', 'content');
         // 允許連結使用 target="_blank"
         $config->set('Attr.AllowedFrameTargets', ['_blank']);
         // 允許連結使用 rel 標籤
         $config->set('Attr.AllowedRel', ['nofollow', 'noreferrer', 'noopener']);
+
+        $config->set('Cache.SerializerPath', config('cache.stores.file.path'));
+
+        // 清除過濾規則的快取，正式上線時必須移除
+        if (app()->isLocal()) {
+            $config->set('Cache.DefinitionImpl', null);
+        }
 
         $def = $config->maybeGetRawHTMLDefinition();
 

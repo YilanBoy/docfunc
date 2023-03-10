@@ -41,13 +41,13 @@ class ContentService
         $config->set('Cache.SerializerPath', config('cache.stores.file.path'));
 
         // 清除過濾規則的快取，正式上線時必須移除
-        if (app()->isLocal()) {
+        if (! app()->isProduction()) {
             $config->set('Cache.DefinitionImpl', null);
         }
 
         $def = $config->maybeGetRawHTMLDefinition();
 
-        if ($def) {
+        if (! is_null($def)) {
             // 允許連結使用 target="_blank" 與 rel="nofollow noreferrer noopener"
             $def->addAttribute('a', 'target', new HTMLPurifier_AttrDef_Enum(['_blank']));
             $def->addAttribute('a', 'rel', new HTMLPurifier_AttrDef_Enum(

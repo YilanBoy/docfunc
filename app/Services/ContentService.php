@@ -4,7 +4,6 @@ namespace App\Services;
 
 use DOMDocument;
 use HTMLPurifier;
-use HTMLPurifier_AttrDef_Enum;
 use HTMLPurifier_Config;
 
 class ContentService
@@ -40,6 +39,11 @@ class ContentService
 
         $config->set('Cache.SerializerPath', config('cache.stores.file.path'));
 
+        // 預設幫外部連結補上 target="_blank" 與 rel="noreferrer noopener"
+        $config->set('HTML.TargetBlank', true);
+        // 預設幫外部連結補上 rel="nofollow"
+        $config->set('HTML.Nofollow', true);
+
         // 清除過濾規則的快取，正式上線時必須移除
         if (! app()->isProduction()) {
             $config->set('Cache.DefinitionImpl', null);
@@ -48,11 +52,6 @@ class ContentService
         $def = $config->maybeGetRawHTMLDefinition();
 
         if (! is_null($def)) {
-            // 允許連結使用 target="_blank" 與 rel="nofollow noreferrer noopener"
-            $def->addAttribute('a', 'target', new HTMLPurifier_AttrDef_Enum(['_blank']));
-            $def->addAttribute('a', 'rel', new HTMLPurifier_AttrDef_Enum(
-                ['nofollow', 'noreferrer', 'noopener']
-            ));
             // 圖片
             $def->addElement('figure', 'Block', 'Flow', 'Common');
             // 圖片底下的說明文字

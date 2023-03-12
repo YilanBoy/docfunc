@@ -34,7 +34,7 @@ it('can keep the custom HTML elements we want', function () {
             <a href="https://google.com" rel="nofollow noreferrer noopener" target="_blank">Google</a>
 
             <figure class="image">
-                <img src="https://docfunc-files.s3.ap-northeast-1.amazonaws.com/share.jpg" alt="share">
+                <img src="image.jpg" alt="share">
                 <figcaption>Share Image</figcaption>
             </figure>
 

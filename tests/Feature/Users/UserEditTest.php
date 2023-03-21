@@ -3,7 +3,7 @@
 use App\Http\Livewire\Users\Edit\EditInformation;
 use App\Models\User;
 
-use function Pest\Faker\faker;
+use function Pest\Faker\fake;
 use function Pest\Laravel\get;
 
 test('non-logged-in users cannot access the user edit page', function () {
@@ -44,7 +44,7 @@ test('users can update their own information', function () {
         'introduction' => $user->introduction,
     ])
         ->set('name', 'New_legal_name')
-        ->set('introduction', faker()->realText(120))
+        ->set('introduction', fake()->realText(120))
         ->call('update')
         ->assertDispatchedBrowserEvent('info-badge', ['status' => 'success', 'message' => '個人資料更新成功']);
 });
@@ -60,7 +60,7 @@ test('if the name format is not correct, the name cannot be updated', function (
         'introduction' => $user->introduction,
     ])
         ->set('name', 'Wrong Format Name')
-        ->set('introduction', faker()->realText(120))
+        ->set('introduction', fake()->realText(120))
         ->call('update')
         ->assertHasErrors('name');
 });
@@ -76,7 +76,7 @@ test('if the number of words in the introduction exceeds the limit, the introduc
         'introduction' => $user->introduction,
     ])
         ->set('name', 'New_legal_name')
-        ->set('introduction', faker()->words(500, true))
+        ->set('introduction', fake()->words(500, true))
         ->call('update')
         ->assertHasErrors('introduction');
 });

@@ -5,7 +5,7 @@ use App\Http\Livewire\Notifications\Index as NotificationIndex;
 use App\Models\Post;
 use App\Models\User;
 
-use function Pest\Faker\faker;
+use function Pest\Faker\fake;
 use function Pest\Laravel\get;
 
 test('receive a notification when a post has a comment', function () {
@@ -16,7 +16,7 @@ test('receive a notification when a post has a comment', function () {
     $this->actingAs($user);
 
     Livewire::test(CreateModal::class, ['postId' => $post->id])
-        ->set('body', faker()->realText(100))
+        ->set('body', fake()->realText(100))
         ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store');
 
@@ -44,7 +44,7 @@ test('access the notification page to clear unread notifications', function () {
     $this->actingAs($user);
 
     Livewire::test(CreateModal::class, ['postId' => $post->id])
-        ->set('body', faker()->realText(100))
+        ->set('body', fake()->realText(100))
         ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store');
 
@@ -68,7 +68,7 @@ test('if you reply to your own post, there will be no notification', function ()
     $this->actingAs($author);
 
     Livewire::test(CreateModal::class, ['postId' => $post->id])
-        ->set('body', faker()->realText(100))
+        ->set('body', fake()->realText(100))
         ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store');
 

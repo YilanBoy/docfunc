@@ -5,7 +5,7 @@ use App\Models\Post;
 use App\Models\User;
 use Livewire\Livewire;
 
-use function Pest\Faker\faker;
+use function Pest\Faker\fake;
 use function Pest\Laravel\get;
 
 test('posts index can be rendered', function () {
@@ -23,7 +23,7 @@ test('posts index can be rendered', function () {
 
 it('will be redirect if slug is not in the url', function () {
     $post = Post::factory()->create([
-        'slug' => faker()->word(),
+        'slug' => fake()->word(),
     ]);
 
     get(route('posts.show', ['post' => $post->id]))

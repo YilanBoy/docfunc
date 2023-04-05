@@ -97,7 +97,7 @@ RUN groupadd --force -g $WWWGROUP octane \
 # create bootstrap and storage files if they do not exist
 # gives the 'octane' user read/write and execute privileges to those files
 RUN mkdir -p \
-    storage/framework/{sessions,views,cache} \
+    storage/framework/{sessions,views,cache/data} \
     storage/logs \
     bootstrap/cache \
     && chown -R octane:octane \

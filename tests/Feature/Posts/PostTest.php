@@ -8,6 +8,10 @@ use Livewire\Livewire;
 use function Pest\Faker\fake;
 use function Pest\Laravel\get;
 
+test('user can access the home page ', function () {
+    get('/')->assertStatus(200);
+});
+
 test('posts index can be rendered', function () {
     $user = User::factory()->create();
 

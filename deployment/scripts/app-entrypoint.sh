@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-php() {
-    su octane -c "php $*"
-}
-
 initialStuff() {
     php artisan optimize:clear
     php artisan package:discover --ansi
@@ -14,4 +10,6 @@ initialStuff() {
 }
 
 initialStuff
-exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.app.conf
+
+php artisan octane:start --server=swoole --host=0.0.0.0 --port=9000 --workers=auto --task-workers=auto --max-requests=500
+

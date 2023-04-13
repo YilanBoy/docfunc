@@ -29,9 +29,6 @@ FROM php:${PHP_VERSION}-cli-bullseye
 
 LABEL maintainer="Allen"
 
-ARG WWWUSER=1000
-ARG WWWGROUP=1000
-
 ENV ROOT=/var/www/html
 WORKDIR $ROOT
 
@@ -54,6 +51,9 @@ RUN apt-get update \
 # install php extension
 RUN docker-php-ext-install pdo_mysql \
     && docker-php-ext-install opcache
+
+ARG WWWUSER=1000
+ARG WWWGROUP=1000
 
 # create group and user "scheduler"
 RUN groupadd --force -g $WWWGROUP scheduler \

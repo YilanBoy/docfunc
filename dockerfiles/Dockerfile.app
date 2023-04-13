@@ -41,9 +41,6 @@ FROM php:${PHP_VERSION}-cli-bullseye
 
 LABEL maintainer="Allen"
 
-ARG WWWUSER=1000
-ARG WWWGROUP=1000
-
 ENV ROOT=/var/www/html
 WORKDIR $ROOT
 
@@ -69,6 +66,9 @@ RUN docker-php-ext-install pdo_mysql \
     && docker-php-ext-install pcntl \
     && docker-php-ext-enable redis swoole
 
+ARG WWWUSER=1000
+ARG WWWGROUP=1000
+
 # create group and user "octane"
 RUN groupadd --force -g $WWWGROUP octane \
     && useradd -ms /bin/bash --no-log-init --no-user-group -g $WWWGROUP -u $WWWUSER octane
@@ -84,7 +84,7 @@ RUN mkdir -p \
         bootstrap/cache \
     && chmod -R ug+rwx storage bootstrap/cache
 
-# copy supervisor and php config files into container
+# copy php config files into container
 COPY deployment/php/php.ini /usr/local/etc/php/conf.d/octane.ini
 COPY deployment/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 

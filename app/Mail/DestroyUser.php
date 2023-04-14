@@ -4,6 +4,8 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class DestroyUser extends Mailable
@@ -11,27 +13,43 @@ class DestroyUser extends Mailable
     use Queueable;
     use SerializesModels;
 
-    public $destroyLink;
-
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $destroyLink)
-    {
-        $this->destroyLink = $destroyLink;
+    public function __construct(
+        public string $destroyLink
+    ) {
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * Get the message envelope.
      */
-    public function build()
+    public function envelope(): Envelope
     {
-        return $this
-            ->subject('刪除帳號確認')
-            ->view('emails.destroy-user');
+        return new Envelope(
+            subject: '刪除帳號確認',
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'emails.destroy-user',
+        );
+    }
+
+    /**
+     * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     */
+    public function attachments(): array
+    {
+        return [];
     }
 }

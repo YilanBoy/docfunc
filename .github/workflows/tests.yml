@@ -8,9 +8,6 @@ jobs:
       matrix:
         php: [ 8.1, 8.2 ]
     env:
-      DB_DATABASE: blog_tests
-      DB_USERNAME: root
-      DB_PASSWORD: password
       BROADCAST_DRIVER: log
       CACHE_DRIVER: redis
       QUEUE_CONNECTION: redis
@@ -29,15 +26,6 @@ jobs:
     name: php-version-${{ matrix.php }}-test
 
     services:
-      mysql:
-        image: mysql:latest
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: blog_tests
-        ports:
-          - 3306/tcp
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
       redis:
         image: redis
         ports:
@@ -62,9 +50,6 @@ jobs:
           extensions: bcmath, ctype, curl, dom, fileinfo, json, mbstring, openssl, pcre, pdo, tokenizer, xml, redis
           coverage: xdebug
 
-      - name: Start mysql service
-        run: sudo systemctl start mysql
-
       - name: Get Composer Cache Directory
         id: composer-cache
         run: |
@@ -85,16 +70,9 @@ jobs:
           php -r "file_exists('.env') || copy('.env.example', '.env');"
           php artisan key:generate
 
-      - name: Run Migration
-        run: php artisan migrate -v
-        env:
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
-
       - name: Test with pest
         run: vendor/bin/pest --coverage-clover ./coverage.xml
         env:
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
 
       - name: Upload to Codecov

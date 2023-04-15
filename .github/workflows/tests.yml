@@ -1,4 +1,5 @@
 name: tests
+
 on: [ push ]
 
 jobs:
@@ -49,7 +50,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           # https://laravel.com/docs/9.x/deployment#server-requirements
-          extensions: bcmath, ctype, curl, dom, fileinfo, json, mbstring, openssl, pcre, pdo, tokenizer, xml, redis
+          extensions: ctype, curl, dom, fileinfo, filter, hash, mbstring, openssl, pcre, pdo, session, tokenizer, xml, redis
           coverage: xdebug
 
       - name: Get Composer Cache Directory

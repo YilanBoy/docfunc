@@ -1,8 +1,6 @@
 name: build
-on:
-  push:
-    branches:
-      - main
+
+on: workflow_dispatch
 
 jobs:
   create-deployment-artifacts:

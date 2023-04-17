@@ -1,4 +1,4 @@
-name: build-container
+name: build-image
 
 on:
   workflow_run:
@@ -8,7 +8,7 @@ on:
       - completed
 
 jobs:
-  docker:
+  build-image:
     runs-on: ubuntu-latest
 
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
@@ -25,11 +25,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Display directory structure
-        run: |
-          echo "Directory structure:"
-          find . -type d
 
       - name: Build and push laravel octane
         uses: docker/build-push-action@v4

@@ -1,10 +1,18 @@
 name: build-container
 
-on: [ push ]
+on:
+  workflow_run:
+    workflows:
+      - tests
+    types:
+      - completed
 
 jobs:
-  build-and-push-image:
+  docker:
     runs-on: ubuntu-latest
+
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -26,8 +34,7 @@ jobs:
       - name: Build and push laravel octane
         uses: docker/build-push-action@v4
         with:
-          context: .
-          file: ./dockerfiles/Dockerfile.app
+          file: dockerfiles/Dockerfile.app
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/docfunc-app:latest
@@ -35,8 +42,7 @@ jobs:
       - name: Build and push laravel horizon
         uses: docker/build-push-action@v4
         with:
-          context: .
-          file: ./dockerfiles/Dockerfile.horizon
+          file: dockerfiles/Dockerfile.horizon
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/docfunc-horizon:latest
@@ -44,8 +50,7 @@ jobs:
       - name: Build and push laravel scheduler
         uses: docker/build-push-action@v4
         with:
-          context: .
-          file: ./dockerfiles/Dockerfile.scheduler
+          file: dockerfiles/Dockerfile.scheduler
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/docfunc-scheduler:latest

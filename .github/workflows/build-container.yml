@@ -26,6 +26,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Display directory structure
+        run: |
+          echo "Directory structure:"
+          find . -type d
+
       - name: Build and push laravel octane
         uses: docker/build-push-action@v4
         with:

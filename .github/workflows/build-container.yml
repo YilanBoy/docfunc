@@ -6,6 +6,8 @@ on:
       - tests
     types:
       - completed
+    branches:
+      - 'main'
 
 jobs:
   docker:

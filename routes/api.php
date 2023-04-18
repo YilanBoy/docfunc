@@ -18,13 +18,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('user', function (Request $request) {
     return $request->user();
 });
 
-// 上傳圖片至 S3
+// Upload the image to S3
 Route::middleware('auth:sanctum')
-    ->post('/images/upload', UploadImageController::class)
+    ->post('images/upload', UploadImageController::class)
     ->name('images.store');
 
 Route::get('tags', ShowAllTagsController::class)->name('api.tags');

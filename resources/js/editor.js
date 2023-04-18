@@ -1,38 +1,39 @@
-import MyUploadAdapter from "./upload-image-adapter.js";
-
-// 設定文章最多字數限制
+const editor = document.querySelector("#editor");
+// Set a maximum word count limit for the post
 const maxCharacters = 20000;
-// 設定要更新字數顯示的區塊
+// Set up an HTML element to display the character count
 const characterCounter = document.querySelectorAll(".character-counter");
 
-function MyCustomUploadAdapterPlugin(editor) {
-    editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
-        // Configure the URL to the upload script in your back-end here!
-        return new MyUploadAdapter(loader);
-    };
-}
-
-ClassicEditor.create(document.querySelector("#editor"), {
-    // 圖片上傳
-    extraPlugins: [MyCustomUploadAdapterPlugin],
-
+ClassicEditor.create(editor, {
     // Editor configuration.
     wordCount: {
         onUpdate: (stats) => {
-            // 字數超過最高限制
+            // The character count has exceeded the maximum limit
             const isLimitExceeded = stats.characters > maxCharacters;
-            // 接近字數限制
+            // The character count is approaching the maximum limit
             const isCloseToLimit =
                 !isLimitExceeded && stats.characters > maxCharacters * 0.8;
 
-            // 文章總字數更新
+            // update character count in HTML element
             characterCounter.forEach((element) => {
                 element.textContent = `${stats.characters} / ${maxCharacters}`;
-                // 如果字數接近限制，則將 wordsBox 的 class 加上一個 text-yellow-500，使文字變成黃色
+                // If the character count is approaching the limit
+                // add the class 'text-yellow-500' to the 'wordsBox' element to turn the text yellow
                 element.classList.toggle("text-yellow-500", isCloseToLimit);
-                // 如果字數超過限制，則將 wordsBox 的 class 加上一個 text-red-400，使文字變成紅色
+                // If the character count exceeds the limit
+                // add the class 'text-red-400' to the 'wordsBox' element to turn the text red
                 element.classList.toggle("text-red-400", isLimitExceeded);
             });
+        },
+    },
+    simpleUpload: {
+        // The URL that the images are uploaded to.
+        uploadUrl: "/api/images/upload",
+
+        // laravel sanctum need csrf token to authenticate
+        headers: {
+            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]')
+                .content,
         },
     },
 })

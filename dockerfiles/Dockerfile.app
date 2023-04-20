@@ -37,46 +37,46 @@ RUN npm install \
 # Laravel Octane
 ###########################################
 
-FROM php:${PHP_VERSION}-cli-bullseye
+FROM php:${PHP_VERSION}-alpine3.17
 
 LABEL maintainer="Allen"
 
 ENV ROOT=/var/www/html
 WORKDIR $ROOT
 
-# set the default shell to /bin/bash with some useful options
+# set the default shell to /bin/ash with some useful options
 # -e: exit immediately if a command exits with a non-zero status
-# -o: enable POSIX mode for the shell, which ensures that the shell behaves in a standard way
-# -u: treat unset variables as an error, and immediately exit if an undefined variable is referenced
 # -c: execute the following command when the shell starts
-SHELL ["/bin/bash", "-eou", "pipefail", "-c"]
+SHELL ["/bin/ash", "-e", "-c"]
 
 COPY . .
 
-# use --no-install-recommends flag to apt-get in dockerfile to save space
-# see https://github.com/jhipster/generator-jhipster/issues/12648
-RUN apt-get update \
-    && apt-get upgrade -yqq
+# install necessary package to install php extension
+RUN apk update \
+    && apk upgrade \
+    && apk add autoconf gcc g++ make
 
 # install php extension
 RUN docker-php-ext-install pdo_mysql \
     && docker-php-ext-install opcache \
+    && docker-php-ext-install pcntl \
     && pecl install redis \
     && pecl install swoole \
-    && docker-php-ext-install pcntl \
     && docker-php-ext-enable redis swoole
 
 ARG WWWUSER=1000
 ARG WWWGROUP=1000
 
 # create group and user "octane"
-RUN groupadd --force -g $WWWGROUP octane \
-    && useradd -ms /bin/bash --no-log-init --no-user-group -g $WWWGROUP -u $WWWUSER octane
+RUN addgroup -g $WWWGROUP -S octane || true \
+    && adduser -D -h /home/octane -s /bin/ash -G octane -u $WWWUSER octane
 
 # create bootstrap and storage files if they do not exist
 # gives the 'octane' user read/write and execute privileges to those files
 RUN mkdir -p \
-        storage/framework/{sessions,views,cache/data} \
+        storage/framework/sessions \
+        storage/framework/views \
+        storage/framework/views/cache/data \
         storage/logs \
         bootstrap/cache \
     && chown -R octane:octane \

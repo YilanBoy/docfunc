@@ -57,7 +57,7 @@
     </button>
 
     <div class="container mx-auto max-w-7xl">
-      <div class="flex space-x-4 justify-center items-stretch">
+      <div class="flex lg:space-x-4 justify-center items-stretch">
         <div class="hidden lg:block lg:w-1/6"></div>
 
         <div class="flex flex-col items-center justify-start w-full md:w-[700px] p-2 lg:p-0">

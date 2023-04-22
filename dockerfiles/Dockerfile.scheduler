@@ -60,7 +60,7 @@ RUN addgroup -g $WWWGROUP -S scheduler || true \
 RUN mkdir -p \
         storage/framework/sessions \
         storage/framework/views \
-        storage/framework/views/cache/data \
+        storage/framework/cache/data \
         storage/logs \
         bootstrap/cache \
     && chown -R scheduler:scheduler \

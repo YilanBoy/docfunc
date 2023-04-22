@@ -76,7 +76,7 @@ RUN addgroup -g $WWWGROUP -S octane || true \
 RUN mkdir -p \
         storage/framework/sessions \
         storage/framework/views \
-        storage/framework/views/cache/data \
+        storage/framework/cache/data \
         storage/logs \
         bootstrap/cache \
     && chown -R octane:octane \
@@ -102,4 +102,5 @@ USER octane
 
 ENTRYPOINT ["deployment/scripts/app-entrypoint.sh"]
 
-HEALTHCHECK --start-period=5s --interval=2s --timeout=5s --retries=8 CMD php artisan octane:status || exit 1
+HEALTHCHECK --start-period=5s --interval=2s --timeout=5s --retries=8 \
+    CMD curl --fail localhost:9000 || exit 1

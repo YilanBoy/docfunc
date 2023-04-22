@@ -1,6 +1,6 @@
 <div
   x-data
-  class="relative items-center justify-center hidden w-full h-16 transition-all duration-300 shadow-lg lg:flex bg-gray-50 dark:bg-gray-700"
+  class="relative items-center justify-center hidden w-full h-20 transition-all duration-300 shadow-lg lg:flex bg-gray-50 dark:bg-gray-700"
 >
   {{-- logout form --}}
   <form
@@ -15,7 +15,7 @@
   {{-- 電腦版-Logo --}}
   <a
     href="{{ route('root') }}"
-    class="absolute flex items-center top-3 left-4"
+    class="absolute flex items-center inset-y-1/2 left-4"
   >
     <img src="{{ asset('images/icon/icon.svg') }}" alt="logo" class="w-10 h-10">
     <span class="ml-3 font-mono text-2xl font-bold dark:text-gray-50">{{ config('app.name') }}</span>
@@ -37,8 +37,8 @@
       <span
         @class([
           'absolute left-0 w-full h-1 transition-all duration-300 bg-green-400 dark:bg-blue-400 rounded-full pointer-events-none',
-          'opacity-0 -bottom-5 peer-hover:opacity-100 peer-hover:-bottom-3' => request()->url() !== route('posts.index'),
-          'opacity-100 -bottom-3' => request()->url() === route('posts.index'),
+          'opacity-0 -bottom-5 peer-hover:opacity-100 peer-hover:-bottom-1' => request()->url() !== route('posts.index'),
+          'opacity-100 -bottom-1' => request()->url() === route('posts.index'),
         ])
       ></span>
     </li>
@@ -59,15 +59,15 @@
         <span
           @class([
             'absolute left-0 w-full h-1 transition-all duration-300 bg-green-400 dark:bg-blue-400 rounded-full pointer-events-none',
-            'opacity-0 -bottom-5 peer-hover:opacity-100 peer-hover:-bottom-3' => request()->url() !== $category->link_with_name,
-            'opacity-100 -bottom-3' => request()->url() === $category->link_with_name,
+            'opacity-0 -bottom-5 peer-hover:opacity-100 peer-hover:-bottom-1' => request()->url() !== $category->link_with_name,
+            'opacity-100 -bottom-1' => request()->url() === $category->link_with_name,
           ])
         ></span>
       </li>
     @endforeach
   </ul>
 
-  <div class="absolute flex space-x-3 top-3 right-4">
+  <div class="absolute flex items-center space-x-5 inset-y-1/2 right-6">
 
     {{-- 明亮 / 暗黑模式切換 --}}
     <button
@@ -84,11 +84,11 @@
       type="button"
       class="flex items-center justify-center w-10 h-10 group"
     >
-        <span class="transition duration-150 text-amber-400 dark:hidden group-hover:text-amber-500">
+        <span class="transition duration-150 text-amber-400 text-xl dark:hidden group-hover:text-amber-500">
           <i class="bi bi-sun-fill"></i>
         </span>
 
-      <span class="hidden transition duration-150 text-blue-500 dark:inline group-hover:text-blue-400">
+      <span class="hidden transition duration-150 text-blue-500 text-xl dark:inline group-hover:text-blue-400">
           <i class="bi bi-moon-stars-fill"></i>
         </span>
     </button>
@@ -122,7 +122,7 @@
       <span class="relative inline-flex rounded-md">
         <a
           href="{{ route('notifications.index') }}"
-          class="flex items-center justify-center w-10 h-10 text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50"
+          class="flex items-center justify-center w-10 h-10 text-xl text-gray-400 transition duration-150 rounded-lg hover:text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-50"
         >
           <i class="bi bi-bell-fill"></i>
         </a>
@@ -153,7 +153,7 @@
           >
             <span class="sr-only">Open user menu</span>
             <img
-              class="w-10 h-10 rounded-full"
+              class="w-12 h-12 rounded-full"
               src="{{ auth()->user()->gravatar_url }}"
               alt=""
             >
@@ -170,7 +170,7 @@
           aria-orientation="vertical"
           aria-labelledby="user-menu-button"
           tabindex="-1"
-          class="absolute right-0 w-48 p-2 mt-2 text-gray-700 rounded-md shadow-lg top-14 bg-gray-50 ring-1 ring-black ring-opacity-20 dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
+          class="absolute right-0 w-48 p-2 mt-2 text-gray-700 rounded-md shadow-lg top-16 bg-gray-50 ring-1 ring-black ring-opacity-20 dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
         >
           <a
             href="{{ route('posts.create') }}"

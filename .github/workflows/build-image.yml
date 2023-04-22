@@ -30,28 +30,22 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           file: dockerfiles/Dockerfile.app
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: nella0128/docfunc-app:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
       - name: Build and push laravel horizon
         uses: docker/build-push-action@v4
         with:
           file: dockerfiles/Dockerfile.horizon
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: nella0128/docfunc-horizon:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
       - name: Build and push laravel scheduler
         uses: docker/build-push-action@v4
         with:
           file: dockerfiles/Dockerfile.scheduler
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: nella0128/docfunc-scheduler:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max

@@ -33,7 +33,11 @@
             /* code */
         prose-code:before:content-none prose-code:after:content-none
             /* pre */
-        prose-pre:p-0 prose-pre:rounded-lg;
+        prose-pre:p-0 prose-pre:rounded-lg
+            /* blockquote */
+        prose-blockquote:border-slate-300 prose-blockquote:text-slate-500
+        dark:prose-blockquote:border-slate-600 dark:prose-blockquote:text-slate-400
+        ;
     }
 
     /* ckeditor5-font/theme/fontsize.css */

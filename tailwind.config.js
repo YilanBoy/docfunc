@@ -43,18 +43,10 @@ module.exports = {
                 DEFAULT: {
                     css: {
                         // blockquote
-                        blockquote: {
-                            borderColor: theme("colors.slate.300"),
-                            color: theme("colors.slate.500"),
-                        },
                         "blockquote p:first-of-type::before": null,
                         "blockquote p:last-of-type::after": null,
-                        ".dark blockquote": {
-                            borderColor: theme("colors.slate.600"),
-                            color: theme("colors.slate.400"),
-                        },
-                        // code
-                        code: {
+                        // inline code
+                        ":not(pre) > code": {
                             backgroundColor: theme("colors.green.100"),
                             color: theme("colors.green.600"),
                             padding: "0.25rem",

@@ -22,48 +22,23 @@
   </a>
 
   <ul class="flex space-x-6">
-    <li class="relative">
-      <a
-        href="{{ route('posts.index') }}"
-        @class([
-          'peer flex items-center justify-center h-10 transition duration-150',
-          'text-gray-400 hover:text-green-400 dark:hover:text-blue-400' => request()->url() !== route('posts.index'),
-          'text-green-400 dark:text-blue-400' => request()->url() === route('posts.index'),
-        ])
-      >
-        <i class="bi bi-house-fill"></i><span class="ml-2">全部文章</span>
-      </a>
 
-      <span
-        @class([
-          'absolute left-0 w-full h-1 transition-all duration-300 bg-green-400 dark:bg-blue-400 rounded-full pointer-events-none',
-          'opacity-0 -bottom-5 peer-hover:opacity-100 peer-hover:-bottom-1' => request()->url() !== route('posts.index'),
-          'opacity-100 -bottom-1' => request()->url() === route('posts.index'),
-        ])
-      ></span>
-    </li>
+    <x-floating-underline-button
+      :link="route('posts.index')"
+      :selected="request()->url() === route('posts.index')"
+      :icon-class="'bi bi-house-fill'"
+    >
+      全部文章
+    </x-floating-underline-button>
 
     @foreach ($categories as $category)
-      <li class="relative">
-        <a
-          href="{{ $category->link_with_name }}"
-          @class([
-            'peer flex items-center justify-center h-10 transition duration-150',
-            'text-gray-400 hover:text-green-400 dark:hover:text-blue-400' => request()->url() !== $category->link_with_name,
-            'text-green-400 dark:text-blue-400' => request()->url() === $category->link_with_name,
-          ])
-        >
-          <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>
-        </a>
-
-        <span
-          @class([
-            'absolute left-0 w-full h-1 transition-all duration-300 bg-green-400 dark:bg-blue-400 rounded-full pointer-events-none',
-            'opacity-0 -bottom-5 peer-hover:opacity-100 peer-hover:-bottom-1' => request()->url() !== $category->link_with_name,
-            'opacity-100 -bottom-1' => request()->url() === $category->link_with_name,
-          ])
-        ></span>
-      </li>
+      <x-floating-underline-button
+        :link="$category->link_with_name"
+        :selected="request()->url() === $category->link_with_name"
+        :icon-class="$category->icon"
+      >
+        {{ $category->name }}
+      </x-floating-underline-button>
     @endforeach
   </ul>
 

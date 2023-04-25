@@ -38,7 +38,7 @@ jobs:
           security-group-id: ${{ secrets.SECURITY_GROUP_ID }}
 
   build-arm-image:
-    name: Do the job on the runner
+    name: Start to build arm image and publish to docker hub
     needs: start-runner
     runs-on: ${{ needs.start-runner.outputs.label }}
 

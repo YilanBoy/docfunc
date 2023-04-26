@@ -102,5 +102,5 @@ USER octane
 
 ENTRYPOINT ["deployment/scripts/app-entrypoint.sh"]
 
-HEALTHCHECK --start-period=5s --interval=2s --timeout=5s --retries=8 \
+HEALTHCHECK --start-period=5s --interval=30s --timeout=5s --retries=8 \
     CMD curl --fail localhost:9000 || exit 1

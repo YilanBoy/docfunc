@@ -61,7 +61,7 @@ jobs:
           file: dockerfiles/Dockerfile.app
           platforms: linux/arm64
           push: true
-          tags: nella0128/docfunc-app:latest
+          tags: nella0128/docfunc-app-arm:latest
 
       - name: Build and push laravel horizon
         uses: docker/build-push-action@v4
@@ -69,7 +69,7 @@ jobs:
           file: dockerfiles/Dockerfile.horizon
           platforms: linux/arm64
           push: true
-          tags: nella0128/docfunc-horizon:latest
+          tags: nella0128/docfunc-horizon-arm:latest
 
       - name: Build and push laravel scheduler
         uses: docker/build-push-action@v4
@@ -77,7 +77,7 @@ jobs:
           file: dockerfiles/Dockerfile.scheduler
           platforms: linux/arm64
           push: true
-          tags: nella0128/docfunc-scheduler:latest
+          tags: nella0128/docfunc-scheduler-arm:latest
 
   stop-runner:
     name: Stop self-hosted EC2 runner

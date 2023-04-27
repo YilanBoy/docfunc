@@ -5,20 +5,18 @@ namespace Database\Seeders;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
+use Generator;
 use Illuminate\Database\Seeder;
 
 class CommentSeeder extends Seeder
 {
-    public function run()
+    const COMMENT_COUNT = 10_000;
+
+    const CHUNK = 100;
+
+    protected function commentGenerator(int $userCount, int $postCount): Generator
     {
-        $userCount = User::query()->count();
-        $postCount = Post::query()->count();
-        $commentCounts = 10_000;
-        $commentChunk = 1_000;
-
-        $data = [];
-
-        for ($i = 0; $i < $commentCounts; $i++) {
+        for ($i = 1; $i <= self::COMMENT_COUNT; $i++) {
             $data[] = [
                 'user_id' => rand(1, $userCount),
                 'post_id' => rand(1, $postCount),
@@ -26,14 +24,17 @@ class CommentSeeder extends Seeder
                 'created_at' => fake()->dateTimeThisMonth(now()),
                 'updated_at' => now(),
             ];
+
+            if ($i % self::CHUNK === 0) {
+                yield $data;
+
+                $data = [];
+            }
         }
+    }
 
-        $chunks = array_chunk($data, $commentChunk);
-
-        foreach ($chunks as $chunk) {
-            Comment::query()->insert($chunk);
-        }
-
+    protected function updateCommentCount(): void
+    {
         // update comment_counts of post table
         $postCommentCountsData = Comment::query()->selectRaw('
             post_id,
@@ -51,5 +52,17 @@ class CommentSeeder extends Seeder
                     'comment_counts' => $data['post_comment_counts'],
                 ]);
         }
+    }
+
+    public function run(): void
+    {
+        $userCount = User::query()->count();
+        $postCount = Post::query()->count();
+
+        foreach ($this->commentGenerator($userCount, $postCount) as $data) {
+            Comment::query()->insert($data);
+        }
+
+        $this->updateCommentCount();
     }
 }

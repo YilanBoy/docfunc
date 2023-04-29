@@ -62,7 +62,7 @@ class ChangePassword extends Component
     public function render()
     {
         return view('livewire.users.edit.change-password')
-            ->extends('users.edit.index')
+            ->extends('layouts.users.edit.index')
             ->section('users.content');
     }
 }

@@ -10,42 +10,46 @@
         </h3>
 
         <div class="flex w-full flex-col space-y-1">
+          @php
+            $editUserUrl = route('users.edit', ['user' => auth()->id()]);
+            $inEditUserPage = request()->url() === $editUserUrl;
+          @endphp
           <a
-            href="{{ route('users.edit', ['user' => auth()->id()]) }}"
+            href="{{ $editUserUrl }}"
             @class([
                 'block rounded-md p-2 dark:text-gray-50',
-                'bg-gray-200 dark:bg-gray-600' =>
-                    request()->url() === route('users.edit', ['user' => auth()->id()]),
-                'hover:bg-gray-200 dark:hover:bg-gray-600' =>
-                    request()->url() !== route('users.edit', ['user' => auth()->id()]),
+                'bg-gray-200 dark:bg-gray-600' => $inEditUserPage,
+                'hover:bg-gray-200 dark:hover:bg-gray-600' => !$inEditUserPage,
             ])
           >
             <i class="bi bi-person-lines-fill"></i><span class="ml-2">編輯個人資料</span>
           </a>
 
+          @php
+            $changePasswordUrl = route('users.changePassword', ['user' => auth()->id()]);
+            $inChangePasswordPage = request()->url() === $changePasswordUrl;
+          @endphp
           <a
-            href="{{ route('users.changePassword', ['user' => auth()->id()]) }}"
+            href="{{ $changePasswordUrl }}"
             @class([
                 'block rounded-md p-2 dark:text-gray-50',
-                'bg-gray-200 dark:bg-gray-600' =>
-                    request()->url() ===
-                    route('users.changePassword', ['user' => auth()->id()]),
-                'hover:bg-gray-200 dark:hover:bg-gray-600' =>
-                    request()->url() !==
-                    route('users.changePassword', ['user' => auth()->id()]),
+                'bg-gray-200 dark:bg-gray-600' => $inChangePasswordPage,
+                'hover:bg-gray-200 dark:hover:bg-gray-600' => !$inChangePasswordPage,
             ])
           >
             <i class="bi bi-file-earmark-lock-fill"></i><span class="ml-2">修改密碼</span>
           </a>
 
+          @php
+            $deleteUserUrl = route('users.delete', ['user' => auth()->id()]);
+            $inDeleteUserPage = request()->url() === $deleteUserUrl;
+          @endphp
           <a
-            href="{{ route('users.delete', ['user' => auth()->id()]) }}"
+            href="{{ $deleteUserUrl }}"
             @class([
                 'block rounded-md p-2 dark:text-gray-50',
-                'bg-gray-200 dark:bg-gray-600' =>
-                    request()->url() === route('users.delete', ['user' => auth()->id()]),
-                'hover:bg-gray-200 dark:hover:bg-gray-600' =>
-                    request()->url() !== route('users.delete', ['user' => auth()->id()]),
+                'bg-gray-200 dark:bg-gray-600' => $inDeleteUserPage,
+                'hover:bg-gray-200 dark:hover:bg-gray-600' => !$inDeleteUserPage,
             ])
           >
             <i class="bi bi-person-x-fill"></i><span class="ml-2">刪除帳號</span>

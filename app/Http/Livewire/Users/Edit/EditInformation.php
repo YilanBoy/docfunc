@@ -55,7 +55,7 @@ class EditInformation extends Component
         $this->authorize('update', $this->user);
 
         return view('livewire.users.edit.edit-information')
-            ->extends('users.edit.index')
+            ->extends('layouts.users.edit.index')
             ->section('users.content');
     }
 }

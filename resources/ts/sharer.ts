@@ -35,7 +35,7 @@ class Sharer {
 
     // 拿取標籤中所有屬性前綴為 data- 的值
     private getValue(attr: String): string {
-        let val = this.elem.getAttribute('data-' + attr);
+        let val: string | null = this.elem.getAttribute('data-' + attr);
         // handing facebook hashtag attribute
         if (val && attr === 'hashtag') {
             if (!val.startsWith('#')) {

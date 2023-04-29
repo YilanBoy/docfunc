@@ -1,37 +1,37 @@
 // 用 id 取得置頂按鈕
 const scrollToTopButton = <HTMLButtonElement>(
-    document.getElementById("scroll-to-top-btn")
+    document.getElementById('scroll-to-top-btn')
 );
 
-scrollToTopButton.addEventListener("click", scrollToTop);
+scrollToTopButton.addEventListener('click', scrollToTop);
 
 // 滾動至網頁最頂部
 function scrollToTop(): void {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // 監聽滾動
-window.addEventListener("scroll", () => {
+window.addEventListener('scroll', () => {
     if (window.scrollY > 0) {
-        scrollToTopButton.classList.add("xl:flex");
+        scrollToTopButton.classList.add('xl:flex');
     } else {
-        scrollToTopButton.classList.remove("xl:flex");
+        scrollToTopButton.classList.remove('xl:flex');
     }
 });
 
-const footer = <HTMLElement>document.getElementById("footer");
+const footer = <HTMLElement>document.getElementById('footer');
 
 // 根據 footer 是否出現在畫面上調整按鈕的樣式
 let footerObserver = new IntersectionObserver(
     function (entries) {
         if (entries[0].isIntersecting) {
             // footer 在畫面上
-            scrollToTopButton.classList.remove("fixed");
-            scrollToTopButton.classList.add("absolute");
+            scrollToTopButton.classList.remove('fixed');
+            scrollToTopButton.classList.add('absolute');
         } else {
             // footer 不在畫面上
-            scrollToTopButton.classList.add("fixed");
-            scrollToTopButton.classList.remove("absolute");
+            scrollToTopButton.classList.add('fixed');
+            scrollToTopButton.classList.remove('absolute');
         }
     },
     { threshold: [0] }

@@ -2,7 +2,7 @@
 
 @section('description', $post->excerpt)
 
-@if(!is_null($post->preview_url))
+@if (!is_null($post->preview_url))
   @section('preview_url', $post->preview_url)
 @endif
 
@@ -49,7 +49,7 @@
     <button
       id="scroll-to-top-btn"
       title="Go to top"
-      class="fixed z-10 hidden w-16 h-16 transition duration-150 ease-in bg-blue-600 rounded-full shadow-md bottom-7 right-7 text-gray-50 hover:scale-110 hover:shadow-xl"
+      class="fixed bottom-7 right-7 z-10 hidden h-16 w-16 rounded-full bg-blue-600 text-gray-50 shadow-md transition duration-150 ease-in hover:scale-110 hover:shadow-xl"
     >
       <span class="m-auto text-3xl font-bold">
         <i class="bi bi-arrow-up"></i>
@@ -57,26 +57,29 @@
     </button>
 
     <div class="container mx-auto max-w-7xl">
-      <div class="flex lg:space-x-4 justify-center items-stretch">
+      <div class="flex items-stretch justify-center lg:space-x-4">
         <div class="hidden lg:block lg:w-1/6"></div>
 
-        <div class="flex flex-col items-center justify-start w-full md:w-[700px] p-2 lg:p-0">
+        <div class="flex w-full flex-col items-center justify-start p-2 md:w-[700px] lg:p-0">
 
-          <x-card id="section" class="w-full">
+          <x-card
+            id="section"
+            class="w-full"
+          >
 
             <div class="flex justify-between">
               {{-- post title --}}
-              <h1 class="text-3xl font-bold grow dark:text-gray-50">{{ $post->title }}</h1>
+              <h1 class="grow text-3xl font-bold dark:text-gray-50">{{ $post->title }}</h1>
 
               {{-- mobile post sidebar --}}
               @if (auth()->id() === $post->user_id)
-                <livewire:posts.partials.mobile-show-menu :post-id="$post->id"/>
+                <livewire:posts.partials.mobile-show-menu :post-id="$post->id" />
               @endif
 
             </div>
 
             {{-- post information --}}
-            <div class="flex items-center mt-4 space-x-2 text-neutral-400 text-base">
+            <div class="mt-4 flex items-center space-x-2 text-base text-neutral-400">
               {{-- classfication --}}
               <div>
                 <a
@@ -129,8 +132,7 @@
                   class="hover:text-neutral-500 dark:hover:text-neutral-300"
                   href="{{ $post->link_with_slug }}#comments"
                 >
-                  <i class="bi bi-chat-square-text-fill"></i><span
-                    class="ml-2">{{ $post->comment_counts }}</span>
+                  <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->comment_counts }}</span>
                 </a>
               </div>
 
@@ -138,7 +140,7 @@
 
             {{-- post tags --}}
             @if ($post->tags()->exists())
-              <div class="flex items-center mt-4 text-base">
+              <div class="mt-4 flex items-center text-base">
                 <span class="mr-1 text-green-300 dark:text-blue-300"><i class="bi bi-tags-fill"></i></span>
 
                 @foreach ($post->tags as $tag)
@@ -152,26 +154,26 @@
             {{-- post body --}}
             <div
               id="post-body"
-              class="mt-4 post-body"
+              class="post-body mt-4"
             >
               {!! $post->body !!}
             </div>
           </x-card>
 
           {{-- about author --}}
-          <x-card class="grid w-full grid-cols-12 gap-4 mt-6">
-            <div class="flex items-center justify-start col-span-12 md:col-span-2 md:justify-center">
+          <x-card class="mt-6 grid w-full grid-cols-12 gap-4">
+            <div class="col-span-12 flex items-center justify-start md:col-span-2 md:justify-center">
               <img
-                class="w-16 h-16 rounded-full"
+                class="h-16 w-16 rounded-full"
                 src="{{ $post->user->gravatar_url }}"
                 alt="{{ $post->user->name }}"
               >
             </div>
             <div class="col-span-12 space-y-2 md:col-span-10">
-              <div class="text-gray-400 uppercase">written by</div>
+              <div class="uppercase text-gray-400">written by</div>
               <a
                 href="{{ route('users.index', ['user' => $post->user->id]) }}"
-                class="inline-block text-2xl font-bold gradient-underline-grow dark:text-gray-50"
+                class="gradient-underline-grow inline-block text-2xl font-bold dark:text-gray-50"
               >
                 {{ $post->user->name }}
               </a>
@@ -204,10 +206,12 @@
     </div>
   </div>
 
-  <livewire:comments.create-modal :post-id="$post->id"/>
+  <livewire:comments.create-modal :post-id="$post->id" />
 
-  <livewire:comments.edit-modal/>
+  <livewire:comments.edit-modal />
 
-  <div id="progress-bar"
-       class="fixed top-0 left-0 w-0 h-[5px] bg-gradient-to-r from-green-500 via-teal-500 to-sky-500 dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500 z-20 transition-all duration-300 ease-out"></div>
+  <div
+    id="progress-bar"
+    class="fixed left-0 top-0 z-20 h-[5px] w-0 bg-gradient-to-r from-green-500 via-teal-500 to-sky-500 transition-all duration-300 ease-out dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500"
+  ></div>
 </div>

@@ -1,17 +1,12 @@
-<div class="w-full mr-0 space-y-6 md:w-[700px] xl:mr-6">
+<div class="mr-0 w-full space-y-6 md:w-[700px] xl:mr-6">
 
   {{-- 文章排序 --}}
-  <div class="flex flex-col-reverse w-full md:flex-row md:justify-between text-sm">
+  <div class="flex w-full flex-col-reverse text-sm md:flex-row md:justify-between">
 
-    <nav
-      class="flex w-full p-1 space-x-1 md:w-auto rounded-xl bg-gray-300 dark:bg-gray-600 dark:text-gray-50">
+    <nav class="flex w-full space-x-1 rounded-xl bg-gray-300 p-1 dark:bg-gray-600 dark:text-gray-50 md:w-auto">
 
       @php
-        $tabs = [
-          ['value' => 'latest', 'text' => '最新文章', 'icon' => 'bi bi-stars'],
-          ['value' => 'recent', 'text' => '最近更新', 'icon' => 'bi bi-wrench-adjustable'],
-          ['value' => 'comment', 'text' => '最多留言', 'icon' => 'bi bi-chat-square-text-fill'],
-        ]
+        $tabs = [['value' => 'latest', 'text' => '最新文章', 'icon' => 'bi bi-stars'], ['value' => 'recent', 'text' => '最近更新', 'icon' => 'bi bi-wrench-adjustable'], ['value' => 'comment', 'text' => '最多留言', 'icon' => 'bi bi-chat-square-text-fill']];
       @endphp
 
       @foreach ($tabs as $tab)
@@ -19,9 +14,9 @@
           wire:click.prevent="orderChange('{{ $tab['value'] }}')"
           href="{{ $currentUrl . '?order=' . $tab['value'] }}"
           @class([
-            'flex w-1/3 md:w-auto justify-center px-4 py-2 transition duration-300 rounded-lg',
-            'bg-gray-50 dark:bg-gray-700' => $order === $tab['value'],
-            'hover:bg-gray-50 dark:hover:bg-gray-700' => $order !== $tab['value'],
+              'flex w-1/3 md:w-auto justify-center px-4 py-2 transition duration-300 rounded-lg',
+              'bg-gray-50 dark:bg-gray-700' => $order === $tab['value'],
+              'hover:bg-gray-50 dark:hover:bg-gray-700' => $order !== $tab['value'],
           ])
         >
           <i class="{{ $tab['icon'] }}"></i>
@@ -33,7 +28,8 @@
     {{-- 文章分類訊息-桌面裝置 --}}
     @if ($categoryId)
       <div
-        class="flex items-center justify-end pb-2 pl-6 mb-6 border-b-2 border-gray-900 dark:text-gray-50 dark:border-gray-50 md:mb-0">
+        class="mb-6 flex items-center justify-end border-b-2 border-gray-900 pb-2 pl-6 dark:border-gray-50 dark:text-gray-50 md:mb-0"
+      >
         <span class="font-bold">{{ $categoryName }}：</span>
         <span>{{ $categoryDescription }}</span>
       </div>
@@ -42,7 +38,8 @@
     {{-- 文章標籤訊息-桌面裝置 --}}
     @if ($tagId)
       <div
-        class="flex items-center justify-end pb-2 pl-6 mb-6 border-b-2 border-gray-900 dark:text-gray-50 dark:border-gray-50 md:mb-0">
+        class="mb-6 flex items-center justify-end border-b-2 border-gray-900 pb-2 pl-6 dark:border-gray-50 dark:text-gray-50 md:mb-0"
+      >
         <span>標籤：</span>
         <span class="font-bold">{{ $tagName }}</span>
       </div>
@@ -54,12 +51,12 @@
     <x-card
       x-data="cardLink"
       x-on:click="directToCardLink($event, $refs)"
-      class="flex flex-col justify-between cursor-pointer group md:flex-row"
+      class="group flex cursor-pointer flex-col justify-between md:flex-row"
     >
       {{-- 文章 --}}
-      <div class="flex flex-col justify-between w-full">
+      <div class="flex w-full flex-col justify-between">
         {{-- 文章標題 --}}
-        <h1 class="mt-2 text-xl font-semibold md:mt-0 dark:text-gray-50">
+        <h1 class="mt-2 text-xl font-semibold dark:text-gray-50 md:mt-0">
           <a
             x-ref="cardLinkUrl"
             href="{{ $post->link_with_slug }}"
@@ -68,13 +65,13 @@
         </h1>
 
         {{-- 文章大綱 --}}
-        <div class="mt-2 text-gray-400 text-base">
+        <div class="mt-2 text-base text-gray-400">
           {{ $post->excerpt }}
         </div>
 
         {{-- 文章標籤 --}}
         @if ($post->tags_count > 0)
-          <div class="flex flex-wrap items-center mt-2 text-base">
+          <div class="mt-2 flex flex-wrap items-center text-base">
             <span class="mr-1 text-green-300 dark:text-blue-300"><i class="bi bi-tags-fill"></i></span>
 
             @foreach ($post->tags as $tag)
@@ -86,7 +83,7 @@
         @endif
 
         {{-- 文章相關資訊 --}}
-        <div class="flex items-center mt-2 space-x-2 text-base text-neutral-400">
+        <div class="mt-2 flex items-center space-x-2 text-base text-neutral-400">
           {{-- 文章分類資訊 --}}
           <div>
             <a
@@ -95,7 +92,7 @@
               class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
               <i class="{{ $post->category->icon }}"></i><span
-                class="hidden ml-2 md:inline">{{ $post->category->name }}</span>
+                class="ml-2 hidden md:inline">{{ $post->category->name }}</span>
             </a>
           </div>
           <div>&bull;</div>
@@ -106,7 +103,7 @@
               title="{{ $post->user->name }}"
               class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
-              <i class="bi bi-person-fill"></i><span class="hidden ml-2 md:inline">{{ $post->user->name }}</span>
+              <i class="bi bi-person-fill"></i><span class="ml-2 hidden md:inline">{{ $post->user->name }}</span>
             </a>
           </div>
           <div>&bull;</div>
@@ -118,7 +115,7 @@
               class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
               <i class="bi bi-clock-fill"></i><span
-                class="hidden ml-2 md:inline">{{ $post->created_at->diffForHumans() }}</span>
+                class="ml-2 hidden md:inline">{{ $post->created_at->diffForHumans() }}</span>
             </a>
           </div>
           <div>&bull;</div>
@@ -129,7 +126,7 @@
               class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
               <i class="bi bi-chat-square-text-fill"></i><span
-                class="hidden ml-2 md:inline">{{ $post->comment_counts }}</span>
+                class="ml-2 hidden md:inline">{{ $post->comment_counts }}</span>
             </a>
           </div>
         </div>
@@ -138,7 +135,8 @@
 
   @empty
     <x-card
-      class="flex items-center justify-center w-full transition duration-150 ease-in h-36 hover:-translate-x-2 hover:shadow-xl dark:text-gray-50">
+      class="flex h-36 w-full items-center justify-center transition duration-150 ease-in hover:-translate-x-2 hover:shadow-xl dark:text-gray-50"
+    >
       <span>Whoops！此分類底下還沒有文章，趕緊寫一篇吧！</span>
     </x-card>
   @endforelse

@@ -2,7 +2,6 @@
 <div class="space-y-6">
   {{-- 文章列表 --}}
   @forelse ($posts as $post)
-
     @if (!$post->trashed())
       <livewire:users.information.posts.post-card
         :postId="$post->id"
@@ -34,7 +33,7 @@
     @endif
 
   @empty
-    <x-card class="flex items-center justify-center w-full h-36 dark:text-gray-50">
+    <x-card class="flex h-36 w-full items-center justify-center dark:text-gray-50">
       <span>目前沒有文章，有沒有什麼事情想要分享呢？</span>
     </x-card>
   @endforelse

@@ -1,12 +1,10 @@
 <div class="relative">
   <input
     type="checkbox"
-    {{
-      $attributes->merge([
+    {{ $attributes->merge([
         'type' => 'submit',
         'class' => 'sr-only peer',
-      ])
-    }}
+    ]) }}
   />
   <div class="block h-8 w-14 rounded-full bg-gray-400 transition-all duration-300 peer-checked:bg-cyan-400">
   </div>

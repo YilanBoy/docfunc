@@ -1,5 +1,5 @@
-import _ from "lodash";
-import axios from "axios";
+import _ from 'lodash';
+import axios from 'axios';
 
 window._ = _;
 
@@ -11,7 +11,7 @@ window._ = _;
 
 window.axios = axios;
 
-window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

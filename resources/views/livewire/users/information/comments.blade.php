@@ -11,47 +11,42 @@
 {{-- 會員留言 --}}
 <div
   x-data
-  x-init="
-    Livewire.hook('message.processed', (el, component) => {
+  x-init="Livewire.hook('message.processed', (el, component) => {
       window.hljs.highlightAll();
-    })
-  "
+  })"
   class="space-y-6"
 >
   @forelse ($comments as $comment)
     <x-dashed-card
       x-data="cardLink"
       x-on:click="directToCardLink($event, $refs)"
-      class="relative group cursor-pointer max-h-64 overflow-hidden
-      after:absolute after:inset-x-0 after:bottom-0 after:h-1/2
-      after:bg-gradient-to-b after:from-transparent after:to-gray-100 dark:after:to-gray-700"
+      class="group relative max-h-64 cursor-pointer overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-1/2 after:bg-gradient-to-b after:from-transparent after:to-gray-100 dark:after:to-gray-700"
     >
       <a
         x-ref="cardLinkUrl"
         href="{{ $comment->post->link_with_slug }}#comments"
-        class="group-gradient-underline-grow text-xl font-semibold dark:text-gray-50 "
+        class="group-gradient-underline-grow text-xl font-semibold dark:text-gray-50"
       >
         {{ $comment->post->title }}
       </a>
 
       <div class="flex flex-col">
         {{-- 留言 --}}
-        <div
-          class="comment-body"
-        >
+        <div class="comment-body">
           {!! $comment->body !!}
         </div>
       </div>
 
       <div
-        class="absolute bottom-3 right-3 text-base z-10 bg-emerald-500 rounded-lg py-2 px-4 dark:bg-cyan-600 text-gray-50">
+        class="absolute bottom-3 right-3 z-10 rounded-lg bg-emerald-500 px-4 py-2 text-base text-gray-50 dark:bg-cyan-600"
+      >
         <i class="bi bi-clock-fill"></i>
         <span class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>
       </div>
     </x-dashed-card>
 
   @empty
-    <x-card class="flex items-center justify-center w-full h-36 dark:text-gray-50">
+    <x-card class="flex h-36 w-full items-center justify-center dark:text-gray-50">
       <span>目前沒有留言，快點找文章進行留言吧！</span>
     </x-card>
   @endforelse

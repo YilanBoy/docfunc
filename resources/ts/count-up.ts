@@ -1,5 +1,5 @@
 // select all elements with class="count-up"
-const countUps = document.querySelectorAll(".count-up");
+const countUps = document.querySelectorAll('.count-up');
 
 countUps.forEach((countUp) => {
     let from = 0;

@@ -1,13 +1,13 @@
-<div class="sticky flex flex-col space-y-2 -translate-y-1/2 top-1/2">
+<div class="sticky top-1/2 flex -translate-y-1/2 flex-col space-y-2">
   {{-- Home --}}
   <a
     role="button"
     href="{{ route('posts.index') }}"
-    class="flex items-center justify-center text-gray-400 w-14 h-14 group"
+    class="group flex h-14 w-14 items-center justify-center text-gray-400"
   >
-      <span class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:rotate-12">
-        <i class="bi bi-house-fill"></i>
-      </span>
+    <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
+      <i class="bi bi-house-fill"></i>
+    </span>
   </a>
 
   <!-- Facebook share button -->
@@ -16,11 +16,11 @@
     data-sharer="facebook"
     data-hashtag="{{ config('app.name') }}"
     data-url="{{ request()->fullUrl() }}"
-    class="flex items-center justify-center text-gray-400 w-14 h-14 group"
+    class="group flex h-14 w-14 items-center justify-center text-gray-400"
   >
-      <span class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:rotate-12">
-        <i class="bi bi-facebook"></i>
-      </span>
+    <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
+      <i class="bi bi-facebook"></i>
+    </span>
   </button>
 
   <!-- Twitter share button -->
@@ -30,11 +30,11 @@
     data-title="{{ $postTitle }}"
     data-hashtags="{{ config('app.name') }}"
     data-url="{{ request()->fullUrl() }}"
-    class="flex items-center justify-center text-gray-400 w-14 h-14 group"
+    class="group flex h-14 w-14 items-center justify-center text-gray-400"
   >
-      <span class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:rotate-12">
-        <i class="bi bi-twitter"></i>
-      </span>
+    <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
+      <i class="bi bi-twitter"></i>
+    </span>
   </button>
 
   {{-- 編輯文章 --}}
@@ -44,9 +44,9 @@
     <a
       role="button"
       href="{{ route('posts.edit', ['id' => $postId]) }}"
-      class="flex items-center justify-center text-gray-400 w-14 h-14 group"
+      class="group flex h-14 w-14 items-center justify-center text-gray-400"
     >
-      <span class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:rotate-12">
+      <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
         <i class="bi bi-pencil-square"></i>
       </span>
     </a>
@@ -57,9 +57,9 @@
       wire:click="deletePost({{ $postId }})"
       type="button"
       title="刪除文章"
-      class="flex items-center justify-center text-gray-400 w-14 h-14 group"
+      class="group flex h-14 w-14 items-center justify-center text-gray-400"
     >
-      <span class="text-2xl transition duration-150 ease-in group-hover:scale-125 group-hover:rotate-12">
+      <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
         <i class="bi bi-trash-fill"></i>
       </span>
     </button>

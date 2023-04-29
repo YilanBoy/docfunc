@@ -1,4 +1,4 @@
-import Tagify from "@yaireo/tagify";
+import Tagify from '@yaireo/tagify';
 
 declare global {
     interface Window {
@@ -6,9 +6,9 @@ declare global {
     }
 }
 
-const tags = <HTMLInputElement>document.querySelector("#tags");
+const tags = <HTMLInputElement>document.querySelector('#tags');
 
-fetch("/api/tags")
+fetch('/api/tags')
     .then((response) => response.json())
     .then(function (tagsJson) {
         window.tagify = new Tagify(tags, {
@@ -20,7 +20,7 @@ fetch("/api/tags")
                 enabled: 0,
                 maxItems: 5,
                 // place the dropdown near the typed text
-                position: "text",
+                position: 'text',
                 // keep the dropdown open after selecting a suggestion
                 closeOnSelect: false,
                 highlightFirst: true,

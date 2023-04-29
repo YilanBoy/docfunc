@@ -1,6 +1,6 @@
 <div
   x-data="{ menuIsOpen: false }"
-  class="shadow-lg bg-gray-50 lg:hidden dark:bg-gray-700"
+  class="bg-gray-50 shadow-lg dark:bg-gray-700 lg:hidden"
 >
   {{-- logout form --}}
   <form
@@ -12,8 +12,8 @@
     @csrf
   </form>
 
-  <div class="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
-    <div class="relative flex items-center justify-between h-[4.5rem]">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-[4.5rem] items-center justify-between">
       <div class="absolute inset-y-0 left-0 flex items-center">
         {{-- 手機版-開關選單按鈕 --}}
         <button
@@ -21,7 +21,7 @@
           type="button"
           aria-controls="mobile-menu"
           aria-expanded="false"
-          class="inline-flex items-center justify-center p-2 text-gray-700 rounded-md"
+          class="inline-flex items-center justify-center rounded-md p-2 text-gray-700"
         >
           <span class="sr-only">Open main menu</span>
           {{-- 手機版-關閉選單的 icon --}}
@@ -42,11 +42,15 @@
         </button>
       </div>
 
-      <div class="flex items-center mx-auto">
-        <img src="{{ asset('images/icon/icon.svg') }}" alt="logo" class="hidden w-10 h-10 md:inline-block">
-        <span class="hidden ml-3 font-mono text-xl font-bold md:block dark:text-gray-50">
-            {{ config('app.name') }}
-          </span>
+      <div class="mx-auto flex items-center">
+        <img
+          src="{{ asset('images/icon/icon.svg') }}"
+          alt="logo"
+          class="hidden h-10 w-10 md:inline-block"
+        >
+        <span class="ml-3 hidden font-mono text-xl font-bold dark:text-gray-50 md:block">
+          {{ config('app.name') }}
+        </span>
       </div>
 
       <div class="absolute inset-y-0 right-0 flex items-center space-x-6">
@@ -64,13 +68,13 @@
           "
           type="button"
         >
-            <span class="text-amber-400 dark:hidden hover:text-amber-500">
-              <i class="bi bi-sun-fill"></i>
-            </span>
+          <span class="text-amber-400 hover:text-amber-500 dark:hidden">
+            <i class="bi bi-sun-fill"></i>
+          </span>
 
-          <span class="hidden text-blue-500 dark:inline hover:text-blue-400">
-              <i class="bi bi-moon-stars-fill"></i>
-            </span>
+          <span class="hidden text-blue-500 hover:text-blue-400 dark:inline">
+            <i class="bi bi-moon-stars-fill"></i>
+          </span>
         </button>
 
         @guest
@@ -78,7 +82,7 @@
           @if ($showRegisterButton)
             <a
               href="{{ route('register') }}"
-              class="px-4 py-2 text-blue-400 bg-transparent border border-blue-400 rounded-md hover:bg-blue-400 hover:text-gray-50 hover:border-transparent"
+              class="rounded-md border border-blue-400 bg-transparent px-4 py-2 text-blue-400 hover:border-transparent hover:bg-blue-400 hover:text-gray-50"
             >
               註冊
             </a>
@@ -87,12 +91,11 @@
           @if (request()->url() !== route('login'))
             <a
               href="{{ route('login') }}"
-              class="px-4 py-2 bg-transparent border rounded-md text-emerald-400 border-emerald-400 hover:bg-emerald-400 hover:text-gray-50 hover:border-transparent"
+              class="rounded-md border border-emerald-400 bg-transparent px-4 py-2 text-emerald-400 hover:border-transparent hover:bg-emerald-400 hover:text-gray-50"
             >
               登入
             </a>
           @endif
-
         @else
           {{-- 手機版-已登入 --}}
 
@@ -100,15 +103,15 @@
           <span class="relative inline-flex rounded-md">
             <a
               href="{{ route('notifications.index') }}"
-              class="text-gray-400 rounded-full hover:text-gray-700 dark:hover:text-gray-50"
+              class="rounded-full text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
             >
               <i class="bi bi-bell-fill"></i>
             </a>
 
             @if (auth()->user()->notification_count > 0)
-              <span class="absolute flex w-3 h-3 -mt-1 -mr-1 top-2 right-2">
-                <span class="absolute inline-flex w-full h-full bg-red-400 rounded-full opacity-75 animate-ping"></span>
-                <span class="relative inline-flex w-3 h-3 bg-red-500 rounded-full"></span>
+              <span class="absolute right-2 top-2 -mr-1 -mt-1 flex h-3 w-3">
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
+                <span class="relative inline-flex h-3 w-3 rounded-full bg-red-500"></span>
               </span>
             @endif
           </span>
@@ -127,11 +130,11 @@
                 id="user-menu-button"
                 aria-expanded="false"
                 aria-haspopup="true"
-                class="flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-400 focus:ring-white"
+                class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-400"
               >
                 <span class="sr-only">Open user menu</span>
                 <img
-                  class="w-10 h-10 rounded-full "
+                  class="h-10 w-10 rounded-full"
                   src="{{ auth()->user()->gravatar_url }}"
                   alt=""
                 >
@@ -148,13 +151,13 @@
               aria-orientation="vertical"
               aria-labelledby="user-menu-button"
               tabindex="-1"
-              class="absolute right-0 w-48 p-2 mt-2 text-gray-700 rounded-md shadow-lg bg-gray-50 ring-1 ring-black ring-opacity-20 dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
+              class="absolute right-0 mt-2 w-48 rounded-md bg-gray-50 p-2 text-gray-700 shadow-lg ring-1 ring-black ring-opacity-20 dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
             >
               <a
                 href="{{ route('posts.create') }}"
                 role="menuitem"
                 tabindex="-1"
-                class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600"
+                class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600"
               >
                 <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
               </a>
@@ -163,7 +166,7 @@
                 href="{{ route('users.index', ['user' => auth()->id()]) }}"
                 role="menuitem"
                 tabindex="-1"
-                class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600"
+                class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600"
               >
                 <i class="bi bi-info-circle-fill"></i><span class="ml-2">個人資訊</span>
               </a>
@@ -172,7 +175,7 @@
                 href="{{ route('users.edit', ['user' => auth()->id()]) }}"
                 role="menuitem"
                 tabindex="-1"
-                class="block px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600"
+                class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600"
               >
                 <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
               </a>
@@ -186,7 +189,7 @@
                 type="button"
                 role="menuitem"
                 tabindex="-1"
-                class="flex items-start w-full px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600"
+                class="flex w-full items-start rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600"
               >
                 <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
               </button>
@@ -204,30 +207,38 @@
     x-collapse
     class="lg:hidden"
   >
-    <div class="px-2 pt-2 pb-3 space-y-1">
+    <div class="space-y-1 px-2 pb-3 pt-2">
       <a
         href="{{ route('posts.index') }}"
         @class([
-          'block px-3 py-2 rounded-md font-medium',
-          'bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-50' => request()->url() === route('posts.index'),
-          'text-gray-400 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-600 dark:hover:text-gray-50' => request()->url() !== route('posts.index'),
+            'block px-3 py-2 rounded-md font-medium',
+            'bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-50' =>
+                request()->url() === route('posts.index'),
+            'text-gray-400 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-600 dark:hover:text-gray-50' =>
+                request()->url() !== route('posts.index'),
         ])
-        @if (request()->url() === route('posts.index')) aria-current="page" @endif
-      >
+        @if (request()->url() === route('posts.index'))
+        aria-current="page"
+        @endif
+        >
         <i class="bi bi-house-fill"></i><span class="ml-2">全部文章</span>
       </a>
       @foreach ($categories as $category)
         <a
           href="{{ $category->link_with_name }}"
           @class([
-            'block px-3 py-2 rounded-md font-medium',
-            'bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-50' => request()->url() === $category->link_with_name,
-            'text-gray-400 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-600 dark:hover:text-gray-50' => request()->url() !== $category->link_with_name,
+              'block px-3 py-2 rounded-md font-medium',
+              'bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-50' =>
+                  request()->url() === $category->link_with_name,
+              'text-gray-400 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-600 dark:hover:text-gray-50' =>
+                  request()->url() !== $category->link_with_name,
           ])
-          @if (request()->url() === $category->link_with_name) aria-current="page" @endif
-        >
-          <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>
-        </a>
+          @if (request()->url() === $category->link_with_name)
+          aria-current="page"
+      @endif
+      >
+      <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>
+      </a>
       @endforeach
     </div>
   </div>

@@ -1,15 +1,13 @@
 <div
   x-cloak
   x-data="alertComponent(@js(session()->get('alert')))"
-  x-init="
-    if (alert !== null) {
+  x-init="if (alert !== null) {
       showAlert(alert.status, alert.message)
 
-      setTimeout(function () {
-      openAlertBox=false
+      setTimeout(function() {
+          openAlertBox = false
       }, 3000);
-    }
-  "
+  }"
   @info-badge.window="
     showAlert(event.detail.status, event.detail.message)
 
@@ -28,12 +26,19 @@
 >
   <div class="p-10">
     <div
-      class="flex items-center text-white text-lg font-bold px-4 py-3 rounded shadow-md"
+      class="flex items-center rounded px-4 py-3 text-lg font-bold text-white shadow-md"
       :class="alertBackgroundColor"
       role="alert"
     >
-      <span x-html="alertMessage" class="flex items-center"></span>
-      <button type="button" class="flex" @click="openAlertBox = false">
+      <span
+        x-html="alertMessage"
+        class="flex items-center"
+      ></span>
+      <button
+        type="button"
+        class="flex"
+        @click="openAlertBox = false"
+      >
         <svg
           fill="none"
           stroke-linecap="round"
@@ -41,7 +46,7 @@
           stroke-width="1"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          class="w-4 h-4 ml-4"
+          class="ml-4 h-4 w-4"
         >
           <path d="M6 18L18 6M6 6l12 12"></path>
         </svg>

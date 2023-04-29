@@ -1,9 +1,10 @@
 <div class="hidden space-y-6 xl:block xl:w-[320px]">
   {{-- 介紹 --}}
   <div
-    class="p-0.5 bg-gradient-to-br from-green-500 via-teal-500 to-sky-500 rounded-xl shadow-lg dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500">
-    <div class="p-5 bg-gray-50 rounded-xl dark:bg-gray-700 dark:text-gray-50">
-      <h3 class="pb-3 mb-3 text-lg font-semibold text-center border-b-2 border-black dark:border-white">
+    class="rounded-xl bg-gradient-to-br from-green-500 via-teal-500 to-sky-500 p-0.5 shadow-lg dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500"
+  >
+    <div class="rounded-xl bg-gray-50 p-5 dark:bg-gray-700 dark:text-gray-50">
+      <h3 class="mb-3 border-b-2 border-black pb-3 text-center text-lg font-semibold dark:border-white">
         歡迎來到 <span class="font-mono">{{ config('app.name') }}</span>！
       </h3>
       <span>
@@ -11,10 +12,10 @@
         <br>
         此部落格使用 Laravel、Alpine.js 與 Tailwind CSS 開發～
       </span>
-      <div class="flex items-center justify-center mt-7">
+      <div class="mt-7 flex items-center justify-center">
         <a
           href="{{ route('posts.create') }}"
-          class="group [transform:translateZ(0)] px-4 py-2 rounded-lg overflow-hidden bg-emerald-500 relative before:absolute before:bg-blue-600 before:top-1/2 before:left-1/2 before:h-8 before:w-8 before:-translate-y-1/2 before:-translate-x-1/2 before:rounded-full before:scale-[0] before:opacity-0 hover:before:scale-[10] hover:before:opacity-100 before:transition before:ease-in-out before:duration-700 w-full flex justify-center items-center"
+          class="group relative flex w-full items-center justify-center overflow-hidden rounded-lg bg-emerald-500 px-4 py-2 [transform:translateZ(0)] before:absolute before:left-1/2 before:top-1/2 before:h-8 before:w-8 before:-translate-x-1/2 before:-translate-y-1/2 before:scale-[0] before:rounded-full before:bg-blue-600 before:opacity-0 before:transition before:duration-700 before:ease-in-out hover:before:scale-[10] hover:before:opacity-100"
         >
           <span class="relative z-0 text-lg font-semibold text-gray-200 transition duration-700 ease-in-out">
             <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
@@ -27,7 +28,7 @@
   {{-- 熱門標籤 --}}
   @if ($popularTags->count())
     <x-card class="dark:text-gray-50">
-      <h3 class="pb-3 mb-3 text-lg font-semibold text-center border-b-2 border-black dark:border-white">
+      <h3 class="mb-3 border-b-2 border-black pb-3 text-center text-lg font-semibold dark:border-white">
         <i class="bi bi-tags-fill"></i><span class="ml-2">熱門標籤</span>
       </h3>
       <div class="flex flex-wrap">
@@ -43,7 +44,7 @@
   {{-- 學習資源推薦 --}}
   @if ($links->count())
     <x-card class="dark:text-gray-50">
-      <h3 class="pb-3 mb-3 text-lg font-semibold text-center border-b-2 border-black dark:border-white">
+      <h3 class="mb-3 border-b-2 border-black pb-3 text-center text-lg font-semibold dark:border-white">
         <i class="bi bi-file-earmark-code-fill"></i><span class="ml-2">學習資源推薦</span>
       </h3>
       <div class="flex flex-col">
@@ -52,7 +53,7 @@
             href="{{ $link->link }}"
             target="_blank"
             rel="nofollow noopener noreferrer"
-            class="flex p-2 rounded-md hover:bg-gray-200 dark:text-gray-50 dark:hover:bg-gray-600"
+            class="flex rounded-md p-2 hover:bg-gray-200 dark:text-gray-50 dark:hover:bg-gray-600"
           >
             <i class="bi bi-link-45deg"></i><span class="ml-2">{{ $link->title }}</span>
           </a>
@@ -74,7 +75,7 @@
     href="{{ route('feeds.main') }}"
     target="_blank"
     rel="nofollow noopener"
-    class="inline-flex items-center justify-center w-full px-4 py-2 text-lg font-semibold tracking-widest transition duration-150 ease-in-out border border-transparent rounded-lg text-gray-50 bg-zinc-500 hover:bg-zinc-600 active:bg-zinc-700 focus:outline-none focus:border-zinc-700 focus:ring ring-zinc-300 dark:ring-zinc-800"
+    class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-zinc-500 px-4 py-2 text-lg font-semibold tracking-widest text-gray-50 ring-zinc-300 transition duration-150 ease-in-out hover:bg-zinc-600 focus:border-zinc-700 focus:outline-none focus:ring active:bg-zinc-700 dark:ring-zinc-800"
   >
     <i class="bi bi-rss-fill"></i><span class="ml-2">訂閱文章</span>
   </a>

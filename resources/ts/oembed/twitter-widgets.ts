@@ -13,7 +13,7 @@ window.twttr = (function (d, s, id) {
 
     js = <HTMLScriptElement>d.createElement(s);
     js.id = id;
-    js.src = "https://platform.twitter.com/widgets.js";
+    js.src = 'https://platform.twitter.com/widgets.js';
 
     if (fjs.parentNode !== null) fjs.parentNode.insertBefore(js, fjs);
 
@@ -23,4 +23,4 @@ window.twttr = (function (d, s, id) {
     };
 
     return t;
-})(document, "script", "twitter-wjs");
+})(document, 'script', 'twitter-wjs');

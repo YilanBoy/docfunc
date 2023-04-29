@@ -1,6 +1,6 @@
 <x-mail-base :title="'DocFunc - 帳號刪除確認'">
   <x-card x-data>
-    <h3 class="pb-3 mb-3 text-lg font-semibold text-center border-b-2 border-black">
+    <h3 class="mb-3 border-b-2 border-black pb-3 text-center text-lg font-semibold">
       <i class="bi bi-person-x-fill"></i><span class="ml-2">DocFunc - 帳號刪除確認</span>
     </h3>
 
@@ -9,7 +9,7 @@
       <span class="mt-4 text-red-400">請注意！您撰寫的文章與留言都會一起刪除，而且無法恢復！</span>
     </div>
 
-    <div class="flex items-center justify-center mt-4">
+    <div class="mt-4 flex items-center justify-center">
       {{-- Delete User Button --}}
       <a
         x-on:click.prevent="
@@ -18,12 +18,10 @@
           }
         "
         href="{{ $destroyLink }}"
-        class="inline-flex items-center justify-center px-4 py-2 font-semibold tracking-widest uppercase transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md text-gray-50 hover:bg-red-500 active:bg-red-900 focus:outline-none focus:border-red-900 focus:ring ring-red-300 disabled:opacity-25"
+        class="inline-flex items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 font-semibold uppercase tracking-widest text-gray-50 ring-red-300 transition duration-150 ease-in-out hover:bg-red-500 focus:border-red-900 focus:outline-none focus:ring active:bg-red-900 disabled:opacity-25"
       >
         <i class="bi bi-exclamation-triangle-fill"></i><span class="ml-2">確認刪除帳號</span>
       </a>
     </div>
   </x-card>
 </x-mail-base>
-
-

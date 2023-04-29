@@ -3,23 +3,39 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
   {{-- CSRF Token --}}
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta
+    name="csrf-token"
+    content="{{ csrf_token() }}"
+  >
 
   <title>@yield('title', config('app.name'))</title>
 
-  {{-- Primary Meta Tags--}}
-  <meta name="title" content="@yield('title', config('app.name'))">
-  <meta name="description" content="@yield('description', config('app.name'))">
+  {{-- Primary Meta Tags --}}
+  <meta
+    name="title"
+    content="@yield('title', config('app.name'))"
+  >
+  <meta
+    name="description"
+    content="@yield('description', config('app.name'))"
+  >
 
-  <x-sharing-meta-tags/>
+  <x-sharing-meta-tags />
 
   {{-- Ｗeb Feed --}}
   @include('feed::links')
 
   {{-- Favicon --}}
-  <link rel="shortcut icon" href="{{ asset('images/icon/icon.svg') }}" type="image/x-icon">
+  <link
+    rel="shortcut icon"
+    href="{{ asset('images/icon/icon.svg') }}"
+    type="image/x-icon"
+  >
   {{-- Set theme --}}
   <script>
     if (
@@ -35,15 +51,28 @@
   {{-- Styles --}}
   @vite('resources/css/app.css')
   {{-- Icon --}}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+  >
   {{-- Font --}}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap"
+    rel="stylesheet"
+  >
 
   @stack('css')
 
-  <livewire:styles/>
+  <livewire:styles />
 
   {{-- google recaptcha --}}
   <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
@@ -55,29 +84,30 @@
   x-data
   {{-- when change page, scroll to top --}}
   @scroll-to-top.window="window.scrollTo({ top: 0, behavior: 'smooth' })"
-  class="antialiased text-gray-900 bg-gray-200 overscroll-y-none dark:bg-gray-800 font-noto text-lg"
+  class="overscroll-y-none bg-gray-200 font-noto text-lg text-gray-900 antialiased dark:bg-gray-800"
 >
 
-<div
-  class="relative flex flex-col justify-between min-h-screen selection:bg-green-300 selection:text-green-900 dark:selection:bg-indigo-300 dark:selection:text-indigo-900">
+  <div
+    class="relative flex min-h-screen flex-col justify-between selection:bg-green-300 selection:text-green-900 dark:selection:bg-indigo-300 dark:selection:text-indigo-900"
+  >
 
-  <livewire:layouts.header.nav/>
+    <livewire:layouts.header.nav />
 
-  {{ $slot }}
+    {{ $slot }}
 
-  <livewire:layouts.footer/>
+    <livewire:layouts.footer />
 
-</div>
+  </div>
 
-{{-- Scripts --}}
-<livewire:scripts/>
+  {{-- Scripts --}}
+  <livewire:scripts />
 
-@vite('resources/js/app.js')
+  @vite('resources/js/app.js')
 
-{{-- Flash Alert --}}
-<x-alert/>
+  {{-- Flash Alert --}}
+  <x-alert />
 
-@stack('script')
+  @stack('script')
 </body>
 
 </html>

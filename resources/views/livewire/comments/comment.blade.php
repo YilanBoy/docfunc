@@ -1,13 +1,13 @@
 <x-dashed-card>
   <div class="flex flex-col">
     {{-- 大頭貼 --}}
-    <div class="space-x-4 flex items-center text-base">
+    <div class="flex items-center space-x-4 text-base">
       @if ($userId !== 0)
         <a href="{{ route('users.index', ['user' => $userId]) }}">
           <img
             src="{{ $userGravatarUrl }}"
             alt="{{ $userName }}"
-            class="w-8 h-8 rounded-full hover:ring-2 hover:ring-blue-400"
+            class="h-8 w-8 rounded-full hover:ring-2 hover:ring-blue-400"
           >
         </a>
 

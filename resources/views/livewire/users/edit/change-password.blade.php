@@ -1,10 +1,13 @@
 @section('title', '會員中心-修改密碼')
 
-<x-card class="flex flex-col justify-center w-full mt-6 md:w-1/2 md:mt-0 space-y-6">
+<x-card class="mt-6 flex w-full flex-col justify-center space-y-6 md:mt-0 md:w-1/2">
   {{-- 驗證錯誤訊息 --}}
-  <x-auth-validation-errors :errors="$errors"/>
+  <x-auth-validation-errors :errors="$errors" />
 
-  <form wire:submit.prevent="update" class="w-full">
+  <form
+    wire:submit.prevent="update"
+    class="w-full"
+  >
     {{-- 舊密碼 --}}
     <div>
       <x-floating-label-input
@@ -39,7 +42,7 @@
       ></x-floating-label-input>
     </div>
 
-    <div class="flex items-center justify-end mt-6">
+    <div class="mt-6 flex items-center justify-end">
       {{-- 儲存按鈕 --}}
       <x-button>
         <i class="bi bi-save2-fill"></i><span class="ml-2">修改密碼</span>

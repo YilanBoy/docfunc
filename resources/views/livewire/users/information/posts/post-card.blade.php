@@ -1,12 +1,12 @@
 <x-card
   x-data="cardLink"
   x-on:click="directToCardLink($event, $refs)"
-  class="flex flex-col justify-between cursor-pointer group md:flex-row"
+  class="group flex cursor-pointer flex-col justify-between md:flex-row"
 >
   {{-- 文章 --}}
-  <div class="flex flex-col justify-between w-full">
+  <div class="flex w-full flex-col justify-between">
     {{-- 文章標題 --}}
-    <span class="mt-2 text-xl font-semibold md:mt-0 dark:text-gray-50">
+    <span class="mt-2 text-xl font-semibold dark:text-gray-50 md:mt-0">
       <a
         x-ref="cardLinkUrl"
         href="{{ $postLink }}"
@@ -15,7 +15,7 @@
     </span>
 
     {{-- 文章相關資訊 --}}
-    <div class="flex items-center mt-2 space-x-2 text-base text-neutral-400">
+    <div class="mt-2 flex items-center space-x-2 text-base text-neutral-400">
       {{-- 文章分類資訊 --}}
       <div>
         <a
@@ -51,11 +51,11 @@
   </div>
 
   @if (auth()->id() === $postAuthorId)
-    <div class="flex items-center mt-2 space-x-2 md:mt-0">
+    <div class="mt-2 flex items-center space-x-2 md:mt-0">
       {{-- 編輯文章 --}}
       <a
-        href="{{ route('posts.edit', ['id' => $postId ]) }}"
-        class="inline-flex items-center justify-center w-10 h-10 transition duration-150 ease-in-out bg-green-500 border border-transparent rounded-md text-gray-50 hover:bg-green-600 active:bg-green-700 focus:outline-none focus:border-green-700 focus:ring ring-green-300"
+        href="{{ route('posts.edit', ['id' => $postId]) }}"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-transparent bg-green-500 text-gray-50 ring-green-300 transition duration-150 ease-in-out hover:bg-green-600 focus:border-green-700 focus:outline-none focus:ring active:bg-green-700"
       >
         <i class="bi bi-pencil-square"></i>
       </a>
@@ -65,7 +65,7 @@
         onclick="confirm('你確定要刪除文章嗎？（7 天之內可以還原）') || event.stopImmediatePropagation()"
         wire:click.stop="deletePost({{ $postId }})"
         type="button"
-        class="inline-flex items-center justify-center w-10 h-10 transition duration-150 ease-in-out bg-red-500 border border-transparent rounded-md text-gray-50 hover:bg-red-600 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring ring-red-300"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-transparent bg-red-500 text-gray-50 ring-red-300 transition duration-150 ease-in-out hover:bg-red-600 focus:border-red-700 focus:outline-none focus:ring active:bg-red-700"
       >
         <i class="bi bi-trash-fill"></i>
       </button>

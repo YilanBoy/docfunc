@@ -36,8 +36,7 @@
         prose-pre:p-0 prose-pre:rounded-lg
             /* blockquote */
         prose-blockquote:border-slate-300 prose-blockquote:text-slate-500
-        dark:prose-blockquote:border-slate-600 dark:prose-blockquote:text-slate-400
-        ;
+        dark:prose-blockquote:border-slate-600 dark:prose-blockquote:text-slate-400;
     }
 
     /* ckeditor5-font/theme/fontsize.css */
@@ -74,8 +73,8 @@
 
 /* scroll bar */
 ::-webkit-scrollbar {
-    height: .8em;
-    width: .8em;
+    height: 0.8em;
+    width: 0.8em;
 }
 
 ::-webkit-scrollbar-track {

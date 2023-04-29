@@ -4,13 +4,13 @@
   <div class="container mx-auto max-w-7xl">
     <div class="flex items-center justify-center px-4 xl:px-0">
 
-      <div class="flex flex-col items-center justify-center w-full">
+      <div class="flex w-full flex-col items-center justify-center">
         {{-- 頁面標題 --}}
-        <div class="text-2xl text-gray-700 fill-current dark:text-gray-50">
+        <div class="fill-current text-2xl text-gray-700 dark:text-gray-50">
           <i class="bi bi-person-check-fill"></i><span class="ml-4">驗證 Email</span>
         </div>
 
-        <x-card class="w-full mt-4 overflow-hidden sm:max-w-md">
+        <x-card class="mt-4 w-full overflow-hidden sm:max-w-md">
           <div class="mb-4 text-gray-600 dark:text-gray-50">
             {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
           </div>
@@ -21,8 +21,11 @@
             </div>
           @endif
 
-          <div class="flex items-center justify-between mt-4">
-            <form method="POST" action="{{ route('verification.send') }}">
+          <div class="mt-4 flex items-center justify-between">
+            <form
+              method="POST"
+              action="{{ route('verification.send') }}"
+            >
               @csrf
 
               <div>
@@ -32,10 +35,16 @@
               </div>
             </form>
 
-            <form method="POST" action="{{ route('logout') }}">
+            <form
+              method="POST"
+              action="{{ route('logout') }}"
+            >
               @csrf
 
-              <button type="submit" class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50">
+              <button
+                type="submit"
+                class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
+              >
                 {{ __('Log Out') }}
               </button>
             </form>

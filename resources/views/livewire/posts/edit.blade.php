@@ -1,11 +1,7 @@
 @section('title', '編輯文章')
 
 @push('css')
-  @vite([
-    'resources/css/editor.css',
-    'node_modules/@yaireo/tagify/dist/tagify.css',
-    'resources/css/missing-content-style.css',
-  ])
+  @vite(['resources/css/editor.css', 'node_modules/@yaireo/tagify/dist/tagify.css', 'resources/css/missing-content-style.css'])
 @endpush
 
 @push('script')

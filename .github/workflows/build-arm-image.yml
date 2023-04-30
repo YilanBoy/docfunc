@@ -83,6 +83,7 @@ jobs:
     name: Stop self-hosted EC2 runner
     needs:
       - start-runner
+      - build-arm-image
     runs-on: ubuntu-latest
 
     # required to stop the runner even if the error happened in the previous jobs

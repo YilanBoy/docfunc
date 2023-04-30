@@ -21,7 +21,7 @@ class CommentSeeder extends Seeder
                 'user_id' => rand(1, $userCount),
                 'post_id' => rand(1, $postCount),
                 'body' => fake()->sentence,
-                'created_at' => fake()->dateTimeThisMonth(now()),
+                'created_at' => now(),
                 'updated_at' => now(),
             ];
 

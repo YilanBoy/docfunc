@@ -38,7 +38,7 @@
       </div>
 
       <div
-        class="absolute bottom-3 right-3 z-10 rounded-lg bg-emerald-500 px-4 py-2 text-base text-gray-50 dark:bg-cyan-600"
+        class="absolute bottom-3 right-3 z-10 rounded-lg bg-emerald-500 px-2 py-1 text-sm text-gray-50 dark:bg-cyan-600"
       >
         <i class="bi bi-clock-fill"></i>
         <span class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>

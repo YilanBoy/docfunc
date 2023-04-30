@@ -30,6 +30,8 @@ class Comment extends Component
 
     public string $createdAt;
 
+    public string $isEdited;
+
     public string $postUserId;
 
     public string $offset;

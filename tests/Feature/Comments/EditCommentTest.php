@@ -95,3 +95,30 @@ it('can see the comment preview', function () {
             '</ul>',
         ]);
 });
+
+it('will display the word "edited" on top of it if it has been edited', function () {
+    $comment = Comment::factory()->create();
+
+    $offset = 0;
+
+    $commentGroupId = 0;
+
+    // update the updated_at comment
+    $comment->touch();
+
+    Livewire::test(\App\Http\Livewire\Comments\Comment::class, [
+        'postId' => $comment->post_id,
+        'commentId' => $comment->id,
+        'userId' => $comment->user_id,
+        'userGravatarUrl' => $comment->user->gravatar_url,
+        'userName' => $comment->user->name,
+        'body' => $comment->body,
+        'createdAt' => $comment->created_at,
+        'isEdited' => $comment->created_at->ne($comment->updated_at),
+        'postUserId' => $comment->post->user_id,
+        'offset' => $offset,
+        'groupId' => $commentGroupId,
+    ])->assertSee(<<<'HTML'
+        <span class="text-gray-400">(已編輯)</span>
+    HTML, false);
+});

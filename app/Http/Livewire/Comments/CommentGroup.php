@@ -14,7 +14,7 @@ class CommentGroup extends Component
     public int $offset;
 
     /**
-     * comment group id
+     * @var int comment group id
      */
     public int $groupId;
 
@@ -34,6 +34,7 @@ class CommentGroup extends Component
                 comments.body,
                 comments.user_id,
                 comments.created_at,
+                comments.updated_at,
                 posts.user_id AS post_user_id,
                 users.name AS user_name,
                 users.email AS user_email

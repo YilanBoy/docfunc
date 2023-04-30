@@ -34,7 +34,7 @@ test('you will receive a notification when there is a comment on your post', fun
                 <span class="absolute inline-flex w-full h-full bg-red-400 rounded-full opacity-75 animate-ping"></span>
                 <span class="relative inline-flex w-3 h-3 bg-red-500 rounded-full"></span>
             </span>
-            HTML, false);
+        HTML, false);
 
     get(route('notifications.index'))->assertDontSeeText('沒有消息通知！');
 });

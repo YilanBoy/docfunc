@@ -17,6 +17,9 @@
       @endif
 
       <span class="text-gray-400">{{ $createdAt }}</span>
+      @if ($isEdited)
+        <span class="text-gray-400">(已編輯)</span>
+      @endif
     </div>
 
     {{-- 留言 --}}

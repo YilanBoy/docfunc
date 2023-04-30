@@ -8,6 +8,7 @@
       :user-name="$comment->user_name ?? ''"
       :body="$comment->body"
       :created-at="$comment->created_at->format('Y 年 m 月 d 日')"
+      :is-edited="$comment->created_at->ne($comment->updated_at)"
       :post-user-id="$comment->post_user_id"
       :offset="$offset"
       :group-id="$groupId"

@@ -1,4 +1,4 @@
-name: build-image
+name: build-arm-image
 
 on:
   workflow_run:
@@ -82,11 +82,11 @@ jobs:
   stop-runner:
     name: Stop self-hosted EC2 runner
     needs:
-      - start-runner # required to get output from the start-runner job
-      - build-arm-image # required to wait when the main job is done
+      - start-runner
     runs-on: ubuntu-latest
 
-    if: ${{ always() }} # required to stop the runner even if the error happened in the previous jobs
+    # required to stop the runner even if the error happened in the previous jobs
+    if: ${{ always() }}
 
     steps:
       - name: Configure AWS credentials

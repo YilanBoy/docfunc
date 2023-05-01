@@ -25,7 +25,7 @@ test('non-logged-in users can leave a anonymous comment', function () {
         ->call('store')
         ->assertEmitted('closeCreateCommentModal')
         ->assertEmitted('updateCommentCounts')
-        ->assertEmitted('refreshAllCommentGroup');
+        ->assertEmitted('refreshAllComments');
 
     $this->assertDatabaseHas('comments', [
         'body' => $body,

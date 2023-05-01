@@ -10,9 +10,9 @@ use Illuminate\Database\Seeder;
 
 class CommentSeeder extends Seeder
 {
-    const COMMENT_COUNT = 10_000;
+    const COMMENT_COUNT = 100_000;
 
-    const CHUNK = 100;
+    const CHUNK = 1_000;
 
     protected function commentGenerator(int $userCount, int $postCount): Generator
     {

@@ -11,7 +11,6 @@
       :is-edited="$comment->created_at->ne($comment->updated_at)"
       :post-user-id="$comment->post_user_id"
       :offset="$offset"
-      :group-id="$groupId"
       {{-- when the parent component is updated, the child component is updated together --}}
       {{-- reference: https://github.com/livewire/livewire/discussions/1895 --}}
       :wire:key="'comment-'.$comment->id.'-'.md5($comment->body)"

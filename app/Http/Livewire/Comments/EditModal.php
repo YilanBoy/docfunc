@@ -16,8 +16,7 @@ class EditModal extends Component
 
     public bool $convertToHtml = false;
 
-    // comment group id is used to refresh comment group component
-    public int $groupId;
+    public int $offset;
 
     public int $commentId;
 
@@ -42,10 +41,10 @@ class EditModal extends Component
         return $this->convertToHtml($this->body);
     }
 
-    public function setEditComment(CommentModel $comment, int $groupId)
+    public function setEditComment(CommentModel $comment, int $offset)
     {
         $this->convertToHtml = false;
-        $this->groupId = $groupId;
+        $this->offset = $offset;
         $this->commentId = $comment->id;
         $this->body = $comment->body;
 
@@ -53,8 +52,6 @@ class EditModal extends Component
     }
 
     /**
-     * @param  CommentModel  $comment
-     *
      * @throws AuthorizationException
      */
     public function update(): void
@@ -69,8 +66,7 @@ class EditModal extends Component
 
         $this->emit('closeEditCommentModal');
 
-        // refresh comment list
-        $this->emit('refreshCommentGroup'.$this->groupId);
+        $this->emit('refreshCommentGroup-'.$this->offset);
     }
 
     public function render()

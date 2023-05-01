@@ -13,16 +13,11 @@ class CommentGroup extends Component
 
     public int $offset;
 
-    /**
-     * @var int comment group id
-     */
-    public int $groupId;
-
     protected function getListeners(): array
     {
         return [
-            'refreshAllCommentGroup' => '$refresh',
-            'refreshCommentGroup'.$this->groupId => '$refresh',
+            'refreshAllComments' => '$refresh',
+            'refreshCommentGroup-'.$this->offset => '$refresh',
         ];
     }
 

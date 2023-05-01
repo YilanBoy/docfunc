@@ -36,11 +36,6 @@ class Comment extends Component
 
     public string $offset;
 
-    /**
-     * comment group id is used to refresh comment group component
-     */
-    public int $groupId;
-
     public function getConvertedBodyProperty(): string
     {
         return $this->convertToHtml($this->body);
@@ -67,7 +62,7 @@ class Comment extends Component
 
         $this->emit('updateCommentCounts');
 
-        $this->emit('refreshAllCommentGroup');
+        $this->emit('refreshAllComments');
     }
 
     public function render()

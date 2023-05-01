@@ -68,7 +68,7 @@ class CreateModal extends Component
         $this->emit('updateCommentCounts');
 
         // refresh comment list
-        $this->emit('refreshAllCommentGroup');
+        $this->emit('refreshAllComments');
     }
 
     public function render()

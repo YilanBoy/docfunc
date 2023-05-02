@@ -13,7 +13,7 @@ test('editing modal can load the data of the comment', function () {
         ->call('setEditComment', $comment->id, $offset)
         ->assertSet('commentId', $comment->id)
         ->assertSet('body', $comment->body)
-        ->assertEmitted('editCommentWasSet');
+        ->assertDispatchedBrowserEvent('edit-comment-was-set');
 });
 
 test('logged-in users can update their comments', function () {
@@ -34,7 +34,7 @@ test('logged-in users can update their comments', function () {
         ->set('body', $body)
         ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('update')
-        ->assertEmitted('closeEditCommentModal')
+        ->assertDispatchedBrowserEvent('close-edit-comment-modal')
         ->assertEmitted('refreshCommentGroup-'.$offset);
 
     $this->assertDatabaseHas('comments', ['body' => $body]);

@@ -9,11 +9,9 @@
           })
           .then(function(response) {
 
-            @this.
-            set('recaptcha', response);
+            @this.set('recaptcha', response);
 
-            @this.
-            store();
+            @this.store();
           });
       });
     });
@@ -23,22 +21,21 @@
 <div
   x-cloak
   x-data="{ isOpen: false }"
-  x-init="Livewire.on('closeCreateCommentModal', () => {
-      isOpen = false
-  })
-
-  // when enable the preview, reload the scripts
-  Livewire.hook('message.processed', (el, component) => {
-      document.querySelectorAll('#creating-comment-preview pre code').forEach((element) => {
-          window.hljs.highlightElement(element)
-      })
+  x-init="// when enable the preview, reload the scripts
+  Livewire.hook('message.processed', (message) => {
+      if (message.updateQueue[0].name === 'convertToHtml') {
+          document.querySelectorAll('#creating-comment-preview pre code:not(.hljs)').forEach((element) => {
+              window.hljs.highlightElement(element)
+          })
+      }
   })"
   x-show="isOpen"
-  @keydown.escape.window="isOpen = false"
   @open-create-comment-modal.window="
     isOpen = true
     $nextTick(() => $refs.createComment.focus())
   "
+  @close-create-comment-modal.window="isOpen = false"
+  @keydown.escape.window="isOpen = false"
   class="fixed inset-0 z-30"
   aria-labelledby="modal-title"
   role="dialog"

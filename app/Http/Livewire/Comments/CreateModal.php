@@ -63,7 +63,7 @@ class CreateModal extends Component
         // empty the body of the comment form
         $this->reset('body');
 
-        $this->emit('closeCreateCommentModal');
+        $this->dispatchBrowserEvent('close-create-comment-modal');
 
         $this->emit('updateCommentCounts');
 

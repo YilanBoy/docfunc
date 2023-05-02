@@ -21,22 +21,20 @@
 <div
   x-cloak
   x-data="{ isOpen: false }"
-  x-init="Livewire.on('editCommentWasSet', () => {
-      isOpen = true
-      $nextTick(() => $refs.editComment.focus())
-  })
-
-  Livewire.on('closeEditCommentModal', () => {
-      isOpen = false
-  })
-
-  // when enable the preview, reload the scripts
-  Livewire.hook('message.processed', (el, component) => {
-      document.querySelectorAll('#editing-comment-preview pre code').forEach((element) => {
-          window.hljs.highlightElement(element)
-      })
+  x-init="// when enable the preview, reload the scripts
+  Livewire.hook('message.processed', (message) => {
+      if (message.updateQueue[0].name === 'convertToHtml') {
+          document.querySelectorAll('#editing-comment-preview pre code:not(.hljs)').forEach((element) => {
+              window.hljs.highlightElement(element)
+          })
+      }
   })"
   x-show="isOpen"
+  @edit-comment-was-set.window="
+    isOpen = true
+    $nextTick(() => $refs.editComment.focus())
+  "
+  @close-edit-comment-modal.window="isOpen = false"
   @keydown.escape.window="isOpen = false"
   class="fixed inset-0 z-30"
   aria-labelledby="modal-title"

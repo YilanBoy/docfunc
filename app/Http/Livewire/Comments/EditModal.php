@@ -48,7 +48,7 @@ class EditModal extends Component
         $this->commentId = $comment->id;
         $this->body = $comment->body;
 
-        $this->emit('editCommentWasSet');
+        $this->dispatchBrowserEvent('edit-comment-was-set');
     }
 
     /**
@@ -64,7 +64,7 @@ class EditModal extends Component
             'body' => $this->body,
         ]);
 
-        $this->emit('closeEditCommentModal');
+        $this->dispatchBrowserEvent('close-edit-comment-modal');
 
         $this->emit('refreshCommentGroup-'.$this->offset);
     }

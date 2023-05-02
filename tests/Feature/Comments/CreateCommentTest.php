@@ -23,7 +23,7 @@ test('non-logged-in users can leave a anonymous comment', function () {
         ->set('body', $body)
         ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store')
-        ->assertEmitted('closeCreateCommentModal')
+        ->assertDispatchedBrowserEvent('close-create-comment-modal')
         ->assertEmitted('updateCommentCounts')
         ->assertEmitted('refreshAllComments');
 

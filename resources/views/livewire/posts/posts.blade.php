@@ -83,7 +83,7 @@
         @endif
 
         {{-- 文章相關資訊 --}}
-        <div class="mt-2 flex items-center space-x-2 text-base text-neutral-400">
+        <div class="mt-2 hidden space-x-2 text-base text-neutral-400 md:flex md:items-center">
           {{-- 文章分類資訊 --}}
           <div>
             <a
@@ -91,8 +91,7 @@
               title="{{ $post->category->name }}"
               class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
-              <i class="{{ $post->category->icon }}"></i><span
-                class="ml-2 hidden md:inline">{{ $post->category->name }}</span>
+              <i class="{{ $post->category->icon }}"></i><span class="ml-2">{{ $post->category->name }}</span>
             </a>
           </div>
           <div>&bull;</div>
@@ -103,7 +102,7 @@
               title="{{ $post->user->name }}"
               class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
-              <i class="bi bi-person-fill"></i><span class="ml-2 hidden md:inline">{{ $post->user->name }}</span>
+              <i class="bi bi-person-fill"></i><span class="ml-2">{{ $post->user->name }}</span>
             </a>
           </div>
           <div>&bull;</div>
@@ -114,8 +113,7 @@
               title="文章發布於：{{ $post->created_at->toDateString() }}"
               class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
-              <i class="bi bi-clock-fill"></i><span
-                class="ml-2 hidden md:inline">{{ $post->created_at->diffForHumans() }}</span>
+              <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
             </a>
           </div>
           <div>&bull;</div>
@@ -125,8 +123,7 @@
               href="{{ $post->link_with_slug }}#comments"
               class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
-              <i class="bi bi-chat-square-text-fill"></i><span
-                class="ml-2 hidden md:inline">{{ $post->comment_counts }}</span>
+              <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->comment_counts }}</span>
             </a>
           </div>
         </div>

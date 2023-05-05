@@ -143,7 +143,7 @@
               value=""
               required
               autofocus
-              class="form-input h-12 w-full rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+              class="form-input h-12 w-full rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
             >
           </div>
 
@@ -159,7 +159,7 @@
               id="category_id"
               name="category_id"
               required
-              class="form-select h-12 w-full rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50"
+              class="form-select h-12 w-full rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50"
             >
               @foreach ($categories as $category)
                 <option value="{{ $category->id }}">
@@ -185,7 +185,7 @@
               name="tags"
               value="{{ $tags }}"
               placeholder="標籤 (最多 5 個)"
-              class="h-12 w-full rounded-md bg-white dark:bg-gray-600"
+              class="h-12 w-full rounded-md bg-white dark:bg-gray-700"
             >
           </div>
 
@@ -220,7 +220,7 @@
 
               <span wire:loading>
                 <svg
-                  class="h-5 w-5 animate-spin text-gray-700 dark:text-gray-50"
+                  class="h-5 w-5 animate-spin"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -266,7 +266,7 @@
         wire:loading.attr="disabled"
         type="submit"
         form="create-post"
-        class="group mt-4 inline-flex h-14 w-14 items-center justify-center rounded-xl border border-transparent bg-blue-500 text-gray-50 ring-blue-300 transition duration-150 ease-in-out focus:border-blue-700 focus:outline-none focus:ring active:bg-blue-700"
+        class="group mt-4 inline-flex h-14 w-14 items-center justify-center rounded-xl border border-transparent bg-blue-600 text-gray-50 ring-blue-300 transition duration-150 ease-in-out focus:border-blue-700 focus:outline-none focus:ring active:bg-blue-700"
       >
         <span
           wire:loading.remove
@@ -277,7 +277,7 @@
 
         <span wire:loading>
           <svg
-            class="h-10 w-10 animate-spin text-gray-50 text-gray-700"
+            class="h-10 w-10 animate-spin"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -303,7 +303,7 @@
       <button
         x-on:click="$dispatch('reset')"
         type="button"
-        class="group mt-4 inline-flex h-14 w-14 items-center justify-center rounded-xl border border-transparent bg-red-500 text-gray-50 ring-red-300 transition duration-150 ease-in-out focus:border-red-700 focus:outline-none focus:ring active:bg-red-700"
+        class="group mt-4 inline-flex h-14 w-14 items-center justify-center rounded-xl border border-transparent bg-red-600 text-gray-50 ring-red-300 transition duration-150 ease-in-out focus:border-red-700 focus:outline-none focus:ring active:bg-red-700"
       >
         <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
           <i class="bi bi-file-earmark-x-fill"></i>
@@ -320,7 +320,7 @@
   <script>
     let tags = document.querySelector('#tags');
 
-    tags.addEventListener('change', function(event) {
+    tags.addEventListener('change', (event) => {
       // change livewire attribute 'tags'
       @this.set('tags', event.target.value);
     });

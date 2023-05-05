@@ -1,6 +1,6 @@
 <div
   x-data
-  class="relative hidden h-20 w-full items-center justify-center bg-gray-50 shadow-lg transition-all duration-300 dark:bg-gray-700 lg:flex"
+  class="relative hidden h-20 w-full items-center justify-center bg-gray-50 shadow-lg transition-all duration-300 dark:bg-gray-800 lg:flex"
 >
   {{-- logout form --}}
   <form
@@ -63,11 +63,11 @@
       type="button"
       class="group flex h-10 w-10 items-center justify-center"
     >
-      <span class="text-xl text-amber-400 transition duration-150 group-hover:text-amber-500 dark:hidden">
+      <span class="text-xl text-amber-500 transition duration-150 group-hover:text-amber-600 dark:hidden">
         <i class="bi bi-sun-fill"></i>
       </span>
 
-      <span class="hidden text-xl text-blue-500 transition duration-150 group-hover:text-blue-400 dark:inline">
+      <span class="hidden text-xl text-indigo-600 transition duration-150 group-hover:text-indigo-500 dark:inline">
         <i class="bi bi-moon-stars-fill"></i>
       </span>
     </button>
@@ -80,7 +80,7 @@
       @if ($showRegisterButton)
         <a
           href="{{ route('register') }}"
-          class="flex h-10 items-center justify-center rounded-lg border border-blue-400 bg-transparent px-3 text-blue-400 transition duration-150 hover:border-transparent hover:bg-blue-400 hover:text-gray-50"
+          class="flex h-10 items-center justify-center rounded-lg border border-blue-600 bg-transparent px-3 text-blue-600 transition duration-150 hover:border-transparent hover:bg-blue-600 hover:text-gray-50"
         >
           註冊
         </a>
@@ -89,7 +89,7 @@
       @if (request()->url() !== route('login'))
         <a
           href="{{ route('login') }}"
-          class="flex h-10 items-center justify-center rounded-lg border border-emerald-400 bg-transparent px-3 text-emerald-400 transition duration-150 hover:border-transparent hover:bg-emerald-400 hover:text-gray-50"
+          class="flex h-10 items-center justify-center rounded-lg border border-emerald-600 bg-transparent px-3 text-emerald-600 transition duration-150 hover:border-transparent hover:bg-emerald-600 hover:text-gray-50"
         >
           <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
         </a>
@@ -149,13 +149,13 @@
           aria-orientation="vertical"
           aria-labelledby="user-menu-button"
           tabindex="-1"
-          class="absolute right-0 top-16 mt-2 w-48 rounded-md bg-gray-50 p-2 text-gray-700 shadow-lg ring-1 ring-black ring-opacity-20 dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
+          class="absolute right-0 top-16 mt-2 w-48 rounded-md bg-gray-50 p-2 text-gray-700 shadow-lg ring-1 ring-black ring-opacity-20 dark:bg-gray-800 dark:text-gray-50 dark:ring-gray-600"
         >
           <a
             href="{{ route('posts.create') }}"
             role="menuitem"
             tabindex="-1"
-            class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600"
+            class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
           >
             <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
           </a>
@@ -164,7 +164,7 @@
             href="{{ route('users.index', ['user' => auth()->id()]) }}"
             role="menuitem"
             tabindex="-1"
-            class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600"
+            class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
           >
             <i class="bi bi-info-circle-fill"></i><span class="ml-2">個人資訊</span>
           </a>
@@ -173,7 +173,7 @@
             href="{{ route('users.edit', ['user' => auth()->id()]) }}"
             role="menuitem"
             tabindex="-1"
-            class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600"
+            class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
           >
             <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
           </a>
@@ -187,7 +187,7 @@
             type="button"
             role="menuitem"
             tabindex="-1"
-            class="flex w-full items-start rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600"
+            class="flex w-full items-start rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
           >
             <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
           </button>

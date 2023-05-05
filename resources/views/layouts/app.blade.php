@@ -84,7 +84,7 @@
   x-data
   {{-- when change page, scroll to top --}}
   @scroll-to-top.window="window.scrollTo({ top: 0, behavior: 'smooth' })"
-  class="overscroll-y-none bg-gray-200 font-noto text-lg text-gray-900 antialiased dark:bg-gray-800"
+  class="overscroll-y-none bg-gray-200 font-noto text-lg text-gray-900 antialiased dark:bg-gray-900"
 >
 
   <div

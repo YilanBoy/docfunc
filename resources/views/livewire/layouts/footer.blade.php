@@ -1,6 +1,6 @@
 <footer
   id="footer"
-  class="mt-6 bg-gray-800 pt-4 dark:bg-gray-900"
+  class="mt-6 bg-gray-800 pt-4 dark:bg-gray-950"
 >
   <div class="justify-left m-auto flex max-w-6xl flex-wrap text-gray-800">
 

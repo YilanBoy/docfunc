@@ -1,6 +1,6 @@
 <div
   x-data="{ menuIsOpen: false }"
-  class="bg-gray-50 shadow-lg dark:bg-gray-700 lg:hidden"
+  class="bg-gray-50 shadow-lg dark:bg-gray-800 lg:hidden"
 >
   {{-- logout form --}}
   <form
@@ -68,11 +68,11 @@
           "
           type="button"
         >
-          <span class="text-amber-400 hover:text-amber-500 dark:hidden">
+          <span class="text-amber-500 hover:text-amber-600 dark:hidden">
             <i class="bi bi-sun-fill"></i>
           </span>
 
-          <span class="hidden text-blue-500 hover:text-blue-400 dark:inline">
+          <span class="hidden text-indigo-600 hover:text-indigo-500 dark:inline">
             <i class="bi bi-moon-stars-fill"></i>
           </span>
         </button>
@@ -151,13 +151,13 @@
               aria-orientation="vertical"
               aria-labelledby="user-menu-button"
               tabindex="-1"
-              class="absolute right-0 mt-2 w-48 rounded-md bg-gray-50 p-2 text-gray-700 shadow-lg ring-1 ring-black ring-opacity-20 dark:bg-gray-700 dark:text-gray-50 dark:ring-gray-500"
+              class="absolute right-0 mt-2 w-48 rounded-md bg-gray-50 p-2 text-gray-700 shadow-lg ring-1 ring-black ring-opacity-20 dark:bg-gray-800 dark:text-gray-50 dark:ring-gray-600"
             >
               <a
                 href="{{ route('posts.create') }}"
                 role="menuitem"
                 tabindex="-1"
-                class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600"
+                class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
               >
                 <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
               </a>
@@ -166,7 +166,7 @@
                 href="{{ route('users.index', ['user' => auth()->id()]) }}"
                 role="menuitem"
                 tabindex="-1"
-                class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600"
+                class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
               >
                 <i class="bi bi-info-circle-fill"></i><span class="ml-2">個人資訊</span>
               </a>
@@ -175,7 +175,7 @@
                 href="{{ route('users.edit', ['user' => auth()->id()]) }}"
                 role="menuitem"
                 tabindex="-1"
-                class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600"
+                class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
               >
                 <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
               </a>
@@ -189,7 +189,7 @@
                 type="button"
                 role="menuitem"
                 tabindex="-1"
-                class="flex w-full items-start rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600"
+                class="flex w-full items-start rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
               >
                 <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
               </button>
@@ -208,37 +208,38 @@
     class="lg:hidden"
   >
     <div class="space-y-1 px-2 pb-3 pt-2">
+
+      @php
+        $inIndexPage = request()->url() === route('posts.index');
+      @endphp
+
       <a
         href="{{ route('posts.index') }}"
+        @if ($inIndexPage) aria-current="page" @endif
         @class([
             'block px-3 py-2 rounded-md font-medium',
-            'bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-50' =>
-                request()->url() === route('posts.index'),
-            'text-gray-400 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-600 dark:hover:text-gray-50' =>
-                request()->url() !== route('posts.index'),
+            'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-50' => $inIndexPage,
+            'text-gray-400 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-50' => !$inIndexPage,
         ])
-        @if (request()->url() === route('posts.index'))
-        aria-current="page"
-        @endif
-        >
+      >
         <i class="bi bi-house-fill"></i><span class="ml-2">全部文章</span>
       </a>
+
       @foreach ($categories as $category)
+        @php
+          $inCategoryPage = request()->url() === $category->link_with_name;
+        @endphp
         <a
           href="{{ $category->link_with_name }}"
+          @if ($inCategoryPage) aria-current="page" @endif
           @class([
               'block px-3 py-2 rounded-md font-medium',
-              'bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-50' =>
-                  request()->url() === $category->link_with_name,
-              'text-gray-400 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-600 dark:hover:text-gray-50' =>
-                  request()->url() !== $category->link_with_name,
+              'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-50' => $inCategoryPage,
+              'text-gray-400 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-50' => !$inCategoryPage,
           ])
-          @if (request()->url() === $category->link_with_name)
-          aria-current="page"
-      @endif
-      >
-      <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>
-      </a>
+        >
+          <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>
+        </a>
       @endforeach
     </div>
   </div>

@@ -18,8 +18,8 @@
             href="{{ $editUserUrl }}"
             @class([
                 'block rounded-md p-2 dark:text-gray-50',
-                'bg-gray-200 dark:bg-gray-600' => $inEditUserPage,
-                'hover:bg-gray-200 dark:hover:bg-gray-600' => !$inEditUserPage,
+                'bg-gray-200 dark:bg-gray-700' => $inEditUserPage,
+                'hover:bg-gray-200 dark:hover:bg-gray-700' => !$inEditUserPage,
             ])
           >
             <i class="bi bi-person-lines-fill"></i><span class="ml-2">編輯個人資料</span>
@@ -33,8 +33,8 @@
             href="{{ $changePasswordUrl }}"
             @class([
                 'block rounded-md p-2 dark:text-gray-50',
-                'bg-gray-200 dark:bg-gray-600' => $inChangePasswordPage,
-                'hover:bg-gray-200 dark:hover:bg-gray-600' => !$inChangePasswordPage,
+                'bg-gray-200 dark:bg-gray-700' => $inChangePasswordPage,
+                'hover:bg-gray-200 dark:hover:bg-gray-700' => !$inChangePasswordPage,
             ])
           >
             <i class="bi bi-file-earmark-lock-fill"></i><span class="ml-2">修改密碼</span>
@@ -48,8 +48,8 @@
             href="{{ $deleteUserUrl }}"
             @class([
                 'block rounded-md p-2 dark:text-gray-50',
-                'bg-gray-200 dark:bg-gray-600' => $inDeleteUserPage,
-                'hover:bg-gray-200 dark:hover:bg-gray-600' => !$inDeleteUserPage,
+                'bg-gray-200 dark:bg-gray-700' => $inDeleteUserPage,
+                'hover:bg-gray-200 dark:hover:bg-gray-700' => !$inDeleteUserPage,
             ])
           >
             <i class="bi bi-person-x-fill"></i><span class="ml-2">刪除帳號</span>

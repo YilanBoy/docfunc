@@ -55,7 +55,7 @@
     <div
       x-show="isOpen"
       x-transition.origin.bottom.duration.300ms
-      class="max-h-[36rem] transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all dark:bg-gray-700 sm:w-full sm:max-w-2xl"
+      class="max-h-[36rem] transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all dark:bg-gray-800 sm:w-full sm:max-w-2xl"
     >
       {{-- close modal button --}}
       <div class="absolute right-5 top-5">
@@ -110,7 +110,7 @@
                 rows="12"
                 placeholder="寫下你的留言吧！**支援 Markdown**"
                 required
-                class="form-textarea w-full resize-none rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+                class="form-textarea w-full resize-none rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
               ></textarea>
 
               @error('body')

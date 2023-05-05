@@ -70,7 +70,7 @@
         placeholder="給自己取個有趣的暱稱吧！"
         required
         autofocus
-        class="form-input mt-2 w-full rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+        class="form-input mt-2 w-full rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
       >
     </div>
 
@@ -87,7 +87,7 @@
         name="introduction"
         placeholder="介紹一下你自己吧！"
         rows="5"
-        class="form-textarea mt-2 w-full resize-none rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-600 dark:text-gray-50 dark:placeholder-white"
+        class="form-textarea mt-2 w-full resize-none rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
       >{{ old('introduction', $introduction) }}</textarea>
     </div>
 

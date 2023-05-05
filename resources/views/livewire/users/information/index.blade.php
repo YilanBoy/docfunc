@@ -18,7 +18,7 @@
     >
       {{-- 切換顯示選單 --}}
       <nav
-        class="flex w-full space-x-1 rounded-xl bg-gray-300 p-1 text-sm dark:bg-gray-600 dark:text-gray-50 md:w-4/5 lg:w-1/2"
+        class="flex w-full space-x-1 rounded-xl bg-gray-300 p-1 text-sm dark:bg-gray-700 dark:text-gray-50 md:w-4/5 lg:w-1/2"
       >
 
         @php
@@ -34,8 +34,8 @@
             "
             href="#"
             :class="{
-                'bg-gray-50 dark:bg-gray-700': tab === '{{ $tab['value'] }}',
-                'hover:bg-gray-50 dark:hover:bg-gray-700': tab !== '{{ $tab['value'] }}'
+                'bg-gray-50 dark:bg-gray-800': tab === '{{ $tab['value'] }}',
+                'hover:bg-gray-50 dark:hover:bg-gray-800': tab !== '{{ $tab['value'] }}'
             }"
             class="flex w-1/3 justify-center rounded-lg px-2 py-2 transition duration-300"
           >

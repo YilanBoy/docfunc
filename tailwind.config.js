@@ -47,14 +47,14 @@ module.exports = {
                         'blockquote p:last-of-type::after': null,
                         // inline code
                         ':not(pre) > code': {
-                            backgroundColor: theme('colors.green.100'),
+                            backgroundColor: theme('colors.green.200'),
                             color: theme('colors.green.600'),
                             padding: '0.25rem',
                             fontWeight: '600',
                             borderRadius: '0.25rem',
                         },
                         '.dark :not(pre) > code': {
-                            backgroundColor: theme('colors.gray.500'),
+                            backgroundColor: theme('colors.gray.600'),
                             color: theme('colors.gray.100'),
                         },
                     },

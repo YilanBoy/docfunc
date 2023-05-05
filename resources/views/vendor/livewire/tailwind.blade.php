@@ -11,7 +11,7 @@
         <span>
           @if ($paginator->onFirstPage())
             <span
-              class="relative inline-flex cursor-default items-center rounded-md border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium leading-5 text-gray-500 dark:bg-gray-700 dark:text-gray-50"
+              class="relative inline-flex cursor-default items-center rounded-md border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium leading-5 text-gray-500 dark:bg-gray-800 dark:text-gray-50"
             >
               {!! __('pagination.previous') !!}
             </span>
@@ -20,7 +20,7 @@
               wire:click="previousPage('{{ $paginator->getPageName() }}')"
               wire:loading.attr="disabled"
               dusk="previousPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.before"
-              class="focus:shadow-outline-blue relative inline-flex items-center rounded-md border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out hover:text-gray-500 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-700 dark:bg-gray-700 dark:text-gray-50"
+              class="focus:shadow-outline-blue relative inline-flex items-center rounded-md border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out hover:text-gray-500 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-700 dark:bg-gray-800 dark:text-gray-50"
             >
               {!! __('pagination.previous') !!}
             </button>
@@ -33,7 +33,7 @@
               wire:click="nextPage('{{ $paginator->getPageName() }}')"
               wire:loading.attr="disabled"
               dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.before"
-              class="focus:shadow-outline-blue relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out hover:text-gray-500 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-700 dark:bg-gray-700 dark:text-gray-50"
+              class="focus:shadow-outline-blue relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out hover:text-gray-500 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-700 dark:bg-gray-800 dark:text-gray-50"
             >
               {!! __('pagination.next') !!}
             </button>
@@ -70,7 +70,7 @@
                   aria-label="{{ __('pagination.previous') }}"
                 >
                   <span
-                    class="relative inline-flex cursor-default items-center rounded-l-md border border-gray-300 bg-gray-50 px-2 py-2 text-sm font-medium leading-5 text-gray-500 dark:bg-gray-700 dark:text-gray-50"
+                    class="relative inline-flex cursor-default items-center rounded-l-md border border-gray-300 bg-gray-50 px-2 py-2 text-sm font-medium leading-5 text-gray-500 dark:bg-gray-800 dark:text-gray-50"
                     aria-hidden="true"
                   >
                     <svg
@@ -91,7 +91,7 @@
                   wire:click="previousPage('{{ $paginator->getPageName() }}')"
                   dusk="previousPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after"
                   rel="prev"
-                  class="focus:shadow-outline-blue relative inline-flex items-center rounded-l-md border border-gray-300 bg-gray-50 px-2 py-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:text-gray-400 focus:z-10 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-500 dark:bg-gray-700 dark:text-gray-50 dark:hover:bg-gray-800"
+                  class="focus:shadow-outline-blue relative inline-flex items-center rounded-l-md border border-gray-300 bg-gray-50 px-2 py-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:text-gray-400 focus:z-10 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-500 dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-900"
                   aria-label="{{ __('pagination.previous') }}"
                 >
                   <svg
@@ -115,7 +115,7 @@
               @if (is_string($element))
                 <span aria-disabled="true">
                   <span
-                    class="relative -ml-px inline-flex cursor-default items-center border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium leading-5 text-gray-700 dark:bg-gray-700 dark:text-gray-50"
+                    class="relative -ml-px inline-flex cursor-default items-center border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium leading-5 text-gray-700 dark:bg-gray-800 dark:text-gray-50"
                   >
                     {{ $element }}
                   </span>
@@ -131,7 +131,7 @@
                     @if ($page == $paginator->currentPage())
                       <span aria-current="page">
                         <span
-                          class="relative -ml-px inline-flex cursor-default items-center border border-gray-300 bg-green-100 px-4 py-2 text-sm font-medium leading-5 text-gray-500 dark:bg-gray-800 dark:text-gray-50"
+                          class="relative -ml-px inline-flex cursor-default items-center border border-gray-300 bg-green-100 px-4 py-2 text-sm font-medium leading-5 text-gray-500 dark:bg-gray-900 dark:text-gray-50"
                         >
                           {{ $page }}
                         </span>
@@ -139,7 +139,7 @@
                     @else
                       <button
                         wire:click="gotoPage({{ $page }}, '{{ $paginator->getPageName() }}')"
-                        class="focus:shadow-outline-blue relative -ml-px inline-flex items-center border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out hover:text-gray-500 focus:z-10 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-700 dark:bg-gray-700 dark:text-gray-50 dark:hover:bg-gray-800"
+                        class="focus:shadow-outline-blue relative -ml-px inline-flex items-center border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out hover:text-gray-500 focus:z-10 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-700 dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-900"
                         aria-label="{{ __('Go to page :page', ['page' => $page]) }}"
                       >
                         {{ $page }}
@@ -157,7 +157,7 @@
                   wire:click="nextPage('{{ $paginator->getPageName() }}')"
                   dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after"
                   rel="next"
-                  class="focus:shadow-outline-blue relative -ml-px inline-flex items-center rounded-r-md border border-gray-300 bg-gray-50 px-2 py-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:text-gray-400 focus:z-10 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-500 dark:bg-gray-700 dark:text-gray-50 dark:hover:bg-gray-800"
+                  class="focus:shadow-outline-blue relative -ml-px inline-flex items-center rounded-r-md border border-gray-300 bg-gray-50 px-2 py-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:text-gray-400 focus:z-10 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-500 dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-900"
                   aria-label="{{ __('pagination.next') }}"
                 >
                   <svg
@@ -178,7 +178,7 @@
                   aria-label="{{ __('pagination.next') }}"
                 >
                   <span
-                    class="relative -ml-px inline-flex cursor-default items-center rounded-r-md border border-gray-300 bg-gray-50 px-2 py-2 text-sm font-medium leading-5 text-gray-500 dark:bg-gray-700 dark:text-gray-50"
+                    class="relative -ml-px inline-flex cursor-default items-center rounded-r-md border border-gray-300 bg-gray-50 px-2 py-2 text-sm font-medium leading-5 text-gray-500 dark:bg-gray-800 dark:text-gray-50"
                     aria-hidden="true"
                   >
                     <svg

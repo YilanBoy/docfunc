@@ -11,7 +11,7 @@
 {{-- 會員留言 --}}
 <div
   x-data
-  x-init="Livewire.hook('message.processed', (el, component) => {
+  x-init="Livewire.hook('message.processed', () => {
       window.hljs.highlightAll();
   })"
   class="space-y-6"
@@ -20,7 +20,7 @@
     <x-dashed-card
       x-data="cardLink"
       x-on:click="directToCardLink($event, $refs)"
-      class="group relative max-h-64 cursor-pointer overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-1/2 after:bg-gradient-to-b after:from-transparent after:to-gray-100 dark:after:to-gray-700"
+      class="group relative max-h-64 cursor-pointer overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-1/2 after:bg-gradient-to-b after:from-transparent after:to-gray-100 dark:after:to-gray-800"
     >
       <a
         x-ref="cardLinkUrl"
@@ -38,7 +38,7 @@
       </div>
 
       <div
-        class="absolute bottom-3 right-3 z-10 rounded-lg bg-emerald-500 px-2 py-1 text-sm text-gray-50 dark:bg-cyan-600"
+        class="absolute bottom-3 right-3 z-10 rounded-lg bg-emerald-600 px-2 py-1 text-sm text-gray-50 dark:bg-cyan-700"
       >
         <i class="bi bi-clock-fill"></i>
         <span class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>

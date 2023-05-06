@@ -34,7 +34,7 @@
             /* code */
         prose-code:before:content-none prose-code:after:content-none
             /* pre */
-        prose-pre:p-0 prose-pre:rounded-lg dark:prose-pre:ring-1 dark:prose-pre:ring-slate-700
+        prose-pre:p-0 prose-pre:rounded-lg
             /* blockquote */
         prose-blockquote:border-slate-300 prose-blockquote:text-slate-500
         dark:prose-blockquote:border-slate-600 dark:prose-blockquote:text-slate-400;
@@ -63,7 +63,7 @@
             /* code */
         prose-code:before:content-none prose-code:after:content-none
             /* pre */
-        prose-pre:p-0 prose-pre:rounded-lg dark:prose-pre:ring-1 dark:prose-pre:ring-slate-700;
+        prose-pre:p-0 prose-pre:rounded-lg;
     }
 }
 

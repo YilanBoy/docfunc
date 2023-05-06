@@ -8,7 +8,7 @@
 
 @push('css')
   {{-- highlight code block --}}
-  @vite('node_modules/highlight.js/scss/atom-one-dark.scss')
+  @vite('node_modules/highlight.js/scss/base16/material-palenight.scss')
 
   <style>
     /* media embed */

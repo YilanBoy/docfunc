@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Traits\Livewire\MarkdownConverter;
+use Tests\TestCase;
+
+uses(TestCase::class);
 
 it('can block the header tags', function () {
     $trait = new class
@@ -35,7 +38,10 @@ it('can block the header tags', function () {
 });
 
 it('can convert the markdown content to html', function () {
-    $trait = $this->getObjectForTrait(MarkdownConverter::class);
+    $trait = new class
+    {
+        use MarkdownConverter;
+    };
 
     $body = <<<'MARKDOWN'
     # Title

@@ -63,11 +63,11 @@
       type="button"
       class="group flex h-10 w-10 items-center justify-center"
     >
-      <span class="text-xl text-amber-500 transition duration-150 group-hover:text-amber-600 dark:hidden">
+      <span class="text-xl text-amber-400 transition duration-150 group-hover:text-amber-500 dark:hidden">
         <i class="bi bi-sun-fill"></i>
       </span>
 
-      <span class="hidden text-xl text-indigo-600 transition duration-150 group-hover:text-indigo-500 dark:inline">
+      <span class="hidden text-xl text-[#f6f1d5] transition duration-150 group-hover:text-[#ddd8bf] dark:inline">
         <i class="bi bi-moon-stars-fill"></i>
       </span>
     </button>

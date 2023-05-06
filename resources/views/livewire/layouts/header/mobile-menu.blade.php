@@ -68,11 +68,11 @@
           "
           type="button"
         >
-          <span class="text-amber-500 hover:text-amber-600 dark:hidden">
+          <span class="text-amber-400 hover:text-amber-500 dark:hidden">
             <i class="bi bi-sun-fill"></i>
           </span>
 
-          <span class="hidden text-indigo-600 hover:text-indigo-500 dark:inline">
+          <span class="hidden text-[#f6f1d5] hover:text-[#ddd8bf] dark:inline">
             <i class="bi bi-moon-stars-fill"></i>
           </span>
         </button>

@@ -5,29 +5,29 @@ use Illuminate\Support\Facades\Http;
 use function Pest\Laravel\postJson;
 
 test('youtube\'s oembed api can be called', function () {
-    $fakeResponse = [
+    $expectResponse = [
         'title' => 'Amazing Nintendo Facts',
         'author_name' => 'ZackScott',
-        'author_url' => 'https://www.youtube.com/c/ZackScott',
+        'author_url' => 'https://www.youtube.com/@ZackScott',
         'type' => 'video',
-        'height' => 113,
-        'width' => 200,
+        'height' => 360,
+        'width' => 640,
         'version' => '1.0',
         'provider_name' => 'YouTube',
         'provider_url' => 'https://www.youtube.com/',
         'thumbnail_height' => 360,
         'thumbnail_width' => 480,
         'thumbnail_url' => 'https://i.ytimg.com/vi/M3r2XDceM6A/hqdefault.jpg',
-        'html' => '<iframe width="200" height="113" src="https://www.youtube.com/embed/M3r2XDceM6A?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Amazing Nintendo Facts"></iframe>',
+        'html' => '<iframe width="640" height="360" src="https://www.youtube.com/embed/M3r2XDceM6A?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="Amazing Nintendo Facts"></iframe>',
     ];
 
-    Http::fake([
-        'https://www.youtube.com/oembed*' => Http::response($fakeResponse),
-    ]);
-
-    postJson('/api/oembed/youtube', ['url' => 'https://www.youtube.com/watch?v=M3r2XDceM6A'])
+    postJson('/api/oembed/youtube', [
+        'url' => 'https://www.youtube.com/watch?v=M3r2XDceM6A',
+        'width' => 640,
+        'height' => 360,
+    ])
         ->assertStatus(200)
-        ->assertJson($fakeResponse);
+        ->assertJson($expectResponse);
 });
 
 test('if the embedded youtube link is an invalid link, return the alternative html content', function () {
@@ -55,13 +55,16 @@ test('twitter\'s oembed api can be called', function () {
         'version' => '1.0',
     ];
 
-    postJson('/api/oembed/twitter', ['url' => 'https://twitter.com/TwitterDev/status/1603823063690199040'])
+    postJson('/api/oembed/twitter', [
+        'url' => 'https://twitter.com/TwitterDev/status/1603823063690199040',
+        'theme' => 'dark',
+    ])
         ->assertStatus(200)
         ->assertJson($expectResponse);
 });
 
 test('if the embedded twitter link is an invalid link, return the alternative html content', function () {
-    postJson('/api/oembed/twitter', ['url' => 'https://twitter.com/TwitterDev/status/123456789'])
+    postJson('/api/oembed/twitter', ['url' => 'https://twitter.com/TwitterDev/status/123456789', 'theme' => 'dark'])
         ->assertStatus(400)
         ->assertJson(['html' => '<p style="font-size:1.5em;">Twitter 連結發生錯誤... 🥲</p>']);
 });

@@ -17,8 +17,8 @@ class YoutubeOembedApiController extends Controller
     {
         $apiUrl = 'https://www.youtube.com/oembed?url='.$request->url;
         $apiUrl .= '&format=json';
-        $apiUrl .= '&maxwidth=640';
-        $apiUrl .= '&maxheight=360';
+        $apiUrl .= '&maxwidth='.$request->width;
+        $apiUrl .= '&maxheight='.$request->height;
 
         $response = Http::get($apiUrl);
 

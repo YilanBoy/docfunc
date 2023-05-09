@@ -43,9 +43,19 @@ async function embedMedia(url: string, element: Element): Promise<void> {
 }
 
 function insertYoutubeIframe(url: string, element: Element): Promise<void> {
+    const screenWidth: number = window.screen.width;
+
+    let width: number = 640;
+    let height: number = 360;
+
+    if (screenWidth <= 425) {
+        width = 320;
+        height = 180;
+    }
+
     return fetch(`/api/oembed/youtube`, {
         method: 'POST',
-        body: JSON.stringify({ url: url }),
+        body: JSON.stringify({ url: url, width: width, height: height }),
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
@@ -64,9 +74,15 @@ function insertYoutubeIframe(url: string, element: Element): Promise<void> {
 }
 
 function insertTwitterIframe(url: string, element: Element): Promise<void> {
+    // if html class has 'dark' then theme is dark
+    let theme: string = 'light';
+    if (document.documentElement.classList.contains('dark')) {
+        theme = 'dark';
+    }
+
     return fetch('/api/oembed/twitter', {
         method: 'POST',
-        body: JSON.stringify({ url: url }),
+        body: JSON.stringify({ url: url, theme: theme }),
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',

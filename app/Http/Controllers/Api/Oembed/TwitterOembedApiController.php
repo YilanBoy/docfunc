@@ -16,7 +16,7 @@ class TwitterOembedApiController extends Controller
     public function __invoke(Request $request): Response|JsonResponse
     {
         $apiUrl = 'https://publish.twitter.com/oembed?url='.$request->url;
-        $apiUrl .= '&theme=dark';
+        $apiUrl .= '&theme='.$request->theme;
         $apiUrl .= '&omit_script=true';
 
         $response = Http::get($apiUrl);

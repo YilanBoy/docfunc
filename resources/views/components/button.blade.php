@@ -2,7 +2,7 @@
   {{ $attributes->merge([
       'type' => 'submit',
       'class' =>
-          'inline-flex justify-center items-center px-4 py-2 bg-blue-600 border border-transparent rounded-xl font-semibold text-gray-50 uppercase tracking-widest hover:bg-blue-700 active:bg-blue-600 focus:outline-none focus:border-blue-700 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150',
+          'inline-flex items-center justify-center rounded-xl border border-transparent bg-green-600 px-4 py-2 font-semibold uppercase tracking-widest text-gray-50 ring-green-300 transition duration-150 ease-in-out hover:bg-green-700 focus:border-green-700 focus:outline-none focus:ring active:bg-green-600 disabled:opacity-25 dark:bg-[#1b87f5] dark:hover:bg-[#44adff] dark:ring-[#8edaff] dark:focus:border-[#146fe1] dark:active:bg-[#1b87f5]',
   ]) }}
 >
   {{ $slot }}

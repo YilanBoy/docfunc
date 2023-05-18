@@ -14,11 +14,11 @@
     .post-body {
         @apply prose text-lg max-w-none prose-slate dark:prose-invert
             /* headings */
-        prose-headings:text-green-500 dark:prose-headings:text-blue-600
+        prose-headings:text-green-500 dark:prose-headings:text-[#1b87f5]
         prose-h2:border-b-2 prose-h2:border-slate-300 dark:prose-h2:border-slate-500 prose-h2:mb-4 prose-h2:pb-4 prose-h2:border-solid
             /* links */
         prose-a:no-underline hover:prose-a:underline prose-a:text-green-500 hover:prose-a:text-green-600
-        dark:prose-a:text-blue-600 dark:hover:prose-a:text-blue-500
+        dark:prose-a:text-[#1b87f5] dark:hover:prose-a:text-[#44adff]
             /* lists */
         prose-li:marker:text-gray-500 dark:prose-li:marker:text-gray-400
             /* figure */
@@ -53,7 +53,7 @@
         @apply prose text-lg max-w-none prose-slate dark:prose-invert
             /* links */
         prose-a:no-underline hover:prose-a:underline prose-a:text-green-500 hover:prose-a:text-green-600
-        dark:prose-a:text-blue-600 dark:hover:prose-a:text-blue-500
+        dark:prose-a:text-[#1b87f5] dark:hover:prose-a:text-[#44adff]
             /* lists */
         prose-li:marker:text-gray-500 dark:prose-li:marker:text-gray-400
             /* image */

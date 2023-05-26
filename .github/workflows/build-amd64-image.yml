@@ -1,0 +1,52 @@
+name: build-amd64-image
+
+on:
+  workflow_run:
+    workflows:
+      - tests
+    types:
+      - completed
+
+jobs:
+  build-amd64-image:
+    name: Start to build amd64 image and publish to docker hub
+    runs-on: ubuntu-latest
+
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push laravel octane
+        uses: docker/build-push-action@v4
+        with:
+          file: dockerfiles/Dockerfile.app
+          platforms: linux/amd64
+          push: true
+          tags: nella0128/docfunc-app-amd64:latest
+
+      - name: Build and push laravel horizon
+        uses: docker/build-push-action@v4
+        with:
+          file: dockerfiles/Dockerfile.horizon
+          platforms: linux/amd64
+          push: true
+          tags: nella0128/docfunc-horizon-amd64:latest
+
+      - name: Build and push laravel scheduler
+        uses: docker/build-push-action@v4
+        with:
+          file: dockerfiles/Dockerfile.scheduler
+          platforms: linux/amd64
+          push: true
+          tags: nella0128/docfunc-scheduler-amd64:latest

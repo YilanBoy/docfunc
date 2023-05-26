@@ -1,6 +1,6 @@
 <div
   x-data="{ menuIsOpen: false }"
-  class="bg-gray-50 shadow-lg dark:bg-gray-800 lg:hidden"
+  class="bg-gray-50 shadow-lg dark:bg-gray-800 dark:shadow-none lg:hidden"
 >
   {{-- logout form --}}
   <form
@@ -151,7 +151,7 @@
               aria-orientation="vertical"
               aria-labelledby="user-menu-button"
               tabindex="-1"
-              class="absolute right-0 mt-2 w-48 rounded-md bg-gray-50 p-2 text-gray-700 shadow-lg ring-1 ring-black ring-opacity-20 dark:bg-gray-800 dark:text-gray-50 dark:ring-gray-600"
+              class="absolute right-0 mt-2 w-48 rounded-md bg-gray-50 p-2 text-gray-700 shadow-lg ring-1 ring-black ring-opacity-20 dark:bg-gray-800 dark:text-gray-50 dark:shadow-none dark:ring-gray-600"
             >
               <a
                 href="{{ route('posts.create') }}"

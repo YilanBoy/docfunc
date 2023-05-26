@@ -1,7 +1,7 @@
 <div class="hidden space-y-6 xl:block xl:w-[320px]">
   {{-- 介紹 --}}
   <div
-    class="rounded-xl bg-gradient-to-br from-green-500 via-teal-500 to-sky-500 p-0.5 shadow-lg dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500"
+    class="rounded-xl bg-gradient-to-br from-green-500 via-teal-500 to-sky-500 p-0.5 shadow-lg dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500 dark:shadow-none"
   >
     <div class="rounded-xl bg-gray-50 p-5 dark:bg-gray-800 dark:text-gray-50">
       <h3 class="mb-3 border-b-2 border-black pb-3 text-center text-lg font-semibold dark:border-white">

@@ -13,20 +13,20 @@ beforeEach(function () {
     $this->imageName3 = '2022_12_31_10_28_00_63af9e3067169.jpg';
 
     // use getContent() here, so we can use storage put() to determine the filename
-    $this->imageFile1 = UploadedFile::fake()->image('image1.jpg')->size(100)->getContent();
-    $this->imageFile2 = UploadedFile::fake()->image('image2.jpg')->size(100)->getContent();
-    $this->imageFile3 = UploadedFile::fake()->image('image3.jpg')->size(100)->getContent();
+    $this->image1 = UploadedFile::fake()->image('image1.jpg')->size(100)->getContent();
+    $this->image2 = UploadedFile::fake()->image('image2.jpg')->size(100)->getContent();
+    $this->image3 = UploadedFile::fake()->image('image3.jpg')->size(100)->getContent();
 
-    Storage::disk('s3')->put('images/'.$this->imageName1, $this->imageFile1);
-    Storage::disk('s3')->put('images/'.$this->imageName2, $this->imageFile2);
-    Storage::disk('s3')->put('images/'.$this->imageName3, $this->imageFile3);
+    Storage::disk('s3')->put('images/'.$this->imageName1, $this->image1);
+    Storage::disk('s3')->put('images/'.$this->imageName2, $this->image2);
+    Storage::disk('s3')->put('images/'.$this->imageName3, $this->image3);
 });
 
 it('can terminate the program by answering "no"', function () {
     $body = <<<EOF
-        <div>
-            <img src="https://fake-url.com/images/{$this->imageName1}" alt="{$this->imageName1}" title="" style="">
-        </div>
+    <div>
+        <img src="https://fake-url.com/images/{$this->imageName1}" alt="{$this->imageName1}" title="" style="">
+    </div>
     EOF;
 
     $post = Post::factory()->create(['body' => $body]);
@@ -48,9 +48,9 @@ it('can terminate the program by answering "no"', function () {
 
 it('can clear unused images', function () {
     $body = <<<EOF
-        <div>
-            <img src="https://fake-url.com/images/{$this->imageName1}" alt="{$this->imageName1}" title="" style="">
-        </div>
+    <div>
+        <img src="https://fake-url.com/images/{$this->imageName1}" alt="{$this->imageName1}" title="" style="">
+    </div>
     EOF;
 
     $post = Post::factory()->create(['body' => $body]);
@@ -72,9 +72,9 @@ it('can clear unused images', function () {
 
 it('can skip confirmed by adding --force flag', function () {
     $body = <<<EOF
-        <div>
-            <img src="https://fake-url.com/images/{$this->imageName1}" alt="{$this->imageName1}" title="" style="">
-        </div>
+    <div>
+        <img src="https://fake-url.com/images/{$this->imageName1}" alt="{$this->imageName1}" title="" style="">
+    </div>
     EOF;
 
     $post = Post::factory()->create(['body' => $body]);
@@ -95,19 +95,19 @@ it('can skip confirmed by adding --force flag', function () {
 
 test('if there are no unused images, the program will not delete any of them', function () {
     $body1 = <<<EOF
-        <div>
-            <img src="https://fake-url.com/images/{$this->imageName1}" alt="{$this->imageName1}" title="" style="">
-        </div>
+    <div>
+        <img src="https://fake-url.com/images/{$this->imageName1}" alt="{$this->imageName1}" title="" style="">
+    </div>
     EOF;
 
     $post1 = Post::factory()->create(['body' => $body1]);
     expect(Post::find($post1->id))->body->toContain($this->imageName1);
 
     $body2 = <<<EOF
-        <div>
-            <img src="https://fake-url.com/images/{$this->imageName2}" alt="{$this->imageName2}" title="" style="">
-            <img src="https://fake-url.com/images/{$this->imageName3}" alt="{$this->imageName3}" title="" style="">
-        </div>
+    <div>
+        <img src="https://fake-url.com/images/{$this->imageName2}" alt="{$this->imageName2}" title="" style="">
+        <img src="https://fake-url.com/images/{$this->imageName3}" alt="{$this->imageName3}" title="" style="">
+    </div>
     EOF;
 
     $post2 = Post::factory()->create(['body' => $body2]);

@@ -25,7 +25,7 @@ RUN composer install \
 # Scheduler
 ###########################################
 
-FROM php:${PHP_VERSION}-alpine3.17
+FROM php:${PHP_VERSION}-alpine3.18
 
 LABEL maintainer="Allen"
 
@@ -96,5 +96,3 @@ HEALTHCHECK --interval=5s --timeout=3s \
 USER scheduler
 
 ENTRYPOINT ["supercronic", "/etc/supercronic/laravel"]
-
-

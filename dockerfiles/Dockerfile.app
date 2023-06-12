@@ -37,7 +37,7 @@ RUN npm install \
 # Laravel Octane
 ###########################################
 
-FROM php:${PHP_VERSION}-alpine3.17
+FROM php:${PHP_VERSION}-alpine3.18
 
 LABEL maintainer="Allen"
 

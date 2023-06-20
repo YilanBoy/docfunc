@@ -9,11 +9,9 @@ on:
 
 jobs:
   build-image:
-    name: Start to build amd64 image and publish to docker hub
+    name: Start to build image and publish to docker hub
     runs-on: ubuntu-latest
-
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-
+    environment: production
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2

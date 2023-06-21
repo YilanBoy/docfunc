@@ -32,6 +32,8 @@ jobs:
           platforms: linux/amd64, linux/arm64
           push: true
           tags: nella0128/docfunc-app:latest
+          cache-from: type=registry,ref=nella0128/docfunc-app:buildcache
+          cache-to: type=registry,ref=nella0128/docfunc-app:buildcache,mode=max
 
       - name: Build and push laravel horizon
         uses: docker/build-push-action@v4
@@ -40,6 +42,8 @@ jobs:
           platforms: linux/amd64, linux/arm64
           push: true
           tags: nella0128/docfunc-horizon:latest
+          cache-from: type=registry,ref=nella0128/docfunc-horizon:buildcache
+          cache-to: type=registry,ref=nella0128/docfunc-horizon:buildcache,mode=max
 
       - name: Build and push laravel scheduler
         uses: docker/build-push-action@v4
@@ -48,3 +52,5 @@ jobs:
           platforms: linux/amd64, linux/arm64
           push: true
           tags: nella0128/docfunc-scheduler:latest
+          cache-from: type=registry,ref=nella0128/docfunc-scheduler:buildcache
+          cache-to: type=registry,ref=nella0128/docfunc-scheduler:buildcache,mode=max

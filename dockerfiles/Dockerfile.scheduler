@@ -37,7 +37,7 @@ WORKDIR $ROOT
 # -c: execute the following command when the shell starts
 SHELL ["/bin/ash", "-e", "-c"]
 
-COPY . .
+
 
 # install necessary package to install php extension
 RUN apk update \
@@ -55,25 +55,9 @@ ARG WWWGROUP=1000
 RUN addgroup -g $WWWGROUP -S scheduler || true \
     && adduser -D -h /home/scheduler -s /bin/ash -G scheduler -u $WWWUSER scheduler
 
-# create bootstrap and storage files if they do not exist
-# gives the 'scheduler' user read/write and execute privileges to those files
-RUN mkdir -p \
-        storage/framework/sessions \
-        storage/framework/views \
-        storage/framework/cache/data \
-        storage/logs \
-        bootstrap/cache \
-    && chown -R scheduler:scheduler \
-        storage \
-        bootstrap/cache \
-    && chmod -R ug+rwx storage bootstrap/cache
-
 # copy supervisor and php config files into container
 COPY deployment/php/php.ini /usr/local/etc/php/conf.d/scheduler.ini
 COPY deployment/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
-
-# copy dependencies from another stage
-COPY --from=vendor ${ROOT}/vendor vendor
 
 # set supercronic for schedules
 # download the corresponding files according to the different architectures.
@@ -88,7 +72,25 @@ RUN if [ "$(uname -m)" = "x86_64" ]; then \
     fi \
     && chmod +x /usr/bin/supercronic \
     && mkdir -p /etc/supercronic \
-    && echo "*/1 * * * * php ${ROOT}/artisan schedule:run --verbose --no-interaction" > /etc/supercronic/laravel
+    && echo "*/1 * * * * php ${ROOT}/artisan schedule:run --verbose --no-interaction" > /etc/supercronic/laravel \
+
+COPY . .
+
+# create bootstrap and storage files if they do not exist
+# gives the 'scheduler' user read/write and execute privileges to those files
+RUN mkdir -p \
+        storage/framework/sessions \
+        storage/framework/views \
+        storage/framework/cache/data \
+        storage/logs \
+        bootstrap/cache \
+    && chown -R scheduler:scheduler \
+        storage \
+        bootstrap/cache \
+    && chmod -R ug+rwx storage bootstrap/cache
+
+# copy dependencies from another stage
+COPY --from=vendor ${ROOT}/vendor vendor
 
 HEALTHCHECK --interval=5s --timeout=3s \
     CMD supercronic -test /etc/supercronic/laravel

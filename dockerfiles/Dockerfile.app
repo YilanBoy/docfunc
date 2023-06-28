@@ -49,8 +49,6 @@ WORKDIR $ROOT
 # -c: execute the following command when the shell starts
 SHELL ["/bin/ash", "-e", "-c"]
 
-COPY . .
-
 # install necessary package to install php extension
 RUN apk update \
     && apk upgrade \
@@ -71,6 +69,16 @@ ARG WWWGROUP=1000
 RUN addgroup -g $WWWGROUP -S octane || true \
     && adduser -D -h /home/octane -s /bin/ash -G octane -u $WWWUSER octane
 
+# copy php config files into container
+COPY deployment/php/php.ini /usr/local/etc/php/conf.d/octane.ini
+COPY deployment/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+
+# set scripts to start the laravel octane app
+COPY deployment/scripts/app-entrypoint.sh deployment/scripts/app-entrypoint.sh
+RUN chmod +x deployment/scripts/app-entrypoint.sh
+
+COPY . .
+
 # create bootstrap and storage files if they do not exist
 # gives the 'octane' user read/write and execute privileges to those files
 RUN mkdir -p \
@@ -83,14 +91,6 @@ RUN mkdir -p \
         storage \
         bootstrap/cache \
     && chmod -R ug+rwx storage bootstrap/cache
-
-# copy php config files into container
-COPY deployment/php/php.ini /usr/local/etc/php/conf.d/octane.ini
-COPY deployment/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
-
-# set scripts to start the laravel octane app
-COPY deployment/scripts/app-entrypoint.sh deployment/scripts/app-entrypoint.sh
-RUN chmod +x deployment/scripts/app-entrypoint.sh
 
 # copy dependencies from another stage
 COPY --from=vendor ${ROOT}/vendor vendor

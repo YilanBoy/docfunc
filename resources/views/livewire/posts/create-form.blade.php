@@ -316,15 +316,15 @@
 </div>
 
 @push('script')
-  {{-- binding livewire attribute 'tags' --}}
+  {{-- binding the value of the tag input to the livewire attribute 'tags' --}}
   <script>
     let tags = document.querySelector('#tags');
 
     tags.addEventListener('change', (event) => {
-      // change livewire attribute 'tags'
       @this.set('tags', event.target.value);
     });
 
+    // create a listener to remove all tags
     window.addEventListener('removeAllTags', () => {
       tagify.removeAllTags();
     });
@@ -352,12 +352,14 @@
         }, 500);
       });
 
+      // create a listener to clear the post content
       window.addEventListener('clearCkeditorContent', () => {
         editorInstance.setData('');
       });
     });
   </script>
 
+  {{-- only press the submit button to leave the edit page  --}}
   <script>
     let leaveStatus = false
 
@@ -366,11 +368,11 @@
     });
 
     window.addEventListener('beforeunload', function(event) {
+      // https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event
       if (!leaveStatus) {
         // standard practice for canceling events, but Chrome does not support
         event.preventDefault();
 
-        // Firefox not support
         // to cancel the event, Chrome requires that the returnValue must be given a value
         // In the past, this value could be displayed in the alert window, but now it is no longer supported, so just give it a null value.
         event.returnValue = '';

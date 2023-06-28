@@ -73,11 +73,10 @@ RUN addgroup -g $WWWGROUP -S octane || true \
 COPY deployment/php/php.ini /usr/local/etc/php/conf.d/octane.ini
 COPY deployment/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
-# set scripts to start the laravel octane app
-COPY deployment/scripts/app-entrypoint.sh deployment/scripts/app-entrypoint.sh
-RUN chmod +x deployment/scripts/app-entrypoint.sh
-
 COPY . .
+
+# set scripts to start the laravel octane app
+RUN chmod +x deployment/scripts/app-entrypoint.sh
 
 # create bootstrap and storage files if they do not exist
 # gives the 'octane' user read/write and execute privileges to those files

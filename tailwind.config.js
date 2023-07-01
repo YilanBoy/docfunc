@@ -16,7 +16,7 @@ module.exports = {
                     "'Noto Sans TC', sans-serif",
                     ...defaultTheme.fontFamily.sans,
                 ],
-                'jetbrains-mono': "'JetBrains Mono', monospace",
+                'jetbrains-mono': ["'JetBrains Mono', monospace", "'Noto Sans TC', sans-serif"]
             },
             keyframes: {
                 'fade-in': {

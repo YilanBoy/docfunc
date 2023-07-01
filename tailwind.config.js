@@ -12,8 +12,11 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-                noto: "'Noto Sans TC', sans-serif",
+                sans: [
+                    "'Noto Sans TC', sans-serif",
+                    ...defaultTheme.fontFamily.sans,
+                ],
+                'jetbrains-mono': "'JetBrains Mono', monospace",
             },
             keyframes: {
                 'fade-in': {

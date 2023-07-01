@@ -110,7 +110,7 @@
                 rows="12"
                 placeholder="寫下你的留言吧！**支援 Markdown**"
                 required
-                class="form-textarea w-full resize-none rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
+                class="font-jetbrains-mono form-textarea w-full resize-none rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
               ></textarea>
 
               @error('body')

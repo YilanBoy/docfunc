@@ -70,6 +70,21 @@
     rel="stylesheet"
   >
 
+  {{-- jetbrains mono font --}}
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
+    rel="stylesheet"
+  >
+
   @stack('css')
 
   <livewire:styles />
@@ -84,7 +99,7 @@
   x-data
   {{-- when change page, scroll to top --}}
   @scroll-to-top.window="window.scrollTo({ top: 0, behavior: 'smooth' })"
-  class="overscroll-y-none bg-gray-200 font-noto text-lg text-gray-900 antialiased dark:bg-gray-900"
+  class="overscroll-y-none bg-gray-200 font-sans text-lg text-gray-900 antialiased dark:bg-gray-900"
 >
 
   <div

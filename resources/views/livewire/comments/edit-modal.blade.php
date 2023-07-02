@@ -110,7 +110,7 @@
                 rows="12"
                 placeholder="寫下你的留言吧！**支援 Markdown**"
                 required
-                class="font-jetbrains-mono form-textarea w-full resize-none rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
+                class="form-textarea w-full resize-none rounded-md border border-gray-300 font-jetbrains-mono text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
               ></textarea>
 
               @error('body')
@@ -133,19 +133,9 @@
           @endif
 
           <div class="flex items-center justify-between space-x-3">
-            <label
-              for="edit-comment-markdown-converter"
-              class="flex cursor-pointer select-none items-center space-x-4"
-            >
-              <x-toggle-switch
-                wire:model="convertToHtml"
-                id="edit-comment-markdown-converter"
-                title="顯示轉換後的內容"
-                placeholder="show converted results"
-              />
-
-              <span class="dark:text-gray-50">預覽</span>
-            </label>
+            <x-toggle-switch wire:model="convertToHtml">
+              預覽
+            </x-toggle-switch>
 
             <x-button>
               <i class="bi bi-save2-fill"></i>

@@ -1,33 +1,27 @@
 # Blog
 
-![build](https://github.com/YilanBoy/blog/actions/workflows/build.yml/badge.svg)
+![tests](https://github.com/YilanBoy/blog/actions/workflows/tests.yml/badge.svg)
+![build-image](https://github.com/YilanBoy/blog/actions/workflows/build-image.yml/badge.svg)
 [![codecov](https://codecov.io/gh/YilanBoy/blog/branch/main/graph/badge.svg?token=K2V2ANX2LW)](https://codecov.io/gh/YilanBoy/blog)
 
-This is a simple blog made by [TALL stack](https://tallstack.dev/):
+This is a simple blog, mainly used to help me learn about Laravel. The entire project uses
+the [TALL stack](https://tallstack.dev/), which is：
 
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Alpine.js](https://alpinejs.dev/)
 - [Laravel](https://laravel.com/)
 - [Laravel Livewire](https://laravel-livewire.com/)
 
-The features of this blog include:
-
-- authentication
-- creating post
-- post tags
-- comments
-- post search
-- web feed url
-- dark mode
+This blog contains certain basic functions, such as membership system, writing articles and replies.
 
 Post editor use [CKEditor 5](https://ckeditor.com/), You can upload image to AWS S3 in blog post. You can search post
-by [Algolia](https://www.algolia.com/).
+by Algolia.
 
 ## Requirements
 
-[php](https://www.php.net/) ^8.1  
-[composer](https://getcomposer.org/)  
-[npm](https://www.npmjs.com/)
+- [php](https://www.php.net/) ^8.1
+- [composer](https://getcomposer.org/)
+- [npm](https://www.npmjs.com/)
 
 ## Installation
 
@@ -91,7 +85,15 @@ Generate model ide-helper:
 php artisan ide-helper:models
 ```
 
+## Service Used
+
+- [Algolia](https://www.algolia.com/): for search post
+- [AWS S3](https://aws.amazon.com/tw/s3/): for images storage
+- [reCAPTCHA](https://www.google.com/recaptcha/about/): for verify user is bot or not
+
 ## Deployment
+
+### Supervisor
 
 You could deploy this project use [Laravel Octane](https://laravel.com/docs/9.x/octane), supercharges the performance by
 serving application using [Swoole](https://github.com/swoole/swoole-src).
@@ -126,7 +128,8 @@ Start the service by swoole server:
 php artisan ocatane:start
 ```
 
-In production, we use [Supervisor](https://github.com/Supervisor/supervisor) to start swoole server and laravel queue
+In production, you can use [Supervisor](https://github.com/Supervisor/supervisor) to start swoole server and laravel
+queue
 worker.
 
 Using supervisor to start swoole server process, we have to create a `blog-octane-worker.conf` config file
@@ -174,4 +177,28 @@ Add this line to run the Scheduler.
 
 ```text
 0 * * * * cd /var/www/blog && php artisan schedule:run >> /dev/null 2>&1
+```
+
+### Docker
+
+> **Note**
+>
+> You must install [Docker](https://www.docker.com/) first.
+
+The container is divided into 3 parts, which are app, horizon and scheduler.
+
+Dockerfiles is placed in the folder dockerfiles. The php settings and entrypoint files in the container are placed in
+the folder deployment. You can use Docker and these files to build images.
+
+```sh
+cd blog
+
+# build blog app
+docker buildx build -f dockerfiles/Dockerfile.app --platform linux/amd64,linux/arm64 --push -t blog:latest .
+
+# build horizon
+docker buildx build -f dockerfiles/Dockerfile.horizon --platform linux/amd64,linux/arm64 --push -t blog-horizon:latest .
+
+# build scheduler
+docker buildx build -f dockerfiles/Dockerfile.scheduler --platform linux/amd64,linux/arm64 --push -t blog-scheduler:latest .
 ```

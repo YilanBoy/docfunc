@@ -32,7 +32,6 @@ test('logged-in users can update their comments', function () {
     Livewire::test(EditModal::class)
         ->call('setEditComment', $comment->id, $offset)
         ->set('body', $body)
-        ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('update')
         ->assertDispatchedBrowserEvent('close-edit-comment-modal')
         ->assertEmitted('refreshCommentGroup-'.$offset);
@@ -52,7 +51,6 @@ test('users can\'t update others\' comments', function () {
     Livewire::test(EditModal::class)
         ->call('setEditComment', $comment->id, $offset)
         ->set('body', $body)
-        ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('update')
         ->assertForbidden();
 

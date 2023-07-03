@@ -1,5 +1,6 @@
 {{-- Google reCAPTCHA --}}
 @push('script')
+  {{-- when submit the comment, set the recaptcha value and update the comment --}}
   <script>
     document.getElementById("create-comment").addEventListener("submit", function(event) {
       event.preventDefault();

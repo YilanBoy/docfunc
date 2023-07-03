@@ -1,23 +1,3 @@
-{{-- Google reCAPTCHA --}}
-@push('script')
-  <script>
-    document.getElementById("edit-comment").addEventListener("submit", function(event) {
-      event.preventDefault();
-      grecaptcha.ready(function() {
-        grecaptcha.execute("{{ config('services.recaptcha.site_key') }}", {
-            action: "submit"
-          })
-          .then(function(response) {
-
-            @this.set('recaptcha', response);
-
-            @this.update();
-          });
-      });
-    });
-  </script>
-@endpush
-
 <div
   x-cloak
   x-data="{ isOpen: false }"
@@ -87,6 +67,7 @@
 
         <form
           id="edit-comment"
+          wire:submit.prevent="update"
           class="space-y-4"
         >
           @if (!$convertToHtml)

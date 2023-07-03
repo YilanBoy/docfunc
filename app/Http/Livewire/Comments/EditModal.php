@@ -22,8 +22,6 @@ class EditModal extends Component
 
     public string $body = '';
 
-    public string $recaptcha;
-
     protected $listeners = ['setEditComment'];
 
     protected function rules(): array

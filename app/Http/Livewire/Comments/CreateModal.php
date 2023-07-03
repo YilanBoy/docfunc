@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Comments;
 
-use App\Http\Requests\CommentRequest;
+use App\Http\Requests\CommentWithRecaptchaRequest;
 use App\Http\Traits\Livewire\MarkdownConverter;
 use App\Models\Comment;
 use App\Models\Post;
@@ -25,12 +25,12 @@ class CreateModal extends Component
 
     protected function rules(): array
     {
-        return (new CommentRequest())->rules();
+        return (new CommentWithRecaptchaRequest())->rules();
     }
 
     protected function messages(): array
     {
-        return (new CommentRequest())->messages();
+        return (new CommentWithRecaptchaRequest())->messages();
     }
 
     public function getConvertedBodyProperty(): string

@@ -27,7 +27,6 @@ class CommentRequest extends FormRequest
             'body.required' => '請填寫留言內容',
             'body.min' => '留言內容至少 5 個字元',
             'body.max' => '留言內容至多 2000 個字元',
-            'recaptcha.required' => '請完成驗證',
         ];
     }
 }

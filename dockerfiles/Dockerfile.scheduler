@@ -72,7 +72,7 @@ RUN if [ "$(uname -m)" = "x86_64" ]; then \
     fi \
     && chmod +x /usr/bin/supercronic \
     && mkdir -p /etc/supercronic \
-    && echo "*/1 * * * * php ${ROOT}/artisan schedule:run --verbose --no-interaction" > /etc/supercronic/laravel \
+    && echo "*/1 * * * * php ${ROOT}/artisan schedule:run --verbose --no-interaction" > /etc/supercronic/laravel
 
 COPY . .
 

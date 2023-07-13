@@ -54,8 +54,6 @@ class EditInformation extends Component
         // 會員只能進入自己的頁面，規則寫在 UserPolicy
         $this->authorize('update', $this->user);
 
-        return view('livewire.users.edit.edit-information')
-            ->extends('layouts.users.edit.index')
-            ->section('users.content');
+        return view('livewire.users.edit.edit-information');
     }
 }

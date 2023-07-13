@@ -40,8 +40,6 @@ class DeleteUser extends Component
     {
         $this->authorize('update', $this->user);
 
-        return view('livewire.users.edit.delete-user')
-            ->extends('layouts.users.edit.index')
-            ->section('users.content');
+        return view('livewire.users.edit.delete-user');
     }
 }

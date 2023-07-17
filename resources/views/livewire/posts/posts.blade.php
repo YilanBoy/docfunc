@@ -3,7 +3,7 @@
   {{-- 文章排序 --}}
   <div class="flex w-full flex-col-reverse text-sm md:flex-row md:justify-between">
 
-    <nav class="flex w-full space-x-1 rounded-xl bg-gray-300 p-1 dark:bg-gray-700 dark:text-gray-50 md:w-auto">
+    <nav class="flex w-full space-x-1 rounded-xl p-1 dark:text-gray-50 md:w-auto">
 
       @php
         $tabs = [['value' => 'latest', 'text' => '最新文章', 'icon' => 'bi bi-stars'], ['value' => 'recent', 'text' => '最近更新', 'icon' => 'bi bi-wrench-adjustable'], ['value' => 'comment', 'text' => '最多留言', 'icon' => 'bi bi-chat-square-text-fill']];
@@ -14,7 +14,7 @@
           wire:click.prevent="orderChange('{{ $tab['value'] }}')"
           href="{{ $currentUrl . '?order=' . $tab['value'] }}"
           @class([
-              'flex w-1/3 md:w-auto justify-center px-4 py-2 transition duration-300 rounded-lg',
+              'flex w-1/3 md:w-auto justify-center px-4 py-2 transition duration-300 rounded-lg ',
               'bg-gray-50 dark:bg-gray-800' => $order === $tab['value'],
               'hover:bg-gray-50 dark:hover:bg-gray-800' => $order !== $tab['value'],
           ])

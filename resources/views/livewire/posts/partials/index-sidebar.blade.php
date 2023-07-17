@@ -3,16 +3,20 @@
   <div
     class="rounded-xl bg-gradient-to-br from-green-500 via-teal-500 to-sky-500 p-0.5 shadow-lg dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500 dark:shadow-none"
   >
-    <div class="rounded-xl bg-gray-50 p-5 dark:bg-gray-800 dark:text-gray-50">
-      <h3 class="mb-3 border-b-2 border-black pb-3 text-center text-lg font-semibold dark:border-white">
-        歡迎來到 <span class="font-mono">{{ config('app.name') }}</span>！
+    <div class="group rounded-xl bg-gray-50 p-5 dark:bg-gray-800 dark:text-gray-50">
+      <h3
+        class="w-full bg-gradient-to-r from-emerald-500 to-sky-500 bg-clip-text text-center font-jetbrains-mono text-2xl font-semibold text-transparent dark:border-white dark:from-pink-500 dark:to-violet-500"
+      >
+        echo 'Hello World';
       </h3>
-      <span>
-        紀錄學習與生活上的大小事！
-        <br>
-        此部落格使用 Laravel、Alpine.js 與 Tailwind CSS 開發～
+
+      <hr class="my-4 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
+
+      <span class="group-gradient-underline-grow">
+        嘗試用部落格來紀錄自己學習的過程，與生活上的大小事。此部落格使用 TALL Stack 所開發🚀
       </span>
-      <div class="mt-7 flex items-center justify-center">
+
+      <div class="mt-8 flex items-center justify-center">
         <a
           href="{{ route('posts.create') }}"
           class="group relative flex w-full items-center justify-center overflow-hidden rounded-lg bg-emerald-600 px-4 py-2 [transform:translateZ(0)] before:absolute before:left-1/2 before:top-1/2 before:h-8 before:w-8 before:-translate-x-1/2 before:-translate-y-1/2 before:scale-[0] before:rounded-full before:bg-blue-600 before:opacity-0 before:transition before:duration-700 before:ease-in-out hover:before:scale-[10] hover:before:opacity-100"

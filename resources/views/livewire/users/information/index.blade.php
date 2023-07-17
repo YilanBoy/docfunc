@@ -12,13 +12,13 @@
     <div
       {{-- tab can only be 'information', 'posts', 'comments' --}}
       x-data="{
-          url: new URL(window.location.href),
           tabSelected: new URLSearchParams(location.search).get('tab') || 'information',
           tabButtonClicked(tabButton) {
               this.tabSelected = tabButton.id.replace('-tab-button', '');
               // update the url
-              this.url.searchParams.set('tab', this.tabSelected);
-              history.pushState(null, document.title, this.url.toString());
+              let url = new URL(window.location.href);
+              url.searchParams.set('tab', this.tabSelected);
+              history.pushState(null, document.title, url.toString());
 
               this.tabRepositionMarker(tabButton);
           },

@@ -26,7 +26,7 @@ class Posts extends Component
             ->with('category')
             ->orderBy('deleted_at', 'desc')
             ->latest()
-            ->paginate(10, ['*'], 'postsPage')
+            ->paginate(10, ['*'], 'posts-page')
             ->withQueryString();
 
         // 該會員的文章

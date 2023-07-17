@@ -29,7 +29,7 @@ class Comments extends Component
             })
             ->with('post:id,title,slug')
             ->latest()
-            ->paginate(10, ['*'], 'commentsPage')
+            ->paginate(10, ['*'], 'comments-page')
             ->withQueryString();
 
         // convert the body from markdown to html

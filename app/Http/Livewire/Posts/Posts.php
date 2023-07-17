@@ -33,13 +33,13 @@ class Posts extends Component
         $this->order = request()->order ?? 'latest';
     }
 
-    public function dehydrate()
+    // add a scroll to top browser event when the paginators are updated
+    public function updatedPaginators(): void
     {
-        // when change page, scroll to top
         $this->dispatchBrowserEvent('scroll-to-top');
     }
 
-    public function orderChange($newOrder)
+    public function orderChange($newOrder): void
     {
         // 回到第一頁
         $this->resetPage();

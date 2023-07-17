@@ -14,7 +14,7 @@ class Comments extends Component
 
     public int $userId;
 
-    public function dehydrate()
+    public function updatedPaginators(): void
     {
         $this->dispatchBrowserEvent('scroll-to-top');
     }

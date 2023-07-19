@@ -11,12 +11,26 @@ module.exports = {
     ],
     theme: {
         extend: {
+            colors: {
+                lividus: {
+                    100: '#cddeee',
+                    200: '#abc7e3',
+                    300: '#88b0d7',
+                    400: '#6699cc',
+                    500: '#4482c1',
+                    600: '#366ba1',
+                    700: '#2a547e',
+                },
+            },
             fontFamily: {
                 sans: [
                     "'Noto Sans TC', sans-serif",
                     ...defaultTheme.fontFamily.sans,
                 ],
-                'jetbrains-mono': ["'JetBrains Mono', monospace", "'Noto Sans TC', sans-serif"]
+                'jetbrains-mono': [
+                    "'JetBrains Mono', monospace",
+                    "'Noto Sans TC', sans-serif",
+                ],
             },
             keyframes: {
                 'fade-in': {
@@ -57,8 +71,8 @@ module.exports = {
                             borderRadius: '0.25rem',
                         },
                         '.dark :not(pre) > code': {
-                            backgroundColor: theme('colors.gray.600'),
-                            color: theme('colors.gray.100'),
+                            backgroundColor: theme('colors.lividus.700'),
+                            color: theme('colors.lividus.100'),
                         },
                     },
                 },

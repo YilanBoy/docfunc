@@ -49,7 +49,7 @@
     <button
       id="scroll-to-top-btn"
       title="Go to top"
-      class="fixed bottom-7 right-7 z-10 hidden h-16 w-16 rounded-full bg-green-600 text-gray-50 shadow-md transition duration-150 ease-in hover:scale-110 hover:shadow-xl dark:bg-blue-600"
+      class="fixed bottom-7 right-7 z-10 hidden h-16 w-16 rounded-full bg-green-600 text-gray-50 shadow-md transition duration-150 ease-in hover:scale-110 hover:shadow-xl dark:bg-lividus-600"
     >
       <span class="m-auto text-3xl font-bold">
         <i class="bi bi-arrow-up"></i>
@@ -141,7 +141,7 @@
             {{-- post tags --}}
             @if ($post->tags()->exists())
               <div class="mt-4 flex items-center text-base">
-                <span class="mr-1 text-green-300 dark:text-slate-600"><i class="bi bi-tags-fill"></i></span>
+                <span class="mr-1 text-green-300 dark:text-lividus-600"><i class="bi bi-tags-fill"></i></span>
 
                 @foreach ($post->tags as $tag)
                   <x-tag :href="route('tags.show', ['tag' => $tag->id])">

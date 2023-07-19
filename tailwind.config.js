@@ -72,7 +72,7 @@ module.exports = {
                         },
                         '.dark :not(pre) > code': {
                             backgroundColor: theme('colors.lividus.700'),
-                            color: theme('colors.lividus.100'),
+                            color: theme('colors.gray.50'),
                         },
                     },
                 },

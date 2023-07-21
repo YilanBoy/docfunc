@@ -2,16 +2,109 @@
 
 namespace App\Http\Livewire\Posts;
 
+use App\Http\Traits\Livewire\PostValidation;
+use App\Models\Category;
+use App\Models\Post;
+use App\Services\ContentService;
+use App\Services\FileService;
+use App\Services\FormatTransferService;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Edit extends Component
 {
-    // we can't use id for naming property, it's livewire internal usage
-    public $postId;
+    use PostValidation;
+    use AuthorizesRequests;
+    use WithFileUploads;
 
-    public function mount(int $id)
+    protected ContentService $contentService;
+
+    protected FormatTransferService $formatTransferService;
+
+    protected FileService $fileService;
+
+    public Collection $categories;
+
+    public Post $post;
+
+    public string $title;
+
+    public int $categoryId;
+
+    public string $tags;
+
+    public ?string $previewUrl = null;
+
+    public $image = null;
+
+    public string $body;
+
+    public function boot(
+        ContentService $contentService,
+        FormatTransferService $formatTransferService,
+        FileService $fileService
+    ): void {
+        $this->contentService = $contentService;
+        $this->formatTransferService = $formatTransferService;
+        $this->fileService = $fileService;
+    }
+
+    public function mount(int $id): void
     {
-        $this->postId = $id;
+        $this->post = Post::find($id);
+
+        $this->authorize('update', $this->post);
+
+        $this->categories = Category::all(['id', 'name']);
+
+        $this->title = $this->post->title;
+        $this->categoryId = $this->post->category_id;
+        $this->tags = $this->post->tags_json;
+        $this->previewUrl = $this->post->preview_url;
+        $this->body = $this->post->body;
+    }
+
+    public function updatedImage(): void
+    {
+        $this->validateImage();
+
+        $this->resetValidation('image');
+    }
+
+    public function update()
+    {
+        $this->validatePost();
+
+        $this->post->title = $this->title;
+        $this->post->slug = $this->contentService->makeSlug($this->title);
+        $this->post->category_id = $this->categoryId;
+
+        $body = $this->contentService->htmlPurifier($this->body);
+        $this->post->body = $body;
+        $this->post->excerpt = $this->contentService->makeExcerpt($body);
+
+        // upload image
+        if ($this->image) {
+            $imageName = $this->fileService->generateFileName($this->image->getClientOriginalExtension());
+            $uploadFilePath = $this->image->storeAs('preview', $imageName, 's3');
+            $this->previewUrl = Storage::disk('s3')->url($uploadFilePath);
+        }
+
+        $this->post->preview_url = $this->previewUrl;
+        $this->post->save();
+
+        $tagIdsArray = $this->formatTransferService->tagsJsonToTagIdsArray($this->tags);
+
+        $this->post->tags()->sync($tagIdsArray);
+
+        $this->dispatchBrowserEvent('leavePage', ['leavePagePermission' => true]);
+
+        return redirect()
+            ->to($this->post->link_with_slug)
+            ->with('alert', ['status' => 'success', 'message' => '成功更新文章！']);
     }
 
     public function render()

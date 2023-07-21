@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Posts\EditForm;
+use App\Http\Livewire\Posts\Edit;
 use App\Models\Post;
 use App\Models\User;
 
@@ -44,7 +44,7 @@ test('authors can update their posts', function ($categoryId) {
     $newTitle = str()->random(4);
     $newBody = str()->random(500);
 
-    livewire(EditForm::class, ['postId' => $post->id])
+    livewire(Edit::class, ['id' => $post->id])
         ->set('title', $newTitle)
         ->set('categoryId', $categoryId)
         ->set('body', $newBody)

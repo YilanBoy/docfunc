@@ -50,11 +50,8 @@
   </script>
   {{-- Styles --}}
   @vite('resources/css/app.css')
-  {{-- Icon --}}
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
-  >
+  @vite('resources/css/icon.css')
+
   {{-- Font --}}
   <link
     rel="preconnect"
@@ -97,7 +94,6 @@
 
 <body
   x-data
-  {{-- when change page, scroll to top --}}
   @scroll-to-top.window="window.scrollTo({ top: 0, behavior: 'smooth' })"
   class="overscroll-y-none bg-gray-200 font-sans text-lg text-gray-900 antialiased dark:bg-gray-900"
 >

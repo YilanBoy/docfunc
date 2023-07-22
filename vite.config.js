@@ -22,6 +22,7 @@ export default defineConfig({
                 'node_modules/@yaireo/tagify/dist/tagify.css',
                 'resources/css/editor.css',
                 'resources/css/missing-content-style.css',
+                'resources/css/icon.css',
                 // scss
                 'node_modules/highlight.js/scss/base16/material-palenight.scss',
             ],

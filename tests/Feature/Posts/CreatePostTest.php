@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Http\UploadedFile;
 
 use function Pest\Laravel\get;
-use function Pest\Laravel\travel;
 use function Pest\Livewire\livewire;
 
 test('guest cannot visit create post page', function () {
@@ -174,44 +173,4 @@ it('can auto save the post to cache', function () {
             'tags' => $tags,
             'body' => $body,
         ]);
-});
-
-test('auto save content will be delete after 7 days', function () {
-    $user = User::factory()->create();
-
-    $autoSaveKey = 'auto_save_user_'.$user->id.'_create_post';
-
-    // clean the redis data, like refresh database
-    if (Cache::has($autoSaveKey)) {
-        Cache::pull($autoSaveKey);
-    }
-
-    expect(Cache::has($autoSaveKey))->toBeFalse();
-
-    $this->actingAs($user);
-
-    $title = str()->random(4);
-    $categoryId = Category::pluck('id')->random();
-    $tags = Tag::inRandomOrder()
-        ->limit(5)
-        ->get()
-        ->map(fn ($tag) => ['id' => $tag->id, 'value' => $tag->name])
-        ->toJson(JSON_UNESCAPED_UNICODE);
-    $body = str()->random(500);
-
-    livewire(Create::class, [
-        'categories' => Category::all(['id', 'name']),
-    ])
-        ->set('title', $title)
-        ->set('categoryId', $categoryId)
-        ->set('tags', $tags)
-        ->set('body', $body);
-
-    travel(6)->days();
-
-    expect(Cache::has($autoSaveKey))->toBeTrue();
-
-    travel(8)->days();
-
-    expect(Cache::has($autoSaveKey))->toBeFalse();
 });

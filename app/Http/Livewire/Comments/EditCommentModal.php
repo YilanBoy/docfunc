@@ -9,7 +9,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
-class EditModal extends Component
+class EditCommentModal extends Component
 {
     use AuthorizesRequests;
     use MarkdownConverter;
@@ -69,6 +69,6 @@ class EditModal extends Component
 
     public function render()
     {
-        return view('livewire.comments.edit-modal');
+        return view('livewire.comments.edit-comment-modal');
     }
 }

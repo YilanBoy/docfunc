@@ -2,22 +2,22 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\InvokableRule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Translation\PotentiallyTranslatedString;
 
-class MatchOldPassword implements InvokableRule
+class MatchOldPassword implements ValidationRule
 {
     /**
      * Run the validation rule.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     * @param  Closure(string): PotentiallyTranslatedString  $fail
      */
-    public function __invoke($attribute, $value, $fail): void
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (! Hash::check($value, auth()->user()->password)) {
-            $fail('密碼錯誤');
+            $fail('舊密碼錯誤');
         }
     }
 }

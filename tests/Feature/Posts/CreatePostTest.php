@@ -6,12 +6,10 @@ use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Redis;
 
 use function Pest\Laravel\get;
+use function Pest\Laravel\travel;
 use function Pest\Livewire\livewire;
-
-const REDIS_KEY_EXISTS_RETURN_VALUE = 1;
 
 test('guest cannot visit create post page', function () {
     get(route('posts.create'))
@@ -136,15 +134,17 @@ it('can get auto save key property', function () {
     ])->assertSet('auto_save_key', 'auto_save_user_'.$user->id.'_create_post');
 });
 
-it('can auto save the post to redis', function () {
+it('can auto save the post to cache', function () {
     $user = User::factory()->create();
 
     $autoSaveKey = 'auto_save_user_'.$user->id.'_create_post';
 
     // clean the redis data, like refresh database
-    if (Redis::exists($autoSaveKey)) {
-        Redis::del($autoSaveKey);
+    if (Cache::has($autoSaveKey)) {
+        Cache::pull($autoSaveKey);
     }
+
+    expect(Cache::has($autoSaveKey))->toBeFalse();
 
     $this->actingAs($user);
 
@@ -165,13 +165,53 @@ it('can auto save the post to redis', function () {
         ->set('tags', $tags)
         ->set('body', $body);
 
-    expect(Redis::exists($autoSaveKey))
-        ->toBe(REDIS_KEY_EXISTS_RETURN_VALUE)
-        ->and(json_decode(Redis::get($autoSaveKey), true))
+    expect(Cache::has($autoSaveKey))
+        ->toBeTrue()
+        ->and(json_decode(Cache::get($autoSaveKey), true))
         ->toBe([
             'title' => $title,
             'category_id' => $categoryId,
             'tags' => $tags,
             'body' => $body,
         ]);
+});
+
+test('auto save content will be delete after 7 days', function () {
+    $user = User::factory()->create();
+
+    $autoSaveKey = 'auto_save_user_'.$user->id.'_create_post';
+
+    // clean the redis data, like refresh database
+    if (Cache::has($autoSaveKey)) {
+        Cache::pull($autoSaveKey);
+    }
+
+    expect(Cache::has($autoSaveKey))->toBeFalse();
+
+    $this->actingAs($user);
+
+    $title = str()->random(4);
+    $categoryId = Category::pluck('id')->random();
+    $tags = Tag::inRandomOrder()
+        ->limit(5)
+        ->get()
+        ->map(fn ($tag) => ['id' => $tag->id, 'value' => $tag->name])
+        ->toJson(JSON_UNESCAPED_UNICODE);
+    $body = str()->random(500);
+
+    livewire(Create::class, [
+        'categories' => Category::all(['id', 'name']),
+    ])
+        ->set('title', $title)
+        ->set('categoryId', $categoryId)
+        ->set('tags', $tags)
+        ->set('body', $body);
+
+    travel(6)->days();
+
+    expect(Cache::has($autoSaveKey))->toBeTrue();
+
+    travel(8)->days();
+
+    expect(Cache::has($autoSaveKey))->toBeFalse();
 });

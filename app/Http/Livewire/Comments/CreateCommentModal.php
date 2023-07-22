@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Throwable;
 
-class CreateModal extends Component
+class CreateCommentModal extends Component
 {
     use MarkdownConverter;
 
@@ -73,6 +73,6 @@ class CreateModal extends Component
 
     public function render()
     {
-        return view('livewire.comments.create-modal');
+        return view('livewire.comments.create-comment-modal');
     }
 }

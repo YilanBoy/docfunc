@@ -206,9 +206,9 @@
     </div>
   </div>
 
-  <livewire:comments.create-modal :post-id="$post->id" />
+  <livewire:comments.create-comment-modal :post-id="$post->id" />
 
-  <livewire:comments.edit-modal />
+  <livewire:comments.edit-comment-modal />
 
   <div
     id="progress-bar"

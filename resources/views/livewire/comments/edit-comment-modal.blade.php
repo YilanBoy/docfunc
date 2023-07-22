@@ -1,41 +1,20 @@
-{{-- Google reCAPTCHA --}}
-@push('script')
-  {{-- when submit the comment, set the recaptcha value and update the comment --}}
-  <script>
-    document.getElementById("create-comment").addEventListener("submit", function(event) {
-      event.preventDefault();
-      grecaptcha.ready(function() {
-        grecaptcha.execute("{{ config('services.recaptcha.site_key') }}", {
-            action: "submit"
-          })
-          .then(function(response) {
-
-            @this.set('recaptcha', response);
-
-            @this.store();
-          });
-      });
-    });
-  </script>
-@endpush
-
 <div
   x-cloak
   x-data="{ isOpen: false }"
   x-init="// when enable the preview, reload the scripts
   Livewire.hook('message.processed', (message) => {
       if (message.updateQueue[0].name === 'convertToHtml') {
-          document.querySelectorAll('#creating-comment-preview pre code:not(.hljs)').forEach((element) => {
+          document.querySelectorAll('#editing-comment-preview pre code:not(.hljs)').forEach((element) => {
               window.hljs.highlightElement(element)
           })
       }
   })"
   x-show="isOpen"
-  @open-create-comment-modal.window="
+  @edit-comment-was-set.window="
     isOpen = true
-    $nextTick(() => $refs.createComment.focus())
+    $nextTick(() => $refs.editCommentTextarea.focus())
   "
-  @close-create-comment-modal.window="isOpen = false"
+  @close-edit-comment-modal.window="isOpen = false"
   @keydown.escape.window="isOpen = false"
   class="fixed inset-0 z-30"
   aria-labelledby="modal-title"
@@ -83,11 +62,12 @@
       <div>
         <div class="mb-5 space-x-2 text-center text-2xl font-bold text-gray-900 dark:text-gray-50">
           <i class="bi bi-chat-dots-fill"></i>
-          <span>新增留言</span>
+          <span>編輯留言</span>
         </div>
 
         <form
-          id="create-comment"
+          id="edit-comment"
+          wire:submit.prevent="update"
           class="space-y-4"
         >
           @if (!$convertToHtml)
@@ -95,7 +75,7 @@
               <label for="body"></label>
 
               <textarea
-                x-ref="createComment"
+                x-ref="editCommentTextarea"
                 {{-- change tab into 4 spaces --}}
                 x-on:keydown.tab.prevent="
                   $el.setRangeText(
@@ -115,22 +95,16 @@
               ></textarea>
 
               @error('body')
-                <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
+                <p class="text-red mt-1 text-xs">{{ $message }}</p>
               @enderror
             </div>
           @else
             <div
-              id="creating-comment-preview"
+              id="editing-comment-preview"
               class="space-y-2"
             >
               <div class="space-x-4">
-                <span class="font-semibold dark:text-gray-50">
-                  @if (auth()->check())
-                    {{ auth()->user()->name }}
-                  @else
-                    訪客
-                  @endif
-                </span>
+                <span class="font-semibold dark:text-gray-50">{{ auth()->user()->name }}</span>
                 <span class="text-gray-400">{{ now()->format('Y 年 m 月 d 日') }}</span>
               </div>
               <div class="comment-body h-80 overflow-auto">
@@ -146,15 +120,14 @@
 
             <x-button>
               <i class="bi bi-save2-fill"></i>
-              <span class="ml-2">儲存</span>
+              <span class="ml-2">更新留言</span>
             </x-button>
-
           </div>
+
         </form>
 
       </div>
 
-    </div>
-    {{-- end modal --}}
+    </div> <!-- end modal -->
   </div>
 </div>

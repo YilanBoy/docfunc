@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Comments\EditModal;
+use App\Http\Livewire\Comments\EditCommentModal;
 use App\Models\Comment;
 use App\Models\User;
 
@@ -9,7 +9,7 @@ test('editing modal can load the data of the comment', function () {
 
     $offset = 0;
 
-    Livewire::test(EditModal::class)
+    Livewire::test(EditCommentModal::class)
         ->call('setEditComment', $comment->id, $offset)
         ->assertSet('commentId', $comment->id)
         ->assertSet('body', $comment->body)
@@ -29,7 +29,7 @@ test('logged-in users can update their comments', function () {
 
     $body = 'new comment';
 
-    Livewire::test(EditModal::class)
+    Livewire::test(EditCommentModal::class)
         ->call('setEditComment', $comment->id, $offset)
         ->set('body', $body)
         ->call('update')
@@ -48,7 +48,7 @@ test('users can\'t update others\' comments', function () {
 
     $body = 'new comment';
 
-    Livewire::test(EditModal::class)
+    Livewire::test(EditCommentModal::class)
         ->call('setEditComment', $comment->id, $offset)
         ->set('body', $body)
         ->call('update')
@@ -77,7 +77,7 @@ it('can see the comment preview', function () {
     - item 3
     MARKDOWN;
 
-    Livewire::test(EditModal::class)
+    Livewire::test(EditCommentModal::class)
         ->call('setEditComment', $comment->id, $offset)
         ->set('body', $body)
         ->set('convertToHtml', true)

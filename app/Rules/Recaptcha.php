@@ -2,28 +2,19 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Translation\PotentiallyTranslatedString;
 
-class Recaptcha implements Rule
+class Recaptcha implements ValidationRule
 {
     /**
-     * Create a new rule instance.
+     * Run the validation rule.
      *
-     * @return void
+     * @param  Closure(string): PotentiallyTranslatedString  $fail
      */
-    public function __construct()
-    {
-    }
-
-    /**
-     * Determine if the validation rule passes.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @return bool
-     */
-    public function passes($attribute, $value)
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
             'secret' => config('services.recaptcha.secret_key'),
@@ -31,23 +22,11 @@ class Recaptcha implements Rule
         ]);
 
         if (
-            $response->successful() &&
+            ! ($response->successful() &&
             $response->json('success') &&
-            $response->json('score') > config('services.recaptcha.min_score')
+            $response->json('score') > config('services.recaptcha.min_score'))
         ) {
-            return true;
+            $fail('驗證錯誤');
         }
-
-        return false;
-    }
-
-    /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
-    public function message()
-    {
-        return '驗證錯誤';
     }
 }

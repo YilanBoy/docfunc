@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Comments\CreateModal;
+use App\Http\Livewire\Comments\CreateCommentModal;
 use App\Http\Livewire\Notifications\Index as NotificationIndex;
 use App\Models\Post;
 use App\Models\User;
@@ -15,7 +15,7 @@ test('you will receive a notification when there is a comment on your post', fun
 
     $this->actingAs($user);
 
-    Livewire::test(CreateModal::class, ['postId' => $post->id])
+    Livewire::test(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', fake()->realText(100))
         ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store');
@@ -46,7 +46,7 @@ test('you can clear unread notifications if you visit the notification page', fu
 
     $this->actingAs($user);
 
-    Livewire::test(CreateModal::class, ['postId' => $post->id])
+    Livewire::test(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', fake()->realText(100))
         ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store');
@@ -70,7 +70,7 @@ test('if you reply to your own post, there will be no notification', function ()
 
     $this->actingAs($author);
 
-    Livewire::test(CreateModal::class, ['postId' => $post->id])
+    Livewire::test(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', fake()->realText(100))
         ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store');

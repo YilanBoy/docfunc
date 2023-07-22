@@ -8,11 +8,15 @@ use App\Models\Post;
 use App\Services\ContentService;
 use App\Services\FileService;
 use App\Services\FormatTransferService;
-use Illuminate\Support\Facades\Redis;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
+/**
+ * @property mixed $auto_save_key computed property, create by getAutoSaveKeyProperty()
+ */
 class Create extends Component
 {
     use PostValidation;
@@ -24,7 +28,7 @@ class Create extends Component
 
     protected FileService $fileService;
 
-    public $categories;
+    public Collection $categories;
 
     public string $title = '';
 
@@ -60,8 +64,8 @@ class Create extends Component
     {
         $this->categories = Category::all(['id', 'name']);
 
-        if (Redis::exists($this->auto_save_key)) {
-            $autoSavePostData = json_decode(Redis::get($this->auto_save_key), true);
+        if (Cache::has($this->auto_save_key)) {
+            $autoSavePostData = json_decode(Cache::get($this->auto_save_key), true);
 
             $this->title = $autoSavePostData['title'];
             $this->categoryId = (int) $autoSavePostData['category_id'];
@@ -82,17 +86,16 @@ class Create extends Component
     // when data update, auto save it to redis
     public function updated(): void
     {
-        Redis::set($this->auto_save_key, json_encode(
-            [
+        Cache::put(
+            $this->auto_save_key,
+            json_encode([
                 'title' => $this->title,
                 'category_id' => $this->categoryId,
                 'tags' => $this->tags,
                 'body' => $this->body,
-            ], JSON_UNESCAPED_UNICODE)
+            ], JSON_UNESCAPED_UNICODE),
+            now()->addDays(7)
         );
-
-        // set ttl to 7 days
-        Redis::expire($this->auto_save_key, 604_800);
     }
 
     public function clearForm(): void
@@ -136,7 +139,8 @@ class Create extends Component
         // create new tags relation with post in database
         $post->tags()->attach($tagIdsArray);
 
-        Redis::del($this->auto_save_key);
+        // delete auto save data
+        Cache::pull($this->auto_save_key);
 
         $this->dispatchBrowserEvent('leavePage', ['leavePagePermission' => true]);
 

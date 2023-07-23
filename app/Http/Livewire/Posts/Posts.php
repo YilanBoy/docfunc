@@ -57,6 +57,7 @@ class Posts extends Component
                     $query->where('tag_id', $this->tagId);
                 });
             })
+            ->where('is_private', false)
             ->withOrder($this->order)
             ->with('user', 'category', 'tags') // 預加載防止 N+1 問題
             ->withCount('tags') // 計算標籤數目

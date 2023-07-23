@@ -20,7 +20,7 @@
               let url = new URL(window.location.href);
               url.searchParams.set('tab', this.tabSelected);
               history.pushState(null, document.title, url.toString());
-      
+
               this.tabRepositionMarker(tabButton);
           },
           tabRepositionMarker(tabButton) {
@@ -80,7 +80,7 @@
         x-show="tabContentActive($el)"
         x-transition:enter.duration.300ms
       >
-        <livewire:users.information.posts.posts :user-id="$user->id" />
+        <livewire:users.information.posts-group-by-year :user-id="$user->id" />
       </div>
 
       {{-- user comments content --}}

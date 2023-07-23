@@ -3,14 +3,22 @@
 namespace App\Http\Livewire\Posts;
 
 use App\Models\Post;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Show extends Component
 {
+    use AuthorizesRequests;
+
     public Post $post;
 
     public function mount(Post $post)
     {
+        // private post, only the author can see
+        if ($post->is_private) {
+            $this->authorize('update', $post)->asNotFound();
+        }
+
         $this->post = $post;
     }
 

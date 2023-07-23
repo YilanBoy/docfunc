@@ -167,9 +167,11 @@ it('can auto save the post to cache', function () {
     expect(Cache::has($autoSaveKey))
         ->toBeTrue()
         ->and(json_decode(Cache::get($autoSaveKey), true))
+        // it will compare the order of the arrangement
         ->toBe([
-            'title' => $title,
             'category_id' => $categoryId,
+            'is_private' => false, // default value
+            'title' => $title,
             'tags' => $tags,
             'body' => $body,
         ]);

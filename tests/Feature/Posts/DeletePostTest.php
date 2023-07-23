@@ -2,8 +2,7 @@
 
 use App\Http\Livewire\Posts\Partials\DesktopShowMenu;
 use App\Http\Livewire\Posts\Partials\MobileShowMenu;
-use App\Http\Livewire\Users\Information\Posts\DeletedPostCard;
-use App\Http\Livewire\Users\Information\Posts\PostCard;
+use App\Http\Livewire\Users\Information\Posts;
 use App\Models\Post;
 use App\Models\User;
 use Livewire\Livewire;
@@ -97,21 +96,13 @@ test('author can soft delete own post in user information post card', function (
 
     $this->actingAs(User::find($post->user_id));
 
-    Livewire::test(PostCard::class, [
-        'postId' => $post->id,
-        'postTitle' => $post->title,
-        'postLink' => $post->link_with_slug,
-        'postAuthorId' => $post->user_id,
-        'postCreatedAtDateString' => $post->created_at->toDateString(),
-        'postCreatedAtDiffForHuman' => $post->created_at->diffForHumans(),
-        'postCommentCounts' => $post->comment_counts,
-        'categoryLink' => $post->category->link_with_name,
-        'categoryName' => $post->category->name,
-        'categoryIcon' => $post->category->icon,
+    Livewire::test(Posts::class, [
+        'posts' => [$post],
+        'userId' => $post->user_id,
+        'year' => $post->created_at->format('Y'),
     ])
         ->call('deletePost', $post->id)
-        ->assertEmitted('refreshUserPosts')
-        ->assertDispatchedBrowserEvent('info-badge', ['status' => 'success', 'message' => '成功刪除文章！']);
+        ->assertDispatchedBrowserEvent('info-badge', ['status' => 'success', 'message' => '文章已刪除']);
 
     $this->assertSoftDeleted('posts', ['id' => $post->id]);
 });
@@ -119,17 +110,10 @@ test('author can soft delete own post in user information post card', function (
 test('guest cannot delete others\' post in user information post card', function () {
     $post = Post::factory()->create();
 
-    Livewire::test(PostCard::class, [
-        'postId' => $post->id,
-        'postTitle' => $post->title,
-        'postLink' => $post->link_with_slug,
-        'postAuthorId' => $post->user_id,
-        'postCreatedAtDateString' => $post->created_at->toDateString(),
-        'postCreatedAtDiffForHuman' => $post->created_at->diffForHumans(),
-        'postCommentCounts' => $post->comment_counts,
-        'categoryLink' => $post->category->link_with_name,
-        'categoryName' => $post->category->name,
-        'categoryIcon' => $post->category->icon,
+    Livewire::test(Posts::class, [
+        'posts' => [$post],
+        'userId' => $post->user_id,
+        'year' => $post->created_at->format('Y'),
     ])
         ->call('deletePost', $post->id)
         ->assertForbidden();
@@ -144,17 +128,10 @@ test('user cannot delete others\' post in user information post card', function 
 
     $this->actingAs($user);
 
-    Livewire::test(PostCard::class, [
-        'postId' => $post->id,
-        'postTitle' => $post->title,
-        'postLink' => $post->link_with_slug,
-        'postAuthorId' => $post->user_id,
-        'postCreatedAtDateString' => $post->created_at->toDateString(),
-        'postCreatedAtDiffForHuman' => $post->created_at->diffForHumans(),
-        'postCommentCounts' => $post->comment_counts,
-        'categoryLink' => $post->category->link_with_name,
-        'categoryName' => $post->category->name,
-        'categoryIcon' => $post->category->icon,
+    Livewire::test(Posts::class, [
+        'posts' => [$post],
+        'userId' => $post->user_id,
+        'year' => $post->created_at->format('Y'),
     ])
         ->call('deletePost', $post->id)
         ->assertForbidden();
@@ -176,9 +153,12 @@ test('author can restore deleted post', function () {
 
     $this->assertSoftDeleted('posts', ['id' => $post->id]);
 
-    Livewire::test(DeletedPostCard::class, ['post' => $post])
+    Livewire::test(Posts::class, [
+        'posts' => [$post],
+        'userId' => $post->user_id,
+        'year' => $post->created_at->format('Y'),
+    ])
         ->call('restore', $post->id)
-        ->assertEmitted('refreshUserPosts')
         ->assertDispatchedBrowserEvent('info-badge', ['status' => 'success', 'message' => '文章已恢復']);
 
     $this->assertNotSoftDeleted('posts', ['id' => $post->id]);
@@ -198,7 +178,11 @@ test('users cannot restore other users\' post', function () {
         'deleted_at' => now(),
     ]);
 
-    Livewire::test(DeletedPostCard::class, ['post' => $post])
+    Livewire::test(Posts::class, [
+        'posts' => [$post],
+        'userId' => $user->id,
+        'year' => $post->created_at->format('Y'),
+    ])
         ->call('restore', $post->id)
         ->assertForbidden();
 

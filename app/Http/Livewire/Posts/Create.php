@@ -30,6 +30,8 @@ class Create extends Component
 
     public Collection $categories;
 
+    public bool $isPrivate = false;
+
     public string $title = '';
 
     public int $categoryId = 1;
@@ -67,8 +69,9 @@ class Create extends Component
         if (Cache::has($this->auto_save_key)) {
             $autoSavePostData = json_decode(Cache::get($this->auto_save_key), true);
 
-            $this->title = $autoSavePostData['title'];
             $this->categoryId = (int) $autoSavePostData['category_id'];
+            $this->isPrivate = $autoSavePostData['is_private'];
+            $this->title = $autoSavePostData['title'];
             $this->tags = $autoSavePostData['tags'];
             $this->body = $autoSavePostData['body'];
         }
@@ -89,8 +92,9 @@ class Create extends Component
         Cache::put(
             $this->auto_save_key,
             json_encode([
-                'title' => $this->title,
                 'category_id' => $this->categoryId,
+                'is_private' => $this->isPrivate,
+                'title' => $this->title,
                 'tags' => $this->tags,
                 'body' => $this->body,
             ], JSON_UNESCAPED_UNICODE),
@@ -100,8 +104,9 @@ class Create extends Component
 
     public function clearForm(): void
     {
-        $this->title = '';
         $this->categoryId = 1;
+        $this->isPrivate = false;
+        $this->title = '';
         $this->tags = '';
         $this->body = '';
 
@@ -128,6 +133,7 @@ class Create extends Component
             'title' => $this->title,
             'category_id' => $this->categoryId,
             'body' => $body,
+            'is_private' => $this->isPrivate,
             'slug' => $this->contentService->makeSlug($this->title),
             'preview_url' => $this->previewUrl,
             'excerpt' => $this->contentService->makeExcerpt($body),

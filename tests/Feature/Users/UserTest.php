@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Users\Information\Posts\Posts;
+use App\Http\Livewire\Users\Information\PostsGroupByYear;
 use App\Models\Post;
 use App\Models\User;
 
@@ -9,9 +9,9 @@ use function Pest\Laravel\get;
 test('guest can view user profile', function ($tabQueryString) {
     $user = User::factory()->create();
 
-    get(route('users.index', $user->id).'?tab='.$tabQueryString)
+    get(route('users.index', ['user' => $user->id, 'tab' => $tabQueryString]))
         ->assertStatus(200)
-        ->assertSeeLivewire(Posts::class);
+        ->assertSeeLivewire(PostsGroupByYear::class);
 })->with([
     'information',
     'posts',
@@ -23,9 +23,9 @@ test('user can view own profile', function ($tabQueryString) {
 
     $this->actingAs($user);
 
-    get(route('users.index', $user->id).'?tab='.$tabQueryString)
+    get(route('users.index', ['user' => $user->id, 'tab' => $tabQueryString]))
         ->assertStatus(200)
-        ->assertSeeLivewire(Posts::class);
+        ->assertSeeLivewire(PostsGroupByYear::class);
 })->with([
     'information',
     'posts',
@@ -39,9 +39,9 @@ test('user can see soft deleted post in posts tab', function () {
 
     $post->delete();
 
-    get(route('users.index', $post->user->id).'?tab=posts')
+    get(route('users.index', ['user' => $post->user->id, 'tab' => 'posts']))
         ->assertSuccessful()
-        ->assertSeeText('文章將於6天後刪除');
+        ->assertSeeText('已刪除');
 });
 
 test('guest can\'t see others soft deleted post in posts tab', function () {
@@ -49,7 +49,7 @@ test('guest can\'t see others soft deleted post in posts tab', function () {
 
     $post->delete();
 
-    get(route('users.index', $post->user->id).'?tab=posts')
+    get(route('users.index', ['user' => $post->user->id, 'tab' => 'posts']))
         ->assertSuccessful()
         ->assertDontSeeText('文章將於6天後刪除');
 });

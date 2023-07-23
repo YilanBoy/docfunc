@@ -32,6 +32,7 @@ class Post extends Model implements Feedable
     protected $fillable = [
         'title',
         'body',
+        'is_private',
         'user_id',
         'category_id',
         'excerpt',

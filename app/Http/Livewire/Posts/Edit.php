@@ -28,6 +28,8 @@ class Edit extends Component
 
     public Collection $categories;
 
+    public bool $isPrivate;
+
     public Post $post;
 
     public string $title;
@@ -60,8 +62,9 @@ class Edit extends Component
 
         $this->categories = Category::all(['id', 'name']);
 
-        $this->title = $this->post->title;
         $this->categoryId = $this->post->category_id;
+        $this->isPrivate = $this->post->is_private;
+        $this->title = $this->post->title;
         $this->tags = $this->post->tags_json;
         $this->previewUrl = $this->post->preview_url;
         $this->body = $this->post->body;
@@ -80,6 +83,7 @@ class Edit extends Component
 
         $this->post->title = $this->title;
         $this->post->slug = $this->contentService->makeSlug($this->title);
+        $this->post->is_private = $this->isPrivate;
         $this->post->category_id = $this->categoryId;
 
         $body = $this->contentService->htmlPurifier($this->body);

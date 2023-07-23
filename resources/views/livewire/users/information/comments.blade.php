@@ -12,8 +12,11 @@
 <div
   class="space-y-6"
   x-data
-  x-init="Livewire.hook('message.processed', () => {
-      window.hljs.highlightAll();
+  x-init="Livewire.hook('message.processed', (message) => {
+      // when change page in comments tab, highlight code block
+      if (message.updateQueue[0].method.toLowerCase().includes('page')) {
+          window.hljs.highlightAll();
+      }
   })"
 >
   @forelse ($comments as $comment)

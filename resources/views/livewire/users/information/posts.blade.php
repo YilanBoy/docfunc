@@ -28,13 +28,14 @@
       </div>
 
       @if ($post->user_id === auth()->id())
-        <div class="flex space-x-2">
+        <div class="flex items-center space-x-2">
 
           {{-- restore --}}
           @if ($post->trashed())
             <button
               class="text-gray-400 duration-200 ease-out hover:text-gray-700 dark:hover:text-gray-200"
               type="button"
+              wire:loading.attr="disabled"
               onclick="confirm('你確定要還原該文章？') || event.stopImmediatePropagation()"
               wire:click="restore({{ $post->id }})"
             >
@@ -46,6 +47,7 @@
               <button
                 class="text-gray-400 duration-200 ease-out hover:text-gray-700 dark:hover:text-gray-200"
                 type="button"
+                wire:loading.attr="disabled"
                 onclick="confirm('你確定要將該文章設為公開？') || event.stopImmediatePropagation()"
                 wire:click="postPrivateToggle({{ $post->id }})"
               >
@@ -55,6 +57,7 @@
               <button
                 class="text-gray-400 duration-200 ease-out hover:text-gray-700 dark:hover:text-gray-200"
                 type="button"
+                wire:loading.attr="disabled"
                 onclick="confirm('你確定要將該文章設為不公開？') || event.stopImmediatePropagation()"
                 wire:click="postPrivateToggle({{ $post->id }})"
               >
@@ -76,6 +79,7 @@
             <button
               class="text-red-400 duration-200 ease-out hover:text-red-700 dark:hover:text-red-200"
               type="button"
+              wire:loading.attr="disabled"
               onclick="confirm('你確定要刪除文章嗎？（7 天之內可以還原）') || event.stopImmediatePropagation()"
               wire:click.stop="deletePost({{ $post->id }})"
             >

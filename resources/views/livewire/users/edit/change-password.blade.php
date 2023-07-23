@@ -9,8 +9,8 @@
       <x-auth-validation-errors :errors="$errors" />
 
       <form
-        wire:submit.prevent="update"
         class="w-full"
+        wire:submit.prevent="update"
       >
         {{-- 舊密碼 --}}
         <div>

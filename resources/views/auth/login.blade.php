@@ -46,10 +46,10 @@
 
             {{-- reCAPTCHA --}}
             <input
-              type="hidden"
               class="g-recaptcha"
-              name="g-recaptcha-response"
               id="g-recaptcha-response"
+              name="g-recaptcha-response"
+              type="hidden"
             >
 
             {{-- 信箱 --}}
@@ -78,14 +78,14 @@
             <div class="mt-6 flex justify-between">
               {{-- 記住我 --}}
               <label
-                for="remember_me"
                 class="inline-flex items-center"
+                for="remember_me"
               >
                 <input
-                  id="remember_me"
-                  type="checkbox"
-                  name="remember"
                   class="form-checkbox rounded border-gray-300 text-indigo-400 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  id="remember_me"
+                  name="remember"
+                  type="checkbox"
                 >
                 <span class="ml-2 text-sm text-gray-600 dark:text-gray-50">{{ __('Remember me') }}</span>
               </label>

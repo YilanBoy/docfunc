@@ -36,10 +36,10 @@
   <div class="mt-2 flex items-center md:mt-0">
     {{-- 還原文章 --}}
     <button
+      class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-transparent bg-blue-500 text-gray-50 ring-blue-300 transition duration-150 ease-in-out hover:bg-blue-600 focus:border-blue-700 focus:outline-none focus:ring active:bg-blue-700"
+      type="button"
       onclick="confirm('你確定要還原該文章？') || event.stopImmediatePropagation()"
       wire:click="restore({{ $postId }})"
-      type="button"
-      class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-transparent bg-blue-500 text-gray-50 ring-blue-300 transition duration-150 ease-in-out hover:bg-blue-600 focus:border-blue-700 focus:outline-none focus:ring active:bg-blue-700"
     >
       <i class="bi bi-arrow-counterclockwise"></i>
     </button>

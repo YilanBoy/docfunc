@@ -42,8 +42,8 @@
               @csrf
 
               <button
-                type="submit"
                 class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
+                type="submit"
               >
                 {{ __('Log Out') }}
               </button>

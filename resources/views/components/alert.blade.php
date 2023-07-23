@@ -1,9 +1,10 @@
 <div
+  class="fixed bottom-0 left-0"
   x-cloak
   x-data="alertComponent(@js(session()->get('alert')))"
   x-init="if (alert !== null) {
       showAlert(alert.status, alert.message)
-
+  
       setTimeout(function() {
           openAlertBox = false
       }, 3000);
@@ -16,7 +17,6 @@
     }, 3000);
   "
   x-show="openAlertBox"
-  class="fixed bottom-0 left-0"
   x-transition:enter="transition ease-out duration-300"
   x-transition:enter-start="opacity-0"
   x-transition:enter-end="opacity-100"
@@ -27,26 +27,26 @@
   <div class="p-10">
     <div
       class="flex items-center rounded px-4 py-3 text-lg font-bold text-white shadow-md"
-      :class="alertBackgroundColor"
       role="alert"
+      :class="alertBackgroundColor"
     >
       <span
-        x-html="alertMessage"
         class="flex items-center"
+        x-html="alertMessage"
       ></span>
       <button
-        type="button"
         class="flex"
+        type="button"
         @click="openAlertBox = false"
       >
         <svg
+          class="ml-4 h-4 w-4"
           fill="none"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="1"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          class="ml-4 h-4 w-4"
         >
           <path d="M6 18L18 6M6 6l12 12"></path>
         </svg>

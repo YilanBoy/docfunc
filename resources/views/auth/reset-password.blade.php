@@ -22,8 +22,8 @@
 
             {{-- 更改密碼 Token --}}
             <input
-              type="hidden"
               name="token"
+              type="hidden"
               value="{{ $request->route('token') }}"
             >
 

@@ -47,9 +47,10 @@
   <div class="relative animate-fade-in">
     {{-- to the top button --}}
     <button
-      id="scroll-to-top-btn"
-      title="Go to top"
       class="fixed bottom-7 right-7 z-10 hidden h-16 w-16 rounded-full bg-green-600 text-gray-50 shadow-md transition duration-150 ease-in hover:scale-110 hover:shadow-xl dark:bg-lividus-600"
+      id="scroll-to-top-btn"
+      type="button"
+      title="Go to top"
     >
       <span class="m-auto text-3xl font-bold">
         <i class="bi bi-arrow-up"></i>
@@ -63,8 +64,8 @@
         <div class="flex w-full flex-col items-center justify-start p-2 md:w-[700px] lg:p-0">
 
           <x-card
-            id="section"
             class="w-full"
+            id="section"
           >
 
             <div class="flex justify-between">
@@ -153,8 +154,8 @@
 
             {{-- post body --}}
             <div
-              id="post-body"
               class="post-body mt-4"
+              id="post-body"
             >
               {!! $post->body !!}
             </div>
@@ -172,8 +173,8 @@
             <div class="col-span-12 space-y-2 md:col-span-10">
               <div class="uppercase text-gray-400">written by</div>
               <a
-                href="{{ route('users.index', ['user' => $post->user->id]) }}"
                 class="gradient-underline-grow inline-block text-2xl font-bold dark:text-gray-50"
+                href="{{ route('users.index', ['user' => $post->user->id]) }}"
               >
                 {{ $post->user->name }}
               </a>
@@ -211,7 +212,8 @@
   <livewire:comments.edit-comment-modal />
 
   <div
-    id="progress-bar"
     class="fixed left-0 top-0 z-20 h-[5px] w-0 bg-gradient-to-r from-green-500 via-teal-500 to-sky-500 transition-all duration-300 ease-out dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500"
-  ></div>
+    id="progress-bar"
+  >
+  </div>
 </div>

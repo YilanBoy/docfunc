@@ -1,4 +1,8 @@
 <div
+  class="fixed inset-0 z-30"
+  role="dialog"
+  aria-labelledby="modal-title"
+  aria-modal="true"
   x-cloak
   x-data="{
       isOpen: false,
@@ -19,32 +23,29 @@
   "
   @close-create-comment-modal.window="isOpen = false"
   @keydown.escape.window="isOpen = false"
-  class="fixed inset-0 z-30"
-  aria-labelledby="modal-title"
-  role="dialog"
-  aria-modal="true"
 >
   <div class="flex min-h-screen items-end justify-center">
     {{-- gray background --}}
     <div
-      x-show="isOpen"
-      x-transition.opacity
       class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
       aria-hidden="true"
+      x-show="isOpen"
+      x-transition.opacity
     >
     </div>
 
     {{--  modal  --}}
     <div
+      class="max-h-[36rem] transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all dark:bg-gray-800 sm:w-full sm:max-w-2xl"
       x-show="isOpen"
       x-transition.origin.bottom.duration.300ms
-      class="max-h-[36rem] transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all dark:bg-gray-800 sm:w-full sm:max-w-2xl"
     >
       {{-- close modal button --}}
       <div class="absolute right-5 top-5">
         <button
-          @click="isOpen = false"
           class="text-gray-400 hover:text-gray-500"
+          type="button"
+          @click="isOpen = false"
         >
           <svg
             class="h-8 w-8"
@@ -69,6 +70,7 @@
         </div>
 
         <form
+          class="space-y-4"
           x-on:submit.prevent="
               grecaptcha.ready(function() {
                   grecaptcha.execute(recaptchaSiteKey, { action: 'submit' })
@@ -81,23 +83,22 @@
                       });
               });
           "
-          class="space-y-4"
         >
           @if (!$convertToHtml)
             <div>
               <label for="body"></label>
 
               <textarea
+                class="form-textarea w-full resize-none rounded-md border border-gray-300 font-jetbrains-mono text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
+                id="body"
+                name="body"
                 x-ref="createCommentTextarea"
                 {{-- change tab into 4 spaces --}}
                 x-on:keydown.tab.prevent="$el.setRangeText( '    ', $el.selectionStart, $el.selectionStart, 'end')"
                 wire:model.lazy="body"
-                id="body"
-                name="body"
                 rows="12"
                 placeholder="寫下你的留言吧！**支援 Markdown**"
                 required
-                class="form-textarea w-full resize-none rounded-md border border-gray-300 font-jetbrains-mono text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
               ></textarea>
 
               @error('body')
@@ -106,8 +107,8 @@
             </div>
           @else
             <div
-              id="creating-comment-preview"
               class="space-y-2"
+              id="creating-comment-preview"
             >
               <div class="space-x-4">
                 <span class="font-semibold dark:text-gray-50">

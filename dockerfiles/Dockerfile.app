@@ -31,7 +31,8 @@ WORKDIR /var/www/html
 
 COPY . .
 RUN npm install \
-    && npm run build
+    && npm run build \
+    && npm run purge-icons
 
 ###########################################
 # Laravel Octane

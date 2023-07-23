@@ -42,10 +42,10 @@
 
             {{-- reCAPTCHA --}}
             <input
-              type="hidden"
               class="g-recaptcha"
-              name="g-recaptcha-response"
               id="g-recaptcha-response"
+              name="g-recaptcha-response"
+              type="hidden"
             >
 
             {{-- 會員名稱 --}}
@@ -95,8 +95,8 @@
 
             <div class="mt-6 flex items-center justify-end">
               <a
-                href="{{ route('login') }}"
                 class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
+                href="{{ route('login') }}"
               >
                 {{ __('Already registered?') }}
               </a>

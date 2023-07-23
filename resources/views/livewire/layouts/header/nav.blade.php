@@ -1,7 +1,7 @@
 {{-- Header --}}
 <nav
-  id="header"
   class="z-20 mb-6"
+  id="header"
 >
   <livewire:layouts.header.mobile-menu
     :categories="$categories"

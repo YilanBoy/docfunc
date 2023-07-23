@@ -1,5 +1,7 @@
 {{-- 留言列表 --}}
 <div
+  class="w-full"
+  id="comments"
   x-data="{ currentScrollY: 0 }"
   x-init="// after editing comment or loading more comments, reload the scripts
   Livewire.hook('message.processed', (message) => {
@@ -14,8 +16,6 @@
 
       window.codeBlockCopyButton('#comments pre')
   })"
-  id="comments"
-  class="w-full"
 >
 
   @for ($offset = 0; $offset < $count; $offset += $perPage)
@@ -30,15 +30,16 @@
   @if ($showMoreButtonIsActive)
     <div class="mt-6 flex items-center justify-center">
       <button
+        class="relative text-lg dark:text-gray-50"
+        type="button"
         {{-- when click the button and update the DOM, make windows.scrollY won't change --}}
         x-on:mousedown="currentScrollY = window.scrollY"
         wire:mouseup="showMore"
-        class="relative text-lg dark:text-gray-50"
       >
         <span>顯示更多</span>
         <div
-          wire:loading
           class="absolute -right-8 top-1.5"
+          wire:loading
         >
           <svg
             class="h-5 w-5 animate-spin text-gray-700 dark:text-gray-50"
@@ -58,7 +59,8 @@
               class="opacity-75"
               fill="currentColor"
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            ></path>
+            >
+            </path>
           </svg>
         </div>
       </button>

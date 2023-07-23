@@ -5,9 +5,9 @@
       @if ($userId !== 0)
         <a href="{{ route('users.index', ['user' => $userId]) }}">
           <img
+            class="h-8 w-8 rounded-full hover:ring-2 hover:ring-blue-400"
             src="{{ $userGravatarUrl }}"
             alt="{{ $userName }}"
-            class="h-8 w-8 rounded-full hover:ring-2 hover:ring-blue-400"
           >
         </a>
 
@@ -32,8 +32,9 @@
         @auth
           @if (auth()->id() === $userId)
             <button
-              wire:click="$emit('setEditComment', {{ $commentId }}, {{ $offset }})"
               class="hover:text-gray-500 dark:hover:text-gray-300"
+              type="button"
+              wire:click="$emit('setEditComment', {{ $commentId }}, {{ $offset }})"
             >
               <i class="bi bi-pencil-fill"></i>
               <span class="ml-1">編輯</span>
@@ -42,9 +43,10 @@
 
           @if (in_array(auth()->id(), [$userId, $postUserId]))
             <button
+              class="hover:text-gray-500 dark:hover:text-gray-300"
+              type="button"
               onclick="confirm('你確定要刪除該留言？') || event.stopImmediatePropagation()"
               wire:click="destroy({{ $commentId }})"
-              class="hover:text-gray-500 dark:hover:text-gray-300"
             >
               <i class="bi bi-trash3-fill"></i>
               <span class="ml-1">刪除</span>

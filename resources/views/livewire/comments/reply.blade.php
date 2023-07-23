@@ -1,6 +1,6 @@
 <div
-  x-data
   class="w-full"
+  x-data
 >
   <div class="mt-6 flex justify-between">
     {{-- show comments count --}}
@@ -10,9 +10,9 @@
     </span>
 
     <button
-      x-on:click="$dispatch('open-create-comment-modal')"
-      type="button"
       class="group relative overflow-hidden rounded-xl bg-emerald-600 px-6 py-2 [transform:translateZ(0)] before:absolute before:bottom-0 before:left-0 before:h-full before:w-full before:origin-[100%_100%] before:scale-x-0 before:bg-blue-600 before:transition before:duration-500 before:ease-in-out hover:before:origin-[0_0] hover:before:scale-x-100"
+      type="button"
+      x-on:click="$dispatch('open-create-comment-modal')"
     >
       <span class="relative z-0 text-lg font-semibold text-gray-200 transition duration-500 ease-in-out">
         <i class="bi bi-chat-dots-fill"></i>

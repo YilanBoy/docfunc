@@ -12,13 +12,13 @@
     <div class="mt-4 flex items-center justify-center">
       {{-- Delete User Button --}}
       <a
+        class="inline-flex items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 font-semibold uppercase tracking-widest text-gray-50 ring-red-300 transition duration-150 ease-in-out hover:bg-red-500 focus:border-red-900 focus:outline-none focus:ring active:bg-red-900 disabled:opacity-25"
+        href="{{ $destroyLink }}"
         x-on:click.prevent="
           if (confirm('您確定要刪除帳號嗎？此動作無法復原')) {
             $el.click()
           }
         "
-        href="{{ $destroyLink }}"
-        class="inline-flex items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 font-semibold uppercase tracking-widest text-gray-50 ring-red-300 transition duration-150 ease-in-out hover:bg-red-500 focus:border-red-900 focus:outline-none focus:ring active:bg-red-900 disabled:opacity-25"
       >
         <i class="bi bi-exclamation-triangle-fill"></i><span class="ml-2">確認刪除帳號</span>
       </a>

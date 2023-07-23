@@ -49,7 +49,8 @@
           <div style="width: {{ $barWidth }}%">
             <div
               class="h-4 animate-grow-width rounded-sm bg-gradient-to-r from-emerald-400 to-blue-400 transition-all duration-300"
-            ></div>
+            >
+            </div>
           </div>
 
         </div>

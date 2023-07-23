@@ -13,9 +13,9 @@
       {{-- 通知列表 --}}
       @forelse ($notifications as $notification)
         <x-card
+          class="flex w-full cursor-pointer flex-col justify-between md:flex-row"
           x-data="cardLink"
           x-on:click="directToCardLink($event, $refs)"
-          class="flex w-full cursor-pointer flex-col justify-between md:flex-row"
         >
           {{-- 通知內容 --}}
           <div class="flex w-full flex-col justify-between">
@@ -24,9 +24,9 @@
 
               <span class="dark:text-gray-50">在你的文章中</span>
               <a
-                x-ref="cardLinkUrl"
                 class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
                 href="{{ $notification->data['post_link'] }}"
+                x-ref="cardLinkUrl"
               >
                 {{ $notification->data['post_title'] }}
               </a>

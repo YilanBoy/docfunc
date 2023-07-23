@@ -18,8 +18,8 @@
 
       <div class="mt-8 flex items-center justify-center">
         <a
-          href="{{ route('posts.create') }}"
           class="group relative flex w-full items-center justify-center overflow-hidden rounded-lg bg-emerald-600 px-4 py-2 [transform:translateZ(0)] before:absolute before:left-1/2 before:top-1/2 before:h-8 before:w-8 before:-translate-x-1/2 before:-translate-y-1/2 before:scale-[0] before:rounded-full before:bg-blue-600 before:opacity-0 before:transition before:duration-700 before:ease-in-out hover:before:scale-[10] hover:before:opacity-100"
+          href="{{ route('posts.create') }}"
         >
           <span class="relative z-0 text-lg font-semibold text-gray-200 transition duration-700 ease-in-out">
             <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
@@ -54,10 +54,10 @@
       <div class="flex flex-col">
         @foreach ($links as $link)
           <a
+            class="flex rounded-md p-2 hover:bg-gray-200 dark:text-gray-50 dark:hover:bg-gray-700"
             href="{{ $link->link }}"
             target="_blank"
             rel="nofollow noopener noreferrer"
-            class="flex rounded-md p-2 hover:bg-gray-200 dark:text-gray-50 dark:hover:bg-gray-700"
           >
             <i class="bi bi-link-45deg"></i><span class="ml-2">{{ $link->title }}</span>
           </a>
@@ -67,6 +67,8 @@
   @endif
 
   <a
+    class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-zinc-500 px-4 py-2 text-lg font-semibold tracking-widest text-gray-50 ring-zinc-300 transition duration-150 ease-in-out hover:bg-zinc-600 focus:border-zinc-700 focus:outline-none focus:ring active:bg-zinc-700 dark:bg-zinc-600 dark:ring-zinc-800 dark:hover:bg-zinc-500"
+    href="{{ route('feeds.main') }}"
     x-data="{ webFeedUrl: $el.getAttribute('href') }"
     x-on:click.prevent="
       navigator.clipboard.writeText(webFeedUrl).then(
@@ -76,10 +78,8 @@
 
       setTimeout(() => $el.innerHTML = `<i class='bi bi-rss-fill'></i><span class='ml-2'>訂閱文章</span>`, 2000);
     "
-    href="{{ route('feeds.main') }}"
     target="_blank"
     rel="nofollow noopener"
-    class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-zinc-500 px-4 py-2 text-lg font-semibold tracking-widest text-gray-50 ring-zinc-300 transition duration-150 ease-in-out hover:bg-zinc-600 focus:border-zinc-700 focus:outline-none focus:ring active:bg-zinc-700 dark:bg-zinc-600 dark:ring-zinc-800 dark:hover:bg-zinc-500"
   >
     <i class="bi bi-rss-fill"></i><span class="ml-2">訂閱文章</span>
   </a>

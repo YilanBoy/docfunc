@@ -14,12 +14,12 @@
   @vite(['resources/css/app.css'])
   {{-- Font --}}
   <link
-    rel="preconnect"
     href="https://fonts.googleapis.com"
+    rel="preconnect"
   >
   <link
-    rel="preconnect"
     href="https://fonts.gstatic.com"
+    rel="preconnect"
     crossorigin
   >
   <link
@@ -28,7 +28,7 @@
   >
 </head>
 
-<body class="flex min-h-screen items-center justify-center bg-gray-100 font-noto antialiased">
+<body class="font-noto flex min-h-screen items-center justify-center bg-gray-100 antialiased">
   {{ $slot }}
 </body>
 

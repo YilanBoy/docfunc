@@ -1,6 +1,6 @@
 <footer
-  id="footer"
   class="mt-6 bg-gray-800 pt-4 dark:bg-gray-950"
+  id="footer"
 >
   <div class="justify-left m-auto flex max-w-6xl flex-wrap text-gray-800">
 
@@ -12,18 +12,18 @@
       </div>
       {{-- Links --}}
       <a
+        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
         href="https://github.com/YilanBoy/blog"
         target="_blank"
         rel="nofollow noopener noreferrer"
-        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
       >
         Source Code
       </a>
       <a
+        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
         href="https://github.com/YilanBoy"
         target="_blank"
         rel="nofollow noopener noreferrer"
-        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
       >
         Author
       </a>
@@ -38,19 +38,19 @@
 
       {{-- Links --}}
       <a
+        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
         href="https://laracasts.com/"
         target="_blank"
         rel="nofollow noopener noreferrer"
-        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
       >
         Laracasts
       </a>
 
       <a
+        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
         href="https://www.jetbrains.com/academy/"
         target="_blank"
         rel="nofollow noopener noreferrer"
-        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
       >
         JetBrains Academy
       </a>
@@ -65,58 +65,58 @@
 
       {{-- Links --}}
       <a
+        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
         href="https://laravel.com/"
         target="_blank"
         rel="nofollow noopener noreferrer"
-        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
       >
         Laravel
       </a>
       <a
+        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
         href="https://learnku.com/laravel"
         target="_blank"
         rel="nofollow noopener noreferrer"
-        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
       >
         Laravel China
       </a>
       <a
+        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
         href="https://www.facebook.com/groups/498481680220886"
         target="_blank"
         rel="nofollow noopener noreferrer"
-        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
       >
         Laravel Taiwan
       </a>
       <a
+        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
         href="https://laravel-livewire.com/"
         target="_blank"
         rel="nofollow noopener noreferrer"
-        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
       >
         Laravel Livewire
       </a>
       <a
+        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
         href="https://tailwindcss.com/"
         target="_blank"
         rel="nofollow noopener noreferrer"
-        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
       >
         Tailwind CSS
       </a>
       <a
+        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
         href="https://getbootstrap.com/"
         target="_blank"
         rel="nofollow noopener noreferrer"
-        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
       >
         Bootstrap
       </a>
       <a
+        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
         href="https://alpinejs.dev/"
         target="_blank"
         rel="nofollow noopener noreferrer"
-        class="my-3 block font-medium text-gray-300 duration-300 hover:text-gray-500"
       >
         Alpine.js
       </a>
@@ -132,26 +132,26 @@
 
       <div class="flex flex-row justify-center space-x-4 md:flex-auto md:justify-end">
         <a
+          class="text-2xl text-gray-300 duration-300 hover:text-gray-500"
           href="https://github.com/YilanBoy"
           target="_blank"
           rel="nofollow noopener noreferrer"
-          class="text-2xl text-gray-300 duration-300 hover:text-gray-500"
         >
           <i class="bi bi-github"></i>
         </a>
         <a
+          class="text-2xl text-gray-300 duration-300 hover:text-gray-500"
           href="https://twitter.com/bVK1uFaMvQkDyPR"
           target="_blank"
           rel="nofollow noopener noreferrer"
-          class="text-2xl text-gray-300 duration-300 hover:text-gray-500"
         >
           <i class="bi bi-twitter"></i>
         </a>
         <a
+          class="text-2xl text-gray-300 duration-300 hover:text-gray-500"
           href="https://www.facebook.com/profile.php?id=100004204543711"
           target="_blank"
           rel="nofollow noopener noreferrer"
-          class="text-2xl text-gray-300 duration-300 hover:text-gray-500"
         >
           <i class="bi bi-facebook"></i>
         </a>

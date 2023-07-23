@@ -14,7 +14,7 @@ it('can filter the dangerous HTML element', function () {
     $body = <<<'HTML'
         <body onload="alert('this a xss attack')">
             <script>alert('this a xss attack');</script>
-            <button onclick="alert('this an another xss attack')"></button>
+            <button type="button" onclick="alert('this an another xss attack')"></button>
             <!-- a=&\#X41 (UTF-8) -->
             <IMG SRC=j&#X41vascript:alert('test2')>
             <span>This normal tag</span>

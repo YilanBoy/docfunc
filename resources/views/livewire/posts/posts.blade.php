@@ -11,8 +11,8 @@
 
       @foreach ($tabs as $tab)
         <a
-          wire:click.prevent="orderChange('{{ $tab['value'] }}')"
           href="{{ $currentUrl . '?order=' . $tab['value'] }}"
+          wire:click.prevent="orderChange('{{ $tab['value'] }}')"
           @class([
               'flex w-1/3 md:w-auto justify-center px-4 py-2 transition duration-300 rounded-lg ',
               'bg-gray-50 dark:bg-gray-800' => $order === $tab['value'],
@@ -49,18 +49,18 @@
   {{-- 文章列表 --}}
   @forelse($posts as $post)
     <x-card
+      class="group flex cursor-pointer flex-col justify-between md:flex-row"
       x-data="cardLink"
       x-on:click="directToCardLink($event, $refs)"
-      class="group flex cursor-pointer flex-col justify-between md:flex-row"
     >
       {{-- 文章 --}}
       <div class="flex w-full flex-col justify-between">
         {{-- 文章標題 --}}
         <h1 class="mt-2 text-xl font-semibold dark:text-gray-50 md:mt-0">
           <a
-            x-ref="cardLinkUrl"
-            href="{{ $post->link_with_slug }}"
             class="group-gradient-underline-grow"
+            href="{{ $post->link_with_slug }}"
+            x-ref="cardLinkUrl"
           >{{ $post->title }}</a>
         </h1>
 
@@ -87,9 +87,9 @@
           {{-- 文章分類資訊 --}}
           <div>
             <a
+              class="hover:text-neutral-500 dark:hover:text-neutral-300"
               href="{{ $post->category->link_with_name }}"
               title="{{ $post->category->name }}"
-              class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
               <i class="{{ $post->category->icon }}"></i><span class="ml-2">{{ $post->category->name }}</span>
             </a>
@@ -98,9 +98,9 @@
           {{-- 文章作者資訊 --}}
           <div>
             <a
+              class="hover:text-neutral-500 dark:hover:text-neutral-300"
               href="{{ route('users.index', ['user' => $post->user_id]) }}"
               title="{{ $post->user->name }}"
-              class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
               <i class="bi bi-person-fill"></i><span class="ml-2">{{ $post->user->name }}</span>
             </a>
@@ -109,9 +109,9 @@
           {{-- 文章發布時間 --}}
           <div>
             <a
+              class="hover:text-neutral-500 dark:hover:text-neutral-300"
               href="{{ $post->link_with_slug }}"
               title="文章發布於：{{ $post->created_at->toDateString() }}"
-              class="hover:text-neutral-500 dark:hover:text-neutral-300"
             >
               <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
             </a>
@@ -120,8 +120,8 @@
           <div>
             {{-- 文章留言數 --}}
             <a
-              href="{{ $post->link_with_slug }}#comments"
               class="hover:text-neutral-500 dark:hover:text-neutral-300"
+              href="{{ $post->link_with_slug }}#comments"
             >
               <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->comment_counts }}</span>
             </a>

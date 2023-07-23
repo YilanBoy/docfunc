@@ -3,9 +3,9 @@
     @php(isset($this->numberOfPaginatorsRendered[$paginator->getPageName()]) ? $this->numberOfPaginatorsRendered[$paginator->getPageName()]++ : ($this->numberOfPaginatorsRendered[$paginator->getPageName()] = 1))
 
     <nav
+      class="flex items-center justify-between"
       role="navigation"
       aria-label="Pagination Navigation"
-      class="flex items-center justify-between"
     >
       <div class="flex flex-1 justify-between sm:hidden">
         <span>
@@ -17,10 +17,11 @@
             </span>
           @else
             <button
+              class="focus:shadow-outline-blue relative inline-flex items-center rounded-md border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out hover:text-gray-500 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-700 dark:bg-gray-800 dark:text-gray-50"
+              type="button"
               wire:click="previousPage('{{ $paginator->getPageName() }}')"
               wire:loading.attr="disabled"
               dusk="previousPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.before"
-              class="focus:shadow-outline-blue relative inline-flex items-center rounded-md border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out hover:text-gray-500 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-700 dark:bg-gray-800 dark:text-gray-50"
             >
               {!! __('pagination.previous') !!}
             </button>
@@ -30,10 +31,11 @@
         <span>
           @if ($paginator->hasMorePages())
             <button
+              class="focus:shadow-outline-blue relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out hover:text-gray-500 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-700 dark:bg-gray-800 dark:text-gray-50"
+              type="button"
               wire:click="nextPage('{{ $paginator->getPageName() }}')"
               wire:loading.attr="disabled"
               dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.before"
-              class="focus:shadow-outline-blue relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out hover:text-gray-500 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-700 dark:bg-gray-800 dark:text-gray-50"
             >
               {!! __('pagination.next') !!}
             </button>
@@ -88,11 +90,12 @@
                 </span>
               @else
                 <button
+                  class="focus:shadow-outline-blue relative inline-flex items-center rounded-l-md border border-gray-300 bg-gray-50 px-2 py-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:text-gray-400 focus:z-10 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-500 dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-900"
+                  type="button"
+                  aria-label="{{ __('pagination.previous') }}"
                   wire:click="previousPage('{{ $paginator->getPageName() }}')"
                   dusk="previousPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after"
                   rel="prev"
-                  class="focus:shadow-outline-blue relative inline-flex items-center rounded-l-md border border-gray-300 bg-gray-50 px-2 py-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:text-gray-400 focus:z-10 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-500 dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-900"
-                  aria-label="{{ __('pagination.previous') }}"
                 >
                   <svg
                     class="h-5 w-5"
@@ -138,9 +141,10 @@
                       </span>
                     @else
                       <button
-                        wire:click="gotoPage({{ $page }}, '{{ $paginator->getPageName() }}')"
                         class="focus:shadow-outline-blue relative -ml-px inline-flex items-center border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out hover:text-gray-500 focus:z-10 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-700 dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-900"
+                        type="button"
                         aria-label="{{ __('Go to page :page', ['page' => $page]) }}"
+                        wire:click="gotoPage({{ $page }}, '{{ $paginator->getPageName() }}')"
                       >
                         {{ $page }}
                       </button>
@@ -154,11 +158,12 @@
               {{-- Next Page Link --}}
               @if ($paginator->hasMorePages())
                 <button
+                  class="focus:shadow-outline-blue relative -ml-px inline-flex items-center rounded-r-md border border-gray-300 bg-gray-50 px-2 py-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:text-gray-400 focus:z-10 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-500 dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-900"
+                  type="button"
+                  aria-label="{{ __('pagination.next') }}"
                   wire:click="nextPage('{{ $paginator->getPageName() }}')"
                   dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after"
                   rel="next"
-                  class="focus:shadow-outline-blue relative -ml-px inline-flex items-center rounded-r-md border border-gray-300 bg-gray-50 px-2 py-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:text-gray-400 focus:z-10 focus:border-blue-300 focus:outline-none active:bg-gray-100 active:text-gray-500 dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-900"
-                  aria-label="{{ __('pagination.next') }}"
                 >
                   <svg
                     class="h-5 w-5"

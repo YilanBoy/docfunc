@@ -19,9 +19,10 @@
       {{-- 寄出刪除帳號信件 --}}
       <div class="w-full">
         <button
+          class="inline-flex items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 font-semibold uppercase tracking-widest text-gray-50 ring-red-300 transition duration-150 ease-in-out hover:bg-red-700 focus:border-red-900 focus:outline-none focus:ring active:bg-red-900 disabled:opacity-25"
+          type="button"
           onclick="confirm('您確定要寄出刪除帳號信件嗎？') || event.stopImmediatePropagation()"
           wire:click="sendDestroyEmail"
-          class="inline-flex items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 font-semibold uppercase tracking-widest text-gray-50 ring-red-300 transition duration-150 ease-in-out hover:bg-red-700 focus:border-red-900 focus:outline-none focus:ring active:bg-red-900 disabled:opacity-25"
         >
           寄出刪除帳號信件
         </button>

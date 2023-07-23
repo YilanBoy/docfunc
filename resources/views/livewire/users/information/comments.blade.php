@@ -10,22 +10,22 @@
 
 {{-- 會員留言 --}}
 <div
+  class="space-y-6"
   x-data
   x-init="Livewire.hook('message.processed', () => {
       window.hljs.highlightAll();
   })"
-  class="space-y-6"
 >
   @forelse ($comments as $comment)
     <x-dashed-card
+      class="group relative max-h-64 cursor-pointer overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-1/2 after:bg-gradient-to-b after:from-transparent after:to-gray-100 dark:after:to-gray-800"
       x-data="cardLink"
       x-on:click="directToCardLink($event, $refs)"
-      class="group relative max-h-64 cursor-pointer overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-1/2 after:bg-gradient-to-b after:from-transparent after:to-gray-100 dark:after:to-gray-800"
     >
       <a
-        x-ref="cardLinkUrl"
-        href="{{ $comment->post->link_with_slug }}#comments"
         class="group-gradient-underline-grow text-xl font-semibold dark:text-gray-50"
+        href="{{ $comment->post->link_with_slug }}#comments"
+        x-ref="cardLinkUrl"
       >
         {{ $comment->post->title }}
       </a>

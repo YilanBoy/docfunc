@@ -2,11 +2,13 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "purge-icons": "purgecss --css ./public/build/assets/icon.*.css --content ./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php ./storage/framework/views/*.php ./resources/views/**/*.blade.php ./resources/js/*.js ./resources/ts/*.ts -o ./public/build/assets/icon.*.css"
     },
     "devDependencies": {
         "@shufo/prettier-plugin-blade": "^1.8.12",
-        "prettier": "^3.0.0"
+        "prettier": "^3.0.0",
+        "purgecss": "^5.0.0"
     },
     "dependencies": {
         "@alpinejs/collapse": "^3.10.2",

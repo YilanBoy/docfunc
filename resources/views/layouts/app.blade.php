@@ -32,9 +32,9 @@
 
   {{-- Favicon --}}
   <link
-    rel="shortcut icon"
-    href="{{ asset('images/icon/icon.svg') }}"
     type="image/x-icon"
+    href="{{ asset('images/icon/icon.svg') }}"
+    rel="shortcut icon"
   >
   {{-- Set theme --}}
   <script>
@@ -54,12 +54,12 @@
 
   {{-- Font --}}
   <link
-    rel="preconnect"
     href="https://fonts.googleapis.com"
+    rel="preconnect"
   >
   <link
-    rel="preconnect"
     href="https://fonts.gstatic.com"
+    rel="preconnect"
     crossorigin
   >
   <link
@@ -69,12 +69,12 @@
 
   {{-- jetbrains mono font --}}
   <link
-    rel="preconnect"
     href="https://fonts.googleapis.com"
+    rel="preconnect"
   >
   <link
-    rel="preconnect"
     href="https://fonts.gstatic.com"
+    rel="preconnect"
     crossorigin
   >
   <link
@@ -93,9 +93,9 @@
 </head>
 
 <body
+  class="overscroll-y-none bg-gray-200 font-sans text-lg text-gray-900 antialiased dark:bg-gray-900"
   x-data
   @scroll-to-top.window="window.scrollTo({ top: 0, behavior: 'smooth' })"
-  class="overscroll-y-none bg-gray-200 font-sans text-lg text-gray-900 antialiased dark:bg-gray-900"
 >
 
   <div

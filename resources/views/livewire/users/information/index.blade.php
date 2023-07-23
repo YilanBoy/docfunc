@@ -10,6 +10,7 @@
 
     {{-- user information, posts and comments --}}
     <div
+      class="relative w-full max-w-sm md:max-w-2xl"
       {{-- tab can only be 'information', 'posts', 'comments' --}}
       x-data="{
           tabSelected: new URLSearchParams(location.search).get('tab') || 'information',
@@ -19,7 +20,7 @@
               let url = new URL(window.location.href);
               url.searchParams.set('tab', this.tabSelected);
               history.pushState(null, document.title, url.toString());
-
+      
               this.tabRepositionMarker(tabButton);
           },
           tabRepositionMarker(tabButton) {
@@ -33,7 +34,6 @@
       }"
       x-init="tabSelectedButtons = document.getElementById(tabSelected + '-tab-button');
       tabRepositionMarker(tabSelectedButtons);"
-      class="relative w-full max-w-sm md:max-w-2xl"
     >
       <div
         class="relative mb-6 inline-grid h-10 w-full select-none grid-cols-3 items-center justify-center rounded-lg border border-gray-100 bg-white p-1 text-gray-500 dark:border-gray-800 dark:bg-gray-700 dark:text-gray-50"
@@ -44,10 +44,10 @@
 
         @foreach ($tabs as $tab)
           <button
-            id="{{ $tab['value'] }}-tab-button"
-            @click="tabButtonClicked($el)"
-            type="button"
             class="relative z-20 inline-flex h-8 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded-md px-3 text-sm font-medium transition-all"
+            id="{{ $tab['value'] }}-tab-button"
+            type="button"
+            @click="tabButtonClicked($el)"
           >
             <i class="{{ $tab['icon'] }}"></i>
             <span class="ml-2">{{ $tab['text'] }}</span>
@@ -55,8 +55,8 @@
         @endforeach
 
         <div
-          x-ref="tabMarker"
           class="absolute left-0 z-10 h-full w-1/2 duration-300 ease-out"
+          x-ref="tabMarker"
           x-cloak
         >
           <div class="h-full w-full rounded-md bg-gray-100 shadow-sm dark:bg-gray-800 dark:shadow-none"></div>

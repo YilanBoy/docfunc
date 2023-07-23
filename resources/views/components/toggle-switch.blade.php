@@ -1,14 +1,14 @@
 <label
+  class="flex cursor-pointer select-none items-center space-x-4"
   x-id="['comment-markdown-converter']"
   :for="$id('comment-markdown-converter')"
-  class="flex cursor-pointer select-none items-center space-x-4"
 >
   <div class="relative">
     <input
-      :id="$id('comment-markdown-converter')"
-      type="checkbox"
-      {{ $attributes }}
       class="peer sr-only"
+      type="checkbox"
+      :id="$id('comment-markdown-converter')"
+      {{ $attributes }}
     />
 
     {{-- background --}}

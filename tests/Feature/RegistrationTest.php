@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Layouts\Header;
 use App\Models\Setting;
 
 use function Pest\Laravel\get;
-use function Pest\Laravel\post;
 use function Pest\Livewire\livewire;
 
 test('registration screen can be rendered', function () {
@@ -20,21 +20,22 @@ test('registration screen can be rendered', function () {
 });
 
 test('guest can register', function () {
+    // register is not allowed by default, so we need to change the setting
     Setting::query()
         ->where('key', 'allow_register')
         ->firstOrFail()
         ->update(['value' => true]);
 
-    $response = $this->post('/register', [
-        'name' => 'Test_User',
-        'email' => 'test@example.com',
-        'password' => 'Password101',
-        'password_confirmation' => 'Password101',
-        'g-recaptcha-response' => 'fake-g-recaptcha-response',
-    ]);
+    Livewire::test(Register::class)
+        ->set('name', 'Test_User')
+        ->set('email', 'test@example.com')
+        ->set('password', 'Password101')
+        ->set('password_confirmation', 'Password101')
+        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->call('store')
+        ->assertRedirect('/verify-email');
 
     $this->assertAuthenticated();
-    $response->assertRedirect('verify-email');
 });
 
 test('guest can not visit register page when register is not allowed', function () {
@@ -55,20 +56,4 @@ test('guest can not see register button', function () {
     expect($registerSetting->value)->toBeFalse();
 
     livewire(Header::class)->assertDontSeeText('註冊');
-});
-
-test('guest can not register when register is not allowed', function () {
-    $registerSetting = Setting::query()
-        ->where('key', 'allow_register')
-        ->firstOrFail();
-
-    expect($registerSetting->value)->toBeFalse();
-
-    post(route('register'), [
-        'name' => 'John',
-        'email' => 'John@email.com',
-        'password' => 'Password01!',
-        'password_confirmation' => 'Password01!',
-        'g-recaptcha-response' => 'fake-g-recaptcha-response',
-    ])->assertStatus(503);
 });

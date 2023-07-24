@@ -55,6 +55,9 @@
       </div>
     </div>
   @empty
+    <div class="flex h-32 items-center justify-center text-gray-400 dark:text-gray-600">
+      <i class="bi bi-exclamation-circle-fill"></i><span class="ml-2">尚未發布任何文章</span>
+    </div>
   @endforelse
 
 </x-card>

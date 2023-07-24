@@ -20,8 +20,6 @@
 
         <form
           id="login"
-          method="POST"
-          action="{{ route('login') }}"
           x-data="{
               recaptchaSiteKey: @js(config('services.recaptcha.site_key'))
           }"
@@ -38,7 +36,6 @@
               });
           "
         >
-
           {{-- 信箱 --}}
           <div>
             <x-floating-label-input

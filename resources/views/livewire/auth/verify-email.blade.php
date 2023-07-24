@@ -21,18 +21,13 @@
         @endif
 
         <div class="mt-4 flex items-center justify-between">
-          <form
-            method="POST"
-            action="{{ route('verification.send') }}"
-          >
-            @csrf
 
-            <div>
-              <x-button>
-                {{ __('Resend Verification Email') }}
-              </x-button>
-            </div>
-          </form>
+          <x-button
+            type="button"
+            wire:click="resendVerificationEmail"
+          >
+            {{ __('Resend Verification Email') }}
+          </x-button>
 
           <button
             class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"

@@ -5,7 +5,7 @@
 @endpush
 
 {{-- user information page --}}
-<div class="container mx-auto">
+<div class="container mx-auto flex-1">
   <div class="flex flex-col items-center justify-start px-4">
 
     {{-- user information, posts and comments --}}

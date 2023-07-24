@@ -49,8 +49,8 @@
     </x-dashed-card>
 
   @empty
-    <x-card class="flex h-36 w-full items-center justify-center dark:text-gray-50">
-      <span>目前沒有留言，快點找文章進行留言吧！</span>
+    <x-card class="flex h-32 items-center justify-center text-gray-400 dark:text-gray-600">
+      <i class="bi bi-exclamation-circle-fill"></i><span class="ml-2">目前沒有留言，快點找文章進行留言吧！</span>
     </x-card>
   @endforelse
 

@@ -19,7 +19,7 @@
 @endpush
 
 <x-app-layout>
-  <div class="container mx-auto max-w-7xl">
+  <div class="container mx-auto">
     <div class="flex items-center justify-center px-4 xl:px-0">
 
       <div class="flex w-full flex-col items-center justify-center">

@@ -1,6 +1,6 @@
 @section('title', '會員中心-編輯個人資料')
 
-<div class="container mx-auto max-w-7xl flex-1">
+<div class="container mx-auto">
   <div class="flex flex-col items-start justify-center px-4 md:flex-row xl:px-0">
     <livewire:users.edit.side-menu />
 

@@ -1,7 +1,7 @@
 @section('title', '我的通知')
 
 {{-- 通知列表 --}}
-<div class="container mx-auto max-w-7xl flex-1">
+<div class="container mx-auto">
   <div class="flex items-start justify-center px-4 xl:px-0">
 
     <div class="flex w-full flex-col items-center justify-center space-y-6 md:w-2/3 xl:w-1/2">

@@ -13,7 +13,7 @@
 @endpush
 
 {{-- edit post --}}
-<div class="container mx-auto max-w-7xl">
+<div class="container mx-auto">
   <div
     class="flex items-stretch justify-center space-x-4"
     x-data="{

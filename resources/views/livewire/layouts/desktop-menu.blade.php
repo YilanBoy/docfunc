@@ -2,16 +2,6 @@
   class="relative hidden h-20 w-full items-center justify-center bg-gray-50 shadow-lg transition-all duration-300 dark:bg-gray-800 dark:shadow-none lg:flex"
   x-data
 >
-  {{-- logout form --}}
-  <form
-    class="hidden"
-    x-ref="logout"
-    action="{{ route('logout') }}"
-    method="POST"
-  >
-    @csrf
-  </form>
-
   {{-- 電腦版-Logo --}}
   <a
     class="absolute inset-y-1/2 left-4 flex items-center"
@@ -183,11 +173,8 @@
             type="button"
             role="menuitem"
             tabindex="-1"
-            x-on:click.prevent="
-              if (confirm('您確定要登出？')) {
-                $refs.logout.submit()
-              }
-            "
+            onclick="confirm('你確定要登出嗎？') || event.stopImmediatePropagation()"
+            wire:click="$emitUp('logout')"
           >
             <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
           </button>

@@ -119,3 +119,61 @@ test('user can view a post', function () {
         ->assertSee($post->title)
         ->assertSee($post->body);
 });
+
+test('author can visit own private post', function () {
+    $user = User::factory()->create();
+
+    $post = Post::factory()->make([
+        'user_id' => $user->id,
+        'is_private' => true,
+    ]);
+
+    $post->save();
+
+    $this->actingAs($user)
+        ->get($post->link_with_slug)
+        ->assertStatus(200)
+        ->assertSee($post->title)
+        ->assertSee($post->body);
+});
+
+test('the private post don\'t show in home page', function () {
+    $post = Post::factory()->make([
+        'is_private' => true,
+    ]);
+
+    $post->save();
+
+    get(route('root'))
+        ->assertStatus(200)
+        ->assertDontSee($post->title);
+
+    get(route('posts.index'))
+        ->assertStatus(200)
+        ->assertDontSee($post->title);
+});
+
+test('guest can\'t visit the private post', function () {
+    $post = Post::factory()->make([
+        'is_private' => true,
+    ]);
+
+    $post->save();
+
+    get($post->link_with_slug)
+        ->assertStatus(403);
+});
+
+test('user can\' visit the owner\'s private post', function () {
+    $user = User::factory()->create();
+
+    $post = Post::factory()->make([
+        'is_private' => true,
+    ]);
+
+    $post->save();
+
+    $this->actingAs($user)
+        ->get($post->link_with_slug)
+        ->assertStatus(403);
+});

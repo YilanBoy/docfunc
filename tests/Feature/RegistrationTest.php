@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Layouts\Header\Nav;
+use App\Http\Livewire\Layouts\Header;
 use App\Models\Setting;
 
 use function Pest\Laravel\get;
@@ -54,7 +54,7 @@ test('guest can not see register button', function () {
 
     expect($registerSetting->value)->toBeFalse();
 
-    livewire(Nav::class)->assertDontSeeText('註冊');
+    livewire(Header::class)->assertDontSeeText('註冊');
 });
 
 test('guest can not register when register is not allowed', function () {

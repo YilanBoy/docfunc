@@ -30,13 +30,13 @@
             {{-- 信箱 --}}
             <div>
               <x-floating-label-input
-                :type="'text'"
-                :name="'email'"
+                name="email"
+                type="text"
+                :id="'email'"
                 :placeholder="'電子信箱'"
                 required
                 autofocus
-              >
-              </x-floating-label-input>
+              />
             </div>
 
             <div class="mt-6 flex items-center justify-end">

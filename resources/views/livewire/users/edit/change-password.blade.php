@@ -1,6 +1,6 @@
 @section('title', '會員中心-修改密碼')
 
-<div class="container mx-auto">
+<div class="container mx-auto flex-1">
   <div class="flex flex-col items-start justify-center px-4 md:flex-row xl:px-0">
     <livewire:users.edit.side-menu />
 
@@ -15,10 +15,11 @@
         {{-- 舊密碼 --}}
         <div>
           <x-floating-label-input
-            wire:model.lazy="current_password"
-            :type="'password'"
-            :name="'current_password'"
+            name="current_password"
+            type="password"
+            :id="'current_password'"
             :placeholder="'舊密碼'"
+            wire:model.defer="current_password"
             required
             autofocus
           ></x-floating-label-input>
@@ -27,10 +28,11 @@
         {{-- 新密碼 --}}
         <div class="mt-6">
           <x-floating-label-input
-            wire:model.lazy="new_password"
-            :type="'password'"
-            :name="'new_password'"
+            name="new_password"
+            type="password"
+            :id="'new_password'"
             :placeholder="'新密碼'"
+            wire:model.defer="new_password"
             required
           ></x-floating-label-input>
         </div>
@@ -38,10 +40,11 @@
         {{-- 確認新密碼 --}}
         <div class="mt-6">
           <x-floating-label-input
-            wire:model.lazy="new_password_confirmation"
-            :type="'password'"
-            :name="'new_password_confirmation'"
+            name="new_password_confirmation"
+            type="password"
+            :id="'new_password_confirmation'"
             :placeholder="'確認新密碼'"
+            wire:model.defer="new_password_confirmation"
             required
           ></x-floating-label-input>
         </div>

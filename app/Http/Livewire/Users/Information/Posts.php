@@ -28,7 +28,7 @@ class Posts extends Component
 
         $post->is_private = ! $post->is_private;
 
-        $post->save();
+        $post->withoutTimestamps(fn () => $post->save());
 
         $this->refreshPostsByYear();
 

@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Livewire\Auth\Login;
 use App\Models\User;
 
 use function Pest\Laravel\get;
-use function Pest\Laravel\post;
 
 test('login screen can be rendered', function () {
     get('/login')->assertStatus(200);
@@ -12,11 +12,14 @@ test('login screen can be rendered', function () {
 test('users can authenticate using the login screen', function () {
     $user = User::factory()->create();
 
-    post('/login', [
-        'email' => $user->email,
-        'password' => 'Password101',
-        'g-recaptcha-response' => 'fake-g-recaptcha-response',
-    ])->assertRedirect('/');
+    // use request() will cause livewire tests fail
+    // https://github.com/livewire/livewire/issues/936
+    Livewire::test(Login::class)
+        ->set('email', $user->email)
+        ->set('password', 'Password101')
+        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->call('store')
+        ->assertRedirect('/');
 
     $this->assertAuthenticated();
 });
@@ -24,11 +27,11 @@ test('users can authenticate using the login screen', function () {
 test('users can not authenticate with invalid password', function () {
     $user = User::factory()->create();
 
-    post('/login', [
-        'email' => $user->email,
-        'password' => 'wrong-password',
-        'g-recaptcha-response' => 'fake-g-recaptcha-response',
-    ]);
+    Livewire::test(Login::class)
+        ->set('email', $user->email)
+        ->set('password', 'wrongPassword')
+        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->call('store');
 
     $this->assertGuest();
 });

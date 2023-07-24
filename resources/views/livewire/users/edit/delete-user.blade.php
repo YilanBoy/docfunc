@@ -1,6 +1,6 @@
 @section('title', '會員中心-刪除帳號')
 
-<div class="container mx-auto">
+<div class="container mx-auto flex-1">
   <div class="flex flex-col items-start justify-center px-4 md:flex-row xl:px-0">
     <livewire:users.edit.side-menu />
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Layouts\Header;
+namespace App\Http\Livewire\Layouts;
 
 use Livewire\Component;
 
@@ -12,6 +12,6 @@ class DesktopMenu extends Component
 
     public function render()
     {
-        return view('livewire.layouts.header.desktop-menu');
+        return view('livewire.layouts.desktop-menu');
     }
 }

@@ -30,35 +30,37 @@
             {{-- 信箱 --}}
             <div>
               <x-floating-label-input
-                :type="'text'"
-                :name="'email'"
+                name="email"
+                type="text"
+                value="{{ $request->email ?? old('email') }}"
+                :id="'email'"
                 :placeholder="'電子信箱'"
-                :value="$request->email ?? old('email')"
                 required
                 readonly
-              ></x-floating-label-input>
+              />
             </div>
 
             {{-- 密碼 --}}
             <div class="mt-6">
               <x-floating-label-input
-                :type="'password'"
-                :name="'password'"
+                name="password"
+                type="password"
+                :id="'password'"
                 :placeholder="'新密碼'"
                 required
                 autofocus
-              >
-              </x-floating-label-input>
+              />
             </div>
 
             {{-- 確認密碼 --}}
             <div class="mt-6">
               <x-floating-label-input
-                :type="'password'"
-                :name="'password_confirmation'"
+                name="password_confirmation"
+                type="password"
+                :id="'password_confirmation'"
                 :placeholder="'確認新密碼'"
                 required
-              ></x-floating-label-input>
+              />
             </div>
 
             <div class="mt-6 flex items-center justify-end">

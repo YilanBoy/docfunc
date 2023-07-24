@@ -51,46 +51,48 @@
             {{-- 會員名稱 --}}
             <div>
               <x-floating-label-input
-                :type="'text'"
-                :name="'name'"
+                name="name"
+                type="text"
+                value="{{ old('name') }}"
+                :id="'name'"
                 :placeholder="'會員名稱 (只能使用英文、數字、_ 或是 -)'"
-                :value="old('name')"
                 required
                 autofocus
-              ></x-floating-label-input>
+              />
             </div>
 
             {{-- 信箱 --}}
             <div class="mt-6">
               <x-floating-label-input
-                :type="'text'"
-                :name="'email'"
+                name="email"
+                type="text"
+                value="{{ old('email') }}"
+                :id="'email'"
                 :placeholder="'電子信箱'"
-                :value="old('email')"
                 required
-              ></x-floating-label-input>
+              />
             </div>
 
             {{-- 密碼 --}}
             <div class="mt-6">
               <x-floating-label-input
-                :type="'password'"
-                :name="'password'"
+                name="password"
+                type="password"
+                :id="'password'"
                 :placeholder="'密碼'"
                 required
-              >
-              </x-floating-label-input>
+              />
             </div>
 
             {{-- 確認密碼 --}}
             <div class="mt-6">
               <x-floating-label-input
-                :type="'password'"
-                :name="'password_confirmation'"
+                name="password_confirmation"
+                type="password"
+                :id="'password_confirmation'"
                 :placeholder="'確認密碼'"
                 required
-              >
-              </x-floating-label-input>
+              />
             </div>
 
             <div class="mt-6 flex items-center justify-end">

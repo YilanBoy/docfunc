@@ -22,22 +22,19 @@
   @forelse ($comments as $comment)
     <x-dashed-card
       class="group relative max-h-64 cursor-pointer overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-1/2 after:bg-gradient-to-b after:from-transparent after:to-gray-100 dark:after:to-gray-800"
-      x-data="cardLink"
-      x-on:click="directToCardLink($event, $refs)"
     >
       <a
-        class="group-gradient-underline-grow text-xl font-semibold dark:text-gray-50"
+        class="absolute right-0 top-0 z-20 block h-full w-full bg-transparent"
         href="{{ $comment->post->link_with_slug }}#comments"
-        x-ref="cardLinkUrl"
-      >
-        {{ $comment->post->title }}
-      </a>
+      ></a>
 
-      <div class="flex flex-col">
-        {{-- 留言 --}}
-        <div class="comment-body">
-          {!! $comment->body !!}
-        </div>
+      <span class="group-gradient-underline-grow text-xl font-semibold dark:text-gray-50">
+        {{ $comment->post->title }}
+      </span>
+
+      {{-- 留言 --}}
+      <div class="comment-body">
+        {!! $comment->body !!}
       </div>
 
       <div

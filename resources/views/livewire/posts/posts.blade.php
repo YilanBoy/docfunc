@@ -48,20 +48,18 @@
 
   {{-- 文章列表 --}}
   @forelse($posts as $post)
-    <x-card
-      class="group flex cursor-pointer flex-col justify-between md:flex-row"
-      x-data="cardLink"
-      x-on:click="directToCardLink($event, $refs)"
-    >
+    <x-card class="group relative flex cursor-pointer flex-col justify-between md:flex-row">
+
       {{-- 文章 --}}
       <div class="flex w-full flex-col justify-between">
+        <a
+          class="absolute right-0 top-0 block h-full w-full bg-transparent"
+          href="{{ $post->link_with_slug }}"
+        ></a>
+
         {{-- 文章標題 --}}
-        <h1 class="mt-2 text-xl font-semibold dark:text-gray-50 md:mt-0">
-          <a
-            class="group-gradient-underline-grow"
-            href="{{ $post->link_with_slug }}"
-            x-ref="cardLinkUrl"
-          >{{ $post->title }}</a>
+        <h1 class="group-gradient-underline-grow mt-2 w-fit text-xl font-semibold dark:text-gray-50 md:mt-0">
+          {{ $post->title }}
         </h1>
 
         {{-- 文章大綱 --}}
@@ -71,7 +69,7 @@
 
         {{-- 文章標籤 --}}
         @if ($post->tags_count > 0)
-          <div class="mt-2 flex flex-wrap items-center text-base">
+          <div class="z-10 mt-2 flex flex-wrap items-center text-base">
             <span class="mr-1 text-green-300 dark:text-lividus-600"><i class="bi bi-tags-fill"></i></span>
 
             @foreach ($post->tags as $tag)
@@ -86,45 +84,28 @@
         <div class="mt-2 hidden space-x-2 text-base text-neutral-500 md:flex md:items-center">
           {{-- 文章分類資訊 --}}
           <div>
-            <a
-              class="hover:text-neutral-500 dark:hover:text-neutral-300"
-              href="{{ $post->category->link_with_name }}"
-              title="{{ $post->category->name }}"
-            >
-              <i class="{{ $post->category->icon }}"></i><span class="ml-2">{{ $post->category->name }}</span>
-            </a>
+            <i class="{{ $post->category->icon }}"></i><span class="ml-2">{{ $post->category->name }}</span>
           </div>
+
           <div>&bull;</div>
+
           {{-- 文章作者資訊 --}}
           <div>
-            <a
-              class="hover:text-neutral-500 dark:hover:text-neutral-300"
-              href="{{ route('users.index', ['user' => $post->user_id]) }}"
-              title="{{ $post->user->name }}"
-            >
-              <i class="bi bi-person-fill"></i><span class="ml-2">{{ $post->user->name }}</span>
-            </a>
+            <i class="bi bi-person-fill"></i><span class="ml-2">{{ $post->user->name }}</span>
           </div>
+
           <div>&bull;</div>
+
           {{-- 文章發布時間 --}}
           <div>
-            <a
-              class="hover:text-neutral-500 dark:hover:text-neutral-300"
-              href="{{ $post->link_with_slug }}"
-              title="文章發布於：{{ $post->created_at->toDateString() }}"
-            >
-              <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
-            </a>
+            <i class="bi bi-clock-fill"></i><span class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
           </div>
+
           <div>&bull;</div>
+
+          {{-- 文章留言數 --}}
           <div>
-            {{-- 文章留言數 --}}
-            <a
-              class="hover:text-neutral-500 dark:hover:text-neutral-300"
-              href="{{ $post->link_with_slug }}#comments"
-            >
-              <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->comment_counts }}</span>
-            </a>
+            <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->comment_counts }}</span>
           </div>
         </div>
       </div>

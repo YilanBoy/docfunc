@@ -83,14 +83,7 @@
             <div class="mt-4 flex items-center space-x-2 text-base text-neutral-400">
               {{-- classfication --}}
               <div>
-                <a
-                  class="hover:text-neutral-500 dark:hover:text-neutral-300"
-                  href="{{ $post->category->link_with_name }}"
-                  title="{{ $post->category->name }}"
-                >
-                  <i class="{{ $post->category->icon }}"></i>
-                  <span class="ml-2">{{ $post->category->name }}</span>
-                </a>
+                <i class="{{ $post->category->icon }}"></i><span class="ml-2">{{ $post->category->name }}</span>
               </div>
 
               <div>&bull;</div>
@@ -110,19 +103,12 @@
 
               {{-- post created time --}}
               <div class="hidden md:block">
-                <a
-                  class="hover:text-neutral-500 dark:hover:text-neutral-300"
-                  href="{{ $post->link_with_slug }}"
-                  title="發表時間：{{ $post->created_at->toDateString() }}"
-                >
-                  <i class="bi bi-clock-fill"></i>
-                  <span class="ml-2">{{ $post->created_at->toDateString() }}</span>
+                <i class="bi bi-clock-fill"></i>
+                <span class="ml-2">{{ $post->created_at->toDateString() }}</span>
 
-                  @if ($post->created_at->toDateString() !== $post->updated_at->toDateString())
-                    <span>{{ '(最後更新於 ' . $post->updated_at->toDateString() . ')' }}</span>
-                  @endif
-
-                </a>
+                @if ($post->created_at->toDateString() !== $post->updated_at->toDateString())
+                  <span>{{ '(最後更新於 ' . $post->updated_at->toDateString() . ')' }}</span>
+                @endif
               </div>
 
               <div class="hidden md:block">&bull;</div>

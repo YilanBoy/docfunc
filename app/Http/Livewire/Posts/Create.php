@@ -62,8 +62,8 @@ class Create extends Component
 
         // dispatch browser event to update the body and tags in front-end
         // when update these value, listener will be triggered and update the livewire property
-        $this->dispatchBrowserEvent('updateCkeditorContent', ['content' => '']);
-        $this->dispatchBrowserEvent('updateTags', ['tags' => '']);
+        $this->dispatchBrowserEvent('update-ckeditor-content', ['content' => '']);
+        $this->dispatchBrowserEvent('update-tags', ['tags' => json_encode([])]);
     }
 
     public function store()

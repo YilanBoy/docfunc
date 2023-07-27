@@ -7,9 +7,6 @@
 @push('scriptInHead')
   {{-- Ckeditor --}}
   <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-@endpush
-
-@push('scriptInBody')
   {{-- Tagify --}}
   @vite('resources/ts/tagify.ts')
 @endpush
@@ -19,7 +16,7 @@
   <div
     class="flex items-stretch justify-center space-x-4"
     x-data="{
-        editorElement: document.querySelector('#editor'),
+        csrf_token: @js(csrf_token()),
         characterCounter: document.querySelectorAll('.character-counter'),
         maxCharacters: 20000,
         editorDebounceTimer: null,
@@ -28,10 +25,11 @@
             window.clearTimeout(this.editorDebounceTimer);
             this.editorDebounceTimer = window.setTimeout(callback, time);
         },
-        csrf_token: @js(csrf_token())
+        body: @entangle('post.body'),
+        tags: @entangle('post.tags')
     }"
     x-init="// init the create post page
-    ClassicEditor.create(editorElement, {
+    ClassicEditor.create($refs.editor, {
             // Editor configuration.
             wordCount: {
                 onUpdate: (stats) => {
@@ -64,14 +62,14 @@
         })
         .then((editor) => {
             // create a listener to update the ckeditor content
-            window.addEventListener('updateCkeditorContent', (event) => {
+            window.addEventListener('update-ckeditor-content', (event) => {
                 editor.setData(event.detail.content);
             });
 
             // binding the value of the ckeditor to the livewire attribute 'body'
             editor.model.document.on('change:data', () => {
                 debounce(() => {
-                    $wire.set('post.body', editor.getData());
+                    body = editor.getData();
                 }, 500);
             });
         })
@@ -79,15 +77,35 @@
             console.error(err.stack);
         });
 
-    // binding the value of the tag input to the livewire attribute 'tags'
-    $refs.tags.addEventListener('change', (event) => {
-        $wire.set('post.tags', event.target.value);
-    });
-
-    window.addEventListener('updateTags', (event) => {
-        tagify.removeAllTags();
-        tagify.addTags(JSON.parse(event.detail.tags));
-    });"
+    fetch('/api/tags')
+        .then((response) => response.json())
+        .then(function(tagsJson) {
+            return new Tagify($refs.tags, {
+                whitelist: tagsJson.data,
+                enforceWhitelist: true,
+                maxTags: 5,
+                dropdown: {
+                    // show the dropdown immediately on focus
+                    enabled: 0,
+                    maxItems: 5,
+                    // place the dropdown near the typed text
+                    position: 'text',
+                    // keep the dropdown open after selecting a suggestion
+                    closeOnSelect: false,
+                    highlightFirst: true
+                },
+                callbacks: {
+                    // binding the value of the tag input to the livewire attribute 'tags'
+                    'change': (event) => tags = event.detail.value
+                }
+            });
+        })
+        .then(function(tagify) {
+            window.addEventListener('update-tags', (event) => {
+                tagify.removeAllTags();
+                tagify.addTags(JSON.parse(event.detail.tags));
+            });
+        });"
   >
     <div class="hidden xl:block xl:w-1/6"></div>
 
@@ -332,7 +350,10 @@
                   for="editor"
                 >內文</label>
 
-                <div id="editor">{!! $post['body'] !!}</div>
+                <div
+                  id="editor"
+                  x-ref="editor"
+                >{!! $post['body'] !!}</div>
               </div>
             </div>
 

@@ -74,8 +74,8 @@ class Edit extends Component
         $this->post['is_private'] = $this->default->is_private;
         $this->post['title'] = $this->default->title;
 
-        $this->dispatchBrowserEvent('updateCkeditorContent', ['content' => $this->default->body]);
-        $this->dispatchBrowserEvent('updateTags', ['tags' => $this->default->tags_json]);
+        $this->dispatchBrowserEvent('update-ckeditor-content', ['content' => $this->default->body]);
+        $this->dispatchBrowserEvent('update-tags', ['tags' => $this->default->tags_json]);
     }
 
     public function update()

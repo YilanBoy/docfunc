@@ -84,9 +84,9 @@
         $wire.set('post.tags', event.target.value);
     });
 
-    // create a listener to remove all tags
-    window.addEventListener('removeAllTags', () => {
+    window.addEventListener('updateTags', (event) => {
         tagify.removeAllTags();
+        tagify.addTags(JSON.parse(event.detail.tags));
     });"
   >
     <div class="hidden xl:block xl:w-1/6"></div>
@@ -94,7 +94,7 @@
     <div class="w-full p-2 md:w-[700px] lg:p-0">
       <div class="flex w-full flex-col items-center justify-center space-y-6">
         {{-- title --}}
-        <div class="fill-current text-2xl text-gray-800 dark:text-gray-50">
+        <div class="fill-current text-2xl text-gray-700 dark:text-gray-50">
           <i class="bi bi-pencil-fill"></i><span class="ml-4">新增文章</span>
         </div>
 
@@ -407,7 +407,7 @@
         <button
           class="group mt-4 inline-flex h-14 w-14 items-center justify-center rounded-xl border border-transparent bg-red-600 text-gray-50 ring-red-300 transition duration-150 ease-in-out focus:border-red-700 focus:outline-none focus:ring active:bg-red-700"
           type="button"
-          x-on:click="$dispatch('reset')"
+          x-on:click="$dispatch('clear')"
         >
           <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
             <i class="bi bi-file-earmark-x-fill"></i>

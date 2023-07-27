@@ -59,12 +59,11 @@ class Create extends Component
         $this->post['category_id'] = 1;
         $this->post['is_private'] = false;
         $this->post['title'] = '';
-        $this->post['tags'] = '';
-        $this->post['body'] = '';
 
-        $this->dispatchBrowserEvent('removeAllTags');
+        // dispatch browser event to update the body and tags in front-end
+        // when update these value, listener will be triggered and update the livewire property
         $this->dispatchBrowserEvent('updateCkeditorContent', ['content' => '']);
-
+        $this->dispatchBrowserEvent('updateTags', ['tags' => '']);
     }
 
     public function store()

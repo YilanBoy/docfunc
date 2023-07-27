@@ -84,9 +84,9 @@
         $wire.set('post.tags', event.target.value);
     });
 
-    // create a listener to remove all tags
-    window.addEventListener('removeAllTags', () => {
+    window.addEventListener('updateTags', (event) => {
         tagify.removeAllTags();
+        tagify.addTags(JSON.parse(event.detail.tags));
     });"
   >
     <div class="hidden xl:block xl:w-1/6"></div>
@@ -437,15 +437,17 @@
 
         {{-- show dialog --}}
         <button
-          class="group mt-4 inline-flex h-14 w-14 items-center justify-center rounded-xl border border-transparent bg-red-600 text-gray-50 ring-red-300 transition duration-150 ease-in-out focus:border-red-700 focus:outline-none focus:ring active:bg-red-700"
+          class="group mt-4 inline-flex h-14 w-14 items-center justify-center rounded-xl border border-transparent bg-orange-600 text-gray-50 ring-orange-300 transition duration-150 ease-in-out focus:border-orange-700 focus:outline-none focus:ring active:bg-orange-700"
           type="button"
-          wire:click="resetForm()"
+          x-on:click="$dispatch('reset')"
         >
           <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
-            <i class="bi bi-file-earmark-x-fill"></i>
+            <i class="bi bi-arrow-counterclockwise"></i>
           </span>
         </button>
       </div>
     </div>
+
+    <livewire:posts.partials.reset-dialog />
   </div>
 </div>

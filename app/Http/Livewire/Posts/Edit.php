@@ -31,7 +31,7 @@ class Edit extends Component
 
     public Post $default;
 
-    public bool $isDataChanged = false;
+    protected $listeners = ['resetForm'];
 
     public function boot(
         ContentService $contentService,
@@ -63,30 +63,9 @@ class Edit extends Component
         }
     }
 
-    private function dataChangeCheck(): void
-    {
-        $originalPostPattern = $this->default->category_id;
-        $originalPostPattern .= $this->default->is_private;
-        $originalPostPattern .= $this->default->title;
-        $originalPostPattern .= $this->default->tags_json;
-        $originalPostPattern .= $this->default->body;
-
-        $postPattern = $this->post['category_id'];
-        $postPattern .= $this->post['is_private'];
-        $postPattern .= $this->post['title'];
-        $postPattern .= $this->post['tags'];
-        $postPattern .= $this->contentService->htmlPurifier($this->post['body']);
-
-        $originalPostHash = md5($originalPostPattern);
-        $postHash = md5($postPattern);
-
-        $this->isDataChanged = ($originalPostHash !== $postHash);
-    }
-
     public function updated(): void
     {
         $this->autoSave($this->autoSaveKey);
-        $this->dataChangeCheck();
     }
 
     public function resetForm(): void
@@ -94,14 +73,9 @@ class Edit extends Component
         $this->post['category_id'] = $this->default->category_id;
         $this->post['is_private'] = $this->default->is_private;
         $this->post['title'] = $this->default->title;
-        $this->post['tags'] = $this->default->tags_json;
-        // dispatch browser event to reset ckeditor content to default
-        // when change the content, ckeditor change:data event will update the $this->post['body']
-        $this->dispatchBrowserEvent('updateCkeditorContent', ['content' => $this->default->body]);
 
-        // updated hook will only be triggered by wire:model
-        // need to manually call updated()
-        $this->updated();
+        $this->dispatchBrowserEvent('updateCkeditorContent', ['content' => $this->default->body]);
+        $this->dispatchBrowserEvent('updateTags', ['tags' => $this->default->tags_json]);
     }
 
     public function update()

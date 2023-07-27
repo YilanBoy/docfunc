@@ -2,7 +2,7 @@
   x-data="{
       showDialog: false
   }"
-  @clear.window="showDialog = ! showDialog"
+  @reset.window="showDialog = ! showDialog"
 >
   {{-- In work, do what you enjoy. --}}
   <div
@@ -69,11 +69,11 @@
                     class="text-xl font-medium leading-6 text-gray-900 dark:text-gray-50"
                     id="modal-title"
                   >
-                    清空資料
+                    重置資料
                   </h3>
                   <div class="mt-2">
                     <p class="text-gray-500 dark:text-gray-400">
-                      請問是否清空資料？
+                      請問是否重置資料？
                     </p>
                   </div>
                 </div>
@@ -91,9 +91,9 @@
                 class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-gray-500 dark:text-gray-50 dark:hover:bg-gray-600 sm:ml-3 sm:mt-0 sm:w-auto"
                 type="button"
                 x-on:click="showDialog = false"
-                wire:click="$emit('clearForm')"
+                wire:click="$emit('resetForm')"
               >
-                清空資料
+                重置資料
               </button>
             </div>
           </div>

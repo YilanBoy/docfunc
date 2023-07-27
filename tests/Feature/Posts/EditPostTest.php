@@ -45,9 +45,9 @@ test('authors can update their posts', function ($categoryId) {
     $newBody = str()->random(500);
 
     livewire(Edit::class, ['id' => $post->id])
-        ->set('title', $newTitle)
-        ->set('categoryId', $categoryId)
-        ->set('body', $newBody)
+        ->set('post.title', $newTitle)
+        ->set('post.category_id', $categoryId)
+        ->set('post.body', $newBody)
         ->call('update')
         ->assertHasNoErrors();
 

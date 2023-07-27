@@ -8,7 +8,6 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 // js
-                'resources/js/editor.js',
                 'resources/ts/sharer.ts',
                 'resources/ts/highlight.ts',
                 'resources/ts/tagify.ts',

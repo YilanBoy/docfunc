@@ -11,7 +11,7 @@
       }
 
       document.querySelectorAll('#comments pre code:not(.hljs)').forEach((element) => {
-          window.hljs.highlightElement(element)
+          hljs.highlightElement(element)
       })
 
       window.codeBlockCopyButton('#comments pre')

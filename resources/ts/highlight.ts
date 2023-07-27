@@ -5,14 +5,16 @@ import dart from 'highlight.js/lib/languages/dart';
 import dockerfile from 'highlight.js/lib/languages/dockerfile';
 import nginx from 'highlight.js/lib/languages/nginx';
 
-interface Window {
-    hljs: any;
+declare global {
+    interface Window {
+        hljs: any;
+    }
 }
 
 hljs.registerLanguage('dart', dart);
 hljs.registerLanguage('dockerfile', dockerfile);
 hljs.registerLanguage('nginx', nginx);
 
-hljs.highlightAll();
+// hljs.highlightAll();
 
 window.hljs = hljs;

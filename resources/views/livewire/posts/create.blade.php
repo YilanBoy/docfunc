@@ -4,10 +4,12 @@
   @vite(['resources/css/editor.css', 'node_modules/@yaireo/tagify/dist/tagify.css', 'resources/css/missing-content-style.css'])
 @endpush
 
-@push('script')
+@push('scriptInHead')
   {{-- Ckeditor --}}
   <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-  @vite('resources/js/editor.js')
+@endpush
+
+@push('scriptInBody')
   {{-- Tagify --}}
   @vite('resources/ts/tagify.ts')
 @endpush
@@ -17,73 +19,79 @@
   <div
     class="flex items-stretch justify-center space-x-4"
     x-data="{
-        finishLoad: false,
-        leaveStatus: false,
+        editorElement: document.querySelector('#editor'),
+        characterCounter: document.querySelectorAll('.character-counter'),
+        maxCharacters: 20000,
         editorDebounceTimer: null,
         debounce(callback, time) {
             // https://webdesign.tutsplus.com/tutorials/javascript-debounce-and-throttle--cms-36783
             window.clearTimeout(this.editorDebounceTimer);
             this.editorDebounceTimer = window.setTimeout(callback, time);
         },
-        tags: @entangle('tags'),
-        body: @entangle('body')
+        csrf_token: @js(csrf_token())
     }"
     x-init="// init the create post page
-    window.addEventListener('load', () => {
-        finishLoad = true;
+    ClassicEditor.create(editorElement, {
+            // Editor configuration.
+            wordCount: {
+                onUpdate: (stats) => {
+                    // The character count has exceeded the maximum limit
+                    let isLimitExceeded = stats.characters > maxCharacters;
+                    // The character count is approaching the maximum limit
+                    let isCloseToLimit = !isLimitExceeded && stats.characters > maxCharacters * 0.8;
 
-        // https://ckeditor.com/docs/ckeditor5/latest/support/faq.html#how-to-get-the-editor-instance-object-from-the-dom-element
-        // A reference to the editor editable element in the DOM.
-        const domEditableElement = document.querySelector('.ck-editor__editable');
+                    // update character count in HTML element
+                    characterCounter.forEach((element) => {
+                        element.textContent = `${stats.characters} / ${maxCharacters}`;
+                        // If the character count is approaching the limit
+                        // add the class 'text-yellow-500' to the 'wordsBox' element to turn the text yellow
+                        element.classList.toggle('text-yellow-500', isCloseToLimit);
+                        // If the character count exceeds the limit
+                        // add the class 'text-red-400' to the 'wordsBox' element to turn the text red
+                        element.classList.toggle('text-red-400', isLimitExceeded);
+                    });
+                }
+            },
+            simpleUpload: {
+                // The URL that the images are uploaded to.
+                uploadUrl: '/api/images/upload',
 
-        // Get the editor instance from the editable element.
-        const editorInstance = domEditableElement.ckeditorInstance;
+                // laravel sanctum need csrf token to authenticate
+                headers: {
+                    'X-CSRF-TOKEN': csrf_token
+                }
+            }
+        })
+        .then((editor) => {
+            // create a listener to update the ckeditor content
+            window.addEventListener('updateCkeditorContent', (event) => {
+                editor.setData(event.detail.content);
+            });
 
-        // binding the value of the ckeditor to the livewire attribute 'body'
-        editorInstance.model.document.on('change:data', () => {
-            debounce(() => {
-                body = editorInstance.getData();
-            }, 500);
+            // binding the value of the ckeditor to the livewire attribute 'body'
+            editor.model.document.on('change:data', () => {
+                debounce(() => {
+                    $wire.set('post.body', editor.getData());
+                }, 500);
+            });
+        })
+        .catch((err) => {
+            console.error(err.stack);
         });
-
-        // create a listener to clear the ckeditor content
-        window.addEventListener('clearCkeditorContent', () => {
-            editorInstance.setData('');
-        });
-    });
 
     // binding the value of the tag input to the livewire attribute 'tags'
     $refs.tags.addEventListener('change', (event) => {
-        tags = event.target.value;
+        $wire.set('post.tags', event.target.value);
     });
 
     // create a listener to remove all tags
     window.addEventListener('removeAllTags', () => {
         tagify.removeAllTags();
-    });
-
-    window.addEventListener('leavePage', function(event) {
-        leaveStatus = event.detail.leavePagePermission;
-    });
-
-    // only press the submit button to leave the edit page
-    window.addEventListener('beforeunload', function(event) {
-        // https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event
-        if (!leaveStatus) {
-            // standard practice for canceling events, but Chrome does not support
-            event.preventDefault();
-
-            // to cancel the event, Chrome requires that the returnValue must be given a value
-            // In the past, this value could be displayed in the alert window, but now it is no longer supported, so just give it a null value.
-            event.returnValue = '';
-        }
     });"
-    x-cloak
-    x-show="finishLoad"
   >
     <div class="hidden xl:block xl:w-1/6"></div>
 
-    <div class="z-0 w-full p-2 md:w-[700px] lg:p-0">
+    <div class="w-full p-2 md:w-[700px] lg:p-0">
       <div class="flex w-full flex-col items-center justify-center space-y-6">
         {{-- title --}}
         <div class="fill-current text-2xl text-gray-800 dark:text-gray-50">
@@ -121,7 +129,7 @@
                     class="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none"
                     type="file"
                     title=""
-                    wire:model="image"
+                    wire:model="post.image"
                     x-on:dragenter="
                   $refs.uploadBlock.classList.remove('text-green-500', 'dark:text-indigo-400', 'border-green-500', 'dark:border-indigo-400')
                   $refs.uploadBlock.classList.add('text-green-600', 'dark:text-indigo-300', 'border-green-600', 'dark:border-indigo-300')
@@ -170,18 +178,18 @@
                   </div>
                 </div>
 
-                @if (!$errors->has('image') && $image)
+                @if (!$errors->has('image') && $post['image'])
                   <div class="relative mt-4 w-full md:w-1/2">
                     <img
                       class="rounded-lg"
-                      src="{{ $image->temporaryUrl() }}"
+                      src="{{ $post['image']->temporaryUrl() }}"
                       alt="preview image"
                     >
 
                     <button
                       class="group absolute inset-0 flex flex-1 items-center justify-center rounded-lg transition-all duration-150 hover:bg-gray-600/50 hover:backdrop-blur-sm"
                       type="button"
-                      wire:click="$set('image', null)"
+                      wire:click="$set('post.image', null)"
                     >
                       <svg
                         class="h-24 w-24 opacity-0 transition-all duration-150 group-hover:text-gray-50 group-hover:opacity-100"
@@ -213,7 +221,7 @@
                   class="form-select h-12 w-full rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50"
                   id="category_id"
                   name="category_id"
-                  wire:model="categoryId"
+                  wire:model="post.category_id"
                   required
                 >
                   @foreach ($categories as $category)
@@ -235,7 +243,7 @@
                     id="is-private"
                     name="is-private"
                     type="checkbox"
-                    wire:model="isPrivate"
+                    wire:model="post.is_private"
                   >
                   <span class="ml-2 text-lg text-gray-600 dark:text-gray-50">文章不公開</span>
                 </label>
@@ -254,7 +262,7 @@
                   name="title"
                   type="text"
                   value=""
-                  wire:model.lazy="title"
+                  wire:model="post.title"
                   placeholder="文章標題"
                   required
                   autofocus
@@ -276,7 +284,7 @@
                   id="tags"
                   name="tags"
                   type="text"
-                  value="{{ $tags }}"
+                  value="{{ $post['tags'] }}"
                   x-ref="tags"
                   placeholder="標籤 (最多 5 個)"
                 >
@@ -292,7 +300,7 @@
                   for="editor"
                 >內文</label>
 
-                <div id="editor">{!! $this->body !!}</div>
+                <div id="editor">{!! $post['body'] !!}</div>
               </div>
             </div>
 
@@ -339,7 +347,6 @@
                 <span class="ml-2">儲存</span>
               </x-button>
             </div>
-
           </form>
         </x-card>
 

@@ -4,7 +4,7 @@
   x-data="alertComponent(@js(session()->get('alert')))"
   x-init="if (alert !== null) {
       showAlert(alert.status, alert.message)
-  
+
       setTimeout(function() {
           openAlertBox = false
       }, 3000);
@@ -13,7 +13,7 @@
     showAlert(event.detail.status, event.detail.message)
 
     setTimeout(function () {
-      openAlertBox=false
+      openAlertBox = false
     }, 3000);
   "
   x-show="openAlertBox"

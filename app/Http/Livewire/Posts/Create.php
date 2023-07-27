@@ -2,47 +2,30 @@
 
 namespace App\Http\Livewire\Posts;
 
-use App\Http\Traits\Livewire\PostValidation;
+use App\Http\Traits\Livewire\PostForm;
 use App\Models\Category;
 use App\Models\Post;
 use App\Services\ContentService;
 use App\Services\FileService;
 use App\Services\FormatTransferService;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-/**
- * @property mixed $auto_save_key computed property, create by getAutoSaveKeyProperty()
- */
 class Create extends Component
 {
-    use PostValidation;
+    use PostForm;
     use WithFileUploads;
 
     protected ContentService $contentService;
 
     protected FormatTransferService $formatTransferService;
 
+    public string $autoSaveKey = '';
+
     protected FileService $fileService;
 
     public Collection $categories;
-
-    public bool $isPrivate = false;
-
-    public string $title = '';
-
-    public int $categoryId = 1;
-
-    public string $tags = '';
-
-    public ?string $previewUrl = null;
-
-    public $image = null;
-
-    public string $body = '';
 
     protected $listeners = ['clearForm'];
 
@@ -56,99 +39,64 @@ class Create extends Component
         $this->fileService = $fileService;
     }
 
-    // computed property
-    public function getAutoSaveKeyProperty(): string
-    {
-        return 'auto_save_user_'.auth()->id().'_create_post';
-    }
-
     public function mount(): void
     {
+        $this->autoSaveKey = 'auto_save_user_'.auth()->id().'_create_post';
+
         $this->categories = Category::all(['id', 'name']);
 
-        if (Cache::has($this->auto_save_key)) {
-            $autoSavePostData = json_decode(Cache::get($this->auto_save_key), true);
-
-            $this->categoryId = (int) $autoSavePostData['category_id'];
-            $this->isPrivate = $autoSavePostData['is_private'];
-            $this->title = $autoSavePostData['title'];
-            $this->tags = $autoSavePostData['tags'];
-            $this->body = $autoSavePostData['body'];
-        }
-    }
-
-    // when image property update, trigger validation
-    public function updatedImage(): void
-    {
-        $this->validateImage();
-
-        // when the image pass the validation, clear the error message
-        $this->resetValidation('image');
+        $this->getDataFromAutoSave($this->autoSaveKey);
     }
 
     // when data update, auto save it to redis
     public function updated(): void
     {
-        Cache::put(
-            $this->auto_save_key,
-            json_encode([
-                'category_id' => $this->categoryId,
-                'is_private' => $this->isPrivate,
-                'title' => $this->title,
-                'tags' => $this->tags,
-                'body' => $this->body,
-            ], JSON_UNESCAPED_UNICODE),
-            now()->addDays(7)
-        );
+        $this->autoSave($this->autoSaveKey);
     }
 
     public function clearForm(): void
     {
-        $this->categoryId = 1;
-        $this->isPrivate = false;
-        $this->title = '';
-        $this->tags = '';
-        $this->body = '';
+        $this->post['category_id'] = 1;
+        $this->post['is_private'] = false;
+        $this->post['title'] = '';
+        $this->post['tags'] = '';
+        $this->post['body'] = '';
 
         $this->dispatchBrowserEvent('removeAllTags');
-        $this->dispatchBrowserEvent('clearCkeditorContent');
+        $this->dispatchBrowserEvent('updateCkeditorContent', ['content' => '']);
+
     }
 
     public function store()
     {
         $this->validatePost();
 
-        // xss filter
-        $body = $this->contentService->htmlPurifier($this->body);
-
         // upload image
-        if ($this->image) {
-            $imageName = $this->fileService->generateFileName($this->image->getClientOriginalExtension());
-            $uploadFilePath = $this->image->storeAs('preview', $imageName, 's3');
-            $this->previewUrl = Storage::disk('s3')->url($uploadFilePath);
+        if ($this->post['image']) {
+            $this->post['preview_url'] = $this->fileService->uploadImageToCloud($this->post['image']);
         }
+
+        // xss filter
+        $this->post['body'] = $this->contentService->htmlPurifier($this->post['body']);
 
         $post = Post::query()->create([
             'user_id' => auth()->id(),
-            'title' => $this->title,
-            'category_id' => $this->categoryId,
-            'body' => $body,
-            'is_private' => $this->isPrivate,
-            'slug' => $this->contentService->makeSlug($this->title),
-            'preview_url' => $this->previewUrl,
-            'excerpt' => $this->contentService->makeExcerpt($body),
+            'title' => $this->post['title'],
+            'category_id' => $this->post['category_id'],
+            'body' => $this->post['body'],
+            'is_private' => $this->post['is_private'],
+            'slug' => $this->contentService->makeSlug($this->post['title']),
+            'preview_url' => $this->post['preview_url'],
+            'excerpt' => $this->contentService->makeExcerpt($this->post['body']),
         ]);
 
-        // convert tags json string to array
-        $tagIdsArray = $this->formatTransferService->tagsJsonToTagIdsArray($this->tags);
-
         // create new tags relation with post in database
-        $post->tags()->attach($tagIdsArray);
+        $post->tags()->attach(
+            $this->formatTransferService->tagsJsonToTagIdsArray($this->post['tags'])
+        );
 
         // delete auto save data
-        Cache::pull($this->auto_save_key);
-
-        $this->dispatchBrowserEvent('leavePage', ['leavePagePermission' => true]);
+        $this->clearAutoSave($this->autoSaveKey);
 
         return redirect()
             ->to($post->link_with_slug)

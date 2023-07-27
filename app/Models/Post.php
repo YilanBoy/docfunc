@@ -40,6 +40,10 @@ class Post extends Model implements Feedable
         'preview_url',
     ];
 
+    protected $casts = [
+        'is_private' => 'boolean',
+    ];
+
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);

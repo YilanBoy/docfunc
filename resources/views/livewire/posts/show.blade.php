@@ -27,14 +27,17 @@
   </style>
 @endpush
 
-@push('script')
+@push('scriptInHead')
+  {{-- highlight code block --}}
+  @vite('resources/ts/highlight.ts')
+@endpush
+
+@push('scriptInBody')
   {{-- to the top button --}}
   @vite('resources/ts/scroll-to-top-btn.ts')
   {{-- media embed --}}
   @vite('resources/ts/oembed/twitter-widgets.ts')
   @vite('resources/ts/oembed/oembed-media-embed.ts')
-  {{-- highlight code block --}}
-  @vite('resources/ts/highlight.ts')
   {{-- code block copy button --}}
   @vite('resources/ts/copy-code-btn.ts')
   {{-- post read pregress bar --}}
@@ -43,7 +46,10 @@
   @vite('resources/ts/sharer.ts')
 @endpush
 
-<div>
+<div
+  x-data
+  x-init="hljs.highlightAll();"
+>
   <div class="relative animate-fade-in">
     {{-- to the top button --}}
     <button

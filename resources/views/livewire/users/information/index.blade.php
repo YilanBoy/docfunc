@@ -1,6 +1,6 @@
 @section('title', $user->name . ' 的個人資訊')
 
-@push('script')
+@push('scriptInBody')
   @vite('resources/ts/count-up.ts')
 @endpush
 

@@ -3,7 +3,7 @@
   @vite('node_modules/highlight.js/scss/base16/material-palenight.scss')
 @endpush
 
-@push('script')
+@push('scriptInBody')
   {{-- highlight code block --}}
   @vite('resources/ts/highlight.ts')
 @endpush

@@ -118,7 +118,7 @@
   {{-- Flash Alert --}}
   <x-alert />
 
-  @stack('script')
+  @stack('scriptInBody')
 </body>
 
 </html>

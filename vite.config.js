@@ -14,7 +14,6 @@ export default defineConfig({
                 'resources/ts/scroll-to-top-btn.ts',
                 'resources/ts/copy-code-btn.ts',
                 'resources/ts/oembed/oembed-media-embed.ts',
-                'resources/ts/count-up.ts',
                 'resources/ts/oembed/twitter-widgets.ts',
                 'resources/ts/progress-bar.ts',
                 // css

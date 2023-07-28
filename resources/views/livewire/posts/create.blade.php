@@ -17,7 +17,6 @@
     class="flex items-stretch justify-center space-x-4"
     x-data="{
         csrf_token: @js(csrf_token()),
-        characterCounter: document.querySelectorAll('.character-counter'),
         maxCharacters: 20000,
         editorDebounceTimer: null,
         debounce(callback, time) {
@@ -33,6 +32,7 @@
             // Editor configuration.
             wordCount: {
                 onUpdate: (stats) => {
+                    let characterCounter = document.querySelectorAll('.character-counter');
                     // The character count has exceeded the maximum limit
                     let isLimitExceeded = stats.characters > maxCharacters;
                     // The character count is approaching the maximum limit

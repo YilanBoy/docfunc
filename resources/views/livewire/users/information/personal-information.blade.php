@@ -1,5 +1,26 @@
 {{-- 會員基本資訊 --}}
-<div class="grid w-full grid-cols-6 gap-6 dark:text-gray-50">
+<div
+  class="grid w-full grid-cols-6 gap-6 dark:text-gray-50"
+  x-data
+  x-init="document.querySelectorAll('.count-up').forEach((countUp) => {
+      let from = 0;
+      let to = Number(countUp.textContent);
+
+      if (from === to) {
+          return;
+      }
+
+      let counter = setInterval(() => {
+          countUp.textContent = String(from);
+
+          if (from === to) {
+              clearInterval(counter);
+          }
+
+          from++;
+      }, 1000 * (1 / to));
+  });"
+>
   <x-card class="col-span-6 flex flex-col items-center justify-between md:col-span-2">
     {{-- 大頭貼 --}}
     <img

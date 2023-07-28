@@ -1,9 +1,5 @@
 @section('title', $user->name . ' 的個人資訊')
 
-@push('scriptInBody')
-  @vite('resources/ts/count-up.ts')
-@endpush
-
 {{-- user information page --}}
 <div class="container mx-auto flex-1">
   <div class="flex flex-col items-center justify-start px-4">

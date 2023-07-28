@@ -30,6 +30,8 @@
 @push('scriptInHead')
   {{-- highlight code block --}}
   @vite('resources/ts/highlight.ts')
+  {{-- code block copy button --}}
+  @vite('resources/ts/copy-code-btn.ts')
 @endpush
 
 @push('scriptInBody')
@@ -38,8 +40,6 @@
   {{-- media embed --}}
   @vite('resources/ts/oembed/twitter-widgets.ts')
   @vite('resources/ts/oembed/oembed-media-embed.ts')
-  {{-- code block copy button --}}
-  @vite('resources/ts/copy-code-btn.ts')
   {{-- post read pregress bar --}}
   @vite('resources/ts/progress-bar.ts')
   {{-- social media share button --}}
@@ -48,7 +48,8 @@
 
 <div
   x-data
-  x-init="hljs.highlightAll();"
+  x-init="hljs.highlightAll();
+  codeBlockCopyButton($refs.postBody);"
 >
   <div class="relative animate-fade-in">
     {{-- to the top button --}}
@@ -148,6 +149,7 @@
             <div
               class="post-body mt-4"
               id="post-body"
+              x-ref="postBody"
             >
               {!! $post->body !!}
             </div>

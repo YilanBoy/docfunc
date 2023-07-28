@@ -1,3 +1,7 @@
+interface Window {
+    codeBlockCopyButton: any;
+}
+
 // use Tailwind CSS class names
 const buttonClassList: string[] = [
     'fixed',
@@ -23,26 +27,17 @@ const buttonClassList: string[] = [
     'duration-200',
 ];
 
-interface Window {
-    codeBlockCopyButton: any;
-}
-
-window.codeBlockCopyButton = function (selectors: string) {
-    let preTags = document.querySelectorAll(selectors);
-
-    if (!selectors.endsWith('pre')) {
-        console.log("selectors must be end with 'pre' tag");
-
-        return;
-    }
+window.codeBlockCopyButton = function (element: HTMLElement) {
+    let preTags: HTMLCollectionOf<HTMLPreElement> =
+        element.getElementsByTagName('pre');
 
     // add copy button to all pre tags
-    for (let i = 0, preTagsLength = preTags.length; i < preTagsLength; i++) {
-        if (preTags[i].classList.contains('copy-code-button-added')) {
-            continue;
+    Array.prototype.forEach.call(preTags, function (preTag) {
+        if (preTag.classList.contains('copy-code-button-added')) {
+            return;
         }
 
-        preTags[i].classList.add('copy-code-button-added');
+        preTag.classList.add('copy-code-button-added');
 
         // to make the copy button fixed in the container, we wrap it in the container
         let wrapper: HTMLDivElement = document.createElement('div');
@@ -51,9 +46,9 @@ window.codeBlockCopyButton = function (selectors: string) {
         wrapper.classList.add('group', 'translate-x-0');
 
         // set the wrapper as sibling of the pre tag
-        preTags[i].parentNode?.insertBefore(wrapper, preTags[i]);
+        preTag.parentNode?.insertBefore(wrapper, preTag);
         // set element as child of wrapper
-        wrapper.appendChild(preTags[i]);
+        wrapper.appendChild(preTag);
 
         // create copy button
         let copyButton: HTMLButtonElement = document.createElement('button');
@@ -64,13 +59,13 @@ window.codeBlockCopyButton = function (selectors: string) {
         copyButton.addEventListener(
             'click',
             function (this: HTMLButtonElement) {
-                let code = preTags[i].getElementsByTagName('code')[0];
+                let code = preTag.getElementsByTagName('code')[0];
 
                 // copy code to clipboard
                 let codeText: string = code.innerText;
                 navigator.clipboard.writeText(codeText).then(
                     () => console.log('Copied to clipboard'),
-                    () => console.log('Failed to copy to clipboard')
+                    () => console.log('Failed to copy to clipboard'),
                 );
 
                 // change button icon to "Copied!" for 2 seconds
@@ -79,13 +74,11 @@ window.codeBlockCopyButton = function (selectors: string) {
                     function (this: HTMLButtonElement) {
                         this.innerHTML = `<i class="bi bi-clipboard"></i>`;
                     }.bind(this),
-                    2000
+                    2000,
                 );
-            }
+            },
         );
 
         wrapper.appendChild(copyButton);
-    }
+    });
 };
-
-window.codeBlockCopyButton('body pre');

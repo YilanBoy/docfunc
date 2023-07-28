@@ -8,10 +8,10 @@ type facebookParams = {
     params: {
         quote: string;
         u: string;
-        hashtag: string
+        hashtag: string;
     };
     width: number;
-    height: number
+    height: number;
 };
 
 type twitterParams = {
@@ -20,10 +20,10 @@ type twitterParams = {
         hashtags: string;
         text: string;
         url: string;
-        via: string
+        via: string;
     };
     width: number;
-    height: number
+    height: number;
 };
 
 class Sharer {
@@ -49,7 +49,7 @@ class Sharer {
     // share 與 urlSharer 用來設定分享參數並開啟分享小視窗
     public share(): void | boolean {
         // 取得標籤屬性 data-sharer 的值
-        let sharer: string = this.getValue('sharer').toLowerCase()
+        let sharer: string = this.getValue('sharer').toLowerCase();
         let sharers = {
             facebook: {
                 shareUrl: 'https://www.facebook.com/sharer/sharer.php',
@@ -72,7 +72,7 @@ class Sharer {
                 width: 0,
                 height: 0,
             },
-        }
+        };
 
         let s = sharers[sharer as keyof typeof sharers];
 
@@ -86,8 +86,8 @@ class Sharer {
     }
 
     private urlSharer(sharer: facebookParams | twitterParams): void {
-        let params = sharer.params || {}
-        let keys = Object.keys(params)
+        let params = sharer.params || {};
+        let keys = Object.keys(params);
         let str = keys.length > 0 ? '?' : '';
 
         for (let i = 0, l = keys.length; i < l; i++) {
@@ -95,7 +95,10 @@ class Sharer {
                 str += '&';
             }
             if (params[keys[i] as keyof typeof params]) {
-                str += keys[i] + '=' + encodeURIComponent(params[keys[i] as keyof typeof params]);
+                str +=
+                    keys[i] +
+                    '=' +
+                    encodeURIComponent(params[keys[i] as keyof typeof params]);
             }
         }
 
@@ -113,12 +116,20 @@ class Sharer {
         } else {
             console.log(sharer.shareUrl);
             // 如果沒有設定 data-link，幫彈出視窗設定初始值
-            let popWidth = sharer.width || 600
-            let popHeight = sharer.height || 480
-            let left = window.innerWidth / 2 - popWidth / 2 + window.screenX
-            let top = window.innerHeight / 2 - popHeight / 2 + window.screenY
-            let popParams = 'scrollbars=no, width=' + popWidth + ', height=' + popHeight + ', top=' + top + ', left=' + left
-            let newWindow = window.open(sharer.shareUrl, '', popParams)
+            let popWidth = sharer.width || 600;
+            let popHeight = sharer.height || 480;
+            let left = window.innerWidth / 2 - popWidth / 2 + window.screenX;
+            let top = window.innerHeight / 2 - popHeight / 2 + window.screenY;
+            let popParams =
+                'scrollbars=no, width=' +
+                popWidth +
+                ', height=' +
+                popHeight +
+                ', top=' +
+                top +
+                ', left=' +
+                left;
+            let newWindow = window.open(sharer.shareUrl, '', popParams);
 
             newWindow?.focus();
         }
@@ -127,7 +138,8 @@ class Sharer {
 
 // 取得所有屬性有 data-sharer 的按鈕
 function init(): void {
-    let elems: NodeListOf<HTMLButtonElement> = document.querySelectorAll('[data-sharer]')
+    let elems: NodeListOf<HTMLButtonElement> =
+        document.querySelectorAll('[data-sharer]');
 
     for (let i = 0, l = elems.length; i < l; i++) {
         elems[i].addEventListener('click', addShareFeature);
@@ -145,9 +157,18 @@ function addShareFeature(event: Event): void {
     }
 }
 
-// 在 DOMContentLoaded 的事件中加入分享功能設定
-if (document.readyState === 'complete' || document.readyState !== 'loading') {
-    init();
-} else {
-    document.addEventListener('DOMContentLoaded', init);
+interface Window {
+    setupSharer: any;
 }
+
+window.setupSharer = function () {
+    // 在 DOMContentLoaded 的事件中加入分享功能設定
+    if (
+        document.readyState === 'complete' ||
+        document.readyState !== 'loading'
+    ) {
+        init();
+    } else {
+        document.addEventListener('DOMContentLoaded', init);
+    }
+};

@@ -32,37 +32,33 @@
   @vite('resources/ts/highlight.ts')
   {{-- code block copy button --}}
   @vite('resources/ts/copy-code-btn.ts')
-@endpush
-
-@push('scriptInBody')
+  {{-- post read pregress bar --}}
+  @vite('resources/ts/progress-bar.ts')
   {{-- to the top button --}}
   @vite('resources/ts/scroll-to-top-btn.ts')
+  {{-- social media share button --}}
+  @vite('resources/ts/sharer.ts')
   {{-- media embed --}}
   @vite('resources/ts/oembed/twitter-widgets.ts')
   @vite('resources/ts/oembed/oembed-media-embed.ts')
-  {{-- post read pregress bar --}}
-  @vite('resources/ts/progress-bar.ts')
-  {{-- social media share button --}}
-  @vite('resources/ts/sharer.ts')
 @endpush
 
 <div
   x-data
-  x-init="hljs.highlightAll();
-  codeBlockCopyButton($refs.postBody);"
+  x-init="// init show page
+  hljs.highlightAll();
+  codeBlockCopyButton($refs.postBody);
+  embedAllMedia().then(() => {
+      // scan blog post and embed tweets
+      twttr.widgets?.load(document.getElementById('blog-post'));
+      console.log('load twitter card');
+  });
+  setupProgressBar($refs.section, $refs.progressBar);
+  setupScrollToTopButton($refs.scrollToTopBtn);
+  setupSharer();"
 >
   <div class="relative animate-fade-in">
-    {{-- to the top button --}}
-    <button
-      class="fixed bottom-7 right-7 z-10 hidden h-16 w-16 rounded-full bg-green-600 text-gray-50 shadow-md transition duration-150 ease-in hover:scale-110 hover:shadow-xl dark:bg-lividus-600"
-      id="scroll-to-top-btn"
-      type="button"
-      title="Go to top"
-    >
-      <span class="m-auto text-3xl font-bold">
-        <i class="bi bi-arrow-up"></i>
-      </span>
-    </button>
+    <x-scroll-to-top-button x-ref="scrollToTopBtn" />
 
     <div class="container mx-auto">
       <div class="flex items-stretch justify-center lg:space-x-4">
@@ -73,6 +69,7 @@
           <x-card
             class="w-full"
             id="section"
+            x-ref="section"
           >
 
             <div class="flex justify-between">
@@ -205,9 +202,5 @@
 
   <livewire:comments.edit-comment-modal />
 
-  <div
-    class="fixed left-0 top-0 z-20 h-[5px] w-0 bg-gradient-to-r from-green-500 via-teal-500 to-sky-500 transition-all duration-300 ease-out dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500"
-    id="progress-bar"
-  >
-  </div>
+  <x-porgress-bar />
 </div>

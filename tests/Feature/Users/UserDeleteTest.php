@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Users\Edit\DeleteUser;
+use App\Livewire\Users\Edit\DeleteUser;
 use App\Mail\DestroyUser;
 use App\Models\User;
 

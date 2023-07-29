@@ -26,6 +26,7 @@
       <a
         class="absolute right-0 top-0 z-20 block h-full w-full bg-transparent"
         href="{{ $comment->post->link_with_slug }}#comments"
+        wire:navigate
       ></a>
 
       <span class="group-gradient-underline-grow text-xl font-semibold dark:text-gray-50">

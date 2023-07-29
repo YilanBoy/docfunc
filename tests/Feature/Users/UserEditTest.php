@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Users\Edit\EditInformation;
+use App\Livewire\Users\Edit\EditInformation;
 use App\Models\User;
 
 use function Pest\Faker\fake;

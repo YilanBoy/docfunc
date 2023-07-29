@@ -55,6 +55,7 @@
         <a
           class="absolute right-0 top-0 block h-full w-full bg-transparent"
           href="{{ $post->link_with_slug }}"
+          wire:navigate
         ></a>
 
         {{-- 文章標題 --}}

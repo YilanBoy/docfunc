@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Livewire\Comments\CreateCommentModal;
-use App\Http\Livewire\Notifications\Index as NotificationIndex;
+use App\Livewire\Comments\CreateCommentModal;
+use App\Livewire\Notifications\Index as NotificationIndex;
 use App\Models\Post;
 use App\Models\User;
 

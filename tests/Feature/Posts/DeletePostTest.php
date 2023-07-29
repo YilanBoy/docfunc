@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Livewire\Posts\Partials\DesktopShowMenu;
-use App\Http\Livewire\Posts\Partials\MobileShowMenu;
-use App\Http\Livewire\Users\Information\Posts;
+use App\Livewire\Posts\Partials\DesktopShowMenu;
+use App\Livewire\Posts\Partials\MobileShowMenu;
+use App\Livewire\Users\Information\Posts;
 use App\Models\Post;
 use App\Models\User;
 use Livewire\Livewire;

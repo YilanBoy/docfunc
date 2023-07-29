@@ -4,6 +4,7 @@
     class="group flex h-14 w-14 items-center justify-center text-gray-400"
     href="{{ route('posts.index') }}"
     role="button"
+    wire:navigate
   >
     <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
       <i class="bi bi-house-fill"></i>
@@ -45,6 +46,7 @@
       class="group flex h-14 w-14 items-center justify-center text-gray-400"
       href="{{ route('posts.edit', ['id' => $postId]) }}"
       role="button"
+      wire:navigate
     >
       <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
         <i class="bi bi-pencil-square"></i>

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Users\Edit\ChangePassword;
+use App\Livewire\Users\Edit\ChangePassword;
 use App\Models\User;
 
 use function Pest\Laravel\get;

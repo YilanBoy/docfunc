@@ -1,5 +1,3 @@
-@section('title', '登入')
-
 <div class="container mx-auto">
   <div class="flex items-center justify-center px-4 xl:px-0">
 
@@ -20,21 +18,7 @@
 
         <form
           id="login"
-          x-data="{
-              recaptchaSiteKey: @js(config('services.recaptcha.site_key'))
-          }"
-          x-on:submit.prevent="
-              grecaptcha.ready(function() {
-                  grecaptcha.execute(recaptchaSiteKey, { action: 'submit' })
-                      .then(function(response) {
-                          // set livewire property 'recaptcha' value
-                          $wire.set('recaptcha', response);
-
-                          // submit the form and call the livewire method 'store'
-                          $wire.store();
-                      });
-              });
-          "
+          wire:submit="store"
         >
           {{-- 信箱 --}}
           <div>
@@ -42,7 +26,7 @@
               type="text"
               :id="'email'"
               :placeholder="'電子信箱'"
-              wire:model.defer="email"
+              wire:model="email"
               required
               autofocus
             />
@@ -54,7 +38,7 @@
               type="password"
               :id="'password'"
               :placeholder="'密碼'"
-              wire:model.defer="password"
+              wire:model="password"
               required
             />
           </div>
@@ -70,7 +54,7 @@
                 id="remember-me"
                 name="remember"
                 type="checkbox"
-                wire:model.defer="remember"
+                wire:model="remember"
               >
               <span class="ml-2 text-sm text-gray-600 dark:text-gray-50">{{ __('Remember me') }}</span>
             </label>
@@ -80,6 +64,7 @@
                 <a
                   class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
                   href="{{ route('password.request') }}"
+                  wire:navigate
                 >
                   {{ __('Forgot your password?') }}
                 </a>

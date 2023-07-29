@@ -20,7 +20,7 @@
         {{-- 驗證錯誤訊息 --}}
         <x-auth-validation-errors :errors="$errors" />
 
-        <form wire:submit.prevent="store">
+        <form wire:submit="store">
 
           {{-- 信箱 --}}
           <div>
@@ -31,7 +31,7 @@
               :placeholder="'電子信箱'"
               required
               autofocus
-              wire:model.defer="email"
+              wire:model="email"
             />
           </div>
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Posts\Create;
+use App\Livewire\Posts\Create;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;

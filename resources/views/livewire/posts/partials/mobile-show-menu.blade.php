@@ -31,6 +31,7 @@
       href="{{ route('posts.edit', ['id' => $postId]) }}"
       role="menuitem"
       tabindex="-1"
+      wire:navigate
     >
       <i class="bi bi-pencil-fill"></i><span class="ml-2">編輯</span>
     </a>

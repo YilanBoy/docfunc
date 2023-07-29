@@ -1,5 +1,3 @@
-@section('title', '驗證信箱')
-
 <div class="container mx-auto">
   <div class="flex items-center justify-center px-4 xl:px-0">
 
@@ -32,7 +30,7 @@
           <button
             class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
             type="button"
-            wire:click="$emit('logout')"
+            wire:click="$dispatch('logout')"
           >
             {{ __('Log Out') }}
           </button>

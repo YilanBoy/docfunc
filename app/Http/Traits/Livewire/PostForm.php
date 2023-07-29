@@ -31,7 +31,7 @@ trait PostForm
         );
 
         if ($validator->fails()) {
-            $this->dispatchBrowserEvent('scroll-to-top');
+            $this->dispatch('scroll-to-top');
         }
 
         $validator->validate();
@@ -76,7 +76,7 @@ trait PostForm
         );
 
         if ($validator->fails()) {
-            $this->dispatchBrowserEvent('scroll-to-top');
+            $this->dispatch('scroll-to-top');
         }
 
         $validator->validate();

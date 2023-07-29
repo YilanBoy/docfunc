@@ -14,7 +14,7 @@ return new class extends Migration
         DB::table('settings')->insert([
             'name' => '開放註冊',
             'key' => 'allow_register',
-            'value' => 'false',
+            'value' => 'true',
         ]);
     }
 

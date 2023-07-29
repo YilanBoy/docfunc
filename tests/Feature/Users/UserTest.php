@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Users\Information\PostsGroupByYear;
+use App\Livewire\Users\Information\PostsGroupByYear;
 use App\Models\Post;
 use App\Models\User;
 

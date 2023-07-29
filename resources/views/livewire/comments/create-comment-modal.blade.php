@@ -95,7 +95,7 @@
                 x-ref="createCommentTextarea"
                 {{-- change tab into 4 spaces --}}
                 x-on:keydown.tab.prevent="$el.setRangeText( '    ', $el.selectionStart, $el.selectionStart, 'end')"
-                wire:model.lazy="body"
+                wire:model.blur="body"
                 rows="12"
                 placeholder="寫下你的留言吧！**支援 Markdown**"
                 required
@@ -127,7 +127,7 @@
           @endif
 
           <div class="flex items-center justify-between space-x-3">
-            <x-toggle-switch wire:model="convertToHtml">
+            <x-toggle-switch wire:model.live="convertToHtml">
               預覽
             </x-toggle-switch>
 

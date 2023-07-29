@@ -13,15 +13,15 @@
 >
 <meta
   property="og:title"
-  content="@yield('title', config('app.name'))"
+  content="{{ $title ?? config('app.name') }}"
 >
 <meta
   property="og:description"
-  content="@yield('description', config('app.name'))"
+  content="{{ $description ?? config('app.name') }}"
 >
 <meta
   property="og:image"
-  content="@yield('preview_url', $defaultPreviewUrl)"
+  content="{{ $previewUrl ?? $defaultPreviewUrl }}"
 >
 
 {{-- Twitter --}}
@@ -35,13 +35,13 @@
 >
 <meta
   property="twitter:title"
-  content="@yield('title', config('app.name'))"
+  content="{{ $title ?? config('app.name') }}"
 >
 <meta
   property="twitter:description"
-  content="@yield('description', config('app.name'))"
+  content="{{ $description ?? config('app.name') }}"
 >
 <meta
   property="twitter:image"
-  content="@yield('preview_url', $defaultPreviewUrl)"
+  content="{{ $previewUrl ?? $defaultPreviewUrl }}"
 >

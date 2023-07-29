@@ -1,5 +1,3 @@
-@section('title', '重設密碼')
-
 <div class="container mx-auto">
   <div class="flex items-center justify-center px-4 xl:px-0">
 
@@ -13,7 +11,7 @@
         {{-- 驗證錯誤訊息 --}}
         <x-auth-validation-errors :errors="$errors" />
 
-        <form wire:submit.prevent="store">
+        <form wire:submit="store">
           {{-- 信箱 --}}
           <div>
             <x-floating-label-input
@@ -23,7 +21,7 @@
               :placeholder="'電子信箱'"
               required
               readonly
-              wire:model.defer="email"
+              wire:model="email"
             />
           </div>
 
@@ -36,7 +34,7 @@
               :placeholder="'新密碼'"
               required
               autofocus
-              wire:model.defer="password"
+              wire:model="password"
             />
           </div>
 
@@ -48,7 +46,7 @@
               :id="'password_confirmation'"
               :placeholder="'確認新密碼'"
               required
-              wire:model.defer="password_confirmation"
+              wire:model="password_confirmation"
             />
           </div>
 

@@ -20,7 +20,7 @@
         "laravel/scout": "^9.8",
         "laravel/tinker": "^2.7",
         "league/flysystem-aws-s3-v3": "^3.0",
-        "livewire/livewire": "^2.3",
+        "livewire/livewire": "^3.0@beta",
         "spatie/laravel-feed": "^4.1"
     },
     "require-dev": {
@@ -38,7 +38,6 @@
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-faker": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
-        "pestphp/pest-plugin-livewire": "^2.0",
         "pestphp/pest-plugin-mock": "^2.0",
         "spatie/laravel-ignition": "^2.0"
     },

@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Livewire\Auth\Register;
-use App\Http\Livewire\Layouts\Header;
+use App\Livewire\Auth\Register;
+use App\Livewire\Layouts\Header;
 use App\Models\Setting;
 
 use function Pest\Laravel\get;

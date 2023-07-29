@@ -1,4 +1,8 @@
-<div class="container mx-auto">
+<div
+  class="container mx-auto"
+  x-data
+  x-init="document.getElementById('email').focus()"
+>
   <div class="flex items-center justify-center px-4 xl:px-0">
 
     <div class="flex w-full flex-col items-center justify-center">
@@ -78,6 +82,5 @@
         </form>
       </x-card>
     </div>
-
   </div>
 </div>

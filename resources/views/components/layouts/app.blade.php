@@ -82,6 +82,11 @@
     rel="stylesheet"
   >
 
+  {{-- css --}}
+  @vite(['resources/css/editor.css', 'node_modules/@yaireo/tagify/dist/tagify.css', 'resources/css/missing-content-style.css'])
+  {{-- css --}}
+  @vite('node_modules/highlight.js/scss/base16/material-palenight.scss')
+
   <x-js.alpine-js />
   <x-js.livewire />
 
@@ -111,7 +116,6 @@
   class="overscroll-y-none bg-gray-200 font-sans text-lg text-gray-900 antialiased dark:bg-gray-900"
   x-data
   @scroll-to-top.window="window.scrollTo({ top: 0, behavior: 'smooth' })"
-  @hello-world.window="console.log('Hello World')"
 >
   <div
     class="relative flex min-h-screen flex-col justify-between selection:bg-green-300 selection:text-green-900 dark:selection:bg-indigo-300 dark:selection:text-indigo-900"
@@ -122,9 +126,6 @@
 
     <livewire:layouts.footer />
   </div>
-
-  {{-- Scripts --}}
-  @vite('resources/js/app.js')
 
   {{-- Flash Alert --}}
   @persist('alert')

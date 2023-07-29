@@ -45,10 +45,7 @@
       succeed,
       fail
     }) => {
-      succeed(({
-        snapshot,
-        effect
-      }) => {
+      succeed(() => {
         // Equivalent of 'message.processed'
         queueMicrotask(() => {
           // when create comment in show-post-page
@@ -84,6 +81,11 @@
             document.querySelectorAll('.comment-body pre code:not(.hljs)').forEach((
               element) => {
               hljs.highlightElement(element)
+            })
+
+            window.scroll({
+              top: 0,
+              behavior: 'smooth'
             })
           }
         })

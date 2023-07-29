@@ -14,7 +14,7 @@ class Comments extends Component
 
     public int $userId;
 
-    public function updatedPage()
+    public function updatedCommentsPage()
     {
         $this->dispatch('scroll-to-top');
     }
@@ -23,13 +23,13 @@ class Comments extends Component
     {
         // get the comments from this user
         $comments = Comment::whereUserId($this->userId)
-            ->select(['created_at', 'post_id', 'body'])
+            ->select(['id', 'created_at', 'post_id', 'body'])
             ->whereHas('post', function ($query) {
                 $query->whereNull('deleted_at');
             })
             ->with('post:id,title,slug')
             ->latest()
-            ->paginate(10)
+            ->paginate(10, pageName: 'comments-page')
             ->withQueryString();
 
         // convert the body from markdown to html

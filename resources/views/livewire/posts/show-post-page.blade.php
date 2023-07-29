@@ -12,8 +12,6 @@
   setupScrollToTopButton($refs.scrollToTopBtn);
   setupSharer();"
 >
-  {{-- css --}}
-  @vite('node_modules/highlight.js/scss/base16/material-palenight.scss')
 
   <style>
     /* media embed */

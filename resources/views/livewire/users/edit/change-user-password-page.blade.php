@@ -1,4 +1,8 @@
-<div class="container mx-auto flex-1">
+<div
+  class="container mx-auto flex-1"
+  x-data
+  x-init="document.getElementById('current_password').focus()"
+>
   <div class="flex flex-col items-start justify-center px-4 md:flex-row xl:px-0">
     <livewire:users.edit.side-menu />
 
@@ -19,7 +23,6 @@
             :placeholder="'舊密碼'"
             wire:model="current_password"
             required
-            autofocus
           ></x-floating-label-input>
         </div>
 

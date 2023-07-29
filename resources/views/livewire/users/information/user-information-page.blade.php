@@ -7,14 +7,9 @@
       class="relative w-full max-w-sm md:max-w-2xl"
       {{-- tab can only be 'information', 'posts', 'comments' --}}
       x-data="{
-          tabSelected: new URLSearchParams(location.search).get('tab') || 'information',
+          tabSelected: 'information',
           tabButtonClicked(tabButton) {
               this.tabSelected = tabButton.id.replace('-tab-button', '');
-              // update the url
-              let url = new URL(window.location.href);
-              url.searchParams.set('tab', this.tabSelected);
-              history.pushState(null, document.title, url.toString());
-
               this.tabRepositionMarker(tabButton);
           },
           tabRepositionMarker(tabButton) {
@@ -42,6 +37,7 @@
             id="{{ $tab['value'] }}-tab-button"
             type="button"
             @click="tabButtonClicked($el)"
+            wire:key="{{ $tab['value'] }}-tab-button"
           >
             <i class="{{ $tab['icon'] }}"></i>
             <span class="ml-2">{{ $tab['text'] }}</span>

@@ -63,8 +63,8 @@ class CreatePostPage extends Component
 
         // dispatch browser event to update the body and tags in front-end
         // when update these value, listener will be triggered and update the livewire property
-        $this->dispatch('update-ckeditor-content', ['content' => '']);
-        $this->dispatch('update-tags', ['tags' => json_encode([])]);
+        $this->dispatch('update-ckeditor-content', content: '');
+        $this->dispatch('update-tags', tags: json_encode([]));
     }
 
     public function store()

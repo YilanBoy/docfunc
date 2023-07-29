@@ -1,5 +1,3 @@
-@section('title', '編輯文章')
-
 {{-- edit post --}}
 <div class="container mx-auto">
   {{-- css --}}

@@ -34,7 +34,7 @@
             <button
               class="hover:text-gray-500 dark:hover:text-gray-300"
               type="button"
-              wire:click="$dispatch('setEditComment', {{ $commentId }}, {{ $offset }})"
+              wire:click="$dispatch('set-edit-comment', { comment: {{ $commentId }}, offset: {{ $offset }} })"
             >
               <i class="bi bi-pencil-fill"></i>
               <span class="ml-1">編輯</span>

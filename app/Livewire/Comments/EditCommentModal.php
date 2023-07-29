@@ -7,6 +7,7 @@ use App\Http\Traits\Livewire\MarkdownConverter;
 use App\Models\Comment as CommentModel;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class EditCommentModal extends Component
@@ -21,8 +22,6 @@ class EditCommentModal extends Component
     public int $commentId;
 
     public string $body = '';
-
-    protected $listeners = ['setEditComment'];
 
     protected function rules(): array
     {
@@ -39,6 +38,7 @@ class EditCommentModal extends Component
         return $this->convertToHtml($this->body);
     }
 
+    #[On('set-edit-comment')]
     public function setEditComment(CommentModel $comment, int $offset)
     {
         $this->convertToHtml = false;

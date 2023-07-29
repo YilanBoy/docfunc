@@ -75,8 +75,8 @@ class EditPostPage extends Component
         $this->post['is_private'] = $this->default->is_private;
         $this->post['title'] = $this->default->title;
 
-        $this->dispatch('update-ckeditor-content', ['content' => $this->default->body]);
-        $this->dispatch('update-tags', ['tags' => $this->default->tags_json]);
+        $this->dispatch('update-ckeditor-content', content: $this->default->body);
+        $this->dispatch('update-tags', tags: $this->default->tags_json);
     }
 
     public function update()
@@ -106,9 +106,9 @@ class EditPostPage extends Component
 
         $this->clearAutoSave($this->autoSaveKey);
 
-        return redirect()
-            ->to($this->default->link_with_slug)
-            ->with('alert', ['status' => 'success', 'message' => '成功更新文章！']);
+        $this->redirect($this->default->link_with_slug, navigate: true);
+
+        $this->dispatch('info-badge', status: 'success', message: '成功更新文章！');
     }
 
     #[Title('編輯文章')]

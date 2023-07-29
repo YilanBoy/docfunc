@@ -1,24 +1,12 @@
-@push('css')
-  {{-- highlight code block --}}
-  @vite('node_modules/highlight.js/scss/base16/material-palenight.scss')
-@endpush
-
-@push('scriptInBody')
-  {{-- highlight code block --}}
-  @vite('resources/ts/highlight.ts')
-@endpush
-
 {{-- 會員留言 --}}
 <div
   class="space-y-6"
   x-data
-  x-init="Livewire.hook('message.processed', (message) => {
-      // when change page in comments tab, highlight code block
-      if (message.updateQueue[0].method.toLowerCase().includes('page')) {
-          window.hljs.highlightAll();
-      }
-  })"
+  x-init="hljs.highlightAll()"
 >
+  {{-- highlight code block --}}
+  @vite('node_modules/highlight.js/scss/base16/material-palenight.scss')
+
   @forelse ($comments as $comment)
     <x-dashed-card
       class="group relative max-h-64 cursor-pointer overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-1/2 after:bg-gradient-to-b after:from-transparent after:to-gray-100 dark:after:to-gray-800"

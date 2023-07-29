@@ -32,10 +32,9 @@ class Posts extends Component
 
         $this->refreshPostsByYear();
 
-        $this->dispatch('info-badge', [
-            'status' => 'success',
-            'message' => $post->is_private ? '文章狀態已切換為私人' : '文章狀態已切換為公開',
-        ]);
+        $this->dispatch('info-badge', status: 'success',
+            message: $post->is_private ? '文章狀態已切換為私人' : '文章狀態已切換為公開',
+        );
     }
 
     public function restore(int $postId): void

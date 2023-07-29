@@ -37,6 +37,58 @@
         el.removeEventListener('click', onClick)
       })
     })
+
+    Livewire.hook('commit', ({
+      component,
+      commit,
+      respond,
+      succeed,
+      fail
+    }) => {
+      succeed(({
+        snapshot,
+        effect
+      }) => {
+        // Equivalent of 'message.processed'
+        queueMicrotask(() => {
+          // when create comment in show-post-page
+          if (component.name === 'comments.create-comment-modal') {
+            document.querySelectorAll('#create-comment-preview pre code:not(.hljs)').forEach((
+              element) => {
+              hljs.highlightElement(element)
+            })
+
+          }
+
+          // when edit comment in show-post-page
+          if (component.name === 'comments.edit-comment-modal') {
+            document.querySelectorAll('#edit-comment-preview pre code:not(.hljs)').forEach((
+              element) => {
+              hljs.highlightElement(element)
+            })
+          }
+
+          // when creat and change comment in show-post-page
+          if (component.name === 'comments.comment-group') {
+            document.querySelectorAll('#comments pre code:not(.hljs)').forEach((element) => {
+              if (element instanceof Element) {
+                hljs.highlightElement(element)
+              }
+            })
+
+            codeBlockCopyButton(document.querySelector('#comments'))
+          }
+
+          // when change the comments page in users-information-page
+          if (component.name === 'users.information.comments') {
+            document.querySelectorAll('.comment-body pre code:not(.hljs)').forEach((
+              element) => {
+              hljs.highlightElement(element)
+            })
+          }
+        })
+      })
+    })
   });
 
   document.addEventListener('livewire:initialized', () => {

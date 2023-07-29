@@ -8,14 +8,6 @@
       isOpen: false,
       recaptchaSiteKey: @js(config('services.recaptcha.site_key'))
   }"
-  x-init="// when enable the preview, reload the scripts
-  Livewire.hook('message.processed', (message) => {
-      if (message.updateQueue[0].name === 'convertToHtml') {
-          document.querySelectorAll('#creating-comment-preview pre code:not(.hljs)').forEach((element) => {
-              window.hljs.highlightElement(element)
-          })
-      }
-  });"
   x-show="isOpen"
   @open-create-comment-modal.window="
     isOpen = true
@@ -108,7 +100,7 @@
           @else
             <div
               class="space-y-2"
-              id="creating-comment-preview"
+              id="create-comment-preview"
             >
               <div class="space-x-4">
                 <span class="font-semibold dark:text-gray-50">
@@ -127,7 +119,10 @@
           @endif
 
           <div class="flex items-center justify-between space-x-3">
-            <x-toggle-switch wire:model.live="convertToHtml">
+            <x-toggle-switch
+              :id="'creat-comment-preview-toggle'"
+              wire:model.live="convertToHtml"
+            >
               預覽
             </x-toggle-switch>
 

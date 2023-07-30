@@ -13,7 +13,8 @@ export default defineConfig({
                 'resources/ts/tagify.ts',
                 'resources/ts/scroll-to-top-btn.ts',
                 'resources/ts/copy-code-btn.ts',
-                'resources/ts/oembed/oembed-media-embed.ts',
+                'resources/ts/oembed/embed-youtube-oembed.ts',
+                'resources/ts/oembed/embed-twitter-oembed.ts',
                 'resources/ts/oembed/twitter-widgets.ts',
                 'resources/ts/progress-bar.ts',
                 // css

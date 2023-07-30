@@ -39,8 +39,9 @@
   {{-- social media share button --}}
   @vite('resources/ts/sharer.ts')
   {{-- media embed --}}
+  @vite('resources/ts/oembed/embed-youtube-oembed.ts')
+  @vite('resources/ts/oembed/embed-twitter-oembed.ts')
   @vite('resources/ts/oembed/twitter-widgets.ts')
-  @vite('resources/ts/oembed/oembed-media-embed.ts')
 @endpush
 
 <div
@@ -48,11 +49,11 @@
   x-init="// init show page
   hljs.highlightAll();
   codeBlockCopyButton($refs.postBody);
-  embedAllMedia().then(() => {
-      // scan blog post and embed tweets
-      twttr.widgets?.load(document.getElementById('blog-post'));
-      console.log('load twitter card');
-  });
+  processYoutubeOEmbeds();
+  processTwitterOEmbeds();
+  setTimeout(() => {
+      twttr.widgets?.load($refs.postBody);
+  }, 1000);
   setupProgressBar($refs.section, $refs.progressBar);
   setupScrollToTopButton($refs.scrollToTopBtn);
   setupSharer();"

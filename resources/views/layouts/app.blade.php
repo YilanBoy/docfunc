@@ -113,6 +113,8 @@
   {{-- Scripts --}}
   <livewire:scripts />
 
+  @vite('resources/js/app.js')
+
   {{-- Flash Alert --}}
   <x-alert />
 

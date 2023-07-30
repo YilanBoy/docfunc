@@ -24,8 +24,8 @@
             window.clearTimeout(this.editorDebounceTimer);
             this.editorDebounceTimer = window.setTimeout(callback, time);
         },
-        body: @entangle('post.body'),
-        tags: @entangle('post.tags')
+        body: @entangle('body'),
+        tags: @entangle('tags')
     }"
     x-init="// init the create post page
     ClassicEditor.create($refs.editor, {
@@ -61,11 +61,6 @@
             }
         })
         .then((editor) => {
-            // create a listener to update the ckeditor content
-            window.addEventListener('update-ckeditor-content', (event) => {
-                editor.setData(event.detail.content);
-            });
-
             // binding the value of the ckeditor to the livewire attribute 'body'
             editor.model.document.on('change:data', () => {
                 debounce(() => {
@@ -98,12 +93,6 @@
                     // binding the value of the tag input to the livewire attribute 'tags'
                     'change': (event) => tags = event.detail.value
                 }
-            });
-        })
-        .then(function(tagify) {
-            window.addEventListener('update-tags', (event) => {
-                tagify.removeAllTags();
-                tagify.addTags(JSON.parse(event.detail.tags));
             });
         });"
   >
@@ -147,7 +136,7 @@
                     class="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none"
                     type="file"
                     title=""
-                    wire:model="post.image"
+                    wire:model="image"
                     x-on:dragenter="
                   $refs.uploadBlock.classList.remove('text-green-500', 'dark:text-indigo-400', 'border-green-500', 'dark:border-indigo-400')
                   $refs.uploadBlock.classList.add('text-green-600', 'dark:text-indigo-300', 'border-green-600', 'dark:border-indigo-300')
@@ -196,18 +185,18 @@
                   </div>
                 </div>
 
-                @if (!$errors->has('image') && $post['image'])
+                @if (!$errors->has('image') && $image)
                   <div class="relative mt-4 w-full md:w-1/2">
                     <img
                       class="rounded-lg"
-                      src="{{ $post['image']->temporaryUrl() }}"
+                      src="{{ $image->temporaryUrl() }}"
                       alt="preview image"
                     >
 
                     <button
                       class="group absolute inset-0 flex flex-1 items-center justify-center rounded-lg transition-all duration-150 hover:bg-gray-600/50 hover:backdrop-blur-sm"
                       type="button"
-                      wire:click="$set('post.image', null)"
+                      wire:click="$set('image', null)"
                     >
                       <svg
                         class="h-24 w-24 opacity-0 transition-all duration-150 group-hover:text-gray-50 group-hover:opacity-100"
@@ -239,7 +228,7 @@
                   class="form-select h-12 w-full rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50"
                   id="category_id"
                   name="category_id"
-                  wire:model="post.category_id"
+                  wire:model="category_id"
                   required
                 >
                   @foreach ($categories as $category)
@@ -261,7 +250,7 @@
                     id="is-private"
                     name="is-private"
                     type="checkbox"
-                    wire:model="post.is_private"
+                    wire:model="is_private"
                   >
                   <span class="ml-2 text-lg text-gray-600 dark:text-gray-50">文章不公開</span>
                 </label>
@@ -280,7 +269,7 @@
                   name="title"
                   type="text"
                   value=""
-                  wire:model="post.title"
+                  wire:model="title"
                   placeholder="文章標題"
                   required
                   autofocus
@@ -302,7 +291,7 @@
                   id="tags"
                   name="tags"
                   type="text"
-                  value="{{ $post['tags'] }}"
+                  value="{{ $tags }}"
                   x-ref="tags"
                   placeholder="標籤 (最多 5 個)"
                 >
@@ -321,7 +310,7 @@
                 <div
                   id="editor"
                   x-ref="editor"
-                >{!! $post['body'] !!}</div>
+                >{!! $body !!}</div>
               </div>
             </div>
 
@@ -423,20 +412,7 @@
             </svg>
           </span>
         </button>
-
-        {{-- show dialog --}}
-        <button
-          class="group mt-4 inline-flex h-14 w-14 items-center justify-center rounded-xl border border-transparent bg-red-600 text-gray-50 ring-red-300 transition duration-150 ease-in-out focus:border-red-700 focus:outline-none focus:ring active:bg-red-700"
-          type="button"
-          x-on:click="$dispatch('clear')"
-        >
-          <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
-            <i class="bi bi-file-earmark-x-fill"></i>
-          </span>
-        </button>
       </div>
     </div>
-
-    <livewire:posts.partials.clear-dialog />
   </div>
 </div>

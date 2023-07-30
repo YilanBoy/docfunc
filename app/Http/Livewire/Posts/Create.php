@@ -21,13 +21,9 @@ class Create extends Component
 
     protected FormatTransferService $formatTransferService;
 
-    public string $autoSaveKey = '';
-
     protected FileService $fileService;
 
     public Collection $categories;
-
-    protected $listeners = ['clearForm'];
 
     public function boot(
         ContentService $contentService,
@@ -45,25 +41,7 @@ class Create extends Component
 
         $this->categories = Category::all(['id', 'name']);
 
-        $this->getDataFromAutoSave($this->autoSaveKey);
-    }
-
-    // when data update, auto save it to redis
-    public function updated(): void
-    {
-        $this->autoSave($this->autoSaveKey);
-    }
-
-    public function clearForm(): void
-    {
-        $this->post['category_id'] = 1;
-        $this->post['is_private'] = false;
-        $this->post['title'] = '';
-
-        // dispatch browser event to update the body and tags in front-end
-        // when update these value, listener will be triggered and update the livewire property
-        $this->dispatchBrowserEvent('update-ckeditor-content', ['content' => '']);
-        $this->dispatchBrowserEvent('update-tags', ['tags' => json_encode([])]);
+        $this->setDataFromAutoSave($this->autoSaveKey);
     }
 
     public function store()
@@ -71,27 +49,27 @@ class Create extends Component
         $this->validatePost();
 
         // upload image
-        if ($this->post['image']) {
-            $this->post['preview_url'] = $this->fileService->uploadImageToCloud($this->post['image']);
+        if ($this->image) {
+            $this->preview_url = $this->fileService->uploadImageToCloud($this->image);
         }
 
         // xss filter
-        $this->post['body'] = $this->contentService->htmlPurifier($this->post['body']);
+        $this->body = $this->contentService->htmlPurifier($this->body);
 
         $post = Post::query()->create([
             'user_id' => auth()->id(),
-            'title' => $this->post['title'],
-            'category_id' => $this->post['category_id'],
-            'body' => $this->post['body'],
-            'is_private' => $this->post['is_private'],
-            'slug' => $this->contentService->makeSlug($this->post['title']),
-            'preview_url' => $this->post['preview_url'],
-            'excerpt' => $this->contentService->makeExcerpt($this->post['body']),
+            'title' => $this->title,
+            'category_id' => $this->category_id,
+            'body' => $this->body,
+            'is_private' => $this->is_private,
+            'slug' => $this->contentService->makeSlug($this->title),
+            'preview_url' => $this->preview_url,
+            'excerpt' => $this->contentService->makeExcerpt($this->body),
         ]);
 
         // create new tags relation with post in database
         $post->tags()->attach(
-            $this->formatTransferService->tagsJsonToTagIdsArray($this->post['tags'])
+            $this->formatTransferService->tagsJsonToTagIdsArray($this->tags)
         );
 
         // delete auto save data

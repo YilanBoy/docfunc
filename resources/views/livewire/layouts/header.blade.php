@@ -3,12 +3,12 @@
   class="z-20 mb-6"
   id="header"
 >
-  <livewire:layouts.mobile-menu
+  <livewire:layouts.mobile-header-menu
     :categories="$categories"
     :show-register-button="$showRegisterButton"
   />
 
-  <livewire:layouts.desktop-menu
+  <livewire:layouts.desktop-header-menu
     :categories="$categories"
     :show-register-button="$showRegisterButton"
   />

@@ -10,7 +10,7 @@ use function Pest\Livewire\livewire;
 test('visitors cannot access the edit pages of other people\'s post', function () {
     $post = Post::factory()->create();
 
-    get(route('posts.edit', ['id' => $post->id]))
+    get(route('posts.edit', ['post' => $post->id]))
         ->assertRedirect(route('login'));
 });
 
@@ -21,7 +21,7 @@ test('users cannot access the edit page of other people\'s post', function () {
 
     $this->actingAs($user);
 
-    get(route('posts.edit', ['id' => $post->id]))
+    get(route('posts.edit', ['post' => $post->id]))
         ->assertForbidden();
 });
 
@@ -32,7 +32,7 @@ test('authors can access the edit page of their post', function () {
 
     $this->actingAs($user);
 
-    get(route('posts.edit', ['id' => $post->id]))
+    get(route('posts.edit', ['post' => $post->id]))
         ->assertForbidden();
 });
 

@@ -69,7 +69,7 @@
             {{-- edit --}}
             <a
               class="text-gray-400 duration-200 ease-out hover:text-gray-700 dark:hover:text-gray-200"
-              href="{{ route('posts.edit', ['id' => $post->id]) }}"
+              href="{{ route('posts.edit', ['post' => $post->id]) }}"
               role="button"
             >
               <i class="bi bi-pencil-square"></i>

@@ -1,6 +1,10 @@
 @section('title', '會員中心-編輯個人資料')
 
-<div class="container mx-auto flex-1">
+<div
+  class="container mx-auto flex-1"
+  x-data
+  x-init="$refs.name.focus()"
+>
   <div class="flex flex-col items-start justify-center px-4 md:flex-row xl:px-0">
     <livewire:users.edit.side-menu />
 
@@ -74,7 +78,7 @@
             wire:model.lazy="name"
             placeholder="給自己取個有趣的暱稱吧！"
             required
-            autofocus
+            x-ref="name"
           >
         </div>
 

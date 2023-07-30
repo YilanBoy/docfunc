@@ -43,7 +43,7 @@
 
     <a
       class="group flex h-14 w-14 items-center justify-center text-gray-400"
-      href="{{ route('posts.edit', ['id' => $postId]) }}"
+      href="{{ route('posts.edit', ['post' => $postId]) }}"
       role="button"
     >
       <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">

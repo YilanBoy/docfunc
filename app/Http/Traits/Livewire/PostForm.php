@@ -7,20 +7,39 @@ use Illuminate\Support\Facades\Validator;
 
 trait PostForm
 {
-    public array $post = [
-        'category_id' => 1,
-        'preview_url' => null,
-        'image' => null,
-        'is_private' => false,
-        'title' => '',
-        'tags' => '',
-        'body' => '',
-    ];
+    public string $autoSaveKey = '';
+
+    public int $category_id = 1;
+
+    public string $preview_url = '';
+
+    public $image = null;
+
+    public bool $is_private = false;
+
+    public string $title = '';
+
+    public string $tags = '';
+
+    public string $body = '';
+
+    public function updatedImage(): void
+    {
+        $this->validateImage();
+
+        $this->resetValidation('image');
+    }
+
+    // when data update, auto save it to redis
+    public function updated(): void
+    {
+        $this->autoSave($this->autoSaveKey);
+    }
 
     public function validateImage(): void
     {
-        $validator = Validator::make(
-            ['image' => $this->post['image']],
+        Validator::make(
+            ['image' => $this->image],
             [
                 'image' => ['nullable', 'image', 'max:1024'], // 1MB Max
             ],
@@ -28,31 +47,18 @@ trait PostForm
                 'image.image' => '圖片格式有誤',
                 'image.max' => '圖片大小不能超過 1024 KB',
             ]
-        );
-
-        if ($validator->fails()) {
-            $this->dispatchBrowserEvent('scroll-to-top');
-        }
-
-        $validator->validate();
-    }
-
-    public function updatedPostImage(): void
-    {
-        $this->validateImage();
-
-        $this->resetValidation('image');
+        )->validate();
     }
 
     public function validatePost(): void
     {
-        $validator = Validator::make(
+        Validator::make(
             [
-                'title' => $this->post['title'],
-                'category_id' => $this->post['category_id'],
-                'image' => $this->post['image'],
+                'title' => $this->title,
+                'category_id' => $this->category_id,
+                'image' => $this->image,
                 // validate body text character count
-                'body' => preg_replace('/[\r\n]/u', '', strip_tags($this->post['body'])),
+                'body' => preg_replace('/[\r\n]/u', '', strip_tags($this->body)),
             ],
             [
                 'title' => ['required', 'min:4', 'max:50'],
@@ -73,13 +79,7 @@ trait PostForm
                 'body.min' => '文章內容至少 500 個字元',
                 'body.max' => '文章內容字數已超過 20,000 個字元',
             ]
-        );
-
-        if ($validator->fails()) {
-            $this->dispatchBrowserEvent('scroll-to-top');
-        }
-
-        $validator->validate();
+        )->validate();
     }
 
     public function autoSave(string $key): void
@@ -87,26 +87,26 @@ trait PostForm
         Cache::put(
             $key,
             json_encode([
-                'category_id' => $this->post['category_id'],
-                'is_private' => $this->post['is_private'],
-                'title' => $this->post['title'],
-                'tags' => $this->post['tags'],
-                'body' => $this->post['body'],
+                'category_id' => $this->category_id,
+                'is_private' => $this->is_private,
+                'title' => $this->title,
+                'tags' => $this->tags,
+                'body' => $this->body,
             ], JSON_UNESCAPED_UNICODE),
             now()->addDays(7)
         );
     }
 
-    public function getDataFromAutoSave(string $key): bool
+    public function setDataFromAutoSave(string $key): bool
     {
         if (Cache::has($key)) {
             $autoSavePostData = json_decode(Cache::get($key), true);
 
-            $this->post['category_id'] = (int) $autoSavePostData['category_id'];
-            $this->post['is_private'] = $autoSavePostData['is_private'];
-            $this->post['title'] = $autoSavePostData['title'];
-            $this->post['tags'] = $autoSavePostData['tags'];
-            $this->post['body'] = $autoSavePostData['body'];
+            $this->category_id = (int) $autoSavePostData['category_id'];
+            $this->is_private = $autoSavePostData['is_private'];
+            $this->title = $autoSavePostData['title'];
+            $this->tags = $autoSavePostData['tags'];
+            $this->body = $autoSavePostData['body'];
 
             return true;
         }

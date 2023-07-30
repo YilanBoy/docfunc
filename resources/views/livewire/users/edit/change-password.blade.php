@@ -1,6 +1,10 @@
 @section('title', '會員中心-修改密碼')
 
-<div class="container mx-auto flex-1">
+<div
+  class="container mx-auto flex-1"
+  x-data
+  x-init="$refs.currentPassword.focus()"
+>
   <div class="flex flex-col items-start justify-center px-4 md:flex-row xl:px-0">
     <livewire:users.edit.side-menu />
 
@@ -21,7 +25,7 @@
             :placeholder="'舊密碼'"
             wire:model.defer="current_password"
             required
-            autofocus
+            x-ref="currentPassword"
           ></x-floating-label-input>
         </div>
 

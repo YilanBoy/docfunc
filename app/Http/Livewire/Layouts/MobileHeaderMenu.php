@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Layouts;
 
 use Livewire\Component;
 
-class DesktopMenu extends Component
+class MobileHeaderMenu extends Component
 {
     public $categories;
 
@@ -12,6 +12,6 @@ class DesktopMenu extends Component
 
     public function render()
     {
-        return view('livewire.layouts.desktop-menu');
+        return view('livewire.layouts.mobile-header-menu');
     }
 }

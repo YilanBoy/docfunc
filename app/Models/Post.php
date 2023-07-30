@@ -137,6 +137,9 @@ class Post extends Model implements Feedable
 
     public static function getFeedItems(): Collection
     {
-        return Post::latest()->take(10)->get();
+        return Post::where('is_private', false)
+            ->latest()
+            ->take(10)
+            ->get();
     }
 }

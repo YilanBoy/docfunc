@@ -33,7 +33,9 @@ trait PostForm
     // when data update, auto save it to redis
     public function updated(): void
     {
-        $this->autoSave($this->autoSaveKey);
+        if ($this->autoSaveKey !== '') {
+            $this->autoSave($this->autoSaveKey);
+        }
     }
 
     public function validateImage(): void

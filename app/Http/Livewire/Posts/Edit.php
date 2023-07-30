@@ -43,19 +43,15 @@ class Edit extends Component
     {
         $this->authorize('update', $post);
 
-        $this->autoSaveKey = 'auto_save_user_'.auth()->id().'_edit_post_'.$post->id;
-
         $this->post = $post;
         $this->categories = Category::all(['id', 'name']);
 
-        if (! $this->setDataFromAutoSave($this->autoSaveKey)) {
-            $this->category_id = $post->category_id;
-            $this->is_private = $post->is_private;
-            $this->preview_url = $post->preview_url;
-            $this->title = $post->title;
-            $this->body = $post->body;
-            $this->tags = $post->tags_json;
-        }
+        $this->category_id = $post->category_id;
+        $this->is_private = $post->is_private;
+        $this->preview_url = $post->preview_url;
+        $this->title = $post->title;
+        $this->body = $post->body;
+        $this->tags = $post->tags_json;
     }
 
     public function update()
@@ -82,8 +78,6 @@ class Edit extends Component
         $this->post->tags()->sync(
             $this->formatTransferService->tagsJsonToTagIdsArray($this->tags)
         );
-
-        $this->clearAutoSave($this->autoSaveKey);
 
         return redirect()
             ->to($this->post->link_with_slug)

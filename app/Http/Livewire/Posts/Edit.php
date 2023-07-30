@@ -41,21 +41,20 @@ class Edit extends Component
 
     public function mount(Post $post): void
     {
+        $this->authorize('update', $post);
+
         $this->autoSaveKey = 'auto_save_user_'.auth()->id().'_edit_post_'.$post->id;
 
         $this->post = $post;
-
-        $this->authorize('update', $this->post);
-
         $this->categories = Category::all(['id', 'name']);
 
         if (! $this->setDataFromAutoSave($this->autoSaveKey)) {
-            $this->category_id = $this->post->category_id;
-            $this->is_private = $this->post->is_private;
-            $this->preview_url = $this->post->preview_url;
-            $this->title = $this->post->title;
-            $this->body = $this->post->body;
-            $this->tags = $this->post->tags_json;
+            $this->category_id = $post->category_id;
+            $this->is_private = $post->is_private;
+            $this->preview_url = $post->preview_url;
+            $this->title = $post->title;
+            $this->body = $post->body;
+            $this->tags = $post->tags_json;
         }
     }
 
@@ -73,7 +72,7 @@ class Edit extends Component
         $this->post->update([
             'title' => $this->title,
             'slug' => $this->contentService->makeSlug($this->title),
-            'is_private' => $this->is_private,
+            'is_private' => (bool) $this->is_private,
             'category_id' => $this->category_id,
             'body' => $this->body,
             'excerpt' => $this->contentService->makeExcerpt($this->body),

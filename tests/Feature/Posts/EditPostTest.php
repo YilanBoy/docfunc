@@ -44,10 +44,10 @@ test('authors can update their posts', function ($categoryId) {
     $newTitle = str()->random(4);
     $newBody = str()->random(500);
 
-    livewire(Edit::class, ['id' => $post->id])
-        ->set('post.title', $newTitle)
-        ->set('post.category_id', $categoryId)
-        ->set('post.body', $newBody)
+    livewire(Edit::class, ['post' => $post])
+        ->set('title', $newTitle)
+        ->set('category_id', $categoryId)
+        ->set('body', $newBody)
         ->call('update')
         ->assertHasNoErrors();
 

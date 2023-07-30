@@ -15,6 +15,8 @@ class PostFactory extends Factory
         return [
             'title' => fake()->text(30),
             'body' => fake()->paragraph(10),
+            'is_private' => false,
+            'preview_url' => fake()->imageUrl(),
             'slug' => fake()->word(),
             'excerpt' => fake()->sentence,
             'category_id' => fake()->numberBetween(1, 3),

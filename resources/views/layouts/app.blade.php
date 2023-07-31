@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
   <meta charset="utf-8">
@@ -48,9 +48,6 @@
       document.documentElement.classList.add("dark");
     }
   </script>
-  {{-- Styles --}}
-  @vite('resources/css/app.css')
-  @vite('resources/css/icon.css')
 
   {{-- Font --}}
   <link
@@ -66,21 +63,13 @@
     href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap"
     rel="stylesheet"
   >
-
-  {{-- jetbrains mono font --}}
-  <link
-    href="https://fonts.googleapis.com"
-    rel="preconnect"
-  >
-  <link
-    href="https://fonts.gstatic.com"
-    rel="preconnect"
-    crossorigin
-  >
   <link
     href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
     rel="stylesheet"
   >
+
+  @vite('resources/css/app.css')
+  @vite('resources/css/icon.css')
 
   @stack('css')
 
@@ -110,13 +99,11 @@
 
   </div>
 
-  {{-- Scripts --}}
   <livewire:scripts />
 
-  @vite('resources/js/app.js')
-
-  {{-- Flash Alert --}}
   <x-alert />
+
+  @vite('resources/js/app.js')
 
   @stack('scriptInBody')
 </body>

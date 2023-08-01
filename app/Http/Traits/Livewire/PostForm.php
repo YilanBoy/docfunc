@@ -5,13 +5,13 @@ namespace App\Http\Traits\Livewire;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
-trait PostValidation
+trait PostForm
 {
-    public string $autoSaveKey;
+    public string $autoSaveKey = '';
 
     public int $category_id = 1;
 
-    public string $preview_url = '';
+    public ?string $preview_url = null;
 
     public $image = null;
 
@@ -23,27 +23,6 @@ trait PostValidation
 
     public string $body = '';
 
-    public function validateImage(): void
-    {
-        $validator = Validator::make(
-            ['image' => $this->image],
-            [
-                'image' => ['nullable', 'image', 'max:1024'], // 1MB Max
-            ],
-            [
-                'image.image' => '圖片格式有誤',
-                'image.max' => '圖片大小不能超過 1024 KB',
-            ]
-        );
-
-        if ($validator->fails()) {
-            $this->dispatch('scroll-to-top');
-        }
-
-        $validator->validate();
-    }
-
-    // livewire lifecycle hook, when update $image property, this method will be called
     public function updatedImage(): void
     {
         $this->validateImage();
@@ -54,12 +33,28 @@ trait PostValidation
     // when data update, auto save it to redis
     public function updated(): void
     {
-        $this->autoSave($this->autoSaveKey);
+        if ($this->autoSaveKey !== '') {
+            $this->autoSave($this->autoSaveKey);
+        }
+    }
+
+    public function validateImage(): void
+    {
+        Validator::make(
+            ['image' => $this->image],
+            [
+                'image' => ['nullable', 'image', 'max:1024'], // 1MB Max
+            ],
+            [
+                'image.image' => '圖片格式有誤',
+                'image.max' => '圖片大小不能超過 1024 KB',
+            ]
+        )->validate();
     }
 
     public function validatePost(): void
     {
-        $validator = Validator::make(
+        Validator::make(
             [
                 'title' => $this->title,
                 'category_id' => $this->category_id,
@@ -86,13 +81,7 @@ trait PostValidation
                 'body.min' => '文章內容至少 500 個字元',
                 'body.max' => '文章內容字數已超過 20,000 個字元',
             ]
-        );
-
-        if ($validator->fails()) {
-            $this->dispatch('scroll-to-top');
-        }
-
-        $validator->validate();
+        )->validate();
     }
 
     public function autoSave(string $key): void
@@ -110,7 +99,7 @@ trait PostValidation
         );
     }
 
-    public function getDataFromAutoSave(string $key): bool
+    public function setDataFromAutoSave(string $key): bool
     {
         if (Cache::has($key)) {
             $autoSavePostData = json_decode(Cache::get($key), true);

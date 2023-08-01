@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Oembed;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Client\Response;

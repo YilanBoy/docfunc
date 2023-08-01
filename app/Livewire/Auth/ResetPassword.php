@@ -69,8 +69,9 @@ class ResetPassword extends Component
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
         if ($status == Password::PASSWORD_RESET) {
-            $this->redirect('/login', navigate: true);
             $this->dispatch('info-badge', status: 'success', message: '密碼修改成功！請重新登入');
+
+            return $this->redirect('/login', navigate: true);
         }
 
         $this->addError('email', __($status));

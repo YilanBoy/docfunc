@@ -1,7 +1,9 @@
+@section('title', '會員中心-修改密碼')
+
 <div
   class="container mx-auto flex-1"
   x-data
-  x-init="document.getElementById('current_password').focus()"
+  x-init="$refs.currentPassword.focus()"
 >
   <div class="flex flex-col items-start justify-center px-4 md:flex-row xl:px-0">
     <livewire:users.edit.side-menu />
@@ -12,7 +14,7 @@
 
       <form
         class="w-full"
-        wire:submit="update"
+        wire:submit.prevent="update"
       >
         {{-- 舊密碼 --}}
         <div>
@@ -21,8 +23,9 @@
             type="password"
             :id="'current_password'"
             :placeholder="'舊密碼'"
-            wire:model="current_password"
+            wire:model.defer="current_password"
             required
+            x-ref="currentPassword"
           ></x-floating-label-input>
         </div>
 
@@ -33,7 +36,7 @@
             type="password"
             :id="'new_password'"
             :placeholder="'新密碼'"
-            wire:model="new_password"
+            wire:model.defer="new_password"
             required
           ></x-floating-label-input>
         </div>
@@ -45,7 +48,7 @@
             type="password"
             :id="'new_password_confirmation'"
             :placeholder="'確認新密碼'"
-            wire:model="new_password_confirmation"
+            wire:model.defer="new_password_confirmation"
             required
           ></x-floating-label-input>
         </div>

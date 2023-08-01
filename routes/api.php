@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\Oembed\TwitterOembedApiController;
-use App\Http\Controllers\Api\Oembed\YoutubeOembedApiController;
 use App\Http\Controllers\Api\ShowAllTagsController;
+use App\Http\Controllers\Api\TwitterOembedApiController;
 use App\Http\Controllers\Api\UploadImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +29,3 @@ Route::middleware('auth:sanctum')
 Route::get('tags', ShowAllTagsController::class)->name('api.tags');
 
 Route::post('oembed/twitter', TwitterOembedApiController::class);
-Route::post('oembed/youtube', YoutubeOembedApiController::class);

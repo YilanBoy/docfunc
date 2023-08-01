@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Posts;
 
-use App\Http\Traits\Livewire\PostValidation;
+use App\Http\Traits\Livewire\PostForm;
 use App\Models\Category;
 use App\Models\Post;
 use App\Services\ContentService;
@@ -16,7 +16,7 @@ use Livewire\WithFileUploads;
 class CreatePostPage extends Component
 {
     use WithFileUploads;
-    use PostValidation;
+    use PostForm;
 
     protected ContentService $contentService;
 
@@ -42,11 +42,13 @@ class CreatePostPage extends Component
 
         $this->categories = Category::all(['id', 'name']);
 
-        $this->getDataFromAutoSave($this->autoSaveKey);
+        $this->setDataFromAutoSave($this->autoSaveKey);
     }
 
     public function store()
     {
+        $this->validatePost();
+
         // upload image
         if ($this->image) {
             $this->preview_url = $this->fileService->uploadImageToCloud($this->image);
@@ -74,9 +76,9 @@ class CreatePostPage extends Component
         // delete auto save data
         $this->clearAutoSave($this->autoSaveKey);
 
-        $this->redirect($post->link_with_slug, navigate: true);
-
         $this->dispatch('info-badge', status: 'success', message: '成功新增文章！');
+
+        return $this->redirect($post->link_with_slug, navigate: true);
     }
 
     #[Title('新增文章')]

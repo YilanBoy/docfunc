@@ -11,12 +11,12 @@
             window.clearTimeout(this.editorDebounceTimer);
             this.editorDebounceTimer = window.setTimeout(callback, time);
         },
-        body: @entangle('body').live,
-        tags: @entangle('tags').live
+        body: @entangle('body'),
+        tags: @entangle('tags')
     }"
     x-init="// init the create post page
     ClassicEditor.create($refs.editor, {
-            // Editor configuration
+            // Editor configuration.
             wordCount: {
                 onUpdate: (stats) => {
                     let characterCounter = document.querySelectorAll('.character-counter');
@@ -102,7 +102,7 @@
 
           <form
             id="create-post"
-            wire:submit="store"
+            wire:submit.prevent="store"
           >
             <div class="grid grid-cols-2 gap-5">
               {{-- preview image --}}
@@ -123,7 +123,7 @@
                     class="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none"
                     type="file"
                     title=""
-                    wire:model.live="image"
+                    wire:model="image"
                     x-on:dragenter="
                   $refs.uploadBlock.classList.remove('text-green-500', 'dark:text-indigo-400', 'border-green-500', 'dark:border-indigo-400')
                   $refs.uploadBlock.classList.add('text-green-600', 'dark:text-indigo-300', 'border-green-600', 'dark:border-indigo-300')
@@ -215,7 +215,7 @@
                   class="form-select h-12 w-full rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50"
                   id="category_id"
                   name="category_id"
-                  wire:model.live="category_id"
+                  wire:model="category_id"
                   required
                 >
                   @foreach ($categories as $category)
@@ -237,7 +237,7 @@
                     id="is-private"
                     name="is-private"
                     type="checkbox"
-                    wire:model.live="is_private"
+                    wire:model="is_private"
                   >
                   <span class="ml-2 text-lg text-gray-600 dark:text-gray-50">文章不公開</span>
                 </label>
@@ -256,7 +256,7 @@
                   name="title"
                   type="text"
                   value=""
-                  wire:model.live="title"
+                  wire:model="title"
                   placeholder="文章標題"
                   required
                   autofocus

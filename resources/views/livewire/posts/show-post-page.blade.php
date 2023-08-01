@@ -3,32 +3,15 @@
   x-init="// init show page
   hljs.highlightAll();
   codeBlockCopyButton($refs.postBody);
-  embedAllMedia().then(() => {
-      // scan blog post and embed tweets
-      twttr.widgets?.load(document.getElementById('blog-post'));
-      console.log('load twitter card');
-  });
+  processYoutubeOEmbeds();
+  processTwitterOEmbeds();
+  setTimeout(() => {
+      twttr.widgets?.load($refs.postBody);
+  }, 1000);
   setupProgressBar($refs.section, $refs.progressBar);
   setupScrollToTopButton($refs.scrollToTopBtn);
   setupSharer();"
 >
-
-  <style>
-    /* media embed */
-    iframe,
-    .twitter-tweet {
-      margin-left: auto;
-      margin-right: auto;
-    }
-  </style>
-
-  {{-- hide google recaptcha badge --}}
-  <style>
-    .grecaptcha-badge {
-      visibility: hidden;
-    }
-  </style>
-
   <div class="relative animate-fade-in">
     <x-scroll-to-top-button x-ref="scrollToTopBtn" />
 

@@ -27,7 +27,7 @@ class VerifyEmail extends Component
     #[Title('驗證電子郵件')]
     public function render()
     {
-        request()->user()->hasVerifiedEmail()
+        return request()->user()->hasVerifiedEmail()
             ? $this->redirect(RouteServiceProvider::HOME, navigate: true)
             : view('livewire.auth.verify-email');
     }

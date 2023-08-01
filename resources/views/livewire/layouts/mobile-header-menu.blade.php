@@ -182,7 +182,7 @@
                 role="menuitem"
                 tabindex="-1"
                 wire:confirm="你確定要登出嗎？"
-                wire:click="logout"
+                wire:click="$parent.logout"
               >
                 <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
               </button>

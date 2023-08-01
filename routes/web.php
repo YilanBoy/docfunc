@@ -51,7 +51,7 @@ Route::prefix('posts')->group(function () {
 
     Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/create', CreatePostPage::class)->name('posts.create');
-        Route::get('/{id}/edit', EditPostPage::class)->name('posts.edit');
+        Route::get('/{post}/edit', EditPostPage::class)->name('posts.edit');
     });
 
     // {slug?} 當中的問號代表參數為選擇性

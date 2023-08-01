@@ -1,7 +1,9 @@
+@section('title', '會員中心-編輯個人資料')
+
 <div
   class="container mx-auto flex-1"
   x-data
-  x-init="document.getElementById('name').focus()"
+  x-init="$refs.name.focus()"
 >
   <div class="flex flex-col items-start justify-center px-4 md:flex-row xl:px-0">
     <livewire:users.edit.side-menu />
@@ -34,7 +36,7 @@
 
       <form
         class="w-full"
-        wire:submit="update"
+        wire:submit.prevent="update"
       >
         {{-- 信箱 --}}
         <div>
@@ -73,10 +75,10 @@
             name="name"
             type="text"
             value="{{ old('name', $name) }}"
-            wire:model.blur="name"
+            wire:model.lazy="name"
             placeholder="給自己取個有趣的暱稱吧！"
             required
-            autofocus
+            x-ref="name"
           >
         </div>
 
@@ -91,7 +93,7 @@
             class="form-textarea mt-2 w-full resize-none rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
             id="introduction"
             name="introduction"
-            wire:model.blur="introduction"
+            wire:model.lazy="introduction"
             placeholder="介紹一下你自己吧！"
             rows="5"
           >{{ old('introduction', $introduction) }}</textarea>

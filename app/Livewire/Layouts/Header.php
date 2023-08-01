@@ -21,9 +21,9 @@ class Header extends Component
 
         session()->regenerateToken();
 
-        $this->redirect('/login', navigate: true);
-
         $this->dispatch('info-badge', status: 'success', message: '已登出！');
+
+        return $this->redirect('/login', navigate: true);
     }
 
     public function render()

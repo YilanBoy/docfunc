@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Posts;
 
-use App\Http\Traits\Livewire\PostValidation;
+use App\Http\Traits\Livewire\PostForm;
 use App\Models\Category;
 use App\Models\Post;
 use App\Services\ContentService;
@@ -16,9 +16,9 @@ use Livewire\WithFileUploads;
 
 class EditPostPage extends Component
 {
-    use PostValidation;
     use AuthorizesRequests;
     use WithFileUploads;
+    use PostForm;
 
     protected ContentService $contentService;
 
@@ -40,24 +40,19 @@ class EditPostPage extends Component
         $this->fileService = $fileService;
     }
 
-    public function mount(int $id): void
+    public function mount(Post $post): void
     {
-        $this->autoSaveKey = 'auto_save_user_'.auth()->id().'_edit_post_'.$id;
+        $this->authorize('update', $post);
 
-        $this->post = Post::find($id);
-
-        $this->authorize('update', $this->post);
-
+        $this->post = $post;
         $this->categories = Category::all(['id', 'name']);
 
-        if (! $this->getDataFromAutoSave($this->autoSaveKey)) {
-            $this->category_id = $this->post->category_id;
-            $this->is_private = $this->post->is_private;
-            $this->preview_url = (string) $this->post->preview_url;
-            $this->title = $this->post->title;
-            $this->body = $this->post->body;
-            $this->tags = $this->post->tags_json;
-        }
+        $this->category_id = $post->category_id;
+        $this->is_private = $post->is_private;
+        $this->preview_url = $post->preview_url;
+        $this->title = $post->title;
+        $this->body = $post->body;
+        $this->tags = $post->tags_json;
     }
 
     public function update()
@@ -87,9 +82,9 @@ class EditPostPage extends Component
 
         $this->clearAutoSave($this->autoSaveKey);
 
-        $this->redirect($this->post->link_with_slug, navigate: true);
-
         $this->dispatch('info-badge', status: 'success', message: '成功更新文章！');
+
+        return $this->redirect($this->post->link_with_slug, navigate: true);
     }
 
     #[Title('編輯文章')]

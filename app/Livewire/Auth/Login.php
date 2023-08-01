@@ -85,9 +85,9 @@ class Login extends Component
 
         session()->regenerate();
 
-        $this->redirect(RouteServiceProvider::HOME, navigate: true);
-
         $this->dispatch('info-badge', status: 'success', message: '登入成功！');
+
+        return $this->redirect(RouteServiceProvider::HOME, navigate: true);
     }
 
     #[Title('登入')]

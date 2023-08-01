@@ -65,7 +65,7 @@ class Register extends Component
 
         Auth::login($user);
 
-        $this->redirect('verify-email', navigate: true);
+        return $this->redirect('verify-email', navigate: true);
     }
 
     #[Title('註冊')]

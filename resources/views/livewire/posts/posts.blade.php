@@ -53,8 +53,9 @@
       {{-- 文章 --}}
       <div class="flex w-full flex-col justify-between">
         <a
-          class="absolute right-0 top-0 block h-full w-full bg-transparent"
+          class="absolute right-0 top-0 block h-full w-full"
           href="{{ $post->link_with_slug }}"
+          title="{{ $post->title }}"
         ></a>
 
         {{-- 文章標題 --}}

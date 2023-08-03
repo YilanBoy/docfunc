@@ -15,6 +15,8 @@ return new class extends Migration
             'name' => '開放註冊',
             'key' => 'allow_register',
             'value' => 'false',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 

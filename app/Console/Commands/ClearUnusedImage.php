@@ -55,7 +55,7 @@ class ClearUnusedImage extends Command
         if (empty($notInUseImages)) {
             $this->info('There is not a single image that has not been used');
 
-            return Command::SUCCESS;
+            return self::SUCCESS;
         }
 
         $this->warn('This operation will delete unused images on S3');
@@ -71,11 +71,11 @@ class ClearUnusedImage extends Command
 
             $this->info('Clear operation finish');
 
-            return Command::SUCCESS;
+            return self::SUCCESS;
         }
 
         $this->info('Stop this operation...');
 
-        return Command::FAILURE;
+        return self::FAILURE;
     }
 }

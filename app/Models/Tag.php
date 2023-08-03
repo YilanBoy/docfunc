@@ -10,6 +10,8 @@ class Tag extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     // 定義與文章的關聯
     public function posts(): BelongsToMany
     {

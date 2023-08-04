@@ -1,7 +1,6 @@
 # Blog
 
-![tests](https://github.com/YilanBoy/blog/actions/workflows/tests.yml/badge.svg)
-![build-image](https://github.com/YilanBoy/blog/actions/workflows/build-image.yml/badge.svg)
+![tests-and-build-images](https://github.com/YilanBoy/blog/actions/workflows/tests-and-build-images.yml/badge.svg)
 [![codecov](https://codecov.io/gh/YilanBoy/blog/branch/main/graph/badge.svg?token=K2V2ANX2LW)](https://codecov.io/gh/YilanBoy/blog)
 
 This is a simple blog, mainly used to help me learn about Laravel. The entire project uses

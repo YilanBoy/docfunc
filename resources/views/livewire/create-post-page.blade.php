@@ -18,6 +18,7 @@
     }"
     x-init="// init the create post page
     ClassicEditor.create($refs.editor, {
+            placeholder: '分享使自己成長～',
             // Editor configuration.
             wordCount: {
                 onUpdate: (stats) => {

@@ -1,6 +1,6 @@
 /* 編輯區塊設定 */
 .ck-editor__editable_inline {
-    /* 編輯區最小高度 */
+    /* editing area */
     min-height: 500px;
 }
 
@@ -28,14 +28,15 @@
 
 /* Dark Mode */
 /* Textarea */
-.dark .ck-rounded-corners .ck.ck-editor__main > .ck-editor__editable,
-.dark .ck.ck-editor__main > .ck-editor__editable.ck-rounded-corners {
-    background-color: #374151;
+/* https://stackoverflow.com/questions/69695266/how-can-i-style-ckeditor5-background-color-and-stuff */
+.dark .ck.ck-editor__main > .ck-editor__editable {
+    background: #374151;
 }
 
 /* Placeholder */
+/* https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#styling-the-placeholder */
 .dark .ck.ck-editor__editable > .ck-placeholder::before {
-    color: #f9fafb;
+    color: #a1a1aa;
 }
 
 /* tagify */

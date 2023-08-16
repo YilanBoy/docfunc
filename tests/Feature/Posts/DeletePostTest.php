@@ -2,7 +2,7 @@
 
 use App\Http\Livewire\Posts\Partials\DesktopShowMenu;
 use App\Http\Livewire\Posts\Partials\MobileShowMenu;
-use App\Http\Livewire\Users\Information\Posts;
+use App\Http\Livewire\UserInfoPage\PostsByYear;
 use App\Models\Post;
 use App\Models\User;
 use Livewire\Livewire;
@@ -96,7 +96,7 @@ test('author can soft delete own post in user information post card', function (
 
     $this->actingAs(User::find($post->user_id));
 
-    Livewire::test(Posts::class, [
+    Livewire::test(PostsByYear::class, [
         'posts' => [$post],
         'userId' => $post->user_id,
         'year' => $post->created_at->format('Y'),
@@ -110,7 +110,7 @@ test('author can soft delete own post in user information post card', function (
 test('guest cannot delete others\' post in user information post card', function () {
     $post = Post::factory()->create();
 
-    Livewire::test(Posts::class, [
+    Livewire::test(PostsByYear::class, [
         'posts' => [$post],
         'userId' => $post->user_id,
         'year' => $post->created_at->format('Y'),
@@ -128,7 +128,7 @@ test('user cannot delete others\' post in user information post card', function 
 
     $this->actingAs($user);
 
-    Livewire::test(Posts::class, [
+    Livewire::test(PostsByYear::class, [
         'posts' => [$post],
         'userId' => $post->user_id,
         'year' => $post->created_at->format('Y'),
@@ -153,7 +153,7 @@ test('author can restore deleted post', function () {
 
     $this->assertSoftDeleted('posts', ['id' => $post->id]);
 
-    Livewire::test(Posts::class, [
+    Livewire::test(PostsByYear::class, [
         'posts' => [$post],
         'userId' => $post->user_id,
         'year' => $post->created_at->format('Y'),
@@ -178,7 +178,7 @@ test('users cannot restore other users\' post', function () {
         'deleted_at' => now(),
     ]);
 
-    Livewire::test(Posts::class, [
+    Livewire::test(PostsByYear::class, [
         'posts' => [$post],
         'userId' => $user->id,
         'year' => $post->created_at->format('Y'),

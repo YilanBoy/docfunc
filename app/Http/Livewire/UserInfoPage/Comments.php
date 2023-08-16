@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Users\Information;
+namespace App\Http\Livewire\UserInfoPage;
 
 use App\Http\Traits\Livewire\MarkdownConverter;
 use App\Models\Comment;
@@ -39,6 +39,6 @@ class Comments extends Component
             return $comment;
         });
 
-        return view('livewire.users.information.comments', ['comments' => $comments]);
+        return view('livewire.user-info-page.comments', ['comments' => $comments]);
     }
 }

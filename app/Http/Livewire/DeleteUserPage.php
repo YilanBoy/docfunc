@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Users\Edit;
+namespace App\Http\Livewire;
 
 use App\Mail\DestroyUser;
 use App\Models\User;
@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Livewire\Component;
 
-class DeleteUser extends Component
+class DeleteUserPage extends Component
 {
     use AuthorizesRequests;
 
@@ -40,6 +40,6 @@ class DeleteUser extends Component
     {
         $this->authorize('update', $this->user);
 
-        return view('livewire.users.edit.delete-user');
+        return view('livewire.delete-user-page');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Users\Information\PostsGroupByYear;
+use App\Http\Livewire\UserInfoPage\Posts;
 use App\Models\Post;
 use App\Models\User;
 
@@ -11,7 +11,7 @@ test('guest can view user profile', function ($tabQueryString) {
 
     get(route('users.index', ['user' => $user->id, 'tab' => $tabQueryString]))
         ->assertStatus(200)
-        ->assertSeeLivewire(PostsGroupByYear::class);
+        ->assertSeeLivewire(Posts::class);
 })->with([
     'information',
     'posts',
@@ -25,7 +25,7 @@ test('user can view own profile', function ($tabQueryString) {
 
     get(route('users.index', ['user' => $user->id, 'tab' => $tabQueryString]))
         ->assertStatus(200)
-        ->assertSeeLivewire(PostsGroupByYear::class);
+        ->assertSeeLivewire(Posts::class);
 })->with([
     'information',
     'posts',

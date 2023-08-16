@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Users\Edit\EditInformation;
+use App\Http\Livewire\EditUserInfoPage;
 use App\Models\User;
 
 use function Pest\Faker\fake;
@@ -38,7 +38,7 @@ test('users can update their own information', function () {
 
     $this->actingAs($user);
 
-    Livewire::test(EditInformation::class, [
+    Livewire::test(EditUserInfoPage::class, [
         'user' => $user,
         'name' => $user->name,
         'introduction' => $user->introduction,
@@ -54,7 +54,7 @@ test('if the name format is not correct, the name cannot be updated', function (
 
     $this->actingAs($user);
 
-    Livewire::test(EditInformation::class, [
+    Livewire::test(EditUserInfoPage::class, [
         'user' => $user,
         'name' => $user->name,
         'introduction' => $user->introduction,
@@ -70,7 +70,7 @@ test('if the number of words in the introduction exceeds the limit, the introduc
 
     $this->actingAs($user);
 
-    Livewire::test(EditInformation::class, [
+    Livewire::test(EditUserInfoPage::class, [
         'user' => $user,
         'name' => $user->name,
         'introduction' => $user->introduction,

@@ -46,7 +46,7 @@
         x-collapse
         x-cloak
       >
-        <livewire:users.information.posts
+        <livewire:user-info-page.posts-by-year
           :wire:key="$year"
           :user-id="$userId"
           :posts="$posts"

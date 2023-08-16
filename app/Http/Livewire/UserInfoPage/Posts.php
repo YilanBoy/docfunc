@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Users\Information;
+namespace App\Http\Livewire\UserInfoPage;
 
 use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class PostsGroupByYear extends Component
+class Posts extends Component
 {
     use WithPagination;
     use AuthorizesRequests;
@@ -45,6 +45,6 @@ class PostsGroupByYear extends Component
         }
 
         // 該會員的文章
-        return view('livewire.users.information.posts-group-by-year', ['postsGroupByYear' => $postsGroupByYear]);
+        return view('livewire.user-info-page.posts', ['postsGroupByYear' => $postsGroupByYear]);
     }
 }

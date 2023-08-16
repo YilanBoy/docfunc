@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Users\Edit;
+namespace App\Http\Livewire;
 
 use App\Models\User;
 use App\Rules\MatchOldPassword;
@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Livewire\Component;
 
-class ChangePassword extends Component
+class ChangeUserPasswordPage extends Component
 {
     use AuthorizesRequests;
 
@@ -61,6 +61,6 @@ class ChangePassword extends Component
 
     public function render()
     {
-        return view('livewire.users.edit.change-password');
+        return view('livewire.change-user-password-page');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Users\Edit\ChangePassword;
+use App\Http\Livewire\ChangeUserPasswordPage;
 use App\Models\User;
 
 use function Pest\Laravel\get;
@@ -30,7 +30,7 @@ test('users can update their passwords', function () {
 
     $this->actingAs($user);
 
-    Livewire::test(ChangePassword::class, ['user' => $user])
+    Livewire::test(ChangeUserPasswordPage::class, ['user' => $user])
         ->set('current_password', $oldPassword)
         ->set('new_password', $newPassword)
         ->set('new_password_confirmation', $newPassword)
@@ -51,7 +51,7 @@ test('can\'t update password with wrong old password', function () {
 
     $this->actingAs($user);
 
-    Livewire::test(ChangePassword::class, ['user' => $user])
+    Livewire::test(ChangeUserPasswordPage::class, ['user' => $user])
         ->set('current_password', $wrongPassword)
         ->set('new_password', $newPassword)
         ->set('new_password_confirmation', $newPassword)
@@ -72,7 +72,7 @@ test('can\'t update password if the "new password" is different from the "confir
 
     $this->actingAs($user);
 
-    Livewire::test(ChangePassword::class, ['user' => $user])
+    Livewire::test(ChangeUserPasswordPage::class, ['user' => $user])
         ->set('current_password', $oldPassword)
         ->set('new_password', $newPassword)
         ->set('new_password_confirmation', $wrongNewPasswordConfirmation)

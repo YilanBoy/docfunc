@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Users\Edit;
+namespace App\Http\Livewire;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
-class EditInformation extends Component
+class EditUserInfoPage extends Component
 {
     use AuthorizesRequests;
 
@@ -54,6 +54,6 @@ class EditInformation extends Component
         // 會員只能進入自己的頁面，規則寫在 UserPolicy
         $this->authorize('update', $this->user);
 
-        return view('livewire.users.edit.edit-information');
+        return view('livewire.edit-user-info-page');
     }
 }

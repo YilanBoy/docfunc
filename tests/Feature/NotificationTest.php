@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Livewire\Comments\CreateCommentModal;
-use App\Http\Livewire\Notifications\Index as NotificationIndex;
+use App\Http\Livewire\NotificationPage;
 use App\Models\Post;
 use App\Models\User;
 
@@ -55,7 +55,7 @@ test('you can clear unread notifications if you visit the notification page', fu
 
     $this->actingAs($author);
 
-    Livewire::test(NotificationIndex::class);
+    Livewire::test(NotificationPage::class);
 
     $author->refresh();
 

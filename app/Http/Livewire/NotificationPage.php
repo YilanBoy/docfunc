@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Notifications;
+namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Index extends Component
+class NotificationPage extends Component
 {
     use WithPagination;
 
@@ -17,6 +17,6 @@ class Index extends Component
         // 標記為已讀，未讀數量歸零
         auth()->user()->markAsRead();
 
-        return view('livewire.notifications.index', compact('notifications'));
+        return view('livewire.notification-page', compact('notifications'));
     }
 }

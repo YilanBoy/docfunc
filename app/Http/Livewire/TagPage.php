@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Tags;
+namespace App\Http\Livewire;
 
 use App\Models\Tag;
 use Livewire\Component;
 
-class Show extends Component
+class TagPage extends Component
 {
     public Tag $tag;
 
@@ -16,7 +16,7 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.tags.show', [
+        return view('livewire.tag-page', [
             'title' => $this->tag->name,
         ]);
     }

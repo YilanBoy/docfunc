@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Users\Information;
+namespace App\Http\Livewire\UserInfoPage;
 
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
-class Posts extends Component
+class PostsByYear extends Component
 {
     use AuthorizesRequests;
 
@@ -80,6 +80,6 @@ class Posts extends Component
 
     public function render()
     {
-        return view('livewire.users.information.posts');
+        return view('livewire.user-info-page.posts-by-year');
     }
 }

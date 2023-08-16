@@ -1,17 +1,17 @@
 <?php
 
 use App\Http\Controllers\User\DestroyUserController;
-use App\Http\Livewire\Categories\Show as CategoryShow;
-use App\Http\Livewire\Notifications\Index as NotificationIndex;
+use App\Http\Livewire\CategoryPage;
+use App\Http\Livewire\ChangeUserPasswordPage;
+use App\Http\Livewire\DeleteUserPage;
+use App\Http\Livewire\EditUserInfoPage;
+use App\Http\Livewire\NotificationPage;
 use App\Http\Livewire\Posts\Create as PostCreate;
 use App\Http\Livewire\Posts\Edit as PostEdit;
 use App\Http\Livewire\Posts\Index as PostIndex;
 use App\Http\Livewire\Posts\Show as PostShow;
-use App\Http\Livewire\Tags\Show as TagShow;
-use App\Http\Livewire\Users\Edit\ChangePassword;
-use App\Http\Livewire\Users\Edit\DeleteUser;
-use App\Http\Livewire\Users\Edit\EditInformation as UserEditInformation;
-use App\Http\Livewire\Users\Information\Index as UserInformationIndex;
+use App\Http\Livewire\TagPage;
+use App\Http\Livewire\UserInfoPage\Index as UserInfoPage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,13 +32,13 @@ require __DIR__.'/auth.php';
 
 // 會員相關頁面
 Route::middleware('auth')->prefix('users')->group(function () {
-    Route::get('/{user}', UserInformationIndex::class)
+    Route::get('/{user}', UserInfoPage::class)
         ->name('users.index')
         ->withoutMiddleware('auth');
 
-    Route::get('/{user}/edit', UserEditInformation::class)->name('users.edit');
-    Route::get('/{user}/change-password', ChangePassword::class)->name('users.changePassword');
-    Route::get('/{user}/delete', DeleteUser::class)->name('users.delete');
+    Route::get('/{user}/edit', EditUserInfoPage::class)->name('users.edit');
+    Route::get('/{user}/change-password', ChangeUserPasswordPage::class)->name('users.changePassword');
+    Route::get('/{user}/delete', DeleteUserPage::class)->name('users.delete');
 
     Route::get('/{user}/destroy', DestroyUserController::class)
         ->name('users.destroy')
@@ -56,18 +56,17 @@ Route::prefix('posts')->group(function () {
 
     // {slug?} 當中的問號代表參數為選擇性
     Route::get('/{post}/{slug?}', PostShow::class)
-        ->missing(fn () => redirect()->route('posts.index'))
         ->name('posts.show');
 });
 
 // 文章分類
-Route::get('categories/{category}/{name?}', CategoryShow::class)->name('categories.show');
+Route::get('categories/{category}/{name?}', CategoryPage::class)->name('categories.show');
 
 // 文章標籤
-Route::get('tags/{tag}', TagShow::class)->name('tags.show');
+Route::get('tags/{tag}', TagPage::class)->name('tags.show');
 
 // 通知列表
-Route::get('notifications', NotificationIndex::class)->name('notifications.index');
+Route::get('notifications', NotificationPage::class)->name('notifications.index');
 
 // Web Feed
 Route::feeds();

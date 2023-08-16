@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Categories;
+namespace App\Http\Livewire;
 
 use App\Models\Category;
 use Livewire\Component;
 
-class Show extends Component
+class CategoryPage extends Component
 {
     public Category $category;
 
@@ -22,7 +22,7 @@ class Show extends Component
         }
 
         // 傳參變量文章和分類到模板中
-        return view('livewire.categories.show', [
+        return view('livewire.category-page', [
             'title' => $this->category->name,
         ]);
     }

@@ -66,7 +66,7 @@
         x-show="tabContentActive($el)"
         x-transition:enter.duration.300ms
       >
-        <livewire:users.information.personal-information :user-id="$user->id" />
+        <livewire:user-info-page.info-cards :user-id="$user->id" />
       </div>
 
       {{-- user posts content --}}
@@ -76,7 +76,7 @@
         x-show="tabContentActive($el)"
         x-transition:enter.duration.300ms
       >
-        <livewire:users.information.posts-group-by-year :user-id="$user->id" />
+        <livewire:user-info-page.posts :user-id="$user->id" />
       </div>
 
       {{-- user comments content --}}
@@ -86,7 +86,7 @@
         x-show="tabContentActive($el)"
         x-transition:enter.duration.300ms
       >
-        <livewire:users.information.comments :user-id="$user->id" />
+        <livewire:user-info-page.comments :user-id="$user->id" />
       </div>
     </div>
   </div>

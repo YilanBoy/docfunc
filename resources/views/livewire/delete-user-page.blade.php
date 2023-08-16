@@ -4,7 +4,7 @@
   <div class="flex flex-col items-start justify-center px-4 md:flex-row xl:px-0">
     <x-member-certre-side-menu />
 
-    <x-card class="mt-6 flex w-full flex-col justify-center space-y-6 md:mt-0 md:w-1/2">
+    <x-card class="mt-6 flex w-full flex-col justify-center space-y-6 md:mt-0 md:w-[700px]">
       {{-- 說明 --}}
       <div class="flex flex-col items-start justify-center">
         <span class="dark:text-gray-50">很遺憾您要離開...</span>

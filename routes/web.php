@@ -3,13 +3,13 @@
 use App\Http\Controllers\User\DestroyUserController;
 use App\Http\Livewire\CategoryPage;
 use App\Http\Livewire\ChangeUserPasswordPage;
+use App\Http\Livewire\CreatePostPage;
 use App\Http\Livewire\DeleteUserPage;
+use App\Http\Livewire\EditPostPage;
 use App\Http\Livewire\EditUserInfoPage;
 use App\Http\Livewire\NotificationPage;
-use App\Http\Livewire\Posts\Create as PostCreate;
-use App\Http\Livewire\Posts\Edit as PostEdit;
-use App\Http\Livewire\Posts\Index as PostIndex;
-use App\Http\Livewire\Posts\Show as PostShow;
+use App\Http\Livewire\PostsPage\Index as PostsPage;
+use App\Http\Livewire\ShowPostPage\Index as ShowPostPage;
 use App\Http\Livewire\TagPage;
 use App\Http\Livewire\UserInfoPage\Index as UserInfoPage;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 // 首頁
-Route::get('/', PostIndex::class)->name('root');
+Route::get('/', PostsPage::class)->name('root');
 
 require __DIR__.'/auth.php';
 
@@ -47,15 +47,15 @@ Route::middleware('auth')->prefix('users')->group(function () {
 
 // 文章列表與內容
 Route::prefix('posts')->group(function () {
-    Route::get('/', PostIndex::class)->name('posts.index');
+    Route::get('/', PostsPage::class)->name('posts.index');
 
     Route::middleware(['auth', 'verified'])->group(function () {
-        Route::get('/create', PostCreate::class)->name('posts.create');
-        Route::get('/{post}/edit', PostEdit::class)->name('posts.edit');
+        Route::get('/create', CreatePostPage::class)->name('posts.create');
+        Route::get('/{post}/edit', EditPostPage::class)->name('posts.edit');
     });
 
     // {slug?} 當中的問號代表參數為選擇性
-    Route::get('/{post}/{slug?}', PostShow::class)
+    Route::get('/{post}/{slug?}', ShowPostPage::class)
         ->name('posts.show');
 });
 

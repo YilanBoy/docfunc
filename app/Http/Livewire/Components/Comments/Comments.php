@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Comments;
+namespace App\Http\Livewire\Components\Comments;
 
 use Livewire\Component;
 
@@ -37,6 +37,6 @@ class Comments extends Component
 
     public function render()
     {
-        return view('livewire.comments.comments');
+        return view('livewire.components.comments.comments');
     }
 }

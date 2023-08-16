@@ -29,7 +29,7 @@
 >
 
   @for ($offset = 0; $offset < $count; $offset += $perPage)
-    <livewire:comments.comment-group
+    <livewire:components.comments.comment-group
       :post-id="$postId"
       :per-page="$perPage"
       :offset="$offset"

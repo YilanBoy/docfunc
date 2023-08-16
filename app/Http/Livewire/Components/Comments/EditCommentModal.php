@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Comments;
+namespace App\Http\Livewire\Components\Comments;
 
 use App\Http\Requests\CommentRequest;
 use App\Http\Traits\Livewire\MarkdownConverter;
@@ -69,6 +69,6 @@ class EditCommentModal extends Component
 
     public function render()
     {
-        return view('livewire.comments.edit-comment-modal');
+        return view('livewire.components.comments.edit-comment-modal');
     }
 }

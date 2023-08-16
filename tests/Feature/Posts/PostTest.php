@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Posts\Posts;
+use App\Http\Livewire\Components\Posts;
 use App\Models\Post;
 use App\Models\User;
 use Livewire\Livewire;
@@ -22,7 +22,7 @@ test('posts index can be rendered', function () {
 
     get(route('posts.index'))
         ->assertStatus(200)
-        ->assertSeeLivewire('posts.posts');
+        ->assertSeeLivewire(Posts::class);
 });
 
 it('will be redirect if slug is not in the url', function () {

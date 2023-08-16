@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Comments;
+namespace App\Http\Livewire\Components\Comments;
 
 use App\Http\Requests\CommentWithRecaptchaRequest;
 use App\Http\Traits\Livewire\MarkdownConverter;
@@ -73,6 +73,6 @@ class CreateCommentModal extends Component
 
     public function render()
     {
-        return view('livewire.comments.create-comment-modal');
+        return view('livewire.components.comments.create-comment-modal');
     }
 }

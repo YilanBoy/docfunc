@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Comments;
+namespace App\Http\Livewire\Components\Comments;
 
 use App\Models\Comment;
 use Livewire\Component;
@@ -42,6 +42,6 @@ class CommentGroup extends Component
             ->offset($this->offset)
             ->get();
 
-        return view('livewire.comments.comment-group', ['comments' => $comments]);
+        return view('livewire.components.comments.comment-group', ['comments' => $comments]);
     }
 }

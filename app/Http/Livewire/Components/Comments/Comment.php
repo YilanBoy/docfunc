@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Comments;
+namespace App\Http\Livewire\Components\Comments;
 
 use App\Http\Traits\Livewire\MarkdownConverter;
 use App\Models\Comment as CommentModel;
@@ -67,6 +67,6 @@ class Comment extends Component
 
     public function render()
     {
-        return view('livewire.comments.comment');
+        return view('livewire.components.comments.comment');
     }
 }

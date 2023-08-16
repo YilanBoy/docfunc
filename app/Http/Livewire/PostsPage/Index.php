@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Posts;
+namespace App\Http\Livewire\PostsPage;
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Component;
@@ -13,6 +13,6 @@ class Index extends Component
             ? config('app.name')
             : '所有文章';
 
-        return view('livewire.posts.index', compact('title'));
+        return view('livewire.posts-page.index', compact('title'));
     }
 }

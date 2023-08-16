@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Comments\EditCommentModal;
+use App\Http\Livewire\Components\Comments\EditCommentModal;
 use App\Models\Comment;
 use App\Models\User;
 
@@ -101,7 +101,7 @@ it('will display the word "edited" on top of it if it has been edited', function
     // update the updated_at comment
     $comment->touch();
 
-    Livewire::test(\App\Http\Livewire\Comments\Comment::class, [
+    Livewire::test(\App\Http\Livewire\Components\Comments\Comment::class, [
         'postId' => $comment->post_id,
         'commentId' => $comment->id,
         'userId' => $comment->user_id,

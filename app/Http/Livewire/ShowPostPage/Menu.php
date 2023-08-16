@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Posts\Partials;
+namespace App\Http\Livewire\ShowPostPage;
 
 use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
-class MobileShowMenu extends Component
+class Menu extends Component
 {
     use AuthorizesRequests;
 
@@ -24,6 +24,6 @@ class MobileShowMenu extends Component
 
     public function render()
     {
-        return view('livewire.posts.partials.mobile-show-menu');
+        return view('livewire.show-post-page.menu');
     }
 }

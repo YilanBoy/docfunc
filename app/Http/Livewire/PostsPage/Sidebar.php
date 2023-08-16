@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Posts\Partials;
+namespace App\Http\Livewire\PostsPage;
 
 use App\Models\Link;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 
-class IndexSidebar extends Component
+class Sidebar extends Component
 {
     public function render()
     {
@@ -23,6 +23,6 @@ class IndexSidebar extends Component
             return Link::all();
         });
 
-        return view('livewire.posts.partials.index-sidebar', compact('popularTags', 'links'));
+        return view('livewire.posts-page.sidebar', compact('popularTags', 'links'));
     }
 }

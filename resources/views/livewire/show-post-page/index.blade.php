@@ -53,9 +53,9 @@
               {{-- post title --}}
               <h1 class="grow text-3xl font-bold dark:text-gray-50">{{ $post->title }}</h1>
 
-              {{-- mobile post sidebar --}}
+              {{-- mobile menu --}}
               @if (auth()->id() === $post->user_id)
-                <livewire:posts.partials.mobile-show-menu :post-id="$post->id" />
+                <livewire:show-post-page.menu :post-id="$post->id" />
               @endif
 
             </div>
@@ -151,21 +151,21 @@
           </x-card>
 
           {{-- comment box --}}
-          <livewire:comments.reply
+          <livewire:components.comments.reply
             :postId="$post->id"
             :commentCounts="$post->comment_counts"
           />
 
           {{-- comments list --}}
-          <livewire:comments.comments
+          <livewire:components.comments.comments
             :postId="$post->id"
             :comment-counts="$post->comment_counts"
           />
         </div>
 
         <div class="hidden lg:block lg:w-1/6">
-          {{-- 文章選單-桌面裝置 --}}
-          <livewire:posts.partials.desktop-show-menu
+          {{-- desktop sidebar --}}
+          <livewire:show-post-page.sidebar
             :post-id="$post->id"
             :post-title="$post->title"
             :author-id="$post->user_id"
@@ -175,9 +175,9 @@
     </div>
   </div>
 
-  <livewire:comments.create-comment-modal :post-id="$post->id" />
+  <livewire:components.comments.create-comment-modal :post-id="$post->id" />
 
-  <livewire:comments.edit-comment-modal />
+  <livewire:components.comments.edit-comment-modal />
 
   <x-porgress-bar />
 </div>

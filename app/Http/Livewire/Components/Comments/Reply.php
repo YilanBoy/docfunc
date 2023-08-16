@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Comments;
+namespace App\Http\Livewire\Components\Comments;
 
 use App\Models\Post;
 use Livewire\Component;
@@ -21,6 +21,6 @@ class Reply extends Component
 
     public function render()
     {
-        return view('livewire.comments.reply');
+        return view('livewire.components.comments.reply');
     }
 }

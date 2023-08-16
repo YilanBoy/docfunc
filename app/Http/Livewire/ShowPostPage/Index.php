@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Posts;
+namespace App\Http\Livewire\ShowPostPage;
 
 use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
-class Show extends Component
+class Index extends Component
 {
     use AuthorizesRequests;
 
@@ -29,6 +29,6 @@ class Show extends Component
             redirect()->to($this->post->link_with_slug);
         }
 
-        return view('livewire.posts.show');
+        return view('livewire.show-post-page.index');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Posts;
+namespace App\Http\Livewire;
 
 use App\Http\Traits\Livewire\PostForm;
 use App\Models\Category;
@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Create extends Component
+class CreatePostPage extends Component
 {
     use PostForm;
     use WithFileUploads;
@@ -82,6 +82,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.posts.create');
+        return view('livewire.create-post-page');
     }
 }

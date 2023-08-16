@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Posts\Partials;
+namespace App\Http\Livewire\ShowPostPage;
 
 use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
-class DesktopShowMenu extends Component
+class Sidebar extends Component
 {
     use AuthorizesRequests;
 
@@ -29,6 +29,6 @@ class DesktopShowMenu extends Component
 
     public function render()
     {
-        return view('livewire.posts.partials.desktop-show-menu');
+        return view('livewire.show-post-page.sidebar');
     }
 }

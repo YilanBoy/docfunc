@@ -1,6 +1,6 @@
 <div class="mt-6 space-y-6">
   @foreach ($comments as $comment)
-    <livewire:comments.comment
+    <livewire:components.comments.comment
       :post-id="$postId"
       :comment-id="$comment->id"
       :user-id="$comment->user_id ?? 0"

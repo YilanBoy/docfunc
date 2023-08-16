@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Posts;
+namespace App\Http\Livewire;
 
 use App\Http\Traits\Livewire\PostForm;
 use App\Models\Category;
@@ -13,7 +13,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Edit extends Component
+class EditPostPage extends Component
 {
     use PostForm;
     use AuthorizesRequests;
@@ -86,6 +86,6 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.posts.edit');
+        return view('livewire.edit-post-page');
     }
 }

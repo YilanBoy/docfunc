@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Comments\CreateCommentModal;
+use App\Http\Livewire\Components\Comments\CreateCommentModal;
 use App\Models\Post;
 use App\Models\User;
 

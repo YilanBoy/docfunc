@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Livewire\Posts\Partials\DesktopShowMenu;
-use App\Http\Livewire\Posts\Partials\MobileShowMenu;
+use App\Http\Livewire\ShowPostPage\Menu;
+use App\Http\Livewire\ShowPostPage\Sidebar;
 use App\Http\Livewire\UserInfoPage\PostsByYear;
 use App\Models\Post;
 use App\Models\User;
@@ -12,7 +12,7 @@ test('author can soft delete own post in desktop show post page', function () {
 
     $this->actingAs(User::find($post->user_id));
 
-    Livewire::test(DesktopShowMenu::class, [
+    Livewire::test(Sidebar::class, [
         'postId' => $post->id,
         'postTitle' => $post->title,
         'authorId' => $post->user_id,
@@ -26,7 +26,7 @@ test('author can soft delete own post in desktop show post page', function () {
 test('guest cannot delete others\' post in desktop show post page', function () {
     $post = Post::factory()->create();
 
-    Livewire::test(DesktopShowMenu::class, [
+    Livewire::test(Sidebar::class, [
         'postId' => $post->id,
         'postTitle' => $post->title,
         'authorId' => $post->user_id,
@@ -44,7 +44,7 @@ test('user cannot delete others\' post in desktop show post page', function () {
 
     $this->actingAs($user);
 
-    Livewire::test(DesktopShowMenu::class, [
+    Livewire::test(Sidebar::class, [
         'postId' => $post->id,
         'postTitle' => $post->title,
         'authorId' => $post->user_id,
@@ -60,7 +60,7 @@ test('author can soft delete own post in mobile show post page', function () {
 
     $this->actingAs(User::find($post->user_id));
 
-    Livewire::test(MobileShowMenu::class, ['postId' => $post->id])
+    Livewire::test(Menu::class, ['postId' => $post->id])
         ->call('deletePost', $post->id)
         ->assertRedirect(route('users.index', ['user' => $post->user_id, 'tab' => 'posts']));
 
@@ -70,7 +70,7 @@ test('author can soft delete own post in mobile show post page', function () {
 test('guest cannot delete others\' post in mobile show post page', function () {
     $post = Post::factory()->create();
 
-    Livewire::test(MobileShowMenu::class, ['postId' => $post->id])
+    Livewire::test(Menu::class, ['postId' => $post->id])
         ->call('deletePost', $post->id)
         ->assertForbidden();
 
@@ -84,7 +84,7 @@ test('user cannot delete others\' post in mobile show post page', function () {
 
     $this->actingAs($user);
 
-    Livewire::test(MobileShowMenu::class, ['postId' => $post->id])
+    Livewire::test(Menu::class, ['postId' => $post->id])
         ->call('deletePost', $post->id)
         ->assertForbidden();
 

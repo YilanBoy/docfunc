@@ -70,15 +70,34 @@
 
   @vite('resources/css/app.css')
   @vite('resources/css/icon.css')
+  {{-- highlight code block style --}}
+  @vite('node_modules/highlight.js/scss/base16/material-palenight.scss')
+  {{-- editor style --}}
+  @vite(['resources/css/editor.css', 'node_modules/@yaireo/tagify/dist/tagify.css', 'resources/css/missing-content-style.css'])
 
-  @stack('css')
+  {{-- highlight code block --}}
+  @vite('resources/ts/highlight.ts')
+  {{-- code block copy button --}}
+  @vite('resources/ts/copy-code-btn.ts')
+  {{-- post read pregress bar --}}
+  @vite('resources/ts/progress-bar.ts')
+  {{-- to the top button --}}
+  @vite('resources/ts/scroll-to-top-btn.ts')
+  {{-- social media share button --}}
+  @vite('resources/ts/sharer.ts')
+  {{-- media embed --}}
+  @vite('resources/ts/oembed/embed-youtube-oembed.ts')
+  @vite('resources/ts/oembed/embed-twitter-oembed.ts')
+  @vite('resources/ts/oembed/twitter-widgets.ts')
+  {{-- Ckeditor --}}
+  <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+  {{-- Tagify --}}
+  @vite('resources/ts/tagify.ts')
 
   <livewire:styles />
 
   {{-- google recaptcha --}}
   <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
-
-  @stack('scriptInHead')
 </head>
 
 <body
@@ -104,8 +123,6 @@
   <x-alert />
 
   @vite('resources/js/app.js')
-
-  @stack('scriptInBody')
 </body>
 
 </html>

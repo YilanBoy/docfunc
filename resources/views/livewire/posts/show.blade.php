@@ -6,44 +6,6 @@
   @section('preview_url', $post->preview_url)
 @endif
 
-@push('css')
-  {{-- highlight code block --}}
-  @vite('node_modules/highlight.js/scss/base16/material-palenight.scss')
-
-  <style>
-    /* media embed */
-    iframe,
-    .twitter-tweet {
-      margin-left: auto;
-      margin-right: auto;
-    }
-  </style>
-
-  {{-- hide google recaptcha badge --}}
-  <style>
-    .grecaptcha-badge {
-      visibility: hidden;
-    }
-  </style>
-@endpush
-
-@push('scriptInHead')
-  {{-- highlight code block --}}
-  @vite('resources/ts/highlight.ts')
-  {{-- code block copy button --}}
-  @vite('resources/ts/copy-code-btn.ts')
-  {{-- post read pregress bar --}}
-  @vite('resources/ts/progress-bar.ts')
-  {{-- to the top button --}}
-  @vite('resources/ts/scroll-to-top-btn.ts')
-  {{-- social media share button --}}
-  @vite('resources/ts/sharer.ts')
-  {{-- media embed --}}
-  @vite('resources/ts/oembed/embed-youtube-oembed.ts')
-  @vite('resources/ts/oembed/embed-twitter-oembed.ts')
-  @vite('resources/ts/oembed/twitter-widgets.ts')
-@endpush
-
 <div
   x-data
   x-init="// init show page
@@ -58,6 +20,20 @@
   setupScrollToTopButton($refs.scrollToTopBtn);
   setupSharer();"
 >
+  <style>
+    /* media embed */
+    iframe,
+    .twitter-tweet {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* hide google recaptcha badge */
+    .grecaptcha-badge {
+      visibility: hidden;
+    }
+  </style>
+
   <div class="relative animate-fade-in">
     <x-scroll-to-top-button x-ref="scrollToTopBtn" />
 

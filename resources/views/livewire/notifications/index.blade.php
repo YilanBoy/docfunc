@@ -4,7 +4,7 @@
 <div class="container mx-auto">
   <div class="flex items-start justify-center px-4 xl:px-0">
 
-    <div class="flex w-full flex-col items-center justify-center space-y-6 md:w-2/3 xl:w-1/2">
+    <div class="flex w-full flex-col items-center justify-center space-y-6 md:w-[700px]">
       {{-- 頁面標題 --}}
       <div class="fill-current text-2xl text-gray-700 dark:text-gray-50">
         <i class="bi bi-bell-fill"></i><span class="ml-4">我的通知</span>

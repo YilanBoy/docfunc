@@ -1,21 +1,19 @@
-@push('css')
-  {{-- highlight code block --}}
-  @vite('node_modules/highlight.js/scss/base16/material-palenight.scss')
-@endpush
-
-@push('scriptInBody')
-  {{-- highlight code block --}}
-  @vite('resources/ts/highlight.ts')
-@endpush
-
 {{-- 會員留言 --}}
 <div
   class="space-y-6"
   x-data
-  x-init="Livewire.hook('message.processed', (message) => {
+  x-init="// init comments page
+  window.hljs.highlightAll();
+
+  Livewire.hook('message.processed', (message) => {
       // when change page in comments tab, highlight code block
       if (message.updateQueue[0].method.toLowerCase().includes('page')) {
-          window.hljs.highlightAll();
+          document.querySelectorAll('#comments-content pre code:not(.hljs)').forEach((element) => {
+              // if element is type of element
+              if (element instanceof Element) {
+                  hljs.highlightElement(element)
+              }
+          })
       }
   })"
 >

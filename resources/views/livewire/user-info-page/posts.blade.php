@@ -25,7 +25,9 @@
         type="button"
         @click="
           setActiveAccordion(id);
-          $el.scrollIntoView();
+          // because the collapse animation is 200ms long (use tailwind css 'duration-200' class)
+          // we have to wait for the collapse animation to finish
+          setTimeout(() => $el.scrollIntoView({ behavior: 'smooth'}), 300)
         "
       >
         <span>{{ $year }}</span>

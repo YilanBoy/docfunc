@@ -24,7 +24,7 @@ class PostSeeder extends Seeder
                 'category_id' => fake()->numberBetween(1, 3),
                 'comment_counts' => 0,
                 'user_id' => rand(1, $userCount),
-                'created_at' => fake()->dateTimeBetween(),
+                'created_at' => fake()->dateTimeBetween(startDate: '-3 years'),
                 'updated_at' => now(),
             ];
 

@@ -22,7 +22,11 @@
     >
       <button
         class="flex w-full select-none items-center justify-between px-5 py-4 text-left font-semibold"
-        @click="setActiveAccordion(id)"
+        type="button"
+        @click="
+          setActiveAccordion(id);
+          $el.scrollIntoView();
+        "
       >
         <span>{{ $year }}</span>
 
@@ -59,5 +63,4 @@
       <i class="bi bi-exclamation-circle-fill"></i><span class="ml-2">尚未發布任何文章</span>
     </div>
   @endforelse
-
 </x-card>

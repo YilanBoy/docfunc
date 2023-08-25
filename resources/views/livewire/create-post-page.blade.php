@@ -1,91 +1,6 @@
-@section('title', '新增文章')
-
 {{-- create new post --}}
 <div class="container mx-auto">
-  <div
-    class="flex items-stretch justify-center space-x-4"
-    x-data="{
-        csrf_token: @js(csrf_token()),
-        maxCharacters: 20000,
-        editorDebounceTimer: null,
-        debounce(callback, time) {
-            // https://webdesign.tutsplus.com/tutorials/javascript-debounce-and-throttle--cms-36783
-            window.clearTimeout(this.editorDebounceTimer);
-            this.editorDebounceTimer = window.setTimeout(callback, time);
-        },
-        body: @entangle('body'),
-        tags: @entangle('tags')
-    }"
-    x-init="// init the create post page
-    ClassicEditor.create($refs.editor, {
-            placeholder: '分享使自己成長～',
-            // Editor configuration.
-            wordCount: {
-                onUpdate: (stats) => {
-                    let characterCounter = document.querySelectorAll('.character-counter');
-                    // The character count has exceeded the maximum limit
-                    let isLimitExceeded = stats.characters > maxCharacters;
-                    // The character count is approaching the maximum limit
-                    let isCloseToLimit = !isLimitExceeded && stats.characters > maxCharacters * 0.8;
-
-                    // update character count in HTML element
-                    characterCounter.forEach((element) => {
-                        element.textContent = `${stats.characters} / ${maxCharacters}`;
-                        // If the character count is approaching the limit
-                        // add the class 'text-yellow-500' to the 'wordsBox' element to turn the text yellow
-                        element.classList.toggle('text-yellow-500', isCloseToLimit);
-                        // If the character count exceeds the limit
-                        // add the class 'text-red-400' to the 'wordsBox' element to turn the text red
-                        element.classList.toggle('text-red-400', isLimitExceeded);
-                    });
-                }
-            },
-            simpleUpload: {
-                // The URL that the images are uploaded to.
-                uploadUrl: '/api/images/upload',
-
-                // laravel sanctum need csrf token to authenticate
-                headers: {
-                    'X-CSRF-TOKEN': csrf_token
-                }
-            }
-        })
-        .then((editor) => {
-            // binding the value of the ckeditor to the livewire attribute 'body'
-            editor.model.document.on('change:data', () => {
-                debounce(() => {
-                    body = editor.getData();
-                }, 500);
-            });
-        })
-        .catch((err) => {
-            console.error(err.stack);
-        });
-
-    fetch('/api/tags')
-        .then((response) => response.json())
-        .then(function(tagsJson) {
-            return new Tagify($refs.tags, {
-                whitelist: tagsJson.data,
-                enforceWhitelist: true,
-                maxTags: 5,
-                dropdown: {
-                    // show the dropdown immediately on focus
-                    enabled: 0,
-                    maxItems: 5,
-                    // place the dropdown near the typed text
-                    position: 'text',
-                    // keep the dropdown open after selecting a suggestion
-                    closeOnSelect: false,
-                    highlightFirst: true
-                },
-                callbacks: {
-                    // binding the value of the tag input to the livewire attribute 'tags'
-                    'change': (event) => tags = event.detail.value
-                }
-            });
-        });"
-  >
+  <div class="flex items-stretch justify-center space-x-4">
     <div class="hidden xl:block xl:w-1/6"></div>
 
     <div class="w-full p-2 md:w-[700px] lg:p-0">
@@ -105,107 +20,15 @@
 
           <form
             id="create-post"
-            wire:submit.prevent="store"
+            wire:submit="store"
           >
             <div class="grid grid-cols-2 gap-5">
               {{-- preview image --}}
-              <div
-                class="col-span-2 text-base"
-                x-data="{ isUploading: false, progress: 0 }"
-                x-on:livewire-upload-start="isUploading = true"
-                x-on:livewire-upload-finish="isUploading = false"
-                x-on:livewire-upload-error="isUploading = false"
-                x-on:livewire-upload-progress="progress = $event.detail.progress"
-              >
-                {{-- Upload Area --}}
-                <div
-                  class="relative flex cursor-pointer flex-col items-center rounded-lg border-2 border-dashed border-green-500 bg-transparent px-4 py-6 tracking-wide text-green-500 transition-all duration-300 hover:border-green-600 hover:text-green-600 dark:border-indigo-400 dark:text-indigo-400 dark:hover:border-indigo-300 dark:hover:text-indigo-300"
-                  x-ref="uploadBlock"
-                >
-                  <input
-                    class="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none"
-                    type="file"
-                    title=""
-                    wire:model="image"
-                    x-on:dragenter="
-                  $refs.uploadBlock.classList.remove('text-green-500', 'dark:text-indigo-400', 'border-green-500', 'dark:border-indigo-400')
-                  $refs.uploadBlock.classList.add('text-green-600', 'dark:text-indigo-300', 'border-green-600', 'dark:border-indigo-300')
-                "
-                    x-on:dragleave="
-                  $refs.uploadBlock.classList.add('text-green-500', 'dark:text-indigo-400', 'border-green-500', 'dark:border-indigo-400')
-                  $refs.uploadBlock.classList.remove('text-green-600', 'dark:text-indigo-300', 'border-green-600', 'dark:border-indigo-300')
-                "
-                    x-on:drop="
-                  $refs.uploadBlock.classList.add('text-green-500', 'dark:text-indigo-400', 'border-green-500', 'dark:border-indigo-400')
-                  $refs.uploadBlock.classList.remove('text-green-600', 'dark:text-indigo-300', 'border-green-600', 'dark:border-indigo-300')
-                "
-                  >
-
-                  <div class="flex flex-col items-center justify-center space-y-2 text-center">
-                    <svg
-                      class="h-10 w-10"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-                      />
-                    </svg>
-
-                    <p>預覽圖 (jpg, jpeg, png, bmp, gif, svg, or webp)</p>
-                  </div>
-                </div>
-
-                {{-- Progress Bar --}}
-                <div
-                  class="relative mt-4 pt-1"
-                  x-show="isUploading"
-                >
-                  <div class="mb-4 flex h-4 overflow-hidden rounded bg-green-200 text-xs dark:bg-indigo-200">
-                    <div
-                      class="flex flex-col justify-center whitespace-nowrap bg-green-500 text-center text-white shadow-none dark:bg-indigo-500"
-                      x-bind:style="`width:${progress}%`"
-                    >
-                    </div>
-                  </div>
-                </div>
-
-                @if (!$errors->has('image') && $image)
-                  <div class="relative mt-4 w-full md:w-1/2">
-                    <img
-                      class="rounded-lg"
-                      src="{{ $image->temporaryUrl() }}"
-                      alt="preview image"
-                    >
-
-                    <button
-                      class="group absolute inset-0 flex flex-1 items-center justify-center rounded-lg transition-all duration-150 hover:bg-gray-600/50 hover:backdrop-blur-sm"
-                      type="button"
-                      wire:click="$set('image', null)"
-                    >
-                      <svg
-                        class="h-24 w-24 opacity-0 transition-all duration-150 group-hover:text-gray-50 group-hover:opacity-100"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                @endif
-              </div>
+              <x-post-form.upload-image-block
+                :image="$image"
+                :preview-url="$preview_url"
+                :errors="$errors"
+              />
 
               {{-- classfication --}}
               <div class="col-span-2 md:col-span-1">
@@ -218,7 +41,7 @@
                   class="form-select h-12 w-full rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50"
                   id="category_id"
                   name="category_id"
-                  wire:model="category_id"
+                  wire:model.live="category_id"
                   required
                 >
                   @foreach ($categories as $category)
@@ -240,7 +63,7 @@
                     id="is-private"
                     name="is-private"
                     type="checkbox"
-                    wire:model="is_private"
+                    wire:model.live="is_private"
                   >
                   <span class="ml-2 text-lg text-gray-600 dark:text-gray-50">文章不公開</span>
                 </label>
@@ -259,7 +82,7 @@
                   name="title"
                   type="text"
                   value=""
-                  wire:model="title"
+                  wire:model.live="title"
                   placeholder="文章標題"
                   required
                   autofocus
@@ -267,41 +90,10 @@
               </div>
 
               {{-- tags --}}
-              <div
-                class="col-span-2"
-                wire:ignore
-              >
-                <label
-                  class="hidden"
-                  for="tags"
-                >標籤 (最多 5 個)</label>
-
-                <input
-                  class="h-12 w-full rounded-md bg-white dark:bg-gray-700"
-                  id="tags"
-                  name="tags"
-                  type="text"
-                  value="{{ $tags }}"
-                  x-ref="tags"
-                  placeholder="標籤 (最多 5 個)"
-                >
-              </div>
+              <x-post-form.tagify />
 
               {{-- body --}}
-              <div
-                class="col-span-2 max-w-none"
-                wire:ignore
-              >
-                <label
-                  class="hidden"
-                  for="editor"
-                >內文</label>
-
-                <div
-                  id="editor"
-                  x-ref="editor"
-                >{!! $body !!}</div>
-              </div>
+              <x-post-form.ckedtior />
             </div>
 
             {{-- mobile device --}}

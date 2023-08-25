@@ -62,7 +62,7 @@
                 id="searchBox"
                 type="text"
                 x-ref="searchBox"
-                wire:model.debounce.500ms="search"
+                wire:model.live.debounce.500ms="search"
                 autocomplete="off"
                 placeholder="搜尋文章"
               />
@@ -115,6 +115,7 @@
                         <a
                           class="flex rounded-md p-2 text-left hover:bg-gray-200 dark:text-gray-50 dark:hover:bg-gray-600"
                           href="{{ $result->link_with_slug }}"
+                          wire:navigate
                         >
                           <i class="bi bi-caret-right-fill"></i><span class="ml-2">{{ $result->title }}</span>
                         </a>

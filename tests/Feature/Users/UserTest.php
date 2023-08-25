@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\UserInfoPage\Posts;
+use App\Livewire\UserInfoPage\Posts;
 use App\Models\Post;
 use App\Models\User;
 

@@ -1,6 +1,7 @@
-@section('title', '註冊')
-
 <div class="container mx-auto">
+  {{-- google recaptcha --}}
+  <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+
   <div class="flex items-center justify-center px-4 xl:px-0">
 
     <div class="flex w-full flex-col items-center justify-center">
@@ -42,7 +43,7 @@
               :placeholder="'會員名稱 (只能使用英文、數字、_ 或是 -)'"
               required
               autofocus
-              wire:model.defer="name"
+              wire:model="name"
             />
           </div>
 
@@ -55,7 +56,7 @@
               :id="'email'"
               :placeholder="'電子信箱'"
               required
-              wire:model.defer="email"
+              wire:model="email"
             />
           </div>
 
@@ -67,7 +68,7 @@
               :id="'password'"
               :placeholder="'密碼'"
               required
-              wire:model.defer="password"
+              wire:model="password"
             />
           </div>
 
@@ -79,7 +80,7 @@
               :id="'password_confirmation'"
               :placeholder="'確認密碼'"
               required
-              wire:model.defer="password_confirmation"
+              wire:model="password_confirmation"
             />
           </div>
 
@@ -87,6 +88,7 @@
             <a
               class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
               href="{{ route('login') }}"
+              wire:navigate
             >
               {{ __('Already registered?') }}
             </a>

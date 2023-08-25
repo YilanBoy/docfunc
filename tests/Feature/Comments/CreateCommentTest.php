@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Components\Comments\CreateCommentModal;
+use App\Livewire\Components\Comments\CreateCommentModal;
 use App\Models\Post;
 use App\Models\User;
 
@@ -23,9 +23,9 @@ test('non-logged-in users can leave a anonymous comment', function () {
         ->set('body', $body)
         ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store')
-        ->assertDispatchedBrowserEvent('close-create-comment-modal')
-        ->assertEmitted('updateCommentCounts')
-        ->assertEmitted('refreshAllComments');
+        ->assertDispatched('close-create-comment-modal')
+        ->assertDispatched('updateCommentCounts')
+        ->assertDispatched('refreshComments');
 
     $this->assertDatabaseHas('comments', [
         'body' => $body,

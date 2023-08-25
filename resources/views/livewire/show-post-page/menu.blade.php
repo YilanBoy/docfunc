@@ -31,6 +31,7 @@
       href="{{ route('posts.edit', ['post' => $postId]) }}"
       role="menuitem"
       tabindex="-1"
+      wire:navigate
     >
       <i class="bi bi-pencil-fill"></i><span class="ml-2">編輯</span>
     </a>
@@ -41,7 +42,7 @@
       type="button"
       role="menuitem"
       tabindex="-1"
-      onclick="confirm('你確定要刪除文章嗎？（7 天之內可以還原）') || event.stopImmediatePropagation()"
+      wire:confirm="你確定要刪除文章嗎？（7 天之內可以還原）"
       wire:click="deletePost({{ $postId }})"
     >
       <i class="bi bi-file-earmark-x-fill"></i><span class="ml-2">刪除</span>

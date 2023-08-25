@@ -10,8 +10,8 @@
       @endphp
 
       @foreach ($tabs as $tab)
-        <a
-          href="{{ $currentUrl . '?order=' . $tab['value'] }}"
+        <button
+          type="button"
           wire:click.prevent="orderChange('{{ $tab['value'] }}')"
           @class([
               'flex w-1/3 md:w-auto justify-center px-4 py-2 transition duration-300 rounded-lg ',
@@ -21,7 +21,7 @@
         >
           <i class="{{ $tab['icon'] }}"></i>
           <span class="ml-2">{{ $tab['text'] }}</span>
-        </a>
+        </button>
       @endforeach
     </nav>
 
@@ -56,6 +56,7 @@
           class="absolute right-0 top-0 block h-full w-full"
           href="{{ $post->link_with_slug }}"
           title="{{ $post->title }}"
+          wire:navigate
         ></a>
 
         {{-- 文章標題 --}}
@@ -70,7 +71,7 @@
 
         {{-- 文章標籤 --}}
         @if ($post->tags_count > 0)
-          <div class="z-10 mt-2 flex flex-wrap items-center text-base">
+          <div class="z-10 mt-2 flex w-fit flex-wrap items-center text-base">
             <span class="mr-1 text-green-300 dark:text-lividus-600"><i class="bi bi-tags-fill"></i></span>
 
             @foreach ($post->tags as $tag)

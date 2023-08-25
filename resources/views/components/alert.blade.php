@@ -1,14 +1,7 @@
 <div
   class="fixed bottom-0 left-0"
   x-cloak
-  x-data="alertComponent(@js(session()->get('alert')))"
-  x-init="if (alert !== null) {
-      showAlert(alert.status, alert.message)
-
-      setTimeout(function() {
-          openAlertBox = false
-      }, 3000);
-  }"
+  x-data="alertComponent"
   @info-badge.window="
     showAlert(event.detail.status, event.detail.message)
 

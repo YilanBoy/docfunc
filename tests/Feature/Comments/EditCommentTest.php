@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Components\Comments\EditCommentModal;
+use App\Livewire\Components\Comments\EditCommentModal;
 use App\Models\Comment;
 use App\Models\User;
 
@@ -13,7 +13,7 @@ test('editing modal can load the data of the comment', function () {
         ->call('setEditComment', $comment->id, $offset)
         ->assertSet('commentId', $comment->id)
         ->assertSet('body', $comment->body)
-        ->assertDispatchedBrowserEvent('edit-comment-was-set');
+        ->assertDispatched('edit-comment-was-set');
 });
 
 test('logged-in users can update their comments', function () {
@@ -33,8 +33,8 @@ test('logged-in users can update their comments', function () {
         ->call('setEditComment', $comment->id, $offset)
         ->set('body', $body)
         ->call('update')
-        ->assertDispatchedBrowserEvent('close-edit-comment-modal')
-        ->assertEmitted('refreshCommentGroup-'.$offset);
+        ->assertDispatched('close-edit-comment-modal')
+        ->assertDispatched('comment-updated.'.$comment->id);
 
     $this->assertDatabaseHas('comments', ['body' => $body]);
 });
@@ -101,7 +101,7 @@ it('will display the word "edited" on top of it if it has been edited', function
     // update the updated_at comment
     $comment->touch();
 
-    Livewire::test(\App\Http\Livewire\Components\Comments\Comment::class, [
+    Livewire::test(\App\Livewire\Components\Comments\Comment::class, [
         'postId' => $comment->post_id,
         'commentId' => $comment->id,
         'userId' => $comment->user_id,

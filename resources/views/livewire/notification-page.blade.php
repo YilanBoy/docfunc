@@ -1,5 +1,3 @@
-@section('title', '我的通知')
-
 {{-- 通知列表 --}}
 <div class="container mx-auto">
   <div class="flex items-start justify-center px-4 xl:px-0">
@@ -22,6 +20,7 @@
               <a
                 class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
                 href="{{ $notification->data['post_link'] }}"
+                wire:navigate
               >
                 {{ $notification->data['post_title'] }}
               </a>

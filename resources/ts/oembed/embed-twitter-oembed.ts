@@ -32,6 +32,7 @@ async function convertTwitterOEmbedToIframe(oembedElement: HTMLElement) {
 
     if (data.html) {
         oembedElement.insertAdjacentHTML('afterend', data.html);
+        oembedElement.classList.add('oembed-processed');
     }
 }
 
@@ -42,11 +43,13 @@ function isTwitterUrl(url: string) {
 
 // 主要處理函式
 window.processTwitterOEmbeds = function () {
-    const oembedElements: NodeListOf<HTMLElement> =
-        document.querySelectorAll('oembed');
+    const oembedElements: NodeListOf<HTMLElement> = document.querySelectorAll(
+        'oembed:not(.oembed-processed)',
+    );
 
     oembedElements.forEach((oembedElement) => {
         const figureElement = oembedElement.closest('figure.media');
+
         if (figureElement) {
             convertTwitterOEmbedToIframe(oembedElement);
         }

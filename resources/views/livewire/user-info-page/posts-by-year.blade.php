@@ -14,6 +14,7 @@
           <a
             class="ml-2 duration-200 ease-out hover:text-gray-700 hover:underline dark:hover:text-gray-300"
             href="{{ $post->link_with_slug }}"
+            wire:navigate
           >
             {{ $post->title . ' (未公開)' }}
           </a>
@@ -21,6 +22,7 @@
           <a
             class="ml-2 duration-200 ease-out hover:text-gray-700 hover:underline dark:hover:text-gray-300"
             href="{{ $post->link_with_slug }}"
+            wire:navigate
           >
             {{ $post->title }}
           </a>
@@ -36,7 +38,7 @@
               class="text-gray-400 duration-200 ease-out hover:text-gray-700 dark:hover:text-gray-200"
               type="button"
               wire:loading.attr="disabled"
-              onclick="confirm('你確定要還原該文章？') || event.stopImmediatePropagation()"
+              wire:confirm="你確定要還原該文章？"
               wire:click="restore({{ $post->id }})"
             >
               <i class="bi bi-arrow-counterclockwise"></i>
@@ -48,7 +50,7 @@
                 class="text-gray-400 duration-200 ease-out hover:text-gray-700 dark:hover:text-gray-200"
                 type="button"
                 wire:loading.attr="disabled"
-                onclick="confirm('你確定要將該文章設為公開？') || event.stopImmediatePropagation()"
+                wire:confirm="你確定要將該文章設為公開？"
                 wire:click="postPrivateToggle({{ $post->id }})"
               >
                 <i class="bi bi-lock-fill"></i>
@@ -58,7 +60,7 @@
                 class="text-gray-400 duration-200 ease-out hover:text-gray-700 dark:hover:text-gray-200"
                 type="button"
                 wire:loading.attr="disabled"
-                onclick="confirm('你確定要將該文章設為不公開？') || event.stopImmediatePropagation()"
+                wire:confirm="你確定要將該文章設為不公開？"
                 wire:click="postPrivateToggle({{ $post->id }})"
               >
 
@@ -71,6 +73,7 @@
               class="text-gray-400 duration-200 ease-out hover:text-gray-700 dark:hover:text-gray-200"
               href="{{ route('posts.edit', ['post' => $post->id]) }}"
               role="button"
+              wire:navigate
             >
               <i class="bi bi-pencil-square"></i>
             </a>
@@ -80,7 +83,7 @@
               class="text-red-400 duration-200 ease-out hover:text-red-700 dark:hover:text-red-200"
               type="button"
               wire:loading.attr="disabled"
-              onclick="confirm('你確定要刪除文章嗎？（7 天之內可以還原）') || event.stopImmediatePropagation()"
+              wire:confirm="你確定要刪除文章嗎？（7 天之內可以還原）"
               wire:click.stop="deletePost({{ $post->id }})"
             >
               <i class="bi bi-x-lg"></i>

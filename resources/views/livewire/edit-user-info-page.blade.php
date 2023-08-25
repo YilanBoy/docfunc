@@ -1,5 +1,3 @@
-@section('title', '會員中心-編輯個人資料')
-
 <div
   class="container mx-auto flex-1"
   x-data
@@ -36,7 +34,7 @@
 
       <form
         class="w-full"
-        wire:submit.prevent="update"
+        wire:submit="update"
       >
         {{-- 信箱 --}}
         <div>
@@ -75,7 +73,7 @@
             name="name"
             type="text"
             value="{{ old('name', $name) }}"
-            wire:model.lazy="name"
+            wire:model.blur="name"
             placeholder="給自己取個有趣的暱稱吧！"
             required
             x-ref="name"
@@ -93,7 +91,7 @@
             class="form-textarea mt-2 w-full resize-none rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
             id="introduction"
             name="introduction"
-            wire:model.lazy="introduction"
+            wire:model.blur="introduction"
             placeholder="介紹一下你自己吧！"
             rows="5"
           >{{ old('introduction', $introduction) }}</textarea>

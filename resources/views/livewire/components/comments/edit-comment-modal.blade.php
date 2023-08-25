@@ -5,14 +5,6 @@
   aria-modal="true"
   x-cloak
   x-data="{ isOpen: false }"
-  x-init="// when enable the preview, reload the scripts
-  Livewire.hook('message.processed', (message) => {
-      if (message.updateQueue[0].name === 'convertToHtml') {
-          document.querySelectorAll('#editing-comment-preview pre code:not(.hljs)').forEach((element) => {
-              window.hljs.highlightElement(element)
-          })
-      }
-  })"
   x-show="isOpen"
   @edit-comment-was-set.window="
     isOpen = true
@@ -69,7 +61,7 @@
         <form
           class="space-y-4"
           id="edit-comment"
-          wire:submit.prevent="update"
+          wire:submit="update"
         >
           @if (!$convertToHtml)
             <div>
@@ -89,7 +81,7 @@
                     'end'
                   )
                 "
-                wire:model.lazy="body"
+                wire:model.blur="body"
                 rows="12"
                 placeholder="寫下你的留言吧！**支援 Markdown**"
                 required
@@ -102,7 +94,7 @@
           @else
             <div
               class="space-y-2"
-              id="editing-comment-preview"
+              id="edit-comment-preview"
             >
               <div class="space-x-4">
                 <span class="font-semibold dark:text-gray-50">{{ auth()->user()->name }}</span>
@@ -115,7 +107,10 @@
           @endif
 
           <div class="flex items-center justify-between space-x-3">
-            <x-toggle-switch wire:model="convertToHtml">
+            <x-toggle-switch
+              wire:model.live="convertToHtml"
+              :id="'edit-comment-modal-preview'"
+            >
               預覽
             </x-toggle-switch>
 

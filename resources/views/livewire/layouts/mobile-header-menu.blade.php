@@ -73,6 +73,7 @@
             <a
               class="rounded-md border border-blue-400 bg-transparent px-4 py-2 text-blue-400 hover:border-transparent hover:bg-blue-400 hover:text-gray-50"
               href="{{ route('register') }}"
+              wire:navigate
             >
               註冊
             </a>
@@ -82,6 +83,7 @@
             <a
               class="rounded-md border border-emerald-400 bg-transparent px-4 py-2 text-emerald-400 hover:border-transparent hover:bg-emerald-400 hover:text-gray-50"
               href="{{ route('login') }}"
+              wire:navigate
             >
               登入
             </a>
@@ -94,6 +96,7 @@
             <a
               class="rounded-full text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
               href="{{ route('notifications.index') }}"
+              wire:navigate
             >
               <i class="bi bi-bell-fill"></i>
             </a>
@@ -148,6 +151,7 @@
                 href="{{ route('posts.create') }}"
                 role="menuitem"
                 tabindex="-1"
+                wire:navigate
               >
                 <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
               </a>
@@ -157,6 +161,7 @@
                 href="{{ route('users.index', ['user' => auth()->id()]) }}"
                 role="menuitem"
                 tabindex="-1"
+                wire:navigate
               >
                 <i class="bi bi-info-circle-fill"></i><span class="ml-2">個人資訊</span>
               </a>
@@ -166,6 +171,7 @@
                 href="{{ route('users.edit', ['user' => auth()->id()]) }}"
                 role="menuitem"
                 tabindex="-1"
+                wire:navigate
               >
                 <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
               </a>
@@ -175,8 +181,8 @@
                 type="button"
                 role="menuitem"
                 tabindex="-1"
-                onclick="confirm('你確定要登出嗎？') || event.stopImmediatePropagation()"
-                wire:click="$emitUp('logout')"
+                wire:confirm="你確定要登出嗎？"
+                wire:click="$parent.logout"
               >
                 <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
               </button>
@@ -208,6 +214,7 @@
             'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-50' => $inIndexPage,
             'text-gray-400 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-50' => !$inIndexPage,
         ])
+        wire:navigate
       >
         <i class="bi bi-house-fill"></i><span class="ml-2">全部文章</span>
       </a>
@@ -224,6 +231,7 @@
               'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-50' => $inCategoryPage,
               'text-gray-400 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-50' => !$inCategoryPage,
           ])
+          wire:navigate
         >
           <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>
         </a>

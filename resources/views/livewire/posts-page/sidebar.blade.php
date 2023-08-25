@@ -20,6 +20,7 @@
         <a
           class="group relative flex w-full items-center justify-center overflow-hidden rounded-lg bg-emerald-600 px-4 py-2 [transform:translateZ(0)] before:absolute before:left-1/2 before:top-1/2 before:h-8 before:w-8 before:-translate-x-1/2 before:-translate-y-1/2 before:scale-[0] before:rounded-full before:bg-blue-600 before:opacity-0 before:transition before:duration-700 before:ease-in-out hover:before:scale-[10] hover:before:opacity-100"
           href="{{ route('posts.create') }}"
+          wire:navigate
         >
           <span class="relative z-0 text-lg font-semibold text-gray-200 transition duration-700 ease-in-out">
             <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>

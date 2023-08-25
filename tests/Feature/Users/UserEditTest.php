@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\EditUserInfoPage;
+use App\Livewire\EditUserInfoPage;
 use App\Models\User;
 
 use function Pest\Faker\fake;
@@ -46,7 +46,7 @@ test('users can update their own information', function () {
         ->set('name', 'New_legal_name')
         ->set('introduction', fake()->realText(120))
         ->call('update')
-        ->assertDispatchedBrowserEvent('info-badge', ['status' => 'success', 'message' => '個人資料更新成功']);
+        ->assertDispatched('info-badge', status: 'success', message: '個人資料更新成功');
 });
 
 test('if the name format is not correct, the name cannot be updated', function () {

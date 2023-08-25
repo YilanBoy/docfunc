@@ -1,17 +1,17 @@
 <?php
 
 use App\Http\Controllers\User\DestroyUserController;
-use App\Http\Livewire\CategoryPage;
-use App\Http\Livewire\ChangeUserPasswordPage;
-use App\Http\Livewire\CreatePostPage;
-use App\Http\Livewire\DeleteUserPage;
-use App\Http\Livewire\EditPostPage;
-use App\Http\Livewire\EditUserInfoPage;
-use App\Http\Livewire\NotificationPage;
-use App\Http\Livewire\PostsPage\Index as PostsPage;
-use App\Http\Livewire\ShowPostPage\Index as ShowPostPage;
-use App\Http\Livewire\TagPage;
-use App\Http\Livewire\UserInfoPage\Index as UserInfoPage;
+use App\Livewire\CategoryPage;
+use App\Livewire\ChangeUserPasswordPage;
+use App\Livewire\CreatePostPage;
+use App\Livewire\DeleteUserPage;
+use App\Livewire\EditPostPage;
+use App\Livewire\EditUserInfoPage;
+use App\Livewire\NotificationPage;
+use App\Livewire\PostsPage\Index as PostsPage;
+use App\Livewire\ShowPostPage\Index as ShowPostPage;
+use App\Livewire\TagPage;
+use App\Livewire\UserInfoPage\Index as UserInfoPage;
 use Illuminate\Support\Facades\Route;
 
 /*

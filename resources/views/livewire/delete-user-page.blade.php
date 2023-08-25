@@ -1,5 +1,3 @@
-@section('title', '會員中心-刪除帳號')
-
 <div class="container mx-auto flex-1">
   <div class="flex flex-col items-start justify-center px-4 md:flex-row xl:px-0">
     <x-member-certre-side-menu />
@@ -21,7 +19,7 @@
         <button
           class="inline-flex items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 font-semibold uppercase tracking-widest text-gray-50 ring-red-300 transition duration-150 ease-in-out hover:bg-red-700 focus:border-red-900 focus:outline-none focus:ring active:bg-red-900 disabled:opacity-25"
           type="button"
-          onclick="confirm('您確定要寄出刪除帳號信件嗎？') || event.stopImmediatePropagation()"
+          wire:confirm="您確定要寄出刪除帳號信件嗎？"
           wire:click="sendDestroyEmail"
         >
           寄出刪除帳號信件

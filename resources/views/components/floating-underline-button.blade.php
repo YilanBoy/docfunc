@@ -6,6 +6,7 @@
         'text-gray-400 hover:text-green-500 dark:hover:text-lividus-400' => !$selected,
         'text-green-500 dark:text-lividus-400' => $selected,
     ])
+    wire:navigate
   >
     <i class="{{ $iconClass }}"></i>
     <span class="ml-2 font-semibold">{{ $slot }}</span>

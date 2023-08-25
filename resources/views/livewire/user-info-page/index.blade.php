@@ -1,5 +1,3 @@
-@section('title', $user->name . ' 的個人資訊')
-
 {{-- user information page --}}
 <div class="container mx-auto flex-1">
   <div class="flex flex-col items-center justify-start px-4">
@@ -9,7 +7,7 @@
       class="relative w-full max-w-sm md:max-w-2xl"
       {{-- tab can only be 'information', 'posts', 'comments' --}}
       x-data="{
-          tabSelected: 'information',
+          tabSelected: $persist('information'),
           tabButtonClicked(tabButton) {
               this.tabSelected = tabButton.id.replace('-tab-button', '');
               this.tabRepositionMarker(tabButton);

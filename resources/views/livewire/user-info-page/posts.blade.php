@@ -7,12 +7,14 @@
           this.activeAccordion = (this.activeAccordion == id) ? '' : id
       }
   }"
-  x-init="setActiveAccordion('accordion-1')"
+  x-init="setActiveAccordion(new Date().getFullYear())"
 >
   @forelse($postsGroupByYear as $year => $posts)
     <div
       class="group cursor-pointer rounded-md border bg-gray-50 duration-200 ease-out dark:bg-gray-800"
-      x-data="{ id: $id('accordion') }"
+      x-data="{
+          id: @js($year)
+      }"
       :id="id"
       :class="{
           'border-gray-300/60 dark:border-gray-600/60 text-gray-800 dark:text-gray-200': activeAccordion === id,

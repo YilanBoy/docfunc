@@ -30,6 +30,8 @@ async function convertOEmbedToIframe(oembedElement: HTMLElement) {
         .then((data) => {
             if (data.html) {
                 oembedElement.insertAdjacentHTML('afterend', data.html);
+                // 標記為已處理，在 SPA 應用中，避免重複處理
+                oembedElement.classList.add('oembed-processed');
             }
         });
 }
@@ -41,10 +43,9 @@ function isYouTubeUrl(url: string) {
 
 // 主要處理函式
 window.processYoutubeOEmbeds = function () {
-    console.log('processOEmbeds');
-
-    const oembedElements: NodeListOf<HTMLElement> =
-        document.querySelectorAll('oembed');
+    const oembedElements: NodeListOf<HTMLElement> = document.querySelectorAll(
+        'oembed:not(.oembed-processed)',
+    );
 
     oembedElements.forEach((oembedElement) => {
         const figureElement = oembedElement.closest('figure.media');

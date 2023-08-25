@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\ChangeUserPasswordPage;
+use App\Livewire\ChangeUserPasswordPage;
 use App\Models\User;
 
 use function Pest\Laravel\get;
@@ -35,7 +35,7 @@ test('users can update their passwords', function () {
         ->set('new_password', $newPassword)
         ->set('new_password_confirmation', $newPassword)
         ->call('update')
-        ->assertDispatchedBrowserEvent('info-badge', ['status' => 'success', 'message' => '密碼更新成功！']);
+        ->assertDispatched('info-badge', status: 'success', message: '密碼更新成功！');
 
     $user->refresh();
 

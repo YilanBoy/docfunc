@@ -6,6 +6,7 @@
   <a
     class="absolute inset-y-1/2 left-4 flex items-center"
     href="{{ route('root') }}"
+    wire:navigate
   >
     <img
       class="h-10 w-10"
@@ -71,6 +72,7 @@
         <a
           class="flex h-10 items-center justify-center rounded-lg border border-blue-600 bg-transparent px-3 text-blue-600 transition duration-150 hover:border-transparent hover:bg-blue-600 hover:text-gray-50"
           href="{{ route('register') }}"
+          wire:navigate
         >
           註冊
         </a>
@@ -80,6 +82,7 @@
         <a
           class="flex h-10 items-center justify-center rounded-lg border border-emerald-600 bg-transparent px-3 text-emerald-600 transition duration-150 hover:border-transparent hover:bg-emerald-600 hover:text-gray-50"
           href="{{ route('login') }}"
+          wire:navigate
         >
           <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
         </a>
@@ -92,6 +95,7 @@
         <a
           class="flex h-10 w-10 items-center justify-center rounded-lg text-xl text-gray-400 transition duration-150 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-600 dark:hover:text-gray-50"
           href="{{ route('notifications.index') }}"
+          wire:navigate
         >
           <i class="bi bi-bell-fill"></i>
         </a>
@@ -146,6 +150,7 @@
             href="{{ route('posts.create') }}"
             role="menuitem"
             tabindex="-1"
+            wire:navigate
           >
             <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
           </a>
@@ -155,6 +160,7 @@
             href="{{ route('users.index', ['user' => auth()->id()]) }}"
             role="menuitem"
             tabindex="-1"
+            wire:navigate
           >
             <i class="bi bi-info-circle-fill"></i><span class="ml-2">個人資訊</span>
           </a>
@@ -164,6 +170,7 @@
             href="{{ route('users.edit', ['user' => auth()->id()]) }}"
             role="menuitem"
             tabindex="-1"
+            wire:navigate
           >
             <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
           </a>
@@ -173,8 +180,8 @@
             type="button"
             role="menuitem"
             tabindex="-1"
-            onclick="confirm('你確定要登出嗎？') || event.stopImmediatePropagation()"
-            wire:click="$emitUp('logout')"
+            wire:confirm="你確定要登出嗎？"
+            wire:click="$parent.logout"
           >
             <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
           </button>

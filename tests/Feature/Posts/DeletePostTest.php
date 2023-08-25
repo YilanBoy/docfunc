@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Livewire\ShowPostPage\Menu;
-use App\Http\Livewire\ShowPostPage\Sidebar;
-use App\Http\Livewire\UserInfoPage\PostsByYear;
+use App\Livewire\ShowPostPage\Menu;
+use App\Livewire\ShowPostPage\Sidebar;
+use App\Livewire\UserInfoPage\PostsByYear;
 use App\Models\Post;
 use App\Models\User;
 use Livewire\Livewire;
@@ -102,7 +102,7 @@ test('author can soft delete own post in user information post card', function (
         'year' => $post->created_at->format('Y'),
     ])
         ->call('deletePost', $post->id)
-        ->assertDispatchedBrowserEvent('info-badge', ['status' => 'success', 'message' => '文章已刪除']);
+        ->assertDispatched('info-badge', status: 'success', message: '文章已刪除');
 
     $this->assertSoftDeleted('posts', ['id' => $post->id]);
 });
@@ -159,7 +159,7 @@ test('author can restore deleted post', function () {
         'year' => $post->created_at->format('Y'),
     ])
         ->call('restore', $post->id)
-        ->assertDispatchedBrowserEvent('info-badge', ['status' => 'success', 'message' => '文章已恢復']);
+        ->assertDispatched('info-badge', status: 'success', message: '文章已恢復');
 
     $this->assertNotSoftDeleted('posts', ['id' => $post->id]);
 });

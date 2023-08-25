@@ -1,5 +1,3 @@
-@section('title', '會員中心-修改密碼')
-
 <div
   class="container mx-auto flex-1"
   x-data
@@ -14,7 +12,7 @@
 
       <form
         class="w-full"
-        wire:submit.prevent="update"
+        wire:submit="update"
       >
         {{-- 舊密碼 --}}
         <div>
@@ -23,7 +21,7 @@
             type="password"
             :id="'current_password'"
             :placeholder="'舊密碼'"
-            wire:model.defer="current_password"
+            wire:model="current_password"
             required
             x-ref="currentPassword"
           ></x-floating-label-input>
@@ -36,7 +34,7 @@
             type="password"
             :id="'new_password'"
             :placeholder="'新密碼'"
-            wire:model.defer="new_password"
+            wire:model="new_password"
             required
           ></x-floating-label-input>
         </div>
@@ -48,7 +46,7 @@
             type="password"
             :id="'new_password_confirmation'"
             :placeholder="'確認新密碼'"
-            wire:model.defer="new_password_confirmation"
+            wire:model="new_password_confirmation"
             required
           ></x-floating-label-input>
         </div>

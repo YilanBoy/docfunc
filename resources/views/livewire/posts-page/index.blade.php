@@ -1,5 +1,3 @@
-@section('title', $title)
-
 {{-- 文章列表 --}}
 <div class="container mx-auto">
   <div

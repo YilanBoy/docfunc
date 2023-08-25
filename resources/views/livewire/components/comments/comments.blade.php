@@ -4,28 +4,6 @@
   id="comments"
   x-ref="comments"
   x-data="{ currentScrollY: 0 }"
-  x-init="// after editing comment or loading more comments, reload the scripts
-  Livewire.hook('message.processed', (message) => {
-      // if the method is 'showMore', scroll to the previous position
-      if (message.updateQueue[0].method === 'showMore') {
-          window.scrollTo(0, currentScrollY);
-      }
-
-      // creat a default function to execute
-      // when comments list update and markdown preview enable, execute the function
-      (function() {
-          // highlight the code blocks
-          document.querySelectorAll('#comments pre code:not(.hljs)').forEach((element) => {
-              // if element is type of element
-              if (element instanceof Element) {
-                  hljs.highlightElement(element)
-              }
-          })
-
-          // add copy button to the code blocks
-          codeBlockCopyButton($refs.comments)
-      })()
-  })"
 >
 
   @for ($offset = 0; $offset < $count; $offset += $perPage)

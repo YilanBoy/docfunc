@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -80,7 +79,7 @@ class Post extends Model implements Feedable
     /**
      * Get the prunable model query.
      */
-    public function prunable(): Builder
+    public function prunable()
     {
         return static::where('deleted_at', '<=', now()->subMonth());
     }

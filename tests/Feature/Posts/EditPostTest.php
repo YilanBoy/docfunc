@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Livewire\EditPostPage;
+use App\Livewire\EditPostPage;
+use App\Livewire\UserInfoPage\PostsByYear;
 use App\Models\Post;
 use App\Models\User;
 
@@ -57,3 +58,31 @@ test('authors can update their posts', function ($categoryId) {
     $this->assertEquals($post->category_id, $categoryId);
     $this->assertEquals($post->body, $newBody);
 })->with('defaultCategoryIds');
+
+test('users can update the private status of their posts.', function ($privateStatus) {
+    $post = Post::factory()->create([
+        'is_private' => $privateStatus,
+        'created_at' => now(),
+    ]);
+
+    $this->actingAs($post->user);
+
+    livewire(PostsByYear::class, [
+        'year' => now()->year,
+        'userId' => $post->user_id,
+        'posts' => $post->get(),
+    ])
+        ->call('postPrivateToggle', $post->id)
+        ->assertHasNoErrors()
+        ->assertDispatched(
+            'info-badge',
+            status: 'success',
+            // if original status is true, then the message should be '文章狀態已切換為公開'
+            // because the status is toggled to false
+            message: $privateStatus ? '文章狀態已切換為公開' : '文章狀態已切換為私人',
+        );
+
+    $post->refresh();
+
+    expect($post->is_private)->toBe(! $privateStatus);
+})->with([true, false]);

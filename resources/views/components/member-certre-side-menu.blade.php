@@ -16,6 +16,7 @@
           'bg-gray-200 dark:bg-gray-700' => $inEditUserPage,
           'hover:bg-gray-200 dark:hover:bg-gray-700' => !$inEditUserPage,
       ])
+      wire:navigate
     >
       <i class="bi bi-person-lines-fill"></i><span class="ml-2">編輯個人資料</span>
     </a>
@@ -31,6 +32,7 @@
           'bg-gray-200 dark:bg-gray-700' => $inChangePasswordPage,
           'hover:bg-gray-200 dark:hover:bg-gray-700' => !$inChangePasswordPage,
       ])
+      wire:navigate
     >
       <i class="bi bi-file-earmark-lock-fill"></i><span class="ml-2">修改密碼</span>
     </a>
@@ -46,6 +48,7 @@
           'bg-gray-200 dark:bg-gray-700' => $inDeleteUserPage,
           'hover:bg-gray-200 dark:hover:bg-gray-700' => !$inDeleteUserPage,
       ])
+      wire:navigate
     >
       <i class="bi bi-person-x-fill"></i><span class="ml-2">刪除帳號</span>
     </a>

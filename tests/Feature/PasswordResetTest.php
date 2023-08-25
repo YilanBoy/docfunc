@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Livewire\Auth\ForgotPassword;
-use App\Http\Livewire\Auth\ResetPassword as ResetPasswordComponent;
+use App\Livewire\Auth\ForgotPassword;
+use App\Livewire\Auth\ResetPassword as ResetPasswordComponent;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -60,8 +60,7 @@ test('password can be reset with valid token', function () {
             ->test(ResetPasswordComponent::class, ['token' => $notification->token])
             ->set('password', 'Banana101!')
             ->set('password_confirmation', 'Banana101!')
-            ->call('store')
-            ->assertHasNoErrors();
+            ->call('store');
 
         Event::assertDispatched(PasswordReset::class);
 

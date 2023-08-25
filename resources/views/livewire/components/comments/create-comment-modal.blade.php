@@ -8,14 +8,6 @@
       isOpen: false,
       recaptchaSiteKey: @js(config('services.recaptcha.site_key'))
   }"
-  x-init="// when enable the preview, reload the scripts
-  Livewire.hook('message.processed', (message) => {
-      if (message.updateQueue[0].name === 'convertToHtml') {
-          document.querySelectorAll('#creating-comment-preview pre code:not(.hljs)').forEach((element) => {
-              window.hljs.highlightElement(element)
-          })
-      }
-  });"
   x-show="isOpen"
   @open-create-comment-modal.window="
     isOpen = true
@@ -24,6 +16,9 @@
   @close-create-comment-modal.window="isOpen = false"
   @keydown.escape.window="isOpen = false"
 >
+  {{-- google recaptcha --}}
+  <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+
   <div class="flex min-h-screen items-end justify-center">
     {{-- gray background --}}
     <div
@@ -95,7 +90,7 @@
                 x-ref="createCommentTextarea"
                 {{-- change tab into 4 spaces --}}
                 x-on:keydown.tab.prevent="$el.setRangeText( '    ', $el.selectionStart, $el.selectionStart, 'end')"
-                wire:model.lazy="body"
+                wire:model.blur="body"
                 rows="12"
                 placeholder="寫下你的留言吧！**支援 Markdown**"
                 required
@@ -108,7 +103,7 @@
           @else
             <div
               class="space-y-2"
-              id="creating-comment-preview"
+              id="create-comment-preview"
             >
               <div class="space-x-4">
                 <span class="font-semibold dark:text-gray-50">
@@ -127,7 +122,10 @@
           @endif
 
           <div class="flex items-center justify-between space-x-3">
-            <x-toggle-switch wire:model="convertToHtml">
+            <x-toggle-switch
+              :id="'create-comment-modal-preview'"
+              wire:model.live="convertToHtml"
+            >
               預覽
             </x-toggle-switch>
 

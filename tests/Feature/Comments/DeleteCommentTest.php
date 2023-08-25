@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\Components\Comments\Comment;
+use App\Livewire\Components\Comments\Comment;
 use App\Models\Comment as CommentModel;
 use App\Models\User;
 
@@ -22,8 +22,8 @@ test('the author can delete his comment', function () {
         'postUserId' => $comment->post->user->id,
     ])
         ->call('destroy', $comment->id)
-        ->assertEmitted('updateCommentCounts')
-        ->assertEmitted('refreshAllComments');
+        ->assertDispatched('updateCommentCounts')
+        ->assertDispatched('refreshComments');
 
     $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
 });

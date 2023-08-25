@@ -1,5 +1,3 @@
-@section('title', $post->title)
-
 @section('description', $post->excerpt)
 
 @if (!is_null($post->preview_url))
@@ -75,6 +73,7 @@
                   class="hover:text-neutral-500 dark:hover:text-neutral-300"
                   href="{{ route('users.index', ['user' => $post->user_id]) }}"
                   title="{{ $post->user->name }}"
+                  wire:navigate
                 >
                   <i class="bi bi-person-fill"></i><span class="ml-2">{{ $post->user->name }}</span>
                 </a>
@@ -143,6 +142,7 @@
               <a
                 class="gradient-underline-grow inline-block text-2xl font-bold dark:text-gray-50"
                 href="{{ route('users.index', ['user' => $post->user->id]) }}"
+                wire:navigate
               >
                 {{ $post->user->name }}
               </a>

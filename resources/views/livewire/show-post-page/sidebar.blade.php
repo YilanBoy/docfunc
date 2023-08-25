@@ -4,6 +4,7 @@
     class="group flex h-14 w-14 items-center justify-center text-gray-400"
     href="{{ route('posts.index') }}"
     role="button"
+    wire:navigate
   >
     <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
       <i class="bi bi-house-fill"></i>
@@ -45,6 +46,7 @@
       class="group flex h-14 w-14 items-center justify-center text-gray-400"
       href="{{ route('posts.edit', ['post' => $postId]) }}"
       role="button"
+      wire:navigate
     >
       <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
         <i class="bi bi-pencil-square"></i>
@@ -56,7 +58,7 @@
       class="group flex h-14 w-14 items-center justify-center text-gray-400"
       type="button"
       title="刪除文章"
-      onclick="confirm('你確定要刪除文章嗎？（7 天之內可以還原）') || event.stopImmediatePropagation()"
+      wire:confirm="你確定要刪除文章嗎？（7 天之內可以還原）"
       wire:click="deletePost({{ $postId }})"
     >
       <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">

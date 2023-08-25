@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Livewire\Auth\ForgotPassword;
-use App\Http\Livewire\Auth\Login;
-use App\Http\Livewire\Auth\Register;
-use App\Http\Livewire\Auth\ResetPassword;
-use App\Http\Livewire\Auth\VerifyEmail;
+use App\Livewire\Auth\ForgotPassword;
+use App\Livewire\Auth\Login;
+use App\Livewire\Auth\Register;
+use App\Livewire\Auth\ResetPassword;
+use App\Livewire\Auth\VerifyEmail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', Login::class)

@@ -13,7 +13,7 @@
 >
 <meta
   property="og:title"
-  content="@yield('title', config('app.name'))"
+  content="{{ $title }}"
 >
 <meta
   property="og:description"
@@ -35,7 +35,7 @@
 >
 <meta
   property="twitter:title"
-  content="@yield('title', config('app.name'))"
+  content="{{ $title }}"
 >
 <meta
   property="twitter:description"

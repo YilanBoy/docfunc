@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Livewire\Components\Comments\CreateCommentModal;
-use App\Http\Livewire\NotificationPage;
+use App\Livewire\Components\Comments\CreateCommentModal;
+use App\Livewire\NotificationPage;
 use App\Models\Post;
 use App\Models\User;
 

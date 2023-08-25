@@ -3,19 +3,7 @@
   class="space-y-6"
   x-data
   x-init="// init comments page
-  window.hljs.highlightAll();
-
-  Livewire.hook('message.processed', (message) => {
-      // when change page in comments tab, highlight code block
-      if (message.updateQueue[0].method.toLowerCase().includes('page')) {
-          document.querySelectorAll('#comments-content pre code:not(.hljs)').forEach((element) => {
-              // if element is type of element
-              if (element instanceof Element) {
-                  hljs.highlightElement(element)
-              }
-          })
-      }
-  })"
+  window.hljs.highlightAll();"
 >
   @forelse ($comments as $comment)
     <x-dashed-card
@@ -24,6 +12,7 @@
       <a
         class="absolute right-0 top-0 z-20 block h-full w-full bg-transparent"
         href="{{ $comment->post->link_with_slug }}#comments"
+        wire:navigate
       ></a>
 
       <span class="group-gradient-underline-grow text-xl font-semibold dark:text-gray-50">

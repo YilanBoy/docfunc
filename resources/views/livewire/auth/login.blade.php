@@ -1,6 +1,7 @@
-@section('title', '登入')
-
 <div class="container mx-auto">
+  {{-- google recaptcha --}}
+  <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+
   <div class="flex items-center justify-center px-4 xl:px-0">
 
     <div class="flex w-full flex-col items-center justify-center">
@@ -42,7 +43,7 @@
               type="text"
               :id="'email'"
               :placeholder="'電子信箱'"
-              wire:model.defer="email"
+              wire:model="email"
               required
               autofocus
             />
@@ -54,7 +55,7 @@
               type="password"
               :id="'password'"
               :placeholder="'密碼'"
-              wire:model.defer="password"
+              wire:model="password"
               required
             />
           </div>
@@ -70,7 +71,7 @@
                 id="remember-me"
                 name="remember"
                 type="checkbox"
-                wire:model.defer="remember"
+                wire:model="remember"
               >
               <span class="ml-2 text-sm text-gray-600 dark:text-gray-50">{{ __('Remember me') }}</span>
             </label>
@@ -80,6 +81,7 @@
                 <a
                   class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
                   href="{{ route('password.request') }}"
+                  wire:navigate
                 >
                   {{ __('Forgot your password?') }}
                 </a>

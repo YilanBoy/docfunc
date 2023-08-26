@@ -2,7 +2,7 @@
 
 namespace App\Livewire\UserInfoPage;
 
-use App\Http\Traits\Livewire\MarkdownConverter;
+use App\Livewire\Traits\MarkdownConverter;
 use App\Models\Comment;
 use Livewire\Component;
 use Livewire\WithPagination;

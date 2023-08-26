@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Http\Traits\Livewire\PostForm;
+use App\Livewire\Traits\PostForm;
 use App\Models\Category;
 use App\Models\Post;
 use App\Services\ContentService;
@@ -17,6 +17,8 @@ class CreatePostPage extends Component
 {
     use PostForm;
     use WithFileUploads;
+
+    public string $autoSaveKey = '';
 
     protected ContentService $contentService;
 
@@ -39,13 +41,40 @@ class CreatePostPage extends Component
     public function mount(): void
     {
         $this->autoSaveKey = 'auto_save_user_'.auth()->id().'_create_post';
+        $this->user_id = auth()->id();
 
         $this->categories = Category::all(['id', 'name']);
 
         $this->setDataFromAutoSave($this->autoSaveKey);
     }
 
-    public function store()
+    public function updatedImage(): void
+    {
+        $this->validateImage();
+
+        $this->resetValidation('image');
+    }
+
+    public function updatedTitle(): void
+    {
+        $this->slug = $this->contentService->makeSlug($this->title);
+    }
+
+    public function updatedBody(): void
+    {
+        $this->body = $this->contentService->htmlPurifier($this->body);
+        $this->excerpt = $this->contentService->makeExcerpt($this->body);
+    }
+
+    // when data update, auto save it to redis
+    public function updated(): void
+    {
+        if ($this->autoSaveKey !== '') {
+            $this->autoSave($this->autoSaveKey);
+        }
+    }
+
+    public function store(): void
     {
         $this->validatePost();
 
@@ -54,19 +83,7 @@ class CreatePostPage extends Component
             $this->preview_url = $this->fileService->uploadImageToCloud($this->image);
         }
 
-        // xss filter
-        $this->body = $this->contentService->htmlPurifier($this->body);
-
-        $post = Post::query()->create([
-            'user_id' => auth()->id(),
-            'title' => $this->title,
-            'category_id' => $this->category_id,
-            'body' => $this->body,
-            'is_private' => $this->is_private,
-            'slug' => $this->contentService->makeSlug($this->title),
-            'preview_url' => $this->preview_url,
-            'excerpt' => $this->contentService->makeExcerpt($this->body),
-        ]);
+        $post = Post::query()->create($this->formToArray());
 
         // create new tags relation with post in database
         $post->tags()->attach(

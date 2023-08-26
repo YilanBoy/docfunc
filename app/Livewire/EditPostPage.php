@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Http\Traits\Livewire\PostForm;
+use App\Livewire\Traits\PostForm;
 use App\Models\Category;
 use App\Models\Post;
 use App\Services\ContentService;
@@ -55,7 +55,25 @@ class EditPostPage extends Component
         $this->tags = $post->tags_json;
     }
 
-    public function update()
+    public function updatedImage(): void
+    {
+        $this->validateImage();
+
+        $this->resetValidation('image');
+    }
+
+    public function updatedTitle(): void
+    {
+        $this->slug = $this->contentService->makeSlug($this->title);
+    }
+
+    public function updatedBody(): void
+    {
+        $this->body = $this->contentService->htmlPurifier($this->body);
+        $this->excerpt = $this->contentService->makeExcerpt($this->body);
+    }
+
+    public function update(): void
     {
         $this->validatePost();
 
@@ -64,15 +82,13 @@ class EditPostPage extends Component
             $this->preview_url = $this->fileService->uploadImageToCloud($this->image);
         }
 
-        $this->body = $this->contentService->htmlPurifier($this->body);
-
         $this->post->update([
             'title' => $this->title,
-            'slug' => $this->contentService->makeSlug($this->title),
-            'is_private' => (bool) $this->is_private,
+            'slug' => $this->slug,
+            'is_private' => $this->is_private,
             'category_id' => $this->category_id,
             'body' => $this->body,
-            'excerpt' => $this->contentService->makeExcerpt($this->body),
+            'excerpt' => $this->excerpt,
             'preview_url' => $this->preview_url,
         ]);
 

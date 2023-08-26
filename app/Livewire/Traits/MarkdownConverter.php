@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Traits\Livewire;
+namespace App\Livewire\Traits;
 
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Exception\CommonMarkException;

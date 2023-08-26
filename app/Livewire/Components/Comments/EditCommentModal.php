@@ -3,7 +3,7 @@
 namespace App\Livewire\Components\Comments;
 
 use App\Http\Requests\CommentRequest;
-use App\Http\Traits\Livewire\MarkdownConverter;
+use App\Livewire\Traits\MarkdownConverter;
 use App\Models\Comment as CommentModel;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;

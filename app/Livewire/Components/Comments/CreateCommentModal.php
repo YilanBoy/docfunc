@@ -3,7 +3,7 @@
 namespace App\Livewire\Components\Comments;
 
 use App\Http\Requests\CommentWithRecaptchaRequest;
-use App\Http\Traits\Livewire\MarkdownConverter;
+use App\Livewire\Traits\MarkdownConverter;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Notifications\PostComment;

@@ -1,19 +1,21 @@
 <?php
 
-namespace App\Http\Traits\Livewire;
+namespace App\Livewire\Traits;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Locked;
 
 trait PostForm
 {
-    public string $autoSaveKey = '';
+    #[Locked]
+    public ?int $user_id = null;
 
     public int $category_id = 1;
 
     public ?string $preview_url = null;
 
-    public $image = null;
+    public ?object $image = null;
 
     public bool $is_private = false;
 
@@ -23,20 +25,9 @@ trait PostForm
 
     public string $body = '';
 
-    public function updatedImage(): void
-    {
-        $this->validateImage();
+    public string $slug = '';
 
-        $this->resetValidation('image');
-    }
-
-    // when data update, auto save it to redis
-    public function updated(): void
-    {
-        if ($this->autoSaveKey !== '') {
-            $this->autoSave($this->autoSaveKey);
-        }
-    }
+    public string $excerpt = '';
 
     public function validateImage(): void
     {
@@ -119,5 +110,19 @@ trait PostForm
     public function clearAutoSave(string $key): void
     {
         Cache::forget($key);
+    }
+
+    public function formToArray(): array
+    {
+        return [
+            'user_id' => $this->user_id,
+            'title' => $this->title,
+            'category_id' => $this->category_id,
+            'body' => $this->body,
+            'is_private' => $this->is_private,
+            'slug' => $this->slug,
+            'preview_url' => $this->preview_url,
+            'excerpt' => $this->excerpt,
+        ];
     }
 }

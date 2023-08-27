@@ -18,8 +18,8 @@ use Spatie\Feed\FeedItem;
 /**
  * @property string $link_with_slug 帶有 slug 的文章連結，set by linkWithSlug()
  * @property string $tags_json json 格式的標籤列表, set by tagsJson()
- *
- * @method transform($array, $transformers = null) Algolia method
+ * @method int increment(string $column, float|int $amount = 1, array $extra = []) 將該欄位值加 1
+ * @method int decrement(string $column, float|int $amount = 1, array $extra = []) 將該欄位值減 1
  */
 class Post extends Model implements Feedable
 {

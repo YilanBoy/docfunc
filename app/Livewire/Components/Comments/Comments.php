@@ -2,35 +2,60 @@
 
 namespace App\Livewire\Components\Comments;
 
+use App\Models\Comment;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 
 class Comments extends Component
 {
+    #[Locked]
     public int $postId;
 
-    public int $commentCounts;
-
-    public int $count = 10;
+    #[Locked]
+    public int $postAuthorId;
 
     public int $perPage = 10;
 
-    public bool $showMoreButtonIsActive = false;
+    public array $groupIds = [];
 
-    public function mount()
+    public int $bookmark = 0;
+
+    public bool $showMoreButtonIsActive = true;
+
+    public function mount(): void
     {
-        // 當留言總數大於每頁數目，需要顯示「顯示更多留言」的按鈕
-        if ($this->commentCounts > $this->perPage) {
-            $this->showMoreButtonIsActive = true;
+        $commentIds = Comment::query()
+            ->where('post_id', $this->postId)
+            ->orderBy('id', 'desc')
+            ->limit($this->perPage + 1)
+            ->pluck('id');
+
+        if ($commentIds->count() > 0) {
+            $this->groupIds[$commentIds->first()] = array_slice($commentIds->all(), 0, $this->perPage);
+            $this->bookmark = $commentIds->last();
+        }
+
+        if ($commentIds->count() <= $this->perPage) {
+            $this->showMoreButtonIsActive = false;
         }
     }
 
     // 顯示更多留言
-    public function showMore()
+    public function showMore(): void
     {
-        $this->count += $this->perPage;
+        $commentIds = Comment::query()
+            ->where('post_id', $this->postId)
+            ->where('id', '<=', $this->bookmark)
+            ->orderBy('id', 'desc')
+            ->limit($this->perPage + 1)
+            ->pluck('id');
 
-        // 當父留言顯示數目已經超過文章的父留言總數，不顯示「顯示更多留言」的按鈕
-        if ($this->count >= $this->commentCounts) {
+        if ($commentIds->count() > 0) {
+            $this->groupIds[$commentIds->first()] = array_slice($commentIds->all(), 0, $this->perPage);
+            $this->bookmark = $commentIds->last();
+        }
+
+        if ($commentIds->count() <= $this->perPage) {
             $this->showMoreButtonIsActive = false;
         }
     }

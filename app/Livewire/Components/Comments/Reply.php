@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\Comments;
 
 use App\Models\Post;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Reply extends Component
@@ -11,10 +12,9 @@ class Reply extends Component
 
     public int $commentCounts;
 
-    protected $listeners = ['updateCommentCounts'];
-
     // update comment count in post show page
-    public function updateCommentCounts()
+    #[On('update-comment-counts')]
+    public function updateCommentCounts(): void
     {
         $this->commentCounts = Post::findOrFail($this->postId, ['comment_counts'])->comment_counts;
     }

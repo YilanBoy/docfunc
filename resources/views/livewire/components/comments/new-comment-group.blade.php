@@ -10,7 +10,7 @@
       :body="$comment->body"
       :created-at="$comment->created_at"
       :is-edited="$comment->created_at->ne($comment->updated_at)"
-      :$bookmark
+      :bookmark="'new'"
       {{-- when the parent component is updated, the child component is updated together --}}
       {{-- reference: https://github.com/livewire/livewire/discussions/1895 --}}
       :wire:key="'comment-'.$comment->id"

@@ -7,7 +7,7 @@ use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class CommentGroup extends Component
+class NewCommentGroup extends Component
 {
     #[Locked]
     public int $postId;
@@ -15,11 +15,15 @@ class CommentGroup extends Component
     #[Locked]
     public int $postAuthorId;
 
-    public array $ids;
+    public array $ids = [];
 
-    public int $bookmark;
+    #[On('add-id-to-group-new')]
+    public function addId(int $commentId): void
+    {
+        $this->ids[] = $commentId;
+    }
 
-    #[On('remove-id-from-group-{bookmark}')]
+    #[On('remove-id-from-group-new')]
     public function removeId(int $id): void
     {
         unset($this->ids[array_search($id, $this->ids)]);
@@ -39,6 +43,6 @@ class CommentGroup extends Component
                 ->get();
         }
 
-        return view('livewire.components.comments.comment-group', compact('comments'));
+        return view('livewire.components.comments.new-comment-group', compact('comments'));
     }
 }

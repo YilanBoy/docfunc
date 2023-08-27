@@ -152,13 +152,14 @@
 
           {{-- comment box --}}
           <livewire:components.comments.reply
-            :postId="$post->id"
-            :commentCounts="$post->comment_counts"
+            :post-id="$post->id"
+            :comment-counts="$post->comment_counts"
           />
 
           {{-- comments list --}}
           <livewire:components.comments.comments
-            :postId="$post->id"
+            :post-id="$post->id"
+            :post-author-id="$post->user_id"
             :comment-counts="$post->comment_counts"
           />
         </div>

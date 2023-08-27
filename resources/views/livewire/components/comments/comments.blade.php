@@ -5,15 +5,20 @@
   x-ref="comments"
   x-data="{ currentScrollY: 0 }"
 >
+  <livewire:components.comments.new-comment-group
+    :$postId
+    :$postAuthorId
+  />
 
-  @for ($offset = 0; $offset < $count; $offset += $perPage)
+  @foreach ($groupIds as $bookmark => $ids)
     <livewire:components.comments.comment-group
-      :post-id="$postId"
-      :per-page="$perPage"
-      :offset="$offset"
-      :wire:key="'comment-group-' . $offset"
+      :$postId
+      :$postAuthorId
+      :$ids
+      :$bookmark
+      :wire:key="'group-'.$bookmark"
     />
-  @endfor
+  @endforeach
 
   @if ($showMoreButtonIsActive)
     <div class="mt-6 flex items-center justify-center">

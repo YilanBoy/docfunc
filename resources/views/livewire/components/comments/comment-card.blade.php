@@ -19,7 +19,7 @@
         <span class="font-semibold dark:text-gray-50">訪客</span>
       @endif
 
-      <span class="text-gray-400">{{ $createdAt }}</span>
+      <span class="text-gray-400">{{ $createdAt->format('Y 年 m 月 d 日') }}</span>
       @if ($isEdited)
         <span class="text-gray-400">(已編輯)</span>
       @endif
@@ -44,12 +44,12 @@
             </button>
           @endif
 
-          @if (in_array(auth()->id(), [$userId, $postUserId]))
+          @if (in_array(auth()->id(), [$userId, $postAuthorId]))
             <button
               class="hover:text-gray-500 dark:hover:text-gray-300"
               type="button"
               wire:confirm="你確定要刪除該留言？"
-              wire:click="destroy({{ $commentId }})"
+              wire:click="destroy"
             >
               <i class="bi bi-trash3-fill"></i>
               <span class="ml-1">刪除</span>

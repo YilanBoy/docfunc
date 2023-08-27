@@ -3,18 +3,22 @@
 namespace App\Livewire\Components\Comments;
 
 use App\Livewire\Traits\MarkdownConverter;
-use App\Models\Comment as CommentModel;
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 use League\CommonMark\Exception\CommonMarkException;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Throwable;
 
-class Comment extends Component
+/**
+ * @property string convertedBody 將 markdown 的 body 轉換成 html 格式，set by convertedBody()
+ */
+class CommentCard extends Component
 {
     use AuthorizesRequests;
     use MarkdownConverter;
@@ -23,13 +27,13 @@ class Comment extends Component
     public int $postId;
 
     #[Locked]
+    public int $postAuthorId;
+
+    #[Locked]
     public int $commentId;
 
     #[Locked]
     public int $userId;
-
-    #[Locked]
-    public string $postUserId;
 
     public string $userGravatarUrl;
 
@@ -37,14 +41,17 @@ class Comment extends Component
 
     public string $body;
 
-    public string $createdAt;
+    public object $createdAt;
 
     public string $isEdited;
+
+    public int|string $bookmark;
 
     /**
      * @throws CommonMarkException
      */
-    public function getConvertedBodyProperty(): string
+    #[Computed]
+    public function convertedBody(): string
     {
         return $this->convertToHtml($this->body);
     }
@@ -52,9 +59,10 @@ class Comment extends Component
     #[On('comment-updated.{commentId}')]
     public function refreshComment(): void
     {
-        $comment = CommentModel::findOrFail($this->commentId);
+        $comment = Comment::findOrFail($this->commentId);
+
         $this->body = $comment->body;
-        $this->createdAt = $comment->created_at->diffForHumans();
+        $this->createdAt = $comment->created_at;
         $this->isEdited = true;
     }
 
@@ -64,8 +72,10 @@ class Comment extends Component
      * @throws AuthorizationException
      * @throws Throwable
      */
-    public function destroy(CommentModel $comment): void
+    public function destroy(): void
     {
+        $comment = Comment::findOrFail($this->commentId);
+
         $this->authorize('destroy', $comment);
 
         DB::transaction(function () use ($comment) {
@@ -76,13 +86,15 @@ class Comment extends Component
             $post->decrement('comment_counts');
         });
 
-        $this->dispatch('updateCommentCounts');
+        $this->dispatch('remove-id-from-group-'.$this->bookmark, id: $this->commentId);
 
-        $this->dispatch('refreshComments');
+        $this->dispatch('update-comment-counts');
+
+        $this->dispatch('info-badge', status: 'success', message: '成功刪除留言！');
     }
 
     public function render()
     {
-        return view('livewire.components.comments.comment');
+        return view('livewire.components.comments.comment-card');
     }
 }

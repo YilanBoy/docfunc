@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Components\Comments\CommentCard;
 use App\Livewire\Components\Comments\EditCommentModal;
 use App\Models\Comment;
 use App\Models\User;
@@ -96,22 +97,20 @@ it('can see the comment preview', function () {
 it('will display the word "edited" on top of it if it has been edited', function () {
     $comment = Comment::factory()->create();
 
-    $offset = 0;
-
     // update the updated_at comment
     $comment->touch();
 
-    Livewire::test(\App\Livewire\Components\Comments\Comment::class, [
+    Livewire::test(CommentCard::class, [
         'postId' => $comment->post_id,
+        'postAuthorId' => $comment->post->user_id,
         'commentId' => $comment->id,
         'userId' => $comment->user_id,
-        'userGravatarUrl' => $comment->user->gravatar_url,
+        'userGravatarUrl' => get_gravatar($comment->user->email),
         'userName' => $comment->user->name,
         'body' => $comment->body,
         'createdAt' => $comment->created_at,
         'isEdited' => $comment->created_at->ne($comment->updated_at),
-        'postUserId' => $comment->post->user_id,
-        'offset' => $offset,
+        'bookmark' => 'id',
     ])->assertSee(<<<'HTML'
         <span class="text-gray-400">(已編輯)</span>
     HTML, false);

@@ -62,20 +62,13 @@ class EditPostPage extends Component
         $this->resetValidation('image');
     }
 
-    public function updatedTitle(): void
-    {
-        $this->slug = $this->contentService->makeSlug($this->title);
-    }
-
-    public function updatedBody(): void
-    {
-        $this->body = $this->contentService->htmlPurifier($this->body);
-        $this->excerpt = $this->contentService->makeExcerpt($this->body);
-    }
-
     public function update(): void
     {
         $this->validatePost();
+
+        $this->slug = $this->contentService->makeSlug($this->title);
+        $this->body = $this->contentService->htmlPurifier($this->body);
+        $this->excerpt = $this->contentService->makeExcerpt($this->body);
 
         // upload image
         if ($this->image) {

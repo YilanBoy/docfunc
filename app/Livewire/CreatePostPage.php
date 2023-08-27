@@ -55,17 +55,6 @@ class CreatePostPage extends Component
         $this->resetValidation('image');
     }
 
-    public function updatedTitle(): void
-    {
-        $this->slug = $this->contentService->makeSlug($this->title);
-    }
-
-    public function updatedBody(): void
-    {
-        $this->body = $this->contentService->htmlPurifier($this->body);
-        $this->excerpt = $this->contentService->makeExcerpt($this->body);
-    }
-
     // when data update, auto save it to redis
     public function updated(): void
     {
@@ -77,6 +66,10 @@ class CreatePostPage extends Component
     public function store(): void
     {
         $this->validatePost();
+
+        $this->slug = $this->contentService->makeSlug($this->title);
+        $this->body = $this->contentService->htmlPurifier($this->body);
+        $this->excerpt = $this->contentService->makeExcerpt($this->body);
 
         // upload image
         if ($this->image) {

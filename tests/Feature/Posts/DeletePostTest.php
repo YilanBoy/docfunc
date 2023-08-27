@@ -5,14 +5,15 @@ use App\Livewire\ShowPostPage\Sidebar;
 use App\Livewire\UserInfoPage\PostsByYear;
 use App\Models\Post;
 use App\Models\User;
-use Livewire\Livewire;
+
+use function Pest\Livewire\livewire;
 
 test('author can soft delete own post in desktop show post page', function () {
     $post = Post::factory()->create();
 
     $this->actingAs(User::find($post->user_id));
 
-    Livewire::test(Sidebar::class, [
+    livewire(Sidebar::class, [
         'postId' => $post->id,
         'postTitle' => $post->title,
         'authorId' => $post->user_id,
@@ -26,7 +27,7 @@ test('author can soft delete own post in desktop show post page', function () {
 test('guest cannot delete others\' post in desktop show post page', function () {
     $post = Post::factory()->create();
 
-    Livewire::test(Sidebar::class, [
+    livewire(Sidebar::class, [
         'postId' => $post->id,
         'postTitle' => $post->title,
         'authorId' => $post->user_id,
@@ -44,7 +45,7 @@ test('user cannot delete others\' post in desktop show post page', function () {
 
     $this->actingAs($user);
 
-    Livewire::test(Sidebar::class, [
+    livewire(Sidebar::class, [
         'postId' => $post->id,
         'postTitle' => $post->title,
         'authorId' => $post->user_id,
@@ -60,7 +61,7 @@ test('author can soft delete own post in mobile show post page', function () {
 
     $this->actingAs(User::find($post->user_id));
 
-    Livewire::test(Menu::class, ['postId' => $post->id])
+    livewire(Menu::class, ['postId' => $post->id])
         ->call('deletePost', $post->id)
         ->assertRedirect(route('users.index', ['user' => $post->user_id, 'tab' => 'posts']));
 
@@ -70,7 +71,7 @@ test('author can soft delete own post in mobile show post page', function () {
 test('guest cannot delete others\' post in mobile show post page', function () {
     $post = Post::factory()->create();
 
-    Livewire::test(Menu::class, ['postId' => $post->id])
+    livewire(Menu::class, ['postId' => $post->id])
         ->call('deletePost', $post->id)
         ->assertForbidden();
 
@@ -84,7 +85,7 @@ test('user cannot delete others\' post in mobile show post page', function () {
 
     $this->actingAs($user);
 
-    Livewire::test(Menu::class, ['postId' => $post->id])
+    livewire(Menu::class, ['postId' => $post->id])
         ->call('deletePost', $post->id)
         ->assertForbidden();
 
@@ -96,7 +97,7 @@ test('author can soft delete own post in user information post card', function (
 
     $this->actingAs(User::find($post->user_id));
 
-    Livewire::test(PostsByYear::class, [
+    livewire(PostsByYear::class, [
         'posts' => [$post],
         'userId' => $post->user_id,
         'year' => $post->created_at->format('Y'),
@@ -110,7 +111,7 @@ test('author can soft delete own post in user information post card', function (
 test('guest cannot delete others\' post in user information post card', function () {
     $post = Post::factory()->create();
 
-    Livewire::test(PostsByYear::class, [
+    livewire(PostsByYear::class, [
         'posts' => [$post],
         'userId' => $post->user_id,
         'year' => $post->created_at->format('Y'),
@@ -128,7 +129,7 @@ test('user cannot delete others\' post in user information post card', function 
 
     $this->actingAs($user);
 
-    Livewire::test(PostsByYear::class, [
+    livewire(PostsByYear::class, [
         'posts' => [$post],
         'userId' => $post->user_id,
         'year' => $post->created_at->format('Y'),
@@ -153,7 +154,7 @@ test('author can restore deleted post', function () {
 
     $this->assertSoftDeleted('posts', ['id' => $post->id]);
 
-    Livewire::test(PostsByYear::class, [
+    livewire(PostsByYear::class, [
         'posts' => [$post],
         'userId' => $post->user_id,
         'year' => $post->created_at->format('Y'),
@@ -178,7 +179,7 @@ test('users cannot restore other users\' post', function () {
         'deleted_at' => now(),
     ]);
 
-    Livewire::test(PostsByYear::class, [
+    livewire(PostsByYear::class, [
         'posts' => [$post],
         'userId' => $user->id,
         'year' => $post->created_at->format('Y'),

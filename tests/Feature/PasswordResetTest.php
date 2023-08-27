@@ -8,6 +8,7 @@ use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Notification;
 
 use function Pest\Laravel\get;
+use function Pest\Livewire\livewire;
 
 test('reset password link screen can be rendered', function () {
     get('/forgot-password')
@@ -20,7 +21,7 @@ test('reset password link can be requested', function () {
 
     $user = User::factory()->create();
 
-    Livewire::test(ForgotPassword::class)
+    livewire(ForgotPassword::class)
         ->set('email', $user->email)
         ->call('store')
         ->assertHasNoErrors();

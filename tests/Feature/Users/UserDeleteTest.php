@@ -5,6 +5,7 @@ use App\Mail\DestroyUser;
 use App\Models\User;
 
 use function Pest\Laravel\get;
+use function Pest\Livewire\livewire;
 
 test('non-logged-in users cannot access the delete user page', function () {
     $user = User::factory()->create();
@@ -30,7 +31,7 @@ test('schedule the task of sending the \'delete user\' email in the queue', func
 
     $this->actingAs($user);
 
-    Livewire::test(DeleteUserPage::class, ['user' => $user])
+    livewire(DeleteUserPage::class, ['user' => $user])
         ->call('sendDestroyEmail');
 
     Mail::assertQueued(DestroyUser::class);

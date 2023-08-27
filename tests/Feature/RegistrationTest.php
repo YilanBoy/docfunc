@@ -26,7 +26,7 @@ test('guest can register', function () {
         ->firstOrFail()
         ->update(['value' => true]);
 
-    Livewire::test(Register::class)
+    livewire(Register::class)
         ->set('name', 'Test_User')
         ->set('email', 'test@example.com')
         ->set('password', 'Password101')

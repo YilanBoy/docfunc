@@ -5,7 +5,7 @@
       :$postAuthorId
       :comment-id="$comment->id"
       :user-id="$comment->user_id ?? 0"
-      :user-gravatar-url="$comment->user->email ? get_gravatar($comment->user->email) : ''"
+      :user-gravatar-url="$comment->user ? get_gravatar($comment->user->email) : ''"
       :user-name="$comment->user->name ?? ''"
       :body="$comment->body"
       :created-at="$comment->created_at"

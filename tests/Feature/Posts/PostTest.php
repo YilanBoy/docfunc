@@ -7,6 +7,7 @@ use Livewire\Livewire;
 
 use function Pest\Faker\fake;
 use function Pest\Laravel\get;
+use function Pest\Livewire\livewire;
 
 test('user can access the home page ', function () {
     get('/')->assertStatus(200);
@@ -45,7 +46,7 @@ test('category can filter posts', function () {
 
     $categoryOnePost->save();
 
-    Livewire::test(Posts::class, [
+    livewire(Posts::class, [
         'currentUrl' => '/',
         'categoryId' => 1,
         'tagId' => 0,
@@ -53,7 +54,7 @@ test('category can filter posts', function () {
         return $posts->count() === 1;
     });
 
-    Livewire::test(Posts::class, [
+    livewire(Posts::class, [
         'currentUrl' => '/',
         'categoryId' => 2,
         'tagId' => 0,

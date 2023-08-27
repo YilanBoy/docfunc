@@ -7,13 +7,14 @@ use App\Models\User;
 
 use function Pest\Faker\fake;
 use function Pest\Laravel\get;
+use function Pest\Livewire\livewire;
 
 test('non-logged-in users can leave a anonymous comment', function () {
     $post = Post::factory()->create();
 
     $body = fake()->words(5, true);
 
-    Livewire::test(CreateCommentModal::class, ['postId' => $post->id])
+    livewire(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', $body)
         ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store')
@@ -40,7 +41,7 @@ test('logged-in users can leave a comment', function () {
 
     $body = fake()->words(5, true);
 
-    Livewire::test(CreateCommentModal::class, ['postId' => $post->id])
+    livewire(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', $body)
         ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store')
@@ -74,7 +75,7 @@ test('if the comment addition fails, no data will be available in the database.'
 
     $body = fake()->words(5, true);
 
-    Livewire::test(CreateCommentModal::class, ['postId' => $post->id])
+    livewire(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', $body)
         ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store')
@@ -106,7 +107,7 @@ it('can see the comment preview', function () {
     - item 3
     MARKDOWN;
 
-    Livewire::test(CreateCommentModal::class, ['postId' => $post->id])
+    livewire(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', $body)
         ->set('recaptcha', 'fake-g-recaptcha-response')
         ->set('convertToHtml', true)
@@ -129,7 +130,7 @@ test('when a new comment is added, the post comments will be increased by one', 
 
     $this->assertDatabaseHas('posts', ['comment_counts' => 0]);
 
-    Livewire::test(CreateCommentModal::class, ['postId' => $post->id])
+    livewire(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', 'Hello World!')
         ->set('recaptcha', 'fake-g-recaptcha-response')
         ->call('store');

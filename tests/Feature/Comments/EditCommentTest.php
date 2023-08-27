@@ -5,12 +5,14 @@ use App\Livewire\Components\Comments\EditCommentModal;
 use App\Models\Comment;
 use App\Models\User;
 
+use function Pest\Livewire\livewire;
+
 test('editing modal can load the data of the comment', function () {
     $comment = Comment::factory()->create();
 
     $offset = 0;
 
-    Livewire::test(EditCommentModal::class)
+    livewire(EditCommentModal::class)
         ->call('setEditComment', $comment->id, $offset)
         ->assertSet('commentId', $comment->id)
         ->assertSet('body', $comment->body)
@@ -30,7 +32,7 @@ test('logged-in users can update their comments', function () {
 
     $body = 'new comment';
 
-    Livewire::test(EditCommentModal::class)
+    livewire(EditCommentModal::class)
         ->call('setEditComment', $comment->id, $offset)
         ->set('body', $body)
         ->call('update')
@@ -49,7 +51,7 @@ test('users can\'t update others\' comments', function () {
 
     $body = 'new comment';
 
-    Livewire::test(EditCommentModal::class)
+    livewire(EditCommentModal::class)
         ->call('setEditComment', $comment->id, $offset)
         ->set('body', $body)
         ->call('update')
@@ -78,7 +80,7 @@ it('can see the comment preview', function () {
     - item 3
     MARKDOWN;
 
-    Livewire::test(EditCommentModal::class)
+    livewire(EditCommentModal::class)
         ->call('setEditComment', $comment->id, $offset)
         ->set('body', $body)
         ->set('convertToHtml', true)
@@ -100,7 +102,7 @@ it('will display the word "edited" on top of it if it has been edited', function
     // update the updated_at comment
     $comment->touch();
 
-    Livewire::test(CommentCard::class, [
+    livewire(CommentCard::class, [
         'postId' => $comment->post_id,
         'postAuthorId' => $comment->post->user_id,
         'commentId' => $comment->id,

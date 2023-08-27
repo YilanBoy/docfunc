@@ -5,6 +5,7 @@ use App\Models\User;
 
 use function Pest\Faker\fake;
 use function Pest\Laravel\get;
+use function Pest\Livewire\livewire;
 
 test('non-logged-in users cannot access the user edit page', function () {
     $user = User::factory()->create();
@@ -38,7 +39,7 @@ test('users can update their own information', function () {
 
     $this->actingAs($user);
 
-    Livewire::test(EditUserInfoPage::class, [
+    livewire(EditUserInfoPage::class, [
         'user' => $user,
         'name' => $user->name,
         'introduction' => $user->introduction,
@@ -54,7 +55,7 @@ test('if the name format is not correct, the name cannot be updated', function (
 
     $this->actingAs($user);
 
-    Livewire::test(EditUserInfoPage::class, [
+    livewire(EditUserInfoPage::class, [
         'user' => $user,
         'name' => $user->name,
         'introduction' => $user->introduction,
@@ -70,7 +71,7 @@ test('if the number of words in the introduction exceeds the limit, the introduc
 
     $this->actingAs($user);
 
-    Livewire::test(EditUserInfoPage::class, [
+    livewire(EditUserInfoPage::class, [
         'user' => $user,
         'name' => $user->name,
         'introduction' => $user->introduction,

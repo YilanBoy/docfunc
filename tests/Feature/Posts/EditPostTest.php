@@ -3,7 +3,9 @@
 use App\Livewire\EditPostPage;
 use App\Livewire\UserInfoPage\PostsByYear;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
+use App\Services\ContentService;
 
 use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
@@ -15,18 +17,16 @@ test('visitors cannot access the edit pages of other people\'s post', function (
         ->assertRedirect(route('login'));
 });
 
-test('users cannot access the edit page of other people\'s post', function () {
-    $user = User::factory()->create();
-
+test('authors can access the edit page of their post', function () {
     $post = Post::factory()->create();
 
-    $this->actingAs($user);
+    $this->actingAs($post->user);
 
     get(route('posts.edit', ['post' => $post->id]))
-        ->assertForbidden();
+        ->assertSuccessful();
 });
 
-test('authors can access the edit page of their post', function () {
+test('users cannot access the edit page of other people\'s post', function () {
     $user = User::factory()->create();
 
     $post = Post::factory()->create();
@@ -44,19 +44,39 @@ test('authors can update their posts', function ($categoryId) {
 
     $newTitle = str()->random(4);
     $newBody = str()->random(500);
+    $newPrivateStatus = (bool) rand(0, 1);
+
+    $newTagCollection = Tag::factory()->count(3)->create();
+
+    $newTagsJson = $newTagCollection
+        ->map(fn ($item) => ['id' => $item->id, 'name' => $item->name])
+        ->toJson();
 
     livewire(EditPostPage::class, ['post' => $post])
         ->set('form.title', $newTitle)
         ->set('form.category_id', $categoryId)
+        ->set('form.tags', $newTagsJson)
         ->set('form.body', $newBody)
+        ->set('form.is_private', $newPrivateStatus)
         ->call('update')
         ->assertHasNoErrors();
 
     $post->refresh();
 
-    $this->assertEquals($post->title, $newTitle);
-    $this->assertEquals($post->category_id, $categoryId);
-    $this->assertEquals($post->body, $newBody);
+    $contentService = app(ContentService::class);
+
+    $newTagIdsArray = $newTagCollection
+        ->map(fn ($item) => $item->id)
+        ->all();
+
+    expect($post)
+        ->title->toBe($newTitle)
+        ->slug->toBe($contentService->makeSlug($newTitle))
+        ->category_id->toBe($categoryId)
+        ->body->toBe($newBody)
+        ->excerpt->toBe($contentService->makeExcerpt($newBody))
+        ->is_private->toBe($newPrivateStatus)
+        ->and($post->tags->pluck('id')->toArray())->toBe($newTagIdsArray);
 })->with('defaultCategoryIds');
 
 test('users can update the private status of their posts.', function ($privateStatus) {
@@ -70,7 +90,7 @@ test('users can update the private status of their posts.', function ($privateSt
     livewire(PostsByYear::class, [
         'year' => now()->year,
         'userId' => $post->user_id,
-        'posts' => $post->get(),
+        'posts' => $post->all(),
     ])
         ->call('postPrivateToggle', $post->id)
         ->assertHasNoErrors()

@@ -16,8 +16,7 @@ return new class extends Migration
         Schema::table('posts', function (Blueprint $table) {
             $table->string('preview_url', 2048)
                 ->after('slug')
-                ->nullable()
-                ->default(null)
+                ->default('')
                 ->comment('文章預覽圖');
         });
     }

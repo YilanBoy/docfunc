@@ -6,6 +6,7 @@ class FormatTransferService
 {
     /**
      * 將 tag 的 JSON 資料轉成 array
+     * ex. [{"id":1,"name":"PHP"},{"id":2,"name":"Laravel"}]
      */
     public function tagsJsonToTagIdsArray(?string $tagsJson): array
     {
@@ -15,6 +16,7 @@ class FormatTransferService
         }
 
         $tags = json_decode($tagsJson);
+
 
         // 生成由 tag ID 組成的 Array
         return collect($tags)

@@ -33,9 +33,9 @@ test('authenticated user can create post', function ($categoryId) {
     livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
-        ->set('title', $title)
-        ->set('category_id', $categoryId)
-        ->set('body', $randomString)
+        ->set('form.title', $title)
+        ->set('form.category_id', $categoryId)
+        ->set('form.body', $randomString)
         ->call('store')
         ->assertHasNoErrors();
 
@@ -51,9 +51,9 @@ test('title at least 4 characters', function () {
     livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
-        ->set('title', str()->random(3))
-        ->set('category_id', Category::pluck('id')->random())
-        ->set('body', str()->random(500))
+        ->set('form.title', str()->random(3))
+        ->set('form.category_id', Category::pluck('id')->random())
+        ->set('form.body', str()->random(500))
         ->call('store')
         ->assertHasErrors(['title' => 'min:4']);
 });
@@ -64,9 +64,9 @@ test('body at least 500 characters', function () {
     livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
-        ->set('title', str()->random(4))
-        ->set('category_id', Category::pluck('id')->random())
-        ->set('body', str()->random(499))
+        ->set('form.title', str()->random(4))
+        ->set('form.category_id', Category::pluck('id')->random())
+        ->set('form.body', str()->random(499))
         ->call('store')
         ->assertHasErrors(['body' => 'min:500']);
 });
@@ -93,11 +93,11 @@ it('can upload image', function () {
     livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
-        ->set('title', str()->random(4))
-        ->set('category_id', Category::pluck('id')->random())
+        ->set('form.title', str()->random(4))
+        ->set('form.category_id', Category::pluck('id')->random())
         // filename will be converted before store to s3
         ->set('image', $file)
-        ->set('body', str()->random(500))
+        ->set('form.body', str()->random(500))
         ->call('store')
         ->assertHasNoErrors();
 
@@ -114,13 +114,13 @@ it('can\'t upload non image', function () {
     livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
-        ->set('title', str()->random(4))
-        ->set('category_id', Category::pluck('id')->random())
+        ->set('form.title', str()->random(4))
+        ->set('form.category_id', Category::pluck('id')->random())
         // filename will be converted before store to s3
         ->set('image', $file)
-        ->set('body', str()->random(500))
+        ->set('form.body', str()->random(500))
         ->call('store')
-        ->assertHasErrors(['image' => 'image']);
+        ->assertHasErrors(['image']);
 });
 
 it('can get auto save key property', function () {
@@ -152,17 +152,17 @@ it('can auto save the post to cache', function () {
     $tags = Tag::inRandomOrder()
         ->limit(5)
         ->get()
-        ->map(fn($tag) => ['id' => $tag->id, 'value' => $tag->name])
+        ->map(fn ($tag) => ['id' => $tag->id, 'value' => $tag->name])
         ->toJson(JSON_UNESCAPED_UNICODE);
     $body = str()->random(500);
 
     livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
-        ->set('title', $title)
-        ->set('category_id', $categoryId)
-        ->set('tags', $tags)
-        ->set('body', $body);
+        ->set('form.title', $title)
+        ->set('form.category_id', $categoryId)
+        ->set('form.tags', $tags)
+        ->set('form.body', $body);
 
     expect(Cache::has($autoSaveKey))
         ->toBeTrue()

@@ -76,7 +76,7 @@
         class="group absolute inset-0 flex flex-1 items-center justify-center rounded-lg transition-all duration-150 hover:bg-gray-600/50 hover:backdrop-blur-sm"
         type="button"
         wire:confirm="你確定要刪除預覽圖嗎？"
-        wire:click="$set('preview_url', '')"
+        wire:click="$set('form.preview_url', '')"
       >
         <svg
           class="h-24 w-24 opacity-0 transition-all duration-150 group-hover:text-gray-50 group-hover:opacity-100"
@@ -96,7 +96,8 @@
     </div>
   @endif
 
-  @if (!$errors->has('image') && $image)
+  {{-- image preview --}}
+  @if ($showPreview)
     <div class="relative mt-4 w-full md:w-1/2">
       <img
         class="rounded-lg"

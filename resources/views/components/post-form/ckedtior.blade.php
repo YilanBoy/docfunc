@@ -10,7 +10,7 @@
           this.editorDebounceTimer = window.setTimeout(callback, time);
       },
       imageUploadUrl: '/api/images/upload',
-      body: @entangle('body').live
+      body: @entangle('form.body').live
   }"
   x-init="// init the create post page
   ClassicEditor.create($refs.editor, {

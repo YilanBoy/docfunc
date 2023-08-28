@@ -1,25 +1,23 @@
 <?php
 
-namespace App\Livewire\Traits;
+namespace App\Livewire\Forms;
 
 use App\Models\Post;
 use App\Services\ContentService;
-use App\Services\FileService;
 use App\Services\FormatTransferService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Attributes\Locked;
+use Livewire\Form;
 
-trait PostForm
+class PostForm extends Form
 {
     #[Locked]
     public ?int $user_id = null;
 
     public int $category_id = 1;
 
-    public ?string $preview_url = null;
-
-    public ?object $image = null;
+    public string $preview_url = '';
 
     public bool $is_private = false;
 
@@ -33,34 +31,18 @@ trait PostForm
 
     public string $excerpt = '';
 
-    public function validateImage(): void
-    {
-        Validator::make(
-            ['image' => $this->image],
-            [
-                'image' => ['nullable', 'image', 'max:1024'], // 1MB Max
-            ],
-            [
-                'image.image' => '圖片格式有誤',
-                'image.max' => '圖片大小不能超過 1024 KB',
-            ]
-        )->validate();
-    }
-
     public function validatePost(): void
     {
         Validator::make(
             [
                 'title' => $this->title,
                 'category_id' => $this->category_id,
-                'image' => $this->image,
                 // validate body text character count
                 'body' => preg_replace('/[\r\n]/u', '', strip_tags($this->body)),
             ],
             [
                 'title' => ['required', 'min:4', 'max:50'],
                 'category_id' => ['required', 'numeric', 'exists:categories,id'],
-                'image' => ['nullable', 'image', 'max:1024'],
                 'body' => ['required', 'min:500', 'max:20000'],
             ],
             [
@@ -70,8 +52,6 @@ trait PostForm
                 'category_id.required' => '請選擇文章分類',
                 'category_id.numeric' => '分類資料錯誤',
                 'category_id.exists' => '分類不存在',
-                'image.image' => '圖片格式有誤',
-                'image.max' => '圖片大小不能超過 1024 KB',
                 'body.required' => '請填寫文章內容',
                 'body.min' => '文章內容至少 500 個字元',
                 'body.max' => '文章內容字數已超過 20,000 個字元',
@@ -131,36 +111,13 @@ trait PostForm
         $this->excerpt = ContentService::makeExcerpt($this->body);
     }
 
-    public function setPreviewUrl(): void
-    {
-        // upload image
-        if ($this->image) {
-            $this->preview_url = app(FileService::class)->uploadImageToCloud($this->image);
-        }
-    }
-
-    public function formToArray(): array
-    {
-        return [
-            'user_id' => $this->user_id,
-            'title' => $this->title,
-            'category_id' => $this->category_id,
-            'body' => $this->body,
-            'is_private' => $this->is_private,
-            'slug' => $this->slug,
-            'preview_url' => $this->preview_url,
-            'excerpt' => $this->excerpt,
-        ];
-    }
-
     public function createPost(): Post
     {
         $this->setSlug();
         $this->setBody();
         $this->setExcerpt();
-        $this->setPreviewUrl();
 
-        $post = Post::query()->create($this->formToArray());
+        $post = Post::query()->create($this->all());
 
         // create new tags relation with post in database
         $post->tags()->attach(
@@ -175,9 +132,8 @@ trait PostForm
         $this->setSlug();
         $this->setBody();
         $this->setExcerpt();
-        $this->setPreviewUrl();
 
-        $post->update($this->formToArray());
+        $post->update($this->all());
 
         // update tags relation with post in database
         $post->tags()->sync(

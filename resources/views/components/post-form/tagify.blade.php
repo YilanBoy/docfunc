@@ -3,7 +3,7 @@
   wire:ignore
   x-data="{
       tagsListUrl: '/api/tags',
-      tags: @entangle('tags').live
+      tags: @entangle('form.tags').live
   }"
   x-init="// because the editor will be cached by livewire in navigation
   fetch(tagsListUrl)

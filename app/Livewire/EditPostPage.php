@@ -2,43 +2,32 @@
 
 namespace App\Livewire;
 
-use App\Livewire\Traits\PostForm;
+use App\Livewire\Forms\PostForm;
 use App\Models\Category;
 use App\Models\Post;
-use App\Services\ContentService;
 use App\Services\FileService;
-use App\Services\FormatTransferService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class EditPostPage extends Component
 {
-    use PostForm;
     use AuthorizesRequests;
     use WithFileUploads;
 
-    protected ContentService $contentService;
+    #[Rule('nullable')]
+    #[Rule('image', message: '圖片格式有誤')]
+    #[Rule('max:1024', message: '圖片大小不能超過 1024 KB')]
+    public ?object $image = null;
 
-    protected FormatTransferService $formatTransferService;
-
-    protected FileService $fileService;
+    public PostForm $form;
 
     public Collection $categories;
 
     public Post $post;
-
-    public function boot(
-        ContentService $contentService,
-        FormatTransferService $formatTransferService,
-        FileService $fileService
-    ): void {
-        $this->contentService = $contentService;
-        $this->formatTransferService = $formatTransferService;
-        $this->fileService = $fileService;
-    }
 
     public function mount(Post $post): void
     {
@@ -47,27 +36,25 @@ class EditPostPage extends Component
         $this->post = $post;
         $this->categories = Category::all(['id', 'name']);
 
-        $this->user_id = $post->user_id;
-        $this->category_id = $post->category_id;
-        $this->is_private = $post->is_private;
-        $this->preview_url = $post->preview_url;
-        $this->title = $post->title;
-        $this->body = $post->body;
-        $this->tags = $post->tags_json;
-    }
-
-    public function updatedImage(): void
-    {
-        $this->validateImage();
-
-        $this->resetValidation('image');
+        $this->form->user_id = $post->user_id;
+        $this->form->category_id = $post->category_id;
+        $this->form->is_private = $post->is_private;
+        $this->form->preview_url = $post->preview_url;
+        $this->form->title = $post->title;
+        $this->form->body = $post->body;
+        $this->form->tags = $post->tags_json;
     }
 
     public function update(): void
     {
-        $this->validatePost();
+        $this->form->validatePost();
 
-        $post = $this->updatePost($this->post);
+        // upload image
+        if ($this->image) {
+            $this->form->preview_url = app(FileService::class)->uploadImageToCloud($this->image);
+        }
+
+        $post = $this->form->updatePost($this->post);
 
         $this->dispatch('info-badge', status: 'success', message: '成功更新文章！');
 

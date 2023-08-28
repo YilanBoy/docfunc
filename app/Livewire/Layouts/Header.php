@@ -10,8 +10,6 @@ use Livewire\Component;
 
 class Header extends Component
 {
-    protected $listeners = ['logout'];
-
     /**
      * Destroy an authenticated session.
      */

@@ -11,9 +11,9 @@ class ContentService
     /**
      * 生成用來優化 SEO 的 slug
      *
-     * @param  string  $title 標題
+     * @param  string  $title  標題
      */
-    public function makeSlug(string $title): string
+    public static function makeSlug(string $title): string
     {
         // 去掉特殊字元，只留中文與英文
         $title = preg_replace('/[^A-Za-z0-9 \p{Han}]+/u', '', $title);
@@ -29,7 +29,7 @@ class ContentService
     /**
      * 過濾 html 格式的文章內容，避免 XSS 攻擊
      */
-    public function htmlPurifier(string $html): string
+    public static function htmlPurifier(string $html): string
     {
         $config = HTMLPurifier_Config::createDefault();
 
@@ -75,7 +75,7 @@ class ContentService
     /**
      * 生成文章內容的摘錄
      */
-    public function makeExcerpt(string $body, int $length = 200): string
+    public static function makeExcerpt(string $body, int $length = 200): string
     {
         return str()->limit(strip_tags($body), $length);
     }
@@ -83,7 +83,7 @@ class ContentService
     /**
      * 取得文章中的圖片連結
      */
-    public function imagesInContent(string $body): array
+    public static function imagesInContent(string $body): array
     {
         $dom = new DOMDocument();
         $dom->loadHTML($body, LIBXML_NOERROR);

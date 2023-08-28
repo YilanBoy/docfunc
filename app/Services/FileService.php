@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Storage;
 
 class FileService
 {
-    public function generateFileName(string $fileExtension): string
+    public static function generateFileName(string $fileExtension): string
     {
         $bytes = random_bytes(6);
 

@@ -47,6 +47,7 @@ class EditPostPage extends Component
         $this->post = $post;
         $this->categories = Category::all(['id', 'name']);
 
+        $this->user_id = $post->user_id;
         $this->category_id = $post->category_id;
         $this->is_private = $post->is_private;
         $this->preview_url = $post->preview_url;
@@ -66,32 +67,11 @@ class EditPostPage extends Component
     {
         $this->validatePost();
 
-        $this->slug = $this->contentService->makeSlug($this->title);
-        $this->body = $this->contentService->htmlPurifier($this->body);
-        $this->excerpt = $this->contentService->makeExcerpt($this->body);
-
-        // upload image
-        if ($this->image) {
-            $this->preview_url = $this->fileService->uploadImageToCloud($this->image);
-        }
-
-        $this->post->update([
-            'title' => $this->title,
-            'slug' => $this->slug,
-            'is_private' => $this->is_private,
-            'category_id' => $this->category_id,
-            'body' => $this->body,
-            'excerpt' => $this->excerpt,
-            'preview_url' => $this->preview_url,
-        ]);
-
-        $this->post->tags()->sync(
-            $this->formatTransferService->tagsJsonToTagIdsArray($this->tags)
-        );
+        $post = $this->updatePost($this->post);
 
         $this->dispatch('info-badge', status: 'success', message: '成功更新文章！');
 
-        $this->redirect($this->post->link_with_slug, navigate: true);
+        $this->redirect($post->link_with_slug, navigate: true);
     }
 
     #[Title('編輯文章')]

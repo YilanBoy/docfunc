@@ -2,6 +2,10 @@
 
 namespace App\Livewire\Traits;
 
+use App\Models\Post;
+use App\Services\ContentService;
+use App\Services\FileService;
+use App\Services\FormatTransferService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Attributes\Locked;
@@ -112,6 +116,29 @@ trait PostForm
         Cache::forget($key);
     }
 
+    public function setSlug(): void
+    {
+        $this->slug = ContentService::makeSlug($this->title);
+    }
+
+    public function setBody(): void
+    {
+        $this->body = ContentService::htmlPurifier($this->body);
+    }
+
+    public function setExcerpt(): void
+    {
+        $this->excerpt = ContentService::makeExcerpt($this->body);
+    }
+
+    public function setPreviewUrl(): void
+    {
+        // upload image
+        if ($this->image) {
+            $this->preview_url = app(FileService::class)->uploadImageToCloud($this->image);
+        }
+    }
+
     public function formToArray(): array
     {
         return [
@@ -124,5 +151,39 @@ trait PostForm
             'preview_url' => $this->preview_url,
             'excerpt' => $this->excerpt,
         ];
+    }
+
+    public function createPost(): Post
+    {
+        $this->setSlug();
+        $this->setBody();
+        $this->setExcerpt();
+        $this->setPreviewUrl();
+
+        $post = Post::query()->create($this->formToArray());
+
+        // create new tags relation with post in database
+        $post->tags()->attach(
+            app(FormatTransferService::class)->tagsJsonToTagIdsArray($this->tags)
+        );
+
+        return $post;
+    }
+
+    public function updatePost(Post $post): Post
+    {
+        $this->setSlug();
+        $this->setBody();
+        $this->setExcerpt();
+        $this->setPreviewUrl();
+
+        $post->update($this->formToArray());
+
+        // update tags relation with post in database
+        $post->tags()->sync(
+            app(FormatTransferService::class)->tagsJsonToTagIdsArray($this->tags)
+        );
+
+        return $post;
     }
 }

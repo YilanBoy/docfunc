@@ -4,10 +4,6 @@ namespace App\Livewire;
 
 use App\Livewire\Traits\PostForm;
 use App\Models\Category;
-use App\Models\Post;
-use App\Services\ContentService;
-use App\Services\FileService;
-use App\Services\FormatTransferService;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -20,23 +16,7 @@ class CreatePostPage extends Component
 
     public string $autoSaveKey = '';
 
-    protected ContentService $contentService;
-
-    protected FormatTransferService $formatTransferService;
-
-    protected FileService $fileService;
-
     public Collection $categories;
-
-    public function boot(
-        ContentService $contentService,
-        FormatTransferService $formatTransferService,
-        FileService $fileService
-    ): void {
-        $this->contentService = $contentService;
-        $this->formatTransferService = $formatTransferService;
-        $this->fileService = $fileService;
-    }
 
     public function mount(): void
     {
@@ -67,21 +47,7 @@ class CreatePostPage extends Component
     {
         $this->validatePost();
 
-        $this->slug = $this->contentService->makeSlug($this->title);
-        $this->body = $this->contentService->htmlPurifier($this->body);
-        $this->excerpt = $this->contentService->makeExcerpt($this->body);
-
-        // upload image
-        if ($this->image) {
-            $this->preview_url = $this->fileService->uploadImageToCloud($this->image);
-        }
-
-        $post = Post::query()->create($this->formToArray());
-
-        // create new tags relation with post in database
-        $post->tags()->attach(
-            $this->formatTransferService->tagsJsonToTagIdsArray($this->tags)
-        );
+        $post = $this->createPost();
 
         // delete auto save data
         $this->clearAutoSave($this->autoSaveKey);

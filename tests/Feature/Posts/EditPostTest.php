@@ -79,7 +79,7 @@ test('authors can update their posts', function ($categoryId) {
         ->and($post->tags->pluck('id')->toArray())->toBe($newTagIdsArray);
 })->with('defaultCategoryIds');
 
-test('users can update the private status of their posts.', function ($privateStatus) {
+test('users can update the private status of their posts in user info page', function ($privateStatus) {
     $post = Post::factory()->create([
         'is_private' => $privateStatus,
         'created_at' => now(),

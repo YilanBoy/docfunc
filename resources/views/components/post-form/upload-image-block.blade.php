@@ -68,6 +68,7 @@
     <div class="relative mt-4 w-full md:w-1/2">
       <img
         class="rounded-lg"
+        id="preview-image"
         src="{{ $previewUrl }}"
         alt="preview image"
       >
@@ -101,6 +102,7 @@
     <div class="relative mt-4 w-full md:w-1/2">
       <img
         class="rounded-lg"
+        id="upload-image"
         src="{{ $image->temporaryUrl() }}"
         alt="preview image"
       >

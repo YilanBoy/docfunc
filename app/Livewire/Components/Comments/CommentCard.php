@@ -45,7 +45,7 @@ class CommentCard extends Component
 
     public string $isEdited;
 
-    public int|string $bookmark;
+    public int|string $groupId;
 
     /**
      * @throws CommonMarkException
@@ -86,7 +86,7 @@ class CommentCard extends Component
             $post->decrement('comment_counts');
         });
 
-        $this->dispatch('remove-id-from-group-'.$this->bookmark, id: $this->commentId);
+        $this->dispatch('remove-id-from-group-'.$this->groupId, id: $this->commentId);
 
         $this->dispatch('update-comment-counts');
 

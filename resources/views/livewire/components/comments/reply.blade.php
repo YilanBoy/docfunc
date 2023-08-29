@@ -1,8 +1,8 @@
 <div
-  class="w-full"
+  class="mt-6 w-full"
   x-data
 >
-  <div class="mt-6 flex justify-between">
+  <div class="flex justify-between">
     {{-- show comments count --}}
     <span class="flex items-center dark:text-gray-50">
       <i class="bi bi-chat-square-text-fill"></i>

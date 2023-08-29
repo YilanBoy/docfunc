@@ -67,10 +67,9 @@
           // when creat and change comment in show-post-page
           if ([
               "components.comments.comment-group",
-              "components.comments.new-comment-group",
               "components.comments.comment-card"
             ].includes(component.name)) {
-            document.querySelectorAll("#comments pre code:not(.hljs)").forEach((element) => {
+            document.querySelectorAll(".comment-body pre code:not(.hljs)").forEach((element) => {
               if (element instanceof Element) {
                 hljs.highlightElement(element);
               }

@@ -5,9 +5,11 @@
   x-ref="comments"
   x-data="{ currentScrollY: 0 }"
 >
-  <livewire:components.comments.new-comment-group
+  {{-- new comment will show here --}}
+  <livewire:components.comments.comment-group
     :$postId
     :$postAuthorId
+    :wire:key="'group-new'"
   />
 
   @foreach ($groupIds as $bookmark => $ids)
@@ -15,7 +17,7 @@
       :$postId
       :$postAuthorId
       :$ids
-      :$bookmark
+      :group-id="$bookmark"
       :wire:key="'group-'.$bookmark"
     />
   @endforeach

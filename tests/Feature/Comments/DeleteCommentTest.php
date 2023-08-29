@@ -23,7 +23,7 @@ test('the author can delete his comment', function () {
         'body' => $comment->body,
         'createdAt' => $comment->created_at,
         'isEdited' => $comment->created_at->ne($comment->updated_at),
-        'bookmark' => $bookmark,
+        'groupId' => $bookmark,
     ])
         ->call('destroy')
         ->assertDispatched('remove-id-from-group-'.$bookmark)
@@ -53,7 +53,7 @@ test('post author can delete other users comment', function () {
         'body' => $comment->body,
         'createdAt' => $comment->created_at,
         'isEdited' => $comment->created_at->ne($comment->updated_at),
-        'bookmark' => $bookmark,
+        'groupId' => $bookmark,
     ])
         ->call('destroy')
         ->assertDispatched('remove-id-from-group-'.$bookmark)
@@ -83,7 +83,7 @@ test('when a comment is deleted, the post comments will be reduced by one', func
         'body' => $comment->body,
         'createdAt' => $comment->created_at,
         'isEdited' => $comment->created_at->ne($comment->updated_at),
-        'bookmark' => 'id',
+        'groupId' => 'id',
     ])
         ->call('destroy');
 

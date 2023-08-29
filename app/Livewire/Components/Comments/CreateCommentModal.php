@@ -22,6 +22,8 @@ class CreateCommentModal extends Component
 {
     use MarkdownConverter;
 
+    const FIRST_GROUP_ID = 0;
+
     public int $postId;
 
     public string $body = '';
@@ -89,7 +91,7 @@ class CreateCommentModal extends Component
         // empty the body of the comment form
         $this->reset('body', 'convertToHtml');
 
-        $this->dispatch('add-id-to-group-new', commentId: $comment->id);
+        $this->dispatch('add-id-to-group-new', id: $comment->id);
 
         $this->dispatch('close-create-comment-modal');
 

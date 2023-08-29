@@ -8,13 +8,13 @@ use Livewire\Component;
 
 class Comments extends Component
 {
+    const PER_PAGE = 10;
+
     #[Locked]
     public int $postId;
 
     #[Locked]
     public int $postAuthorId;
-
-    public int $perPage = 10;
 
     public array $groupIds = [];
 
@@ -27,15 +27,15 @@ class Comments extends Component
         $commentIds = Comment::query()
             ->where('post_id', $this->postId)
             ->orderBy('id', 'desc')
-            ->limit($this->perPage + 1)
+            ->limit(self::PER_PAGE + 1)
             ->pluck('id');
 
         if ($commentIds->count() > 0) {
-            $this->groupIds[$commentIds->first()] = array_slice($commentIds->all(), 0, $this->perPage);
+            $this->groupIds[$commentIds->first()] = array_slice($commentIds->all(), 0, self::PER_PAGE);
             $this->bookmark = $commentIds->last();
         }
 
-        if ($commentIds->count() <= $this->perPage) {
+        if ($commentIds->count() <= self::PER_PAGE) {
             $this->showMoreButtonIsActive = false;
         }
     }
@@ -47,15 +47,15 @@ class Comments extends Component
             ->where('post_id', $this->postId)
             ->where('id', '<=', $this->bookmark)
             ->orderBy('id', 'desc')
-            ->limit($this->perPage + 1)
+            ->limit(self::PER_PAGE + 1)
             ->pluck('id');
 
         if ($commentIds->count() > 0) {
-            $this->groupIds[$commentIds->first()] = array_slice($commentIds->all(), 0, $this->perPage);
+            $this->groupIds[$commentIds->first()] = array_slice($commentIds->all(), 0, self::PER_PAGE);
             $this->bookmark = $commentIds->last();
         }
 
-        if ($commentIds->count() <= $this->perPage) {
+        if ($commentIds->count() <= self::PER_PAGE) {
             $this->showMoreButtonIsActive = false;
         }
     }

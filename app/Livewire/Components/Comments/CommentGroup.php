@@ -15,11 +15,17 @@ class CommentGroup extends Component
     #[Locked]
     public int $postAuthorId;
 
-    public array $ids;
+    public array $ids = [];
 
-    public int $bookmark;
+    public int|string $groupId = 'new';
 
-    #[On('remove-id-from-group-{bookmark}')]
+    #[On('add-id-to-group-{groupId}')]
+    public function addId(int $id): void
+    {
+        $this->ids[] = $id;
+    }
+
+    #[On('remove-id-from-group-{groupId}')]
     public function removeId(int $id): void
     {
         unset($this->ids[array_search($id, $this->ids)]);

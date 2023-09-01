@@ -1,8 +1,8 @@
 <?php
 
-use App\Livewire\ShowPostPage\Menu;
-use App\Livewire\ShowPostPage\Sidebar;
-use App\Livewire\UserInfoPage\PostsByYear;
+use App\Livewire\Shared\Posts\DesktopSidemenu;
+use App\Livewire\Shared\Posts\MobileDropdowns;
+use App\Livewire\Shared\Users\PostsGroupByYear;
 use App\Models\Post;
 use App\Models\User;
 
@@ -13,13 +13,13 @@ test('author can soft delete own post in desktop show post page', function () {
 
     $this->actingAs(User::find($post->user_id));
 
-    livewire(Sidebar::class, [
+    livewire(DesktopSidemenu::class, [
         'postId' => $post->id,
         'postTitle' => $post->title,
         'authorId' => $post->user_id,
     ])
         ->call('deletePost', $post->id)
-        ->assertRedirect(route('users.index', ['user' => $post->user_id, 'tab' => 'posts']));
+        ->assertRedirect(route('users.show', ['user' => $post->user_id, 'tab' => 'posts']));
 
     $this->assertSoftDeleted('posts', ['id' => $post->id]);
 });
@@ -27,7 +27,7 @@ test('author can soft delete own post in desktop show post page', function () {
 test('guest cannot delete others\' post in desktop show post page', function () {
     $post = Post::factory()->create();
 
-    livewire(Sidebar::class, [
+    livewire(DesktopSidemenu::class, [
         'postId' => $post->id,
         'postTitle' => $post->title,
         'authorId' => $post->user_id,
@@ -45,7 +45,7 @@ test('user cannot delete others\' post in desktop show post page', function () {
 
     $this->actingAs($user);
 
-    livewire(Sidebar::class, [
+    livewire(DesktopSidemenu::class, [
         'postId' => $post->id,
         'postTitle' => $post->title,
         'authorId' => $post->user_id,
@@ -61,9 +61,9 @@ test('author can soft delete own post in mobile show post page', function () {
 
     $this->actingAs(User::find($post->user_id));
 
-    livewire(Menu::class, ['postId' => $post->id])
+    livewire(MobileDropdowns::class, ['postId' => $post->id])
         ->call('deletePost', $post->id)
-        ->assertRedirect(route('users.index', ['user' => $post->user_id, 'tab' => 'posts']));
+        ->assertRedirect(route('users.show', ['user' => $post->user_id, 'tab' => 'posts']));
 
     $this->assertSoftDeleted('posts', ['id' => $post->id]);
 });
@@ -71,7 +71,7 @@ test('author can soft delete own post in mobile show post page', function () {
 test('guest cannot delete others\' post in mobile show post page', function () {
     $post = Post::factory()->create();
 
-    livewire(Menu::class, ['postId' => $post->id])
+    livewire(MobileDropdowns::class, ['postId' => $post->id])
         ->call('deletePost', $post->id)
         ->assertForbidden();
 
@@ -85,7 +85,7 @@ test('user cannot delete others\' post in mobile show post page', function () {
 
     $this->actingAs($user);
 
-    livewire(Menu::class, ['postId' => $post->id])
+    livewire(MobileDropdowns::class, ['postId' => $post->id])
         ->call('deletePost', $post->id)
         ->assertForbidden();
 
@@ -97,7 +97,7 @@ test('author can soft delete own post in user information post card', function (
 
     $this->actingAs(User::find($post->user_id));
 
-    livewire(PostsByYear::class, [
+    livewire(PostsGroupByYear::class, [
         'posts' => [$post],
         'userId' => $post->user_id,
         'year' => $post->created_at->format('Y'),
@@ -111,7 +111,7 @@ test('author can soft delete own post in user information post card', function (
 test('guest cannot delete others\' post in user information post card', function () {
     $post = Post::factory()->create();
 
-    livewire(PostsByYear::class, [
+    livewire(PostsGroupByYear::class, [
         'posts' => [$post],
         'userId' => $post->user_id,
         'year' => $post->created_at->format('Y'),
@@ -129,7 +129,7 @@ test('user cannot delete others\' post in user information post card', function 
 
     $this->actingAs($user);
 
-    livewire(PostsByYear::class, [
+    livewire(PostsGroupByYear::class, [
         'posts' => [$post],
         'userId' => $post->user_id,
         'year' => $post->created_at->format('Y'),
@@ -154,7 +154,7 @@ test('author can restore deleted post', function () {
 
     $this->assertSoftDeleted('posts', ['id' => $post->id]);
 
-    livewire(PostsByYear::class, [
+    livewire(PostsGroupByYear::class, [
         'posts' => [$post],
         'userId' => $post->user_id,
         'year' => $post->created_at->format('Y'),
@@ -179,7 +179,7 @@ test('users cannot restore other users\' post', function () {
         'deleted_at' => now(),
     ]);
 
-    livewire(PostsByYear::class, [
+    livewire(PostsGroupByYear::class, [
         'posts' => [$post],
         'userId' => $user->id,
         'year' => $post->created_at->format('Y'),

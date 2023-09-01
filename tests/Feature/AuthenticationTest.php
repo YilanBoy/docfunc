@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Auth\Login;
+use App\Livewire\Pages\Auth\Login;
 use App\Models\User;
 
 use function Pest\Laravel\get;

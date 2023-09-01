@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\CreatePostPage;
+use App\Livewire\Pages\Posts\Create;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
@@ -38,7 +38,7 @@ test('authenticated user can create post', function ($categoryId) {
         ->map(fn ($item) => ['id' => $item->id, 'name' => $item->name])
         ->toJson();
 
-    livewire(CreatePostPage::class, [
+    livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.title', $title)
@@ -70,7 +70,7 @@ test('authenticated user can create post', function ($categoryId) {
 test('title at least 4 characters', function () {
     $this->actingAs(User::factory()->create());
 
-    livewire(CreatePostPage::class, [
+    livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.title', str()->random(3))
@@ -83,7 +83,7 @@ test('title at least 4 characters', function () {
 test('title at most 50 characters', function () {
     $this->actingAs(User::factory()->create());
 
-    livewire(CreatePostPage::class, [
+    livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.title', str()->random(51))
@@ -96,7 +96,7 @@ test('title at most 50 characters', function () {
 test('body at least 500 characters', function () {
     $this->actingAs(User::factory()->create());
 
-    livewire(CreatePostPage::class, [
+    livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.title', str()->random(4))
@@ -109,7 +109,7 @@ test('body at least 500 characters', function () {
 test('body at most 20000 characters', function () {
     $this->actingAs(User::factory()->create());
 
-    livewire(CreatePostPage::class, [
+    livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.title', str()->random(4))
@@ -124,7 +124,7 @@ it('can check image immediately', function () {
 
     $file = UploadedFile::fake()->image('image.jpg')->size(1025);
 
-    livewire(CreatePostPage::class, [
+    livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('image', $file)
@@ -138,7 +138,7 @@ it('can upload image', function () {
 
     $image = UploadedFile::fake()->image('fake_image.jpg');
 
-    livewire(CreatePostPage::class, [
+    livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.title', str()->random(4))
@@ -160,7 +160,7 @@ it('can\'t upload non image', function () {
 
     $file = UploadedFile::fake()->create('document.pdf', 512);
 
-    livewire(CreatePostPage::class, [
+    livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.title', str()->random(4))
@@ -178,7 +178,7 @@ it('can get auto save key property', function () {
 
     $this->actingAs($user);
 
-    livewire(CreatePostPage::class, [
+    livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
     ])->assertSet('autoSaveKey', 'auto_save_user_'.$user->id.'_create_post');
 });
@@ -206,7 +206,7 @@ it('can auto save the post to cache', function () {
         ->toJson(JSON_UNESCAPED_UNICODE);
     $body = str()->random(500);
 
-    livewire(CreatePostPage::class, [
+    livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.title', $title)

@@ -1,7 +1,7 @@
 <?php
 
-use App\Livewire\Components\Comments\CommentCard;
-use App\Livewire\Components\Comments\EditCommentModal;
+use App\Livewire\Shared\Comments\CommentCard;
+use App\Livewire\Shared\Comments\EditCommentModal;
 use App\Models\Comment;
 use App\Models\User;
 

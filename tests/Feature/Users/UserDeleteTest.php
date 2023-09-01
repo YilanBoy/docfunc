@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\DeleteUserPage;
+use App\Livewire\Pages\Users\Delete;
 use App\Mail\DestroyUser;
 use App\Models\User;
 
@@ -31,7 +31,7 @@ test('schedule the task of sending the \'delete user\' email in the queue', func
 
     $this->actingAs($user);
 
-    livewire(DeleteUserPage::class, ['user' => $user])
+    livewire(Delete::class, ['user' => $user])
         ->call('sendDestroyEmail');
 
     Mail::assertQueued(DestroyUser::class);

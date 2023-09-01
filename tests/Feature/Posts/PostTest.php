@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Components\Posts;
+use App\Livewire\Shared\Posts\Posts;
 use App\Models\Post;
 use App\Models\User;
 use Livewire\Livewire;

@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\ChangeUserPasswordPage;
+use App\Livewire\Pages\Users\UpdatePassword;
 use App\Models\User;
 
 use function Pest\Laravel\get;
@@ -9,7 +9,7 @@ use function Pest\Livewire\livewire;
 test('non-logged-in users cannot access the update password page', function () {
     $user = User::factory()->create();
 
-    get(route('users.changePassword', $user->id))
+    get(route('users.updatePassword', $user->id))
         ->assertStatus(302)
         ->assertRedirect(route('login'));
 });
@@ -19,7 +19,7 @@ test('users can access the update password page', function () {
 
     $this->actingAs($user);
 
-    get(route('users.changePassword', $user->id))
+    get(route('users.updatePassword', $user->id))
         ->assertSuccessful();
 });
 
@@ -31,7 +31,7 @@ test('users can update their passwords', function () {
 
     $this->actingAs($user);
 
-    livewire(ChangeUserPasswordPage::class, ['user' => $user])
+    livewire(UpdatePassword::class, ['user' => $user])
         ->set('current_password', $oldPassword)
         ->set('new_password', $newPassword)
         ->set('new_password_confirmation', $newPassword)
@@ -52,7 +52,7 @@ test('can\'t update password with wrong old password', function () {
 
     $this->actingAs($user);
 
-    livewire(ChangeUserPasswordPage::class, ['user' => $user])
+    livewire(UpdatePassword::class, ['user' => $user])
         ->set('current_password', $wrongPassword)
         ->set('new_password', $newPassword)
         ->set('new_password_confirmation', $newPassword)
@@ -73,7 +73,7 @@ test('can\'t update password if the "new password" is different from the "confir
 
     $this->actingAs($user);
 
-    livewire(ChangeUserPasswordPage::class, ['user' => $user])
+    livewire(UpdatePassword::class, ['user' => $user])
         ->set('current_password', $oldPassword)
         ->set('new_password', $newPassword)
         ->set('new_password_confirmation', $wrongNewPasswordConfirmation)

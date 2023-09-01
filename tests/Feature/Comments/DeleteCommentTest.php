@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Components\Comments\CommentCard;
+use App\Livewire\Shared\Comments\CommentCard;
 use App\Models\Comment;
 use App\Models\User;
 

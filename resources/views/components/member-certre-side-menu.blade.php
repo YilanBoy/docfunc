@@ -22,7 +22,7 @@
     </a>
 
     @php
-      $changePasswordUrl = route('users.changePassword', ['user' => auth()->id()]);
+      $changePasswordUrl = route('users.updatePassword', ['user' => auth()->id()]);
       $inChangePasswordPage = request()->url() === $changePasswordUrl;
     @endphp
     <a

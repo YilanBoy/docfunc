@@ -1,7 +1,7 @@
 <?php
 
-use App\Livewire\EditPostPage;
-use App\Livewire\UserInfoPage\PostsByYear;
+use App\Livewire\Pages\Posts\Edit;
+use App\Livewire\Shared\Users\PostsGroupByYear;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
@@ -52,7 +52,7 @@ test('authors can update their posts', function ($categoryId) {
         ->map(fn ($item) => ['id' => $item->id, 'name' => $item->name])
         ->toJson();
 
-    livewire(EditPostPage::class, ['post' => $post])
+    livewire(Edit::class, ['post' => $post])
         ->set('form.title', $newTitle)
         ->set('form.category_id', $categoryId)
         ->set('form.tags', $newTagsJson)
@@ -87,7 +87,7 @@ test('users can update the private status of their posts in user info page', fun
 
     $this->actingAs($post->user);
 
-    livewire(PostsByYear::class, [
+    livewire(PostsGroupByYear::class, [
         'year' => now()->year,
         'userId' => $post->user_id,
         'posts' => $post->all(),

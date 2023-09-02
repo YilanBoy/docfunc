@@ -6,7 +6,7 @@ use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
-class DesktopSidemenu extends Component
+class ShowPostSidemenu extends Component
 {
     use AuthorizesRequests;
 
@@ -29,6 +29,6 @@ class DesktopSidemenu extends Component
 
     public function render()
     {
-        return view('livewire.shared.posts.desktop-sidemenu');
+        return view('livewire.shared.posts.show-post-sidemenu');
     }
 }

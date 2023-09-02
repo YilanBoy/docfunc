@@ -6,12 +6,12 @@
   x-cloak
   x-data="{ isOpen: false }"
   x-show="isOpen"
-  @edit-comment-was-set.window="
+  x-on:edit-comment-was-set.window="
     isOpen = true
     $nextTick(() => $refs.editCommentTextarea.focus())
   "
-  @close-edit-comment-modal.window="isOpen = false"
-  @keydown.escape.window="isOpen = false"
+  x-on:close-edit-comment-modal.window="isOpen = false"
+  x-on:keydown.escape.window="isOpen = false"
 >
   <div class="flex min-h-screen items-end justify-center">
     {{-- gray background --}}
@@ -34,7 +34,7 @@
         <button
           class="text-gray-400 hover:text-gray-500"
           type="button"
-          @click="isOpen = false"
+          x-on:click="isOpen = false"
         >
           <svg
             class="h-8 w-8"

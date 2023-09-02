@@ -2,8 +2,6 @@
 <div
   class="w-full"
   id="comments"
-  x-ref="comments"
-  x-data="{ currentScrollY: 0 }"
 >
   {{-- new comment will show here --}}
   <livewire:shared.comments.comment-group
@@ -28,8 +26,7 @@
         class="relative text-lg dark:text-gray-50"
         type="button"
         {{-- when click the button and update the DOM, make windows.scrollY won't change --}}
-        x-on:mousedown="currentScrollY = window.scrollY"
-        wire:mouseup="showMore"
+        wire:click="showMore"
       >
         <span>顯示更多</span>
         <div

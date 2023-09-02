@@ -4,7 +4,7 @@
   x-init="$refs.currentPassword.focus()"
 >
   <div class="flex flex-col items-start justify-center px-4 md:flex-row xl:px-0">
-    <x-member-certre-side-menu />
+    <x-member-centre.sidemenu />
 
     <x-card class="mt-6 flex w-full flex-col justify-center space-y-6 md:mt-0 md:w-[700px]">
       {{-- 驗證錯誤訊息 --}}

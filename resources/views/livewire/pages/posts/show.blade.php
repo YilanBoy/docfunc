@@ -53,7 +53,7 @@
 
               {{-- mobile dropdowns --}}
               @if (auth()->id() === $post->user_id)
-                <livewire:shared.posts.mobile-dropdowns :post-id="$post->id" />
+                <livewire:shared.posts.show-post-dropdowns :post-id="$post->id" />
               @endif
 
             </div>
@@ -166,7 +166,7 @@
 
         <div class="hidden lg:block lg:w-1/6">
           {{-- desktop sidemenu --}}
-          <livewire:shared.posts.desktop-sidemenu
+          <livewire:shared.posts.show-post-sidemenu
             :post-id="$post->id"
             :post-title="$post->title"
             :author-id="$post->user_id"

@@ -2,7 +2,7 @@
   class="fixed bottom-0 left-0"
   x-cloak
   x-data="alertComponent"
-  @info-badge.window="
+  x-on:info-badge.window="
     showAlert(event.detail.status, event.detail.message)
 
     setTimeout(function () {

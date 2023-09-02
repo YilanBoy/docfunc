@@ -7,7 +7,7 @@ use App\Models\Tag;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 
-class IndexSidebar extends Component
+class HomeSidemenu extends Component
 {
     public function render()
     {
@@ -23,6 +23,6 @@ class IndexSidebar extends Component
             return Link::all();
         });
 
-        return view('livewire.shared.posts.index-sidebar', compact('popularTags', 'links'));
+        return view('livewire.shared.posts.home-sidemenu', compact('popularTags', 'links'));
     }
 }

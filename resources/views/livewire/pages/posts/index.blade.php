@@ -14,6 +14,6 @@
     />
 
     {{-- 文章列表側邊欄 --}}
-    <livewire:shared.posts.index-sidebar />
+    <livewire:shared.posts.home-sidemenu />
   </div>
 </div>

@@ -9,12 +9,12 @@
       recaptchaSiteKey: @js(config('services.recaptcha.site_key'))
   }"
   x-show="isOpen"
-  @open-create-comment-modal.window="
+  x-on:open-create-comment-modal.window="
     isOpen = true
     $nextTick(() => $refs.createCommentTextarea.focus())
   "
-  @close-create-comment-modal.window="isOpen = false"
-  @keydown.escape.window="isOpen = false"
+  x-on:close-create-comment-modal.window="isOpen = false"
+  x-on:keydown.escape.window="isOpen = false"
 >
   {{-- google recaptcha --}}
   <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
@@ -40,7 +40,7 @@
         <button
           class="text-gray-400 hover:text-gray-500"
           type="button"
-          @click="isOpen = false"
+          x-on:click="isOpen = false"
         >
           <svg
             class="h-8 w-8"

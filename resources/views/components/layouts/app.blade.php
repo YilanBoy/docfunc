@@ -99,15 +99,8 @@
 </head>
 
 <body class="overscroll-y-none bg-gray-200 font-sans text-lg text-gray-900 antialiased dark:bg-gray-900">
-  <div
-    class="relative flex min-h-screen flex-col justify-between selection:bg-green-300 selection:text-green-900 dark:selection:bg-indigo-300 dark:selection:text-indigo-900"
-  >
-    <livewire:shared.layouts.header />
 
-    {{ $slot }}
-
-    <livewire:shared.layouts.footer />
-  </div>
+  {{ $slot }}
 
   {{-- Flash Alert --}}
   @persist('alert')

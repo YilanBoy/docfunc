@@ -79,15 +79,13 @@
             </a>
           @endif
 
-          @if (request()->url() !== route('login'))
-            <a
-              class="rounded-md border border-emerald-400 bg-transparent px-4 py-2 text-emerald-400 hover:border-transparent hover:bg-emerald-400 hover:text-gray-50"
-              href="{{ route('login') }}"
-              wire:navigate
-            >
-              登入
-            </a>
-          @endif
+          <a
+            class="rounded-md border border-emerald-400 bg-transparent px-4 py-2 text-emerald-400 hover:border-transparent hover:bg-emerald-400 hover:text-gray-50"
+            href="{{ route('login') }}"
+            wire:navigate
+          >
+            登入
+          </a>
         @else
           {{-- 手機版-已登入 --}}
 

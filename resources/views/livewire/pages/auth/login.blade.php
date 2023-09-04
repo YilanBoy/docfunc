@@ -1,10 +1,20 @@
 <div class="container mx-auto">
+  <div class="fixed left-5 top-5">
+    <a
+      class="block text-2xl font-semibold text-gray-400 transition duration-150 ease-in hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-50"
+      href="{{ route('root') }}"
+      wire:navigate
+    >
+      <i class="bi bi-arrow-left-circle-fill"></i>
+      <span class="ml-2">返回文章列表</span>
+    </a>
+  </div>
   {{-- google recaptcha --}}
   <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
 
   <div class="flex items-center justify-center px-4 xl:px-0">
 
-    <div class="flex w-full flex-col items-center justify-center">
+    <div class="flex min-h-screen w-full flex-col items-center justify-center">
       {{-- 頁面標題 --}}
       <div class="fill-current text-2xl text-gray-700 dark:text-gray-50">
         <i class="bi bi-box-arrow-in-right"></i><span class="ml-4">登入</span>

@@ -78,15 +78,13 @@
         </a>
       @endif
 
-      @if (request()->url() !== route('login'))
-        <a
-          class="flex h-10 items-center justify-center rounded-lg border border-emerald-600 bg-transparent px-3 text-emerald-600 transition duration-150 hover:border-transparent hover:bg-emerald-600 hover:text-gray-50"
-          href="{{ route('login') }}"
-          wire:navigate
-        >
-          <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
-        </a>
-      @endif
+      <a
+        class="flex h-10 items-center justify-center rounded-lg border border-emerald-600 bg-transparent px-3 text-emerald-600 transition duration-150 hover:border-transparent hover:bg-emerald-600 hover:text-gray-50"
+        href="{{ route('login') }}"
+        wire:navigate
+      >
+        <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
+      </a>
     @else
       {{-- 電腦版-已登入 --}}
 

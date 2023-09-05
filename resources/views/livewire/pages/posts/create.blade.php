@@ -1,5 +1,5 @@
 {{-- create new post --}}
-<x-layouts.layout>
+<x-layouts.layout-main>
   <div class="container mx-auto">
     <div class="flex items-stretch justify-center space-x-4">
       <div class="hidden xl:block xl:w-1/6"></div>
@@ -199,4 +199,4 @@
       </div>
     </div>
   </div>
-</x-layouts.layout>
+</x-layouts.layout-main>

@@ -4,7 +4,7 @@
   @section('preview_url', $post->preview_url)
 @endif
 
-<x-layouts.layout>
+<x-layouts.layout-main>
   <div
     x-data
     x-init="// init show page
@@ -183,4 +183,4 @@
 
     <x-porgress-bar />
   </div>
-</x-layouts.layout>
+</x-layouts.layout-main>

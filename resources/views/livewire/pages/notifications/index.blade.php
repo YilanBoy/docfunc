@@ -1,5 +1,5 @@
 {{-- 通知列表 --}}
-<x-layouts.layout>
+<x-layouts.layout-main>
   <div class="container mx-auto">
     <div class="flex items-start justify-center px-4 xl:px-0">
 
@@ -55,4 +55,4 @@
 
     </div>
   </div>
-</x-layouts.layout>
+</x-layouts.layout-main>

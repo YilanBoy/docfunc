@@ -1,4 +1,4 @@
-<x-layouts.layout>
+<x-layouts.layout-main>
   <div
     class="container mx-auto flex-1"
     x-data
@@ -62,4 +62,4 @@
       </x-card>
     </div>
   </div>
-</x-layouts.layout>
+</x-layouts.layout-main>

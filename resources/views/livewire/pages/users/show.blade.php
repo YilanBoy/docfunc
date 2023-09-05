@@ -1,5 +1,5 @@
 {{-- user information page --}}
-<x-layouts.layout>
+<x-layouts.layout-main>
   <div class="container mx-auto flex-1">
     <div class="flex flex-col items-center justify-start px-4">
 
@@ -85,4 +85,4 @@
       </div>
     </div>
   </div>
-</x-layouts.layout>
+</x-layouts.layout-main>

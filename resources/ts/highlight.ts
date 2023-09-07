@@ -1,84 +1,107 @@
 // 載入基本預設的語言
-import hljs from 'highlight.js/lib/common';
+import hljs from "highlight.js/lib/common";
 // 加入 Dart
-import dart from 'highlight.js/lib/languages/dart';
-import dockerfile from 'highlight.js/lib/languages/dockerfile';
-import nginx from 'highlight.js/lib/languages/nginx';
+import dart from "highlight.js/lib/languages/dart";
+import dockerfile from "highlight.js/lib/languages/dockerfile";
+import nginx from "highlight.js/lib/languages/nginx";
 
 // https://github.com/highlightjs/highlightjs-terraform/blob/master/terraform.js
 function terraform(hljs: any) {
+    const KWS = [
+        'resource',
+        'variable',
+        'provider',
+        'output',
+        'locals',
+        'module',
+        'data',
+        'terraform|10',
+    ];
+
+    const LITERAL = ['true', 'false', 'null'];
+
+    const KEYWORDS = {
+        keyword: KWS,
+        literal: LITERAL,
+    };
+
     const NUMBERS = {
-        className: 'number',
-        begin: '\\b\\d+(\\.\\d+)?',
+        scope: 'number',
+        begin: /\b\d+(\.\d+)?/,
         relevance: 0,
     };
+
     const STRINGS = {
-        className: 'string',
-        begin: '"',
-        end: '"',
+        scope: 'string',
+        begin: /"/,
+        end: /"/,
         contains: [
             {
-                className: 'variable',
-                begin: '\\${',
-                end: '\\}',
+                scope: 'variable',
+                begin: /\${/,
+                end: /}/,
                 relevance: 9,
-                contains: [
-                    {
-                        className: 'string',
-                        begin: '"',
-                        end: '"',
-                    },
-                    {
-                        className: 'meta',
-                        begin: '[A-Za-z_0-9]*' + '\\(',
-                        end: '\\)',
-                        contains: [
-                            NUMBERS,
-                            {
-                                className: 'string',
-                                begin: '"',
-                                end: '"',
-                                contains: [
-                                    {
-                                        className: 'variable',
-                                        begin: '\\${',
-                                        end: '\\}',
-                                        contains: [
-                                            {
-                                                className: 'string',
-                                                begin: '"',
-                                                end: '"',
-                                                contains: [
-                                                    {
-                                                        className: 'variable',
-                                                        begin: '\\${',
-                                                        end: '\\}',
-                                                    },
-                                                ],
-                                            },
-                                            {
-                                                className: 'meta',
-                                                begin: '[A-Za-z_0-9]*' + '\\(',
-                                                end: '\\)',
-                                            },
-                                        ],
-                                    },
-                                ],
-                            },
-                            'self',
-                        ],
-                    },
-                ],
             },
         ],
     };
 
+    const PARAMETER = {
+        scope: 'variable',
+        match: /\n\s*[a-zA-Z0-9_]+\s*(?==)/,
+    };
+
+    const BLOCK_PARAMETER = {
+        scope: 'keyword',
+        match: /\n\s*[a-zA-Z0-9_]+\s*(?={)/,
+    };
+
+    const FUNCTION = {
+        scope: 'title.function',
+        match: /[a-zA-Z0-9_]+(?=\()/,
+    };
+
+    const LEFT_BRACE = {
+        scope: 'punctuation',
+        match: /\{/,
+    };
+
+    const RIGHT_BRACE = {
+        scope: 'punctuation',
+        match: /}/,
+    };
+
+    const LEFT_BRACKET = {
+        scope: 'punctuation',
+        match: /\[/,
+    };
+
+    const RIGHT_BRACKET = {
+        scope: 'punctuation',
+        match: /]/,
+    };
+
+    const EQUALS = {
+        scope: 'operator',
+        match: /=/,
+    };
+
     return {
+        case_insensitive: false,
         aliases: ['tf', 'hcl'],
-        keywords:
-            'resource variable provider output locals module data terraform|10',
-        literal: 'false true null',
-        contains: [hljs.COMMENT('\\#', '$'), NUMBERS, STRINGS],
+        keywords: KEYWORDS,
+        contains: [
+            hljs.COMMENT(/#/, /$/),
+            NUMBERS,
+            STRINGS,
+            PARAMETER,
+            BLOCK_PARAMETER,
+            FUNCTION,
+            EQUALS,
+            LEFT_BRACE,
+            RIGHT_BRACE,
+            LEFT_BRACKET,
+            LEFT_BRACKET,
+        ],
     };
 }
 

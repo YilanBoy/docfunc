@@ -71,7 +71,7 @@
   @vite('resources/css/app.css')
   @vite('resources/css/icon.css')
   {{-- highlight code block style --}}
-  @vite('node_modules/highlight.js/scss/base16/material-palenight.scss')
+  @vite('node_modules/highlight.js/scss/atom-one-dark.scss')
   {{-- editor style --}}
   @vite(['resources/css/editor.css', 'node_modules/@yaireo/tagify/dist/tagify.css', 'resources/css/missing-content-style.css'])
 

@@ -23,7 +23,7 @@ export default defineConfig({
                 'resources/css/missing-content-style.css',
                 'resources/css/icon.css',
                 // scss
-                'node_modules/highlight.js/scss/base16/material-palenight.scss',
+                'node_modules/highlight.js/scss/atom-one-dark.scss',
             ],
             refresh: true,
         }),

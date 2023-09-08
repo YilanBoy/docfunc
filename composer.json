@@ -39,7 +39,6 @@
         "pestphp/pest-plugin-faker": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
         "pestphp/pest-plugin-livewire": "^2.0",
-        "pestphp/pest-plugin-mock": "^2.0",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {

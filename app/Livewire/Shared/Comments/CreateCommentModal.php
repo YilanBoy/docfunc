@@ -91,7 +91,7 @@ class CreateCommentModal extends Component
         // empty the body of the comment form
         $this->reset('body', 'convertToHtml');
 
-        $this->dispatch('add-id-to-group-new', id: $comment->id);
+        $this->dispatch('create-comment-in-group-new', id: $comment->id);
 
         $this->dispatch('close-create-comment-modal');
 

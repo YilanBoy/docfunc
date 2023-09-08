@@ -2,71 +2,31 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+  {{-- prettier-ignore-start --}}
   <meta charset="utf-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   {{-- CSRF Token --}}
-  <meta
-    name="csrf-token"
-    content="{{ csrf_token() }}"
-  >
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>{{ $title ?? config('app.name') }}</title>
 
   {{-- Primary Meta Tags --}}
-  <meta
-    name="title"
-    content="{{ $title ?? config('app.name') }}"
-  >
-  <meta
-    name="description"
-    content="@yield('description', config('app.name'))"
-  >
-
+  <meta name="title" content="{{ $title ?? config('app.name') }}">
+  <meta name="description" content="@yield('description', config('app.name'))">
   <x-sharing-meta-tags :title="$title ?? config('app.name')" />
 
   {{-- Ｗeb Feed --}}
   @include('feed::links')
 
   {{-- Favicon --}}
-  <link
-    type="image/x-icon"
-    href="{{ asset('images/icon/icon.svg') }}"
-    rel="shortcut icon"
-  >
-  {{-- Set theme --}}
-  <script>
-    if (
-      localStorage.mode === "light" ||
-      (!("mode" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: light)").matches)
-    ) {
-      document.documentElement.classList.remove("dark");
-    } else {
-      document.documentElement.classList.add("dark");
-    }
-  </script>
+  <link type="image/x-icon" href="{{ asset('images/icon/icon.svg') }}" rel="shortcut icon">
 
   {{-- Font --}}
-  <link
-    href="https://fonts.googleapis.com"
-    rel="preconnect"
-  >
-  <link
-    href="https://fonts.gstatic.com"
-    rel="preconnect"
-    crossorigin
-  >
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap"
-    rel="stylesheet"
-  >
-  <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
 
   @vite('resources/css/app.css')
   @vite('resources/css/icon.css')
@@ -96,6 +56,20 @@
   <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
   {{-- Tagify --}}
   @vite('resources/ts/tagify.ts')
+  {{-- prettier-ignore-end --}}
+
+  {{-- Set theme --}}
+  <script>
+    if (
+      localStorage.mode === "light" ||
+      (!("mode" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: light)").matches)
+    ) {
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+    }
+  </script>
 </head>
 
 <body class="overscroll-y-none bg-gray-200 font-sans text-lg text-gray-900 antialiased dark:bg-gray-900">

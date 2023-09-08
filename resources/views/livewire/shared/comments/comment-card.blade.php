@@ -49,7 +49,7 @@
               class="hover:text-gray-500 dark:hover:text-gray-300"
               type="button"
               wire:confirm="你確定要刪除該留言？"
-              wire:click="destroy"
+              wire:click="$parent.destroy({{ $commentId }})"
             >
               <i class="bi bi-trash3-fill"></i>
               <span class="ml-1">刪除</span>

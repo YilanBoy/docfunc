@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Shared\Comments\CommentCard;
+use App\Livewire\Shared\Comments\CommentGroup;
 use App\Models\Comment;
 use App\Models\User;
 
@@ -13,20 +13,13 @@ test('the author can delete his comment', function () {
 
     $bookmark = 'id';
 
-    livewire(CommentCard::class, [
+    livewire(CommentGroup::class, [
         'postId' => $comment->post_id,
         'postAuthorId' => $comment->post->user_id,
-        'commentId' => $comment->id,
-        'userId' => $comment->user_id,
-        'userGravatarUrl' => get_gravatar($comment->user->email),
-        'userName' => $comment->user->name,
-        'body' => $comment->body,
-        'createdAt' => $comment->created_at,
-        'isEdited' => $comment->created_at->ne($comment->updated_at),
         'groupId' => $bookmark,
+        'ids' => [$comment->id],
     ])
-        ->call('destroy')
-        ->assertDispatched('remove-id-from-group-'.$bookmark)
+        ->call('destroy', comment: $comment->id)
         ->assertDispatched('update-comment-counts')
         ->assertDispatched('info-badge',
             status: 'success',
@@ -43,20 +36,13 @@ test('post author can delete other users comment', function () {
 
     $bookmark = 'id';
 
-    livewire(CommentCard::class, [
+    livewire(CommentGroup::class, [
         'postId' => $comment->post_id,
         'postAuthorId' => $comment->post->user_id,
-        'commentId' => $comment->id,
-        'userId' => $comment->user_id,
-        'userGravatarUrl' => get_gravatar($comment->user->email),
-        'userName' => $comment->user->name,
-        'body' => $comment->body,
-        'createdAt' => $comment->created_at,
-        'isEdited' => $comment->created_at->ne($comment->updated_at),
         'groupId' => $bookmark,
+        'ids' => [$comment->id],
     ])
-        ->call('destroy')
-        ->assertDispatched('remove-id-from-group-'.$bookmark)
+        ->call('destroy', comment: $comment->id)
         ->assertDispatched('update-comment-counts')
         ->assertDispatched('info-badge',
             status: 'success',
@@ -73,19 +59,13 @@ test('when a comment is deleted, the post comments will be reduced by one', func
 
     Livewire::actingAs(User::find($comment->post->user_id));
 
-    livewire(CommentCard::class, [
+    livewire(CommentGroup::class, [
         'postId' => $comment->post_id,
         'postAuthorId' => $comment->post->user_id,
-        'commentId' => $comment->id,
-        'userId' => $comment->user_id,
-        'userGravatarUrl' => get_gravatar($comment->user->email),
-        'userName' => $comment->user->name,
-        'body' => $comment->body,
-        'createdAt' => $comment->created_at,
-        'isEdited' => $comment->created_at->ne($comment->updated_at),
         'groupId' => 'id',
+        'ids' => [$comment->id],
     ])
-        ->call('destroy');
+        ->call('destroy', comment: $comment->id);
 
     $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
 });

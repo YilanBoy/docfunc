@@ -3,12 +3,19 @@
 namespace App\Livewire\Shared\Comments;
 
 use App\Models\Comment;
+use App\Models\Post;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Throwable;
 
 class CommentGroup extends Component
 {
+    use AuthorizesRequests;
+
     #[Locked]
     public int $postId;
 
@@ -19,16 +26,35 @@ class CommentGroup extends Component
 
     public int|string $groupId = 'new';
 
-    #[On('add-id-to-group-{groupId}')]
-    public function addId(int $id): void
+    #[On('create-comment-in-group-{groupId}')]
+    public function create(int $id): void
     {
         $this->ids[] = $id;
     }
 
-    #[On('remove-id-from-group-{groupId}')]
-    public function removeId(int $id): void
+    /**
+     * delete comment in group
+     *
+     * @throws AuthorizationException
+     * @throws Throwable
+     */
+    public function destroy(Comment $comment): void
     {
-        unset($this->ids[array_search($id, $this->ids)]);
+        $this->authorize('destroy', $comment);
+
+        unset($this->ids[array_search($comment->id, $this->ids)]);
+
+        DB::transaction(function () use ($comment) {
+            $comment->delete();
+
+            $post = Post::findOrFail($this->postId);
+
+            $post->decrement('comment_counts');
+        });
+
+        $this->dispatch('update-comment-counts');
+
+        $this->dispatch('info-badge', status: 'success', message: '成功刪除留言！');
     }
 
     public function render()

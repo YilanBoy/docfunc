@@ -65,7 +65,7 @@ module.exports = {
                         // inline code
                         ':not(pre) > code': {
                             backgroundColor: theme('colors.green.200'),
-                            color: theme('colors.green.600'),
+                            color: theme('colors.green.900'),
                             padding: '0.25rem',
                             fontWeight: '600',
                             borderRadius: '0.25rem',

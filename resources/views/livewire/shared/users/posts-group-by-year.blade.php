@@ -6,13 +6,13 @@
       {{-- in this list, these post attribue will be change in the loop, so we have to track them down --}}
       wire:key="{{ $post->id . $post->is_private . $post->deleted_at }}"
     >
-      <div class="text-gray-400">
+      <div class="text-gray-500">
         <i class="bi bi-arrow-right-short"></i>
         @if ($post->trashed())
           <span class="ml-2 text-red-400 line-through">{{ $post->title . ' (已刪除)' }}</span>
         @elseif ($post->is_private)
           <a
-            class="ml-2 duration-200 ease-out hover:text-gray-700 hover:underline dark:hover:text-gray-300"
+            class="ml-2 duration-200 ease-out hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-gray-50"
             href="{{ $post->link_with_slug }}"
             wire:navigate
           >
@@ -20,7 +20,7 @@
           </a>
         @else
           <a
-            class="ml-2 duration-200 ease-out hover:text-gray-700 hover:underline dark:hover:text-gray-300"
+            class="ml-2 duration-200 ease-out hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-gray-50"
             href="{{ $post->link_with_slug }}"
             wire:navigate
           >
@@ -30,12 +30,12 @@
       </div>
 
       @if ($post->user_id === auth()->id())
-        <div class="flex items-center space-x-2">
+        <div class="ml-2 flex items-center space-x-2">
 
           {{-- restore --}}
           @if ($post->trashed())
             <button
-              class="text-gray-400 duration-200 ease-out hover:text-gray-700 dark:hover:text-gray-200"
+              class="text-gray-500 duration-200 ease-out hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
               type="button"
               wire:loading.attr="disabled"
               wire:confirm="你確定要還原該文章？"
@@ -47,7 +47,7 @@
             {{-- private --}}
             @if ($post->is_private)
               <button
-                class="text-gray-400 duration-200 ease-out hover:text-gray-700 dark:hover:text-gray-200"
+                class="text-gray-500 duration-200 ease-out hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
                 type="button"
                 wire:loading.attr="disabled"
                 wire:confirm="你確定要將該文章設為公開？"
@@ -57,7 +57,7 @@
               </button>
             @else
               <button
-                class="text-gray-400 duration-200 ease-out hover:text-gray-700 dark:hover:text-gray-200"
+                class="text-gray-500 duration-200 ease-out hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
                 type="button"
                 wire:loading.attr="disabled"
                 wire:confirm="你確定要將該文章設為不公開？"
@@ -70,7 +70,7 @@
 
             {{-- edit --}}
             <a
-              class="text-gray-400 duration-200 ease-out hover:text-gray-700 dark:hover:text-gray-200"
+              class="text-gray-500 duration-200 ease-out hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
               href="{{ route('posts.edit', ['post' => $post->id]) }}"
               role="button"
               wire:navigate

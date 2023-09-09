@@ -6,13 +6,14 @@
       {{-- in this list, these post attribue will be change in the loop, so we have to track them down --}}
       wire:key="{{ $post->id . $post->is_private . $post->deleted_at }}"
     >
-      <div class="text-gray-500">
-        <i class="bi bi-arrow-right-short"></i>
+      <i class="bi bi-arrow-right-short"></i>
+
+      <div class="ml-2 w-full text-gray-500">
         @if ($post->trashed())
-          <span class="ml-2 text-red-400 line-through">{{ $post->title . ' (已刪除)' }}</span>
+          <span class="text-red-400 line-through">{{ $post->title . ' (已刪除)' }}</span>
         @elseif ($post->is_private)
           <a
-            class="ml-2 duration-200 ease-out hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-gray-50"
+            class="duration-200 ease-out hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-gray-50"
             href="{{ $post->link_with_slug }}"
             wire:navigate
           >
@@ -20,7 +21,7 @@
           </a>
         @else
           <a
-            class="ml-2 duration-200 ease-out hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-gray-50"
+            class="duration-200 ease-out hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-gray-50"
             href="{{ $post->link_with_slug }}"
             wire:navigate
           >

@@ -16,14 +16,14 @@
           <span class="sr-only">Open main menu</span>
           {{-- 手機版-關閉選單的 icon --}}
           <div
-            class="text-3xl text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
+            class="text-3xl text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
             :class="menuIsOpen ? 'hidden' : 'block'"
           >
             <i class="bi bi-list"></i>
           </div>
           {{-- 手機版-開啟選單的 icon --}}
           <div
-            class="text-xl text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
+            class="text-xl text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
             x-cloak
             :class="menuIsOpen ? 'block' : 'hidden'"
           >
@@ -92,7 +92,7 @@
           {{-- 手機版-通知 --}}
           <span class="relative inline-flex rounded-md">
             <a
-              class="rounded-full text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
+              class="rounded-full text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
               href="{{ route('notifications.index') }}"
               wire:navigate
             >
@@ -209,8 +209,8 @@
         @if ($inIndexPage) aria-current="page" @endif
         @class([
             'block px-3 py-2 rounded-md font-medium',
-            'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-50' => $inIndexPage,
-            'text-gray-400 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-50' => !$inIndexPage,
+            'bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-50' => $inIndexPage,
+            'text-gray-500 dark:text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-50' => !$inIndexPage,
         ])
         wire:navigate
       >
@@ -226,8 +226,8 @@
           @if ($inCategoryPage) aria-current="page" @endif
           @class([
               'block px-3 py-2 rounded-md font-medium',
-              'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-50' => $inCategoryPage,
-              'text-gray-400 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-50' => !$inCategoryPage,
+              'bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-50' => $inCategoryPage,
+              'text-gray-500 dark:text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-50' => !$inCategoryPage,
           ])
           wire:navigate
         >

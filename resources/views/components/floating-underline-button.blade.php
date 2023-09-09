@@ -3,8 +3,8 @@
     href="{{ $link }}"
     @class([
         'peer flex items-center justify-center h-10 transition duration-150',
-        'text-gray-400 hover:text-green-500 dark:hover:text-lividus-400' => !$selected,
-        'text-green-500 dark:text-lividus-400' => $selected,
+        'dark:text-gray-50 hover:text-green-600 dark:hover:text-lividus-400' => !$selected,
+        'text-green-600 dark:text-lividus-400' => $selected,
     ])
     wire:navigate
   >

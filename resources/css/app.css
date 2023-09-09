@@ -32,9 +32,9 @@
             /* horizontal line */
         prose-hr:my-3 prose-hr:h-1 prose-hr:border-none prose-hr:bg-slate-300 dark:prose-hr:bg-slate-500
             /* code */
-        prose-code:before:content-none prose-code:after:content-none
+        prose-code:before:content-none prose-code:after:content-none prose-code:font-jetbrains-mono
             /* pre */
-        prose-pre:p-0 prose-pre:rounded-lg
+        prose-pre:p-0 prose-pre:rounded-lg prose-pre:text-lg
             /* blockquote */
         prose-blockquote:border-slate-300 prose-blockquote:text-slate-500
         dark:prose-blockquote:border-slate-600 dark:prose-blockquote:text-slate-400;
@@ -61,9 +61,9 @@
             /* horizontal line */
         prose-hr:my-3 prose-hr:h-1 prose-hr:border-none prose-hr:bg-slate-300 dark:prose-hr:bg-slate-500
             /* code */
-        prose-code:before:content-none prose-code:after:content-none
+        prose-code:before:content-none prose-code:after:content-none prose-code:font-jetbrains-mono
             /* pre */
-        prose-pre:p-0 prose-pre:rounded-lg;
+        prose-pre:p-0 prose-pre:rounded-lg prose-pre:text-lg;
     }
 }
 

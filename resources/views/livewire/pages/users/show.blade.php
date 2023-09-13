@@ -2,7 +2,6 @@
 <x-layouts.layout-main>
   <div class="container mx-auto flex-1">
     <div class="flex flex-col items-center justify-start px-4">
-
       {{-- user information, posts and comments --}}
       <div
         class="relative w-full max-w-sm md:max-w-2xl"
@@ -28,16 +27,12 @@
         <div
           class="relative mb-6 inline-grid h-10 w-full select-none grid-cols-3 items-center justify-center rounded-lg border border-gray-100 bg-white p-1 text-gray-500 dark:border-gray-800 dark:bg-gray-700 dark:text-gray-50"
         >
-          @php
-            $tabs = [['value' => 'information', 'text' => '個人資訊', 'icon' => 'bi bi-info-circle-fill'], ['value' => 'posts', 'text' => '發布文章', 'icon' => 'bi bi-file-earmark-post-fill'], ['value' => 'comments', 'text' => '留言紀錄', 'icon' => 'bi bi-chat-square-text-fill']];
-          @endphp
-
           @foreach ($tabs as $tab)
             <button
               class="relative z-20 inline-flex h-8 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded-md px-3 text-sm font-medium transition-all"
               id="{{ $tab['value'] }}-tab-button"
               type="button"
-              @click="tabButtonClicked($el)"
+              x-on:click="tabButtonClicked($el)"
             >
               <i class="{{ $tab['icon'] }}"></i>
               <span class="ml-2">{{ $tab['text'] }}</span>

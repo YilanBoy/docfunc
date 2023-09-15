@@ -7,7 +7,7 @@
     </span>
 
     <button
-      class="group relative overflow-hidden rounded-xl bg-emerald-600 px-6 py-2 [transform:translateZ(0)] before:absolute before:bottom-0 before:left-0 before:h-full before:w-full before:origin-[100%_100%] before:scale-x-0 before:bg-blue-600 before:transition before:duration-500 before:ease-in-out hover:before:origin-[0_0] hover:before:scale-x-100"
+      class="group relative overflow-hidden rounded-xl bg-emerald-600 px-6 py-2 [transform:translateZ(0)] before:absolute before:bottom-0 before:left-0 before:h-full before:w-full before:origin-[100%_100%] before:scale-x-0 before:bg-lividus-600 before:transition before:duration-500 before:ease-in-out hover:before:origin-[0_0] hover:before:scale-x-100 dark:bg-lividus-600 dark:before:bg-emerald-600"
       type="button"
       wire:click="$dispatch('open-create-comment-modal')"
     >

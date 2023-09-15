@@ -30,7 +30,7 @@
       <button
         class="flex"
         type="button"
-        @click="openAlertBox = false"
+        x-on:click="openAlertBox = false"
       >
         <svg
           class="ml-4 h-4 w-4"

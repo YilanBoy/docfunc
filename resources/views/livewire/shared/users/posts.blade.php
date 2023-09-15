@@ -25,7 +25,7 @@
       <button
         class="flex w-full select-none items-center justify-between px-5 py-4 text-left font-semibold"
         type="button"
-        @click="
+        x-on:click="
           setActiveAccordion(id);
           // because the collapse animation is 200ms long (use tailwind css 'duration-200' class)
           // we have to wait for the collapse animation to finish

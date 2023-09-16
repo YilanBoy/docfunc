@@ -71,7 +71,7 @@
           {{-- 手機版-未登入 --}}
           @if ($showRegisterButton)
             <a
-              class="rounded-md border border-blue-400 bg-transparent px-4 py-2 text-blue-400 hover:border-transparent hover:bg-blue-400 hover:text-gray-50"
+              class="rounded-md border-2 border-lividus-400 bg-transparent px-4 py-2 font-semibold text-lividus-400 hover:border-transparent hover:bg-lividus-400 hover:text-gray-50"
               href="{{ route('register') }}"
               wire:navigate
             >
@@ -80,7 +80,7 @@
           @endif
 
           <a
-            class="rounded-md border border-emerald-400 bg-transparent px-4 py-2 text-emerald-400 hover:border-transparent hover:bg-emerald-400 hover:text-gray-50"
+            class="rounded-md border-2 border-emerald-600 bg-transparent px-4 py-2 font-semibold text-emerald-600 hover:border-transparent hover:bg-emerald-600 hover:text-gray-50"
             href="{{ route('login') }}"
             wire:navigate
           >

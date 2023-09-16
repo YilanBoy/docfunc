@@ -70,7 +70,7 @@
       {{-- 電腦版-未登入 --}}
       @if ($showRegisterButton)
         <a
-          class="flex h-10 items-center justify-center rounded-lg border border-blue-600 bg-transparent px-3 text-blue-600 transition duration-150 hover:border-transparent hover:bg-blue-600 hover:text-gray-50"
+          class="flex h-10 items-center justify-center rounded-lg border-2 border-lividus-600 bg-transparent px-3 font-semibold text-lividus-600 transition duration-150 hover:border-transparent hover:bg-lividus-600 hover:text-gray-50"
           href="{{ route('register') }}"
           wire:navigate
         >
@@ -79,7 +79,7 @@
       @endif
 
       <a
-        class="flex h-10 items-center justify-center rounded-lg border border-emerald-600 bg-transparent px-3 text-emerald-600 transition duration-150 hover:border-transparent hover:bg-emerald-600 hover:text-gray-50"
+        class="flex h-10 items-center justify-center rounded-lg border-2 border-emerald-600 bg-transparent px-3 font-semibold text-emerald-600 transition duration-150 hover:border-transparent hover:bg-emerald-600 hover:text-gray-50"
         href="{{ route('login') }}"
         wire:navigate
       >

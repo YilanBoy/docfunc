@@ -27,11 +27,16 @@ class Comments extends Component
         $commentIds = Comment::query()
             ->where('post_id', $this->postId)
             ->orderBy('id', 'desc')
+            // +1 is needed here because we need to determine whether there is a next page
             ->limit(self::PER_PAGE + 1)
             ->pluck('id');
 
         if ($commentIds->count() > 0) {
+            // use the first id as the key of the group
+            // only keep the first 10 ids
             $this->groupIds[$commentIds->first()] = array_slice($commentIds->all(), 0, self::PER_PAGE);
+            // use the last id as the bookmark
+            // which is used to determine whether there is first id of the next page
             $this->bookmark = $commentIds->last();
         }
 

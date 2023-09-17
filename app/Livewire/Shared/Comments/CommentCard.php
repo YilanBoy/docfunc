@@ -39,8 +39,6 @@ class CommentCard extends Component
 
     public string $isEdited;
 
-    public int|string $groupId;
-
     /**
      * @throws CommonMarkException
      */

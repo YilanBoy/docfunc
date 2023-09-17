@@ -24,6 +24,7 @@ class CommentGroup extends Component
 
     public array $ids = [];
 
+    // default group 'new' is for new comment
     public int|string $groupId = 'new';
 
     #[On('create-comment-in-group-{groupId}')]

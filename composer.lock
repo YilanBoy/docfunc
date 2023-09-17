@@ -136,16 +136,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.281.7",
+            "version": "3.281.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "926cea9a41a545ca9801ac304f2a9ffd23ac68c9"
+                "reference": "eb349b9f31502a05c70362f57913b9fed6b65b1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/926cea9a41a545ca9801ac304f2a9ffd23ac68c9",
-                "reference": "926cea9a41a545ca9801ac304f2a9ffd23ac68c9",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/eb349b9f31502a05c70362f57913b9fed6b65b1f",
+                "reference": "eb349b9f31502a05c70362f57913b9fed6b65b1f",
                 "shasum": ""
             },
             "require": {
@@ -225,9 +225,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.281.7"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.281.8"
             },
-            "time": "2023-09-14T18:05:11+00:00"
+            "time": "2023-09-15T18:34:59+00:00"
         },
         {
             "name": "brick/math",
@@ -2488,16 +2488,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.0.4",
+            "version": "v3.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "23d035b6353c6dfe7ea9c8d288295dbbb46ef84a"
+                "reference": "37f11583c61a75d51b2146c2fe38f506ad36014b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/23d035b6353c6dfe7ea9c8d288295dbbb46ef84a",
-                "reference": "23d035b6353c6dfe7ea9c8d288295dbbb46ef84a",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/37f11583c61a75d51b2146c2fe38f506ad36014b",
+                "reference": "37f11583c61a75d51b2146c2fe38f506ad36014b",
                 "shasum": ""
             },
             "require": {
@@ -2550,7 +2550,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.0.4"
+                "source": "https://github.com/livewire/livewire/tree/v3.0.5"
             },
             "funding": [
                 {
@@ -2558,7 +2558,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-14T22:57:11+00:00"
+            "time": "2023-09-16T11:51:32+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -8599,16 +8599,16 @@
         },
         {
             "name": "laravel-lang/attributes",
-            "version": "v2.4.0",
+            "version": "v2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/attributes.git",
-                "reference": "d8526492361502e88b7f6cd1e7f3952b6becc388"
+                "reference": "c3dce4766cac85fc7430b634d14065e811d691bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/attributes/zipball/d8526492361502e88b7f6cd1e7f3952b6becc388",
-                "reference": "d8526492361502e88b7f6cd1e7f3952b6becc388",
+                "url": "https://api.github.com/repos/Laravel-Lang/attributes/zipball/c3dce4766cac85fc7430b634d14065e811d691bf",
+                "reference": "c3dce4766cac85fc7430b634d14065e811d691bf",
                 "shasum": ""
             },
             "require": {
@@ -8662,7 +8662,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/attributes/issues",
-                "source": "https://github.com/Laravel-Lang/attributes/tree/v2.4.0"
+                "source": "https://github.com/Laravel-Lang/attributes/tree/v2.4.1"
             },
             "funding": [
                 {
@@ -8670,7 +8670,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-08-09T09:01:13+00:00"
+            "time": "2023-09-15T20:14:52+00:00"
         },
         {
             "name": "laravel-lang/common",

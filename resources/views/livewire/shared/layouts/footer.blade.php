@@ -134,6 +134,7 @@
         <a
           class="text-2xl text-gray-400 duration-300 hover:text-gray-50"
           href="https://github.com/YilanBoy"
+          aria-label="GitHub"
           target="_blank"
           rel="nofollow noopener noreferrer"
         >
@@ -142,6 +143,7 @@
         <a
           class="text-2xl text-gray-400 duration-300 hover:text-gray-50"
           href="https://twitter.com/bVK1uFaMvQkDyPR"
+          aria-label="Twitter"
           target="_blank"
           rel="nofollow noopener noreferrer"
         >
@@ -150,6 +152,7 @@
         <a
           class="text-2xl text-gray-400 duration-300 hover:text-gray-50"
           href="https://www.facebook.com/profile.php?id=100004204543711"
+          aria-label="Facebook"
           target="_blank"
           rel="nofollow noopener noreferrer"
         >

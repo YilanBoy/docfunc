@@ -47,6 +47,7 @@
         {{-- 明亮 / 暗黑模式切換 --}}
         <button
           type="button"
+          aria-label="Toggle Dark Mode"
           x-data="{ html: document.documentElement }"
           x-on:click="
             if (html.classList.contains('dark')) {

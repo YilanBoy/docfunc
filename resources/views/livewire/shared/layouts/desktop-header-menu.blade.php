@@ -43,6 +43,7 @@
     <button
       class="group flex h-10 w-10 items-center justify-center"
       type="button"
+      aria-label="Toggle Dark Mode"
       x-data="{ html: document.documentElement }"
       x-on:click="
         if (html.classList.contains('dark')) {

@@ -4,11 +4,10 @@
     class="rounded-xl bg-gradient-to-br from-green-500 via-teal-500 to-sky-500 p-0.5 shadow-lg dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500 dark:shadow-none"
   >
     <div class="group rounded-xl bg-gray-50 p-5 dark:bg-gray-800 dark:text-gray-50">
-      <h3
-        class="w-full bg-gradient-to-r from-emerald-500 to-sky-500 bg-clip-text text-center font-jetbrains-mono text-2xl font-semibold text-transparent dark:border-white dark:from-pink-500 dark:to-violet-500"
-      >
+      <p
+        class="w-full bg-gradient-to-r from-emerald-500 to-sky-500 bg-clip-text text-center font-jetbrains-mono text-2xl font-semibold text-transparent dark:border-white dark:from-pink-500 dark:to-violet-500">
         echo 'Hello World';
-      </h3>
+      </p>
 
       <hr class="my-4 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
 

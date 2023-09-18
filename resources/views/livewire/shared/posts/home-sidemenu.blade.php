@@ -32,9 +32,9 @@
   {{-- 熱門標籤 --}}
   @if ($popularTags->count())
     <x-card class="dark:text-gray-50">
-      <h3 class="mb-3 border-b-2 border-black pb-3 text-center text-lg font-semibold dark:border-white">
+      <p class="mb-3 border-b-2 border-black pb-3 text-center text-lg font-semibold dark:border-white">
         <i class="bi bi-tags-fill"></i><span class="ml-2">熱門標籤</span>
-      </h3>
+      </p>
       <div class="flex flex-wrap">
         @foreach ($popularTags as $popularTag)
           <x-tag :href="route('tags.show', ['tag' => $popularTag->id])">

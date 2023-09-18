@@ -3,6 +3,7 @@
   <button
     class="flex h-10 w-10 items-center justify-center rounded-lg text-xl text-gray-500 transition duration-150 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-gray-50"
     type="button"
+    aria-label="Search"
     x-on:click="
       searchBoxOpen = !searchBoxOpen
       $nextTick(() => { $refs.searchBox.focus() })

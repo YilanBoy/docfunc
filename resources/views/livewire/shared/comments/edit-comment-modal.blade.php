@@ -61,7 +61,7 @@
         <form
           class="space-y-4"
           id="edit-comment"
-          wire:submit="update"
+          wire:submit="update({{ $commentId }})"
         >
           @if (!$convertToHtml)
             <div>

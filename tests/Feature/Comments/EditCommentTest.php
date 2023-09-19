@@ -35,7 +35,7 @@ test('logged-in users can update their comments', function () {
     livewire(EditCommentModal::class)
         ->call('setEditComment', $comment->id, $offset)
         ->set('body', $body)
-        ->call('update')
+        ->call('update', $comment->id)
         ->assertDispatched('close-edit-comment-modal')
         ->assertDispatched('comment-updated.'.$comment->id);
 

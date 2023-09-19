@@ -48,9 +48,9 @@
   {{-- 學習資源推薦 --}}
   @if ($links->count())
     <x-card class="dark:text-gray-50">
-      <h3 class="mb-3 border-b-2 border-black pb-3 text-center text-lg font-semibold dark:border-white">
+      <p class="mb-3 border-b-2 border-black pb-3 text-center text-lg font-semibold dark:border-white">
         <i class="bi bi-file-earmark-code-fill"></i><span class="ml-2">學習資源推薦</span>
-      </h3>
+      </p>
       <div class="flex flex-col">
         @foreach ($links as $link)
           <a

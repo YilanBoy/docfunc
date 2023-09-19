@@ -94,6 +94,7 @@
         <a
           class="flex h-10 w-10 items-center justify-center rounded-lg text-xl text-gray-500 transition duration-150 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-gray-50"
           href="{{ route('notifications.index') }}"
+          aria-label="Notifications"
           wire:navigate
         >
           <i class="bi bi-bell-fill"></i>
@@ -116,7 +117,7 @@
         <div>
           <button
             class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-400"
-            id="user-menu-button"
+            id="desktop-user-menu-button"
             type="button"
             aria-expanded="false"
             aria-haspopup="true"

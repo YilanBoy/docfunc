@@ -4,7 +4,7 @@ namespace App\Livewire\Shared\Comments;
 
 use App\Http\Requests\CommentRequest;
 use App\Livewire\Traits\MarkdownConverter;
-use App\Models\Comment as CommentModel;
+use App\Models\Comment;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Attributes\On;
@@ -37,7 +37,7 @@ class EditCommentModal extends Component
     }
 
     #[On('set-edit-comment')]
-    public function setEditComment(CommentModel $comment): void
+    public function setEditComment(Comment $comment): void
     {
         $this->convertToHtml = false;
         $this->commentId = $comment->id;
@@ -49,10 +49,8 @@ class EditCommentModal extends Component
     /**
      * @throws AuthorizationException
      */
-    public function update(): void
+    public function update(Comment $comment): void
     {
-        $comment = CommentModel::find($this->commentId);
-
         $this->authorize('update', $comment);
 
         $comment->update([

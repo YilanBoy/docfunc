@@ -1,14 +1,14 @@
-<div>
+<div class="p-2">
   {{-- posts list --}}
   @foreach ($posts as $post)
     <div
-      class="flex flex-col justify-between p-5 pt-0 md:flex-row"
+      class="flex flex-col justify-between rounded px-2 py-2 transition duration-100 hover:bg-gray-100 dark:hover:bg-gray-700 md:flex-row"
       {{-- in this list, these post attribue will be change in the loop, so we have to track them down --}}
       wire:key="{{ $post->id . $post->is_private . $post->deleted_at }}"
     >
-      <i class="bi bi-arrow-right-short"></i>
+      <i class="bi bi-arrow-right-short dark:text-gray-400"></i>
 
-      <div class="ml-2 w-full text-gray-500">
+      <div class="ml-2 w-full">
         @if ($post->trashed())
           <span class="text-red-400 line-through">{{ $post->title . ' (已刪除)' }}</span>
         @elseif ($post->is_private)
@@ -31,7 +31,7 @@
       </div>
 
       @if ($post->user_id === auth()->id())
-        <div class="ml-2 flex items-center space-x-2">
+        <div class="ml-2 flex items-center space-x-3">
 
           {{-- restore --}}
           @if ($post->trashed())

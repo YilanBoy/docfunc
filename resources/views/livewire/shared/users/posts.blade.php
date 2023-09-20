@@ -2,65 +2,62 @@
 <x-card
   class="relative w-full text-lg"
   x-data="{
-      activeAccordion: '',
-      setActiveAccordion(id) {
-          this.activeAccordion = (this.activeAccordion == id) ? '' : id
-      }
+      currentYear: new Date().getFullYear()
   }"
-  x-init="setActiveAccordion(new Date().getFullYear())"
 >
-  @forelse($postsGroupByYear as $year => $posts)
+  <div
+    class="relative mb-6 flex justify-start"
+    x-data="{ dropdownOpen: false }"
+  >
+    <button
+      class="inline-flex items-center justify-center rounded-md border bg-white px-4 py-2 text-lg font-medium transition-colors hover:bg-neutral-100 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white disabled:pointer-events-none disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-700 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-800 dark:active:bg-gray-600"
+      type="button"
+      x-on:click="dropdownOpen=true"
+      x-text="currentYear + ' 年的文章'"
+    >
+    </button>
+
     <div
-      class="group cursor-pointer rounded-md border bg-gray-50 duration-200 ease-out dark:bg-gray-800"
-      x-data="{
-          id: @js($year)
-      }"
-      :id="id"
-      :class="{
-          'border-gray-300/60 dark:border-gray-600/60 text-gray-800 dark:text-gray-200': activeAccordion === id,
-          'border-transparent text-gray-400 hover:text-gray-900 dark:hover:text-gray-200': activeAccordion !== id
-      }"
+      class="absolute left-0 top-0 z-50 mt-12 w-40"
+      x-show="dropdownOpen"
+      x-on:click.away="dropdownOpen=false"
+      x-transition:enter="ease-out duration-200"
+      x-transition:enter-start="-translate-y-2"
+      x-transition:enter-end="translate-y-0"
       x-cloak
     >
-      <button
-        class="flex w-full select-none items-center justify-between px-5 py-4 text-left font-semibold"
-        type="button"
-        x-on:click="
-          setActiveAccordion(id);
-          // because the collapse animation is 200ms long (use tailwind css 'duration-200' class)
-          // we have to wait for the collapse animation to finish
-          setTimeout(() => $el.scrollIntoView({ behavior: 'smooth'}), 300)
-        "
-      >
-        <span>{{ $year }}</span>
-
-        {{-- across --}}
-        <div
-          class="relative flex h-2.5 w-2.5 items-center justify-center duration-300 ease-out"
-          :class="{ 'rotate-90': activeAccordion === id }"
-        >
-          <div
-            class="absolute h-full w-0.5 rounded-full bg-gray-400 group-hover:bg-gray-900 dark:group-hover:bg-gray-200"
-          ></div>
-          <div
-            class="ease absolute h-0.5 w-full rounded-full bg-gray-400 duration-500 group-hover:bg-gray-900 dark:group-hover:bg-gray-200"
-            :class="{ 'rotate-90': activeAccordion === id }"
-          ></div>
-        </div>
-      </button>
       <div
-        class="flex flex-col space-y-1"
-        x-show="activeAccordion === id"
-        x-collapse
-        x-cloak
+        class="mt-1 rounded-md border border-neutral-200/70 bg-white p-1 text-base text-neutral-700 shadow-md dark:border-gray-600 dark:bg-gray-800 dark:text-gray-50"
       >
-        <livewire:shared.users.posts-group-by-year
-          :wire:key="$year"
-          :user-id="$userId"
-          :posts="$posts"
-          :year="$year"
-        />
+        @foreach (array_keys($postsGroupByYear) as $year)
+          <button
+            class="group relative flex w-full cursor-default select-none items-center justify-between rounded px-2 py-1.5 outline-none hover:bg-neutral-100 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:hover:bg-gray-700 dark:hover:text-gray-50"
+            type="button"
+            x-on:click="
+              currentYear = @js($year);
+              dropdownOpen = false;
+            "
+          >
+            <span>{{ $year }}</span>
+          </button>
+        @endforeach
       </div>
+    </div>
+  </div>
+
+  @forelse($postsGroupByYear as $year => $posts)
+    <div
+      class="rounded-md border bg-gray-50 duration-200 dark:border-gray-700 dark:bg-gray-800"
+      x-show="currentYear === @js($year)"
+      x-cloak
+      x-transition
+    >
+      <livewire:shared.users.posts-group-by-year
+        :wire:key="$year"
+        :user-id="$userId"
+        :posts="$posts"
+        :year="$year"
+      />
     </div>
   @empty
     <div class="flex h-32 items-center justify-center text-gray-400 dark:text-gray-600">

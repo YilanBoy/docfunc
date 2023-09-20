@@ -108,7 +108,7 @@
 
               {{-- post tags --}}
               @if ($post->tags()->exists())
-                <div class="mt-4 flex items-center text-base">
+                <div class="mt-4 flex flex-wrap items-center text-base">
                   <span class="mr-1 text-green-300 dark:text-lividus-600"><i class="bi bi-tags-fill"></i></span>
 
                   @foreach ($post->tags as $tag)

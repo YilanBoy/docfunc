@@ -2,8 +2,8 @@
   class="col-span-2"
   wire:ignore
   x-data="{
-      tagsListUrl: '/api/tags',
-      tags: @entangle('form.tags').live
+      tagsListUrl: @js(route('api.tags')),
+      tags: @entangle($model).live
   }"
   x-init="// because the editor will be cached by livewire in navigation
   fetch(tagsListUrl)

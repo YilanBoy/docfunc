@@ -24,14 +24,15 @@
               wire:submit="update"
             >
               <div class="grid grid-cols-2 gap-5">
-                {{-- preview image --}}
+                {{-- post preview image --}}
                 <x-post-form.upload-image-block
+                  :model="'image'"
                   :image="$image"
                   :preview-url="$form->preview_url"
                   :showPreview="!$errors->has('image') && !is_null($image)"
                 />
 
-                {{-- classfication --}}
+                {{-- post classfication --}}
                 <div class="col-span-2 md:col-span-1">
                   <label
                     class="hidden"
@@ -53,7 +54,7 @@
                   </select>
                 </div>
 
-                {{-- is private --}}
+                {{-- post private setting --}}
                 <div class="col-span-2 flex items-center md:col-span-1">
                   <label
                     class="inline-flex items-center"
@@ -70,7 +71,7 @@
                   </label>
                 </div>
 
-                {{-- title --}}
+                {{-- post title --}}
                 <div class="col-span-2">
                   <label
                     class="hidden"
@@ -82,7 +83,6 @@
                     id="title"
                     name="title"
                     type="text"
-                    value=""
                     wire:model.live="form.title"
                     placeholder="文章標題"
                     required
@@ -90,14 +90,14 @@
                   >
                 </div>
 
-                {{-- tags --}}
-                <x-post-form.tagify />
+                {{-- post tags --}}
+                <x-post-form.tagify :model="'form.tags'" />
 
-                {{-- body --}}
-                <x-post-form.ckedtior />
+                {{-- post body --}}
+                <x-post-form.ckedtior :model="'form.body'" />
               </div>
 
-              {{-- mobile device --}}
+              {{-- show in mobile device --}}
               <div class="mt-4 flex items-center justify-between xl:hidden">
                 {{-- show characters count --}}
                 <div
@@ -113,28 +113,11 @@
                     <i class="bi bi-save2-fill"></i>
                   </span>
 
-                  <span wire:loading>
-                    <svg
-                      class="h-5 w-5 animate-spin"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        class="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        stroke-width="4"
-                      ></circle>
-                      <path
-                        class="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      >
-                      </path>
-                    </svg>
+                  <span
+                    class="h-5 w-5"
+                    wire:loading
+                  >
+                    <x-animate-spin />
                   </span>
 
                   <span class="ml-2">儲存</span>
@@ -146,57 +129,7 @@
         </div>
       </div>
 
-      {{-- desktop sidebar --}}
-      <div class="hidden xl:block xl:w-1/6">
-        <div class="sticky top-1/2 flex w-full -translate-y-1/2 flex-col">
-          {{-- character count --}}
-          <div
-            class="flex w-full items-center justify-start rounded-xl bg-gradient-to-r from-white to-white/0 p-4 dark:from-gray-700 dark:to-gray-700/0 dark:text-gray-50"
-            wire:ignore
-          >
-            <span class="character-counter"></span>
-          </div>
-
-          {{-- save button --}}
-          <button
-            class="group mt-4 inline-flex h-14 w-14 items-center justify-center rounded-xl border border-transparent bg-blue-600 text-gray-50 ring-blue-300 transition duration-150 ease-in-out focus:border-blue-700 focus:outline-none focus:ring active:bg-blue-700"
-            form="edit-post"
-            type="submit"
-            wire:loading.attr="disabled"
-          >
-            <span
-              class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125"
-              wire:loading.remove
-            >
-              <i class="bi bi-save2-fill"></i>
-            </span>
-
-            <span wire:loading>
-              <svg
-                class="h-10 w-10 animate-spin"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  class="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  stroke-width="4"
-                ></circle>
-                <path
-                  class="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                >
-                </path>
-              </svg>
-            </span>
-          </button>
-        </div>
-      </div>
+      <x-post-form.desktop-side-menu />
     </div>
   </div>
 </x-layouts.layout-main>

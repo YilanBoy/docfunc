@@ -7,9 +7,14 @@ use App\Livewire\Traits\MarkdownConverter;
 use App\Models\Comment;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use League\CommonMark\Exception\CommonMarkException;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
+/**
+ * @property string $convertedBody 將 markdown 的 body 轉換成 html 格式，set by convertedBody()
+ */
 class EditCommentModal extends Component
 {
     use AuthorizesRequests;
@@ -31,7 +36,11 @@ class EditCommentModal extends Component
         return (new CommentRequest())->messages();
     }
 
-    public function getConvertedBodyProperty(): string
+    /**
+     * @throws CommonMarkException
+     */
+    #[Computed]
+    public function convertedBody(): string
     {
         return $this->convertToHtml($this->body);
     }

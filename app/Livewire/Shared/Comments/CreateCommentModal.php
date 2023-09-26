@@ -16,7 +16,7 @@ use Livewire\Component;
 use Throwable;
 
 /**
- * @property string convertedBody 將 markdown 的 body 轉換成 html 格式，set by convertedBody()
+ * @property string $convertedBody 將 markdown 的 body 轉換成 html 格式，set by convertedBody()
  */
 class CreateCommentModal extends Component
 {

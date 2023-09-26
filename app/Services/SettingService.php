@@ -8,11 +8,11 @@ class SettingService
 {
     public static function isRegisterAllowed(): bool
     {
-        $allowRegister = Setting::query()
+        $isRegisterAllow = Setting::query()
             ->where('key', 'allow_register')
-            ->pluck('value')
-            ->first();
+            ->first()
+            ->value;
 
-        return filter_var($allowRegister, FILTER_VALIDATE_BOOLEAN);
+        return filter_var($isRegisterAllow, FILTER_VALIDATE_BOOLEAN);
     }
 }

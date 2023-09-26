@@ -11,7 +11,7 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 
 /**
- * @property string convertedBody 將 markdown 的 body 轉換成 html 格式，set by convertedBody()
+ * @property string $convertedBody 將 markdown 的 body 轉換成 html 格式，set by convertedBody()
  */
 class CommentCard extends Component
 {
@@ -37,7 +37,7 @@ class CommentCard extends Component
 
     public object $createdAt;
 
-    public string $isEdited;
+    public bool $isEdited;
 
     /**
      * @throws CommonMarkException

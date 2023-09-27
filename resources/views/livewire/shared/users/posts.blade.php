@@ -6,11 +6,11 @@
   }"
 >
   <div
-    class="relative mb-6 flex justify-start"
+    class="relative mb-6 flex justify-end"
     x-data="{ dropdownOpen: false }"
   >
     <button
-      class="inline-flex items-center justify-center rounded-md border bg-white px-4 py-2 text-lg font-medium transition-colors hover:bg-neutral-100 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white disabled:pointer-events-none disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-700 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-800 dark:active:bg-gray-600"
+      class="inline-flex w-full items-center justify-center rounded-md border bg-gray-50 px-4 py-2 text-lg font-medium transition-colors hover:bg-neutral-100 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white disabled:pointer-events-none disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-700 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-800 dark:active:bg-gray-600"
       type="button"
       x-on:click="dropdownOpen=true"
       x-text="currentYear + ' 年的文章'"
@@ -18,7 +18,7 @@
     </button>
 
     <div
-      class="absolute left-0 top-0 z-50 mt-12 w-40"
+      class="absolute right-0 top-1 z-50 mt-12 w-40"
       x-show="dropdownOpen"
       x-on:click.away="dropdownOpen=false"
       x-transition:enter="ease-out duration-200"
@@ -27,12 +27,14 @@
       x-cloak
     >
       <div
-        class="mt-1 rounded-md border border-neutral-200/70 bg-white p-1 text-base text-neutral-700 shadow-md dark:border-gray-600 dark:bg-gray-800 dark:text-gray-50"
+        class="mt-1 rounded-md border border-neutral-200/70 bg-white p-1 text-lg text-neutral-700 shadow-md dark:border-gray-600 dark:bg-gray-800 dark:text-gray-50"
       >
         @foreach (array_keys($postsGroupByYear) as $year)
           <button
             class="group relative flex w-full cursor-default select-none items-center justify-between rounded px-2 py-1.5 outline-none hover:bg-neutral-100 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:hover:bg-gray-700 dark:hover:text-gray-50"
             type="button"
+            x-cloak
+            x-show="currentYear !== @js($year)"
             x-on:click="
               currentYear = @js($year);
               dropdownOpen = false;

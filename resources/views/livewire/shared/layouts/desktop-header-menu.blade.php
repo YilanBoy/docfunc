@@ -84,7 +84,10 @@
         href="{{ route('login') }}"
         wire:navigate
       >
-        <i class="bi bi-box-arrow-in-right"></i><span class="ml-2">登入</span>
+        <i
+          class="bi bi-box-arrow-in-right"
+          style="-webkit-text-stroke-width: medium;"
+        ></i><span class="ml-2">登入</span>
       </a>
     @else
       {{-- 電腦版-已登入 --}}

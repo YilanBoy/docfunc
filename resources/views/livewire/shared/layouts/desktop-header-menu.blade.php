@@ -86,7 +86,7 @@
       >
         <i
           class="bi bi-box-arrow-in-right"
-          style="-webkit-text-stroke-width: medium;"
+          style="-webkit-text-stroke-width: 1px;"
         ></i><span class="ml-2">登入</span>
       </a>
     @else

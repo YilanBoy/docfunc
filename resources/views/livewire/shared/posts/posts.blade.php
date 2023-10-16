@@ -34,7 +34,7 @@
     {{-- 文章分類訊息-桌面裝置 --}}
     @if ($categoryId)
       <div
-        class="mb-6 flex items-center justify-end border-b-2 border-gray-900 pb-2 pl-6 dark:border-gray-50 dark:text-gray-50 md:mb-0"
+        class="mb-0 hidden items-center justify-end border-b-2 border-gray-900 pb-2 pl-6 dark:border-gray-50 dark:text-gray-50 md:flex"
       >
         <span class="font-bold">{{ $categoryName }}：</span>
         <span>{{ $categoryDescription }}</span>
@@ -44,7 +44,7 @@
     {{-- 文章標籤訊息-桌面裝置 --}}
     @if ($tagId)
       <div
-        class="mb-6 flex items-center justify-end border-b-2 border-gray-900 pb-2 pl-6 dark:border-gray-50 dark:text-gray-50 md:mb-0"
+        class="mb-0 hidden items-center justify-end border-b-2 border-gray-900 pb-2 pl-6 dark:border-gray-50 dark:text-gray-50 md:flex"
       >
         <span>標籤：</span>
         <span class="font-bold">{{ $tagName }}</span>

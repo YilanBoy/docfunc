@@ -129,7 +129,7 @@
         </div>
       </div>
 
-      <x-post-form.desktop-side-menu />
+      <x-post-form.desktop-side-menu :form-id="'create-post'" />
     </div>
   </div>
 </x-layouts.layout-main>

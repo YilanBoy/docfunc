@@ -11,7 +11,7 @@
     {{-- save button --}}
     <button
       class="group mt-4 inline-flex h-14 w-14 items-center justify-center rounded-xl border border-transparent bg-blue-600 text-gray-50 ring-blue-300 transition duration-150 ease-in-out focus:border-blue-700 focus:outline-none focus:ring active:bg-blue-700"
-      form="edit-post"
+      form="{{ $formId }}"
       type="submit"
       wire:loading.attr="disabled"
     >

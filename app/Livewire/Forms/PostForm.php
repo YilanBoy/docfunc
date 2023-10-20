@@ -7,10 +7,12 @@ use App\Services\ContentService;
 use App\Services\FormatTransferService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Locked;
 use Livewire\Form;
 
 class PostForm extends Form
 {
+    #[Locked]
     public ?int $user_id = null;
 
     public int $category_id = 1;

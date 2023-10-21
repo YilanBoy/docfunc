@@ -1,6 +1,6 @@
 @section('description', $post->excerpt)
 
-@if (!is_null($post->preview_url))
+@if (!empty($post->preview_url))
   @section('preview_url', $post->preview_url)
 @endif
 

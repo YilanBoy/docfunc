@@ -25,13 +25,13 @@ RUN composer install \
 # Front-End Assets
 ###########################################
 
-FROM node:latest AS assets
+FROM oven/bun:latest AS assets
 
 WORKDIR /var/www/html
 
 COPY . .
-RUN npm install \
-    && npm run build
+RUN bun install \
+    && bun run build
 
 ###########################################
 # Laravel Horizon

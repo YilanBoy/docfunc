@@ -178,3 +178,23 @@ test('user can\' visit the owner\'s private post', function () {
         ->get($post->link_with_slug)
         ->assertStatus(403);
 });
+
+it('displays the preview image', function () {
+    $post = Post::factory()->create();
+
+    get($post->link_with_slug)
+        ->assertStatus(200)
+        ->assertSee($post->preview_url);
+});
+
+it('displays the default preview, assuming the preview is not set', function () {
+    $post = Post::factory()->create([
+        'preview_url' => '',
+    ]);
+
+    $defaultPreviewUrl = 'https://'.config('filesystems.disks.s3.bucket').'.s3.'.config('filesystems.disks.s3.region').'.amazonaws.com/share.jpg';
+
+    get($post->link_with_slug)
+        ->assertStatus(200)
+        ->assertSee($defaultPreviewUrl);
+});

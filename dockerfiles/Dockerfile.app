@@ -25,7 +25,7 @@ RUN composer install \
 # Front-End Assets
 ###########################################
 
-FROM node:latest AS assets
+FROM node:18 AS assets
 
 WORKDIR /var/www/html
 

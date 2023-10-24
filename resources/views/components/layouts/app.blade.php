@@ -53,7 +53,7 @@
   @vite('resources/ts/oembed/embed-twitter-oembed.ts')
   @vite('resources/ts/oembed/twitter-widgets.ts')
   {{-- Ckeditor --}}
-  <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+  @vite('resources/ts/ckeditor/ckeditor.ts')
   {{-- Tagify --}}
   @vite('resources/ts/tagify.ts')
   {{-- prettier-ignore-end --}}

@@ -29,7 +29,7 @@ export default defineConfig({
                 'resources/css/missing-content-style.css',
                 'resources/css/icon.css',
                 // scss
-                'node_modules/highlight.js/scss/atom-one-dark.scss',
+                'node_modules/highlight.js/styles/atom-one-dark.css',
             ],
             refresh: true,
         }),

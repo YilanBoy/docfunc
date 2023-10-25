@@ -33,7 +33,11 @@
   {{-- highlight code block style --}}
   @vite('node_modules/highlight.js/styles/atom-one-dark.css')
   {{-- editor style --}}
-  @vite(['resources/css/editor.css', 'node_modules/@yaireo/tagify/dist/tagify.css', 'resources/css/missing-content-style.css'])
+  @vite([
+    'resources/css/editor.css',
+    'node_modules/@yaireo/tagify/dist/tagify.css',
+    'resources/css/missing-content-style.css'
+  ])
 
   <x-js.alpine-js />
   <x-js.livewire />

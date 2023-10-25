@@ -65,10 +65,10 @@ COPY deployment/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 # set supercronic for schedules
 # download the corresponding files according to the different architectures.
 RUN if [ "$(uname -m)" = "x86_64" ]; then \
-        wget -q "https://github.com/aptible/supercronic/releases/download/v0.2.2/supercronic-linux-amd64" \
+        wget -q "https://github.com/aptible/supercronic/releases/download/v0.2.27/supercronic-linux-amd64" \
             -O /usr/bin/supercronic; \
     elif [ "$(uname -m)" = "aarch64" ]; then \
-        wget -q "https://github.com/aptible/supercronic/releases/download/v0.2.2/supercronic-linux-arm64" \
+        wget -q "https://github.com/aptible/supercronic/releases/download/v0.2.27/supercronic-linux-arm64" \
             -O /usr/bin/supercronic; \
     else \
         echo "Unsupported platform" && exit 1; \

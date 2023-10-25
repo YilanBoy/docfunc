@@ -28,7 +28,6 @@ export default defineConfig({
                 'resources/css/editor.css',
                 'resources/css/missing-content-style.css',
                 'resources/css/icon.css',
-                // scss
                 'node_modules/highlight.js/styles/atom-one-dark.css',
             ],
             refresh: true,

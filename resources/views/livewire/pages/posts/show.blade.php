@@ -17,7 +17,16 @@
     }, 1000);
     setupProgressBar($refs.section, $refs.progressBar);
     setupScrollToTopButton($refs.scrollToTopBtn);
-    setupSharer();"
+    setupSharer();
+
+    // scroll to anchor
+    if (window.location.hash !== '') {
+        let target = document.querySelector(window.location.hash);
+
+        if (target instanceof Element) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    }"
   >
     <style>
       /* media embed */

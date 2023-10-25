@@ -184,5 +184,10 @@ ClassicEditor.defaultConfig = {
     language: 'en',
 };
 
-// @ts-ignore
+declare global {
+    interface Window {
+        ClassicEditor: typeof ClassicEditor;
+    }
+}
+
 window.ClassicEditor = ClassicEditor;

@@ -40,9 +40,9 @@
   </x-card>
 
   <x-card class="col-span-6 dark:text-gray-50 md:col-span-4">
-    <h3 class="mb-3 w-full border-b-2 border-black pb-3 text-2xl font-semibold dark:border-white">
-      <span class="ml-2">個人簡介</span>
-    </h3>
+    <h3 class="w-full text-2xl font-semibold">個人簡介</h3>
+
+    <hr class="my-4 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
 
     @if ($user->introduction)
       <p class="flex w-full items-center justify-start whitespace-pre-wrap">{{ $user->introduction }}</p>
@@ -52,9 +52,9 @@
   </x-card>
 
   <x-card class="col-span-6 dark:text-gray-50">
-    <h3 class="mb-3 w-full border-b-2 border-black pb-3 text-2xl font-semibold dark:border-white">
-      <span class="ml-2">各類文章統計</span>
-    </h3>
+    <h3 class="w-full text-2xl font-semibold">各類文章統計</h3>
+
+    <hr class="my-4 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
 
     <div class="grid grid-cols-12 gap-1">
       @foreach ($categories as $category)

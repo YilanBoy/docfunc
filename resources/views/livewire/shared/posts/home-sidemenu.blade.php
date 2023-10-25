@@ -32,9 +32,12 @@
   {{-- 熱門標籤 --}}
   @if ($popularTags->count())
     <x-card class="dark:text-gray-50">
-      <p class="mb-3 border-b-2 border-black pb-3 text-center text-lg font-semibold dark:border-white">
+      <p class="text-center text-lg font-semibold">
         <i class="bi bi-tags-fill"></i><span class="ml-2">熱門標籤</span>
       </p>
+
+      <hr class="my-4 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
+
       <div class="flex flex-wrap">
         @foreach ($popularTags as $popularTag)
           <x-tag :href="route('tags.show', ['tag' => $popularTag->id])">
@@ -48,9 +51,12 @@
   {{-- 學習資源推薦 --}}
   @if ($links->count())
     <x-card class="dark:text-gray-50">
-      <p class="mb-3 border-b-2 border-black pb-3 text-center text-lg font-semibold dark:border-white">
+      <p class="text-center text-lg font-semibold">
         <i class="bi bi-file-earmark-code-fill"></i><span class="ml-2">學習資源推薦</span>
       </p>
+
+      <hr class="my-4 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
+
       <div class="flex flex-col">
         @foreach ($links as $link)
           <a

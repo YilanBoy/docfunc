@@ -12,7 +12,7 @@
           {{-- 大頭貼照片 --}}
           <div>
             <img
-              class="h-36 w-36 rounded-full"
+              class="h-48 w-48 rounded-full"
               src="{{ $user->gravatar_url }}"
               alt="{{ $name }}"
             >

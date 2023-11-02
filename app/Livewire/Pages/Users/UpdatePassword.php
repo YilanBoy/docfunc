@@ -5,7 +5,6 @@ namespace App\Livewire\Pages\Users;
 use App\Models\User;
 use App\Rules\MatchOldPassword;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -53,7 +52,7 @@ class UpdatePassword extends Component
         $this->validate();
 
         User::find(auth()->id())
-            ->update(['password' => Hash::make($this->new_password)]);
+            ->update(['password' => $this->new_password]);
 
         $this->dispatch('info-badge', status: 'success', message: '密碼更新成功！');
 

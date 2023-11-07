@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -58,16 +59,17 @@ class Post extends Model implements Feedable
         return $this->belongsTo(User::class);
     }
 
-    // 定義與標籤的關聯
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
     }
 
-    // 文章排序
-    public function scopeWithOrder($query, ?string $order)
+    /**
+     * Set the ordering of the post
+     */
+    public function scopeWithOrder(Builder $query, ?string $order): void
     {
-        return $query->when($order, function ($query, $order) {
+        $query->when($order, function ($query, $order) {
             return match ($order) {
                 'recent' => $query->orderBy('updated_at', 'desc'),
                 'comment' => $query->orderBy('comment_counts', 'desc'),
@@ -77,14 +79,16 @@ class Post extends Model implements Feedable
     }
 
     /**
-     * Get the prunable model query.
+     * Set the prune rule of the post data
      */
-    public function prunable()
+    public function prunable(): Builder
     {
         return static::where('deleted_at', '<=', now()->subMonth());
     }
 
-    // 將連結加上文章的 slug
+    /**
+     * Use laravel mutator to set the slug attribute.
+     */
     public function linkWithSlug(): Attribute
     {
         return new Attribute(
@@ -106,13 +110,25 @@ class Post extends Model implements Feedable
         );
     }
 
-    // 設定 Algolia 匯入的 index 名稱
+    /**
+     * Get the index name for the model.
+     */
     public function searchableAs()
     {
         return config('scout.prefix');
     }
 
-    // 調整匯入 Algolia 的 Model 資料
+    /**
+     * Modify the query used to retrieve models when making all the models searchable.
+     */
+    protected function makeAllSearchableUsing(Builder $query): Builder
+    {
+        return $query->with('user');
+    }
+
+    /**
+     * Get the indexable data array for the model
+     */
     public function toSearchableArray(): array
     {
         $array = $this->toArray();

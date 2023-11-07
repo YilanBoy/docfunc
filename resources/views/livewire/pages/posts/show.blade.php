@@ -142,7 +142,7 @@
             <x-card class="mt-6 grid w-full grid-cols-12 gap-4">
               <div class="col-span-12 flex items-center justify-start md:col-span-2 md:justify-center">
                 <img
-                  class="h-16 w-16 rounded-full"
+                  class="h-20 w-20 rounded-full"
                   src="{{ $post->user->gravatar_url }}"
                   alt="{{ $post->user->name }}"
                 >

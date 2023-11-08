@@ -9,12 +9,12 @@ the [TALL stack](https://tallstack.dev/), which is：
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Alpine.js](https://alpinejs.dev/)
 - [Laravel](https://laravel.com/)
-- [Laravel Livewire](https://laravel-livewire.com/)
+- [Laravel Livewire](https://livewire.laravel.com/)
 
 This blog contains certain basic functions, such as membership system, writing articles and replies.
 
 Post editor use [CKEditor 5](https://ckeditor.com/), You can upload image to AWS S3 in blog post. You can search post
-by Algolia.
+by [Algolia](https://www.algolia.com/).
 
 ## Requirements
 

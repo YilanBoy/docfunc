@@ -1,4 +1,4 @@
-name: tests and build images
+name: Run tests and build images
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   tests:
-    name: test in php ${{ matrix.php }} version
+    name: Test in php ${{ matrix.php }} version
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -91,7 +91,7 @@ jobs:
   build-image:
     environment: production
     needs: tests
-    name: start to build image and publish to docker hub
+    name: Start to build image and publish to docker hub
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU

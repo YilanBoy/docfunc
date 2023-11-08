@@ -89,6 +89,7 @@ jobs:
           verbose: true
 
   build-image:
+    environment: production
     needs: tests
     name: start to build image and publish to docker hub
     runs-on: ubuntu-latest

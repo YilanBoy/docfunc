@@ -45,6 +45,18 @@
           });
       });"
 >
+  {{-- custom tagify style --}}
+  <style>
+    .tagify__tag {
+      height: 2rem;
+      margin: auto 0 auto 0.5rem;
+    }
+
+    .dark .tagify__tag {
+      --tag-text-color--edit: #f9fafb;
+    }
+  </style>
+
   <label
     class="hidden"
     for="tags"

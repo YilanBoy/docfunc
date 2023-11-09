@@ -11,4 +11,4 @@ initialStuff() {
 
 initialStuff
 
-php artisan octane:start --server=swoole --host=0.0.0.0 --port=9000 --workers=4 --task-workers=1 --max-requests=500
+php artisan octane:start --server=swoole --host=0.0.0.0 --port=9000 --workers=2 --task-workers=1 --max-requests=500

@@ -47,9 +47,12 @@
 >
   {{-- custom tagify style --}}
   <style>
+    .tagify {
+      align-items: center;
+    }
+
     .tagify__tag {
       height: 2rem;
-      margin: auto 0 auto 0.5rem;
     }
 
     .dark .tagify__tag {

@@ -4,5 +4,8 @@
         "blank_line_between_import_groups": true,
         "combine_consecutive_issets": true,
         "line_ending": true
-    }
+    },
+    "exclude": [
+        "tests"
+    ]
 }

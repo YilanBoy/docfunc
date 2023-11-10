@@ -119,7 +119,19 @@ test('body at most 20000 characters', function () {
         ->assertHasErrors(['body' => 'max:20000']);
 });
 
-it('can check image immediately', function () {
+it('can check image type', function () {
+    $this->actingAs(User::factory()->create());
+
+    $file = UploadedFile::fake()->create('document.pdf', 512);
+
+    livewire(Create::class, [
+        'categories' => Category::all(['id', 'name']),
+    ])
+        ->set('image', $file)
+        ->assertHasErrors(['image' => 'image']);
+});
+
+it('can check image size', function () {
     $this->actingAs(User::factory()->create());
 
     $file = UploadedFile::fake()->image('image.jpg')->size(1025);

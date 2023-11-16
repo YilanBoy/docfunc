@@ -18,7 +18,7 @@ test('users can authenticate using the login screen', function () {
     livewire(Login::class)
         ->set('email', $user->email)
         ->set('password', 'Password101')
-        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->set('captchaToken', 'fake-captcha-response')
         ->call('store')
         ->assertRedirect('/');
 
@@ -31,7 +31,7 @@ test('users can not authenticate with invalid password', function () {
     livewire(Login::class)
         ->set('email', $user->email)
         ->set('password', 'wrongPassword')
-        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->set('captchaToken', 'fake-captcha-response')
         ->call('store');
 
     $this->assertGuest();

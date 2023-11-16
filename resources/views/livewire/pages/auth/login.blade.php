@@ -11,13 +11,11 @@
   </div>
 
   <div class="container mx-auto">
-    {{-- google recaptcha --}}
-    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
 
     <div class="flex min-h-screen flex-col items-center justify-center px-4">
       {{-- 頁面標題 --}}
       <div class="fill-current text-2xl text-gray-700 dark:text-gray-50">
-        <i class="bi bi-box-arrow-in-right"></i><span class="ml-4">登入</span>
+        <i class="bi bi-door-open-fill"></i><span class="ml-4">登入</span>
       </div>
 
       {{-- 登入表單 --}}
@@ -31,21 +29,7 @@
 
         <form
           id="login"
-          x-data="{
-              recaptchaSiteKey: @js(config('services.recaptcha.site_key'))
-          }"
-          x-on:submit.prevent="
-              grecaptcha.ready(function() {
-                  grecaptcha.execute(recaptchaSiteKey, { action: 'submit' })
-                      .then(function(response) {
-                          // set livewire property 'recaptcha' value
-                          $wire.set('recaptcha', response);
-
-                          // submit the form and call the livewire method 'store'
-                          $wire.store();
-                      });
-              });
-          "
+          wire:submit="store"
         >
           {{-- 信箱 --}}
           <div>
@@ -104,6 +88,25 @@
           </div>
         </form>
       </x-card>
+
+      <div
+        class="hidden"
+        id="captcha"
+        wire:ignore
+        x-data="{
+            captchaSiteKey: @js(config('services.captcha.site_key'))
+        }"
+        x-init="// Execute the captcha check
+        turnstile.ready(function() {
+            turnstile.render($el, {
+                sitekey: captchaSiteKey,
+                callback: function(token) {
+                    $wire.set('captchaToken', token);
+                }
+            });
+        });"
+      ></div>
+
     </div>
 
   </div>

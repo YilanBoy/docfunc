@@ -11,9 +11,6 @@
   </div>
 
   <div class="container mx-auto">
-    {{-- google recaptcha --}}
-    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
-
     <div class="flex min-h-screen flex-col items-center justify-center px-4">
       {{-- 頁面標題 --}}
       <div class="fill-current text-2xl text-gray-700 dark:text-gray-50">
@@ -27,21 +24,7 @@
 
         <form
           id="register"
-          x-data="{
-              recaptchaSiteKey: @js(config('services.recaptcha.site_key'))
-          }"
-          x-on:submit.prevent="
-                grecaptcha.ready(function() {
-                    grecaptcha.execute(recaptchaSiteKey, { action: 'submit' })
-                        .then(function(response) {
-                            // set livewire property 'recaptcha' value
-                            $wire.set('recaptcha', response);
-
-                            // submit the form and call the livewire method 'store'
-                            $wire.store();
-                        });
-                });
-            "
+          wire:submit.prevent="store"
         >
           {{-- 會員名稱 --}}
           <div>
@@ -109,6 +92,24 @@
           </div>
         </form>
       </x-card>
+
+      <div
+        class="hidden"
+        id="captcha"
+        wire:ignore
+        x-data="{
+            captchaSiteKey: @js(config('services.captcha.site_key'))
+        }"
+        x-init="// Execute the captcha check
+        turnstile.ready(function() {
+            turnstile.render($el, {
+                sitekey: captchaSiteKey,
+                callback: function(token) {
+                    $wire.set('captchaToken', token);
+                }
+            });
+        });"
+      ></div>
     </div>
 
   </div>

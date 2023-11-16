@@ -4,10 +4,7 @@
   aria-labelledby="modal-title"
   aria-modal="true"
   x-cloak
-  x-data="{
-      isOpen: false,
-      recaptchaSiteKey: @js(config('services.recaptcha.site_key'))
-  }"
+  x-data="{ isOpen: false }"
   x-show="isOpen"
   x-on:open-create-comment-modal.window="
     isOpen = true
@@ -16,9 +13,6 @@
   x-on:close-create-comment-modal.window="isOpen = false"
   x-on:keydown.escape.window="isOpen = false"
 >
-  {{-- google recaptcha --}}
-  <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
-
   <div class="flex min-h-screen items-end justify-center">
     {{-- gray background --}}
     <div
@@ -66,18 +60,7 @@
 
         <form
           class="space-y-4"
-          x-on:submit.prevent="
-              grecaptcha.ready(function() {
-                  grecaptcha.execute(recaptchaSiteKey, { action: 'submit' })
-                      .then(function(response) {
-                          // set livewire property 'recaptcha' value
-                          $wire.set('recaptcha', response);
-
-                          // submit the form and call the livewire method 'store'
-                          $wire.store();
-                      });
-              });
-          "
+          wire:submit="store"
         >
           @if (!$convertToHtml)
             <div>
@@ -137,8 +120,24 @@
           </div>
         </form>
 
+        <div
+          class="hidden"
+          id="captcha"
+          wire:ignore
+          x-data="{
+              captchaSiteKey: @js(config('services.captcha.site_key'))
+          }"
+          x-init="// Execute the captcha check
+          turnstile.ready(function() {
+              turnstile.render($el, {
+                  sitekey: captchaSiteKey,
+                  callback: function(token) {
+                      $wire.set('captchaToken', token);
+                  }
+              });
+          });"
+        ></div>
       </div>
-
     </div>
     {{-- end modal --}}
   </div>

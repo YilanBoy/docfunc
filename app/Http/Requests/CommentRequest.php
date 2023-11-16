@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\Recaptcha;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CommentRequest extends FormRequest
@@ -17,7 +16,6 @@ class CommentRequest extends FormRequest
     {
         return [
             'body' => ['required', 'min:5', 'max:2000'],
-            'recaptcha' => ['required', new Recaptcha()],
         ];
     }
 

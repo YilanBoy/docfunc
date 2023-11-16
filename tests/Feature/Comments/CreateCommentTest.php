@@ -16,7 +16,7 @@ test('non-logged-in users can leave a anonymous comment', function () {
 
     livewire(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', $body)
-        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->set('captchaToken', 'fake-captcha-response')
         ->call('store')
         ->assertDispatched('create-comment-in-group-new')
         ->assertDispatched('close-create-comment-modal')
@@ -43,7 +43,7 @@ test('logged-in users can leave a comment', function () {
 
     livewire(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', $body)
-        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->set('captchaToken', 'fake-captcha-response')
         ->call('store')
         ->assertDispatched('create-comment-in-group-new')
         ->assertDispatched('close-create-comment-modal')
@@ -77,7 +77,7 @@ test('if the comment addition fails, no data will be available in the database.'
 
     livewire(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', $body)
-        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->set('captchaToken', 'fake-captcha-response')
         ->call('store')
         ->assertDispatched('close-create-comment-modal')
         ->assertDispatched('info-badge',
@@ -109,7 +109,7 @@ it('can see the comment preview', function () {
 
     livewire(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', $body)
-        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->set('captchaToken', 'fake-captcha-response')
         ->set('convertToHtml', true)
         ->assertSeeHtmlInOrder([
             '<p>Title</p>',
@@ -132,7 +132,7 @@ test('when a new comment is added, the post comments will be increased by one', 
 
     livewire(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', 'Hello World!')
-        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->set('captchaToken', 'fake-captcha-response')
         ->call('store');
 
     $this->assertDatabaseHas('posts', ['comment_counts' => 1]);

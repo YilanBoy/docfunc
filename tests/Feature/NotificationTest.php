@@ -18,7 +18,7 @@ test('you will receive a notification when there is a comment on your post', fun
 
     livewire(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', fake()->realText(100))
-        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->set('captchaToken', 'fake-captcha-response')
         ->call('store');
 
     $author = User::find($post->user_id);
@@ -49,7 +49,7 @@ test('you can clear unread notifications if you visit the notification page', fu
 
     livewire(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', fake()->realText(100))
-        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->set('captchaToken', 'fake-captcha-response')
         ->call('store');
 
     $author = User::find($post->user_id);
@@ -73,7 +73,7 @@ test('if you reply to your own post, there will be no notification', function ()
 
     livewire(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', fake()->realText(100))
-        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->set('captchaToken', 'fake-captcha-response')
         ->call('store');
 
     expect($author->unreadNotifications->count())

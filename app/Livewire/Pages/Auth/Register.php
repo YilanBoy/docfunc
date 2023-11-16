@@ -3,7 +3,7 @@
 namespace App\Livewire\Pages\Auth;
 
 use App\Models\User;
-use App\Rules\Recaptcha;
+use App\Rules\Captcha;
 use App\Services\SettingService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +21,7 @@ class Register extends Component
 
     public string $password_confirmation = '';
 
-    public string $recaptcha = '';
+    public string $captchaToken = '';
 
     public function mount(): void
     {
@@ -34,14 +34,14 @@ class Register extends Component
             'name' => ['required', 'string', 'regex:/^[A-Za-z0-9\-\_]+$/u', 'between:3,25', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Password::min(8)->letters()->mixedCase()->numbers()],
-            'recaptcha' => ['required', new Recaptcha()],
+            'captchaToken' => ['required', new Captcha()],
         ];
     }
 
     protected function messages(): array
     {
         return [
-            'recaptcha.required' => '請完成驗證',
+            'captchaToken.required' => '請完成驗證',
         ];
     }
 

@@ -60,6 +60,8 @@
   @vite('resources/ts/ckeditor/ckeditor.ts')
   {{-- Tagify --}}
   @vite('resources/ts/tagify.ts')
+  {{-- Cloudflare Turnstile --}}
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
   {{-- prettier-ignore-end --}}
 
   {{-- Set theme --}}

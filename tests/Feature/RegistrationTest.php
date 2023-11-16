@@ -31,7 +31,7 @@ test('guest can register', function () {
         ->set('email', 'test@example.com')
         ->set('password', 'Password101')
         ->set('password_confirmation', 'Password101')
-        ->set('recaptcha', 'fake-g-recaptcha-response')
+        ->set('captchaToken', 'fake-captcha-response')
         ->call('store')
         ->assertRedirect('/verify-email');
 

@@ -3,7 +3,7 @@
 namespace App\Livewire\Pages\Auth;
 
 use App\Providers\RouteServiceProvider;
-use App\Rules\Recaptcha;
+use App\Rules\Captcha;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
@@ -20,21 +20,21 @@ class Login extends Component
 
     public bool $remember = false;
 
-    public string $recaptcha = '';
+    public string $captchaToken = '';
 
     protected function rules(): array
     {
         return [
             'email' => 'required|string|email',
             'password' => 'required|string',
-            'recaptcha' => ['required', new Recaptcha()],
+            'captchaToken' => ['required', new Captcha()],
         ];
     }
 
     protected function messages(): array
     {
         return [
-            'recaptcha.required' => '請完成驗證',
+            'captchaToken.required' => '請完成驗證',
         ];
     }
 

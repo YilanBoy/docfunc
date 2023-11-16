@@ -2,14 +2,16 @@
 
 namespace App\Livewire\Shared\Comments;
 
-use App\Http\Requests\CommentWithRecaptchaRequest;
+use App\Http\Requests\CommentRequest;
 use App\Livewire\Traits\MarkdownConverter;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Notifications\PostComment;
+use App\Rules\Captcha;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 use League\CommonMark\Exception\CommonMarkException;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -30,16 +32,16 @@ class CreateCommentModal extends Component
 
     public bool $convertToHtml = false;
 
-    public string $recaptcha;
+    public string $captchaToken = '';
 
     protected function rules(): array
     {
-        return (new CommentWithRecaptchaRequest())->rules();
+        return (new CommentRequest())->rules();
     }
 
     protected function messages(): array
     {
-        return (new CommentWithRecaptchaRequest())->messages();
+        return (new CommentRequest())->messages();
     }
 
     /**
@@ -56,6 +58,12 @@ class CreateCommentModal extends Component
      */
     public function store(): void
     {
+        Validator::make(
+            ['captchaToken' => $this->captchaToken],
+            ['captchaToken' => ['required', new Captcha()]],
+            ['captchaToken.required' => '人機驗證失敗'],
+        )->validate();
+
         $this->validate();
 
         DB::beginTransaction();

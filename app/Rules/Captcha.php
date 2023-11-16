@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Translation\PotentiallyTranslatedString;
 
-class Recaptcha implements ValidationRule
+class Captcha implements ValidationRule
 {
     /**
      * Run the validation rule.
@@ -16,17 +16,13 @@ class Recaptcha implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => config('services.recaptcha.secret_key'),
+        $response = Http::asForm()->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+            'secret' => config('services.captcha.secret_key'),
             'response' => $value,
         ]);
 
-        if (
-            ! ($response->successful() &&
-            $response->json('success') &&
-            $response->json('score') > config('services.recaptcha.min_score'))
-        ) {
-            $fail('驗證錯誤');
+        if (! ($response->successful() && $response->json('success'))) {
+            $fail('人機驗證失敗');
         }
     }
 }

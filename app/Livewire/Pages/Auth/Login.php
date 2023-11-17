@@ -27,14 +27,7 @@ class Login extends Component
         return [
             'email' => 'required|string|email',
             'password' => 'required|string',
-            'captchaToken' => ['required', new Captcha()],
-        ];
-    }
-
-    protected function messages(): array
-    {
-        return [
-            'captchaToken.required' => '請完成驗證',
+            'captchaToken' => [new Captcha()],
         ];
     }
 

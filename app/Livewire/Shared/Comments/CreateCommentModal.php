@@ -11,7 +11,6 @@ use App\Rules\Captcha;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
 use League\CommonMark\Exception\CommonMarkException;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -36,7 +35,10 @@ class CreateCommentModal extends Component
 
     protected function rules(): array
     {
-        return (new CommentRequest())->rules();
+        $rules = (new CommentRequest())->rules();
+        $rules['captchaToken'] = [new Captcha()];
+
+        return $rules;
     }
 
     protected function messages(): array
@@ -58,13 +60,9 @@ class CreateCommentModal extends Component
      */
     public function store(): void
     {
-        Validator::make(
-            ['captchaToken' => $this->captchaToken],
-            ['captchaToken' => ['required', new Captcha()]],
-            ['captchaToken.required' => '人機驗證失敗'],
-        )->validate();
-
-        $this->validate();
+        $this->withValidator(function ($validator) {
+            $validator->after(fn () => $this->dispatch('enable-create-comment-modal-submit'));
+        })->validate();
 
         DB::beginTransaction();
 

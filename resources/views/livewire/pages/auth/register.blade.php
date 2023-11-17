@@ -80,7 +80,6 @@
 
           <div
             class="hidden"
-            id="captcha"
             wire:ignore
             x-data="{
                 captchaSiteKey: @js(config('services.captcha.site_key'))

@@ -14,10 +14,8 @@
     isOpen = true;
     $nextTick(() => $refs.createCommentTextarea.focus());
   "
-  x-on:close-create-comment-modal.window="
-    isOpen = false;
-    enableSubmit = true;
-  "
+  x-on:close-create-comment-modal.window="isOpen = false"
+  x-on:enable-create-comment-modal-submit.window="enableSubmit = true"
   x-on:keydown.escape.window="isOpen = false"
 >
   <div class="flex min-h-screen items-end justify-center">
@@ -71,7 +69,7 @@
             enableSubmit = false;
 
             turnstile.ready(function() {
-              turnstile.render($el, {
+              turnstile.render($refs.captcha, {
                 sitekey: captchaSiteKey,
                 callback: function(token) {
                   $wire.set('captchaToken', token);
@@ -101,6 +99,10 @@
               @error('body')
                 <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
               @enderror
+
+              @error('captchaToken')
+                <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
+              @enderror
             </div>
           @else
             <div
@@ -122,6 +124,12 @@
               </div>
             </div>
           @endif
+
+          <div
+            class="hidden"
+            wire:ignore
+            x-ref="captcha"
+          ></div>
 
           <div class="flex items-center justify-between space-x-3">
             <x-toggle-switch

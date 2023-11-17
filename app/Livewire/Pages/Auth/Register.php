@@ -34,14 +34,7 @@ class Register extends Component
             'name' => ['required', 'string', 'regex:/^[A-Za-z0-9\-\_]+$/u', 'between:3,25', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Password::min(8)->letters()->mixedCase()->numbers()],
-            'captchaToken' => ['required', new Captcha()],
-        ];
-    }
-
-    protected function messages(): array
-    {
-        return [
-            'captchaToken.required' => '請完成驗證',
+            'captchaToken' => [new Captcha()],
         ];
     }
 

@@ -83,7 +83,6 @@
                   turnstile.render($el, {
                       sitekey: captchaSiteKey,
                       callback: function(token) {
-                          console.log('Captcha check finish!')
                           $wire.set('captchaToken', token);
                           enableSubmit = true;
                       }

@@ -4,13 +4,20 @@
   aria-labelledby="modal-title"
   aria-modal="true"
   x-cloak
-  x-data="{ isOpen: false }"
+  x-data="{
+      isOpen: false,
+      enableSubmit: true,
+      captchaSiteKey: @js(config('services.captcha.site_key'))
+  }"
   x-show="isOpen"
   x-on:open-create-comment-modal.window="
-    isOpen = true
-    $nextTick(() => $refs.createCommentTextarea.focus())
+    isOpen = true;
+    $nextTick(() => $refs.createCommentTextarea.focus());
   "
-  x-on:close-create-comment-modal.window="isOpen = false"
+  x-on:close-create-comment-modal.window="
+    isOpen = false;
+    enableSubmit = true;
+  "
   x-on:keydown.escape.window="isOpen = false"
 >
   <div class="flex min-h-screen items-end justify-center">
@@ -60,7 +67,19 @@
 
         <form
           class="space-y-4"
-          wire:submit="store"
+          x-on:submit.prevent="
+            enableSubmit = false;
+
+            turnstile.ready(function() {
+              turnstile.render($el, {
+                sitekey: captchaSiteKey,
+                callback: function(token) {
+                  $wire.set('captchaToken', token);
+                  $wire.store();
+                }
+              });
+            });
+          "
         >
           @if (!$convertToHtml)
             <div>
@@ -112,31 +131,21 @@
               預覽
             </x-toggle-switch>
 
-            <x-button>
-              <i class="bi bi-save2-fill"></i>
+            <x-button x-bind:disabled="!enableSubmit">
+              <i
+                class="bi bi-save2-fill"
+                x-cloak
+                x-show="enableSubmit"
+              ></i>
+              <x-animate-spin
+                class="h-5 w-5 text-gray-50"
+                x-cloak
+                x-show="!enableSubmit"
+              />
               <span class="ml-2">儲存</span>
             </x-button>
-
           </div>
         </form>
-
-        <div
-          class="hidden"
-          id="captcha"
-          wire:ignore
-          x-data="{
-              captchaSiteKey: @js(config('services.captcha.site_key'))
-          }"
-          x-init="// Execute the captcha check
-          turnstile.ready(function() {
-              turnstile.render($el, {
-                  sitekey: captchaSiteKey,
-                  callback: function(token) {
-                      $wire.set('captchaToken', token);
-                  }
-              });
-          });"
-        ></div>
       </div>
     </div>
     {{-- end modal --}}

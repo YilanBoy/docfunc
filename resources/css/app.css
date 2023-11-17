@@ -99,3 +99,10 @@
 #blog-post ::-webkit-scrollbar-thumb:hover {
     background: #9ca3af;
 }
+
+/* media embed */
+iframe,
+.twitter-tweet {
+    margin-left: auto;
+    margin-right: auto;
+}

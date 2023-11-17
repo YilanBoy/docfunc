@@ -28,20 +28,6 @@
         }
     }"
   >
-    <style>
-      /* media embed */
-      iframe,
-      .twitter-tweet {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      /* hide google recaptcha badge */
-      .grecaptcha-badge {
-        visibility: hidden;
-      }
-    </style>
-
     <div class="relative animate-fade-in">
       <x-scroll-to-top-button x-ref="scrollToTopBtn" />
 

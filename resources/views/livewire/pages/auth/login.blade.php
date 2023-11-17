@@ -30,6 +30,7 @@
         <form
           id="login"
           wire:submit="store"
+          x-data="{ enableSubmit: false }"
         >
           {{-- 信箱 --}}
           <div>
@@ -70,6 +71,26 @@
               <span class="ml-2 text-sm text-gray-600 dark:text-gray-50">{{ __('Remember me') }}</span>
             </label>
 
+            <div
+              class="hidden"
+              id="captcha"
+              wire:ignore
+              x-data="{
+                  captchaSiteKey: @js(config('services.captcha.site_key'))
+              }"
+              x-init="// Execute the captcha check
+              turnstile.ready(function() {
+                  turnstile.render($el, {
+                      sitekey: captchaSiteKey,
+                      callback: function(token) {
+                          console.log('Captcha check finish!')
+                          $wire.set('captchaToken', token);
+                          enableSubmit = true;
+                      }
+                  });
+              });"
+            ></div>
+
             <div>
               @if (Route::has('password.request'))
                 <a
@@ -81,33 +102,16 @@
                 </a>
               @endif
 
-              <x-button class="ml-3">
+              <x-button
+                class="ml-3"
+                x-bind:disabled="!enableSubmit"
+              >
                 {{ __('Log in') }}
               </x-button>
             </div>
           </div>
         </form>
       </x-card>
-
-      <div
-        class="hidden"
-        id="captcha"
-        wire:ignore
-        x-data="{
-            captchaSiteKey: @js(config('services.captcha.site_key'))
-        }"
-        x-init="// Execute the captcha check
-        turnstile.ready(function() {
-            turnstile.render($el, {
-                sitekey: captchaSiteKey,
-                callback: function(token) {
-                    $wire.set('captchaToken', token);
-                }
-            });
-        });"
-      ></div>
-
     </div>
-
   </div>
 </x-layouts.layout-auth>

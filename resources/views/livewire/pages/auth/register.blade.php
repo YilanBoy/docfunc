@@ -24,7 +24,8 @@
 
         <form
           id="register"
-          wire:submit.prevent="store"
+          wire:submit="store"
+          x-data="{ enableSubmit: false }"
         >
           {{-- 會員名稱 --}}
           <div>
@@ -77,6 +78,25 @@
             />
           </div>
 
+          <div
+            class="hidden"
+            id="captcha"
+            wire:ignore
+            x-data="{
+                captchaSiteKey: @js(config('services.captcha.site_key'))
+            }"
+            x-init="// Execute the captcha check
+            turnstile.ready(function() {
+                turnstile.render($el, {
+                    sitekey: captchaSiteKey,
+                    callback: function(token) {
+                        $wire.set('captchaToken', token);
+                        enableSubmit = true;
+                    }
+                });
+            });"
+          ></div>
+
           <div class="mt-6 flex items-center justify-end">
             <a
               class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-50"
@@ -86,31 +106,15 @@
               {{ __('Already registered?') }}
             </a>
 
-            <x-button class="ml-4">
+            <x-button
+              class="ml-4"
+              x-bind:disabled="!enableSubmit"
+            >
               {{ __('Register') }}
             </x-button>
           </div>
         </form>
       </x-card>
-
-      <div
-        class="hidden"
-        id="captcha"
-        wire:ignore
-        x-data="{
-            captchaSiteKey: @js(config('services.captcha.site_key'))
-        }"
-        x-init="// Execute the captcha check
-        turnstile.ready(function() {
-            turnstile.render($el, {
-                sitekey: captchaSiteKey,
-                callback: function(token) {
-                    $wire.set('captchaToken', token);
-                }
-            });
-        });"
-      ></div>
     </div>
-
   </div>
 </x-layouts.layout-auth>

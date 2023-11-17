@@ -60,9 +60,7 @@ class CreateCommentModal extends Component
      */
     public function store(): void
     {
-        $this->withValidator(function ($validator) {
-            $validator->after(fn () => $this->dispatch('enable-create-comment-modal-submit'));
-        })->validate();
+        $this->validate();
 
         DB::beginTransaction();
 

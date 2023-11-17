@@ -4,18 +4,13 @@
   aria-labelledby="modal-title"
   aria-modal="true"
   x-cloak
-  x-data="{
-      isOpen: false,
-      enableSubmit: true,
-      captchaSiteKey: @js(config('services.captcha.site_key'))
-  }"
+  x-data="{ isOpen: false }"
   x-show="isOpen"
   x-on:open-create-comment-modal.window="
     isOpen = true;
     $nextTick(() => $refs.createCommentTextarea.focus());
   "
   x-on:close-create-comment-modal.window="isOpen = false"
-  x-on:enable-create-comment-modal-submit.window="enableSubmit = true"
   x-on:keydown.escape.window="isOpen = false"
 >
   <div class="flex min-h-screen items-end justify-center">
@@ -65,19 +60,8 @@
 
         <form
           class="space-y-4"
-          x-on:submit.prevent="
-            enableSubmit = false;
-
-            turnstile.ready(function() {
-              turnstile.render($refs.captcha, {
-                sitekey: captchaSiteKey,
-                callback: function(token) {
-                  $wire.set('captchaToken', token);
-                  $wire.store();
-                }
-              });
-            });
-          "
+          wire:submit="store"
+          x-data="{ enableSubmit: false }"
         >
           @if (!$convertToHtml)
             <div>
@@ -128,7 +112,19 @@
           <div
             class="hidden"
             wire:ignore
-            x-ref="captcha"
+            x-data="{
+                captchaSiteKey: @js(config('services.captcha.site_key'))
+            }"
+            x-init="// Execute the captcha check
+            turnstile.ready(function() {
+                turnstile.render($el, {
+                    sitekey: captchaSiteKey,
+                    callback: function(token) {
+                        $wire.set('captchaToken', token);
+                        enableSubmit = true;
+                    }
+                });
+            });"
           ></div>
 
           <div class="flex items-center justify-between space-x-3">
@@ -141,16 +137,16 @@
 
             <x-button x-bind:disabled="!enableSubmit">
               <i
-                class="bi bi-save2-fill"
+                class="bi bi-save2-fill mr-2"
                 x-cloak
                 x-show="enableSubmit"
               ></i>
               <x-animate-spin
-                class="h-5 w-5 text-gray-50"
+                class="mr-2 h-5 w-5 text-gray-50"
                 x-cloak
                 x-show="!enableSubmit"
               />
-              <span class="ml-2">儲存</span>
+              <span x-text="enableSubmit ? '儲存' : '驗證中'"></span>
             </x-button>
           </div>
         </form>

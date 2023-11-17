@@ -114,7 +114,7 @@
                 x-cloak
                 x-show="!enableSubmit"
               />
-              {{ __('Register') }}
+              <span x-text="enableSubmit ? '註冊' : '驗證中'"></span>
             </x-button>
           </div>
         </form>

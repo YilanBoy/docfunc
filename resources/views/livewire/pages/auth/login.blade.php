@@ -106,6 +106,11 @@
                 class="ml-3"
                 x-bind:disabled="!enableSubmit"
               >
+                <x-animate-spin
+                  class="mr-2 h-5 w-5 text-gray-50"
+                  x-cloak
+                  x-show="!enableSubmit"
+                />
                 {{ __('Log in') }}
               </x-button>
             </div>

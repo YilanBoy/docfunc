@@ -1,7 +1,6 @@
 <?php
 
 use App\Livewire\Shared\Comments\CreateCommentModal;
-use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 
@@ -60,35 +59,6 @@ test('logged-in users can leave a comment', function () {
     get($post->link_with_slug)
         ->assertSee($body);
 });
-
-test('if the comment addition fails, no data will be available in the database.', function () {
-    // make App\Models\Comment::create() throw an exception
-    // https://stackoverflow.com/questions/37456518/how-to-mock-static-methods-of-a-laravel-eloquent-model
-    Mockery::mock('overload:'.Comment::class)
-        ->shouldReceive('create')
-        ->once()
-        ->andThrow(new Exception('comment creating failed'));
-
-    Log::shouldReceive('error')->once();
-
-    $post = Post::factory()->create();
-
-    $body = fake()->words(5, true);
-
-    livewire(CreateCommentModal::class, ['postId' => $post->id])
-        ->set('body', $body)
-        ->set('captchaToken', 'fake-captcha-response')
-        ->call('store')
-        ->assertDispatched('close-create-comment-modal')
-        ->assertDispatched('info-badge',
-            status: 'danger',
-            message: 'Oops！新增留言失敗！',
-        );
-
-    $this->assertDatabaseMissing('comments', [
-        'body' => $body,
-    ]);
-})->skip(true, 'skip until pest support run in separate process');
 
 it('can see the comment preview', function () {
     $this->actingAs(User::factory()->create());

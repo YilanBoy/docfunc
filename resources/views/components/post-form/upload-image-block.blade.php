@@ -31,20 +31,7 @@
     >
 
     <div class="flex flex-col items-center justify-center space-y-2 text-center">
-      <svg
-        class="h-10 w-10"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-        />
-      </svg>
+      <x-icon.upload class="h-10 w-10" />
 
       <p>預覽圖 (jpg, jpeg, png, bmp, gif, svg, or webp)</p>
     </div>
@@ -64,6 +51,7 @@
     </div>
   </div>
 
+  {{-- preview image preview --}}
   @if ($previewUrl && empty($image))
     <div class="relative mt-4 w-full md:w-1/2">
       <img
@@ -74,7 +62,7 @@
       >
 
       <button
-        class="group absolute inset-0 flex flex-1 items-center justify-center rounded-lg transition-all duration-150 hover:bg-gray-600/50 hover:backdrop-blur-sm"
+        class="group absolute right-0 top-0 flex h-full w-full items-center justify-center rounded-lg transition-all duration-150 hover:bg-gray-600/50 hover:backdrop-blur-sm"
         type="button"
         wire:confirm="你確定要刪除預覽圖嗎？"
         wire:click="$set('{{ $previewUrlModel }}', '')"
@@ -86,7 +74,7 @@
     </div>
   @endif
 
-  {{-- image preview --}}
+  {{-- upload image preview --}}
   @if ($showPreview)
     <div class="relative mt-4 w-full md:w-1/2">
       <img

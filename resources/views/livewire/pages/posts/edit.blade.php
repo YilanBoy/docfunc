@@ -26,10 +26,11 @@
               <div class="grid grid-cols-2 gap-5">
                 {{-- post preview image --}}
                 <x-post-form.upload-image-block
-                  :model="'image'"
-                  :image="$image"
+                  :image-model="'form.image'"
+                  :preview-url-model="'form.preview_url'"
+                  :image="$form->image"
                   :preview-url="$form->preview_url"
-                  :showPreview="!$errors->has('image') && !is_null($image)"
+                  :showPreview="!$errors->has('form.image') && !is_null($form->image)"
                 />
 
                 {{-- post classfication --}}
@@ -117,7 +118,7 @@
                     class="h-5 w-5"
                     wire:loading
                   >
-                    <x-animate-spin />
+                    <x-icon.animate-spin />
                   </span>
 
                   <span class="ml-2">儲存</span>

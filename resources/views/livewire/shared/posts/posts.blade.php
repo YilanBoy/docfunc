@@ -58,7 +58,7 @@
 
       {{-- 文章 --}}
       <a
-        class="absolute right-0 top-0 block h-full w-full"
+        class="absolute inset-0 block"
         href="{{ $post->link_with_slug }}"
         title="{{ $post->title }}"
         wire:navigate

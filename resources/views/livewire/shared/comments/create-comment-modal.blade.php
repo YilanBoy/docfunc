@@ -141,7 +141,7 @@
                 x-cloak
                 x-show="enableSubmit"
               ></i>
-              <x-animate-spin
+              <x-icon.animate-spin
                 class="mr-2 h-5 w-5 text-gray-50"
                 x-cloak
                 x-show="!enableSubmit"

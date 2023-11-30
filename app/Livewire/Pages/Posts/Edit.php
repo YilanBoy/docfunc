@@ -8,7 +8,6 @@ use App\Models\Post;
 use App\Services\FileService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -17,11 +16,6 @@ class Edit extends Component
 {
     use AuthorizesRequests;
     use WithFileUploads;
-
-    #[Rule('nullable')]
-    #[Rule('image', message: '圖片格式有誤')]
-    #[Rule('max:1024', message: '圖片大小不能超過 1024 KB')]
-    public ?object $image = null;
 
     public PostForm $form;
 
@@ -50,8 +44,9 @@ class Edit extends Component
         $this->form->validatePost();
 
         // upload image
-        if ($this->image) {
-            $this->form->preview_url = app(FileService::class)->uploadImageToCloud($this->image);
+        if ($this->form->image) {
+            $this->form->preview_url = app(FileService::class)
+                ->uploadImageToCloud($this->form->image);
         }
 
         $post = $this->form->updatePost($this->post);

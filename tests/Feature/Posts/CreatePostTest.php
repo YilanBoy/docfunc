@@ -127,8 +127,8 @@ it('can check image type', function () {
     livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
     ])
-        ->set('image', $file)
-        ->assertHasErrors(['image' => 'image']);
+        ->set('form.image', $file)
+        ->assertHasErrors('form.image');
 });
 
 it('can check image size', function () {
@@ -139,8 +139,8 @@ it('can check image size', function () {
     livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
     ])
-        ->set('image', $file)
-        ->assertHasErrors(['image' => 'max:1024']);
+        ->set('form.image', $file)
+        ->assertHasErrors('form.image');
 });
 
 it('can upload image', function () {
@@ -156,7 +156,7 @@ it('can upload image', function () {
         ->set('form.title', str()->random(4))
         ->set('form.category_id', Category::pluck('id')->random())
         // filename will be converted before store to s3
-        ->set('image', $image)
+        ->set('form.image', $image)
         ->set('form.body', str()->random(500))
         ->call('store')
         ->assertHasNoErrors()
@@ -178,10 +178,10 @@ it('can\'t upload non image', function () {
         ->set('form.title', str()->random(4))
         ->set('form.category_id', Category::pluck('id')->random())
         // filename will be converted before store to s3
-        ->set('image', $file)
+        ->set('form.image', $file)
         ->set('form.body', str()->random(500))
         ->call('store')
-        ->assertHasErrors(['image'])
+        ->assertHasErrors(['form.image'])
         ->assertDontSeeHtml('id="upload-image"');
 });
 

@@ -15,7 +15,7 @@
       class="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none"
       type="file"
       title=""
-      wire:model.live="{{ $model }}"
+      wire:model.live="{{ $imageModel }}"
       x-on:dragenter="
         $refs.uploadBlock.classList.remove('text-green-500', 'dark:text-indigo-400', 'border-green-500', 'dark:border-indigo-400')
         $refs.uploadBlock.classList.add('text-green-600', 'dark:text-indigo-300', 'border-green-600', 'dark:border-indigo-300')
@@ -77,22 +77,11 @@
         class="group absolute inset-0 flex flex-1 items-center justify-center rounded-lg transition-all duration-150 hover:bg-gray-600/50 hover:backdrop-blur-sm"
         type="button"
         wire:confirm="你確定要刪除預覽圖嗎？"
-        wire:click="$set('form.preview_url', '')"
+        wire:click="$set('{{ $previewUrlModel }}', '')"
       >
-        <svg
+        <x-icon.cross
           class="h-24 w-24 opacity-0 transition-all duration-150 group-hover:text-gray-50 group-hover:opacity-100"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
+        />
       </button>
     </div>
   @endif
@@ -108,24 +97,13 @@
       >
 
       <button
-        class="group absolute inset-0 flex flex-1 items-center justify-center rounded-lg transition-all duration-150 hover:bg-gray-600/50 hover:backdrop-blur-sm"
+        class="group absolute right-0 top-0 flex h-full w-full items-center justify-center rounded-lg transition-all duration-150 hover:bg-gray-600/50 hover:backdrop-blur-sm"
         type="button"
-        wire:click="$set('image', null)"
+        wire:click="$set('{{ $imageModel }}', null)"
       >
-        <svg
+        <x-icon.cross
           class="h-24 w-24 opacity-0 transition-all duration-150 group-hover:text-gray-50 group-hover:opacity-100"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
+        />
       </button>
     </div>
   @endif

@@ -26,7 +26,7 @@
         class="h-10 w-10"
         wire:loading
       >
-        <x-animate-spin />
+        <x-icon.animate-spin />
       </span>
     </button>
   </div>

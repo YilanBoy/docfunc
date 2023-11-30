@@ -8,6 +8,7 @@ use App\Services\FormatTransferService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Attributes\Locked;
+use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class PostForm extends Form
@@ -16,6 +17,11 @@ class PostForm extends Form
     public ?int $user_id = null;
 
     public int $category_id = 1;
+
+    #[Validate('nullable')]
+    #[Validate('image', message: '圖片格式有誤')]
+    #[Validate('max:1024', message: '圖片大小不能超過 1024 KB')]
+    public $image;
 
     public string $preview_url = '';
 

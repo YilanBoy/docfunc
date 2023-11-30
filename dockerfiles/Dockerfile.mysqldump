@@ -1,0 +1,14 @@
+FROM amazonlinux:2023
+
+WORKDIR /tmp
+
+RUN dnf update -y \
+    && dnf install awscli mariadb105-server -y
+
+# copy the entrypoint script
+COPY deployment/scripts/mysqldump-backup.sh deployment/scripts/mysqldump-backup.sh
+
+# set scripts to start the laravel octane app
+RUN chmod +x deployment/scripts/mysqldump-backup.sh
+
+ENTRYPOINT ["deployment/scripts/mysqldump-backup.sh"]

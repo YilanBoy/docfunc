@@ -61,18 +61,3 @@ if [ -z "$AWS_DEFAULT_REGION" ]; then
     echo "The environment variable AWS_DEFAULT_REGION is not set. Exiting..."
     exit 1
 fi
-
-# Use mysqldump to backup the database
-mysqldump -h $DATABASE_HOST -P $DATABASE_PORT -u $DATABASE_USER --password=$DATABASE_PASSWORD $DATABASE_NAME > $BACKUP_FILE_NAME
-
-# Use AWS CLI to upload the backup to S3
-aws s3 cp $BACKUP_FILE_NAME s3://$S3_BUCKET_NAME/$BACKUP_FILE_NAME
-
-# Check if the backup was successful
-if [ $? -eq 0 ]; then
-    echo "The backup was successful."
-    exit 0
-else
-    echo "The backup was not successful."
-    exit 1
-fi

@@ -12,3 +12,5 @@ COPY deployment/scripts/mysqldump-backup.sh deployment/scripts/mysqldump-backup.
 RUN chmod +x deployment/scripts/mysqldump-backup.sh
 
 ENTRYPOINT ["deployment/scripts/mysqldump-backup.sh"]
+
+CMD ["/bin/bash"]

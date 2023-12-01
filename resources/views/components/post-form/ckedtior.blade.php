@@ -1,3 +1,5 @@
+@props(['model'])
+
 <div
   class="col-span-2 max-w-none"
   x-data="{

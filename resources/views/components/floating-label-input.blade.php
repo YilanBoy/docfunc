@@ -1,3 +1,5 @@
+@props(['id', 'placeholder'])
+
 <div class="relative px-4 pb-4 pt-5">
   <input
     class="peer h-12 w-full border-b-2 border-gray-300 bg-transparent text-gray-900 placeholder-transparent transition duration-150 ease-in focus:border-emerald-500 focus:outline-none dark:border-gray-400 dark:text-gray-50 dark:focus:border-lividus-500"

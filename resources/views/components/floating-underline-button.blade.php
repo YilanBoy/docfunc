@@ -1,3 +1,5 @@
+@props(['link', 'iconClass', 'selected' => false])
+
 <li class="relative">
   <a
     href="{{ $link }}"

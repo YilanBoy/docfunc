@@ -1,3 +1,11 @@
+@props([
+    'image' => null,
+    'imageModel' => 'image',
+    'previewUrl' => null,
+    'previewUrlModel' => 'previewUrl',
+    'showPreview' => false,
+])
+
 <div
   class="col-span-2 text-base"
   x-data="{ isUploading: false, progress: 0 }"

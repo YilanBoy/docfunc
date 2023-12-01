@@ -1,3 +1,5 @@
+@props(['id'])
+
 <label
   class="flex cursor-pointer select-none items-center space-x-4"
   for="{{ $id }}"

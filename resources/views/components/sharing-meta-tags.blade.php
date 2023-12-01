@@ -1,3 +1,5 @@
+@props(['title'])
+
 @php
   $defaultPreviewUrl = 'https://' . config('filesystems.disks.s3.bucket') . '.s3.' . config('filesystems.disks.s3.region') . '.amazonaws.com/share.jpg';
 @endphp

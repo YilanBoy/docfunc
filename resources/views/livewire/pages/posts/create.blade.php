@@ -4,7 +4,7 @@
     <div class="flex items-stretch justify-center space-x-4">
       <div class="hidden xl:block xl:w-1/6"></div>
 
-      <div class="w-full p-2 md:w-[700px] lg:p-0">
+      <div class="w-full p-2 md:w-[750px] lg:p-0">
         <div class="flex w-full flex-col items-center justify-center space-y-6">
           {{-- title --}}
           <div class="fill-current text-2xl text-gray-700 dark:text-gray-50">

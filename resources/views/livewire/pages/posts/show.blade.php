@@ -4,6 +4,26 @@
   @section('preview_url', $post->preview_url)
 @endif
 
+@assets
+  {{-- highlight code block style --}}
+  @vite('node_modules/highlight.js/styles/atom-one-dark.css')
+
+  {{-- highlight code block --}}
+  @vite('resources/ts/highlight.ts')
+  {{-- code block copy button --}}
+  @vite('resources/ts/copy-code-btn.ts')
+  {{-- post read pregress bar --}}
+  @vite('resources/ts/progress-bar.ts')
+  {{-- to the top button --}}
+  @vite('resources/ts/scroll-to-top-btn.ts')
+  {{-- social media share button --}}
+  @vite('resources/ts/sharer.ts')
+  {{-- media embed --}}
+  @vite('resources/ts/oembed/embed-youtube-oembed.ts')
+  @vite('resources/ts/oembed/embed-twitter-oembed.ts')
+  @vite('resources/ts/oembed/twitter-widgets.ts')
+@endassets
+
 <x-layouts.layout-main>
   <div
     x-data

@@ -30,36 +30,11 @@
 
   @vite('resources/css/app.css')
   @vite('resources/css/icon.css')
-  {{-- highlight code block style --}}
-  @vite('node_modules/highlight.js/styles/atom-one-dark.css')
-  {{-- editor style --}}
-  @vite([
-    'resources/css/editor.css',
-    'node_modules/@yaireo/tagify/dist/tagify.css',
-    'resources/css/missing-content-style.css'
-  ])
 
   <x-js.alpine-js />
   <x-js.livewire />
   @vite('resources/js/app.js')
-  {{-- highlight code block --}}
-  @vite('resources/ts/highlight.ts')
-  {{-- code block copy button --}}
-  @vite('resources/ts/copy-code-btn.ts')
-  {{-- post read pregress bar --}}
-  @vite('resources/ts/progress-bar.ts')
-  {{-- to the top button --}}
-  @vite('resources/ts/scroll-to-top-btn.ts')
-  {{-- social media share button --}}
-  @vite('resources/ts/sharer.ts')
-  {{-- media embed --}}
-  @vite('resources/ts/oembed/embed-youtube-oembed.ts')
-  @vite('resources/ts/oembed/embed-twitter-oembed.ts')
-  @vite('resources/ts/oembed/twitter-widgets.ts')
-  {{-- Ckeditor --}}
-  @vite('resources/ts/ckeditor/ckeditor.ts')
-  {{-- Tagify --}}
-  @vite('resources/ts/tagify.ts')
+
   {{-- Cloudflare Turnstile --}}
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
   {{-- prettier-ignore-end --}}

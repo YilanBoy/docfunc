@@ -20,7 +20,8 @@
   @include('feed::links')
 
   {{-- Favicon --}}
-  <link type="image/x-icon" href="{{ asset('images/icon/icon.svg') }}" rel="shortcut icon">
+  <link rel="icon" href="{{ asset('images/icon/icon.png') }}" type="image/png">
+  <link rel="icon" href="{{ asset('images/icon/icon.svg') }}" type="image/svg+xml">
 
   {{-- Font --}}
   <link href="https://fonts.googleapis.com" rel="preconnect">

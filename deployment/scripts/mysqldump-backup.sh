@@ -61,3 +61,17 @@ if [ -z "$AWS_DEFAULT_REGION" ]; then
     echo "The environment variable AWS_DEFAULT_REGION is not set. Exiting..."
     exit 1
 fi
+
+# Check the mysqldump command is available
+if ! command -v mysqldump &> /dev/null
+then
+    echo "The mysqldump command is not available. Exiting..."
+    exit 1
+fi
+
+# Check the aws command is available
+if ! command -v aws &> /dev/null
+then
+    echo "The aws command is not available. Exiting..."
+    exit 1
+fi

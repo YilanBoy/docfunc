@@ -1,16 +1,46 @@
-FROM amazonlinux:2023
+FROM ubuntu:22.04
 
-WORKDIR /tmp
+SHELL ["/bin/bash", "-exou", "pipefail", "-c"]
 
-RUN dnf update -y \
-    && dnf install awscli mariadb105-server -y
+RUN apt update \
+    && apt upgrade -y \
+    && apt install -y \
+        curl \
+        zip \
+        unzip \
+        mysql-client
+
+RUN if [ "$(uname -m)" = "x86_64" ]; then \
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+            && unzip awscliv2.zip \
+            && ./aws/install; \
+    elif [ "$(uname -m)" = "aarch64" ]; then \
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip" \
+            && unzip awscliv2.zip \
+            && ./aws/install; \
+    else \
+        echo "Unsupported platform" && exit 1; \
+    fi
+
+ARG WWWUSER=1000
+ARG WWWGROUP=1000
+
+# create group and user "scheduler"
+RUN groupadd -g $WWWGROUP scheduler || true \
+    && useradd -ms /bin/bash --no-log-init --no-user-group -g $WWWGROUP -u $WWWUSER scheduler
+
+# set the working directory
+WORKDIR /home/scheduler
 
 # copy the entrypoint script
-COPY deployment/scripts/mysqldump-backup.sh deployment/scripts/mysqldump-backup.sh
+COPY deployment/scripts/mysqldump-backup.sh mysqldump-backup.sh
 
 # set scripts to start the laravel octane app
-RUN chmod +x deployment/scripts/mysqldump-backup.sh
+RUN chmod +x mysqldump-backup.sh
 
-ENTRYPOINT ["deployment/scripts/mysqldump-backup.sh"]
+# set the user
+USER scheduler
+
+ENTRYPOINT ["mysqldump-backup.sh"]
 
 CMD ["/bin/bash"]

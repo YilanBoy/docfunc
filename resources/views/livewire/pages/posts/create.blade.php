@@ -43,10 +43,10 @@
                 {{-- post preview image --}}
                 <x-post-form.upload-image-block
                   :image-model="'form.image'"
-                  :preview-url-model="'form.preview_url'"
                   :image="$form->image"
+                  :show-uploaded-image="!$errors->has('form.image') && !is_null($form->image)"
+                  :preview-url-model="'form.preview_url'"
                   :preview-url="$form->preview_url"
-                  :showPreview="!$errors->has('form.image') && !is_null($form->image)"
                 />
 
                 {{-- post classfication --}}

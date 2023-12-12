@@ -1,9 +1,9 @@
 @props([
-    'image' => null,
     'imageModel' => 'image',
-    'previewUrl' => null,
+    'image' => null,
+    'showUploadedImage' => false,
     'previewUrlModel' => 'previewUrl',
-    'showPreview' => false,
+    'previewUrl' => null,
 ])
 
 <div
@@ -60,7 +60,7 @@
   </div>
 
   {{-- preview image preview --}}
-  @if ($previewUrl && empty($image))
+  @if ($previewUrl && is_null($image))
     <div class="relative mt-4 w-full md:w-1/2">
       <img
         class="rounded-lg"
@@ -82,8 +82,8 @@
     </div>
   @endif
 
-  {{-- upload image preview --}}
-  @if ($showPreview)
+  {{-- uploaded image preview --}}
+  @if ($showUploadedImage)
     <div class="relative mt-4 w-full md:w-1/2">
       <img
         class="rounded-lg"

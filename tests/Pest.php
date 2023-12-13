@@ -11,6 +11,8 @@
 |
 */
 
+use App\Models\User;
+
 uses(Tests\TestCase::class)->in('Feature');
 
 /*
@@ -24,8 +26,9 @@ uses(Tests\TestCase::class)->in('Feature');
 |
 */
 
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
+// A brief example of extending the Expectation API
+expect()->extend('toBePositive', function () {
+    return $this->toBeGreaterThan(0);
 });
 
 /*
@@ -39,7 +42,13 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function login(?User $user = null)
 {
-    // ..
+    if (is_null($user)) {
+        $user = User::factory()->create();
+    }
+
+    test()->actingAs($user);
+
+    return $user;
 }

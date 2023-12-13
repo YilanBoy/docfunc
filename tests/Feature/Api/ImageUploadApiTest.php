@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,7 +18,7 @@ test('users who are not logged in cannot upload images', function () {
 });
 
 test('logged-in users can upload images', function () {
-    $this->actingAs(User::factory()->create());
+    login();
 
     $file = UploadedFile::fake()->image('photo.jpg')->size(100);
 
@@ -31,7 +30,7 @@ test('logged-in users can upload images', function () {
 });
 
 test('the size of the uploaded image must be less than 1024 kb', function () {
-    $this->actingAs(User::factory()->create());
+    login();
 
     post(route('images.store'), [
         'upload' => UploadedFile::fake()->image('photo.jpg')->size(1025),

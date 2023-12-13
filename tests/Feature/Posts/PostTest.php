@@ -14,7 +14,7 @@ test('user can access the home page ', function () {
 });
 
 test('posts index can be rendered', function () {
-    $user = User::factory()->create();
+    $user = login();
 
     Post::factory(10)->create([
         'category_id' => rand(1, 3),
@@ -36,11 +36,8 @@ it('will be redirect if slug is not in the url', function () {
 });
 
 test('category can filter posts', function () {
-    $user = User::factory()->create();
-
     $categoryOnePost = Post::factory()->make([
         'title' => 'this post belongs to category one',
-        'user_id' => $user->id,
         'category_id' => 1,
     ]);
 
@@ -63,7 +60,7 @@ test('category can filter posts', function () {
     });
 });
 
-test('order query string filters correctly', function () {
+test('order query string filters correctly', function (string $queryString, string $title) {
     $user = User::factory()->create();
 
     Post::factory()->create([
@@ -88,27 +85,23 @@ test('order query string filters correctly', function () {
         'updated_at' => now()->subDays(15),
     ]);
 
-    $queryStringAndTitle = [
-        'latest' => 'this post is the latest',
-        'recent' => 'this post is updated recently',
-        'comment' => 'this post has the most comments',
-    ];
-
-    foreach ($queryStringAndTitle as $queryString => $title) {
-        Livewire::withQueryParams(['order' => $queryString])
-            ->test(Posts::class, [
-                'currentUrl' => '/',
-                'categoryId' => 0,
-                'tagId' => 0,
-            ])
-            ->assertViewHas('posts', function ($posts) use ($title) {
-                return $posts->first()->title === $title;
-            });
-    }
-});
+    Livewire::withQueryParams(['order' => $queryString])
+        ->test(Posts::class, [
+            'currentUrl' => '/',
+            'categoryId' => 0,
+            'tagId' => 0,
+        ])
+        ->assertViewHas('posts', function ($posts) use ($title) {
+            return $posts->first()->title === $title;
+        });
+})->with([
+    ['latest', 'this post is the latest'],
+    ['recent', 'this post is updated recently'],
+    ['comment', 'this post has the most comments'],
+]);
 
 test('user can view a post', function () {
-    $user = User::factory()->create();
+    $user = login();
 
     $post = Post::factory()->make();
     $post->user_id = $user->id;

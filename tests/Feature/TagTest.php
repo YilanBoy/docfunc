@@ -12,7 +12,6 @@ test('guest can visit tag show page', function () {
         ->assertSee($tag->name);
 });
 
-// @phpstan-ignore-next-line
 it('can get all tags')
     ->getJson('api/tags')
     ->assertStatus(200);

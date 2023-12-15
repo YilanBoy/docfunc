@@ -36,19 +36,7 @@
           type="button"
           x-on:click="isOpen = false"
         >
-          <svg
-            class="h-8 w-8"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+          <x-icon.x class="h-8 w-8" />
         </button>
       </div>
 
@@ -62,6 +50,7 @@
           class="space-y-4"
           id="edit-comment"
           wire:submit="update({{ $commentId }})"
+          x-data="{ body: @entangle('body') }"
         >
           @if (!$convertToHtml)
             <div>
@@ -72,6 +61,7 @@
                 id="body"
                 name="body"
                 x-ref="editCommentTextarea"
+                x-model="body"
                 {{-- change tab into 4 spaces --}}
                 x-on:keydown.tab.prevent="
                   $el.setRangeText(
@@ -110,6 +100,7 @@
             <x-toggle-switch
               wire:model.live="convertToHtml"
               :id="'edit-comment-modal-preview'"
+              x-bind:disabled="body === ''"
             >
               預覽
             </x-toggle-switch>

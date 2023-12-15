@@ -36,19 +36,7 @@
           type="button"
           x-on:click="isOpen = false"
         >
-          <svg
-            class="h-8 w-8"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+          <x-icon.x class="h-8 w-8" />
         </button>
       </div>
 
@@ -61,7 +49,7 @@
         <form
           class="space-y-4"
           wire:submit="store"
-          x-data="{ enableSubmit: false }"
+          x-data="{ enableSubmit: false, body: @entangle('body') }"
         >
           @if (!$convertToHtml)
             <div>
@@ -131,6 +119,7 @@
             <x-toggle-switch
               :id="'create-comment-modal-preview'"
               wire:model.live="convertToHtml"
+              x-bind:disabled="body === ''"
             >
               預覽
             </x-toggle-switch>

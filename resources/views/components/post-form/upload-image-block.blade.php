@@ -75,7 +75,7 @@
         wire:confirm="你確定要刪除預覽圖嗎？"
         wire:click="$set('{{ $previewUrlModel }}', '')"
       >
-        <x-icon.cross
+        <x-icon.x-circle
           class="h-24 w-24 opacity-0 transition-all duration-150 group-hover:text-gray-50 group-hover:opacity-100"
         />
       </button>
@@ -97,7 +97,7 @@
         type="button"
         wire:click="$set('{{ $imageModel }}', null)"
       >
-        <x-icon.cross
+        <x-icon.x-circle
           class="h-24 w-24 opacity-0 transition-all duration-150 group-hover:text-gray-50 group-hover:opacity-100"
         />
       </button>

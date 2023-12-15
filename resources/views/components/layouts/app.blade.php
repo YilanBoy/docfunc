@@ -54,7 +54,7 @@
   </script>
 </head>
 
-<body class="overscroll-y-none bg-gray-200 font-sans text-lg text-gray-900 antialiased dark:bg-gray-900">
+<body class="bg-dot overscroll-y-none bg-gray-200 font-sans text-lg text-gray-900 antialiased dark:bg-gray-900">
 
   {{ $slot }}
 

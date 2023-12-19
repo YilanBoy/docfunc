@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class TwitterOembedApiController extends Controller
+class TwitterOembedController extends Controller
 {
     /**
      * 取得 Twitter Oembed 資訊

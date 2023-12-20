@@ -9,7 +9,7 @@
     wire:navigate
   >
     <img
-      class="h-10 w-10"
+      class="size-10"
       src="{{ asset('images/icon/icon.svg') }}"
       alt="logo"
     >
@@ -41,7 +41,7 @@
 
     {{-- 明亮 / 暗黑模式切換 --}}
     <button
-      class="group flex h-10 w-10 items-center justify-center"
+      class="size-10 group flex items-center justify-center"
       type="button"
       aria-label="Toggle Dark Mode"
       x-data="{ html: document.documentElement }"
@@ -93,7 +93,7 @@
       {{-- 電腦版-通知 --}}
       <span class="relative inline-flex rounded-md">
         <a
-          class="flex h-10 w-10 items-center justify-center rounded-lg text-xl text-gray-500 transition duration-150 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-gray-50"
+          class="size-10 flex items-center justify-center rounded-lg text-xl text-gray-500 transition duration-150 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-gray-50"
           href="{{ route('notifications.index') }}"
           aria-label="Notifications"
           wire:navigate

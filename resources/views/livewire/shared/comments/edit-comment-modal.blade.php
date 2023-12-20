@@ -36,7 +36,7 @@
           type="button"
           x-on:click="isOpen = false"
         >
-          <x-icon.x class="h-8 w-8" />
+          <x-icon.x class="size-8" />
         </button>
       </div>
 

@@ -25,7 +25,7 @@
       </span>
 
       <span
-        class="h-10 w-10"
+        class="size-10"
         wire:loading
       >
         <x-icon.animate-spin />

@@ -17,8 +17,8 @@ class FileService
     public function uploadImageToCloud($image): string
     {
         $imageName = $this->generateFileName($image->getClientOriginalExtension());
-        $uploadFilePath = $image->storeAs('preview', $imageName, 's3');
+        $uploadFilePath = $image->storeAs('preview', $imageName, config('filesystems.default'));
 
-        return Storage::disk('s3')->url($uploadFilePath);
+        return Storage::disk()->url($uploadFilePath);
     }
 }

@@ -29,8 +29,8 @@ class UploadImageController extends Controller
 
         $file = $request->file('upload');
         $imageName = $this->fileService->generateFileName($file->getClientOriginalExtension());
-        Storage::disk('s3')->put('images/'.$imageName, file_get_contents($file));
-        $url = Storage::disk('s3')->url('images/'.$imageName);
+        Storage::disk()->put('images/'.$imageName, file_get_contents($file));
+        $url = Storage::disk()->url('images/'.$imageName);
 
         return response()->json(['url' => $url]);
     }

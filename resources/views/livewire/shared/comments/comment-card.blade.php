@@ -8,7 +8,7 @@
           wire:navigate
         >
           <img
-            class="h-8 w-8 rounded-full hover:ring-2 hover:ring-blue-400"
+            class="size-10 rounded-full hover:ring-2 hover:ring-blue-400"
             src="{{ $userGravatarUrl }}"
             alt="{{ $userName }}"
           >

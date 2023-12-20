@@ -39,7 +39,7 @@
     >
 
     <div class="flex flex-col items-center justify-center space-y-2 text-center">
-      <x-icon.upload class="h-10 w-10" />
+      <x-icon.upload class="size-10" />
 
       <p>預覽圖 (jpg, jpeg, png, bmp, gif, svg, or webp)</p>
     </div>
@@ -76,7 +76,7 @@
         wire:click="$set('{{ $previewUrlModel }}', '')"
       >
         <x-icon.x-circle
-          class="h-24 w-24 opacity-0 transition-all duration-150 group-hover:text-gray-50 group-hover:opacity-100"
+          class="size-24 opacity-0 transition-all duration-150 group-hover:text-gray-50 group-hover:opacity-100"
         />
       </button>
     </div>
@@ -88,7 +88,7 @@
       <img
         class="rounded-lg"
         id="upload-image"
-        src="{{ $image->temporaryUrl() }}"
+        src="{{ $image->temporaryUrl('local') }}"
         alt="preview image"
       >
 
@@ -98,7 +98,7 @@
         wire:click="$set('{{ $imageModel }}', null)"
       >
         <x-icon.x-circle
-          class="h-24 w-24 opacity-0 transition-all duration-150 group-hover:text-gray-50 group-hover:opacity-100"
+          class="size-24 opacity-0 transition-all duration-150 group-hover:text-gray-50 group-hover:opacity-100"
         />
       </button>
     </div>

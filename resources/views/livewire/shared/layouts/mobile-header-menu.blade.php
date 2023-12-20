@@ -34,7 +34,7 @@
 
       <div class="mx-auto flex items-center">
         <img
-          class="hidden h-10 w-10 md:inline-block"
+          class="size-10 hidden md:inline-block"
           src="{{ asset('images/icon/icon.svg') }}"
           alt="logo"
         >
@@ -126,7 +126,7 @@
               >
                 <span class="sr-only">Open user menu</span>
                 <img
-                  class="h-10 w-10 rounded-full"
+                  class="size-10 rounded-full"
                   src="{{ auth()->user()->gravatar_url }}"
                   alt=""
                 >

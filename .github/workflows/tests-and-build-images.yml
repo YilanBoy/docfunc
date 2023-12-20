@@ -16,6 +16,7 @@ jobs:
       DB_DATABASE: ":memory:"
       BROADCAST_DRIVER: log
       CACHE_DRIVER: redis
+      FILESYSTEM_DISK: s3
       QUEUE_CONNECTION: redis
       SESSION_DRIVER: redis
       MAIL_MAILER: smtp

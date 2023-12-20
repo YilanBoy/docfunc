@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Storage;
 
 use function Pest\Laravel\post;
 
-beforeEach(fn () => Storage::fake('s3'));
+beforeEach(fn () => Storage::fake());
 
 test('users who are not logged in cannot upload images', function () {
     post(route('images.store'), [
@@ -14,7 +14,7 @@ test('users who are not logged in cannot upload images', function () {
         ->assertStatus(302)
         ->assertRedirect(route('login'));
 
-    Storage::disk('s3')->assertDirectoryEmpty('images');
+    Storage::disk()->assertDirectoryEmpty('images');
 });
 
 test('logged-in users can upload images', function () {
@@ -26,7 +26,7 @@ test('logged-in users can upload images', function () {
         'upload' => $file,
     ])->assertStatus(200);
 
-    expect(Storage::disk('s3')->allFiles())->not->toBeEmpty();
+    expect(Storage::disk()->allFiles())->not->toBeEmpty();
 });
 
 test('the size of the uploaded image must be less than 1024 kb', function () {
@@ -36,5 +36,5 @@ test('the size of the uploaded image must be less than 1024 kb', function () {
         'upload' => UploadedFile::fake()->image('photo.jpg')->size(1025),
     ])->assertStatus(302);
 
-    Storage::disk('s3')->assertDirectoryEmpty('images');
+    Storage::disk()->assertDirectoryEmpty('images');
 });

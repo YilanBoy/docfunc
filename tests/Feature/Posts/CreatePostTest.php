@@ -146,7 +146,7 @@ it('can check image size', function () {
 it('can upload image', function () {
     $this->actingAs(User::factory()->create());
 
-    Storage::fake('s3');
+    Storage::fake();
 
     $image = UploadedFile::fake()->image('fake_image.jpg');
 
@@ -162,13 +162,13 @@ it('can upload image', function () {
         ->assertHasNoErrors()
         ->assertSeeHtml('id="upload-image"');
 
-    expect(Storage::disk('s3')->allFiles())->not->toBeEmpty();
+    expect(Storage::disk()->allFiles())->not->toBeEmpty();
 });
 
 it('can\'t upload non image', function () {
     $this->actingAs(User::factory()->create());
 
-    Storage::fake('s3');
+    Storage::fake();
 
     $file = UploadedFile::fake()->create('document.pdf', 512);
 

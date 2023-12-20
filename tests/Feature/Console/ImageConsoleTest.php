@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Storage;
 
 // upload 3 fake image files to fake s3 storage
 beforeEach(function () {
-    Storage::fake('s3');
+    Storage::fake();
 
     $this->imageName1 = '2023_01_01_10_18_21_63b0ed6d06d52.jpg';
     $this->imageName2 = '2022_12_30_22_39_21_63aef81999216.jpg';
@@ -17,9 +17,9 @@ beforeEach(function () {
     $this->image2 = UploadedFile::fake()->image('image2.jpg')->size(100)->getContent();
     $this->image3 = UploadedFile::fake()->image('image3.jpg')->size(100)->getContent();
 
-    Storage::disk('s3')->put('images/'.$this->imageName1, $this->image1);
-    Storage::disk('s3')->put('images/'.$this->imageName2, $this->image2);
-    Storage::disk('s3')->put('images/'.$this->imageName3, $this->image3);
+    Storage::disk()->put('images/'.$this->imageName1, $this->image1);
+    Storage::disk()->put('images/'.$this->imageName2, $this->image2);
+    Storage::disk()->put('images/'.$this->imageName3, $this->image3);
 });
 
 it('can terminate the program by answering "no"', function () {
@@ -40,7 +40,7 @@ it('can terminate the program by answering "no"', function () {
         ->doesntExpectOutput('Clear operation finish')
         ->assertExitCode(1);
 
-    Storage::disk('s3')
+    Storage::disk()
         ->assertExists('images/'.$this->imageName1)
         ->assertExists('images/'.$this->imageName2)
         ->assertExists('images/'.$this->imageName3);
@@ -64,7 +64,7 @@ it('can clear unused images', function () {
         ->doesntExpectOutput('Stop this operation...')
         ->assertExitCode(0);
 
-    Storage::disk('s3')
+    Storage::disk()
         ->assertExists('images/'.$this->imageName1)
         ->assertMissing('images/'.$this->imageName2)
         ->assertMissing('images/'.$this->imageName3);
@@ -87,7 +87,7 @@ it('can skip confirmed by adding --force flag', function () {
         ->doesntExpectOutput('Stop this operation...')
         ->assertExitCode(0);
 
-    Storage::disk('s3')
+    Storage::disk()
         ->assertExists('images/'.$this->imageName1)
         ->assertMissing('images/'.$this->imageName2)
         ->assertMissing('images/'.$this->imageName3);
@@ -117,7 +117,7 @@ test('if there are no unused images, the program will not delete any of them', f
         ->expectsOutput('There is not a single image that has not been used')
         ->assertExitCode(0);
 
-    Storage::disk('s3')
+    Storage::disk()
         ->assertExists('images/'.$this->imageName1)
         ->assertExists('images/'.$this->imageName2)
         ->assertExists('images/'.$this->imageName3);

@@ -21,7 +21,6 @@
 
   {{-- Favicon --}}
   <link rel="icon" href="{{ asset('images/icon/icon.png') }}" type="image/png">
-  <link rel="icon" href="{{ asset('images/icon/icon.svg') }}" type="image/svg+xml">
 
   {{-- Font --}}
   <link href="https://fonts.googleapis.com" rel="preconnect">

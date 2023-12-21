@@ -35,7 +35,7 @@
       <div class="mx-auto flex items-center">
         <img
           class="size-10 hidden md:inline-block"
-          src="{{ asset('images/icon/icon.svg') }}"
+          src="{{ asset('images/icon/icon.png') }}"
           alt="logo"
         >
         <span class="ml-3 hidden font-mono text-xl font-bold dark:text-gray-50 md:block">

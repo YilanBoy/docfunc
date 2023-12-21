@@ -10,7 +10,7 @@
   >
     <img
       class="size-10"
-      src="{{ asset('images/icon/icon.svg') }}"
+      src="{{ asset('images/icon/icon.png') }}"
       alt="logo"
     >
     <span class="ml-3 font-mono text-2xl font-bold dark:text-gray-50">{{ config('app.name') }}</span>

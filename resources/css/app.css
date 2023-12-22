@@ -36,9 +36,8 @@
             /* pre */
         prose-pre:p-0 prose-pre:rounded-lg prose-pre:text-lg
             /* blockquote */
-        prose-blockquote:border-green-400 prose-blockquote:text-slate-500 prose-blockquote:bg-green-100/50
-        dark:prose-blockquote:border-lividus-600 dark:prose-blockquote:text-slate-400 dark:prose-blockquote:bg-lividus-800/50
-        prose-blockquote:py-1;
+        prose-blockquote:border-green-400 prose-blockquote:text-slate-600 prose-blockquote:bg-green-100/50
+        dark:prose-blockquote:border-lividus-600 dark:prose-blockquote:text-slate-400 dark:prose-blockquote:bg-lividus-800/50 prose-blockquote:py-1;
     }
 
     /* ckeditor5-font/theme/fontsize.css */
@@ -64,7 +63,10 @@
             /* code */
         prose-code:before:content-none prose-code:after:content-none prose-code:font-jetbrains-mono
             /* pre */
-        prose-pre:p-0 prose-pre:rounded-lg prose-pre:text-lg;
+        prose-pre:p-0 prose-pre:rounded-lg prose-pre:text-lg
+            /* blockquote */
+        prose-blockquote:border-green-400 prose-blockquote:text-slate-600 prose-blockquote:bg-green-100/50
+        dark:prose-blockquote:border-lividus-600 dark:prose-blockquote:text-slate-400 dark:prose-blockquote:bg-lividus-800/50 prose-blockquote:py-1;
     }
 }
 

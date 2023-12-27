@@ -5,7 +5,6 @@ namespace App\Livewire\Pages\Posts;
 use App\Livewire\Forms\PostForm;
 use App\Models\Category;
 use App\Models\Post;
-use App\Services\FileService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Attributes\Title;
@@ -43,11 +42,7 @@ class Edit extends Component
     {
         $this->form->validatePost();
 
-        // upload image
-        if ($this->form->image) {
-            $this->form->preview_url = app(FileService::class)
-                ->uploadImageToCloud($this->form->image);
-        }
+        $this->form->uploadPreviewImage();
 
         $post = $this->form->updatePost($this->post);
 

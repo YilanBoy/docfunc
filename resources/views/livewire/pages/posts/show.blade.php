@@ -134,6 +134,17 @@
                 </div>
               @endif
 
+              {{-- post thumbnail --}}
+              @if (!empty($post->preview_url))
+                <div class="mt-4">
+                  <img
+                    class="w-full rounded-md"
+                    src="{{ $post->preview_url }}"
+                    alt="{{ $post->title }}"
+                  >
+                </div>
+              @endif
+
               {{-- post body --}}
               <div
                 class="post-body mt-4"

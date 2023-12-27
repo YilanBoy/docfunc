@@ -4,7 +4,6 @@ namespace App\Livewire\Pages\Posts;
 
 use App\Livewire\Forms\PostForm;
 use App\Models\Category;
-use App\Services\FileService;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -41,11 +40,7 @@ class Create extends Component
     {
         $this->form->validatePost();
 
-        // upload image
-        if ($this->form->image) {
-            $this->form->preview_url = app(FileService::class)
-                ->uploadImageToCloud($this->form->image);
-        }
+        $this->form->uploadPreviewImage();
 
         $post = $this->form->createPost();
 

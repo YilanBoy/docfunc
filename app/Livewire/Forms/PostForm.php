@@ -4,8 +4,10 @@ namespace App\Livewire\Forms;
 
 use App\Models\Post;
 use App\Services\ContentService;
+use App\Services\FileService;
 use App\Services\FormatTransferService;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
@@ -115,6 +117,19 @@ class PostForm extends Form
     public function setExcerpt(): void
     {
         $this->excerpt = ContentService::makeExcerpt($this->body);
+    }
+
+    public function uploadPreviewImage(): void
+    {
+        if ($this->image) {
+            $imageName = app(FileService::class)
+                ->generateFileName($this->image->getClientOriginalExtension());
+
+            $path = $this->image
+                ->storeAs('preview', $imageName, config('filesystems.default'));
+
+            $this->preview_url = Storage::disk()->url($path);
+        }
     }
 
     public function createPost(): Post

@@ -3,18 +3,25 @@
 namespace App\Livewire\Shared\Users;
 
 use App\Models\Post;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
-use Livewire\WithPagination;
 
+/**
+ * @property-read array<string, array<Post>> $postsGroupByYear
+ */
 class Posts extends Component
 {
-    use WithPagination;
-    use AuthorizesRequests;
-
     public int $userId;
 
-    public function render()
+    /**
+     * Get the post list of the user. this list will be grouped by year.
+     * The first year will be the latest year
+     * format: ['2021' => [Post, Post, ...], '2020' => [Post, Post, ...], ...]
+     *
+     * @return array<string, array<Post>> $postsGroupByYear
+     */
+    #[Computed]
+    public function postsGroupByYear(): array
     {
         $posts = Post::whereUserId($this->userId)
             ->when(auth()->id() === $this->userId, function ($query) {
@@ -38,7 +45,11 @@ class Posts extends Component
             $postsGroupByYear[$year][] = $post;
         }
 
-        // 該會員的文章
-        return view('livewire.shared.users.posts', ['postsGroupByYear' => $postsGroupByYear]);
+        return $postsGroupByYear;
+    }
+
+    public function render()
+    {
+        return view('livewire.shared.users.posts');
     }
 }

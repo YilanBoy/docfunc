@@ -1,8 +1,12 @@
+@php
+  $latestYear = array_key_first($this->postsGroupByYear);
+@endphp
+
 {{-- 會員文章 --}}
 <x-card
   class="relative w-full text-lg"
   x-data="{
-      currentYear: new Date().getFullYear()
+      currentYear: {{ $latestYear }},
   }"
 >
   <div
@@ -29,7 +33,7 @@
       <div
         class="mt-1 rounded-md border border-neutral-200/70 bg-white p-1 text-lg text-neutral-700 shadow-md dark:border-gray-600 dark:bg-gray-800 dark:text-gray-50"
       >
-        @foreach (array_keys($postsGroupByYear) as $year)
+        @foreach (array_keys($this->postsGroupByYear) as $year)
           <button
             class="group relative flex w-full cursor-default select-none items-center justify-between rounded px-2 py-1.5 outline-none hover:bg-neutral-100 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:hover:bg-gray-700 dark:hover:text-gray-50"
             type="button"
@@ -47,7 +51,7 @@
     </div>
   </div>
 
-  @forelse($postsGroupByYear as $year => $posts)
+  @forelse($this->postsGroupByYear as $year => $posts)
     <div
       class="rounded-md border bg-gray-50 duration-200 dark:border-gray-700 dark:bg-gray-800"
       x-show="currentYear === @js($year)"

@@ -191,3 +191,24 @@ it('displays the default preview, assuming the preview is not set', function () 
         ->assertStatus(200)
         ->assertSee($defaultPreviewUrl);
 });
+
+test('not showing the thumbnail on top of the post', function () {
+    $post = Post::factory()->create([
+        'preview_url' => '',
+    ]);
+
+    get($post->link_with_slug)
+        ->assertOk()
+        ->assertDontSee('post-thumbnail');
+});
+
+it('displays the thumbnail on top of the post', function () {
+    $post = Post::factory()->create([
+        'preview_url' => 'https://example.com/preview.jpg',
+    ]);
+
+    get($post->link_with_slug)
+        ->assertOk()
+        ->assertSee('post-thumbnail')
+        ->assertSee($post->preview_url);
+});

@@ -41,7 +41,7 @@
     <div class="flex flex-col items-center justify-center space-y-2 text-center">
       <x-icon.upload class="size-10" />
 
-      <p>預覽圖 (jpg, jpeg, png, bmp, gif, svg, or webp)</p>
+      <p>預覽圖 (jpg, jpeg or png)</p>
     </div>
   </div>
 

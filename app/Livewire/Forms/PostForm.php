@@ -22,6 +22,7 @@ class PostForm extends Form
 
     #[Validate('nullable')]
     #[Validate('image', message: '圖片格式有誤')]
+    #[Validate('mimes:jpeg,png,jpg', message: '圖片格式必須是 jpeg, png, jpg')]
     #[Validate('max:1024', message: '圖片大小不能超過 1024 KB')]
     public $image;
 

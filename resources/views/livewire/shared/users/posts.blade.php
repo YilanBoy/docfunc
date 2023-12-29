@@ -6,7 +6,7 @@
 <x-card
   class="relative w-full text-lg"
   x-data="{
-      currentYear: {{ $latestYear }},
+      currentYear: {{ Js::from($latestYear) }},
   }"
 >
   <div

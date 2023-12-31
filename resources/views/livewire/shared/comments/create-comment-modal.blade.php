@@ -25,7 +25,7 @@
 
     {{--  modal  --}}
     <div
-      class="max-h-[36rem] transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all dark:bg-gray-800 sm:w-full sm:max-w-2xl"
+      class="max-h-[36rem] transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all sm:w-full sm:max-w-2xl dark:bg-gray-800"
       x-show="isOpen"
       x-transition.origin.bottom.duration.300ms
     >
@@ -41,7 +41,7 @@
       </div>
 
       <div>
-        <div class="mb-5 space-x-2 text-center text-2xl font-bold text-gray-900 dark:text-gray-50">
+        <div class="mb-5 space-x-2 text-center text-2xl text-gray-900 dark:text-gray-50">
           <i class="bi bi-chat-dots-fill"></i>
           <span>新增留言</span>
         </div>

@@ -1,7 +1,7 @@
 <x-layouts.layout-auth>
   <div class="fixed left-5 top-5">
     <a
-      class="block text-2xl font-semibold text-gray-400 transition duration-150 ease-in hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-50"
+      class="block text-2xl text-gray-400 transition duration-150 ease-in hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-50"
       href="{{ route('root') }}"
       wire:navigate
     >

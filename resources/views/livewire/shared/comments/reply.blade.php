@@ -11,7 +11,7 @@
       type="button"
       wire:click="$dispatch('open-create-comment-modal')"
     >
-      <span class="relative z-0 text-lg font-semibold text-gray-200 transition duration-500 ease-in-out">
+      <span class="relative z-0 text-lg text-gray-200 transition duration-500 ease-in-out">
         <i class="bi bi-chat-dots-fill"></i>
         <span class="ml-2">
           @if (auth()->check())

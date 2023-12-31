@@ -39,8 +39,8 @@
     </span>
   </x-card>
 
-  <x-card class="col-span-6 dark:text-gray-50 md:col-span-4">
-    <h3 class="w-full text-2xl font-semibold">個人簡介</h3>
+  <x-card class="col-span-6 md:col-span-4 dark:text-gray-50">
+    <h3 class="w-full text-2xl">個人簡介</h3>
 
     <hr class="my-4 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
 
@@ -52,7 +52,7 @@
   </x-card>
 
   <x-card class="col-span-6 dark:text-gray-50">
-    <h3 class="w-full text-2xl font-semibold">各類文章統計</h3>
+    <h3 class="w-full text-2xl">各類文章統計</h3>
 
     <hr class="my-4 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
 
@@ -82,20 +82,20 @@
     </div>
   </x-card>
 
-  <x-card class="col-span-6 flex flex-col items-start justify-between dark:text-gray-50 md:col-span-2">
+  <x-card class="col-span-6 flex flex-col items-start justify-between md:col-span-2 dark:text-gray-50">
     <div class="w-full text-left text-2xl">文章總數</div>
     <div class="count-up w-full text-center text-8xl font-semibold text-sky-500">{{ $user->posts->count() }}</div>
     <div class="w-full text-right text-2xl">篇</div>
   </x-card>
 
-  <x-card class="col-span-6 flex flex-col items-start justify-between dark:text-gray-50 md:col-span-2">
+  <x-card class="col-span-6 flex flex-col items-start justify-between md:col-span-2 dark:text-gray-50">
     <div class="w-full text-left text-2xl">今年寫了</div>
     <div class="count-up w-full text-center text-8xl font-semibold text-sky-500">{{ $user->posts_count_in_this_year }}
     </div>
     <div class="w-full text-right text-2xl">篇</div>
   </x-card>
 
-  <x-card class="col-span-6 flex flex-col items-start justify-between dark:text-gray-50 md:col-span-2">
+  <x-card class="col-span-6 flex flex-col items-start justify-between md:col-span-2 dark:text-gray-50">
     <div class="w-full text-left text-2xl">留言回覆</div>
     <div class="count-up w-full text-center text-8xl font-semibold text-sky-500">{{ $user->comments->count() }}</div>
     <div class="w-full text-right text-2xl">次</div>

@@ -21,7 +21,7 @@
           href="{{ route('posts.create') }}"
           wire:navigate
         >
-          <span class="relative z-0 text-lg font-semibold text-gray-200 transition duration-700 ease-in-out">
+          <span class="relative z-0 text-lg text-gray-200 transition duration-700 ease-in-out">
             <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
           </span>
         </a>
@@ -32,7 +32,7 @@
   {{-- 熱門標籤 --}}
   @if ($popularTags->count())
     <x-card class="dark:text-gray-50">
-      <p class="text-center text-lg font-semibold">
+      <p class="text-center text-lg">
         <i class="bi bi-tags-fill"></i><span class="ml-2">熱門標籤</span>
       </p>
 
@@ -51,7 +51,7 @@
   {{-- 學習資源推薦 --}}
   @if ($links->count())
     <x-card class="dark:text-gray-50">
-      <p class="text-center text-lg font-semibold">
+      <p class="text-center text-lg">
         <i class="bi bi-file-earmark-code-fill"></i><span class="ml-2">學習資源推薦</span>
       </p>
 
@@ -73,7 +73,7 @@
   @endif
 
   <a
-    class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-zinc-500 px-4 py-2 text-lg font-semibold tracking-widest text-gray-50 ring-zinc-300 transition duration-150 ease-in-out hover:bg-zinc-600 focus:border-zinc-700 focus:outline-none focus:ring active:bg-zinc-700 dark:bg-zinc-600 dark:ring-zinc-800 dark:hover:bg-zinc-500"
+    class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-zinc-500 px-4 py-2 text-lg tracking-widest text-gray-50 ring-zinc-300 transition duration-150 ease-in-out hover:bg-zinc-600 focus:border-zinc-700 focus:outline-none focus:ring active:bg-zinc-700 dark:bg-zinc-600 dark:ring-zinc-800 dark:hover:bg-zinc-500"
     href="{{ route('feeds.main') }}"
     x-data="{ webFeedUrl: $el.getAttribute('href') }"
     x-on:click.prevent="

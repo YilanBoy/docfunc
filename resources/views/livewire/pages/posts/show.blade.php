@@ -65,7 +65,7 @@
 
               <div class="flex justify-between">
                 {{-- post title --}}
-                <h1 class="grow text-3xl font-bold dark:text-gray-50">{{ $post->title }}</h1>
+                <h1 class="grow text-3xl dark:text-gray-50">{{ $post->title }}</h1>
 
                 {{-- mobile dropdowns --}}
                 @if (auth()->id() === $post->user_id)
@@ -170,7 +170,7 @@
               <div class="col-span-12 space-y-2 md:col-span-10">
                 <div class="uppercase text-gray-400">written by</div>
                 <a
-                  class="gradient-underline-grow inline-block text-2xl font-bold dark:text-gray-50"
+                  class="gradient-underline-grow inline-block text-2xl dark:text-gray-50"
                   href="{{ route('users.show', ['user' => $post->user->id]) }}"
                   wire:navigate
                 >

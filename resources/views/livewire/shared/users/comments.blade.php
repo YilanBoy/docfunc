@@ -15,7 +15,7 @@
         wire:navigate
       ></a>
 
-      <span class="group-gradient-underline-grow text-xl font-semibold dark:text-gray-50">
+      <span class="group-gradient-underline-grow text-xl dark:text-gray-50">
         {{ $comment->post->title }}
       </span>
 

@@ -11,7 +11,7 @@
     wire:navigate
   >
     <i class="{{ $iconClass }}"></i>
-    <span class="ml-2 font-semibold">{{ $slot }}</span>
+    <span class="ml-2">{{ $slot }}</span>
   </a>
 
   <span @class([

@@ -1,5 +1,5 @@
 <div
-  class="relative hidden h-20 w-full items-center justify-center bg-gray-50 shadow-lg transition-all duration-300 dark:bg-gray-800 dark:shadow-none lg:flex"
+  class="relative hidden h-20 w-full items-center justify-center bg-gray-50 shadow-lg transition-all duration-300 lg:flex dark:bg-gray-800 dark:shadow-none"
   x-data
 >
   {{-- 電腦版-Logo --}}
@@ -41,7 +41,7 @@
 
     {{-- 明亮 / 暗黑模式切換 --}}
     <button
-      class="size-10 group flex items-center justify-center"
+      class="group flex size-10 items-center justify-center"
       type="button"
       aria-label="Toggle Dark Mode"
       x-data="{ html: document.documentElement }"
@@ -71,7 +71,7 @@
       {{-- 電腦版-未登入 --}}
       @if ($showRegisterButton)
         <a
-          class="flex h-10 items-center justify-center rounded-lg border-2 border-lividus-600 bg-transparent px-3 font-semibold text-lividus-600 transition duration-150 hover:border-transparent hover:bg-lividus-600 hover:text-gray-50"
+          class="flex h-10 items-center justify-center rounded-lg border-2 border-lividus-600 bg-transparent px-3 text-lividus-600 transition duration-150 hover:border-transparent hover:bg-lividus-600 hover:text-gray-50"
           href="{{ route('register') }}"
           wire:navigate
         >
@@ -80,7 +80,7 @@
       @endif
 
       <a
-        class="flex h-10 items-center justify-center rounded-lg border-2 border-emerald-600 bg-transparent px-3 font-semibold text-emerald-600 transition duration-150 hover:border-transparent hover:bg-emerald-600 hover:text-gray-50"
+        class="flex h-10 items-center justify-center rounded-lg border-2 border-emerald-600 bg-transparent px-3 text-emerald-600 transition duration-150 hover:border-transparent hover:bg-emerald-600 hover:text-gray-50"
         href="{{ route('login') }}"
         wire:navigate
       >
@@ -93,7 +93,7 @@
       {{-- 電腦版-通知 --}}
       <span class="relative inline-flex rounded-md">
         <a
-          class="size-10 flex items-center justify-center rounded-lg text-xl text-gray-500 transition duration-150 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-gray-50"
+          class="flex size-10 items-center justify-center rounded-lg text-xl text-gray-500 transition duration-150 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-gray-50"
           href="{{ route('notifications.index') }}"
           aria-label="Notifications"
           wire:navigate

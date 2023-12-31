@@ -3,7 +3,7 @@
   {{-- 文章排序 --}}
   <div class="flex w-full flex-col-reverse text-sm md:flex-row md:justify-between">
 
-    <nav class="flex w-full space-x-1 rounded-xl p-1 dark:text-gray-50 md:w-auto">
+    <nav class="flex w-full space-x-1 rounded-xl p-1 md:w-auto dark:text-gray-50">
 
       {{-- prettier-ignore-start --}}
       @php
@@ -34,20 +34,18 @@
     {{-- 文章分類訊息-桌面裝置 --}}
     @if ($categoryId)
       <div
-        class="mb-0 hidden items-center justify-end border-b-2 border-gray-900 pb-2 pl-6 dark:border-gray-50 dark:text-gray-50 md:flex"
+        class="mb-0 hidden items-center justify-end border-b-2 border-gray-900 pb-2 pl-6 md:flex dark:border-gray-50 dark:text-gray-50"
       >
-        <span class="font-bold">{{ $categoryName }}：</span>
-        <span>{{ $categoryDescription }}</span>
+        <span>{{ $categoryName }}：{{ $categoryDescription }}</span>
       </div>
     @endif
 
     {{-- 文章標籤訊息-桌面裝置 --}}
     @if ($tagId)
       <div
-        class="mb-0 hidden items-center justify-end border-b-2 border-gray-900 pb-2 pl-6 dark:border-gray-50 dark:text-gray-50 md:flex"
+        class="mb-0 hidden items-center justify-end border-b-2 border-gray-900 pb-2 pl-6 md:flex dark:border-gray-50 dark:text-gray-50"
       >
-        <span>標籤：</span>
-        <span class="font-bold">{{ $tagName }}</span>
+        <span>標籤：{{ $tagName }}</span>
       </div>
     @endif
   </div>
@@ -65,7 +63,7 @@
       ></a>
 
       {{-- 文章標題 --}}
-      <h1 class="group-gradient-underline-grow mt-2 w-fit text-xl font-semibold dark:text-gray-50 md:mt-0">
+      <h1 class="group-gradient-underline-grow mt-2 w-fit text-xl md:mt-0 dark:text-gray-50">
         {{ $post->title }}
       </h1>
 

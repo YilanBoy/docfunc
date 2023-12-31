@@ -1,5 +1,5 @@
 <div
-  class="bg-gray-50 shadow-lg dark:bg-gray-800 dark:shadow-none lg:hidden"
+  class="bg-gray-50 shadow-lg lg:hidden dark:bg-gray-800 dark:shadow-none"
   x-data="{ menuIsOpen: false }"
 >
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -34,11 +34,11 @@
 
       <div class="mx-auto flex items-center">
         <img
-          class="size-10 hidden md:inline-block"
+          class="hidden size-10 md:inline-block"
           src="{{ asset('images/icon/icon.png') }}"
           alt="logo"
         >
-        <span class="ml-3 hidden font-mono text-xl font-bold dark:text-gray-50 md:block">
+        <span class="ml-3 hidden font-mono text-xl font-bold md:block dark:text-gray-50">
           {{ config('app.name') }}
         </span>
       </div>
@@ -72,7 +72,7 @@
           {{-- 手機版-未登入 --}}
           @if ($showRegisterButton)
             <a
-              class="rounded-md border-2 border-lividus-400 bg-transparent px-4 py-2 font-semibold text-lividus-400 hover:border-transparent hover:bg-lividus-400 hover:text-gray-50"
+              class="rounded-md border-2 border-lividus-400 bg-transparent px-4 py-2 text-lividus-400 hover:border-transparent hover:bg-lividus-400 hover:text-gray-50"
               href="{{ route('register') }}"
               wire:navigate
             >
@@ -81,7 +81,7 @@
           @endif
 
           <a
-            class="rounded-md border-2 border-emerald-600 bg-transparent px-4 py-2 font-semibold text-emerald-600 hover:border-transparent hover:bg-emerald-600 hover:text-gray-50"
+            class="rounded-md border-2 border-emerald-600 bg-transparent px-4 py-2 text-emerald-600 hover:border-transparent hover:bg-emerald-600 hover:text-gray-50"
             href="{{ route('login') }}"
             wire:navigate
           >

@@ -138,3 +138,13 @@ jobs:
           tags: nella0128/docfunc-scheduler:latest
           cache-from: type=registry,ref=nella0128/docfunc-scheduler:buildcache
           cache-to: type=registry,ref=nella0128/docfunc-scheduler:buildcache,mode=max
+
+      - name: Build a aws mysql client and push to docker hub
+        uses: docker/build-push-action@v4
+        with:
+          file: dockerfiles/Dockerfile.aws-mysql-client
+          platforms: linux/amd64, linux/arm64
+          push: true
+          tags: nella0128/aws-mysql-client:latest
+          cache-from: type=registry,ref=nella0128/aws-mysql-client:buildcache
+          cache-to: type=registry,ref=nella0128/aws-mysql-client:buildcache,mode=max

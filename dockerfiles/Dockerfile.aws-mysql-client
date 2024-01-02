@@ -33,14 +33,14 @@ RUN groupadd -g $WWWGROUP scheduler || true \
 WORKDIR /home/scheduler
 
 # copy the entrypoint script
-COPY deployment/scripts/mysqldump-backup.sh mysqldump-backup.sh
+COPY deployment/scripts/aws-mysql-client.sh aws-mysql-client.sh
 
 # set scripts to start the laravel octane app
-RUN chmod +x mysqldump-backup.sh
+RUN chmod +x aws-mysql-client.sh
 
 # set the user
 USER scheduler
 
-ENTRYPOINT ["mysqldump-backup.sh"]
+ENTRYPOINT [" aws-mysql-client.sh"]
 
 CMD ["/bin/bash"]

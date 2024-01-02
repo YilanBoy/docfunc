@@ -2,7 +2,7 @@
   {{-- posts list --}}
   @foreach ($posts as $post)
     <div
-      class="flex flex-col justify-between rounded px-2 py-2 transition duration-100 hover:bg-gray-100 dark:hover:bg-gray-700 md:flex-row"
+      class="group flex flex-col justify-between rounded px-2 py-2 transition duration-100 hover:bg-gray-100 md:flex-row dark:hover:bg-gray-700"
       {{-- in this list, these post attribue will be change in the loop, so we have to track them down --}}
       wire:key="{{ $post->id . $post->is_private . $post->deleted_at }}"
     >
@@ -31,13 +31,14 @@
       </div>
 
       @if ($post->user_id === auth()->id())
-        <div class="ml-2 flex items-center space-x-3">
+        <div class="ml-2 flex items-center space-x-4 opacity-0 transition duration-100 group-hover:opacity-100">
 
           {{-- restore --}}
           @if ($post->trashed())
             <button
               class="text-gray-500 duration-200 ease-out hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
               type="button"
+              title="還原文章"
               wire:loading.attr="disabled"
               wire:confirm="你確定要還原該文章？"
               wire:click="restore({{ $post->id }})"
@@ -50,6 +51,7 @@
               <button
                 class="text-gray-500 duration-200 ease-out hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
                 type="button"
+                title="公開文章"
                 wire:loading.attr="disabled"
                 wire:confirm="你確定要將該文章設為公開？"
                 wire:click="postPrivateToggle({{ $post->id }})"
@@ -60,6 +62,7 @@
               <button
                 class="text-gray-500 duration-200 ease-out hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
                 type="button"
+                title="關閉文章"
                 wire:loading.attr="disabled"
                 wire:confirm="你確定要將該文章設為不公開？"
                 wire:click="postPrivateToggle({{ $post->id }})"
@@ -73,6 +76,7 @@
             <a
               class="text-gray-500 duration-200 ease-out hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
               href="{{ route('posts.edit', ['post' => $post->id]) }}"
+              title="編輯文章"
               role="button"
               wire:navigate
             >
@@ -83,6 +87,7 @@
             <button
               class="text-red-400 duration-200 ease-out hover:text-red-700 dark:hover:text-red-200"
               type="button"
+              title="刪除文章"
               wire:loading.attr="disabled"
               wire:confirm="你確定要刪除文章嗎？（7 天之內可以還原）"
               wire:click.stop="deletePost({{ $post->id }})"

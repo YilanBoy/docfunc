@@ -10,13 +10,13 @@
     :wire:key="'group-new'"
   />
 
-  @foreach ($groupIds as $bookmark => $ids)
+  @foreach ($IdsByFirstId as $groupId => $ids)
     <livewire:shared.comments.comment-group
       :$postId
       :$postAuthorId
       :$ids
-      :group-id="$bookmark"
-      :wire:key="'group-'.$bookmark"
+      :$groupId
+      :wire:key="'group-'.$groupId"
     />
   @endforeach
 

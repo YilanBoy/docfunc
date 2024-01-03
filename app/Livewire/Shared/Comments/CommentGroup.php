@@ -22,10 +22,15 @@ class CommentGroup extends Component
     #[Locked]
     public int $postAuthorId;
 
-    public array $ids = [];
-
-    // default group 'new' is for new comment
+    // Default group 'new' is for the new comments which will have its own group
     public int|string $groupId = 'new';
+
+    /**
+     * Comment ids.
+     *
+     * @var array<int>
+     */
+    public array $ids = [];
 
     #[On('create-comment-in-group-{groupId}')]
     public function create(int $id): void
@@ -34,7 +39,7 @@ class CommentGroup extends Component
     }
 
     /**
-     * delete comment in group
+     * Delete the comment in group.
      *
      * @throws AuthorizationException
      * @throws Throwable

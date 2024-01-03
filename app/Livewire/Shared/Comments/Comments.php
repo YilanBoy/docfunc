@@ -16,8 +16,15 @@ class Comments extends Component
     #[Locked]
     public int $postAuthorId;
 
-    public array $groupIds = [];
+    /**
+     * This variable is used to gather comment ids.
+     * The key is the first id of the comment group.
+     *
+     * @var array<int, array<int>>
+     */
+    public array $IdsByFirstId = [];
 
+    // bookmark is the last id of the previous page
     public int $bookmark = 0;
 
     public bool $showMoreButtonIsActive = true;
@@ -27,16 +34,18 @@ class Comments extends Component
         $commentIds = Comment::query()
             ->where('post_id', $this->postId)
             ->orderBy('id', 'desc')
-            // +1 is needed here because we need to determine whether there is a next page
+            // Plus one is needed here because we need to determine whether there is a next page.
+            // If comment ids is less than PER_PAGE, it means there is no next page.
             ->limit(self::PER_PAGE + 1)
             ->pluck('id');
 
         if ($commentIds->count() > 0) {
-            // use the first id as the key of the group
-            // only keep the first 10 ids
-            $this->groupIds[$commentIds->first()] = array_slice($commentIds->all(), 0, self::PER_PAGE);
-            // use the last id as the bookmark
-            // which is used to determine whether there is first id of the next page
+            // Use the first id as the key of the group.
+            // Only keep the first 10 ids.
+            $this->IdsByFirstId[$commentIds->first()] = array_slice($commentIds->all(), 0, self::PER_PAGE);
+            // Use the last id as the bookmark.
+            // Bookmark will be the next comment group first id.
+            // But if the comment ids is less than PER_PAGE, bookmark is meaningless.
             $this->bookmark = $commentIds->last();
         }
 
@@ -45,18 +54,19 @@ class Comments extends Component
         }
     }
 
-    // 顯示更多留言
+    // Show more comments
     public function showMore(): void
     {
         $commentIds = Comment::query()
             ->where('post_id', $this->postId)
+            // Use bookmark to get the next comment group.
             ->where('id', '<=', $this->bookmark)
             ->orderBy('id', 'desc')
             ->limit(self::PER_PAGE + 1)
             ->pluck('id');
 
         if ($commentIds->count() > 0) {
-            $this->groupIds[$commentIds->first()] = array_slice($commentIds->all(), 0, self::PER_PAGE);
+            $this->IdsByFirstId[$commentIds->first()] = array_slice($commentIds->all(), 0, self::PER_PAGE);
             $this->bookmark = $commentIds->last();
         }
 

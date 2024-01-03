@@ -11,12 +11,10 @@ test('the author can delete his comment', function () {
 
     Livewire::actingAs(User::find($comment->user_id));
 
-    $bookmark = 'id';
-
     livewire(CommentGroup::class, [
         'postId' => $comment->post_id,
         'postAuthorId' => $comment->post->user_id,
-        'groupId' => $bookmark,
+        'groupId' => 1,
         'ids' => [$comment->id],
     ])
         ->call('destroy', comment: $comment->id)
@@ -34,12 +32,10 @@ test('post author can delete other users comment', function () {
 
     Livewire::actingAs(User::find($comment->post->user_id));
 
-    $bookmark = 'id';
-
     livewire(CommentGroup::class, [
         'postId' => $comment->post_id,
         'postAuthorId' => $comment->post->user_id,
-        'groupId' => $bookmark,
+        'groupId' => 1,
         'ids' => [$comment->id],
     ])
         ->call('destroy', comment: $comment->id)
@@ -62,7 +58,7 @@ test('when a comment is deleted, the post comments will be reduced by one', func
     livewire(CommentGroup::class, [
         'postId' => $comment->post_id,
         'postAuthorId' => $comment->post->user_id,
-        'groupId' => 'id',
+        'groupId' => 1,
         'ids' => [$comment->id],
     ])
         ->call('destroy', comment: $comment->id);

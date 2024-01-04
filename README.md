@@ -1,4 +1,9 @@
-<p align="center"><img width="30%" src="https://docfunc-files.s3.ap-northeast-1.amazonaws.com/docfunc-dark-badge.png" alt="DocFunc Badge"/></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://docfunc-files.s3.ap-northeast-1.amazonaws.com/docfunc-dark-badge.png" width="30%">
+    <img alt="Badge changing depending on mode." src="https://docfunc-files.s3.ap-northeast-1.amazonaws.com/docfunc-light-badge.png" width="30%">
+  </picture>
+</p>
 
 <p align="center">
   <img src="https://github.com/YilanBoy/docfunc/actions/workflows/tests-and-build-images.yml/badge.svg" alt="Test and build images">
@@ -39,7 +44,7 @@ git clone https://github.com/YilanBoy/blog.git
 Change the current working directory to the repository:
 
 ```sh
-cd blog
+cd docfunc
 ```
 
 Install the composer package:
@@ -196,7 +201,7 @@ Dockerfiles is placed in the folder dockerfiles. The php settings and entrypoint
 the folder deployment. You can use Docker and these files to build images.
 
 ```sh
-cd blog
+cd docfunc
 
 # build blog app
 docker buildx build -f dockerfiles/Dockerfile.app --platform linux/amd64,linux/arm64 --push -t docfunc:latest .

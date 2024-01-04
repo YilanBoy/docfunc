@@ -1,9 +1,12 @@
-# Blog
+![DocFunc Dark Badge](https://docfunc-files.s3.ap-northeast-1.amazonaws.com/docfunc-dark-badage.png#gh-dark-mode-only)
+![DocFunc Light Badge](https://docfunc-files.s3.ap-northeast-1.amazonaws.com/docfunc-light-badage.png#gh-light-mode-only)
 
 ![tests-and-build-images](https://github.com/YilanBoy/blog/actions/workflows/tests-and-build-images.yml/badge.svg)
 [![codecov](https://codecov.io/gh/YilanBoy/blog/branch/main/graph/badge.svg?token=K2V2ANX2LW)](https://codecov.io/gh/YilanBoy/blog)
 
-This is a simple blog, mainly used to help me learn about Laravel. The entire project uses
+## Introduction
+
+This is a simple blog project, mainly used to help me learn about Laravel. The entire project uses
 the [TALL stack](https://tallstack.dev/), which is：
 
 - [Tailwind CSS](https://tailwindcss.com/)
@@ -11,7 +14,7 @@ the [TALL stack](https://tallstack.dev/), which is：
 - [Laravel](https://laravel.com/)
 - [Laravel Livewire](https://livewire.laravel.com/)
 
-This blog contains certain basic functions, such as membership system, writing articles and replies.
+This project contains certain basic functions, such as membership system, writing articles and replies.
 
 Post editor use [CKEditor 5](https://ckeditor.com/), You can upload image to AWS S3 in blog post. You can search post
 by [Algolia](https://www.algolia.com/).
@@ -97,17 +100,17 @@ php artisan ide-helper:models
 You could deploy this project use [Laravel Octane](https://laravel.com/docs/9.x/octane), supercharges the performance by
 serving application using [Swoole](https://github.com/swoole/swoole-src).
 
-> **Note**
+> [!NOTE]
 >
 > If you want to use swoole server, you must install swoole extension first.
 >
-> **Using PECL**:
+> Using PECL to install swoole extension:
 >
 > ```sh
 > pecl install swoole
 > ```
 >
-> **Using package manager (Linux)**:
+> Using package manager to install swoole extension (Linux):
 >
 > ```sh
 > sudo add-apt-repository ppa:ondrej/php
@@ -131,28 +134,28 @@ In production, you can use [Supervisor](https://github.com/Supervisor/supervisor
 queue
 worker.
 
-Using supervisor to start swoole server process, we have to create a `blog-octane-worker.conf` config file
+Using supervisor to start swoole server process, we have to create a `docfunc-octane-worker.conf` config file
 in `/etc/supervisor/conf.d/`.
 
 ```text
-[program:blog-octane-worker]
-command=/usr/bin/php -d variables_order=EGPCS /var/www/blog/artisan octane:start --workers=2 --server=swoole --host=0.0.0.0 --port=8000
+[program:docfunc-octane-worker]
+command=/usr/bin/php -d variables_order=EGPCS /var/www/docfunc/artisan octane:start --workers=2 --server=swoole --host=0.0.0.0 --port=8000
 user=www-data
 autostart=true
 autorestart=true
 stopasgroup=true
 killasgroup=true
 redirect_stderr=true
-stdout_logfile=/var/log/blog-octane-worker.log
+stdout_logfile=/var/log/docfunc-octane-worker.log
 ```
 
-Using supervisor to start laravel queue worker process, we have to create a `blog-queue-worker.conf` config file
+Using supervisor to start laravel queue worker process, we have to create a `docfunc-queue-worker.conf` config file
 in `/etc/supervisor/conf.d/`.
 
 ```text
-[program:blog-queue-worker]
+[program:docfunc-queue-worker]
 process_name=%(program_name)s_%(process_num)02d
-command=php /var/www/blog/artisan queue:work --sleep=3 --tries=3 --max-time=3600
+command=php /var/www/docfunc/artisan queue:work --sleep=3 --tries=3 --max-time=3600
 autostart=true
 autorestart=true
 stopasgroup=true
@@ -161,7 +164,7 @@ user=www-data
 numprocs=2
 redirect_stderr=true
 stopwaitsecs=3600
-stdout_logfile=/var/log/blog-queue-worker.log
+stdout_logfile=/var/log/docfunc-queue-worker.log
 ```
 
 Set crontab to run [Laravel Task Schedule](https://laravel.com/docs/9.x/scheduling).
@@ -175,12 +178,12 @@ crontab -e
 Add this line to run the Scheduler.
 
 ```text
-0 * * * * cd /var/www/blog && php artisan schedule:run >> /dev/null 2>&1
+0 * * * * cd /var/www/docfunc && php artisan schedule:run >> /dev/null 2>&1
 ```
 
 ### Docker
 
-> **Note**
+> [!NOTE]
 >
 > You must install [Docker](https://www.docker.com/) first.
 
@@ -193,11 +196,11 @@ the folder deployment. You can use Docker and these files to build images.
 cd blog
 
 # build blog app
-docker buildx build -f dockerfiles/Dockerfile.app --platform linux/amd64,linux/arm64 --push -t blog:latest .
+docker buildx build -f dockerfiles/Dockerfile.app --platform linux/amd64,linux/arm64 --push -t docfunc:latest .
 
 # build horizon
-docker buildx build -f dockerfiles/Dockerfile.horizon --platform linux/amd64,linux/arm64 --push -t blog-horizon:latest .
+docker buildx build -f dockerfiles/Dockerfile.horizon --platform linux/amd64,linux/arm64 --push -t docfunc-horizon:latest .
 
 # build scheduler
-docker buildx build -f dockerfiles/Dockerfile.scheduler --platform linux/amd64,linux/arm64 --push -t blog-scheduler:latest .
+docker buildx build -f dockerfiles/Dockerfile.scheduler --platform linux/amd64,linux/arm64 --push -t docfunc-scheduler:latest .
 ```

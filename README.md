@@ -1,8 +1,10 @@
-<p align="center"><img width="30%" src="https://docfunc-files.s3.ap-northeast-1.amazonaws.com/docfunc-dark-badge.png" alt="DocFunc Badge"></p>
+<p align="center"><img width="30%" src="https://docfunc-files.s3.ap-northeast-1.amazonaws.com/docfunc-dark-badge.png" alt="DocFunc Badge"/></p>
 
 <p align="center">
-<img src="https://github.com/YilanBoy/blog/actions/workflows/tests-and-build-images.yml/badge.svg" alt="Test and build images">
-<a href="https://packagist.org/packages/laravel/pail"><img src="https://codecov.io/gh/YilanBoy/blog/branch/main/graph/badge.svg?token=K2V2ANX2LW" alt="Codecov"></a>
+  <img src="https://github.com/YilanBoy/docfunc/actions/workflows/tests-and-build-images.yml/badge.svg" alt="Test and build images">
+  <a href="https://codecov.io/gh/YilanBoy/docfunc" > 
+    <img src="https://codecov.io/gh/YilanBoy/docfunc/graph/badge.svg?token=K2V2ANX2LW" alt="Codecov"/> 
+  </a>
 </p>
 
 ## Introduction

@@ -1,5 +1,4 @@
-![DocFunc Dark Badge](https://docfunc-files.s3.ap-northeast-1.amazonaws.com/docfunc-dark-badage.png#gh-dark-mode-only)
-![DocFunc Light Badge](https://docfunc-files.s3.ap-northeast-1.amazonaws.com/docfunc-light-badage.png#gh-light-mode-only)
+<p align="center"><img width="50%" src="https://docfunc-files.s3.ap-northeast-1.amazonaws.com/docfunc-dark-badge.png" alt="DocFunc Badge"></p>
 
 ![tests-and-build-images](https://github.com/YilanBoy/blog/actions/workflows/tests-and-build-images.yml/badge.svg)
 [![codecov](https://codecov.io/gh/YilanBoy/blog/branch/main/graph/badge.svg?token=K2V2ANX2LW)](https://codecov.io/gh/YilanBoy/blog)

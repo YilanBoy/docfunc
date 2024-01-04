@@ -13,7 +13,7 @@
       {{-- Links --}}
       <a
         class="my-3 block font-medium text-gray-400 duration-300 hover:text-gray-50"
-        href="https://github.com/YilanBoy/blog"
+        href="https://github.com/YilanBoy/docfunc"
         target="_blank"
         rel="nofollow noopener noreferrer"
       >

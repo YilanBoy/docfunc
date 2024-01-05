@@ -1,9 +1,16 @@
 name: Run tests
 
 on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Who to greet"
+        default: "Allen"
   push:
     tags:
       - 'v*.*.*'
+    branches:
+      - main
 
 jobs:
   tests:

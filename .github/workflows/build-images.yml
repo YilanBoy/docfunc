@@ -1,0 +1,99 @@
+name: Build images
+
+on:
+  workflow_run:
+    workflows: ["Run tests"]
+    types:
+      - completed
+
+jobs:
+  get-approval:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    name: Get approval
+    runs-on: ubuntu-latest
+    environment: production
+
+  build-laravel-octane-image:
+    needs: get-approval
+    name: Start to build laravel octane image and publish to docker hub
+    runs-on: ubuntu-latest
+    steps:
+      # remove the v prefix from the tag name
+      - name: Get version number
+        id: get-version-number
+        run: |
+          number=$(echo "${{ github.ref_name }}" | cut -c 2-)
+          echo "version-number=$number" >> "$GITHUB_OUTPUT"
+
+      - name: Build laravel octane image and publish to docker hub
+        uses: ./.github/actions/publish-to-docker-hub
+        with:
+          registry_username: ${{ secrets.DOCKERHUB_USERNAME }}
+          registry_password: ${{ secrets.DOCKERHUB_TOKEN }}
+          file: dockerfiles/Dockerfile.app
+          platforms: linux/amd64, linux/arm64
+          image_name: nella0128/docfunc-app
+          image_tag: ${{ steps.get-version-number.outputs.version-number }}
+
+  build-laravel-horizon-image:
+    needs: get-approval
+    name: Start to build laravel horizon image and publish to docker hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get version number
+        id: get-version-number
+        run: |
+          number=$(echo "${{ github.ref_name }}" | cut -c 2-)
+          echo "version-number=$number" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push laravel horizon
+        uses: ./.github/actions/publish-to-docker-hub
+        with:
+          registry_username: ${{ secrets.DOCKERHUB_USERNAME }}
+          registry_password: ${{ secrets.DOCKERHUB_TOKEN }}
+          file: dockerfiles/Dockerfile.horizon
+          platforms: linux/amd64, linux/arm64
+          image_name: nella0128/docfunc-horizon
+          image_tag: ${{ steps.get-version-number.outputs.version-number }}
+
+  build-laravel-scheduler-image:
+    needs: get-approval
+    name: Start to build laravel scheduler image and publish to docker hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get version number
+        id: get-version-number
+        run: |
+          number=$(echo "${{ github.ref_name }}" | cut -c 2-)
+          echo "version-number=$number" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push laravel horizon
+        uses: ./.github/actions/publish-to-docker-hub
+        with:
+          registry_username: ${{ secrets.DOCKERHUB_USERNAME }}
+          registry_password: ${{ secrets.DOCKERHUB_TOKEN }}
+          file: dockerfiles/Dockerfile.scheduler
+          platforms: linux/amd64, linux/arm64
+          image_name: nella0128/docfunc-scheduler
+          image_tag: ${{ steps.get-version-number.outputs.version-number }}
+
+  build-aws-mysql-client-image:
+    needs: get-approval
+    name: Start to build aws mysql client image and publish to docker hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get version number
+        id: get-version-number
+        run: |
+          number=$(echo "${{ github.ref_name }}" | cut -c 2-)
+          echo "version-number=$number" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push laravel horizon
+        uses: ./.github/actions/publish-to-docker-hub
+        with:
+          registry_username: ${{ secrets.DOCKERHUB_USERNAME }}
+          registry_password: ${{ secrets.DOCKERHUB_TOKEN }}
+          file: dockerfiles/Dockerfile.aws-mysql-client
+          platforms: linux/amd64, linux/arm64
+          image_name: nella0128/aws-mysql-client
+          image_tag: ${{ steps.get-version-number.outputs.version-number }}

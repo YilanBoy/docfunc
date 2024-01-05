@@ -1,0 +1,95 @@
+name: Run tests
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  tests:
+    name: Test in php ${{ matrix.php }} version
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php:
+          - 8.2
+          - 8.3
+    env:
+      DB_CONNECTION: sqlite
+      DB_DATABASE: ":memory:"
+      BROADCAST_DRIVER: log
+      CACHE_DRIVER: redis
+      FILESYSTEM_DISK: s3
+      QUEUE_CONNECTION: redis
+      SESSION_DRIVER: redis
+      MAIL_MAILER: smtp
+      MAIL_HOST: smtp.mailtrap.io
+      MAIL_PORT: 2525
+      MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+      MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+      MAIL_ENCRYPTION: tls
+      MAIL_FROM_ADDRESS: from@example.com
+      SCOUT_PREFIX: dev_posts
+      ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+      ALGOLIA_SECRET: ${{ secrets.ALGOLIA_SECRET }}
+      CAPTCHA_SITE_KEY: 1x00000000000000000000BB
+      CAPTCHA_SECRET_KEY: 1x0000000000000000000000000000000AA
+
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379/tcp
+        options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile CSS and JavaScript
+        run: |
+          npm install
+          npm run build
+
+      # Docs: https://github.com/shivammathur/setup-php
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          # https://laravel.com/docs/9.x/deployment#server-requirements
+          extensions: ctype, curl, dom, fileinfo, filter, hash, mbstring, openssl, pcre, pdo, session, tokenizer, xml, redis
+          coverage: xdebug
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install composer dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Prepare the application
+        run: |
+          php -r "file_exists('.env') || copy('.env.example', '.env');"
+          php artisan key:generate
+
+      - name: Run the static analysis
+        run: vendor/bin/phpstan analyse --memory-limit=2G
+
+      - name: Test with pest
+        run: vendor/bin/pest --coverage-clover ./coverage.xml
+        env:
+          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
+
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          files: ./coverage.xml
+          verbose: true

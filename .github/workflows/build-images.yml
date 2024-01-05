@@ -15,6 +15,9 @@ jobs:
     name: Get approval
     runs-on: ubuntu-latest
     environment: production
+    steps:
+      - name: Just get approval
+        run: echo "Just get approval"
 
   build-laravel-octane-image:
     needs: get-approval

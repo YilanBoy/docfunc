@@ -24,6 +24,9 @@ jobs:
     name: Start to build laravel octane image and publish to docker hub
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Build laravel octane image and publish to docker hub
         uses: ./.github/actions/publish-to-docker-hub
         with:
@@ -39,6 +42,9 @@ jobs:
     name: Start to build laravel horizon image and publish to docker hub
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Build and push laravel horizon
         uses: ./.github/actions/publish-to-docker-hub
         with:
@@ -54,6 +60,9 @@ jobs:
     name: Start to build laravel scheduler image and publish to docker hub
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Build and push laravel horizon
         uses: ./.github/actions/publish-to-docker-hub
         with:
@@ -69,6 +78,9 @@ jobs:
     name: Start to build aws mysql client image and publish to docker hub
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Build and push laravel horizon
         uses: ./.github/actions/publish-to-docker-hub
         with:

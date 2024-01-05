@@ -20,18 +20,16 @@ test('visitors cannot access the edit pages of other people\'s post', function (
 test('authors can access the edit page of their post', function () {
     $post = Post::factory()->create();
 
-    $this->actingAs($post->user);
+    loginAsUser($post->user);
 
     get(route('posts.edit', ['post' => $post->id]))
         ->assertSuccessful();
 });
 
 test('users cannot access the edit page of other people\'s post', function () {
-    $user = User::factory()->create();
-
     $post = Post::factory()->create();
 
-    $this->actingAs($user);
+    loginAsUser();
 
     get(route('posts.edit', ['post' => $post->id]))
         ->assertForbidden();
@@ -40,7 +38,7 @@ test('users cannot access the edit page of other people\'s post', function () {
 test('authors can update their posts', function ($categoryId) {
     $post = Post::factory()->create();
 
-    $this->actingAs($post->user);
+    loginAsUser($post->user);
 
     $newTitle = str()->random(4);
     $newBody = str()->random(500);
@@ -85,7 +83,7 @@ test('users can update the private status of their posts in user info page', fun
         'created_at' => now(),
     ]);
 
-    $this->actingAs($post->user);
+    loginAsUser($post->user);
 
     livewire(PostsGroupByYear::class, [
         'year' => now()->year,

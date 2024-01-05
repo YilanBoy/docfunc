@@ -10,21 +10,17 @@ class PostComment extends Notification
 {
     use Queueable;
 
-    protected $comment;
-
-    public function __construct(Comment $comment)
+    public function __construct(protected Comment $comment)
     {
-        // 注入留言實體，方便 toDatabase 方法中的使用
-        $this->comment = $comment;
     }
 
-    public function via($notifiable)
+    public function via(object $notifiable): array
     {
         // 開啟通知的頻道
         return ['database'];
     }
 
-    public function toDatabase($notifiable)
+    public function toDatabase(object $notifiable): array
     {
         $post = $this->comment->post;
         $link = $post->link_with_slug.'#comments';
@@ -37,18 +33,4 @@ class PostComment extends Notification
             'post_title' => $post->title,
         ];
     }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    // public function toMail($notifiable)
-    // {
-    //     return (new MailMessage)
-    //         ->line('The introduction to the notification.')
-    //         ->action('Notification Action', url('/'))
-    //         ->line('Thank you for using our application!');
-    // }
 }

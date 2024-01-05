@@ -139,7 +139,18 @@ class PostForm extends Form
         $this->setBody();
         $this->setExcerpt();
 
-        $post = Post::query()->create($this->all());
+        $post = Post::query()->create(
+            $this->only([
+                'title',
+                'body',
+                'category_id',
+                'excerpt',
+                'slug',
+                'user_id',
+                'preview_url',
+                'is_private',
+            ])
+        );
 
         // create new tags relation with post in database
         $post->tags()->attach(
@@ -155,7 +166,18 @@ class PostForm extends Form
         $this->setBody();
         $this->setExcerpt();
 
-        $post->update($this->all());
+        $post->update(
+            $this->only([
+                'title',
+                'body',
+                'category_id',
+                'excerpt',
+                'slug',
+                'user_id',
+                'preview_url',
+                'is_private',
+            ])
+        );
 
         // update tags relation with post in database
         $post->tags()->sync(

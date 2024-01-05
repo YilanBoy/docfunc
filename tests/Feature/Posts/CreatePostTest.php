@@ -26,7 +26,7 @@ test('authenticated user can visit create post page', function () {
 });
 
 test('authenticated user can create post', function ($categoryId) {
-    $this->actingAs(User::factory()->create());
+    $user = loginAsUser();
 
     $title = str()->random(4);
     $body = str()->random(500);
@@ -59,16 +59,17 @@ test('authenticated user can create post', function ($categoryId) {
 
     expect($post)
         ->title->toBe($title)
-        ->slug->toBe($contentService->makeSlug($title))
-        ->category_id->toBe($categoryId)
-        ->excerpt->toBe($contentService->makeExcerpt($body))
         ->body->toBe($body)
+        ->category_id->toBe($categoryId)
+        ->user_id->toBe($user->id)
+        ->slug->toBe($contentService->makeSlug($title))
+        ->excerpt->toBe($contentService->makeExcerpt($body))
         ->is_private->toBe($privateStatus)
         ->and($post->tags->pluck('id')->toArray())->toBe($tagIdsArray);
 })->with('defaultCategoryIds');
 
 test('title at least 4 characters', function () {
-    $this->actingAs(User::factory()->create());
+    loginAsUser();
 
     livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
@@ -81,7 +82,7 @@ test('title at least 4 characters', function () {
 });
 
 test('title at most 50 characters', function () {
-    $this->actingAs(User::factory()->create());
+    loginAsUser();
 
     livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
@@ -94,7 +95,7 @@ test('title at most 50 characters', function () {
 });
 
 test('body at least 500 characters', function () {
-    $this->actingAs(User::factory()->create());
+    loginAsUser();
 
     livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
@@ -107,7 +108,7 @@ test('body at least 500 characters', function () {
 });
 
 test('body at most 20000 characters', function () {
-    $this->actingAs(User::factory()->create());
+    loginAsUser();
 
     livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
@@ -120,7 +121,7 @@ test('body at most 20000 characters', function () {
 });
 
 it('can check image type', function () {
-    $this->actingAs(User::factory()->create());
+    loginAsUser();
 
     $file = UploadedFile::fake()->create('document.pdf', 512);
 
@@ -132,7 +133,7 @@ it('can check image type', function () {
 });
 
 it('can check image size', function () {
-    $this->actingAs(User::factory()->create());
+    loginAsUser();
 
     $file = UploadedFile::fake()->image('image.jpg')->size(1025);
 
@@ -144,7 +145,7 @@ it('can check image size', function () {
 });
 
 it('can upload image', function () {
-    $this->actingAs(User::factory()->create());
+    loginAsUser();
 
     Storage::fake();
 
@@ -166,7 +167,7 @@ it('can upload image', function () {
 });
 
 it('can\'t upload non image', function () {
-    $this->actingAs(User::factory()->create());
+    loginAsUser();
 
     Storage::fake();
 
@@ -186,7 +187,7 @@ it('can\'t upload non image', function () {
 });
 
 it('can get auto save key property', function () {
-    $user = User::factory()->create();
+    $user = loginAsUser();
 
     $this->actingAs($user);
 
@@ -196,7 +197,7 @@ it('can get auto save key property', function () {
 });
 
 it('can auto save the post to cache', function () {
-    $user = User::factory()->create();
+    $user = loginAsUser();
 
     $autoSaveKey = 'auto_save_user_'.$user->id.'_create_post';
 

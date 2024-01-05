@@ -38,7 +38,7 @@ by [Algolia](https://www.algolia.com/).
 Clone the repository to your local machine:
 
 ```sh
-git clone https://github.com/YilanBoy/blog.git
+git clone https://github.com/YilanBoy/docfunc.git
 ```
 
 Change the current working directory to the repository:

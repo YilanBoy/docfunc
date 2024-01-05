@@ -39,11 +39,10 @@ test('guest cannot delete others\' post in desktop show post page', function () 
 });
 
 test('user cannot delete others\' post in desktop show post page', function () {
-    $user = User::factory()->create();
-
     $post = Post::factory()->create();
 
-    $this->actingAs($user);
+    // Login as another user
+    loginAsUser();
 
     livewire(ShowPostSidemenu::class, [
         'postId' => $post->id,
@@ -59,7 +58,7 @@ test('user cannot delete others\' post in desktop show post page', function () {
 test('author can soft delete own post in mobile show post page', function () {
     $post = Post::factory()->create();
 
-    $this->actingAs(User::find($post->user_id));
+    loginAsUser(User::find($post->user_id));
 
     livewire(ShowPostDropdowns::class, ['postId' => $post->id])
         ->call('deletePost', $post->id)
@@ -79,11 +78,9 @@ test('guest cannot delete others\' post in mobile show post page', function () {
 });
 
 test('user cannot delete others\' post in mobile show post page', function () {
-    $user = User::factory()->create();
-
     $post = Post::factory()->create();
 
-    $this->actingAs($user);
+    loginAsUser();
 
     livewire(ShowPostDropdowns::class, ['postId' => $post->id])
         ->call('deletePost', $post->id)
@@ -95,7 +92,7 @@ test('user cannot delete others\' post in mobile show post page', function () {
 test('author can soft delete own post in user information post card', function () {
     $post = Post::factory()->create();
 
-    $this->actingAs(User::find($post->user_id));
+    loginAsUser(User::find($post->user_id));
 
     livewire(PostsGroupByYear::class, [
         'posts' => [$post],
@@ -123,11 +120,9 @@ test('guest cannot delete others\' post in user information post card', function
 });
 
 test('user cannot delete others\' post in user information post card', function () {
-    $user = User::factory()->create();
-
     $post = Post::factory()->create();
 
-    $this->actingAs($user);
+    loginAsUser();
 
     livewire(PostsGroupByYear::class, [
         'posts' => [$post],
@@ -141,9 +136,7 @@ test('user cannot delete others\' post in user information post card', function 
 });
 
 test('author can restore deleted post', function () {
-    $user = User::factory()->create();
-
-    $this->actingAs($user);
+    $user = loginAsUser();
 
     $post = Post::factory()->create([
         'title' => 'This is a test post title',
@@ -166,9 +159,7 @@ test('author can restore deleted post', function () {
 });
 
 test('users cannot restore other users\' post', function () {
-    $user = User::factory()->create();
-
-    $this->actingAs($user);
+    $user = loginAsUser();
 
     $author = User::factory()->create();
 

@@ -14,7 +14,7 @@ test('user can access the home page ', function () {
 });
 
 test('posts index can be rendered', function () {
-    $user = login();
+    $user = loginAsUser();
 
     Post::factory(10)->create([
         'category_id' => rand(1, 3),
@@ -101,7 +101,7 @@ test('order query string filters correctly', function (string $queryString, stri
 ]);
 
 test('user can view a post', function () {
-    $user = login();
+    $user = loginAsUser();
 
     $post = Post::factory()->make();
     $post->user_id = $user->id;

@@ -53,13 +53,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Compile CSS and JavaScript
+        run: |
+          npm install
+          npm run build
+
       # Docs: https://github.com/shivammathur/setup-php
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          # https://laravel.com/docs/10.x/deployment#server-requirements
-          extensions: redis
+          # https://laravel.com/docs/9.x/deployment#server-requirements
+          extensions: ctype, curl, dom, fileinfo, filter, hash, mbstring, openssl, pcre, pdo, session, tokenizer, xml, redis
           coverage: xdebug
 
       - name: Get Composer Cache Directory

@@ -6,7 +6,8 @@
 </p>
 
 <p align="center">
-  <img src="https://github.com/YilanBoy/docfunc/actions/workflows/tests-and-build-images.yml/badge.svg" alt="Test and build images">
+  <img src="https://github.com/YilanBoy/docfunc/actions/workflows/tests.yaml/badge.svg" alt="Tests">
+  <img src="https://github.com/YilanBoy/docfunc/actions/workflows/build-images.yaml/badge.svg" alt="Build images">
   <a href="https://codecov.io/gh/YilanBoy/docfunc" > 
     <img src="https://codecov.io/gh/YilanBoy/docfunc/graph/badge.svg?token=K2V2ANX2LW" alt="Codecov"/> 
   </a>

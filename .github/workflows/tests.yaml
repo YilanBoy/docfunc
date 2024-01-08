@@ -53,7 +53,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Compile CSS and JavaScript
+      - name: Generate Vite manifest
         run: |
           npm install
           npm run build
@@ -64,7 +64,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           # https://laravel.com/docs/9.x/deployment#server-requirements
-          extensions: ctype, curl, dom, fileinfo, filter, hash, mbstring, openssl, pcre, pdo, session, tokenizer, xml, redis
+          extensions: redis
           coverage: xdebug
 
       - name: Get Composer Cache Directory

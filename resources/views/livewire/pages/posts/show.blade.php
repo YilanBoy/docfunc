@@ -137,11 +137,11 @@
               {{-- post thumbnail --}}
               @if (!empty($post->preview_url))
                 <div
-                  class="mt-4"
+                  class="mt-4 -mx-5"
                   id="post-thumbnail"
                 >
                   <img
-                    class="w-full rounded-md"
+                    class="w-full"
                     src="{{ $post->preview_url }}"
                     alt="{{ $post->title }}"
                   >

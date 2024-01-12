@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       name:
-        description: "Who to greet"
-        default: "Allen"
+        description: Who to greet
+        default: Allen
   push:
     tags:
-      - 'v*.*.*'
+      - v*.*.*
     branches:
       - main
 

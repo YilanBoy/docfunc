@@ -12,7 +12,7 @@
     <div class="flex flex-col items-center justify-start px-4">
       {{-- user information, posts and comments --}}
       <div
-        class="relative w-full max-w-sm md:max-w-2xl"
+        class="relative w-full max-w-sm md:max-w-[750px]"
         {{-- tab can only be 'information', 'posts', 'comments' --}}
         x-data="{
             tabSelected: $persist('information'),

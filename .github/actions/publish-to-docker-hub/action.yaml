@@ -1,4 +1,6 @@
-name: "Login to Docker Hub"
+name: Login to Docker Hub
+
+description: A GitHub Action to login to Docker Hub
 
 inputs:
   registry_username:

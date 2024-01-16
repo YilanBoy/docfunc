@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -9,6 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::table('categories', function ($table) {
+            $table->text('icon')->change();
+        });
+
         DB::table('categories')
             ->where('name', '日常分享')
             ->update([
@@ -48,6 +54,5 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::table('categories')->truncate();
     }
 };

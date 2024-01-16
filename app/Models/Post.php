@@ -148,7 +148,7 @@ class Post extends Model implements Feedable
             ->summary($this->excerpt)
             ->updated($this->updated_at)
             ->link($this->link_with_slug)
-            ->authorName($this->user->name);
+            ->authorName(config('app.name'));
     }
 
     public static function getFeedItems(): Collection

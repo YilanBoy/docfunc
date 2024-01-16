@@ -56,10 +56,11 @@
 
     <hr class="my-4 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
 
-    <div class="grid grid-cols-12 gap-1">
+    <div class="grid grid-cols-12 gap-2">
       @foreach ($categories as $category)
         <div class="col-span-12">
-          {{ $category->name }}
+          <i class="{{ $category->icon }}"></i>
+          <span class="ml-2">{{ $category->name }}</span>
         </div>
         <div class="col-span-11 flex items-center">
 

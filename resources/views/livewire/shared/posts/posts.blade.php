@@ -52,11 +52,14 @@
 
   {{-- 文章列表 --}}
   @forelse($posts as $post)
-    <x-card class="group relative flex cursor-pointer flex-col justify-between">
+    <x-card class="group relative flex cursor-pointer flex-col justify-between overflow-hidden">
+      <div class="absolute -bottom-16 -right-3 rotate-12">
+        <i class="{{ $post->category->icon }} text-[14rem] text-green-100 dark:text-lividus-800"></i>
+      </div>
 
       {{-- 文章 --}}
       <a
-        class="absolute inset-0 block"
+        class="absolute inset-0 z-20 block"
         href="{{ $post->link_with_slug }}"
         title="{{ $post->title }}"
         wire:navigate
@@ -68,7 +71,7 @@
       </h1>
 
       {{-- 文章大綱 --}}
-      <div class="mt-2 text-base text-gray-500">
+      <div class="z-10 mt-2 text-base text-gray-500">
         {{ $post->excerpt }}
       </div>
 

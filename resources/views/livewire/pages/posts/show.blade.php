@@ -77,8 +77,10 @@
               {{-- post information --}}
               <div class="mt-4 flex items-center space-x-2 text-base text-neutral-400">
                 {{-- classfication --}}
-                <div>
-                  <i class="{{ $post->category->icon }}"></i><span class="ml-2">{{ $post->category->name }}</span>
+                <div class="flex items-center">
+                  <div class="size-4">{!! $post->category->icon !!}</div>
+
+                  <span class="ml-2">{{ $post->category->name }}</span>
                 </div>
 
                 <div>&bull;</div>
@@ -137,7 +139,7 @@
               {{-- post thumbnail --}}
               @if (!empty($post->preview_url))
                 <div
-                  class="mt-4 -mx-5"
+                  class="-mx-5 mt-4"
                   id="post-thumbnail"
                 >
                   <img

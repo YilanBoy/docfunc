@@ -53,11 +53,11 @@
   {{-- 文章列表 --}}
   @forelse($posts as $post)
     <x-card class="group relative flex cursor-pointer flex-col justify-between overflow-hidden">
-      <div class="absolute -bottom-16 -right-3 rotate-12">
-        <i class="{{ $post->category->icon }} text-[14rem] text-green-100 dark:text-lividus-800"></i>
+      <div class="absolute -bottom-16 -right-3 size-56 rotate-12 text-green-200 dark:text-lividus-800">
+        {!! $post->category->icon !!}
       </div>
 
-      {{-- 文章 --}}
+      {{-- 文章連結 --}}
       <a
         class="absolute inset-0 z-20 block"
         href="{{ $post->link_with_slug }}"
@@ -66,7 +66,7 @@
       ></a>
 
       {{-- 文章標題 --}}
-      <h1 class="group-gradient-underline-grow mt-2 w-fit text-xl md:mt-0 dark:text-gray-50">
+      <h1 class="group-gradient-underline-grow z-10 mt-2 w-fit text-xl md:mt-0 dark:text-gray-50">
         {{ $post->title }}
       </h1>
 
@@ -77,7 +77,7 @@
 
       {{-- 文章標籤 --}}
       @if ($post->tags_count > 0)
-        <div class="z-10 mt-2 flex w-fit flex-wrap items-center text-base">
+        <div class="z-30 mt-2 flex w-fit flex-wrap items-center text-base">
           <span class="mr-1 text-green-300 dark:text-lividus-600"><i class="bi bi-tags-fill"></i></span>
 
           @foreach ($post->tags as $tag)
@@ -91,8 +91,10 @@
       {{-- 文章相關資訊 --}}
       <div class="mt-2 hidden space-x-2 text-base text-neutral-500 md:flex md:items-center">
         {{-- 文章分類資訊 --}}
-        <div>
-          <i class="{{ $post->category->icon }}"></i><span class="ml-2">{{ $post->category->name }}</span>
+        <div class="flex items-center">
+          <div class="size-4">{!! $post->category->icon !!}</div>
+
+          <span class="ml-2">{{ $post->category->name }}</span>
         </div>
 
         <div>&bull;</div>

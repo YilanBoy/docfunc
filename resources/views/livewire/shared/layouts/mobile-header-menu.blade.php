@@ -1,5 +1,5 @@
 <div
-  class="bg-gray-50 shadow-lg lg:hidden dark:bg-gray-800 dark:shadow-none"
+  class="bg-gray-50 shadow-lg dark:bg-gray-800 dark:shadow-none lg:hidden"
   x-data="{ menuIsOpen: false }"
 >
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -38,7 +38,7 @@
           src="{{ asset('images/icon/icon.png') }}"
           alt="logo"
         >
-        <span class="ml-3 hidden font-mono text-xl font-bold md:block dark:text-gray-50">
+        <span class="ml-3 hidden font-mono text-xl font-bold dark:text-gray-50 md:block">
           {{ config('app.name') }}
         </span>
       </div>
@@ -226,13 +226,14 @@
           href="{{ $category->link_with_name }}"
           @if ($inCategoryPage) aria-current="page" @endif
           @class([
-              'block px-3 py-2 rounded-md font-medium',
+              'block px-3 py-2 rounded-md font-medium flex items-center',
               'bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-50' => $inCategoryPage,
               'text-gray-500 dark:text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-50' => !$inCategoryPage,
           ])
           wire:navigate
         >
-          <i class="{{ $category->icon }}"></i><span class="ml-2">{{ $category->name }}</span>
+          <div class="size-4">{!! $category->icon !!}</div>
+          <span class="ml-2">{{ $category->name }}</span>
         </a>
       @endforeach
     </div>

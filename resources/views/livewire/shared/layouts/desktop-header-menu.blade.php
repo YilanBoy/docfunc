@@ -21,7 +21,6 @@
     <x-floating-underline-button
       :link="route('posts.index')"
       :selected="request()->url() === route('posts.index')"
-      :icon-class="'bi bi-house-fill'"
     >
       全部文章
     </x-floating-underline-button>
@@ -30,7 +29,7 @@
       <x-floating-underline-button
         :link="$category->link_with_name"
         :selected="request()->url() === $category->link_with_name"
-        :icon-class="$category->icon"
+        :icon="$category->icon"
       >
         {{ $category->name }}
       </x-floating-underline-button>

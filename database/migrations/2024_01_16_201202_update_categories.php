@@ -54,5 +54,20 @@ return new class extends Migration
      */
     public function down(): void
     {
+        DB::table('categories')
+            ->where('name', '日常分享')
+            ->update(['icon' => 'bi bi-chat-dots-fill']);
+
+        DB::table('categories')
+            ->where('name', '程式技術')
+            ->update(['icon' => 'bi bi-terminal-fill']);
+
+        DB::table('categories')
+            ->where('name', '電玩遊戲')
+            ->update(['icon' => 'bi bi-dpad-fill']);
+
+        Schema::table('categories', function ($table) {
+            $table->string('icon')->change();
+        });
     }
 };

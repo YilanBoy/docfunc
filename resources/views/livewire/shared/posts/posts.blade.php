@@ -59,7 +59,7 @@
 
       {{-- 文章連結 --}}
       <a
-        class="absolute inset-0 z-10 block"
+        class="absolute inset-0 z-20 block"
         href="{{ $post->link_with_slug }}"
         title="{{ $post->title }}"
         wire:navigate

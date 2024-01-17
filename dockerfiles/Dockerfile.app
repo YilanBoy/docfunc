@@ -1,5 +1,3 @@
-ARG PHP_VERSION=8.3
-
 ###########################################
 # Laravel Dependencies
 ###########################################
@@ -37,37 +35,37 @@ RUN npm install \
 # Laravel Octane
 ###########################################
 
-FROM php:${PHP_VERSION}-alpine3.18
+FROM ubuntu:22.04
 
 LABEL maintainer="Allen"
 
 ENV ROOT=/var/www/html
+ENV TZ=Asia/Taipei
 WORKDIR $ROOT
 
-# set the default shell to /bin/ash with some useful options
+# set the default shell to /bin/bash with some useful options
 # -e: exit immediately if a command exits with a non-zero status
-# -c: execute the following command when the shell starts
-SHELL ["/bin/ash", "-e", "-c"]
+# -x: print each command before executing it
+# -o pipefail: fail if any command in a pipeline fails
+# -u: treat unset variables as an error when substituting
+SHELL ["/bin/bash", "-exou", "pipefail", "-c"]
 
 # install necessary package to install php extension
-RUN apk update \
-    && apk upgrade \
-    && apk add autoconf gcc g++ make
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install software-properties-common -y
 
-# install php extension
-RUN docker-php-ext-install pdo_mysql \
-    && docker-php-ext-install opcache \
-    && docker-php-ext-install pcntl \
-    && pecl install redis \
-    && pecl install swoole \
-    && docker-php-ext-enable redis swoole
+# install php and php extension
+RUN add-apt-repository ppa:ondrej/php -y \
+    && apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install php8.3 php8.3-{cli,common,curl,xml,mbstring,redis,swoole} -y
 
 ARG WWWUSER=1000
 ARG WWWGROUP=1000
 
 # create group and user "octane"
-RUN addgroup -g $WWWGROUP -S octane || true \
-    && adduser -D -h /home/octane -s /bin/ash -G octane -u $WWWUSER octane
+RUN groupadd --force -g $WWWGROUP octane \
+    && useradd -ms /bin/bash --no-log-init --no-user-group -g $WWWGROUP -u $WWWUSER octane
 
 # copy php config files into container
 COPY deployment/php/php.ini /usr/local/etc/php/conf.d/octane.ini

@@ -60,6 +60,8 @@ class EditCommentModal extends Component
      */
     public function update(Comment $comment): void
     {
+        $this->validate();
+
         $this->authorize('update', $comment);
 
         $comment->update([

@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Services\ContentService;
 use Generator;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Seeder;
 
 class PostSeeder extends Seeder
@@ -13,14 +15,24 @@ class PostSeeder extends Seeder
 
     const CHUNK = 100;
 
+    /**
+     * @throws BindingResolutionException
+     */
     protected function postGenerator(int $userCount): Generator
     {
+        $contentService = app()->make(ContentService::class);
+
         for ($i = 1; $i <= self::POST_COUNT; $i++) {
+            $title = fake()->text(30);
+            $body = fake()->paragraph(50);
+            $excerpt = $contentService->makeExcerpt($body);
+            $slug = $contentService->makeSlug($title);
+
             $data[] = [
-                'title' => fake()->text(30),
-                'body' => fake()->paragraph(10),
-                'slug' => fake()->word(),
-                'excerpt' => fake()->sentence,
+                'title' => $title,
+                'body' => $body,
+                'slug' => $slug,
+                'excerpt' => $excerpt,
                 'category_id' => fake()->numberBetween(1, 3),
                 'comment_counts' => 0,
                 'user_id' => rand(1, $userCount),

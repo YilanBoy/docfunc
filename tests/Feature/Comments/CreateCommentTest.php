@@ -60,6 +60,41 @@ test('logged-in users can leave a comment', function () {
         ->assertSee($body);
 });
 
+test('the message must be at least 5 characters long', function () {
+    $post = Post::factory()->create();
+
+    $body = str()->random(4);
+
+    livewire(CreateCommentModal::class, ['postId' => $post->id])
+        ->set('body', $body)
+        ->set('captchaToken', 'fake-captcha-response')
+        ->call('store')
+        ->assertHasErrors(['body' => 'min:5']);
+});
+
+test('the message must be less than 2000 characters', function () {
+    $post = Post::factory()->create();
+
+    $body = str()->random(2001);
+
+    livewire(CreateCommentModal::class, ['postId' => $post->id])
+        ->set('body', $body)
+        ->set('captchaToken', 'fake-captcha-response')
+        ->call('store')
+        ->assertHasErrors(['body' => 'max:2000']);
+});
+
+test('the message must have the captcha token', function () {
+    $post = Post::factory()->create();
+
+    $body = fake()->words(5, true);
+
+    livewire(CreateCommentModal::class, ['postId' => $post->id])
+        ->set('body', $body)
+        ->call('store')
+        ->assertHasErrors();
+});
+
 it('can see the comment preview', function () {
     $this->actingAs(User::factory()->create());
 

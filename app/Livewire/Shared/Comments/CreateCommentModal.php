@@ -22,8 +22,6 @@ class CreateCommentModal extends Component
 {
     use MarkdownConverter;
 
-    const FIRST_GROUP_ID = 0;
-
     #[Locked]
     public int $postId;
 
@@ -36,7 +34,7 @@ class CreateCommentModal extends Component
     protected function rules(): array
     {
         $rules = (new CommentRequest())->rules();
-        $rules['captchaToken'] = [new Captcha()];
+        $rules['captchaToken'] = ['required', new Captcha()];
 
         return $rules;
     }

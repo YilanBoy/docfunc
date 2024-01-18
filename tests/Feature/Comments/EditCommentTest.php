@@ -10,10 +10,8 @@ use function Pest\Livewire\livewire;
 test('editing modal can load the data of the comment', function () {
     $comment = Comment::factory()->create();
 
-    $offset = 0;
-
     livewire(EditCommentModal::class)
-        ->call('setEditComment', $comment->id, $offset)
+        ->call('setEditComment', $comment->id)
         ->assertSet('commentId', $comment->id)
         ->assertSet('body', $comment->body)
         ->assertDispatched('edit-comment-was-set');
@@ -24,16 +22,14 @@ test('logged-in users can update their comments', function () {
 
     $comment = Comment::factory()->create(['body' => $oldBody]);
 
-    $offset = 0;
-
     $this->assertDatabaseHas('comments', ['body' => $oldBody]);
 
-    Livewire::actingAs(User::find($comment->user_id));
+    loginAsUser($comment->user_id);
 
     $body = 'new comment';
 
     livewire(EditCommentModal::class)
-        ->call('setEditComment', $comment->id, $offset)
+        ->call('setEditComment', $comment->id)
         ->set('body', $body)
         ->call('update', $comment->id)
         ->assertDispatched('close-edit-comment-modal')
@@ -42,12 +38,52 @@ test('logged-in users can update their comments', function () {
     $this->assertDatabaseHas('comments', ['body' => $body]);
 });
 
+test('the updated message must be at least 5 characters long', function () {
+    $oldBody = 'old comment';
+
+    $comment = Comment::factory()->create(['body' => $oldBody]);
+
+    $this->assertDatabaseHas('comments', ['body' => $oldBody]);
+
+    loginAsUser($comment->user_id);
+
+    $body = str()->random(4);
+
+    livewire(EditCommentModal::class)
+        ->call('setEditComment', $comment->id)
+        ->set('body', $body)
+        ->call('update', $comment->id)
+        ->assertHasErrors(['body' => 'min:5']);
+
+    $this->assertDatabaseHas('comments', ['body' => $oldBody]);
+});
+
+test('the updated message must be less than 2000 characters', function () {
+    $oldBody = 'old comment';
+
+    $comment = Comment::factory()->create(['body' => $oldBody]);
+
+    $this->assertDatabaseHas('comments', ['body' => $oldBody]);
+
+    loginAsUser($comment->user_id);
+
+    $body = str()->random(2001);
+
+    livewire(EditCommentModal::class)
+        ->call('setEditComment', $comment->id)
+        ->set('body', $body)
+        ->call('update', $comment->id)
+        ->assertHasErrors(['body' => 'max:2000']);
+
+    $this->assertDatabaseHas('comments', ['body' => $oldBody]);
+});
+
 test('users can\'t update others\' comments', function () {
     $comment = Comment::factory()->create();
 
     $offset = 0;
 
-    Livewire::actingAs(User::factory()->create());
+    loginAsUser();
 
     $body = 'new comment';
 

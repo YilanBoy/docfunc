@@ -42,8 +42,12 @@ expect()->extend('toBePositive', function () {
 |
 */
 
-function loginAsUser(?User $user = null)
+function loginAsUser(null|User|int $user = null)
 {
+    if (is_int($user)) {
+        $user = User::find($user);
+    }
+
     if (is_null($user)) {
         $user = User::factory()->create();
     }

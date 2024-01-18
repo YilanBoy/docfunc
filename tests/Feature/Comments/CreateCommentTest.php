@@ -69,7 +69,8 @@ test('the message must be at least 5 characters long', function () {
         ->set('body', $body)
         ->set('captchaToken', 'fake-captcha-response')
         ->call('store')
-        ->assertHasErrors(['body' => 'min:5']);
+        ->assertHasErrors(['body' => 'min:5'])
+        ->assertSeeHtml('<p class="mt-1 text-sm text-red-400">留言內容至少 5 個字元</p>');
 });
 
 test('the message must be less than 2000 characters', function () {
@@ -81,7 +82,8 @@ test('the message must be less than 2000 characters', function () {
         ->set('body', $body)
         ->set('captchaToken', 'fake-captcha-response')
         ->call('store')
-        ->assertHasErrors(['body' => 'max:2000']);
+        ->assertHasErrors(['body' => 'max:2000'])
+        ->assertSeeHtml('<p class="mt-1 text-sm text-red-400">留言內容至多 2000 個字元</p>');
 });
 
 test('the message must have the captcha token', function () {
@@ -92,7 +94,8 @@ test('the message must have the captcha token', function () {
     livewire(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', $body)
         ->call('store')
-        ->assertHasErrors();
+        ->assertHasErrors()
+        ->assertSeeHtml('<p class="mt-1 text-sm text-red-400">未完成驗證</p>');
 });
 
 it('can see the comment preview', function () {

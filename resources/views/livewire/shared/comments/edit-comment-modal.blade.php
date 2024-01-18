@@ -25,7 +25,7 @@
 
     {{--  modal  --}}
     <div
-      class="max-h-[36rem] transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all sm:w-full sm:max-w-2xl dark:bg-gray-800"
+      class="max-h-[36rem] transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all dark:bg-gray-800 sm:w-full sm:max-w-2xl"
       x-show="isOpen"
       x-transition.origin.bottom.duration.300ms
     >
@@ -78,7 +78,7 @@
               ></textarea>
 
               @error('body')
-                <p class="text-red mt-1 text-xs">{{ $message }}</p>
+                <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
               @enderror
             </div>
           @else

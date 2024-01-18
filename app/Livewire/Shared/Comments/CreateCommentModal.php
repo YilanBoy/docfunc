@@ -41,7 +41,10 @@ class CreateCommentModal extends Component
 
     protected function messages(): array
     {
-        return (new CommentRequest())->messages();
+        $messages = (new CommentRequest())->messages();
+        $messages['captchaToken.required'] = '未完成驗證';
+
+        return $messages;
     }
 
     /**

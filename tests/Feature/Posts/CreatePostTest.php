@@ -11,6 +11,16 @@ use Illuminate\Http\UploadedFile;
 use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
 
+beforeEach(function () {
+    // Because livewire will use the 'tmp-for-tests' disk in testing
+    // We need to configure the disk driver in testing
+    config()->set('filesystems.disks.tmp-for-tests', [
+        'driver' => 'local',
+        'root' => storage_path('app'),
+    ]);
+    config()->set('filesystems.default', 'tmp-for-tests');
+});
+
 test('guest cannot visit create post page', function () {
     get(route('posts.create'))
         ->assertStatus(302)

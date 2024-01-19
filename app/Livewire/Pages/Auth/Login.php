@@ -27,7 +27,7 @@ class Login extends Component
         return [
             'email' => 'required|string|email',
             'password' => 'required|string',
-            'captchaToken' => [new Captcha()],
+            'captchaToken' => ['required', new Captcha()],
         ];
     }
 
@@ -81,7 +81,7 @@ class Login extends Component
     /**
      * Handle an incoming authentication request.
      */
-    public function store()
+    public function store(): void
     {
         $this->validate();
 

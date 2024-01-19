@@ -31,24 +31,24 @@ class Register extends Component
     protected function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'regex:/^[A-Za-z0-9\-\_]+$/u', 'between:3,25', 'unique:users'],
+            'name' => ['required', 'string', 'regex:/^[A-Za-z0-9\-\_\s]+$/u', 'between:3,25', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Password::min(8)->letters()->mixedCase()->numbers()],
-            'captchaToken' => [new Captcha()],
+            'captchaToken' => ['required', new Captcha()],
         ];
     }
 
     /**
      * Handle an incoming registration request.
      */
-    public function store()
+    public function store(): void
     {
         abort_if(! SettingService::isRegisterAllowed(), 503);
 
         $this->validate();
 
         $user = User::create([
-            'name' => $this->name,
+            'name' => trim($this->name),
             'email' => $this->email,
             'password' => $this->password,
         ]);

@@ -7,3 +7,7 @@ arch('Not debugging statements are left in our code.')
 arch('All controllers should be suffixed with `Controller`.')
     ->expect('App\Http\Controllers')
     ->toHaveSuffix('Controller');
+
+arch('No env function used in app folder')
+    ->expect('env')
+    ->not->toBeUsed();

@@ -141,8 +141,15 @@ function init(): void {
     let elems: NodeListOf<HTMLButtonElement> =
         document.querySelectorAll('[data-sharer]');
 
+    let clipboardElems: NodeListOf<HTMLButtonElement> =
+        document.querySelectorAll('[data-clipboard]');
+
     for (let i = 0, l = elems.length; i < l; i++) {
         elems[i].addEventListener('click', addShareFeature);
+    }
+
+    for (let i = 0, l = clipboardElems.length; i < l; i++) {
+        clipboardElems[i].addEventListener('click', copyToClipboard);
     }
 }
 
@@ -154,6 +161,21 @@ function addShareFeature(event: Event): void {
         let sharer = new Sharer(target);
 
         sharer.share();
+    }
+}
+
+function copyToClipboard(event: Event): void {
+    let target = event.currentTarget;
+
+    if (target instanceof HTMLButtonElement) {
+        let text = target.getAttribute('data-clipboard');
+
+        if (text) {
+            navigator.clipboard.writeText(text).then(
+                () => console.log('copy success'),
+                () => console.log('copy fail'),
+            );
+        }
     }
 }
 

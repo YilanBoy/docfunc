@@ -34,9 +34,22 @@
     type="button"
   >
     <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
-      <i class="bi bi-twitter"></i>
+      <i class="bi bi-twitter-x"></i>
     </span>
   </button>
+
+  <!-- Copy link button -->
+  <x-tooltip :tooltip-position="'right'">
+    <button
+      class="group flex h-14 w-14 items-center justify-center text-gray-500 dark:text-gray-400"
+      data-clipboard="{{ request()->fullUrl() }}"
+      type="button"
+    >
+      <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
+        <i class="bi bi-link-45deg"></i>
+      </span>
+    </button>
+  </x-tooltip>
 
   {{-- 編輯文章 --}}
   @if (auth()->id() === $authorId)

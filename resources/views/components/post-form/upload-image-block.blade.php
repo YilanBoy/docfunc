@@ -6,13 +6,48 @@
     'previewUrl' => null,
 ])
 
+@script
+  <script>
+    Alpine.data('uploadImageBlock', () => ({
+      isUploading: false,
+      progress: 0,
+
+      makeIsUploadingTrue() {
+        this.isUploading = true;
+      },
+
+      makeIsUploadingFalse() {
+        this.isUploading = false;
+      },
+
+      updateProgress(event) {
+        this.progress = event.detail.progress;
+      },
+
+      changeBlockStyleWhenDragEnter() {
+        this.$refs.uploadBlock.classList.remove('text-green-500', 'dark:text-indigo-400', 'border-green-500',
+          'dark:border-indigo-400')
+        this.$refs.uploadBlock.classList.add('text-green-600', 'dark:text-indigo-300', 'border-green-600',
+          'dark:border-indigo-300')
+      },
+
+      changeBlockStyleWhenDragLeaveAndDrop() {
+        this.$refs.uploadBlock.classList.add('text-green-500', 'dark:text-indigo-400', 'border-green-500',
+          'dark:border-indigo-400')
+        this.$refs.uploadBlock.classList.remove('text-green-600', 'dark:text-indigo-300', 'border-green-600',
+          'dark:border-indigo-300')
+      }
+    }));
+  </script>
+@endscript
+
 <div
   class="col-span-2 text-base"
-  x-data="{ isUploading: false, progress: 0 }"
-  x-on:livewire-upload-start="isUploading = true"
-  x-on:livewire-upload-finish="isUploading = false"
-  x-on:livewire-upload-error="isUploading = false"
-  x-on:livewire-upload-progress="progress = $event.detail.progress"
+  x-data="uploadImageBlock"
+  x-on:livewire-upload-start="makeIsUploadingTrue"
+  x-on:livewire-upload-finish="makeIsUploadingFalse"
+  x-on:livewire-upload-error="makeIsUploadingFalse"
+  x-on:livewire-upload-progress="updateProgress"
 >
   {{-- Upload Area --}}
   <div
@@ -24,18 +59,9 @@
       type="file"
       title=""
       wire:model.live="{{ $imageModel }}"
-      x-on:dragenter="
-        $refs.uploadBlock.classList.remove('text-green-500', 'dark:text-indigo-400', 'border-green-500', 'dark:border-indigo-400')
-        $refs.uploadBlock.classList.add('text-green-600', 'dark:text-indigo-300', 'border-green-600', 'dark:border-indigo-300')
-      "
-      x-on:dragleave="
-        $refs.uploadBlock.classList.add('text-green-500', 'dark:text-indigo-400', 'border-green-500', 'dark:border-indigo-400')
-        $refs.uploadBlock.classList.remove('text-green-600', 'dark:text-indigo-300', 'border-green-600', 'dark:border-indigo-300')
-      "
-      x-on:drop="
-        $refs.uploadBlock.classList.add('text-green-500', 'dark:text-indigo-400', 'border-green-500', 'dark:border-indigo-400')
-        $refs.uploadBlock.classList.remove('text-green-600', 'dark:text-indigo-300', 'border-green-600', 'dark:border-indigo-300')
-      "
+      x-on:dragenter="changeBlockStyleWhenDragEnter"
+      x-on:dragleave="changeBlockStyleWhenDragLeaveAndDrop"
+      x-on:drop="changeBlockStyleWhenDragLeaveAndDrop"
     >
 
     <div class="flex flex-col items-center justify-center space-y-2 text-center">

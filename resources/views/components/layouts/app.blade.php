@@ -31,26 +31,14 @@
   @vite('resources/css/app.css')
   @vite('resources/css/icon.css')
 
-  <x-js.alpine-js />
   <x-js.livewire />
   @vite('resources/js/app.js')
+  {{-- Set theme --}}
+  @vite('resources/ts/set-theme.ts')
 
   {{-- Cloudflare Turnstile --}}
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
   {{-- prettier-ignore-end --}}
-
-  {{-- Set theme --}}
-  <script>
-    if (
-      localStorage.mode === "light" ||
-      (!("mode" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: light)").matches)
-    ) {
-      document.documentElement.classList.remove("dark");
-    } else {
-      document.documentElement.classList.add("dark");
-    }
-  </script>
 </head>
 
 <body class="bg-dot overscroll-y-none bg-gray-200 font-sans text-lg text-gray-900 antialiased dark:bg-gray-900">

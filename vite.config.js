@@ -23,6 +23,7 @@ export default defineConfig({
                 'resources/ts/oembed/embed-twitter-oembed.ts',
                 'resources/ts/oembed/twitter-widgets.ts',
                 'resources/ts/progress-bar.ts',
+                'resources/ts/set-theme.ts',
                 // css
                 'node_modules/@yaireo/tagify/dist/tagify.css',
                 'resources/css/editor.css',

@@ -24,30 +24,37 @@
   @vite('resources/ts/oembed/twitter-widgets.ts')
 @endassets
 
-<x-layouts.layout-main>
-  <div
-    x-data
-    x-init="// init show page
-    hljs.highlightAll();
-    codeBlockCopyButton($refs.postBody);
-    processYoutubeOEmbeds();
-    processTwitterOEmbeds();
-    setTimeout(() => {
-        twttr.widgets?.load($refs.postBody);
-    }, 1000);
-    setupProgressBar($refs.section, $refs.progressBar);
-    setupScrollToTopButton($refs.scrollToTopBtn);
-    setupSharer();
+@script
+  <script>
+    Alpine.data('showPostPage', () => ({
+      init() {
+        hljs.highlightAll();
+        codeBlockCopyButton(this.$refs.postBody);
+        processYoutubeOEmbeds();
+        processTwitterOEmbeds();
+        setTimeout(() => {
+          twttr.widgets?.load(this.$refs.postBody);
+        }, 1000);
+        setupProgressBar(this.$refs.section, this.$refs.progressBar);
+        setupScrollToTopButton(this.$refs.scrollToTopBtn);
+        setupSharer();
 
-    // scroll to anchor
-    if (window.location.hash !== '') {
-        let target = document.querySelector(window.location.hash);
+        if (window.location.hash !== '') {
+          let target = document.querySelector(window.location.hash);
 
-        if (target instanceof Element) {
-            target.scrollIntoView({ behavior: 'smooth' });
+          if (target instanceof Element) {
+            target.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
         }
-    }"
-  >
+      }
+    }));
+  </script>
+@endscript
+
+<x-layouts.layout-main>
+  <div x-data="showPostPage">
     <div class="relative animate-fade-in">
       <x-scroll-to-top-button x-ref="scrollToTopBtn" />
 

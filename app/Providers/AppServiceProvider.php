@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Config;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 

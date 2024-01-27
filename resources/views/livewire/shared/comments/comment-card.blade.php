@@ -35,24 +35,24 @@
         @auth
           @if (auth()->id() === $userId)
             <button
-              class="hover:text-gray-500 dark:hover:text-gray-300"
+              class="flex items-center hover:text-gray-500 dark:hover:text-gray-300"
               type="button"
               wire:click="$dispatch('set-edit-comment', { comment: {{ $commentId }} })"
             >
-              <i class="bi bi-pencil-fill"></i>
-              <span class="ml-1">編輯</span>
+              <x-icon.pencil class="w-4" />
+              <span class="ml-2">編輯</span>
             </button>
           @endif
 
           @if (in_array(auth()->id(), [$userId, $postAuthorId]))
             <button
-              class="hover:text-gray-500 dark:hover:text-gray-300"
+              class="flex items-center hover:text-gray-500 dark:hover:text-gray-300"
               type="button"
               wire:confirm="你確定要刪除該留言？"
               wire:click="$parent.destroy({{ $commentId }})"
             >
-              <i class="bi bi-trash3-fill"></i>
-              <span class="ml-1">刪除</span>
+              <x-icon.trash class="w-4" />
+              <span class="ml-2">刪除</span>
             </button>
           @endif
         @endauth

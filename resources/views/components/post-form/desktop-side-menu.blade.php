@@ -21,7 +21,7 @@
         class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125"
         wire:loading.remove
       >
-        <i class="bi bi-save2-fill"></i>
+        <x-icon.save class="w-6" />
       </span>
 
       <span

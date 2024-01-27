@@ -1,11 +1,11 @@
 <x-layouts.layout-auth>
   <div class="fixed left-5 top-5">
     <a
-      class="block text-2xl text-gray-400 transition duration-150 ease-in hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-50"
+      class="flex items-center text-2xl text-gray-400 transition duration-150 ease-in hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-50"
       href="{{ route('login') }}"
       wire:navigate
     >
-      <i class="bi bi-arrow-left-circle-fill"></i>
+      <x-icon.arrow-left-circle class="w-6" />
       <span class="ml-2">返回登入</span>
     </a>
   </div>
@@ -13,8 +13,9 @@
   <div class="container mx-auto">
     <div class="flex min-h-screen flex-col items-center justify-center px-4">
       {{-- 頁面標題 --}}
-      <div class="fill-current text-2xl text-gray-700 dark:text-gray-50">
-        <i class="bi bi-question-circle"></i><span class="ml-4">忘記密碼</span>
+      <div class="flex items-center fill-current text-2xl text-gray-700 dark:text-gray-50">
+        <x-icon.question-circle class="w-6" />
+        <span class="ml-4">忘記密碼</span>
       </div>
 
       <x-card class="mt-4 w-full space-y-6 overflow-hidden sm:max-w-md">

@@ -59,7 +59,7 @@ test('user can see own posts in posts tab', function () {
 test('user can see soft deleted post in posts tab', function () {
     $post = Post::factory()->create();
 
-    $this->actingAs($post->user);
+    loginAsUser($post->user);
 
     $post->delete();
 

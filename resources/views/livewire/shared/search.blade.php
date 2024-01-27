@@ -9,7 +9,7 @@
       $nextTick(() => { $refs.searchBox.focus() })
     "
   >
-    <i class="bi bi-search"></i>
+    <x-icon.search class="w-5" />
   </button>
 
   {{-- search moodal --}}
@@ -68,8 +68,8 @@
                 placeholder="搜尋文章"
               />
 
-              <div class="absolute left-3.5 top-2.5 text-lg text-gray-400 dark:text-gray-50">
-                <i class="bi bi-search"></i>
+              <div class="absolute left-3 top-3.5 text-lg text-gray-400 dark:text-gray-50">
+                <x-icon.search class="w-5" />
               </div>
 
               <x-icon.animate-spin
@@ -93,11 +93,12 @@
                     @foreach ($results as $result)
                       <li>
                         <a
-                          class="flex rounded-md p-2 text-left hover:bg-gray-200 dark:text-gray-50 dark:hover:bg-gray-600"
+                          class="flex items-center rounded-md p-2 text-left hover:bg-gray-200 dark:text-gray-50 dark:hover:bg-gray-600"
                           href="{{ $result->link_with_slug }}"
                           wire:navigate
                         >
-                          <i class="bi bi-caret-right-fill"></i><span class="ml-2">{{ $result->title }}</span>
+                          <x-icon.caret-right class="w-4" />
+                          <span class="ml-2">{{ $result->title }}</span>
                         </a>
                       </li>
                     @endforeach

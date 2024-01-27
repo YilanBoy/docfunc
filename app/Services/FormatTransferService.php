@@ -17,7 +17,6 @@ class FormatTransferService
 
         $tags = json_decode($tagsJson);
 
-
         // 生成由 tag ID 組成的 Array
         return collect($tags)
             ->map(fn ($tag) => $tag->id)

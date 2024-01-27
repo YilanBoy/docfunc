@@ -23,8 +23,9 @@
       <div class="w-full p-2 md:w-[750px] lg:p-0">
         <div class="flex w-full flex-col items-center justify-center space-y-6">
           {{-- title --}}
-          <div class="fill-current text-2xl text-gray-700 dark:text-gray-50">
-            <i class="bi bi-pencil-square"></i><span class="ml-4">編輯文章</span>
+          <div class="flex items-center fill-current text-2xl text-gray-700 dark:text-gray-50">
+            <x-icon.pencil-square class="w-6" />
+            <span class="ml-4">編輯文章</span>
           </div>
 
           {{-- editor --}}
@@ -126,9 +127,10 @@
 
                 {{-- save button --}}
                 <x-button wire:loading.attr="disabled">
-                  <span wire:loading.remove>
-                    <i class="bi bi-save2-fill"></i>
-                  </span>
+                  <x-icon.save
+                    class="w-6"
+                    wire:loading.remove
+                  />
 
                   <span
                     class="h-5 w-5"

@@ -25,20 +25,23 @@
       </div>
 
       <div
-        class="absolute bottom-3 right-3 z-10 rounded-lg bg-emerald-600 px-2 py-1 text-sm text-gray-50 dark:bg-lividus-600"
+        class="absolute bottom-3 right-3 z-10 flex items-center rounded-lg bg-emerald-600 px-2 py-1 text-sm text-gray-50 dark:bg-lividus-600"
       >
-        <i class="bi bi-clock-fill"></i>
+        <x-icon.clock class="w-4" />
         <span class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>
       </div>
     </x-dashed-card>
 
   @empty
     <x-card class="flex h-32 items-center justify-center text-gray-400 dark:text-gray-600">
-      <i class="bi bi-exclamation-circle-fill"></i><span class="ml-2">目前沒有留言，快點找文章進行留言吧！</span>
+      <x-icon.exclamation-circle class="w-6" />
+      <span class="ml-2">目前沒有留言，快點找文章進行留言吧！</span>
     </x-card>
   @endforelse
 
-  <div>
-    {{ $comments->onEachSide(1)->links() }}
-  </div>
+  @if ($comments->count() > 0)
+    <div>
+      {{ $comments->onEachSide(1)->links() }}
+    </div>
+  @endif
 </div>

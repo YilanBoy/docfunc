@@ -1,7 +1,7 @@
 <x-mail-base :title="'DocFunc - 帳號刪除確認'">
   <x-card x-data>
     <h3 class="mb-3 border-b-2 border-black pb-3 text-center text-lg font-semibold">
-      <i class="bi bi-person-x-fill"></i><span class="ml-2">DocFunc - 帳號刪除確認</span>
+      <span class="ml-2">DocFunc - 帳號刪除確認</span>
     </h3>
 
     <div class="flex flex-col">
@@ -20,7 +20,7 @@
           }
         "
       >
-        <i class="bi bi-exclamation-triangle-fill"></i><span class="ml-2">確認刪除帳號</span>
+        <span class="ml-2">確認刪除帳號</span>
       </a>
     </div>
   </x-card>

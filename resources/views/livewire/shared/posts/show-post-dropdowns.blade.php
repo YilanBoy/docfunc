@@ -12,7 +12,7 @@
       x-on:click.outside="editMenuIsOpen = false"
       x-on:keydown.escape.window="editMenuIsOpen = false"
     >
-      <i class="bi bi-three-dots-vertical"></i>
+      <x-icon.three-dots-vertical class="w-6" />
     </button>
   </div>
 
@@ -27,25 +27,27 @@
   >
     {{-- 編輯文章 --}}
     <a
-      class="block rounded-md px-4 py-2 hover:bg-gray-200 active:bg-gray-100 dark:hover:bg-gray-700"
+      class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 active:bg-gray-100 dark:hover:bg-gray-700"
       href="{{ route('posts.edit', ['post' => $postId]) }}"
       role="menuitem"
       tabindex="-1"
       wire:navigate
     >
-      <i class="bi bi-pencil-fill"></i><span class="ml-2">編輯</span>
+      <x-icon.pencil class="w-4" />
+      <span class="ml-2">編輯</span>
     </a>
 
     {{-- 軟刪除 --}}
     <button
-      class="flex w-full items-start rounded-md px-4 py-2 hover:bg-gray-200 active:bg-gray-100 dark:hover:bg-gray-700"
+      class="flex w-full items-center rounded-md px-4 py-2 hover:bg-gray-200 active:bg-gray-100 dark:hover:bg-gray-700"
       type="button"
       role="menuitem"
       tabindex="-1"
       wire:confirm="你確定要刪除文章嗎？（7 天之內可以還原）"
       wire:click="deletePost({{ $postId }})"
     >
-      <i class="bi bi-file-earmark-x-fill"></i><span class="ml-2">刪除</span>
+      <x-icon.file-earmark-x class="w-4" />
+      <span class="ml-2">刪除</span>
     </button>
   </div>
 </div>

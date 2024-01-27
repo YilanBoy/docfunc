@@ -63,7 +63,7 @@
     <div class="grid grid-cols-12 gap-2">
       @foreach ($categories as $category)
         <div class="col-span-12 flex items-center">
-          <div class="size-4">{!! $category->icon !!}</div>
+          <div class="w-4">{!! $category->icon !!}</div>
           <span class="ml-2">{{ $category->name }}</span>
         </div>
         <div class="col-span-11 flex items-center">

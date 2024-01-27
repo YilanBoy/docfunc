@@ -130,7 +130,7 @@
         © Copyright 2020-{{ date('Y') }}. All Rights Reserved.
       </div>
 
-      <div class="flex flex-row justify-center space-x-4 md:flex-auto md:justify-end">
+      <div class="flex flex-row items-center justify-center space-x-4 md:flex-auto md:justify-end">
         <a
           class="text-2xl text-gray-400 duration-300 hover:text-gray-50"
           href="https://github.com/YilanBoy"
@@ -138,7 +138,7 @@
           target="_blank"
           rel="nofollow noopener noreferrer"
         >
-          <i class="bi bi-github"></i>
+          <x-icon.github class="w-6" />
         </a>
         <a
           class="text-2xl text-gray-400 duration-300 hover:text-gray-50"
@@ -147,7 +147,7 @@
           target="_blank"
           rel="nofollow noopener noreferrer"
         >
-          <i class="bi bi-twitter"></i>
+          <x-icon.twitter-x class="w-6" />
         </a>
         <a
           class="text-2xl text-gray-400 duration-300 hover:text-gray-50"
@@ -156,7 +156,7 @@
           target="_blank"
           rel="nofollow noopener noreferrer"
         >
-          <i class="bi bi-facebook"></i>
+          <x-icon.facebook class="w-6" />
         </a>
       </div>
     </div>

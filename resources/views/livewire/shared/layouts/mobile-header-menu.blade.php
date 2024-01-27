@@ -19,7 +19,7 @@
             class="text-3xl text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
             :class="menuIsOpen ? 'hidden' : 'block'"
           >
-            <i class="bi bi-list"></i>
+            <x-icon.list class="w-7" />
           </div>
           {{-- 手機版-開啟選單的 icon --}}
           <div
@@ -27,7 +27,7 @@
             x-cloak
             :class="menuIsOpen ? 'block' : 'hidden'"
           >
-            <i class="bi bi-x-lg"></i>
+            <x-icon.x class="w-7" />
           </div>
         </button>
       </div>
@@ -43,7 +43,7 @@
         </span>
       </div>
 
-      <div class="absolute inset-y-0 right-0 flex items-center space-x-6">
+      <div class="absolute inset-y-0 right-0 flex items-center space-x-8">
         {{-- 明亮 / 暗黑模式切換 --}}
         <button
           type="button"
@@ -59,13 +59,9 @@
             }
           "
         >
-          <span class="text-amber-400 hover:text-amber-500 dark:hidden">
-            <i class="bi bi-sun-fill"></i>
-          </span>
+          <x-icon.sun class="w-5 text-amber-400 hover:text-amber-500 dark:hidden" />
 
-          <span class="hidden text-[#f6f1d5] hover:text-[#ddd8bf] dark:inline">
-            <i class="bi bi-moon-stars-fill"></i>
-          </span>
+          <x-icon.moon-stars class="hidden w-5 text-[#f6f1d5] hover:text-[#ddd8bf] dark:inline" />
         </button>
 
         @guest
@@ -91,13 +87,13 @@
           {{-- 手機版-已登入 --}}
 
           {{-- 手機版-通知 --}}
-          <span class="relative inline-flex rounded-md">
+          <div class="relative inline-flex rounded-md">
             <a
               class="rounded-full text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
               href="{{ route('notifications.index') }}"
               wire:navigate
             >
-              <i class="bi bi-bell-fill"></i>
+              <x-icon.bell class="w-5" />
             </a>
 
             @if (auth()->user()->unreadNotifications->count() > 0)
@@ -106,7 +102,7 @@
                 <span class="relative inline-flex h-3 w-3 rounded-full bg-red-500"></span>
               </span>
             @endif
-          </span>
+          </div>
 
           {{-- 手機版-會員選單 --}}
           <div
@@ -146,44 +142,48 @@
               x-transition.origin.top.right
             >
               <a
-                class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
+                class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
                 href="{{ route('posts.create') }}"
                 role="menuitem"
                 tabindex="-1"
                 wire:navigate
               >
-                <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
+                <x-icon.pencil class="w-4" />
+                <span class="ml-2">新增文章</span>
               </a>
 
               <a
-                class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
+                class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
                 href="{{ route('users.show', ['user' => auth()->id()]) }}"
                 role="menuitem"
                 tabindex="-1"
                 wire:navigate
               >
-                <i class="bi bi-info-circle-fill"></i><span class="ml-2">個人資訊</span>
+                <x-icon.info-circle class="w-4" />
+                <span class="ml-2">個人資訊</span>
               </a>
 
               <a
-                class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
+                class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
                 href="{{ route('users.edit', ['user' => auth()->id()]) }}"
                 role="menuitem"
                 tabindex="-1"
                 wire:navigate
               >
-                <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
+                <x-icon.person-circle class="w-4" />
+                <span class="ml-2">會員中心</span>
               </a>
 
               <button
-                class="flex w-full items-start rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
+                class="flex w-full items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
                 type="button"
                 role="menuitem"
                 tabindex="-1"
                 wire:confirm="你確定要登出嗎？"
                 wire:click="$parent.logout"
               >
-                <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
+                <x-icon.box-arrow-left class="w-4" />
+                <span class="ml-2">登出</span>
               </button>
             </div>
           </div>
@@ -209,13 +209,14 @@
         href="{{ route('posts.index') }}"
         @if ($inIndexPage) aria-current="page" @endif
         @class([
-            'block px-3 py-2 rounded-md font-medium',
+            'flex items-center px-3 py-2 rounded-md font-medium',
             'bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-50' => $inIndexPage,
             'text-gray-500 dark:text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-50' => !$inIndexPage,
         ])
         wire:navigate
       >
-        <i class="bi bi-house-fill"></i><span class="ml-2">全部文章</span>
+        <x-icon.home class="w-4" />
+        <span class="ml-2">全部文章</span>
       </a>
 
       @foreach ($categories as $category)
@@ -232,7 +233,7 @@
           ])
           wire:navigate
         >
-          <div class="size-4">{!! $category->icon !!}</div>
+          <div class="w-4">{!! $category->icon !!}</div>
           <span class="ml-2">{{ $category->name }}</span>
         </a>
       @endforeach

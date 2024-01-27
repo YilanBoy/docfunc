@@ -41,8 +41,8 @@
       </div>
 
       <div>
-        <div class="mb-5 space-x-2 text-center text-2xl text-gray-900 dark:text-gray-50">
-          <i class="bi bi-chat-dots-fill"></i>
+        <div class="mb-5 flex items-center justify-center space-x-2 text-2xl text-gray-900 dark:text-gray-50">
+          <x-icon.chat-dots class="w-8" />
           <span>編輯留言</span>
         </div>
 
@@ -106,7 +106,7 @@
             </x-toggle-switch>
 
             <x-button>
-              <i class="bi bi-save2-fill"></i>
+              <x-icon.save class="w-5" />
               <span class="ml-2">更新留言</span>
             </x-button>
           </div>

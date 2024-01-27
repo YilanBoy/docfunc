@@ -6,9 +6,7 @@
     role="button"
     wire:navigate
   >
-    <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
-      <i class="bi bi-house-fill"></i>
-    </span>
+    <x-icon.home class="w-6 text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125" />
   </a>
 
   <!-- Facebook share button -->
@@ -19,9 +17,7 @@
     data-url="{{ request()->fullUrl() }}"
     type="button"
   >
-    <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
-      <i class="bi bi-facebook"></i>
-    </span>
+    <x-icon.facebook class="w-6 text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125" />
   </button>
 
   <!-- Twitter share button -->
@@ -33,9 +29,8 @@
     data-url="{{ request()->fullUrl() }}"
     type="button"
   >
-    <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
-      <i class="bi bi-twitter-x"></i>
-    </span>
+    <x-icon.twitter-x
+      class="w-6 text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125" />
   </button>
 
   <!-- Copy link button -->
@@ -45,9 +40,9 @@
       data-clipboard="{{ request()->fullUrl() }}"
       type="button"
     >
-      <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
-        <i class="bi bi-link-45deg"></i>
-      </span>
+      <x-icon.link-45deg
+        class="w-6 text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125"
+      />
     </button>
   </x-tooltip>
 
@@ -61,9 +56,9 @@
       role="button"
       wire:navigate
     >
-      <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
-        <i class="bi bi-pencil-square"></i>
-      </span>
+      <x-icon.pencil-square
+        class="w-6 text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125"
+      />
     </a>
 
     {{-- 刪除 --}}
@@ -74,9 +69,7 @@
       wire:confirm="你確定要刪除文章嗎？（7 天之內可以還原）"
       wire:click="deletePost({{ $postId }})"
     >
-      <span class="text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125">
-        <i class="bi bi-trash-fill"></i>
-      </span>
+      <x-icon.trash class="w-6 text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125" />
     </button>
   @endif
 </div>

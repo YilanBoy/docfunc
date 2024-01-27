@@ -6,6 +6,7 @@ import ckeditor5 from '@ckeditor/vite-plugin-ckeditor5';
 const require = createRequire(import.meta.url);
 
 export default defineConfig({
+    build: { chunkSizeWarningLimit: 1000 },
     plugins: [
         ckeditor5({ theme: require.resolve('@ckeditor/ckeditor5-theme-lark') }),
         laravel({
@@ -28,7 +29,6 @@ export default defineConfig({
                 'node_modules/@yaireo/tagify/dist/tagify.css',
                 'resources/css/editor.css',
                 'resources/css/missing-content-style.css',
-                'resources/css/icon.css',
                 'node_modules/highlight.js/styles/atom-one-dark.css',
             ],
             refresh: true,

@@ -21,9 +21,10 @@
           href="{{ route('posts.create') }}"
           wire:navigate
         >
-          <span class="relative z-0 text-lg text-gray-200 transition duration-700 ease-in-out">
-            <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
-          </span>
+          <div class="relative z-0 flex items-center text-gray-200 transition duration-700 ease-in-out">
+            <x-icon.pencil class="w-5" />
+            <span class="ml-2">新增文章</span>
+          </div>
         </a>
       </div>
     </div>
@@ -32,9 +33,10 @@
   {{-- 熱門標籤 --}}
   @if ($popularTags->count())
     <x-card class="dark:text-gray-50">
-      <p class="text-center text-lg">
-        <i class="bi bi-tags-fill"></i><span class="ml-2">熱門標籤</span>
-      </p>
+      <div class="flex items-center justify-center">
+        <x-icon.tags class="w-5" />
+        <span class="ml-2">熱門標籤</span>
+      </div>
 
       <hr class="my-4 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
 
@@ -51,21 +53,23 @@
   {{-- 學習資源推薦 --}}
   @if ($links->count())
     <x-card class="dark:text-gray-50">
-      <p class="text-center text-lg">
-        <i class="bi bi-file-earmark-code-fill"></i><span class="ml-2">學習資源推薦</span>
-      </p>
+      <div class="flex items-center justify-center">
+        <x-icon.file-earmark-code class="w-5" />
+        <span class="ml-2">學習資源推薦</span>
+      </div>
 
       <hr class="my-4 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
 
       <div class="flex flex-col">
         @foreach ($links as $link)
           <a
-            class="flex rounded-md p-2 hover:bg-gray-200 dark:text-gray-50 dark:hover:bg-gray-700"
+            class="flex items-center rounded-md p-2 hover:bg-gray-200 dark:text-gray-50 dark:hover:bg-gray-700"
             href="{{ $link->link }}"
             target="_blank"
             rel="nofollow noopener noreferrer"
           >
-            <i class="bi bi-link-45deg"></i><span class="ml-2">{{ $link->title }}</span>
+            <x-icon.link-45deg class="w-5" />
+            <span class="ml-2">{{ $link->title }}</span>
           </a>
         @endforeach
       </div>
@@ -73,20 +77,24 @@
   @endif
 
   <a
-    class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-zinc-500 px-4 py-2 text-lg tracking-widest text-gray-50 ring-zinc-300 transition duration-150 ease-in-out hover:bg-zinc-600 focus:border-zinc-700 focus:outline-none focus:ring active:bg-zinc-700 dark:bg-zinc-600 dark:ring-zinc-800 dark:hover:bg-zinc-500"
+    class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-zinc-500 px-4 py-2 tracking-widest text-gray-50 ring-zinc-300 transition duration-150 ease-in-out hover:bg-zinc-600 focus:border-zinc-700 focus:outline-none focus:ring active:bg-zinc-700 dark:bg-zinc-600 dark:ring-zinc-800 dark:hover:bg-zinc-500"
     href="{{ route('feeds.main') }}"
     x-data="{ webFeedUrl: $el.getAttribute('href') }"
     x-on:click.prevent="
       navigator.clipboard.writeText(webFeedUrl).then(
-        () => $el.innerHTML = `<i class='bi bi-check-lg'></i><span class='ml-2'>複製成功</span>`,
-        () => $el.innerHTML = `<i class='bi bi-x-lg'></i><span class='ml-2'>複製失敗</span>`
+        () => $refs.subscriptionText.innerText = '複製成功',
+        () => $refs.subscriptionText.innerText = '複製失敗'
       );
 
-      setTimeout(() => $el.innerHTML = `<i class='bi bi-rss-fill'></i><span class='ml-2'>訂閱文章</span>`, 2000);
+      setTimeout(() => $refs.subscriptionText.innerText = '訂閱文章', 2000);
     "
     target="_blank"
     rel="nofollow noopener"
   >
-    <i class="bi bi-rss-fill"></i><span class="ml-2">訂閱文章</span>
+    <x-icon.rss class="w-5" />
+    <span
+      class="ml-2"
+      x-ref="subscriptionText"
+    >訂閱文章</span>
   </a>
 </div>

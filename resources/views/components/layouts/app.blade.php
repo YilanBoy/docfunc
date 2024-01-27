@@ -16,6 +16,9 @@
   <meta name="description" content="@yield('description', config('app.name'))">
   <x-sharing-meta-tags :title="$title ?? config('app.name')" />
 
+  {{-- Set theme --}}
+  @vite('resources/ts/set-theme.ts')
+
   {{-- Ｗeb Feed --}}
   @include('feed::links')
 
@@ -29,12 +32,9 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
 
   @vite('resources/css/app.css')
-  @vite('resources/css/icon.css')
 
   <x-js.livewire />
   @vite('resources/js/app.js')
-  {{-- Set theme --}}
-  @vite('resources/ts/set-theme.ts')
 
   {{-- Cloudflare Turnstile --}}
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>

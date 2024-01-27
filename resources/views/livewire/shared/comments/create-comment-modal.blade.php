@@ -25,7 +25,7 @@
 
     {{--  modal  --}}
     <div
-      class="max-h-[36rem] transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all sm:w-full sm:max-w-2xl dark:bg-gray-800"
+      class="max-h-[36rem] transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all dark:bg-gray-800 sm:w-full sm:max-w-2xl"
       x-show="isOpen"
       x-transition.origin.bottom.duration.300ms
     >
@@ -41,8 +41,8 @@
       </div>
 
       <div>
-        <div class="mb-5 space-x-2 text-center text-2xl text-gray-900 dark:text-gray-50">
-          <i class="bi bi-chat-dots-fill"></i>
+        <div class="mb-5 flex items-center justify-center space-x-2 text-2xl text-gray-900 dark:text-gray-50">
+          <x-icon.chat-dots class="w-8" />
           <span>新增留言</span>
         </div>
 
@@ -125,11 +125,11 @@
             </x-toggle-switch>
 
             <x-button x-bind:disabled="!enableSubmit">
-              <i
-                class="bi bi-save2-fill mr-2"
+              <x-icon.save
+                class="mr-2 w-5"
                 x-cloak
                 x-show="enableSubmit"
-              ></i>
+              />
               <x-icon.animate-spin
                 class="mr-2 h-5 w-5 text-gray-50"
                 x-cloak

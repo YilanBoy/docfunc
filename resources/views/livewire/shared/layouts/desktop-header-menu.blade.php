@@ -1,5 +1,5 @@
 <div
-  class="relative hidden h-20 w-full items-center justify-center bg-gray-50 shadow-lg transition-all duration-300 lg:flex dark:bg-gray-800 dark:shadow-none"
+  class="relative hidden h-20 w-full items-center justify-center bg-gray-50 shadow-lg transition-all duration-300 dark:bg-gray-800 dark:shadow-none lg:flex"
   x-data
 >
   {{-- 電腦版-Logo --}}
@@ -54,13 +54,11 @@
         }
       "
     >
-      <span class="text-xl text-amber-400 transition duration-150 group-hover:text-amber-500 dark:hidden">
-        <i class="bi bi-sun-fill"></i>
-      </span>
+      <x-icon.sun class="w-5 text-amber-400 transition duration-150 group-hover:text-amber-500 dark:hidden" />
 
-      <span class="hidden text-xl text-[#f6f1d5] transition duration-150 group-hover:text-[#ddd8bf] dark:inline">
-        <i class="bi bi-moon-stars-fill"></i>
-      </span>
+      <x-icon.moon-stars
+        class="hidden w-5 text-[#f6f1d5] transition duration-150 group-hover:text-[#ddd8bf] dark:inline"
+      />
     </button>
 
     {{-- dektop search --}}
@@ -83,7 +81,7 @@
         href="{{ route('login') }}"
         wire:navigate
       >
-        <i class="bi bi-door-open-fill"></i>
+        <x-icon.door-open class="w-5" />
         <span class="ml-2">登入</span>
       </a>
     @else
@@ -97,7 +95,7 @@
           aria-label="Notifications"
           wire:navigate
         >
-          <i class="bi bi-bell-fill"></i>
+          <x-icon.bell class="w-5" />
         </a>
 
         @if (auth()->user()->unreadNotifications->count() > 0)
@@ -146,44 +144,48 @@
           x-transition.origin.top.right
         >
           <a
-            class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
+            class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
             href="{{ route('posts.create') }}"
             role="menuitem"
             tabindex="-1"
             wire:navigate
           >
-            <i class="bi bi-pencil-fill"></i><span class="ml-2">新增文章</span>
+            <x-icon.pencil class="w-4" />
+            <span class="ml-2">新增文章</span>
           </a>
 
           <a
-            class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
+            class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
             href="{{ route('users.show', ['user' => auth()->id()]) }}"
             role="menuitem"
             tabindex="-1"
             wire:navigate
           >
-            <i class="bi bi-info-circle-fill"></i><span class="ml-2">個人資訊</span>
+            <x-icon.info-circle class="w-4" />
+            <span class="ml-2">個人資訊</span>
           </a>
 
           <a
-            class="block rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
+            class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
             href="{{ route('users.edit', ['user' => auth()->id()]) }}"
             role="menuitem"
             tabindex="-1"
             wire:navigate
           >
-            <i class="bi bi-person-circle"></i><span class="ml-2">會員中心</span>
+            <x-icon.person-circle class="w-4" />
+            <span class="ml-2">會員中心</span>
           </a>
 
           <button
-            class="flex w-full items-start rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
+            class="flex w-full items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
             type="button"
             role="menuitem"
             tabindex="-1"
             wire:confirm="你確定要登出嗎？"
             wire:click="$parent.logout"
           >
-            <i class="bi bi-box-arrow-left"></i><span class="ml-2">登出</span>
+            <x-icon.box-arrow-left class="w-4" />
+            <span class="ml-2">登出</span>
           </button>
         </div>
       </div>

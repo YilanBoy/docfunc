@@ -93,22 +93,21 @@
                 <div>&bull;</div>
 
                 {{-- author --}}
-                <div>
-                  <a
-                    class="hover:text-neutral-500 dark:hover:text-neutral-300"
-                    href="{{ route('users.show', ['user' => $post->user_id]) }}"
-                    title="{{ $post->user->name }}"
-                    wire:navigate
-                  >
-                    <i class="bi bi-person-fill"></i><span class="ml-2">{{ $post->user->name }}</span>
-                  </a>
-                </div>
+                <a
+                  class="flex items-center hover:text-neutral-500 dark:hover:text-neutral-300"
+                  href="{{ route('users.show', ['user' => $post->user_id]) }}"
+                  title="{{ $post->user->name }}"
+                  wire:navigate
+                >
+                  <x-icon.person class="w-4" />
+                  <span class="ml-2">{{ $post->user->name }}</span>
+                </a>
 
                 <div class="hidden md:block">&bull;</div>
 
                 {{-- post created time --}}
-                <div class="hidden md:block">
-                  <i class="bi bi-clock-fill"></i>
+                <div class="hidden items-center md:flex">
+                  <x-icon.clock class="w-4" />
                   <span class="ml-2">{{ $post->created_at->toDateString() }}</span>
 
                   @if ($post->created_at->toDateString() !== $post->updated_at->toDateString())
@@ -119,21 +118,20 @@
                 <div class="hidden md:block">&bull;</div>
 
                 {{-- comments count --}}
-                <div class="hidden md:block">
-                  <a
-                    class="hover:text-neutral-500 dark:hover:text-neutral-300"
-                    href="{{ $post->link_with_slug }}#comments"
-                  >
-                    <i class="bi bi-chat-square-text-fill"></i><span class="ml-2">{{ $post->comment_counts }}</span>
-                  </a>
-                </div>
+                <a
+                  class="hidden hover:text-neutral-500 dark:hover:text-neutral-300 md:flex md:items-center"
+                  href="{{ $post->link_with_slug }}#comments"
+                >
+                  <x-icon.chat-square-text class="w-4" />
+                  <span class="ml-2">{{ $post->comment_counts }}</span>
+                </a>
 
               </div>
 
               {{-- post tags --}}
               @if ($post->tags()->exists())
                 <div class="mt-4 flex flex-wrap items-center text-base">
-                  <span class="mr-1 text-green-300 dark:text-lividus-600"><i class="bi bi-tags-fill"></i></span>
+                  <x-icon.tags class="mr-1 w-4 text-green-300 dark:text-lividus-600" />
 
                   @foreach ($post->tags as $tag)
                     <x-tag :href="route('tags.show', ['tag' => $tag->id])">

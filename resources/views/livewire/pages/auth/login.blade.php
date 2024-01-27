@@ -1,11 +1,11 @@
 <x-layouts.layout-auth>
   <div class="fixed left-5 top-5">
     <a
-      class="block text-2xl text-gray-400 transition duration-150 ease-in hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-50"
+      class="flex items-center text-2xl text-gray-400 transition duration-150 ease-in hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-50"
       href="{{ route('root') }}"
       wire:navigate
     >
-      <i class="bi bi-arrow-left-circle-fill"></i>
+      <x-icon.arrow-left-circle class="w-6" />
       <span class="ml-2">返回文章列表</span>
     </a>
   </div>
@@ -14,8 +14,9 @@
 
     <div class="flex min-h-screen flex-col items-center justify-center px-4">
       {{-- 頁面標題 --}}
-      <div class="fill-current text-2xl text-gray-700 dark:text-gray-50">
-        <i class="bi bi-door-open-fill"></i><span class="ml-4">登入</span>
+      <div class="flex items-center fill-current text-2xl text-gray-700 dark:text-gray-50">
+        <x-icon.door-open class="w-6" />
+        <span class="ml-4">登入</span>
       </div>
 
       {{-- 登入表單 --}}

@@ -9,8 +9,8 @@ use Livewire\WithPagination;
 
 class Comments extends Component
 {
-    use WithPagination;
     use MarkdownConverter;
+    use WithPagination;
 
     public int $userId;
 

@@ -42,7 +42,18 @@
               type="button"
               x-on:click="tabButtonClicked($el)"
             >
-              <i class="{{ $tab['icon'] }}"></i>
+              @switch($tab['value'])
+                @case('posts')
+                  <x-icon.file-earmark-richtext class="w-4" />
+                @break
+
+                @case('comments')
+                  <x-icon.chat-square-text class="w-4" />
+                @break
+
+                @default
+                  <x-icon.info-circle class="w-4" />
+              @endswitch
               <span class="ml-2">{{ $tab['text'] }}</span>
             </button>
           @endforeach

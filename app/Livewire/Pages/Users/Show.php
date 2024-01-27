@@ -8,16 +8,17 @@ use Livewire\Component;
 
 class Show extends Component
 {
+    #[Locked]
     public User $user;
 
     #[Locked]
     public array $tabs = [
-        ['value' => 'information', 'text' => '個人資訊', 'icon' => 'bi bi-info-circle-fill'],
-        ['value' => 'posts', 'text' => '發布文章', 'icon' => 'bi bi-file-earmark-post-fill'],
-        ['value' => 'comments', 'text' => '留言紀錄', 'icon' => 'bi bi-chat-square-text-fill'],
+        ['value' => 'information', 'text' => '個人資訊'],
+        ['value' => 'posts', 'text' => '發布文章'],
+        ['value' => 'comments', 'text' => '留言紀錄'],
     ];
 
-    public function mount(User $user)
+    public function mount(User $user): void
     {
         $this->user = $user;
     }

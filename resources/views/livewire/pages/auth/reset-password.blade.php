@@ -2,8 +2,9 @@
   <div class="container mx-auto">
     <div class="flex min-h-screen flex-col items-center justify-center px-4">
       {{-- 頁面標題 --}}
-      <div class="fill-current text-2xl text-gray-700 dark:text-gray-50">
-        <i class="bi bi-question-circle"></i><span class="ml-4">重設密碼</span>
+      <div class="flex items-center fill-current text-2xl text-gray-700 dark:text-gray-50">
+        <x-icon.question-circle class="w-6" />
+        <span class="ml-4">重設密碼</span>
       </div>
 
       <x-card class="mt-4 w-full space-y-6 overflow-hidden sm:max-w-md">

@@ -2,11 +2,11 @@
   {{-- posts list --}}
   @foreach ($posts as $post)
     <div
-      class="group flex flex-col justify-between rounded px-2 py-2 transition duration-100 hover:bg-gray-100 md:flex-row dark:hover:bg-gray-700"
+      class="group flex flex-col justify-between rounded px-2 py-2 transition duration-100 hover:bg-gray-100 dark:hover:bg-gray-700 md:flex-row"
       {{-- in this list, these post attribue will be change in the loop, so we have to track them down --}}
       wire:key="{{ $post->id . $post->is_private . $post->deleted_at }}"
     >
-      <i class="bi bi-arrow-right-short dark:text-gray-400"></i>
+      <x-icon.arrow-right class="w-5 dark:text-gray-400" />
 
       <div class="ml-2 w-full">
         @if ($post->trashed())
@@ -43,7 +43,7 @@
               wire:confirm="你確定要還原該文章？"
               wire:click="restore({{ $post->id }})"
             >
-              <i class="bi bi-arrow-counterclockwise"></i>
+              <x-icon.arrow-counterclockwise class="w-5" />
             </button>
           @else
             {{-- private --}}
@@ -56,7 +56,7 @@
                 wire:confirm="你確定要將該文章設為公開？"
                 wire:click="postPrivateToggle({{ $post->id }})"
               >
-                <i class="bi bi-lock-fill"></i>
+                <x-icon.lock class="w-5" />
               </button>
             @else
               <button
@@ -68,7 +68,7 @@
                 wire:click="postPrivateToggle({{ $post->id }})"
               >
 
-                <i class="bi bi-unlock-fill"></i>
+                <x-icon.unlock class="w-5" />
               </button>
             @endif
 
@@ -80,7 +80,7 @@
               role="button"
               wire:navigate
             >
-              <i class="bi bi-pencil-square"></i>
+              <x-icon.pencil-square class="w-5" />
             </a>
 
             {{-- delete --}}
@@ -92,7 +92,7 @@
               wire:confirm="你確定要刪除文章嗎？（7 天之內可以還原）"
               wire:click.stop="deletePost({{ $post->id }})"
             >
-              <i class="bi bi-x-lg"></i>
+              <x-icon.x class="w-5" />
             </button>
           @endif
 

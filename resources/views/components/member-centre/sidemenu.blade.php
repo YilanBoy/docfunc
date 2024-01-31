@@ -9,8 +9,8 @@
 
   <div class="flex w-full flex-col space-y-1">
     @php
-      $editUserUrl = route('users.edit', ['user' => auth()->id()]);
-      $inEditUserPage = request()->url() === $editUserUrl;
+      $editUserUrl = urldecode(route('users.edit', ['user' => auth()->id()]));
+      $inEditUserPage = urldecode(request()->url()) === $editUserUrl;
     @endphp
     <a
       href="{{ $editUserUrl }}"
@@ -26,8 +26,8 @@
     </a>
 
     @php
-      $changePasswordUrl = route('users.updatePassword', ['user' => auth()->id()]);
-      $inChangePasswordPage = request()->url() === $changePasswordUrl;
+      $changePasswordUrl = urldecode(route('users.updatePassword', ['user' => auth()->id()]));
+      $inChangePasswordPage = urldecode(request()->url()) === $changePasswordUrl;
     @endphp
     <a
       href="{{ $changePasswordUrl }}"
@@ -43,8 +43,8 @@
     </a>
 
     @php
-      $deleteUserUrl = route('users.delete', ['user' => auth()->id()]);
-      $inDeleteUserPage = request()->url() === $deleteUserUrl;
+      $deleteUserUrl = urldecode(route('users.delete', ['user' => auth()->id()]));
+      $inDeleteUserPage = urldecode(request()->url()) === $deleteUserUrl;
     @endphp
     <a
       href="{{ $deleteUserUrl }}"

@@ -202,7 +202,7 @@
     <div class="space-y-1 px-2 pb-3 pt-2">
 
       @php
-        $inIndexPage = request()->url() === route('posts.index');
+        $inIndexPage = urldecode(request()->url()) === urldecode(route('posts.index'));
       @endphp
 
       <a
@@ -221,7 +221,7 @@
 
       @foreach ($categories as $category)
         @php
-          $inCategoryPage = request()->url() === $category->link_with_name;
+          $inCategoryPage = urldecode(request()->url()) === urldecode($category->link_with_name);
         @endphp
         <a
           href="{{ $category->link_with_name }}"

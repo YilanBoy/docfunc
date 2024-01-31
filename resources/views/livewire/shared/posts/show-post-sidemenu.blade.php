@@ -37,7 +37,7 @@
   <x-tooltip :tooltip-position="'right'">
     <button
       class="group flex h-14 w-14 items-center justify-center text-gray-500 dark:text-gray-400"
-      data-clipboard="{{ request()->fullUrl() }}"
+      data-clipboard="{{ urldecode(request()->fullUrl()) }}"
       type="button"
     >
       <x-icon.link-45deg

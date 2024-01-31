@@ -20,7 +20,8 @@
 
     <x-floating-underline-button
       :link="route('posts.index')"
-      :selected="request()->url() === route('posts.index')"
+      {{-- Make sure both url are decode in AWS Lambda --}}
+      :selected="urldecode(request()->url()) === urldecode(route('posts.index'))"
     >
       全部文章
     </x-floating-underline-button>
@@ -28,7 +29,7 @@
     @foreach ($categories as $category)
       <x-floating-underline-button
         :link="$category->link_with_name"
-        :selected="request()->url() === $category->link_with_name"
+        :selected="urldecode(request()->url()) === urldecode($category->link_with_name)"
         :icon="$category->icon"
       >
         {{ $category->name }}

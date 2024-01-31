@@ -185,7 +185,7 @@ it('displays the default preview, assuming the preview is not set', function () 
         'preview_url' => '',
     ]);
 
-    $defaultPreviewUrl = 'https://'.config('filesystems.disks.s3.bucket').'.s3.'.config('filesystems.disks.s3.region').'.amazonaws.com/share.jpg';
+    $defaultPreviewUrl = 'https://blobs.docfunc.com/share.jpg';
 
     get($post->link_with_slug)
         ->assertStatus(200)

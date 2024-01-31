@@ -32,11 +32,16 @@ class ClearUnusedImage extends Command
     {
         $imagesInPosts = [];
 
-        Post::select(['id', 'body'])->chunkById(200, function ($posts) use (&$imagesInPosts, $contentService) {
-            foreach ($posts as $post) {
-                array_push($imagesInPosts, ...$contentService->imagesInContent($post->body));
-            }
-        });
+        Post::select(['id', 'body', 'preview_url'])->chunkById(200,
+            function ($posts) use (&$imagesInPosts, $contentService) {
+                foreach ($posts as $post) {
+                    array_push($imagesInPosts, ...$contentService->imagesInContent($post->body));
+
+                    if (! empty($post->preview_url)) {
+                        $imagesInPosts[] = basename($post->preview_url);
+                    }
+                }
+            });
 
         // add s3 directory prefix to each image
         // format:

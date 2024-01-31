@@ -127,7 +127,7 @@ class PostForm extends Form
                 ->generateFileName($this->image->getClientOriginalExtension());
 
             $path = $this->image
-                ->storeAs('preview', $imageName, config('filesystems.default'));
+                ->storeAs('images', $imageName, config('filesystems.default'));
 
             $this->preview_url = Storage::disk()->url($path);
         }

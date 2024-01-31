@@ -53,7 +53,11 @@ it('can clear unused images', function () {
     </div>
     EOF;
 
-    $post = Post::factory()->create(['body' => $body]);
+    $post = Post::factory()->create([
+        'body' => $body,
+        'preview_url' => 'https://fake-url.com/images/'.$this->imageName2,
+    ]);
+
     expect(Post::find($post->id))->body->toContain($this->imageName1);
 
     $this->artisan('image:clear')
@@ -66,7 +70,7 @@ it('can clear unused images', function () {
 
     Storage::disk()
         ->assertExists('images/'.$this->imageName1)
-        ->assertMissing('images/'.$this->imageName2)
+        ->assertExists('images/'.$this->imageName2)
         ->assertMissing('images/'.$this->imageName3);
 });
 

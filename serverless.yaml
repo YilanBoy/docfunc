@@ -1,0 +1,124 @@
+service: docfunc
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  region: ap-northeast-1
+  httpApi:
+    disableDefaultEndpoint: true
+  vpc:
+    securityGroupIds:
+      - ${ssm:/docfunc/${opt:stage, 'dev'}/security-group-id}
+    subnetIds:
+      - ${ssm:/docfunc/${opt:stage, 'dev'}/private-subnet-id-1}
+      - ${ssm:/docfunc/${opt:stage, 'dev'}/private-subnet-id-2}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:GetObject
+            - s3:PutObject
+            - s3:DeleteObject
+          Resource:
+            - arn:aws:s3:::${ssm:/docfunc/${opt:stage, 'dev'}/aws-bucket}/*
+  # CloudWatch log settings
+  logRetentionInDays: 7
+
+  environment:
+    # App settings
+    APP_NAME: DocFunc
+    APP_ENV: production # Or use ${sls:stage} if you want the environment to match the stage
+    APP_KEY: ${ssm:/docfunc/${opt:stage, 'dev'}/app-key}
+    APP_DEBUG: false
+    APP_URL: ${ssm:/docfunc/${opt:stage, 'dev'}/app-url}
+    ASSET_URL: ${ssm:/docfunc/${opt:stage, 'dev'}/asset-url}
+    # Logging
+    LOG_CHANNEL: stdout
+    LOG_LEVEL: error
+    # Database
+    DB_CONNECTION: mysql
+    DB_HOST: ${ssm:/docfunc/${opt:stage, 'dev'}/database-host}
+    DB_PORT: 3306
+    DB_DATABASE: blog
+    DB_USERNAME: admin
+    DB_PASSWORD: ${ssm:/docfunc/${opt:stage, 'dev'}/database-password}
+    # Cache
+    CACHE_DRIVER: redis
+    REDIS_HOST: ${ssm:/docfunc/${opt:stage, 'dev'}/redis-host}
+    REDIS_PORT: 6379
+    # Session
+    SESSION_DRIVER: redis
+    SESSION_LIFETIME: 120 # minutes
+    # Queue
+    QUEUE_CONNECTION: sqs
+    SQS_QUEUE: ${construct:jobs.queueUrl}
+    # Filesystem
+    FILESYSTEM_DISK: s3
+    AWS_BUCKET: ${ssm:/docfunc/${opt:stage, 'dev'}/aws-bucket}
+    AWS_USE_PATH_STYLE_ENDPOINT: false
+    # CAPTCHA
+    CAPTCHA_SITE_KEY: ${ssm:/docfunc/${opt:stage, 'dev'}/captcha-site-key}
+    CAPTCHA_SECRET_KEY: ${ssm:/docfunc/${opt:stage, 'dev'}/captcha-secret-key}
+    # Mail
+    MAIL_MAILER: smtp
+    MAIL_HOST: smtp.sendgrid.net
+    MAIL_PORT: 587
+    MAIL_USERNAME: apikey
+    MAIL_PASSWORD: ${ssm:/docfunc/${opt:stage, 'dev'}/sendgrid-api-key}
+    MAIL_ENCRYPTION: tls
+    MAIL_FROM_ADDRESS: "no-reply@mail.docfunc.com"
+    MAIL_FROM_NAME: "DocFunc"
+    # Scout
+    SCOUT_PREFIX: ${ssm:/docfunc/${opt:stage, 'dev'}/scout-prefix}
+    ALGOLIA_APP_ID: ${ssm:/docfunc/${opt:stage, 'dev'}/algolia-app-id}
+    ALGOLIA_SECRET: ${ssm:/docfunc/${opt:stage, 'dev'}/algolia-secret}
+
+package:
+  # Files and directories to exclude from deployment
+  patterns:
+    - '!node_modules/**'
+    - '!public/storage'
+    - '!resources/assets/**'
+    - '!storage/**'
+    - '!tests/**'
+    - '!.env'
+
+functions:
+  web:
+    handler: Bref\LaravelBridge\Http\OctaneHandler
+    runtime: php-83
+    environment:
+      BREF_LOOP_MAX: 250
+      OCTANE_PERSIST_DATABASE_SESSIONS: 1
+    layers:
+      - ${bref-extra:redis-php-83}
+    timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
+    events:
+      - httpApi: '*'
+
+  artisan:
+    handler: artisan
+    runtime: php-83-console
+    layers:
+      - ${bref-extra:redis-php-83}
+    timeout: 720 # in seconds
+    events:
+      - schedule:
+          rate: rate(1 hour)
+          input: '"schedule:run"'
+
+constructs:
+  jobs:
+    type: queue
+    worker:
+      handler: Bref\LaravelBridge\Queue\QueueHandler
+      runtime: php-83
+      layers:
+        - ${bref-extra:redis-php-83}
+      timeout: 60 # in seconds
+
+plugins:
+  - ./vendor/bref/bref
+  - ./vendor/bref/extra-php-extensions
+  - serverless-lift

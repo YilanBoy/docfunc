@@ -1,0 +1,55 @@
+name: Deploy to AWS Lambda
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: Who to greet?
+        default: Allen
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy-lambda:
+    name: Deploy to AWS Lambda
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: redis
+          coverage: none
+
+      - name: Install php packages
+        run: composer install --prefer-dist --optimize-autoloader --no-dev
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '21'
+
+      - name: Install javascript packages and build the frontend assets
+        run: |
+          npm install
+          npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::154471991214:role/github-action
+          aws-region: ap-northeast-1
+
+      - name: Copy files to the S3 with the AWS CLI
+        run: |
+          aws s3 sync public s3://assets.docfunc.com
+
+      - name: Deploy to AWS Lambda
+        run: |
+          npm install serverless serverless-lift
+          node_modules/.bin/serverless deploy

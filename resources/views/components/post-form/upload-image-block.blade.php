@@ -114,7 +114,7 @@
       <img
         class="rounded-lg"
         id="upload-image"
-        src="{{ $image->temporaryUrl('local') }}"
+        src="{{ $image->temporaryUrl() }}"
         alt="preview image"
       >
 

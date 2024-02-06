@@ -6,12 +6,6 @@ provider:
   region: ap-northeast-1
   httpApi:
     disableDefaultEndpoint: true
-  vpc:
-    securityGroupIds:
-      - ${ssm:/docfunc/${opt:stage, 'dev'}/security-group-id}
-    subnetIds:
-      - ${ssm:/docfunc/${opt:stage, 'dev'}/private-subnet-id-1}
-      - ${ssm:/docfunc/${opt:stage, 'dev'}/private-subnet-id-2}
   iam:
     role:
       statements:
@@ -22,6 +16,16 @@ provider:
             - s3:DeleteObject
           Resource:
             - arn:aws:s3:::${ssm:/docfunc/${opt:stage, 'dev'}/aws-bucket}/*
+        - Effect: Allow
+          Action:
+            - dynamodb:DescribeTable
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: !GetAtt CacheTable.Arn
   # CloudWatch log settings
   logRetentionInDays: 7
 
@@ -39,16 +43,16 @@ provider:
     # Database
     DB_CONNECTION: mysql
     DB_HOST: ${ssm:/docfunc/${opt:stage, 'dev'}/database-host}
-    DB_PORT: 3306
-    DB_DATABASE: blog
-    DB_USERNAME: admin
+    DB_PORT: ${ssm:/docfunc/${opt:stage, 'dev'}/database-port}
+    DB_DATABASE: ${ssm:/docfunc/${opt:stage, 'dev'}/database-name}
+    DB_USERNAME: ${ssm:/docfunc/${opt:stage, 'dev'}/database-username}
     DB_PASSWORD: ${ssm:/docfunc/${opt:stage, 'dev'}/database-password}
+    MYSQL_ATTR_SSL_CA: /opt/bref/ssl/cert.pem
     # Cache
-    CACHE_DRIVER: redis
-    REDIS_HOST: ${ssm:/docfunc/${opt:stage, 'dev'}/redis-host}
-    REDIS_PORT: 6379
+    CACHE_DRIVER: dynamodb
+    DYNAMODB_CACHE_TABLE: !Ref CacheTable
     # Session
-    SESSION_DRIVER: redis
+    SESSION_DRIVER: dynamodb
     SESSION_LIFETIME: 120 # minutes
     # Queue
     QUEUE_CONNECTION: sqs
@@ -56,6 +60,7 @@ provider:
     # Filesystem
     FILESYSTEM_DISK: s3
     AWS_BUCKET: ${ssm:/docfunc/${opt:stage, 'dev'}/aws-bucket}
+    AWS_URL: ${ssm:/docfunc/${opt:stage, 'dev'}/aws-url}
     AWS_USE_PATH_STYLE_ENDPOINT: false
     # CAPTCHA
     CAPTCHA_SITE_KEY: ${ssm:/docfunc/${opt:stage, 'dev'}/captcha-site-key}
@@ -84,6 +89,22 @@ package:
     - '!tests/**'
     - '!.env'
 
+resources:
+  Resources:
+    CacheTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions: # only keys are defined here, other attributes are dynamic
+          - AttributeName: id # adds a mandatory id field
+            AttributeType: S # the type of id is a string
+        BillingMode: PAY_PER_REQUEST # billed for each request instead of paying for a constant capacity
+        TimeToLiveSpecification: # deletes cache keys automatically based on a ttl field which contains a timestamp
+          AttributeName: ttl
+          Enabled: true
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH # the type of key, HASH means partition key (similar to primary keys in SQL)
+
 functions:
   web:
     handler: Bref\LaravelBridge\Http\OctaneHandler
@@ -91,8 +112,6 @@ functions:
     environment:
       BREF_LOOP_MAX: 250
       OCTANE_PERSIST_DATABASE_SESSIONS: 1
-    layers:
-      - ${bref-extra:redis-php-83}
     timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
     events:
       - httpApi: '*'
@@ -100,8 +119,6 @@ functions:
   artisan:
     handler: artisan
     runtime: php-83-console
-    layers:
-      - ${bref-extra:redis-php-83}
     timeout: 720 # in seconds
     events:
       - schedule:
@@ -114,11 +131,8 @@ constructs:
     worker:
       handler: Bref\LaravelBridge\Queue\QueueHandler
       runtime: php-83
-      layers:
-        - ${bref-extra:redis-php-83}
       timeout: 60 # in seconds
 
 plugins:
   - ./vendor/bref/bref
-  - ./vendor/bref/extra-php-extensions
   - serverless-lift

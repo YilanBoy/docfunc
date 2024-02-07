@@ -28,7 +28,7 @@ provider:
             - dynamodb:DeleteItem
           Resource: !GetAtt CacheTable.Arn
   # CloudWatch log settings
-  logRetentionInDays: 7
+  logRetentionInDays: 1
 
   environment:
     # App settings

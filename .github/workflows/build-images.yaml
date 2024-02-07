@@ -1,17 +1,17 @@
 name: Build images
 
 on:
-  workflow_run:
-    workflows: [ "Run tests" ]
-    types:
-      - completed
+  workflow_dispatch:
+    inputs:
+      name:
+        description: Who to greet?
+        default: Allen
 
 env:
-  APP_VERSION: 0.1.21
+  APP_VERSION: 0.1.22
 
 jobs:
   get-approval:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Get approval
     runs-on: ubuntu-latest
     environment: production

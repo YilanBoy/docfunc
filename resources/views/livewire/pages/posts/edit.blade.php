@@ -61,7 +61,7 @@
                     class="form-select h-12 w-full rounded-md border border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50"
                     id="category_id"
                     name="category_id"
-                    wire:model.live="form.category_id"
+                    wire:model.change="form.category_id"
                     required
                   >
                     @foreach ($categories as $category)
@@ -83,7 +83,7 @@
                       id="is-private"
                       name="is-private"
                       type="checkbox"
-                      wire:model.live="form.is_private"
+                      wire:model.change="form.is_private"
                     >
                     <span class="ml-2 text-lg text-gray-600 dark:text-gray-50">文章不公開</span>
                   </label>
@@ -101,7 +101,7 @@
                     id="title"
                     name="title"
                     type="text"
-                    wire:model.live="form.title"
+                    wire:model.live.debounce.500ms="form.title"
                     placeholder="文章標題"
                     required
                     autofocus

@@ -7,12 +7,19 @@ on:
         description: Who to greet?
         default: Allen
 
+  workflow_run:
+    workflows: [ "Run tests" ]
+    types:
+      - completed
+
 permissions:
   id-token: write
   contents: read
 
 jobs:
   deploy-lambda:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    environment: production
     name: Deploy to AWS Lambda
     runs-on: ubuntu-latest
     steps:

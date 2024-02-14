@@ -6,31 +6,39 @@
   @vite('resources/ts/highlight.ts')
 @endassets
 
+@script
+  <script>
+    // tab can only be 'information', 'posts', 'comments'
+    Alpine.data('userShowTabs', () => ({
+      tabSelected: $persist('information'),
+      tabButtonClicked(tabButton) {
+        this.tabSelected = tabButton.id.replace('-tab-button', '');
+        this.tabRepositionMarker(tabButton);
+      },
+      tabRepositionMarker(tabButton) {
+        this.$refs.tabMarker.style.width = tabButton.offsetWidth + 'px';
+        this.$refs.tabMarker.style.height = tabButton.offsetHeight + 'px';
+        this.$refs.tabMarker.style.left = tabButton.offsetLeft + 'px';
+      },
+      tabContentActive(tabContent) {
+        return this.tabSelected === tabContent.id.replace('-content', '');
+      },
+      init() {
+        let tabSelectedButtons = document.getElementById(this.tabSelected + '-tab-button');
+        this.tabRepositionMarker(tabSelectedButtons);
+      }
+    }));
+  </script>
+@endscript
+
 {{-- user information page --}}
 <x-layouts.layout-main>
   <div class="container mx-auto flex-1">
     <div class="flex flex-col items-center justify-start px-4">
       {{-- user information, posts and comments --}}
       <div
-        class="relative w-full max-w-sm md:max-w-[750px]"
-        {{-- tab can only be 'information', 'posts', 'comments' --}}
-        x-data="{
-            tabSelected: $persist('information'),
-            tabButtonClicked(tabButton) {
-                this.tabSelected = tabButton.id.replace('-tab-button', '');
-                this.tabRepositionMarker(tabButton);
-            },
-            tabRepositionMarker(tabButton) {
-                this.$refs.tabMarker.style.width = tabButton.offsetWidth + 'px';
-                this.$refs.tabMarker.style.height = tabButton.offsetHeight + 'px';
-                this.$refs.tabMarker.style.left = tabButton.offsetLeft + 'px';
-            },
-            tabContentActive(tabContent) {
-                return this.tabSelected === tabContent.id.replace('-content', '');
-            }
-        }"
-        x-init="tabSelectedButtons = document.getElementById(tabSelected + '-tab-button');
-        tabRepositionMarker(tabSelectedButtons);"
+        class="relative w-full max-w-sm md:max-w-[800px]"
+        x-data="userShowTabs"
       >
         <div
           class="relative mb-6 inline-grid h-10 w-full select-none grid-cols-3 items-center justify-center rounded-lg border border-gray-100 bg-white p-1 text-gray-500 dark:border-gray-800 dark:bg-gray-700 dark:text-gray-50"

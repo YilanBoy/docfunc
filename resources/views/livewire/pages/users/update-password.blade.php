@@ -1,8 +1,17 @@
+@script
+  <script>
+    Alpine.data('focusOnCurrentPasswordInput', () => ({
+      init() {
+        this.$refs.currentPassword.focus()
+      }
+    }))
+  </script>
+@endscript
+
 <x-layouts.layout-main>
   <div
     class="container mx-auto flex-1"
-    x-data
-    x-init="$refs.currentPassword.focus()"
+    x-data="focusOnCurrentPasswordInput"
   >
     <div class="flex flex-col items-start justify-center px-4 md:flex-row xl:px-0">
       <x-member-centre.sidemenu />

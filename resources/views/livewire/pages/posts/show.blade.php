@@ -62,7 +62,7 @@
         <div class="flex items-stretch justify-center lg:space-x-4">
           <div class="hidden lg:block lg:w-1/6"></div>
 
-          <div class="flex w-full flex-col items-center justify-start p-2 md:w-[750px] lg:p-0">
+          <div class="flex w-full flex-col items-center justify-start p-2 md:w-[800px] lg:p-0">
 
             <x-card
               class="w-full"

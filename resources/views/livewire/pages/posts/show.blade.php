@@ -48,6 +48,36 @@
             });
           }
         }
+
+        // setup heading menu
+        let headingMenu = this.$refs.headingMenu;
+
+        if (headingMenu instanceof Element) {
+          let headings = document.querySelectorAll('#post-body h2');
+
+          if (headings.length > 0) {
+            let headingMenuContent = '';
+
+            headingMenuContent += `<div class="space-y-4">
+              <div class="flex items-center justify-center dark:text-gray-50">目錄</div>
+              <hr class="h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
+            </div>`;
+
+            headings.forEach((heading, index) => {
+              let headingId = `heading-${index}`;
+              heading.id = headingId;
+              headingMenuContent +=
+                `<a href="#${headingId}"
+                  class="flex text-sm text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+                >
+                  <span class="flex items-center justify-center">⏵</span>
+                  <span class="ml-2">${heading.textContent}</span>
+                </a>`;
+            });
+
+            headingMenu.innerHTML = headingMenuContent;
+          }
+        }
       }
     }));
   </script>
@@ -60,7 +90,13 @@
 
       <div class="container mx-auto">
         <div class="flex items-stretch justify-center lg:space-x-4">
-          <div class="hidden lg:block lg:w-1/6"></div>
+          <div class="hidden lg:block lg:w-1/5">
+            {{-- heading menu --}}
+            <div
+              class="sticky top-1/2 hidden -translate-y-1/2 flex-col space-y-4 xl:flex"
+              x-ref="headingMenu"
+            ></div>
+          </div>
 
           <div class="flex w-full flex-col items-center justify-start p-2 md:w-[800px] lg:p-0">
 
@@ -201,7 +237,7 @@
             />
           </div>
 
-          <div class="hidden lg:block lg:w-1/6">
+          <div class="hidden lg:block lg:w-1/5">
             {{-- desktop sidemenu --}}
             <livewire:shared.posts.show-post-sidemenu
               :post-id="$post->id"

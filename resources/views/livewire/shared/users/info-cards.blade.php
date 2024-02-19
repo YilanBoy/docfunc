@@ -25,23 +25,27 @@
       }, 1000 * (1 / to));
   });"
 >
-  <x-card class="col-span-6 flex flex-col items-center justify-between md:col-span-2">
-    {{-- 大頭貼 --}}
-    <img
-      class="h-36 w-36 rounded-full"
-      src="{{ $user->gravatar_url }}"
-      alt="{{ $user->name }}"
-    >
+  <div
+    class="col-span-6 rounded-2xl bg-gradient-to-br from-green-500 via-teal-500 to-sky-500 p-1 shadow-lg dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500 dark:shadow-none md:col-span-2"
+  >
+    <div class="flex flex-col items-center justify-between rounded-xl bg-gray-50 p-5 dark:bg-gray-800">
+      {{-- 大頭貼 --}}
+      <img
+        class="h-36 w-36 rounded-full"
+        src="{{ $user->gravatar_url }}"
+        alt="{{ $user->name }}"
+      >
 
-    {{-- 會員名稱 --}}
-    <span class="mt-2 flex items-center justify-center text-3xl font-semibold">
-      {{ $user->name }}
-    </span>
+      {{-- 會員名稱 --}}
+      <span class="mt-2 flex items-center justify-center text-3xl font-semibold">
+        {{ $user->name }}
+      </span>
 
-    <span class="mt-2 text-xs">
-      註冊於 {{ $user->created_at->format('Y / m / d') . '（' . $user->created_at->diffForHumans() . '）' }}
-    </span>
-  </x-card>
+      <span class="mt-2 text-xs">
+        註冊於 {{ $user->created_at->format('Y / m / d') . '（' . $user->created_at->diffForHumans() . '）' }}
+      </span>
+    </div>
+  </div>
 
   <x-card class="col-span-6 dark:text-gray-50 md:col-span-4">
     <h3 class="w-full text-2xl">個人簡介</h3>

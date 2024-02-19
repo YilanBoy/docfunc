@@ -1,34 +1,30 @@
 <div class="hidden space-y-6 xl:block xl:w-[320px]">
   {{-- 介紹 --}}
-  <div
-    class="rounded-2xl bg-gradient-to-br from-green-500 via-teal-500 to-sky-500 p-1 shadow-lg dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500 dark:shadow-none"
-  >
-    <div class="group rounded-xl bg-gray-50 p-5 dark:bg-gray-800 dark:text-gray-50">
-      <p
-        class="w-full bg-gradient-to-r from-emerald-500 to-sky-500 bg-clip-text text-center font-jetbrains-mono text-xl font-semibold text-transparent dark:border-white dark:from-pink-500 dark:to-violet-500">
-        echo 'Hello World';
-      </p>
+  <x-card class="group dark:text-gray-50">
+    <p
+      class="w-full bg-gradient-to-r from-emerald-500 to-sky-500 bg-clip-text text-center font-jetbrains-mono text-xl font-semibold text-transparent dark:border-white dark:from-pink-500 dark:to-violet-500">
+      echo 'Hello World';
+    </p>
 
-      <hr class="my-4 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
+    <hr class="my-4 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
 
-      <span class="group-gradient-underline-grow">
-        嘗試用部落格來紀錄自己學習的過程，與生活上的大小事。此部落格使用 TALL Stack 所開發🚀
-      </span>
+    <span class="group-gradient-underline-grow">
+      嘗試用部落格來紀錄自己學習的過程，與生活上的大小事。此部落格使用 TALL Stack 所開發🚀
+    </span>
 
-      <div class="mt-8 flex items-center justify-center">
-        <a
-          class="group relative flex w-full items-center justify-center overflow-hidden rounded-lg bg-emerald-600 px-4 py-2 [transform:translateZ(0)] before:absolute before:left-1/2 before:top-1/2 before:h-8 before:w-8 before:-translate-x-1/2 before:-translate-y-1/2 before:scale-[0] before:rounded-full before:bg-lividus-600 before:opacity-0 before:transition before:duration-700 before:ease-in-out hover:before:scale-[10] hover:before:opacity-100 dark:bg-lividus-600 dark:before:bg-emerald-600"
-          href="{{ route('posts.create') }}"
-          wire:navigate
-        >
-          <div class="relative z-0 flex items-center text-gray-200 transition duration-700 ease-in-out">
-            <x-icon.pencil class="w-5" />
-            <span class="ml-2">新增文章</span>
-          </div>
-        </a>
-      </div>
+    <div class="mt-8 flex items-center justify-center">
+      <a
+        class="group relative flex w-full items-center justify-center overflow-hidden rounded-lg bg-emerald-600 px-4 py-2 [transform:translateZ(0)] before:absolute before:left-1/2 before:top-1/2 before:h-8 before:w-8 before:-translate-x-1/2 before:-translate-y-1/2 before:scale-[0] before:rounded-full before:bg-lividus-600 before:opacity-0 before:transition before:duration-700 before:ease-in-out hover:before:scale-[10] hover:before:opacity-100 dark:bg-lividus-600 dark:before:bg-emerald-600"
+        href="{{ route('posts.create') }}"
+        wire:navigate
+      >
+        <div class="relative z-0 flex items-center text-gray-200 transition duration-700 ease-in-out">
+          <x-icon.pencil class="w-5" />
+          <span class="ml-2">新增文章</span>
+        </div>
+      </a>
     </div>
-  </div>
+  </x-card>
 
   {{-- 熱門標籤 --}}
   @if ($popularTags->count())

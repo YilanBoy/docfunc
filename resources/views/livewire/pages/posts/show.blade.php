@@ -14,14 +14,16 @@
   @vite('resources/ts/copy-code-btn.ts')
   {{-- post read pregress bar --}}
   @vite('resources/ts/progress-bar.ts')
-  {{-- to the top button --}}
+  {{-- scroll --}}
   @vite('resources/ts/scroll-to-top-btn.ts')
+  @vite('resources/ts/scroll-to-anchor.ts')
   {{-- social media share button --}}
   @vite('resources/ts/sharer.ts')
   {{-- media embed --}}
   @vite('resources/ts/oembed/embed-youtube-oembed.ts')
   @vite('resources/ts/oembed/embed-twitter-oembed.ts')
-  @vite('resources/ts/oembed/twitter-widgets.ts')
+  {{-- post content --}}
+  @vite('resources/ts/post-content.ts')
 @endassets
 
 @script
@@ -31,53 +33,12 @@
         hljs.highlightAll();
         codeBlockCopyButton(this.$refs.postBody);
         processYoutubeOEmbeds();
-        processTwitterOEmbeds();
-        setTimeout(() => {
-          twttr.widgets?.load(this.$refs.postBody);
-        }, 1000);
+        processTwitterOEmbeds(this.$refs.postBody);
         setupProgressBar(this.$refs.section, this.$refs.progressBar);
         setupScrollToTopButton(this.$refs.scrollToTopBtn);
         setupSharer();
-
-        if (window.location.hash !== '') {
-          let target = document.querySelector(window.location.hash);
-
-          if (target instanceof Element) {
-            target.scrollIntoView({
-              behavior: 'smooth'
-            });
-          }
-        }
-
-        // setup heading menu
-        let headingMenu = this.$refs.headingMenu;
-
-        if (headingMenu instanceof Element) {
-          let headings = document.querySelectorAll('#post-body h2');
-
-          if (headings.length > 0) {
-            let headingMenuContent = '';
-
-            headingMenuContent += `<div class="space-y-4">
-              <div class="flex items-center justify-center dark:text-gray-50">目錄</div>
-              <hr class="h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
-            </div>`;
-
-            headings.forEach((heading, index) => {
-              let headingId = `heading-${index}`;
-              heading.id = headingId;
-              headingMenuContent +=
-                `<a href="#${headingId}"
-                  class="flex text-sm text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
-                >
-                  <span class="flex items-center justify-center">⏵</span>
-                  <span class="ml-2">${heading.textContent}</span>
-                </a>`;
-            });
-
-            headingMenu.innerHTML = headingMenuContent;
-          }
-        }
+        setupPostContent(this.$refs.postContent, this.$refs.postBody);
+        scrollToAnchor();
       }
     }));
   </script>
@@ -91,10 +52,10 @@
       <div class="container mx-auto">
         <div class="flex items-stretch justify-center lg:space-x-4">
           <div class="hidden lg:block lg:w-1/5">
-            {{-- heading menu --}}
+            {{-- content menu --}}
             <div
-              class="sticky top-1/2 hidden -translate-y-1/2 flex-col space-y-4 xl:flex"
-              x-ref="headingMenu"
+              class="sticky top-1/2 hidden -translate-y-1/2 flex-col xl:flex"
+              x-ref="postContent"
             ></div>
           </div>
 

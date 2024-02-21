@@ -2,6 +2,9 @@
  * @description This is a typescript clone of sharer.js(https://github.com/ellisonleao/sharer.js)
  *
  */
+interface Window {
+    setupSharer: any;
+}
 
 type facebookParams = {
     shareUrl: string;
@@ -177,10 +180,6 @@ function copyToClipboard(event: Event): void {
             );
         }
     }
-}
-
-interface Window {
-    setupSharer: any;
 }
 
 window.setupSharer = function () {

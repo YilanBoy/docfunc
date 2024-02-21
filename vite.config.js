@@ -22,9 +22,10 @@ export default defineConfig({
                 'resources/ts/copy-code-btn.ts',
                 'resources/ts/oembed/embed-youtube-oembed.ts',
                 'resources/ts/oembed/embed-twitter-oembed.ts',
-                'resources/ts/oembed/twitter-widgets.ts',
                 'resources/ts/progress-bar.ts',
                 'resources/ts/set-theme.ts',
+                'resources/ts/scroll-to-anchor.ts',
+                'resources/ts/post-content.ts',
                 // css
                 'node_modules/@yaireo/tagify/dist/tagify.css',
                 'resources/css/editor.css',

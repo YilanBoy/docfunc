@@ -69,7 +69,7 @@
 
               <div class="flex justify-between">
                 {{-- post title --}}
-                <h1 class="grow text-3xl dark:text-gray-50">{{ $post->title }}</h1>
+                <h1 class="text-4xl leading-relaxed text-green-600 dark:text-lividus-500">{{ $post->title }}</h1>
 
                 {{-- mobile dropdowns --}}
                 @if (auth()->id() === $post->user_id)

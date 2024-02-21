@@ -2,8 +2,6 @@ interface Window {
     setupPostContent: any;
 }
 
-const viewportHeight: number = window.innerHeight;
-
 function createPostContentLink(
     postContent: Element,
     headings: NodeListOf<HTMLHeadingElement>,

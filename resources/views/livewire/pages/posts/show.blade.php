@@ -30,6 +30,7 @@
   <script>
     Alpine.data('showPostPage', () => ({
       init() {
+        setupPostContent(this.$refs.postContent, this.$refs.postBody);
         hljs.highlightAll();
         codeBlockCopyButton(this.$refs.postBody);
         processYoutubeOEmbeds();
@@ -37,7 +38,6 @@
         setupProgressBar(this.$refs.section, this.$refs.progressBar);
         setupScrollToTopButton(this.$refs.scrollToTopBtn);
         setupSharer();
-        setupPostContent(this.$refs.postContent, this.$refs.postBody);
         scrollToAnchor();
       }
     }));

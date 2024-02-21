@@ -36,42 +36,76 @@ function createPostContentLink(
     }
 }
 
-function activePostContentLink(
-    headingPositions: number[],
-    contentLinks: NodeListOf<HTMLAnchorElement>,
-): void {
-    let currentScrollPosition: number = window.scrollY;
+function createHeadingSectionsInPostBdy(postBody: Element) {
+    let childNodes: NodeListOf<ChildNode> = postBody.childNodes;
 
-    // change the style of heading link when scrolling
-    headingPositions.forEach((position: number, index: number) => {
+    let currentH2: Element | null = null;
+    let currentSection: Element | null = null;
+    let newPostBody: any[] = [];
+
+    childNodes.forEach((childNode: ChildNode) => {
         if (
-            currentScrollPosition <
-            headingPositions[0] - (viewportHeight * 3) / 4
+            currentH2 === null &&
+            currentSection === null &&
+            childNode.nodeName !== 'H2'
         ) {
-            contentLinks.forEach((link: HTMLAnchorElement) => {
-                link.classList.remove('bg-gray-300', 'dark:bg-gray-700');
-            });
-        }
+            newPostBody.push(childNode.cloneNode(true));
+        } else if (childNode.nodeName === 'H2') {
+            currentH2 = childNode as Element;
 
-        if (currentScrollPosition >= position - (viewportHeight * 3) / 4) {
-            contentLinks.forEach((link: HTMLAnchorElement) => {
-                link.classList.remove('bg-gray-300', 'dark:bg-gray-700');
-            });
+            let section = document.createElement('div');
+            currentSection = section;
+            section.id = `${currentH2.id}-section`;
 
-            contentLinks[index].classList.add(
-                'bg-gray-300',
-                'dark:bg-gray-700',
-            );
+            section.appendChild(childNode.cloneNode(true));
+
+            newPostBody.push(section);
+        } else if (currentH2 && currentSection && childNode.nodeName !== 'H2') {
+            // call by reference
+            currentSection.appendChild(childNode.cloneNode(true));
         }
+    });
+
+    // Remove all child nodes from postBody
+    postBody.innerHTML = '';
+
+    // Append all sectionGroups to postBody
+    newPostBody.forEach((sectionGroup: ChildNode) => {
+        postBody.appendChild(sectionGroup);
     });
 }
 
-function showWhereAmI(
-    headingPositions: number[],
-    contentLinks: NodeListOf<HTMLAnchorElement>,
-): void {
-    window.addEventListener('scroll', () => {
-        activePostContentLink(headingPositions, contentLinks);
+function showWhereAmI(contentLinks: NodeListOf<HTMLAnchorElement>) {
+    contentLinks.forEach((contentLink: HTMLAnchorElement, index: number) => {
+        let section: Element | null = document.getElementById(
+            `heading-${index}-section`,
+        );
+
+        console.log(`heading-${index}-section`);
+
+        if (section === null) {
+            return;
+        }
+
+        let sectionObserver = new IntersectionObserver(
+            function (entries) {
+                console.log('show');
+                if (entries[0].isIntersecting) {
+                    contentLink.classList.add(
+                        'bg-gray-300',
+                        'dark:bg-gray-600',
+                    );
+                } else {
+                    contentLink.classList.remove(
+                        'bg-gray-300',
+                        'dark:bg-gray-600',
+                    );
+                }
+            },
+            { threshold: [0] },
+        );
+
+        sectionObserver.observe(section);
     });
 }
 
@@ -87,24 +121,11 @@ window.setupPostContent = function (
     }
 
     createPostContentLink(postContent, headings);
+    createHeadingSectionsInPostBdy(postBody);
 
     // Get all content links, must be after createPostContentLink
     let contentLinks: NodeListOf<HTMLAnchorElement> =
         postContent.querySelectorAll('a');
 
-    // Resize observer will execute at least once, and
-    // When the post body is resized
-    const resizeObserver = new ResizeObserver((entries) => {
-        let headingPositions: number[] = [];
-
-        headings.forEach((heading: HTMLHeadingElement) => {
-            let position = window.scrollY + heading.getBoundingClientRect().top;
-            headingPositions.push(position);
-        });
-
-        activePostContentLink(headingPositions, contentLinks);
-        showWhereAmI(headingPositions, contentLinks);
-    });
-
-    resizeObserver.observe(postBody);
+    showWhereAmI(contentLinks);
 };

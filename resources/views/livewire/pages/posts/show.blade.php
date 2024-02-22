@@ -28,19 +28,19 @@
   @vite('resources/ts/oembed/embed-youtube-oembed.ts')
   @vite('resources/ts/oembed/embed-twitter-oembed.ts')
   {{-- post content --}}
-  @vite('resources/ts/post-content.ts')
+  @vite('resources/ts/post-section-link.ts')
 @endassets
 
 @script
   <script>
     Alpine.data('showPostPage', () => ({
       init() {
-        setupPostContent(this.$refs.postContent, this.$refs.postBody);
+        setupPostSectionLink(this.$refs.postSectionMenu, this.$refs.postBody);
         hljs.highlightAll();
         codeBlockCopyButton(this.$refs.postBody);
         processYoutubeOEmbeds();
         processTwitterOEmbeds(this.$refs.postBody);
-        setupProgressBar(this.$refs.section, this.$refs.progressBar);
+        setupProgressBar(this.$refs.postCard, this.$refs.progressBar);
         setupScrollToTopButton(this.$refs.scrollToTopBtn);
         setupSharer();
         scrollToAnchor();
@@ -60,7 +60,7 @@
             {{-- content menu --}}
             <div
               class="sticky top-1/2 hidden -translate-y-1/2 flex-col xl:flex"
-              x-ref="postContent"
+              x-ref="postSectionMenu"
             ></div>
           </div>
 
@@ -68,8 +68,7 @@
 
             <x-card
               class="w-full"
-              id="section"
-              x-ref="section"
+              x-ref="postCard"
             >
 
               <div class="flex justify-between">

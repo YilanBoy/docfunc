@@ -25,7 +25,7 @@ export default defineConfig({
                 'resources/ts/progress-bar.ts',
                 'resources/ts/set-theme.ts',
                 'resources/ts/scroll-to-anchor.ts',
-                'resources/ts/post-content.ts',
+                'resources/ts/post-section-link.ts',
                 // css
                 'node_modules/@yaireo/tagify/dist/tagify.css',
                 'resources/css/editor.css',

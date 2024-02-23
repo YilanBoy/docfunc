@@ -4,7 +4,7 @@ interface Window {
 
 // 滾動至網頁最頂部
 function scrollToTop(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0 });
 }
 
 window.setupScrollToTopButton = function (

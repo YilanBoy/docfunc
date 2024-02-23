@@ -17,7 +17,7 @@ class Comments extends Component
     public function updatedPaginators(): void
     {
         $javaScript = <<<'JS'
-            window.scrollTo({ top: 0, behavior: 'smooth' })
+            window.scrollTo({ top: 0 });
         JS;
 
         $this->js($javaScript);

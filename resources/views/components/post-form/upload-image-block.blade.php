@@ -74,6 +74,7 @@
   {{-- Progress Bar --}}
   <div
     class="relative mt-4 pt-1"
+    x-cloak
     x-show="isUploading"
   >
     <div class="mb-4 flex h-4 overflow-hidden rounded bg-green-200 text-xs dark:bg-indigo-200">

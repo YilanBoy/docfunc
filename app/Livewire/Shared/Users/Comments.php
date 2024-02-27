@@ -4,6 +4,7 @@ namespace App\Livewire\Shared\Users;
 
 use App\Livewire\Traits\MarkdownConverter;
 use App\Models\Comment;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -12,16 +13,8 @@ class Comments extends Component
     use MarkdownConverter;
     use WithPagination;
 
+    #[Locked]
     public int $userId;
-
-    public function updatedPaginators(): void
-    {
-        $javaScript = <<<'JS'
-            window.scrollTo({ top: 0 });
-        JS;
-
-        $this->js($javaScript);
-    }
 
     public function render()
     {

@@ -5,15 +5,30 @@
     let currentScrollY = 0;
 
     Livewire.hook('commit.prepare', ({
-      component,
-      commit
+      component
     }) => {
       // Runs before commit payloads are collected and sent to the server...
-      currentScrollY = window.scrollY;
+      if (component.name === "shared.comments.comments") {
+        currentScrollY = window.scrollY;
+      }
+    })
+
+    Livewire.hook('commit', ({
+      commit
+    }) => {
+      // Runs immediately before a commit's payload is sent to the server...
+      if ([
+          "gotoPage",
+          "nextPage",
+          "previousPage"
+        ].includes(commit.calls[0].method)) {
+        window.scrollTo({
+          top: 0
+        });
+      }
     })
 
     Livewire.hook("morph.updated", ({
-      el,
       component
     }) => {
       // when show more comments, stick the current scrollY

@@ -26,16 +26,6 @@ class Posts extends Component
     #[Url]
     public string $order = 'latest';
 
-    // add a scroll to top browser event when the paginators are updated
-    public function updatedPaginators(): void
-    {
-        $javaScript = <<<'JS'
-            window.scrollTo({ top: 0 });
-        JS;
-
-        $this->js($javaScript);
-    }
-
     public function orderChange($newOrder): void
     {
         // 回到第一頁

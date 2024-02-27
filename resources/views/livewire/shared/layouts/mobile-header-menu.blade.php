@@ -1,6 +1,40 @@
+@script
+  <script>
+    Alpine.data('mobileHeaderMenu', () => ({
+      html: document.documentElement,
+      dropdownMenuIsOpen: false,
+      profileMenuIsOpen: false,
+      switchTheme() {
+        if (this.html.classList.contains('dark')) {
+          this.html.classList.remove('dark')
+          localStorage.setItem('mode', 'light')
+        } else {
+          this.html.classList.add('dark')
+          localStorage.setItem('mode', 'dark')
+        }
+      },
+      toggleDropdownMenu() {
+        this.dropdownMenuIsOpen = !this.dropdownMenuIsOpen
+      },
+      dropdownMenuIsClose() {
+        return this.dropdownMenuIsOpen !== true
+      },
+      closeDropdownMenu() {
+        this.dropdownMenuIsOpen = false
+      },
+      toggleProfileMenu() {
+        this.profileMenuIsOpen = !this.profileMenuIsOpen
+      },
+      closeProfileMenu() {
+        this.profileMenuIsOpen = false
+      }
+    }));
+  </script>
+@endscript
+
 <div
   class="bg-gray-50 shadow-lg dark:bg-gray-800 dark:shadow-none lg:hidden"
-  x-data="{ menuIsOpen: false }"
+  x-data="mobileHeaderMenu"
 >
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-[4.5rem] items-center justify-between">
@@ -11,13 +45,14 @@
           type="button"
           aria-controls="mobile-menu"
           aria-expanded="false"
-          x-on:click="menuIsOpen = ! menuIsOpen"
+          x-on:click="toggleDropdownMenu"
         >
           <span class="sr-only">Open main menu</span>
           {{-- 手機版-關閉選單的 icon --}}
           <div
             class="text-3xl text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-            :class="menuIsOpen ? 'hidden' : 'block'"
+            x-cloak
+            x-show="dropdownMenuIsClose"
           >
             <x-icon.list class="w-7" />
           </div>
@@ -25,7 +60,7 @@
           <div
             class="text-xl text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
             x-cloak
-            :class="menuIsOpen ? 'block' : 'hidden'"
+            x-show="dropdownMenuIsOpen"
           >
             <x-icon.x class="w-7" />
           </div>
@@ -48,16 +83,7 @@
         <button
           type="button"
           aria-label="Toggle Dark Mode"
-          x-data="{ html: document.documentElement }"
-          x-on:click="
-            if (html.classList.contains('dark')) {
-              html.classList.remove('dark')
-              localStorage.setItem('mode', 'light')
-            } else {
-              html.classList.add('dark')
-              localStorage.setItem('mode', 'dark')
-            }
-          "
+          x-on:click="switchTheme"
         >
           <x-icon.sun class="w-5 text-amber-400 hover:text-amber-500 dark:hidden" />
 
@@ -105,10 +131,7 @@
           </div>
 
           {{-- 手機版-會員選單 --}}
-          <div
-            class="relative"
-            x-data="{ showDropdown: false }"
-          >
+          <div class="relative">
             {{-- 手機版-會員大頭貼 --}}
             <div>
               <button
@@ -117,8 +140,8 @@
                 type="button"
                 aria-expanded="false"
                 aria-haspopup="true"
-                x-on:click="showDropdown = ! showDropdown"
-                x-on:keydown.escape.window="showDropdown = false"
+                x-on:click="toggleProfileMenu"
+                x-on:keydown.escape.window="closeProfileMenu"
               >
                 <span class="sr-only">Open user menu</span>
                 <img
@@ -129,7 +152,7 @@
               </button>
             </div>
 
-            {{-- 手機版-會員下拉式選單 --}}
+            {{-- 手機版-會員選單 --}}
             <div
               class="absolute right-0 mt-2 w-48 rounded-md bg-gray-50 p-2 text-gray-700 shadow-lg ring-1 ring-black ring-opacity-20 dark:bg-gray-800 dark:text-gray-50 dark:shadow-none dark:ring-gray-600"
               role="menu"
@@ -137,8 +160,8 @@
               aria-labelledby="user-menu-button"
               tabindex="-1"
               x-cloak
-              x-on:click.outside="showDropdown = false"
-              x-show="showDropdown"
+              x-show="profileMenuIsOpen"
+              x-on:click.outside="closeProfileMenu"
               x-transition.origin.top.right
             >
               <a
@@ -196,7 +219,7 @@
   <div
     class="lg:hidden"
     x-cloak
-    x-show="menuIsOpen"
+    x-show="dropdownMenuIsOpen"
     x-collapse
   >
     <div class="space-y-1 px-2 pb-3 pt-2">

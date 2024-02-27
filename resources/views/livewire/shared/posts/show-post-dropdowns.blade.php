@@ -1,6 +1,20 @@
+@script
+  <script>
+    Alpine.data('showPostDropdowns', () => ({
+      editMenuIsOpen: false,
+      toggleEditMenu() {
+        this.editMenuIsOpen = !this.editMenuIsOpen;
+      },
+      closeEditMenu() {
+        this.editMenuIsOpen = false;
+      }
+    }));
+  </script>
+@endscript
+
 <div
   class="relative xl:hidden"
-  x-data="{ editMenuIsOpen: false }"
+  x-data="showPostDropdowns"
 >
   <div>
     <button
@@ -8,9 +22,9 @@
       type="button"
       aria-expanded="false"
       aria-haspopup="true"
-      x-on:click="editMenuIsOpen = ! editMenuIsOpen"
-      x-on:click.outside="editMenuIsOpen = false"
-      x-on:keydown.escape.window="editMenuIsOpen = false"
+      x-on:click="toggleEditMenu"
+      x-on:click.outside="closeEditMenu"
+      x-on:keydown.escape.window="closeEditMenu"
     >
       <x-icon.three-dots-vertical class="w-6" />
     </button>

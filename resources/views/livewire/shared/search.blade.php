@@ -1,13 +1,27 @@
-<div x-data="{ searchBoxOpen: false }">
+@script
+  <script>
+    Alpine.data('search', () => ({
+      searchBarIsOpen: false,
+      openSearchBar() {
+        this.searchBarIsOpen = true;
+        this.$nextTick(() => {
+          this.$refs.searchBar.focus()
+        })
+      },
+      closeSearchBar() {
+        this.searchBarIsOpen = false;
+      }
+    }));
+  </script>
+@endscript
+
+<div x-data="search">
   {{-- 搜尋按鈕 --}}
   <button
     class="flex size-10 items-center justify-center rounded-lg text-xl text-gray-500 transition duration-150 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-gray-50"
     type="button"
     aria-label="Search"
-    x-on:click="
-      searchBoxOpen = !searchBoxOpen
-      $nextTick(() => { $refs.searchBox.focus() })
-    "
+    x-on:click="openSearchBar"
   >
     <x-icon.search class="w-5" />
   </button>
@@ -19,15 +33,15 @@
     aria-labelledby="modal-title"
     aria-modal="true"
     x-cloak
-    x-show="searchBoxOpen"
-    x-on:keydown.window.escape="searchBoxOpen = false"
+    x-show="searchBarIsOpen"
+    x-on:keydown.window.escape="closeSearchBar"
   >
     <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
 
       {{-- modal --}}
       <div
         class="fixed inset-0 bg-gray-500/75 backdrop-blur transition-opacity"
-        x-show="searchBoxOpen"
+        x-show="searchBarIsOpen"
         x-transition:enter="ease-out duration-300"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"
@@ -42,15 +56,15 @@
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-start sm:p-0">
           <div
             class="mt-16 inline-block w-full max-w-md transition-all"
-            x-show="searchBoxOpen"
+            x-show="searchBarIsOpen"
             x-transition:enter="ease-out duration-300"
             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
             x-transition:leave="ease-in duration-200"
             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            x-on:click.outside="searchBoxOpen = false"
-            x-trap.noscroll="searchBoxOpen"
+            x-on:click.outside="closeSearchBar"
+            x-trap.noscroll="searchBarIsOpen"
           >
             {{-- search form --}}
             <div class="relative">
@@ -62,7 +76,7 @@
                 class="w-full rounded-xl border border-gray-400 bg-gray-50 px-10 py-2 text-xl placeholder-gray-400 outline-none focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-800 dark:text-gray-50 dark:placeholder-white"
                 id="searchBox"
                 type="text"
-                x-ref="searchBox"
+                x-ref="searchBar"
                 wire:model.live.debounce.500ms="search"
                 autocomplete="off"
                 placeholder="搜尋文章"

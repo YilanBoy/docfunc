@@ -1,29 +1,38 @@
+@script
+  <script>
+    Alpine.data('userInfoCards', () => ({
+      init() {
+        document.querySelectorAll('.count-up').forEach((countUp) => {
+          let from = 0;
+          let to = Number(countUp.textContent);
+
+          if (to > 999) {
+            to = 999;
+          }
+
+          if (from === to) {
+            return;
+          }
+
+          let counter = setInterval(() => {
+            countUp.textContent = String(from);
+
+            if (from === to) {
+              clearInterval(counter);
+            }
+
+            from++;
+          }, 1000 * (1 / to));
+        });
+      }
+    }));
+  </script>
+@endscript
+
 {{-- 會員基本資訊 --}}
 <div
   class="grid w-full grid-cols-6 gap-6 dark:text-gray-50"
-  x-data
-  x-init="document.querySelectorAll('.count-up').forEach((countUp) => {
-      let from = 0;
-      let to = Number(countUp.textContent);
-
-      if (to > 999) {
-          to = 999;
-      }
-
-      if (from === to) {
-          return;
-      }
-
-      let counter = setInterval(() => {
-          countUp.textContent = String(from);
-
-          if (from === to) {
-              clearInterval(counter);
-          }
-
-          from++;
-      }, 1000 * (1 / to));
-  });"
+  x-data="userInfoCards"
 >
   <div
     class="col-span-6 rounded-2xl bg-gradient-to-br from-green-500 via-teal-500 to-sky-500 p-1 shadow-lg dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500 dark:shadow-none md:col-span-2"
@@ -73,7 +82,9 @@
         <div class="col-span-11 flex items-center">
 
           @php
-            $barWidth = $category->posts->count() ? (int) (($category->posts->count() / $user->posts->count()) * 100) : 0.2;
+            $barWidth = $category->posts->count()
+                ? (int) (($category->posts->count() / $user->posts->count()) * 100)
+                : 0.2;
           @endphp
 
           <div style="width: {{ $barWidth }}%">

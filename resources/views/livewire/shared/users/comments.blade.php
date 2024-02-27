@@ -1,9 +1,17 @@
+@script
+  <script>
+    Alpine.data('userComments', () => ({
+      init() {
+        hljs.highlightAll();
+      }
+    }));
+  </script>
+@endscript
+
 {{-- 會員留言 --}}
 <div
   class="space-y-6"
-  x-data
-  x-init="// init comments page
-  window.hljs.highlightAll();"
+  x-data="userComments"
 >
   @forelse ($comments as $comment)
     <x-dashed-card

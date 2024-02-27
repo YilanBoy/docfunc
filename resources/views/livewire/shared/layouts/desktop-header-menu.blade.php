@@ -1,6 +1,30 @@
+@script
+  <script>
+    Alpine.data('desktopHeaderMenu', () => ({
+      html: document.documentElement,
+      profileMenuIsOpen: false,
+      switchTheme() {
+        if (this.html.classList.contains('dark')) {
+          this.html.classList.remove('dark')
+          localStorage.setItem('mode', 'light')
+        } else {
+          this.html.classList.add('dark')
+          localStorage.setItem('mode', 'dark')
+        }
+      },
+      toggleProfileMenu() {
+        this.profileMenuIsOpen = !this.profileIsOpen
+      },
+      closeProfileMenu() {
+        this.profileMenuIsOpen = false
+      }
+    }));
+  </script>
+@endscript
+
 <div
   class="relative hidden h-20 w-full items-center justify-center bg-gray-50 shadow-lg transition-all duration-300 dark:bg-gray-800 dark:shadow-none lg:flex"
-  x-data
+  x-data="desktopHeaderMenu"
 >
   {{-- 電腦版-Logo --}}
   <a
@@ -44,16 +68,7 @@
       class="group flex size-10 items-center justify-center"
       type="button"
       aria-label="Toggle Dark Mode"
-      x-data="{ html: document.documentElement }"
-      x-on:click="
-        if (html.classList.contains('dark')) {
-          html.classList.remove('dark')
-          localStorage.setItem('mode', 'light')
-        } else {
-          html.classList.add('dark')
-          localStorage.setItem('mode', 'dark')
-        }
-      "
+      x-on:click="switchTheme"
     >
       <x-icon.sun class="w-5 text-amber-400 transition duration-150 group-hover:text-amber-500 dark:hidden" />
 
@@ -108,10 +123,7 @@
       </span>
 
       {{-- 電腦版-會員選單 --}}
-      <div
-        class="relative flex items-center justify-center"
-        x-data="{ profileIsOpen: false }"
-      >
+      <div class="relative flex items-center justify-center">
         {{-- 電腦版-會員大頭貼 --}}
         <div>
           <button
@@ -120,8 +132,8 @@
             type="button"
             aria-expanded="false"
             aria-haspopup="true"
-            x-on:click="profileIsOpen = ! profileIsOpen"
-            x-on:keydown.escape.window="profileIsOpen = false"
+            x-on:click="toggleProfileMenu"
+            x-on:keydown.escape.window="closeProfileMenu"
           >
             <span class="sr-only">Open user menu</span>
             <img
@@ -140,8 +152,8 @@
           aria-labelledby="user-menu-button"
           tabindex="-1"
           x-cloak
-          x-on:click.outside="profileIsOpen = false"
-          x-show="profileIsOpen"
+          x-show="profileMenuIsOpen"
+          x-on:click.outside="closeProfileMenu"
           x-transition.origin.top.right
         >
           <a

@@ -13,7 +13,7 @@
   class="space-y-6"
   x-data="userComments"
 >
-  @forelse ($comments as $comment)
+  @foreach ($comments as $comment)
     <x-dashed-card
       class="group relative max-h-64 cursor-pointer overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-1/2 after:bg-gradient-to-b after:from-transparent after:to-gray-100 dark:after:to-gray-800"
     >
@@ -39,17 +39,7 @@
         <span class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>
       </div>
     </x-dashed-card>
+  @endforeach
 
-  @empty
-    <x-card class="flex h-32 items-center justify-center text-gray-400 dark:text-gray-600">
-      <x-icon.exclamation-circle class="w-6" />
-      <span class="ml-2">目前沒有留言，快點找文章進行留言吧！</span>
-    </x-card>
-  @endforelse
-
-  @if ($comments->count() > 0)
-    <div>
-      {{ $comments->onEachSide(1)->links() }}
-    </div>
-  @endif
+  {{ $comments->onEachSide(1)->links() }}
 </div>

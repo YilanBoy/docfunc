@@ -143,7 +143,5 @@
     </x-card>
   @endforelse
 
-  <div>
-    {{ $posts->onEachSide(1)->links() }}
-  </div>
+  {{ $posts->onEachSide(1)->links() }}
 </div>

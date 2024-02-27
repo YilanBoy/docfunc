@@ -1,24 +1,43 @@
+@script
+  <script>
+    Alpine.data('editCommentModal', () => ({
+      modalIsOpen: false,
+      body: @entangle('body'),
+      openModal() {
+        this.modalIsOpen = true;
+        this.$nextTick(() => this.$refs.editCommentTextarea.focus());
+      },
+      closeModal() {
+        this.modalIsOpen = false;
+      },
+      tabToFourSpaces() {
+        this.$el.setRangeText('    ', this.$el.selectionStart, this.$el.selectionStart, 'end');
+      },
+      bodyIsEmpty() {
+        return this.body === '';
+      },
+    }));
+  </script>
+@endscript
+
 <div
   class="fixed inset-0 z-30"
   role="dialog"
   aria-labelledby="modal-title"
   aria-modal="true"
   x-cloak
-  x-data="{ isOpen: false }"
-  x-show="isOpen"
-  x-on:edit-comment-was-set.window="
-    isOpen = true
-    $nextTick(() => $refs.editCommentTextarea.focus())
-  "
-  x-on:close-edit-comment-modal.window="isOpen = false"
-  x-on:keydown.escape.window="isOpen = false"
+  x-data="editCommentModal"
+  x-show="modalIsOpen"
+  x-on:edit-comment-was-set.window="openModal"
+  x-on:close-edit-comment-modal.window="closeModal"
+  x-on:keydown.escape.window="closeModal"
 >
   <div class="flex min-h-screen items-end justify-center">
     {{-- gray background --}}
     <div
       class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
       aria-hidden="true"
-      x-show="isOpen"
+      x-show="modalIsOpen"
       x-transition.opacity
     >
     </div>
@@ -26,7 +45,7 @@
     {{--  modal  --}}
     <div
       class="max-h-[36rem] transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all dark:bg-gray-800 sm:w-full sm:max-w-2xl"
-      x-show="isOpen"
+      x-show="modalIsOpen"
       x-transition.origin.bottom.duration.300ms
     >
       {{-- close modal button --}}
@@ -34,7 +53,7 @@
         <button
           class="text-gray-400 hover:text-gray-500"
           type="button"
-          x-on:click="isOpen = false"
+          x-on:click="closeModal"
         >
           <x-icon.x class="size-8" />
         </button>
@@ -50,7 +69,6 @@
           class="space-y-4"
           id="edit-comment"
           wire:submit="update({{ $commentId }})"
-          x-data="{ body: @entangle('body') }"
         >
           @if (!$convertToHtml)
             <div>
@@ -63,14 +81,7 @@
                 x-ref="editCommentTextarea"
                 x-model="body"
                 {{-- change tab into 4 spaces --}}
-                x-on:keydown.tab.prevent="
-                  $el.setRangeText(
-                    '    ',
-                    $el.selectionStart,
-                    $el.selectionStart,
-                    'end'
-                  )
-                "
+                x-on:keydown.tab.prevent="tabToFourSpaces"
                 wire:model.blur="body"
                 rows="12"
                 placeholder="寫下你的留言吧！**支援 Markdown**"
@@ -100,7 +111,7 @@
             <x-toggle-switch
               wire:model.live="convertToHtml"
               :id="'edit-comment-modal-preview'"
-              x-bind:disabled="body === ''"
+              x-bind:disabled="bodyIsEmpty"
             >
               預覽
             </x-toggle-switch>
@@ -110,11 +121,8 @@
               <span class="ml-2">更新留言</span>
             </x-button>
           </div>
-
         </form>
-
       </div>
-
     </div> <!-- end modal -->
   </div>
 </div>

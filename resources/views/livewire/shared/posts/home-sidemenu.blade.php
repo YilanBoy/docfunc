@@ -1,4 +1,22 @@
-<div class="hidden space-y-6 xl:block xl:w-[320px]">
+@script
+  <script>
+    Alpine.data('homeSideMenu', () => ({
+      copyWebFeedUrl() {
+        navigator.clipboard.writeText(this.$el.getAttribute('href')).then(
+          () => this.$refs.subscriptionText.innerText = '複製成功',
+          () => this.$refs.subscriptionText.innerText = '複製失敗'
+        );
+
+        setTimeout(() => this.$refs.subscriptionText.innerText = '訂閱文章', 2000);
+      }
+    }));
+  </script>
+@endscript
+
+<div
+  class="hidden space-y-6 xl:block xl:w-[320px]"
+  x-data="homeSideMenu"
+>
   {{-- 介紹 --}}
   <x-card class="group dark:text-gray-50">
     <p
@@ -75,15 +93,7 @@
   <a
     class="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-zinc-500 px-4 py-2 tracking-widest text-gray-50 ring-zinc-300 transition duration-150 ease-in-out hover:bg-zinc-600 focus:border-zinc-700 focus:outline-none focus:ring active:bg-zinc-700 dark:bg-zinc-600 dark:ring-zinc-800 dark:hover:bg-zinc-500"
     href="{{ route('feeds.main') }}"
-    x-data="{ webFeedUrl: $el.getAttribute('href') }"
-    x-on:click.prevent="
-      navigator.clipboard.writeText(webFeedUrl).then(
-        () => $refs.subscriptionText.innerText = '複製成功',
-        () => $refs.subscriptionText.innerText = '複製失敗'
-      );
-
-      setTimeout(() => $refs.subscriptionText.innerText = '訂閱文章', 2000);
-    "
+    x-on:click.prevent="copyWebFeedUrl"
     target="_blank"
     rel="nofollow noopener"
   >

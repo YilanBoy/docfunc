@@ -1,4 +1,30 @@
-<x-layouts.layout-auth>
+@script
+  <script>
+    Alpine.data('register', () => ({
+      submitIsEnabled: false,
+      captchaSiteKey: @js(config('services.captcha.site_key')),
+      submitIsDisabled() {
+        return this.submitIsEnabled === false;
+      },
+      informationOnSubmitButton() {
+        return this.submitIsEnabled ? '註冊' : '驗證中'
+      },
+      init() {
+        turnstile.ready(() => {
+          turnstile.render(this.$refs.turnstileBlock, {
+            sitekey: this.captchaSiteKey,
+            callback: (token) => {
+              this.$wire.set('captchaToken', token);
+              this.submitIsEnabled = true;
+            }
+          });
+        });
+      }
+    }));
+  </script>
+@endscript
+
+<x-layouts.layout-auth x-data="register">
   <div class="fixed left-5 top-5">
     <a
       class="flex items-center text-2xl text-gray-400 transition duration-150 ease-in hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-50"
@@ -26,7 +52,6 @@
         <form
           id="register"
           wire:submit="store"
-          x-data="{ enableSubmit: false }"
         >
           {{-- 會員名稱 --}}
           <div>
@@ -82,19 +107,7 @@
           <div
             class="hidden"
             wire:ignore
-            x-data="{
-                captchaSiteKey: @js(config('services.captcha.site_key'))
-            }"
-            x-init="// Execute the captcha check
-            turnstile.ready(function() {
-                turnstile.render($el, {
-                    sitekey: captchaSiteKey,
-                    callback: function(token) {
-                        $wire.set('captchaToken', token);
-                        enableSubmit = true;
-                    }
-                });
-            });"
+            x-ref="turnstileBlock"
           ></div>
 
           <div class="mt-6 flex items-center justify-end">
@@ -108,14 +121,14 @@
 
             <x-button
               class="ml-4"
-              x-bind:disabled="!enableSubmit"
+              x-bind:disabled="submitIsDisabled"
             >
               <x-icon.animate-spin
                 class="mr-2 h-5 w-5 text-gray-50"
                 x-cloak
-                x-show="!enableSubmit"
+                x-show="submitIsDisabled"
               />
-              <span x-text="enableSubmit ? '註冊' : '驗證中'"></span>
+              <span x-text="informationOnSubmitButton"></span>
             </x-button>
           </div>
         </form>

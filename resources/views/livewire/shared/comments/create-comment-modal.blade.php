@@ -1,32 +1,69 @@
+@script
+  <script>
+    Alpine.data('createCommentModal', () => ({
+      modalIsOpen: false,
+      submitIsEnabled: false,
+      body: @entangle('body'),
+      captchaSiteKey: @js(config('services.captcha.site_key')),
+      openModal() {
+        this.modalIsOpen = true;
+        this.$nextTick(() => this.$refs.createCommentTextarea.focus());
+      },
+      closeModal() {
+        this.modalIsOpen = false;
+      },
+      tabToFourSpaces() {
+        this.$el.setRangeText('    ', this.$el.selectionStart, this.$el.selectionStart, 'end');
+      },
+      bodyIsEmpty() {
+        return this.body === '';
+      },
+      submitIsDisabled() {
+        return this.submitIsEnabled === false;
+      },
+      informationOnSubmitButton() {
+        return this.submitIsEnabled ? '儲存' : '驗證中'
+      },
+      init() {
+        turnstile.ready(() => {
+          turnstile.render(this.$refs.turnstileBlock, {
+            sitekey: this.captchaSiteKey,
+            callback: (token) => {
+              this.$wire.set('captchaToken', token);
+              this.submitIsEnabled = true;
+            }
+          });
+        });
+      }
+    }));
+  </script>
+@endscript
+
 <div
   class="fixed inset-0 z-30"
   role="dialog"
   aria-labelledby="modal-title"
   aria-modal="true"
   x-cloak
-  x-data="{ isOpen: false }"
-  x-show="isOpen"
-  x-on:open-create-comment-modal.window="
-    isOpen = true;
-    $nextTick(() => $refs.createCommentTextarea.focus());
-  "
-  x-on:close-create-comment-modal.window="isOpen = false"
-  x-on:keydown.escape.window="isOpen = false"
+  x-data="createCommentModal"
+  x-show="modalIsOpen"
+  x-on:open-create-comment-modal.window="openModal"
+  x-on:close-create-comment-modal.window="closeModal"
+  x-on:keydown.escape.window="closeModal"
 >
   <div class="flex min-h-screen items-end justify-center">
     {{-- gray background --}}
     <div
       class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
       aria-hidden="true"
-      x-show="isOpen"
+      x-show="modalIsOpen"
       x-transition.opacity
-    >
-    </div>
+    ></div>
 
     {{--  modal  --}}
     <div
       class="max-h-[36rem] transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all dark:bg-gray-800 sm:w-full sm:max-w-2xl"
-      x-show="isOpen"
+      x-show="modalIsOpen"
       x-transition.origin.bottom.duration.300ms
     >
       {{-- close modal button --}}
@@ -34,7 +71,7 @@
         <button
           class="text-gray-400 hover:text-gray-500"
           type="button"
-          x-on:click="isOpen = false"
+          x-on:click="closeModal"
         >
           <x-icon.x class="size-8" />
         </button>
@@ -49,7 +86,6 @@
         <form
           class="space-y-4"
           wire:submit="store"
-          x-data="{ enableSubmit: false, body: @entangle('body') }"
         >
           @if (!$convertToHtml)
             <div>
@@ -61,7 +97,7 @@
                 name="body"
                 x-ref="createCommentTextarea"
                 {{-- change tab into 4 spaces --}}
-                x-on:keydown.tab.prevent="$el.setRangeText( '    ', $el.selectionStart, $el.selectionStart, 'end')"
+                x-on:keydown.tab.prevent="tabToFourSpaces"
                 wire:model.blur="body"
                 rows="12"
                 placeholder="寫下你的留言吧！**支援 Markdown**"
@@ -99,27 +135,15 @@
 
           <div
             class="hidden"
+            x-ref="turnstileBlock"
             wire:ignore
-            x-data="{
-                captchaSiteKey: @js(config('services.captcha.site_key'))
-            }"
-            x-init="// Execute the captcha check
-            turnstile.ready(function() {
-                turnstile.render($el, {
-                    sitekey: captchaSiteKey,
-                    callback: function(token) {
-                        $wire.set('captchaToken', token);
-                        enableSubmit = true;
-                    }
-                });
-            });"
           ></div>
 
           <div class="flex items-center justify-between space-x-3">
             <x-toggle-switch
               :id="'create-comment-modal-preview'"
               wire:model.live="convertToHtml"
-              x-bind:disabled="body === ''"
+              x-bind:disabled="bodyIsEmpty"
             >
               預覽
             </x-toggle-switch>
@@ -128,14 +152,14 @@
               <x-icon.save
                 class="mr-2 w-5"
                 x-cloak
-                x-show="enableSubmit"
+                x-show="submitIsEnabled"
               />
               <x-icon.animate-spin
                 class="mr-2 h-5 w-5 text-gray-50"
                 x-cloak
-                x-show="!enableSubmit"
+                x-show="submitIsDisabled"
               />
-              <span x-text="enableSubmit ? '儲存' : '驗證中'"></span>
+              <span x-text="informationOnSubmitButton"></span>
             </x-button>
           </div>
         </form>

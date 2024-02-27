@@ -17,13 +17,13 @@
       commit
     }) => {
       // Runs immediately before a commit's payload is sent to the server...
-      if ([
-          "gotoPage",
-          "nextPage",
-          "previousPage"
-        ].includes(commit.calls[0].method)) {
-        window.scrollTo({
-          top: 0
+      if (commit.calls.length > 0) {
+        commit.calls.forEach((call) => {
+          if (["gotoPage", "nextPage", "previousPage"].includes(call.method)) {
+            window.scrollTo({
+              top: 0
+            });
+          }
         });
       }
     })

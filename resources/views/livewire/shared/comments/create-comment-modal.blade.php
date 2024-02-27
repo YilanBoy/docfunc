@@ -148,7 +148,7 @@
               預覽
             </x-toggle-switch>
 
-            <x-button x-bind:disabled="!enableSubmit">
+            <x-button x-bind:disabled="submitIsDisabled">
               <x-icon.save
                 class="mr-2 w-5"
                 x-cloak

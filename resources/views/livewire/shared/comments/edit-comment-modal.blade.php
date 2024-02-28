@@ -79,7 +79,6 @@
                 id="body"
                 name="body"
                 x-ref="editCommentTextarea"
-                x-model="body"
                 {{-- change tab into 4 spaces --}}
                 x-on:keydown.tab.prevent="tabToFourSpaces"
                 wire:model.blur="body"

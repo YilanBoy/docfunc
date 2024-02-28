@@ -20,7 +20,7 @@ class Comments extends Component
     {
         // get the comments from this user
         $comments = Comment::whereUserId($this->userId)
-            ->select(['created_at', 'post_id', 'body'])
+            ->select(['id', 'created_at', 'post_id', 'body'])
             ->whereHas('post', function ($query) {
                 $query->whereNull('deleted_at');
             })

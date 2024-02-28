@@ -16,6 +16,7 @@
   @foreach ($comments as $comment)
     <x-dashed-card
       class="group relative max-h-64 cursor-pointer overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-1/2 after:bg-gradient-to-b after:from-transparent after:to-gray-100 dark:after:to-gray-800"
+      wire:key="comment-{{ $comment->id }}"
     >
       <a
         class="absolute right-0 top-0 z-20 block h-full w-full bg-transparent"

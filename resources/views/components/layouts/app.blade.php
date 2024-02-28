@@ -36,7 +36,6 @@
 
   @vite('resources/css/app.css')
 
-  <x-js.livewire />
   @vite('resources/js/app.js')
 
   {{-- Cloudflare Turnstile --}}

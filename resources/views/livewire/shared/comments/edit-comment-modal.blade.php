@@ -5,7 +5,7 @@
       body: @entangle('body'),
       openModal() {
         this.modalIsOpen = true;
-        this.$nextTick(() => this.$refs.editCommentTextarea.focus());
+        this.$nextTick(() => this.$refs.editCommentTextarea?.focus());
       },
       closeModal() {
         this.modalIsOpen = false;
@@ -72,11 +72,11 @@
         >
           @if (!$convertToHtml)
             <div>
-              <label for="body"></label>
+              <label for="edit-comment-textarea"></label>
 
               <textarea
                 class="form-textarea w-full resize-none rounded-md border border-gray-300 font-jetbrains-mono text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
-                id="body"
+                id="edit-comment-textarea"
                 name="body"
                 x-ref="editCommentTextarea"
                 {{-- change tab into 4 spaces --}}

@@ -7,7 +7,7 @@
       captchaSiteKey: @js(config('services.captcha.site_key')),
       openModal() {
         this.modalIsOpen = true;
-        this.$nextTick(() => this.$refs.createCommentTextarea.focus());
+        this.$nextTick(() => this.$refs.createCommentTextarea?.focus());
       },
       closeModal() {
         this.modalIsOpen = false;
@@ -89,11 +89,11 @@
         >
           @if (!$convertToHtml)
             <div>
-              <label for="body"></label>
+              <label for="create-comment-textarea"></label>
 
               <textarea
                 class="form-textarea w-full resize-none rounded-md border border-gray-300 font-jetbrains-mono text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
-                id="body"
+                id="create-comment-textarea"
                 name="body"
                 x-ref="createCommentTextarea"
                 {{-- change tab into 4 spaces --}}

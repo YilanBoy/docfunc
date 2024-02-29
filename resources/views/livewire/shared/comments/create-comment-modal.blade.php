@@ -34,6 +34,21 @@
             }
           });
         });
+
+        let observer = new MutationObserver(() => {
+          this.$refs.createCommentModal
+            .querySelectorAll('pre code:not(.hljs)')
+            .forEach((element) => {
+              hljs.highlightElement(element);
+            });
+        });
+
+        observer.observe(this.$refs.createCommentModal, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          characterData: false
+        });
       }
     }));
   </script>
@@ -46,6 +61,7 @@
   aria-modal="true"
   x-cloak
   x-data="createCommentModal"
+  x-ref="createCommentModal"
   x-show="modalIsOpen"
   x-on:open-create-comment-modal.window="openModal"
   x-on:close-create-comment-modal.window="closeModal"

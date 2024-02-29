@@ -1,7 +1,44 @@
+@script
+  <script>
+    Alpine.data('comments', () => ({
+      currentScrollY: 0,
+      init() {
+        Livewire.hook('commit.prepare', () => {
+          this.currentScrollY = window.scrollY;
+        })
+
+        Livewire.hook('morph.updated', ({
+          component
+        }) => {
+          if (component.name === 'shared.comments.comments') {
+            window.scrollTo(0, this.currentScrollY);
+          }
+        })
+
+        let observer = new MutationObserver(() => {
+          this.$refs.comments
+            .querySelectorAll('pre code:not(.hljs)')
+            .forEach((element) => {
+              hljs.highlightElement(element);
+            });
+        });
+
+        observer.observe(this.$refs.comments, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+        });
+      }
+    }));
+  </script>
+@endscript
+
 {{-- 留言列表 --}}
 <div
   class="w-full"
   id="comments"
+  x-data="comments"
+  x-ref="comments"
 >
   {{-- new comment will show here --}}
   <livewire:shared.comments.comment-group

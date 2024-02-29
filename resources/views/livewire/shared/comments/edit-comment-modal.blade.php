@@ -16,6 +16,22 @@
       bodyIsEmpty() {
         return this.body === '';
       },
+      init() {
+        let observer = new MutationObserver(() => {
+          this.$refs.editCommentModal
+            .querySelectorAll('pre code:not(.hljs)')
+            .forEach((element) => {
+              hljs.highlightElement(element);
+            });
+        });
+
+        observer.observe(this.$refs.editCommentModal, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          characterData: false
+        });
+      }
     }));
   </script>
 @endscript
@@ -27,6 +43,7 @@
   aria-modal="true"
   x-cloak
   x-data="editCommentModal"
+  x-ref="editCommentModal"
   x-show="modalIsOpen"
   x-on:edit-comment-was-set.window="openModal"
   x-on:close-edit-comment-modal.window="closeModal"

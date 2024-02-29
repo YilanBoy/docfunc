@@ -3,6 +3,21 @@
     Alpine.data('userComments', () => ({
       init() {
         hljs.highlightAll();
+
+        let observer = new MutationObserver(() => {
+          this.$refs.userComments
+            .querySelectorAll('pre code:not(.hljs)')
+            .forEach((element) => {
+              hljs.highlightElement(element);
+            });
+        });
+
+        observer.observe(this.$refs.userComments, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          characterData: false
+        });
       }
     }));
   </script>
@@ -12,6 +27,7 @@
 <div
   class="space-y-6"
   x-data="userComments"
+  x-ref="userComments"
 >
   @foreach ($comments as $comment)
     <x-dashed-card

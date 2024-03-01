@@ -27,7 +27,7 @@ class CreateCommentModal extends Component
 
     public string $body = '';
 
-    public bool $convertToHtml = false;
+    public bool $previewIsEnabled = false;
 
     public string $captchaToken = '';
 
@@ -82,7 +82,7 @@ class CreateCommentModal extends Component
         });
 
         // empty the body of the comment form
-        $this->reset('body', 'convertToHtml');
+        $this->reset('body', 'previewIsEnabled');
 
         $this->dispatch('close-create-comment-modal');
 

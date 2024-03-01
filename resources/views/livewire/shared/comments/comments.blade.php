@@ -15,7 +15,7 @@
           }
         })
 
-        let observer = new MutationObserver(() => {
+        let commentsObserver = new MutationObserver(() => {
           this.$refs.comments
             .querySelectorAll('pre code:not(.hljs)')
             .forEach((element) => {
@@ -23,11 +23,18 @@
             });
         });
 
-        observer.observe(this.$refs.comments, {
+        commentsObserver.observe(this.$refs.comments, {
           childList: true,
           subtree: true,
           attributes: true,
         });
+
+        let disconnectCommentsObserver = () => {
+          commentsObserver.disconnect();
+          document.removeEventListener('livewire:navigating', disconnectCommentsObserver);
+        };
+
+        document.addEventListener('livewire:navigating', disconnectCommentsObserver);
       }
     }));
   </script>

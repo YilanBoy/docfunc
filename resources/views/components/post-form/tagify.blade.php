@@ -38,13 +38,12 @@
               // forget about it :)
             }
 
-            document.addEventListener('livewire:navigating', () => {
-              if (tagify !== null) {
-                console.log('destroy tagify before navigating away');
-                tagify.destroy();
-                tagify = null;
-              }
-            });
+            let removeTagify = () => {
+              tagify.destroy();
+              document.removeEventListener('livewire:navigating', removeTagify);
+            };
+
+            document.addEventListener('livewire:navigating', removeTagify);
           });
       }
     }));

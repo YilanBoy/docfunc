@@ -59,15 +59,14 @@
               }, 500);
             });
 
-            document.addEventListener('livewire:navigating', () => {
-              if (editor !== null) {
-                console.log('destroy ckeditor before navigating away');
-                editor.destroy().catch((error) => {
-                  console.log(error);
-                });
-                editor = null;
-              }
-            });
+            let removeCkeditor = () => {
+              editor.destroy().catch((error) => {
+                console.log(error);
+              });
+              document.removeEventListener('livewire:navigating', removeCkeditor);
+            };
+
+            document.addEventListener('livewire:navigating', removeCkeditor);
           })
           .catch((err) => {
             console.error(err.stack);

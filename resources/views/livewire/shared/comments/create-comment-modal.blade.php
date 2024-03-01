@@ -35,7 +35,7 @@
           });
         });
 
-        let observer = new MutationObserver(() => {
+        let previewObserver = new MutationObserver(() => {
           this.$refs.createCommentModal
             .querySelectorAll('pre code:not(.hljs)')
             .forEach((element) => {
@@ -43,12 +43,19 @@
             });
         });
 
-        observer.observe(this.$refs.createCommentModal, {
+        previewObserver.observe(this.$refs.createCommentModal, {
           childList: true,
           subtree: true,
           attributes: true,
           characterData: false
         });
+
+        let disconnectPreviewObserver = () => {
+          previewObserver.disconnect();
+          document.removeEventListener('livewire:navigating', disconnectPreviewObserver);
+        };
+
+        document.addEventListener('livewire:navigating', disconnectPreviewObserver);
       }
     }));
   </script>
@@ -103,7 +110,26 @@
           class="space-y-4"
           wire:submit="store"
         >
-          @if (!$convertToHtml)
+          @if ($previewIsEnabled)
+            <div
+              class="space-y-2"
+              id="create-comment-preview"
+            >
+              <div class="space-x-4">
+                <span class="font-semibold dark:text-gray-50">
+                  @if (auth()->check())
+                    {{ auth()->user()->name }}
+                  @else
+                    訪客
+                  @endif
+                </span>
+                <span class="text-gray-400">{{ now()->format('Y 年 m 月 d 日') }}</span>
+              </div>
+              <div class="comment-body h-80 overflow-auto">
+                {!! $this->convertedBody !!}
+              </div>
+            </div>
+          @else
             <div>
               <label for="create-comment-textarea"></label>
 
@@ -128,25 +154,6 @@
                 <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
               @enderror
             </div>
-          @else
-            <div
-              class="space-y-2"
-              id="create-comment-preview"
-            >
-              <div class="space-x-4">
-                <span class="font-semibold dark:text-gray-50">
-                  @if (auth()->check())
-                    {{ auth()->user()->name }}
-                  @else
-                    訪客
-                  @endif
-                </span>
-                <span class="text-gray-400">{{ now()->format('Y 年 m 月 d 日') }}</span>
-              </div>
-              <div class="comment-body h-80 overflow-auto">
-                {!! $this->convertedBody !!}
-              </div>
-            </div>
           @endif
 
           <div
@@ -158,7 +165,7 @@
           <div class="flex items-center justify-between space-x-3">
             <x-toggle-switch
               :id="'create-comment-modal-preview'"
-              wire:model.live="convertToHtml"
+              wire:model.live="previewIsEnabled"
               x-bind:disabled="bodyIsEmpty"
             >
               預覽

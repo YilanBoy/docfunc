@@ -118,7 +118,7 @@ it('can see the comment preview', function () {
     livewire(CreateCommentModal::class, ['postId' => $post->id])
         ->set('body', $body)
         ->set('captchaToken', 'fake-captcha-response')
-        ->set('convertToHtml', true)
+        ->set('previewIsEnabled', true)
         ->assertSeeHtmlInOrder([
             '<p>Title</p>',
             '<p>This is a <strong>comment</strong></p>',

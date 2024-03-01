@@ -121,7 +121,7 @@ it('can see the comment preview', function () {
     livewire(EditCommentModal::class)
         ->call('setEditComment', $comment->id, $offset)
         ->set('body', $body)
-        ->set('convertToHtml', true)
+        ->set('previewIsEnabled', true)
         ->assertSeeHtmlInOrder([
             '<p>Title</p>',
             '<p>This is a <strong>comment</strong></p>',

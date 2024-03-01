@@ -4,7 +4,7 @@
       init() {
         hljs.highlightAll();
 
-        let observer = new MutationObserver(() => {
+        let userCommentsObserver = new MutationObserver(() => {
           this.$refs.userComments
             .querySelectorAll('pre code:not(.hljs)')
             .forEach((element) => {
@@ -12,12 +12,19 @@
             });
         });
 
-        observer.observe(this.$refs.userComments, {
+        userCommentsObserver.observe(this.$refs.userComments, {
           childList: true,
           subtree: true,
           attributes: true,
           characterData: false
         });
+
+        let disconnectUserCommentsObserver = () => {
+          userCommentsObserver.disconnect();
+          document.removeEventListener('livewire:navigating', disconnectUserCommentsObserver);
+        };
+
+        document.addEventListener('livewire:navigating', disconnectUserCommentsObserver);
       }
     }));
   </script>

@@ -20,7 +20,7 @@ class EditCommentModal extends Component
     use AuthorizesRequests;
     use MarkdownConverter;
 
-    public bool $convertToHtml = false;
+    public bool $previewIsEnabled = false;
 
     public int $commentId;
 
@@ -48,7 +48,7 @@ class EditCommentModal extends Component
     #[On('set-edit-comment')]
     public function setEditComment(Comment $comment): void
     {
-        $this->convertToHtml = false;
+        $this->previewIsEnabled = false;
         $this->commentId = $comment->id;
         $this->body = $comment->body;
 

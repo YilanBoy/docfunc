@@ -1,4 +1,4 @@
-<x-dashed-card>
+<x-dashed-card class="mt-6">
   <div class="flex flex-col">
     {{-- 大頭貼 --}}
     <div class="flex items-center space-x-4 text-base">

@@ -1,4 +1,4 @@
-<div class="mt-6 w-full space-y-6">
+<div class="w-full">
   @foreach ($comments as $comment)
     <livewire:shared.comments.comment-card
       :$postId

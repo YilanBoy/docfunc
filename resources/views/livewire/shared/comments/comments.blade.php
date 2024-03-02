@@ -69,18 +69,16 @@
   @endforeach
 
   @if ($showMoreButtonIsActive)
-    <div class="mt-6 flex w-full justify-center">
-      <button
-        class="flex items-center text-lg dark:text-gray-50"
-        type="button"
-        wire:click="showMore"
-      >
-        <x-icon.animate-spin
-          class="w-5"
-          wire:loading
-        />
-        <span class="ml-2">顯示更多</span>
-      </button>
-    </div>
+    <button
+      class="mt-6 flex w-full items-center justify-center rounded-xl p-2 text-lg transition-colors duration-150 ease-in-out hover:bg-gray-300 dark:text-gray-50 dark:hover:bg-gray-700"
+      type="button"
+      wire:click="showMore"
+    >
+      <x-icon.animate-spin
+        class="w-5"
+        wire:loading
+      />
+      <span class="ml-2">顯示更多</span>
+    </button>
   @endif
 </div>

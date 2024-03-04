@@ -53,7 +53,7 @@
         x-transition:enter-end="translate-y-0"
       >
         <div
-          class="mt-1 rounded-md border border-neutral-200/70 bg-white p-1 text-lg text-neutral-700 shadow-md dark:border-gray-600 dark:bg-gray-800 dark:text-gray-50"
+          class="mt-1 rounded-md border border-neutral-200/70 bg-white p-1 text-lg text-neutral-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-50"
         >
           @foreach (array_keys($this->postsGroupByYear) as $year)
             <button

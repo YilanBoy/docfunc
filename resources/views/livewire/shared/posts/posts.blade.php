@@ -137,7 +137,7 @@
 
   @empty
     <x-card
-      class="flex h-36 w-full items-center justify-center transition duration-150 ease-in hover:-translate-x-2 hover:shadow-xl dark:text-gray-50"
+      class="flex h-36 w-full items-center justify-center transition duration-150 ease-in hover:-translate-x-2 dark:text-gray-50"
     >
       <span>Whoops！此分類底下還沒有文章，趕緊寫一篇吧！</span>
     </x-card>

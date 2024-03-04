@@ -95,7 +95,7 @@
             {{-- 搜尋結果列表 --}}
             @if (strlen($search) >= 2)
               <div
-                class="mt-4 w-full rounded-xl bg-gray-50 p-2 shadow-md ring-1 ring-black ring-opacity-20 dark:bg-gray-800 dark:text-gray-50"
+                class="mt-4 w-full rounded-xl bg-gray-50 p-2 ring-1 ring-black ring-opacity-20 dark:bg-gray-800 dark:text-gray-50"
                 wire:transition
               >
                 @if ($results->count() > 0)

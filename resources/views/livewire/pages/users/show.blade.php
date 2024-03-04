@@ -76,7 +76,7 @@
             x-ref="tabMarker"
             x-cloak
           >
-            <div class="h-full w-full rounded-md bg-gray-100 shadow-sm dark:bg-gray-800 dark:shadow-none"></div>
+            <div class="h-full w-full rounded-md bg-gray-100 dark:bg-gray-800"></div>
           </div>
         </div>
 

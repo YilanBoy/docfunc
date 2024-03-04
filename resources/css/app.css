@@ -75,16 +75,6 @@
     display: none !important;
 }
 
-.bg-dot {
-    background-image: radial-gradient(circle, #d8dade 2px, transparent 2px);
-    background-size: 2.5rem 2.5rem;
-    background-position: 0 0;
-}
-
-.dark .bg-dot {
-    background-image: radial-gradient(circle, #1e2534 2px, transparent 2px);
-}
-
 /* scroll bar */
 ::-webkit-scrollbar {
     height: 0.8em;

@@ -35,7 +35,7 @@
   x-data="userInfoCards"
 >
   <div
-    class="col-span-6 rounded-2xl bg-gradient-to-br from-green-500 via-teal-500 to-sky-500 p-1 shadow-lg dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500 dark:shadow-none md:col-span-2"
+    class="col-span-6 rounded-2xl bg-gradient-to-br from-green-500 via-teal-500 to-sky-500 p-1 dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500 md:col-span-2"
   >
     <div class="flex flex-col items-center justify-between rounded-xl bg-gray-50 p-5 dark:bg-gray-800">
       {{-- 大頭貼 --}}

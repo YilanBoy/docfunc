@@ -44,7 +44,7 @@
       </button>
 
       <div
-        class="absolute right-0 top-1 z-50 mt-12 w-40"
+        class="absolute right-0 top-1 z-50 mt-12 w-40 rounded-md bg-gray-50 p-1 text-lg ring-1 ring-black ring-opacity-20 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-50 dark:ring-gray-600"
         x-cloak
         x-show="dropdownIsOpen"
         x-on:click.away="closeDropdown"
@@ -52,20 +52,16 @@
         x-transition:enter-start="-translate-y-2"
         x-transition:enter-end="translate-y-0"
       >
-        <div
-          class="mt-1 rounded-md border border-neutral-200/70 bg-white p-1 text-lg text-neutral-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-50"
-        >
-          @foreach (array_keys($this->postsGroupByYear) as $year)
-            <button
-              class="group relative flex w-full cursor-default select-none items-center justify-between rounded px-2 py-1.5 outline-none hover:bg-neutral-100 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:hover:bg-gray-700 dark:hover:text-gray-50"
-              data-year="{{ $year }}"
-              type="button"
-              x-on:click="switchPostsByYear"
-            >
-              <span>{{ $year }}</span>
-            </button>
-          @endforeach
-        </div>
+        @foreach (array_keys($this->postsGroupByYear) as $year)
+          <button
+            class="group relative flex w-full cursor-default select-none items-center justify-between rounded px-2 py-1.5 outline-none hover:bg-gray-200 dark:ring-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-50"
+            data-year="{{ $year }}"
+            type="button"
+            x-on:click="switchPostsByYear"
+          >
+            <span>{{ $year }}</span>
+          </button>
+        @endforeach
       </div>
     </div>
 

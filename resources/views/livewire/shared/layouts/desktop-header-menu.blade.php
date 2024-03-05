@@ -146,7 +146,7 @@
 
         {{-- 電腦版-會員下拉式選單 --}}
         <div
-          class="absolute right-0 top-16 mt-2 w-48 rounded-md bg-gray-50 p-2 text-gray-700 ring-1 ring-black ring-opacity-20 dark:bg-gray-800 dark:text-gray-50 dark:ring-gray-600"
+          class="absolute right-0 top-16 mt-2 w-48 rounded-md bg-gray-50 p-2 ring-1 ring-black ring-opacity-20 dark:bg-gray-800 dark:text-gray-50 dark:ring-gray-600"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="user-menu-button"

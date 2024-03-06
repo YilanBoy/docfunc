@@ -8,8 +8,8 @@
       editorDebounceTimer: null,
       debounce(callback, time) {
         // https://webdesign.tutsplus.com/tutorials/javascript-debounce-and-throttle--cms-36783
-        window.clearTimeout(this.editorDebounceTimer);
-        this.editorDebounceTimer = window.setTimeout(callback, time);
+        clearTimeout(this.editorDebounceTimer);
+        this.editorDebounceTimer = setTimeout(callback, time);
       },
       imageUploadUrl: @js(route('images.store')),
       body: @entangle($model).live,

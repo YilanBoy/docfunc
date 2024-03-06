@@ -36,7 +36,7 @@
   x-data="userComments"
   x-ref="userComments"
 >
-  @foreach ($comments as $comment)
+  @forelse ($comments as $comment)
     <x-dashed-card
       class="group relative max-h-64 cursor-pointer overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-1/2 after:bg-gradient-to-b after:from-transparent after:to-gray-100 dark:after:to-gray-800"
       wire:key="comment-{{ $comment->id }}"
@@ -63,7 +63,12 @@
         <span class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>
       </div>
     </x-dashed-card>
-  @endforeach
+  @empty
+    <x-card class="flex h-32 items-center justify-center text-gray-400 dark:text-gray-600">
+      <x-icon.exclamation-circle class="w-6" />
+      <span class="ml-2">找篇文章留言吧！</span>
+    </x-card>
+  @endforelse
 
   {{ $comments->onEachSide(1)->links() }}
 </div>

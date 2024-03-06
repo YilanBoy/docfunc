@@ -81,11 +81,10 @@
         />
       </div>
     @endforeach
-
   </x-card>
 @else
   <x-card class="flex h-32 items-center justify-center text-gray-400 dark:text-gray-600">
     <x-icon.exclamation-circle class="w-6" />
-    <span class="ml-2">尚未發布任何文章</span>
+    <span class="ml-2">目前還沒有發佈任何文章喔！</span>
   </x-card>
 @endif

@@ -3,10 +3,12 @@ service: docfunc
 provider:
   name: aws
   stage: ${opt:stage, 'dev'}
-  region: ap-northeast-1
+  region: us-west-2
   httpApi:
     disableDefaultEndpoint: true
   architecture: arm64
+  layers:
+    - arn:aws:lambda:us-west-2:154471991214:layer:us_west_2_rds_cert:1
   iam:
     role:
       statements:
@@ -45,7 +47,7 @@ provider:
     DB_DATABASE: ${ssm:/docfunc/${opt:stage, 'dev'}/database-name}
     DB_USERNAME: ${ssm:/docfunc/${opt:stage, 'dev'}/database-username}
     DB_PASSWORD: ${ssm:/docfunc/${opt:stage, 'dev'}/database-password}
-    MYSQL_ATTR_SSL_CA: /opt/bref/ssl/cert.pem
+    MYSQL_ATTR_SSL_CA: /opt/us-west-2-bundle.pem
     # Cache
     CACHE_DRIVER: dynamodb
     DYNAMODB_CACHE_TABLE: !Ref CacheTable

@@ -129,6 +129,8 @@ constructs:
       handler: Bref\LaravelBridge\Queue\QueueHandler
       runtime: php-83
       timeout: 60 # in seconds
+      layers:
+        - arn:aws:lambda:us-west-2:154471991214:layer:us_west_2_rds_cert:1
 
 plugins:
   - ./vendor/bref/bref

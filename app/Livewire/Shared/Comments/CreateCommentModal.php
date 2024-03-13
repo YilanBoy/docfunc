@@ -6,7 +6,7 @@ use App\Http\Requests\CommentRequest;
 use App\Livewire\Traits\MarkdownConverter;
 use App\Models\Comment;
 use App\Models\Post;
-use App\Notifications\PostComment;
+use App\Notifications\NewComment;
 use App\Rules\Captcha;
 use Illuminate\Support\Facades\DB;
 use League\CommonMark\Exception\CommonMarkException;
@@ -76,7 +76,7 @@ class CreateCommentModal extends Component
             $post->increment('comment_counts');
 
             // notify the article author of new comments
-            $post->user->postNotify(new PostComment($comment));
+            $post->user->notifyNewComment(new NewComment($comment));
 
             $this->dispatch('create-comment-in-group-new', id: $comment->id);
         });

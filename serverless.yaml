@@ -39,6 +39,8 @@ provider:
     APP_KEY: ${ssm:/docfunc/${opt:stage, 'dev'}/app-key}
     APP_DEBUG: false
     APP_URL: ${ssm:/docfunc/${opt:stage, 'dev'}/app-url}
+    APP_TIMEZONE: Asia/Taipei
+    APP_LOCALE: zh_TW
     ASSET_URL: ${ssm:/docfunc/${opt:stage, 'dev'}/asset-url}
     # Database
     DB_CONNECTION: mysql
@@ -49,7 +51,7 @@ provider:
     DB_PASSWORD: ${ssm:/docfunc/${opt:stage, 'dev'}/database-password}
     MYSQL_ATTR_SSL_CA: /opt/us-west-2-bundle.pem
     # Cache
-    CACHE_DRIVER: dynamodb
+    CACHE_STORE: dynamodb
     DYNAMODB_CACHE_TABLE: !Ref CacheTable
     # Session
     SESSION_DRIVER: dynamodb
@@ -107,11 +109,11 @@ resources:
 
 functions:
   web:
-    handler: public/index.php
-    runtime: php-83-fpm
-    timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
-    events:
-      - httpApi: '*'
+    handler: Bref\LaravelBridge\Http\OctaneHandler
+    runtime: php-83
+    environment:
+      BREF_LOOP_MAX: 250
+      OCTANE_PERSIST_DATABASE_SESSIONS: 1
 
   artisan:
     handler: artisan

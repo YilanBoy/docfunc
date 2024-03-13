@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Pages\Auth;
 
-use App\Providers\RouteServiceProvider;
 use App\Rules\Captcha;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
@@ -91,7 +90,7 @@ class Login extends Component
 
         $this->dispatch('info-badge', status: 'success', message: '登入成功！');
 
-        $this->redirect(RouteServiceProvider::HOME, navigate: true);
+        $this->redirect('/', navigate: true);
     }
 
     #[Title('登入')]

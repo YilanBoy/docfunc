@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Pages\Auth;
 
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Livewire\Attributes\Title;
@@ -16,7 +15,7 @@ class VerifyEmail extends Component
     public function resendVerificationEmail(Request $request)
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(RouteServiceProvider::HOME);
+            return redirect()->intended();
         }
 
         $request->user()->sendEmailVerificationNotification();
@@ -28,7 +27,7 @@ class VerifyEmail extends Component
     public function render()
     {
         if (request()->user()->hasVerifiedEmail()) {
-            $this->redirect(RouteServiceProvider::HOME, navigate: true);
+            $this->redirect('/', navigate: true);
         } else {
             return view('livewire.pages.auth.verify-email');
         }

@@ -5,14 +5,14 @@ namespace App\Policies;
 use App\Models\Post;
 use App\Models\User;
 
-class PostPolicy extends Policy
+class PostPolicy
 {
-    public function update(User $user, Post $post)
+    public function update(User $user, Post $post): bool
     {
         return $user->isAuthorOf($post);
     }
 
-    public function destroy(User $user, Post $post)
+    public function destroy(User $user, Post $post): bool
     {
         return $user->isAuthorOf($post);
     }

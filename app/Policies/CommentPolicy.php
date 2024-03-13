@@ -5,14 +5,14 @@ namespace App\Policies;
 use App\Models\Comment;
 use App\Models\User;
 
-class CommentPolicy extends Policy
+class CommentPolicy
 {
-    public function update(User $user, Comment $comment)
+    public function update(User $user, Comment $comment): bool
     {
         return $user->isAuthorOf($comment);
     }
 
-    public function destroy(User $user, Comment $comment)
+    public function destroy(User $user, Comment $comment): bool
     {
         return $user->isAuthorOf($comment) || $user->isAuthorOf($comment->post);
     }

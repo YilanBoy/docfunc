@@ -63,7 +63,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Comment::class);
     }
 
-    public function isAuthorOf($model): bool
+    public function isAuthorOf(Post|Comment $model): bool
     {
         return $this->id === $model->user_id;
     }

@@ -23,7 +23,7 @@ jobs:
       DB_CONNECTION: sqlite
       DB_DATABASE: ":memory:"
       BROADCAST_DRIVER: log
-      CACHE_DRIVER: redis
+      CACHE_STORE: redis
       FILESYSTEM_DISK: s3
       QUEUE_CONNECTION: redis
       SESSION_DRIVER: redis

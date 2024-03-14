@@ -1,12 +1,6 @@
 name: Deploy to AWS Lambda
 
 on:
-  workflow_dispatch:
-    inputs:
-      name:
-        description: Who to greet?
-        default: Allen
-
   workflow_run:
     workflows: [ "Run tests" ]
     types:

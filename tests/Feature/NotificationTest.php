@@ -4,12 +4,36 @@ use App\Livewire\Pages\Notifications\Index;
 use App\Livewire\Shared\Comments\CreateCommentModal;
 use App\Models\Post;
 use App\Models\User;
+use App\Notifications\NewComment;
 
 use function Pest\Faker\fake;
 use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
 
 test('you will receive a notification when there is a comment on your post', function () {
+    Notification::fake();
+
+    $post = Post::factory()->create();
+
+    $user = User::factory()->create();
+
+    $this->actingAs($user);
+
+    livewire(CreateCommentModal::class, ['postId' => $post->id])
+        ->set('body', fake()->realText(100))
+        ->set('captchaToken', 'fake-captcha-response')
+        ->call('store');
+
+    $author = User::find($post->user_id);
+
+    Notification::assertSentTo(
+        [$author], NewComment::class
+    );
+});
+
+test('you will see a red ping animation on notification icon when there is a comment on your post', function () {
+    config()->set('queue.default', 'sync');
+
     $post = Post::factory()->create();
 
     $user = User::factory()->create();
@@ -40,7 +64,26 @@ test('you will receive a notification when there is a comment on your post', fun
     get(route('notifications.index'))->assertDontSeeText('沒有消息通知！');
 });
 
+test('if you reply to your own post, there will be no notification', function () {
+    Notification::fake();
+
+    $post = Post::factory()->create();
+
+    $author = User::find($post->user_id);
+
+    $this->actingAs($author);
+
+    livewire(CreateCommentModal::class, ['postId' => $post->id])
+        ->set('body', fake()->realText(100))
+        ->set('captchaToken', 'fake-captcha-response')
+        ->call('store');
+
+    Notification::assertNothingSent();
+});
+
 test('you can clear unread notifications if you visit the notification page', function () {
+    config()->set('queue.default', 'sync');
+
     $post = Post::factory()->create();
 
     $user = User::factory()->create();
@@ -62,28 +105,4 @@ test('you can clear unread notifications if you visit the notification page', fu
 
     expect($author->unreadNotifications->count())
         ->toBe(0);
-});
-
-test('if you reply to your own post, there will be no notification', function () {
-    $post = Post::factory()->create();
-
-    $author = User::find($post->user_id);
-
-    $this->actingAs($author);
-
-    livewire(CreateCommentModal::class, ['postId' => $post->id])
-        ->set('body', fake()->realText(100))
-        ->set('captchaToken', 'fake-captcha-response')
-        ->call('store');
-
-    expect($author->unreadNotifications->count())
-        ->toBe(0);
-
-    get(route('root'))
-        ->assertDontSee(<<<'HTML'
-            <span class="absolute flex w-3 h-3 -mt-1 -mr-1 top-2 right-2">
-                <span class="absolute inline-flex w-full h-full bg-red-400 rounded-full opacity-75 animate-ping"></span>
-                <span class="relative inline-flex w-3 h-3 bg-red-500 rounded-full"></span>
-            </span>
-        HTML, false);
 });

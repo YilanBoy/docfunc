@@ -2,24 +2,17 @@
 
 namespace App\Livewire\Shared\Layouts;
 
+use App\Livewire\Actions\Logout;
 use App\Models\Category;
 use App\Services\SettingService;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 
 class Header extends Component
 {
-    /**
-     * Destroy an authenticated session.
-     */
-    public function logout()
+    public function logout(Logout $logout): void
     {
-        Auth::guard('web')->logout();
-
-        session()->invalidate();
-
-        session()->regenerateToken();
+        $logout();
 
         $this->dispatch('info-badge', status: 'success', message: '已成功登出！');
 
@@ -28,14 +21,18 @@ class Header extends Component
 
     public function render()
     {
-        // 因為分類不常調整，這裡使用快取減少對資料庫的讀取，快取時效性設定 1 天
+        // Because categories are not frequently adjusted,
+        // use cache to reduce database reads, cache expiration time is set to 1 day
         $categories = Cache::remember('categories', now()->addDay(), function () {
-            return Category::all();
+            return Category::all(['id', 'name', 'icon']);
         });
 
-        // 是否顯示註冊按鈕
+        // Whether to display the registration button
         $showRegisterButton = SettingService::isRegisterAllowed();
 
-        return view('livewire.shared.layouts.header', compact('categories', 'showRegisterButton'));
+        return view(
+            'livewire.shared.layouts.header',
+            compact('categories', 'showRegisterButton')
+        );
     }
 }

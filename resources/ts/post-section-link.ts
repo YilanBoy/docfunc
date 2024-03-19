@@ -80,6 +80,13 @@ function showWhichSectionIAmIn(sectionLinks: NodeListOf<HTMLAnchorElement>) {
             return;
         }
 
+        sectionLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            section?.scrollIntoView({
+                behavior: 'smooth',
+            });
+        });
+
         let sectionObserver = new IntersectionObserver(
             function (entries) {
                 if (entries[0].isIntersecting) {

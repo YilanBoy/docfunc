@@ -56,15 +56,15 @@
 
       <div class="container mx-auto">
         <div class="flex items-stretch justify-center lg:space-x-4">
-          <div class="hidden lg:block lg:w-1/5">
+          <div class="hidden xl:block xl:w-1/5">
             {{-- content menu --}}
             <div
-              class="sticky top-1/2 hidden -translate-y-1/2 flex-col xl:flex"
+              class="sticky top-1/2 flex -translate-y-1/2 flex-col"
               x-ref="postSectionMenu"
             ></div>
           </div>
 
-          <div class="flex w-full flex-col items-center justify-start p-2 md:w-[800px] lg:p-0">
+          <div class="flex w-full max-w-3xl flex-col items-center justify-start p-2 xl:p-0">
 
             <x-card
               class="w-full"
@@ -202,7 +202,7 @@
             />
           </div>
 
-          <div class="hidden lg:block lg:w-1/5">
+          <div class="hidden xl:block xl:w-1/5">
             {{-- desktop sidemenu --}}
             <livewire:shared.posts.show-post-sidemenu
               :post-id="$post->id"

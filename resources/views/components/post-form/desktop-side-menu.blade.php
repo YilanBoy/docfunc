@@ -1,6 +1,6 @@
 @props(['formId'])
 
-<div class="hidden xl:block xl:w-1/6">
+<div class="hidden xl:block xl:w-1/5">
   <div class="sticky top-1/2 flex w-full -translate-y-1/2 flex-col">
     {{-- character count --}}
     <div

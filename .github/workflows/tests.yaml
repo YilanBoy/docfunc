@@ -6,7 +6,7 @@ on:
       name:
         description: Who to greet
         default: Allen
-  push:
+  pull_request:
     branches:
       - main
 

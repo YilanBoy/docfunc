@@ -1,26 +1,50 @@
 name: Build images
 
 on:
-  workflow_dispatch:
-    inputs:
-      name:
-        description: Who to greet?
-        default: Allen
-
-env:
-  APP_VERSION: 0.1.22
+  push:
+    tags:
+      - '*'
 
 jobs:
-  get-approval:
-    name: Get approval
+  print-the-github-ref:
+    name: Print the github ref
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print the github ref
+        run: |
+          echo "The github ref is ${{ github.ref }}"
+          echo "The app version is ${GITHUB_REF#refs/tags/v}"
+
+  check-tag-name-is-valid:
+    needs: print-the-github-ref
+    name: Check tag name is valid
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - name: Just get approval
-        run: echo "Just get approval"
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check tag name is valid
+        run: |
+          if [[ ! ${{ github.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Tag name is not valid. It should be in the format of v1.2.3"
+            exit 1
+          fi
+
+  get-the-version-number-from-tag-name:
+    needs: check-tag-name-is-valid
+    name: Get the version number from tag name
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set tag name without 'v'
+        run: |
+          echo "APP_VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
   build-laravel-octane-image:
-    needs: get-approval
+    needs: check-tag-name-is-valid
     name: Start to build laravel octane image and publish to docker hub
     runs-on: ubuntu-latest
     steps:
@@ -38,7 +62,7 @@ jobs:
           image_tag: ${{ env.APP_VERSION }}
 
   build-laravel-horizon-image:
-    needs: get-approval
+    needs: check-tag-name-is-valid
     name: Start to build laravel horizon image and publish to docker hub
     runs-on: ubuntu-latest
     steps:
@@ -56,7 +80,7 @@ jobs:
           image_tag: ${{ env.APP_VERSION }}
 
   build-laravel-scheduler-image:
-    needs: get-approval
+    needs: check-tag-name-is-valid
     name: Start to build laravel scheduler image and publish to docker hub
     runs-on: ubuntu-latest
     steps:
@@ -74,7 +98,7 @@ jobs:
           image_tag: ${{ env.APP_VERSION }}
 
   build-aws-mysql-client-image:
-    needs: get-approval
+    needs: check-tag-name-is-valid
     name: Start to build aws mysql client image and publish to docker hub
     runs-on: ubuntu-latest
     steps:

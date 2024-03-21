@@ -35,7 +35,6 @@
         "laravel-lang/common": "^6.0",
         "laravel/breeze": "^2.0",
         "laravel/pint": "^1.1",
-        "laravel/sail": "^1.9.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^8.1",
         "nunomaduro/phpinsights": "^2.0",

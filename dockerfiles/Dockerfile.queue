@@ -34,7 +34,7 @@ RUN npm install \
     && npm run build
 
 ###########################################
-# Laravel Horizon
+# Laravel Queue
 ###########################################
 
 FROM php:${PHP_VERSION}-alpine3.18
@@ -48,8 +48,6 @@ WORKDIR $ROOT
 # -e: exit immediately if a command exits with a non-zero status
 # -c: execute the following command when the shell starts
 SHELL ["/bin/ash", "-e", "-c"]
-
-
 
 # install necessary package to install php extension
 RUN apk update \
@@ -66,25 +64,25 @@ RUN docker-php-ext-install pdo_mysql \
 ARG WWWUSER=1000
 ARG WWWGROUP=1000
 
-# create group and user "horizon"
-RUN addgroup -g $WWWGROUP -S horizon || true \
-    && adduser -D -h /home/horizon -s /bin/ash -G horizon -u $WWWUSER horizon
+# create group and user "queue"
+RUN addgroup -g $WWWGROUP -S queue || true \
+    && adduser -D -h /home/queue -s /bin/ash -G queue -u $WWWUSER queue
 
 # copy supervisor and php config files into container
-COPY deployment/php/php.ini /usr/local/etc/php/conf.d/horizon.ini
+COPY deployment/php/php.ini /usr/local/etc/php/conf.d/queue.ini
 COPY deployment/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
 COPY . .
 
 # create bootstrap and storage files if they do not exist
-# gives the 'horizon' user read/write and execute privileges to those files
+# gives the 'queue' user read/write and execute privileges to those files
 RUN mkdir -p \
         storage/framework/sessions \
         storage/framework/views \
         storage/framework/cache/data \
         storage/logs \
         bootstrap/cache \
-    && chown -R horizon:horizon \
+    && chown -R queue:queue \
         storage \
         bootstrap/cache \
     && chmod -R ug+rwx storage bootstrap/cache
@@ -93,11 +91,6 @@ RUN mkdir -p \
 COPY --from=vendor ${ROOT}/vendor vendor
 COPY --from=assets ${ROOT}/public/build public/build
 
-RUN php artisan horizon:publish
+USER queue
 
-USER horizon
-
-ENTRYPOINT ["php", "artisan", "horizon"]
-
-HEALTHCHECK --start-period=5s --interval=30s --timeout=5s --retries=8 \
-    CMD php artisan horizon:status || exit 1
+ENTRYPOINT ["php", "artisan", "queue:work"]

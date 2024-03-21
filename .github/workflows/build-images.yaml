@@ -41,6 +41,8 @@ jobs:
 
       - name: Set tag name without 'v'
         run: |
+          echo $GITHUB_REF
+          echo "${GITHUB_REF#refs/tags/v}"
           echo "APP_VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
   build-laravel-octane-image:

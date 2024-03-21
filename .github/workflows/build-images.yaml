@@ -41,14 +41,14 @@ jobs:
 
       - name: Set tag name without 'v'
         run: |
-          echo $GITHUB_REF
-          echo "${GITHUB_REF#refs/tags/v}"
-          echo "APP_VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+          echo "APP_VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
 
   build-laravel-octane-image:
     needs: get-the-version-number-from-tag-name
     name: Start to build laravel octane image and publish to docker hub
     runs-on: ubuntu-latest
+    env:
+      APP_VERSION: ${{ steps.get-the-version-number-from-tag-name.outputs.APP_VERSION }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -67,6 +67,8 @@ jobs:
     needs: get-the-version-number-from-tag-name
     name: Start to build laravel queue image and publish to docker hub
     runs-on: ubuntu-latest
+    env:
+      APP_VERSION: ${{ steps.get-the-version-number-from-tag-name.outputs.APP_VERSION }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -85,6 +87,8 @@ jobs:
     needs: get-the-version-number-from-tag-name
     name: Start to build laravel scheduler image and publish to docker hub
     runs-on: ubuntu-latest
+    env:
+      APP_VERSION: ${{ steps.get-the-version-number-from-tag-name.outputs.APP_VERSION }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -103,6 +107,8 @@ jobs:
     needs: get-the-version-number-from-tag-name
     name: Start to build aws mysql client image and publish to docker hub
     runs-on: ubuntu-latest
+    env:
+      APP_VERSION: ${{ steps.get-the-version-number-from-tag-name.outputs.APP_VERSION }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

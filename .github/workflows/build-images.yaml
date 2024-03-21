@@ -9,6 +9,7 @@ jobs:
   print-the-github-ref:
     name: Print the github ref
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - name: Print the github ref
         run: |
@@ -19,7 +20,6 @@ jobs:
     needs: print-the-github-ref
     name: Check tag name is valid
     runs-on: ubuntu-latest
-    environment: production
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -61,22 +61,22 @@ jobs:
           image_name: nella0128/docfunc-app
           image_tag: ${{ env.APP_VERSION }}
 
-  build-laravel-horizon-image:
+  build-laravel-queue-image:
     needs: check-tag-name-is-valid
-    name: Start to build laravel horizon image and publish to docker hub
+    name: Start to build laravel queue image and publish to docker hub
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build and push laravel horizon
+      - name: Build and push laravel queue
         uses: ./.github/actions/publish-to-docker-hub
         with:
           registry_username: ${{ secrets.DOCKERHUB_USERNAME }}
           registry_password: ${{ secrets.DOCKERHUB_TOKEN }}
-          file: dockerfiles/Dockerfile.horizon
+          file: dockerfiles/Dockerfile.queue
           platforms: linux/amd64, linux/arm64
-          image_name: nella0128/docfunc-horizon
+          image_name: nella0128/docfunc-queue
           image_tag: ${{ env.APP_VERSION }}
 
   build-laravel-scheduler-image:
@@ -87,7 +87,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build and push laravel horizon
+      - name: Build and push laravel scheduler
         uses: ./.github/actions/publish-to-docker-hub
         with:
           registry_username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -105,7 +105,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build and push laravel horizon
+      - name: Build and push aws mysql client
         uses: ./.github/actions/publish-to-docker-hub
         with:
           registry_username: ${{ secrets.DOCKERHUB_USERNAME }}

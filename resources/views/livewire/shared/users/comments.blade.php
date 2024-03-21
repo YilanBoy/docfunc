@@ -32,7 +32,7 @@
 
 {{-- 會員留言 --}}
 <div
-  class="space-y-6"
+  class="w-full space-y-6"
   x-data="userComments"
   x-ref="userComments"
 >

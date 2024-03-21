@@ -42,7 +42,7 @@
     <div class="flex flex-col items-center justify-start px-4">
       {{-- user information, posts and comments --}}
       <div
-        class="relative w-full max-w-sm md:max-w-[800px]"
+        class="w-full max-w-3xl"
         x-data="userShowTabs"
       >
         <div

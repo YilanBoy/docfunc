@@ -31,24 +31,27 @@ jobs:
             exit 1
           fi
 
-  get-the-version-number-from-tag-name:
+  get-the-version-number:
     needs: check-tag-name-is-valid
     name: Get the version number from tag name
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get-the-version-number.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set tag name without 'v'
+      - name: Get the version number from tag name
+        id: get-the-version-number
         run: |
-          echo "APP_VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+          echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
 
   build-laravel-octane-image:
-    needs: get-the-version-number-from-tag-name
+    needs: get-the-version-number
     name: Start to build laravel octane image and publish to docker hub
     runs-on: ubuntu-latest
     env:
-      APP_VERSION: ${{ steps.get-the-version-number-from-tag-name.outputs.APP_VERSION }}
+      APP_VERSION: ${{ needs.get-the-version-number.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -64,11 +67,11 @@ jobs:
           image_tag: ${{ env.APP_VERSION }}
 
   build-laravel-queue-image:
-    needs: get-the-version-number-from-tag-name
+    needs: get-the-version-number
     name: Start to build laravel queue image and publish to docker hub
     runs-on: ubuntu-latest
     env:
-      APP_VERSION: ${{ steps.get-the-version-number-from-tag-name.outputs.APP_VERSION }}
+      APP_VERSION: ${{ needs.get-the-version-number.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -84,11 +87,11 @@ jobs:
           image_tag: ${{ env.APP_VERSION }}
 
   build-laravel-scheduler-image:
-    needs: get-the-version-number-from-tag-name
+    needs: get-the-version-number
     name: Start to build laravel scheduler image and publish to docker hub
     runs-on: ubuntu-latest
     env:
-      APP_VERSION: ${{ steps.get-the-version-number-from-tag-name.outputs.APP_VERSION }}
+      APP_VERSION: ${{ needs.get-the-version-number.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -104,11 +107,11 @@ jobs:
           image_tag: ${{ env.APP_VERSION }}
 
   build-aws-mysql-client-image:
-    needs: get-the-version-number-from-tag-name
+    needs: get-the-version-number
     name: Start to build aws mysql client image and publish to docker hub
     runs-on: ubuntu-latest
     env:
-      APP_VERSION: ${{ steps.get-the-version-number-from-tag-name.outputs.APP_VERSION }}
+      APP_VERSION: ${{ needs.get-the-version-number.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

@@ -46,7 +46,7 @@ jobs:
           echo "APP_VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
   build-laravel-octane-image:
-    needs: check-tag-name-is-valid
+    needs: get-the-version-number-from-tag-name
     name: Start to build laravel octane image and publish to docker hub
     runs-on: ubuntu-latest
     steps:
@@ -64,7 +64,7 @@ jobs:
           image_tag: ${{ env.APP_VERSION }}
 
   build-laravel-queue-image:
-    needs: check-tag-name-is-valid
+    needs: get-the-version-number-from-tag-name
     name: Start to build laravel queue image and publish to docker hub
     runs-on: ubuntu-latest
     steps:
@@ -82,7 +82,7 @@ jobs:
           image_tag: ${{ env.APP_VERSION }}
 
   build-laravel-scheduler-image:
-    needs: check-tag-name-is-valid
+    needs: get-the-version-number-from-tag-name
     name: Start to build laravel scheduler image and publish to docker hub
     runs-on: ubuntu-latest
     steps:
@@ -100,7 +100,7 @@ jobs:
           image_tag: ${{ env.APP_VERSION }}
 
   build-aws-mysql-client-image:
-    needs: check-tag-name-is-valid
+    needs: get-the-version-number-from-tag-name
     name: Start to build aws mysql client image and publish to docker hub
     runs-on: ubuntu-latest
     steps:

@@ -35,7 +35,7 @@ function createPostSectionLink(
     postSectionMenu.innerHTML = postSectionMenuInnerHtml;
 }
 
-function createSectionInPostBdy(postBody: HTMLElement): void {
+function createSectionInPostBody(postBody: HTMLElement): void {
     let childNodes: NodeListOf<ChildNode> = postBody.childNodes;
 
     let newSection: HTMLDivElement | null = null;
@@ -120,7 +120,7 @@ window.setupPostSectionLink = function (
     }
 
     createPostSectionLink(postSectionMenu, headings);
-    createSectionInPostBdy(postBody);
+    createSectionInPostBody(postBody);
 
     // Get all section links, must be after createPostSectionLink
     let sectionLinks: NodeListOf<HTMLAnchorElement> =

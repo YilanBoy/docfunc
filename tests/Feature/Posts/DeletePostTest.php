@@ -3,6 +3,7 @@
 use App\Livewire\Shared\Posts\ShowPostDropdowns;
 use App\Livewire\Shared\Posts\ShowPostSidemenu;
 use App\Livewire\Shared\Users\PostsGroupByYear;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 
@@ -204,4 +205,21 @@ test('prune the stale post', function () {
         'title' => 'This is a normal post',
         'category_id' => 1,
     ]);
+});
+
+// if the post has been deleted, the post's comments should also be deleted
+test('if the post has been deleted, the post\'s comments should also be deleted', function () {
+    $user = User::factory()->create();
+
+    $post = Post::factory()->create(['user_id' => $user->id]);
+
+    $comment = Comment::factory()->create(['user_id' => $user->id, 'post_id' => $post->id]);
+
+    $this->assertDatabaseHas('posts', ['id' => $post->id]);
+    $this->assertDatabaseHas('comments', ['id' => $comment->id]);
+
+    $post->forceDelete();
+
+    $this->assertDatabaseMissing('posts', ['id' => $post->id]);
+    $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
 });

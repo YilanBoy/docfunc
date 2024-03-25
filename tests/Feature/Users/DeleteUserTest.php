@@ -2,6 +2,8 @@
 
 use App\Livewire\Pages\Users\Delete;
 use App\Mail\DestroyUser;
+use App\Models\Comment;
+use App\Models\Post;
 use App\Models\User;
 
 use function Pest\Laravel\get;
@@ -74,4 +76,26 @@ test('if the link is no longer available, users cannot delete their account', fu
     get($destroyUserLink)->assertStatus(401);
 
     $this->assertDatabaseHas('users', ['id' => $user->id]);
+});
+
+// if the user has been deleted, the user's posts should also be deleted
+// and user id of comments should be set to null
+test('if the user has been deleted, the user\'s posts and comments should also be deleted', function () {
+    $user = User::factory()->create();
+
+    $post = Post::factory()->create(['user_id' => $user->id]);
+
+    $comment = Comment::factory()->create(['user_id' => $user->id]);
+
+    $this->assertDatabaseHas('users', ['id' => $user->id]);
+    $this->assertDatabaseHas('posts', ['id' => $post->id, 'user_id' => $user->id]);
+    $this->assertDatabaseHas('comments', ['id' => $comment->id, 'user_id' => $user->id]);
+
+    $user->delete();
+
+    // the posts should be deleted in the database by constraint
+    // the user id of comments should be updated in the database by constraint
+    $this->assertDatabaseMissing('users', ['id' => $user->id]);
+    $this->assertDatabaseMissing('posts', ['id' => $post->id]);
+    $this->assertDatabaseHas('comments', ['id' => $comment->id, 'user_id' => null]);
 });

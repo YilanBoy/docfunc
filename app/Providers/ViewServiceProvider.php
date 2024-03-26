@@ -9,6 +9,8 @@ class ViewServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        Vite::useScriptTagAttributes(['async' => true]);
+        Vite::useScriptTagAttributes(fn (string $src, string $url, ?array $chunk, ?array $manifest) => [
+            'async' => $src === 'resources/ts/set-theme.ts',
+        ]);
     }
 }

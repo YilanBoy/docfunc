@@ -7,8 +7,6 @@ provider:
   httpApi:
     disableDefaultEndpoint: true
   architecture: arm64
-  layers:
-    - arn:aws:lambda:us-west-2:154471991214:layer:us_west_2_rds_cert:1
   iam:
     role:
       statements:
@@ -43,13 +41,12 @@ provider:
     APP_LOCALE: zh_TW
     ASSET_URL: ${ssm:/docfunc/${opt:stage, 'dev'}/asset-url}
     # Database
-    DB_CONNECTION: mysql
+    DB_CONNECTION: pgsql
     DB_HOST: ${ssm:/docfunc/${opt:stage, 'dev'}/database-host}
     DB_PORT: ${ssm:/docfunc/${opt:stage, 'dev'}/database-port}
     DB_DATABASE: ${ssm:/docfunc/${opt:stage, 'dev'}/database-name}
     DB_USERNAME: ${ssm:/docfunc/${opt:stage, 'dev'}/database-username}
     DB_PASSWORD: ${ssm:/docfunc/${opt:stage, 'dev'}/database-password}
-    MYSQL_ATTR_SSL_CA: /opt/us-west-2-bundle.pem
     # Cache
     CACHE_STORE: dynamodb
     DYNAMODB_CACHE_TABLE: !Ref CacheTable
@@ -131,8 +128,6 @@ constructs:
       handler: Bref\LaravelBridge\Queue\QueueHandler
       runtime: php-83
       timeout: 60 # in seconds
-      layers:
-        - arn:aws:lambda:us-west-2:154471991214:layer:us_west_2_rds_cert:1
 
 plugins:
   - ./vendor/bref/bref

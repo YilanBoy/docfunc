@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://docfunc-files.s3.ap-northeast-1.amazonaws.com/docfunc-dark-badge.png" width="30%">
-    <img alt="Badge changing depending on mode." src="https://docfunc-files.s3.ap-northeast-1.amazonaws.com/docfunc-light-badge.png" width="30%">
+    <source media="(prefers-color-scheme: dark)" srcset="https://blobs.docfunc.com/docfunc-dark-badge.png" width="30%">
+    <img alt="Badge changing depending on mode." src="https://blobs.docfunc.com/docfunc-light-badge.png" width="30%">
   </picture>
 </p>
 

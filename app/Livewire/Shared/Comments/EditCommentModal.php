@@ -3,8 +3,8 @@
 namespace App\Livewire\Shared\Comments;
 
 use App\Http\Requests\CommentRequest;
-use App\Livewire\Traits\MarkdownConverter;
 use App\Models\Comment;
+use App\Traits\MarkdownConverter;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use League\CommonMark\Exception\CommonMarkException;

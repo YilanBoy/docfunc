@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Shared\Users;
 
-use App\Livewire\Traits\MarkdownConverter;
 use App\Models\Comment;
+use App\Traits\MarkdownConverter;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 use Livewire\WithPagination;

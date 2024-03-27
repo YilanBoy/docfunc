@@ -1,18 +1,18 @@
 interface Window {
-    setupPostSectionLink: any;
+    setupPostOutline: any;
 }
 
-function createPostSectionLink(
-    postSectionMenu: HTMLElement,
+function createPostOutlineLinks(
+    postOutline: HTMLElement,
     headings: NodeListOf<HTMLHeadingElement>,
 ): void {
     if (headings.length === 0) {
         return;
     }
 
-    let postSectionMenuInnerHtml: string = '';
+    let postOutlineInnerHtml: string = '';
 
-    postSectionMenuInnerHtml += `
+    postOutlineInnerHtml += `
         <div class="mb-4 flex items-center justify-center dark:text-gray-50">目錄</div>
         <hr class="mb-1 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
     `;
@@ -20,7 +20,7 @@ function createPostSectionLink(
     headings.forEach((heading: HTMLHeadingElement, index: number): void => {
         heading.id = `heading-${index}`;
 
-        postSectionMenuInnerHtml += `
+        postOutlineInnerHtml += `
             <a
                 href="#${heading.id}"
                 id="${heading.id}-link"
@@ -32,7 +32,7 @@ function createPostSectionLink(
         `;
     });
 
-    postSectionMenu.innerHTML = postSectionMenuInnerHtml;
+    postOutline.innerHTML = postOutlineInnerHtml;
 }
 
 function createSectionInPostBody(postBody: HTMLElement): void {
@@ -70,8 +70,8 @@ function createSectionInPostBody(postBody: HTMLElement): void {
     });
 }
 
-function showWhichSectionIAmIn(sectionLinks: NodeListOf<HTMLAnchorElement>) {
-    sectionLinks.forEach((sectionLink: HTMLAnchorElement, index: number) => {
+function showWhichSectionIAmIn(outlineLinks: NodeListOf<HTMLAnchorElement>) {
+    outlineLinks.forEach((outlineLink: HTMLAnchorElement, index: number) => {
         let section: Element | null = document.getElementById(
             `heading-${index}-section`,
         );
@@ -80,7 +80,7 @@ function showWhichSectionIAmIn(sectionLinks: NodeListOf<HTMLAnchorElement>) {
             return;
         }
 
-        sectionLink.addEventListener('click', (event) => {
+        outlineLink.addEventListener('click', (event) => {
             event.preventDefault();
             section?.scrollIntoView({
                 behavior: 'smooth',
@@ -90,12 +90,12 @@ function showWhichSectionIAmIn(sectionLinks: NodeListOf<HTMLAnchorElement>) {
         let sectionObserver = new IntersectionObserver(
             function (entries) {
                 if (entries[0].isIntersecting) {
-                    sectionLink.classList.add(
+                    outlineLink.classList.add(
                         'bg-gray-300',
                         'dark:bg-gray-600',
                     );
                 } else {
-                    sectionLink.classList.remove(
+                    outlineLink.classList.remove(
                         'bg-gray-300',
                         'dark:bg-gray-600',
                     );
@@ -108,8 +108,8 @@ function showWhichSectionIAmIn(sectionLinks: NodeListOf<HTMLAnchorElement>) {
     });
 }
 
-window.setupPostSectionLink = function (
-    postSectionMenu: HTMLElement,
+window.setupPostOutline = function (
+    postOutline: HTMLElement,
     postBody: HTMLElement,
 ): void {
     let headings: NodeListOf<HTMLHeadingElement> =
@@ -119,13 +119,13 @@ window.setupPostSectionLink = function (
         return;
     }
 
-    createPostSectionLink(postSectionMenu, headings);
+    createPostOutlineLinks(postOutline, headings);
     createSectionInPostBody(postBody);
 
     // Get all section links, must be after createPostSectionLink
-    let sectionLinks: NodeListOf<HTMLAnchorElement> =
-        postSectionMenu.querySelectorAll('a');
+    let outlineLinks: NodeListOf<HTMLAnchorElement> =
+        postOutline.querySelectorAll('a');
 
     // Must be after createSectionInPostBdy
-    showWhichSectionIAmIn(sectionLinks);
+    showWhichSectionIAmIn(outlineLinks);
 };

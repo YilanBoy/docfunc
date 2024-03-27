@@ -28,14 +28,14 @@
   @vite('resources/ts/oembed/embed-youtube-oembed.ts')
   @vite('resources/ts/oembed/embed-twitter-oembed.ts')
   {{-- post content --}}
-  @vite('resources/ts/post-section-link.ts')
+  @vite('resources/ts/post-outline.ts')
 @endassets
 
 @script
   <script>
     Alpine.data('showPostPage', () => ({
       init() {
-        setupPostSectionLink(this.$refs.postSectionMenu, this.$refs.postBody);
+        setupPostOutline(this.$refs.postOutline, this.$refs.postBody);
         hljs.highlightAll();
         codeBlockCopyButton(this.$refs.postBody);
         processYoutubeOEmbeds();
@@ -60,7 +60,7 @@
             {{-- content menu --}}
             <div
               class="sticky top-1/2 flex -translate-y-1/2 flex-col"
-              x-ref="postSectionMenu"
+              x-ref="postOutline"
             ></div>
           </div>
 

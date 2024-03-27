@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Shared\Comments;
 
-use App\Livewire\Traits\MarkdownConverter;
 use App\Models\Comment;
+use App\Traits\MarkdownConverter;
 use League\CommonMark\Exception\CommonMarkException;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;

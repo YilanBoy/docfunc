@@ -1,12 +1,13 @@
 <?php
 
-use App\Livewire\Traits\MarkdownConverter;
+use App\Traits\MarkdownConverter;
 use Tests\TestCase;
 
 uses(TestCase::class);
 
 it('can block the header tags', function () {
-    $trait = new class {
+    $trait = new class
+    {
         use MarkdownConverter;
     };
 
@@ -37,7 +38,8 @@ it('can block the header tags', function () {
 });
 
 it('can convert the markdown content to html', function () {
-    $trait = new class {
+    $trait = new class
+    {
         use MarkdownConverter;
     };
 

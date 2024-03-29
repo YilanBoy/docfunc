@@ -4,8 +4,11 @@ interface Window {
 
 function createPostOutlineLinks(
     postOutline: HTMLElement,
-    headings: NodeListOf<HTMLHeadingElement>,
+    postBody: HTMLElement,
 ): void {
+    let headings: NodeListOf<HTMLHeadingElement> =
+        postBody.querySelectorAll('h2');
+
     if (headings.length === 0) {
         return;
     }
@@ -70,7 +73,11 @@ function createSectionInPostBody(postBody: HTMLElement): void {
     });
 }
 
-function showWhichSectionIAmIn(outlineLinks: NodeListOf<HTMLAnchorElement>) {
+function showWhichSectionIAmIn(postOutline: HTMLElement): void {
+    // Get all section links, must be after createPostSectionLink
+    let outlineLinks: NodeListOf<HTMLAnchorElement> =
+        postOutline.querySelectorAll('a');
+
     outlineLinks.forEach((outlineLink: HTMLAnchorElement, index: number) => {
         let section: Element | null = document.getElementById(
             `heading-${index}-section`,
@@ -112,20 +119,8 @@ window.setupPostOutline = function (
     postOutline: HTMLElement,
     postBody: HTMLElement,
 ): void {
-    let headings: NodeListOf<HTMLHeadingElement> =
-        postBody.querySelectorAll('h2');
-
-    if (headings.length === 0) {
-        return;
-    }
-
-    createPostOutlineLinks(postOutline, headings);
+    createPostOutlineLinks(postOutline, postBody);
     createSectionInPostBody(postBody);
-
-    // Get all section links, must be after createPostSectionLink
-    let outlineLinks: NodeListOf<HTMLAnchorElement> =
-        postOutline.querySelectorAll('a');
-
     // Must be after createSectionInPostBdy
-    showWhichSectionIAmIn(outlineLinks);
+    showWhichSectionIAmIn(postOutline);
 };

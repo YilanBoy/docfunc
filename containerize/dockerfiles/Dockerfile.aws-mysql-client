@@ -33,7 +33,7 @@ RUN groupadd -g $WWWGROUP scheduler || true \
 WORKDIR /home/scheduler
 
 # copy the entrypoint script
-COPY deployment/scripts/aws-mysql-client.sh aws-mysql-client.sh
+COPY containerize/scripts/aws-mysql-client.sh aws-mysql-client.sh
 
 # set scripts to start the laravel octane app
 RUN chmod +x aws-mysql-client.sh

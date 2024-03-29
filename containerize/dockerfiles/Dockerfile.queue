@@ -69,8 +69,8 @@ RUN addgroup -g $WWWGROUP -S queue || true \
     && adduser -D -h /home/queue -s /bin/ash -G queue -u $WWWUSER queue
 
 # copy supervisor and php config files into container
-COPY deployment/php/php.ini /usr/local/etc/php/conf.d/queue.ini
-COPY deployment/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+COPY containerize/php/php.ini /usr/local/etc/php/conf.d/queue.ini
+COPY containerize/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
 COPY . .
 

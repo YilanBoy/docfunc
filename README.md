@@ -205,11 +205,11 @@ the folder deployment. You can use Docker and these files to build images.
 cd docfunc
 
 # build blog app
-docker buildx build -f dockerfiles/Dockerfile.app --platform linux/amd64,linux/arm64 --push -t docfunc:latest .
+docker buildx build -f containerize/dockerfiles/Dockerfile.app --platform linux/amd64,linux/arm64 --push -t docfunc:latest .
 
-# build horizon
-docker buildx build -f dockerfiles/Dockerfile.horizon --platform linux/amd64,linux/arm64 --push -t docfunc-horizon:latest .
+# build queue
+docker buildx build -f containerize/dockerfiles/Dockerfile.queue --platform linux/amd64,linux/arm64 --push -t docfunc-queue:latest .
 
 # build scheduler
-docker buildx build -f dockerfiles/Dockerfile.scheduler --platform linux/amd64,linux/arm64 --push -t docfunc-scheduler:latest .
+docker buildx build -f containerize/dockerfiles/Dockerfile.scheduler --platform linux/amd64,linux/arm64 --push -t docfunc-scheduler:latest .
 ```

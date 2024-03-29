@@ -68,13 +68,13 @@ RUN groupadd --force -g $WWWGROUP octane \
     && useradd -ms /bin/bash --no-log-init --no-user-group -g $WWWGROUP -u $WWWUSER octane
 
 # copy php config files into container
-COPY deployment/php/php.ini /usr/local/etc/php/conf.d/octane.ini
-COPY deployment/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+COPY containerize/php/php.ini /usr/local/etc/php/conf.d/octane.ini
+COPY containerize/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
 COPY . .
 
 # set scripts to start the laravel octane app
-RUN chmod +x deployment/scripts/app-entrypoint.sh
+RUN chmod +x containerize/scripts/app-entrypoint.sh
 
 # create bootstrap and storage files if they do not exist
 # gives the 'octane' user read/write and execute privileges to those files
@@ -97,7 +97,7 @@ EXPOSE 9000
 
 USER octane
 
-ENTRYPOINT ["deployment/scripts/app-entrypoint.sh"]
+ENTRYPOINT ["containerize/scripts/app-entrypoint.sh"]
 
 HEALTHCHECK --start-period=5s --interval=30s --timeout=5s --retries=8 \
     CMD curl --fail localhost:9000 || exit 1

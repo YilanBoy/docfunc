@@ -30,7 +30,7 @@ by [Algolia](https://www.algolia.com/).
 
 ## Requirements
 
-- [php](https://www.php.net/) ^8.1
+- [php](https://www.php.net/) ^8.2
 - [composer](https://getcomposer.org/)
 - [npm](https://www.npmjs.com/)
 
@@ -72,7 +72,7 @@ Create the `.env` file, and set up the config, such as database connection, reCA
 cp .env-example .env
 ```
 
-Generate application key:
+Generate application key (for session and cookie encryption):
 
 ```sh
 php artisan key:generate
@@ -99,15 +99,15 @@ php artisan ide-helper:models
 ## Service Used
 
 - [Algolia](https://www.algolia.com/): for search post
-- [AWS S3](https://aws.amazon.com/tw/s3/): for images storage
-- [reCAPTCHA](https://www.google.com/recaptcha/about/): for verify user is bot or not
+- [AWS S3](https://aws.amazon.com/s3/): for images storage
+- [Turnstile](https://www.cloudflare.com/products/turnstile/): for verify user is bot or not
 
 ## Deployment
 
 ### Supervisor
 
 You could deploy this project use [Laravel Octane](https://laravel.com/docs/9.x/octane), supercharges the performance by
-serving application using [Swoole](https://github.com/swoole/swoole-src).
+serving application using [Swoole](https://github.com/swoole/swoole-src), [RoadRunner](https://roadrunner.dev/), or [FrankenPHP](https://frankenphp.dev/).
 
 > [!NOTE]
 >
@@ -123,7 +123,7 @@ serving application using [Swoole](https://github.com/swoole/swoole-src).
 >
 > ```sh
 > sudo add-apt-repository ppa:ondrej/php
-> sudo apt-get php8.1-swoole
+> sudo apt-get php8.2-swoole
 > ```
 
 Setting octane in `.env` file
@@ -196,7 +196,7 @@ Add this line to run the Scheduler.
 >
 > You must install [Docker](https://www.docker.com/) first.
 
-The container is divided into 3 parts, which are app, horizon and scheduler.
+The container is divided into 3 parts, which are app, queue and scheduler.
 
 Dockerfiles is placed in the folder dockerfiles. The php settings and entrypoint files in the container are placed in
 the folder deployment. You can use Docker and these files to build images.

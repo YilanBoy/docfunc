@@ -106,8 +106,11 @@ resources:
 
 functions:
   web:
-    handler: public/index.php
-    runtime: php-83-fpm
+    handler: Bref\LaravelBridge\Http\OctaneHandler
+    runtime: php-83
+    environment:
+      BREF_LOOP_MAX: 250
+      OCTANE_PERSIST_DATABASE_SESSIONS: 1
     timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
     events:
       - httpApi: '*'

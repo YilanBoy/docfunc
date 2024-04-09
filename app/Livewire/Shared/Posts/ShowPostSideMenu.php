@@ -30,6 +30,6 @@ class ShowPostSideMenu extends Component
 
     public function render(): View
     {
-        return view('livewire.shared.posts.show-post-sidemenu');
+        return view('livewire.shared.posts.show-post-side-menu');
     }
 }

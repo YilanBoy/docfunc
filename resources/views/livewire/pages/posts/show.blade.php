@@ -204,7 +204,7 @@
 
           <div class="hidden xl:block xl:w-1/5">
             {{-- desktop sidemenu --}}
-            <livewire:shared.posts.show-post-sidemenu
+            <livewire:shared.posts.show-post-side-menu
               :post-id="$post->id"
               :post-title="$post->title"
               :author-id="$post->user_id"

@@ -8,6 +8,7 @@ use App\Services\SettingService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -61,7 +62,7 @@ class Register extends Component
     }
 
     #[Title('註冊')]
-    public function render()
+    public function render(): View
     {
         return view('livewire.pages.auth.register');
     }

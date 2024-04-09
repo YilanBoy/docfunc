@@ -3,6 +3,7 @@
 namespace App\Livewire\Shared\Comments;
 
 use App\Models\Comment;
+use Illuminate\View\View;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 
@@ -75,7 +76,7 @@ class Comments extends Component
         }
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.shared.comments.comments');
     }

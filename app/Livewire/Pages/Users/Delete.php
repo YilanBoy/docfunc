@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
+use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -16,12 +17,12 @@ class Delete extends Component
 
     public User $user;
 
-    public function mount(User $user)
+    public function mount(User $user): void
     {
         $this->user = $user;
     }
 
-    public function sendDestroyEmail()
+    public function sendDestroyEmail(): void
     {
         $this->authorize('update', $this->user);
 
@@ -38,7 +39,7 @@ class Delete extends Component
     }
 
     #[Title('會員中心 - 刪除帳號')]
-    public function render()
+    public function render(): View
     {
         $this->authorize('update', $this->user);
 

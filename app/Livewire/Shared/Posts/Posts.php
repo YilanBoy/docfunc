@@ -3,6 +3,7 @@
 namespace App\Livewire\Shared\Posts;
 
 use App\Models\Post;
+use Illuminate\View\View;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -33,7 +34,7 @@ class Posts extends Component
         $this->order = $newOrder;
     }
 
-    public function render()
+    public function render(): View
     {
         $posts = Post::query()
             ->when($this->categoryId, function ($query) {
@@ -51,6 +52,6 @@ class Posts extends Component
             ->paginate(10)
             ->withQueryString();
 
-        return view('livewire.shared.posts.posts', ['posts' => $posts]);
+        return view('livewire.shared.posts.posts', compact('posts'));
     }
 }

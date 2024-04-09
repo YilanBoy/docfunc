@@ -3,13 +3,14 @@
 namespace App\Livewire\Shared;
 
 use App\Models\Post;
+use Illuminate\View\View;
 use Livewire\Component;
 
 class Search extends Component
 {
     public string $search = '';
 
-    public function render()
+    public function render(): View
     {
         $results = collect();
 

@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Auth;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -23,6 +24,9 @@ class VerifyEmail extends Component
         session()->flash('status', 'verification-link-sent');
     }
 
+    /**
+     * @return View|void
+     */
     #[Title('驗證電子郵件')]
     public function render()
     {

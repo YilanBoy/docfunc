@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Traits\MarkdownConverter;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\View\View;
 use League\CommonMark\Exception\CommonMarkException;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
@@ -73,7 +74,7 @@ class EditCommentModal extends Component
         $this->dispatch('comment-updated.'.$comment->id);
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.shared.comments.edit-comment-modal');
     }

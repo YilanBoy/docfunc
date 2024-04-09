@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Users;
 
 use App\Models\User;
+use Illuminate\View\View;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 
@@ -23,7 +24,7 @@ class Show extends Component
         $this->user = $user;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.pages.users.show')
             ->title($this->user->name.' 的個人資訊');

@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -63,7 +64,7 @@ class CommentGroup extends Component
         $this->dispatch('info-badge', status: 'success', message: '成功刪除留言！');
     }
 
-    public function render()
+    public function render(): View
     {
         $comments = collect();
 

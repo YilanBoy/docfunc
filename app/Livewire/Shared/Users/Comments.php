@@ -4,6 +4,7 @@ namespace App\Livewire\Shared\Users;
 
 use App\Models\Comment;
 use App\Traits\MarkdownConverter;
+use Illuminate\View\View;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -16,7 +17,7 @@ class Comments extends Component
     #[Locked]
     public int $userId;
 
-    public function render()
+    public function render(): View
     {
         // get the comments from this user
         $comments = Comment::whereUserId($this->userId)

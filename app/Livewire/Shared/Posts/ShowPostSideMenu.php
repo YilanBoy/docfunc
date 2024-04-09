@@ -4,9 +4,10 @@ namespace App\Livewire\Shared\Posts;
 
 use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\View\View;
 use Livewire\Component;
 
-class ShowPostSidemenu extends Component
+class ShowPostSideMenu extends Component
 {
     use AuthorizesRequests;
 
@@ -16,18 +17,18 @@ class ShowPostSidemenu extends Component
 
     public $authorId;
 
-    public function deletePost(Post $post)
+    public function deletePost(Post $post): void
     {
         $this->authorize('destroy', $post);
 
         $post->delete();
 
-        return redirect()
-            ->route('users.show', ['user' => auth()->id(), 'tab' => 'posts'])
-            ->with('alert', ['status' => 'success', 'message' => '成功刪除文章！']);
+        $this->dispatch('info-badge', status: 'success', message: '成功刪除文章！');
+
+        $this->redirectRoute('users.show', ['user' => auth()->id(), 'tab' => 'posts'], navigate: true);
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.shared.posts.show-post-sidemenu');
     }

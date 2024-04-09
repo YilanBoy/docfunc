@@ -5,6 +5,7 @@ namespace App\Livewire\Shared\Users;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\View\View;
 use Livewire\Component;
 
 class PostsGroupByYear extends Component
@@ -79,7 +80,7 @@ class PostsGroupByYear extends Component
             ->get();
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.shared.users.posts-group-by-year');
     }

@@ -6,6 +6,7 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -24,7 +25,7 @@ class ResetPassword extends Component
 
     public string $password_confirmation = '';
 
-    public function mount(string $token)
+    public function mount(string $token): void
     {
         $this->token = $token;
     }
@@ -41,7 +42,7 @@ class ResetPassword extends Component
     /**
      * Handle an incoming new password request.
      */
-    public function store()
+    public function store(): void
     {
         $this->validate();
 
@@ -78,7 +79,7 @@ class ResetPassword extends Component
     }
 
     #[Title('重設密碼')]
-    public function render()
+    public function render(): View
     {
         return view('livewire.pages.auth.reset-password');
     }

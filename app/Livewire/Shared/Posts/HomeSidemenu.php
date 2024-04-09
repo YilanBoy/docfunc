@@ -5,11 +5,12 @@ namespace App\Livewire\Shared\Posts;
 use App\Models\Link;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\View\View;
 use Livewire\Component;
 
 class HomeSidemenu extends Component
 {
-    public function render()
+    public function render(): View
     {
         $popularTags = Cache::remember('popularTags', now()->addDay(), function () {
             // 取出標籤使用次數前 20 名

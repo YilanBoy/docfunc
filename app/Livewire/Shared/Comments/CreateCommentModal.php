@@ -9,6 +9,7 @@ use App\Notifications\NewComment;
 use App\Rules\Captcha;
 use App\Traits\MarkdownConverter;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 use League\CommonMark\Exception\CommonMarkException;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;
@@ -91,7 +92,7 @@ class CreateCommentModal extends Component
         $this->dispatch('info-badge', status: 'success', message: '成功新增留言！');
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.shared.comments.create-comment-modal');
     }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -94,7 +95,7 @@ class Login extends Component
     }
 
     #[Title('登入')]
-    public function render()
+    public function render(): View
     {
         return view('livewire.pages.auth.login');
     }

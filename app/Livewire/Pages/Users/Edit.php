@@ -5,6 +5,7 @@ namespace App\Livewire\Pages\Users;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -28,14 +29,14 @@ class Edit extends Component
         return (new UserRequest())->messages();
     }
 
-    public function mount(User $user)
+    public function mount(User $user): void
     {
         $this->user = $user;
         $this->name = $user->name;
         $this->introduction = $user->introduction;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->authorize('update', $this->user);
 
@@ -51,7 +52,7 @@ class Edit extends Component
     }
 
     #[Title('會員中心 - 編輯個人資料')]
-    public function render()
+    public function render(): View
     {
         // 會員只能進入自己的頁面，規則寫在 UserPolicy
         $this->authorize('update', $this->user);

@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Auth;
 
 use Illuminate\Support\Facades\Password;
+use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -32,7 +33,7 @@ class ForgotPassword extends Component
     }
 
     #[Title('忘記密碼')]
-    public function render()
+    public function render(): View
     {
         return view('livewire.pages.auth.forgot-password');
     }

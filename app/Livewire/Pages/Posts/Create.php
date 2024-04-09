@@ -5,6 +5,7 @@ namespace App\Livewire\Pages\Posts;
 use App\Livewire\Forms\PostForm;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -52,7 +53,7 @@ class Create extends Component
     }
 
     #[Title('新增文章')]
-    public function render()
+    public function render(): View
     {
         return view('livewire.pages.posts.create');
     }

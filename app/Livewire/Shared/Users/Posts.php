@@ -3,6 +3,7 @@
 namespace App\Livewire\Shared\Users;
 
 use App\Models\Post;
+use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -48,7 +49,7 @@ class Posts extends Component
         return $postsGroupByYear;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.shared.users.posts');
     }

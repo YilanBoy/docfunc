@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Rules\MatchOldPassword;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -40,12 +41,12 @@ class UpdatePassword extends Component
         ];
     }
 
-    public function mount(User $user)
+    public function mount(User $user): void
     {
         $this->user = $user;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->authorize('update', $this->user);
 
@@ -60,7 +61,7 @@ class UpdatePassword extends Component
     }
 
     #[Title('會員中心 - 更改密碼')]
-    public function render()
+    public function render(): View
     {
         return view('livewire.pages.users.update-password');
     }

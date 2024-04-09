@@ -4,6 +4,7 @@ namespace App\Livewire\Shared\Comments;
 
 use App\Models\Comment;
 use App\Traits\MarkdownConverter;
+use Illuminate\View\View;
 use League\CommonMark\Exception\CommonMarkException;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;
@@ -58,7 +59,7 @@ class CommentCard extends Component
         $this->isEdited = true;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.shared.comments.comment-card');
     }

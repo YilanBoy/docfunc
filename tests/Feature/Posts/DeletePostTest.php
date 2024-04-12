@@ -1,7 +1,7 @@
 <?php
 
-use App\Livewire\Shared\Posts\ShowPostDropdowns;
-use App\Livewire\Shared\Posts\ShowPostSideMenu;
+use App\Livewire\Shared\Posts\MobileMenu;
+use App\Livewire\Shared\Posts\SideMenu;
 use App\Livewire\Shared\Users\PostsGroupByYear;
 use App\Models\Comment;
 use App\Models\Post;
@@ -14,7 +14,7 @@ test('author can soft delete own post in desktop show post page', function () {
 
     $this->actingAs(User::find($post->user_id));
 
-    livewire(ShowPostSideMenu::class, [
+    livewire(SideMenu::class, [
         'postId' => $post->id,
         'postTitle' => $post->title,
         'authorId' => $post->user_id,
@@ -29,7 +29,7 @@ test('author can soft delete own post in desktop show post page', function () {
 test('guest cannot delete others\' post in desktop show post page', function () {
     $post = Post::factory()->create();
 
-    livewire(ShowPostSideMenu::class, [
+    livewire(SideMenu::class, [
         'postId' => $post->id,
         'postTitle' => $post->title,
         'authorId' => $post->user_id,
@@ -46,7 +46,7 @@ test('user cannot delete others\' post in desktop show post page', function () {
     // Login as another user
     loginAsUser();
 
-    livewire(ShowPostSideMenu::class, [
+    livewire(SideMenu::class, [
         'postId' => $post->id,
         'postTitle' => $post->title,
         'authorId' => $post->user_id,
@@ -62,8 +62,8 @@ test('author can soft delete own post in mobile show post page', function () {
 
     loginAsUser(User::find($post->user_id));
 
-    livewire(ShowPostDropdowns::class, ['postId' => $post->id])
-        ->call('deletePost', $post->id)
+    livewire(MobileMenu::class, ['postId' => $post->id])
+        ->call('destroy', $post->id)
         ->assertDispatched('info-badge', status: 'success', message: '成功刪除文章！')
         ->assertRedirect(route('users.show', ['user' => $post->user_id, 'tab' => 'posts']));
 
@@ -73,8 +73,8 @@ test('author can soft delete own post in mobile show post page', function () {
 test('guest cannot delete others\' post in mobile show post page', function () {
     $post = Post::factory()->create();
 
-    livewire(ShowPostDropdowns::class, ['postId' => $post->id])
-        ->call('deletePost', $post->id)
+    livewire(MobileMenu::class, ['postId' => $post->id])
+        ->call('destroy', $post->id)
         ->assertForbidden();
 
     $this->assertNotSoftDeleted('posts', ['id' => $post->id]);
@@ -85,8 +85,8 @@ test('user cannot delete others\' post in mobile show post page', function () {
 
     loginAsUser();
 
-    livewire(ShowPostDropdowns::class, ['postId' => $post->id])
-        ->call('deletePost', $post->id)
+    livewire(MobileMenu::class, ['postId' => $post->id])
+        ->call('destroy', $post->id)
         ->assertForbidden();
 
     $this->assertNotSoftDeleted('posts', ['id' => $post->id]);

@@ -70,17 +70,8 @@
               class="w-full"
               x-ref="postCard"
             >
-
-              <div class="flex justify-between">
-                {{-- post title --}}
-                <h1 class="text-4xl leading-relaxed text-green-600 dark:text-lividus-500">{{ $post->title }}</h1>
-
-                {{-- mobile dropdowns --}}
-                @if (auth()->id() === $post->user_id)
-                  <livewire:shared.posts.show-post-dropdowns :post-id="$post->id" />
-                @endif
-
-              </div>
+              {{-- post title --}}
+              <h1 class="text-4xl leading-relaxed text-green-600 dark:text-lividus-500">{{ $post->title }}</h1>
 
               {{-- post information --}}
               <div class="mt-4 flex items-center space-x-2 text-base text-neutral-400">
@@ -164,6 +155,11 @@
               >
                 {!! $post->body !!}
               </div>
+
+              {{-- mobile menu --}}
+              @if (auth()->id() === $post->user_id)
+                <livewire:shared.posts.mobile-menu :post-id="$post->id" />
+              @endif
             </x-card>
 
             {{-- about author --}}
@@ -203,8 +199,8 @@
           </div>
 
           <div class="hidden xl:block xl:w-1/5">
-            {{-- desktop sidemenu --}}
-            <livewire:shared.posts.show-post-side-menu
+            {{-- desktop side menu --}}
+            <livewire:shared.posts.side-menu
               :post-id="$post->id"
               :post-title="$post->title"
               :author-id="$post->user_id"

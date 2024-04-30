@@ -18,7 +18,7 @@
 <div x-data="search">
   {{-- 搜尋按鈕 --}}
   <button
-    class="hidden items-center justify-center rounded-lg p-2 text-xl text-gray-500 transition duration-150 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-gray-50 lg:flex"
+    class="hidden items-center justify-center rounded-lg bg-gray-200 p-2 text-xl text-gray-500 transition duration-150 hover:text-gray-900 dark:bg-gray-600 dark:text-gray-400 dark:hover:text-gray-50 xl:flex"
     type="button"
     aria-label="Search"
     x-on:click="openSearchBar"
@@ -27,7 +27,7 @@
   >
     <x-icon.search class="w-5" />
 
-    <div class="ml-2 hidden space-x-2 text-base xl:flex">
+    <div class="ml-2 flex space-x-2 text-base">
       <span>搜尋</span>
 
       <div class="shortcut">

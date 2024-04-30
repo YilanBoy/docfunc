@@ -63,6 +63,9 @@
 
   <div class="absolute inset-y-1/2 right-6 flex items-center space-x-5">
 
+    {{-- dektop search --}}
+    <livewire:shared.search />
+
     {{-- 明亮 / 暗黑模式切換 --}}
     <button
       class="group flex size-10 items-center justify-center"
@@ -76,9 +79,6 @@
         class="hidden w-5 text-[#f6f1d5] transition duration-150 group-hover:text-[#ddd8bf] dark:inline"
       />
     </button>
-
-    {{-- dektop search --}}
-    <livewire:shared.search />
 
     @guest
       {{-- 電腦版-未登入 --}}

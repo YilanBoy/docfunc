@@ -18,12 +18,24 @@
 <div x-data="search">
   {{-- 搜尋按鈕 --}}
   <button
-    class="flex size-10 items-center justify-center rounded-lg text-xl text-gray-500 transition duration-150 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-gray-50"
+    class="hidden items-center justify-center rounded-lg p-2 text-xl text-gray-500 transition duration-150 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-gray-50 lg:flex"
     type="button"
     aria-label="Search"
     x-on:click="openSearchBar"
+    x-on:keydown.cmd.k.window="openSearchBar"
+    x-on:keydown.ctrl.k.window="openSearchBar"
   >
     <x-icon.search class="w-5" />
+
+    <div class="ml-2 hidden space-x-2 text-base xl:flex">
+      <span>搜尋</span>
+
+      <div class="shortcut">
+        <kbd class="rounded bg-gray-300 px-2 py-1 dark:bg-gray-500 dark:text-gray-200">⌘</kbd> + <kbd
+          class="rounded bg-gray-300 px-2 py-1 dark:bg-gray-500 dark:text-gray-200"
+        >K</kbd>
+      </div>
+    </div>
   </button>
 
   {{-- search moodal --}}

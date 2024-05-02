@@ -10,6 +10,14 @@
       },
       closeSearchBar() {
         this.searchBarIsOpen = false;
+      },
+      init() {
+        // disable ctrl + k shortcut in browser
+        document.addEventListener('keydown', (event) => {
+          if (event.ctrlKey && event.which === 75) {
+            event.preventDefault();
+          }
+        });
       }
     }));
   </script>

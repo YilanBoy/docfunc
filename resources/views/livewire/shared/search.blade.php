@@ -18,22 +18,22 @@
 <div x-data="search">
   {{-- 搜尋按鈕 --}}
   <button
-    class="hidden items-center justify-center rounded-lg bg-gray-200 p-2 text-xl text-gray-500 transition duration-150 hover:text-gray-900 dark:bg-gray-600 dark:text-gray-400 dark:hover:text-gray-50 xl:flex"
+    class="group hidden items-center justify-center rounded-lg bg-gray-200 p-2 text-xl text-gray-500 transition duration-150 dark:bg-gray-600 dark:text-gray-400 xl:flex"
     type="button"
     aria-label="Search"
     x-on:click="openSearchBar"
     x-on:keydown.cmd.k.window="openSearchBar"
     x-on:keydown.ctrl.k.window="openSearchBar"
   >
-    <x-icon.search class="w-5" />
+    <x-icon.search class="w-5 group-hover:text-gray-900 dark:group-hover:text-gray-50" />
 
     <div class="ml-2 flex space-x-2 text-base">
-      <span>搜尋</span>
+      <span class="group-hover:text-gray-900 dark:group-hover:text-gray-50">搜尋</span>
 
-      <div class="shortcut">
-        <kbd class="rounded bg-gray-300 px-2 py-1 dark:bg-gray-500 dark:text-gray-200">⌘</kbd> + <kbd
-          class="rounded bg-gray-300 px-2 py-1 dark:bg-gray-500 dark:text-gray-200"
-        >K</kbd>
+      <div class="shortcut space-x-2">
+        <kbd class="rounded bg-gray-300 px-2 py-1 dark:bg-gray-500 dark:text-gray-200">⌘</kbd>
+        <span class="group-hover:text-gray-900 dark:group-hover:text-gray-50">+</span>
+        <kbd class="rounded bg-gray-300 px-2 py-1 dark:bg-gray-500 dark:text-gray-200">K</kbd>
       </div>
     </div>
   </button>

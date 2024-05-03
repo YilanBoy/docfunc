@@ -31,9 +31,8 @@
     <div class="ml-2 flex space-x-2 text-base">
       <span class="group-hover:text-gray-900 dark:group-hover:text-gray-50">搜尋</span>
 
-      <div class="shortcut space-x-2">
+      <div class="shortcut">
         <kbd class="rounded bg-gray-300 px-2 py-1 dark:bg-gray-500 dark:text-gray-200">⌘</kbd>
-        <span class="group-hover:text-gray-900 dark:group-hover:text-gray-50">+</span>
         <kbd class="rounded bg-gray-300 px-2 py-1 dark:bg-gray-500 dark:text-gray-200">K</kbd>
       </div>
     </div>

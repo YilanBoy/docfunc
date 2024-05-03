@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Middleware\CheckRegistrationIsValid;
 use App\Livewire\Pages\Auth\ForgotPassword;
 use App\Livewire\Pages\Auth\Login;
 use App\Livewire\Pages\Auth\Register;
@@ -21,7 +22,7 @@ Route::get('/verify-email/{id}/{hash}', VerifyEmailController::class)
     ->name('verification.verify');
 
 Route::get('/register', Register::class)
-    ->middleware('guest')
+    ->middleware(['guest', CheckRegistrationIsValid::class])
     ->name('register');
 
 Route::get('/forgot-password', ForgotPassword::class)

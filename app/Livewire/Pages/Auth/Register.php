@@ -24,11 +24,6 @@ class Register extends Component
 
     public string $captchaToken = '';
 
-    public function mount(): void
-    {
-        abort_if(! SettingService::isRegisterAllowed(), 503);
-    }
-
     protected function rules(): array
     {
         return [

@@ -10,14 +10,6 @@
       },
       closeSearchBar() {
         this.searchBarIsOpen = false;
-      },
-      init() {
-        // disable ctrl + k shortcut in browser
-        document.addEventListener('keydown', (event) => {
-          if (event.ctrlKey && event.which === 75) {
-            event.preventDefault();
-          }
-        });
       }
     }));
   </script>
@@ -30,8 +22,9 @@
     type="button"
     aria-label="Search"
     x-on:click="openSearchBar"
-    x-on:keydown.cmd.k.window="openSearchBar"
-    x-on:keydown.ctrl.k.window="openSearchBar"
+    x-on:keydown.window.prevent.cmd.k="openSearchBar"
+    x-on:keydown.window.prevent.ctrl.k="openSearchBar"
+    x-on:keydown.window.escape="closeSearchBar"
   >
     <x-icon.search class="w-5 group-hover:text-gray-900 dark:group-hover:text-gray-50" />
 
@@ -54,7 +47,6 @@
     aria-modal="true"
     x-cloak
     x-show="searchBarIsOpen"
-    x-on:keydown.window.escape="closeSearchBar"
   >
     <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
 

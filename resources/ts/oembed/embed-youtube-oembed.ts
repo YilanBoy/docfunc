@@ -6,12 +6,12 @@ interface Window {
 async function convertOEmbedToIframe(oembedElement: HTMLElement) {
     const screenWidth: number = window.screen.width;
 
-    let maxwidth: number = 640;
-    let maxheight: number = 360;
+    let maxWidth: number = 640;
+    let maxHeight: number = 360;
 
     if (screenWidth <= 425) {
-        maxwidth = 320;
-        maxheight = 180;
+        maxWidth = 320;
+        maxHeight = 180;
     }
 
     const url = oembedElement.getAttribute('url');
@@ -23,7 +23,7 @@ async function convertOEmbedToIframe(oembedElement: HTMLElement) {
     let oembedApiUrl = `https://www.youtube.com/oembed?format=json&url=${encodeURIComponent(
         url,
     )}`;
-    oembedApiUrl += `&maxwidth=${maxwidth}&maxheight=${maxheight}`;
+    oembedApiUrl += `&maxwidth=${maxWidth}&maxheight=${maxHeight}`;
 
     await fetch(oembedApiUrl)
         .then((response) => response.json())
@@ -38,7 +38,10 @@ async function convertOEmbedToIframe(oembedElement: HTMLElement) {
 
 // 定義一個函式來檢查是否為 YouTube 連結
 function isYouTubeUrl(url: string) {
-    return /^https?:\/\/(www\.)?youtube\.com\/watch\?v=/.test(url);
+    return (
+        /^https?:\/\/(www\.)?youtube\.com\/watch\?v=/.test(url) ||
+        /^https?:\/\/youtu\.be\//.test(url)
+    );
 }
 
 // 主要處理函式
@@ -51,7 +54,9 @@ window.processYoutubeOEmbeds = function () {
         const figureElement = oembedElement.closest('figure.media');
 
         if (figureElement) {
-            convertOEmbedToIframe(oembedElement);
+            convertOEmbedToIframe(oembedElement).catch((error) => {
+                console.error(error);
+            });
         }
     });
 };

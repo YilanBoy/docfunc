@@ -10,6 +10,18 @@
       },
       closeSearchBar() {
         this.searchBarIsOpen = false;
+      },
+      setShortcutKeyDisplayByOS() {
+        let userAgentInfo = navigator.userAgent.toLowerCase();
+
+        if (userAgentInfo.includes('mac')) {
+          this.$refs.dynamicShortcut.textContent = '⌘';
+        } else {
+          this.$refs.dynamicShortcut.textContent = 'Ctrl';
+        }
+      },
+      init() {
+        this.setShortcutKeyDisplayByOS();
       }
     }));
   </script>
@@ -32,7 +44,10 @@
       <span class="group-hover:text-gray-900 dark:group-hover:text-gray-50">搜尋</span>
 
       <div class="shortcut">
-        <kbd class="rounded bg-gray-300 px-2 py-1 dark:bg-gray-500 dark:text-gray-200">⌘</kbd>
+        <kbd
+          class="rounded bg-gray-300 px-2 py-1 dark:bg-gray-500 dark:text-gray-200"
+          x-ref="dynamicShortcut"
+        ></kbd>
         <kbd class="rounded bg-gray-300 px-2 py-1 dark:bg-gray-500 dark:text-gray-200">K</kbd>
       </div>
     </div>

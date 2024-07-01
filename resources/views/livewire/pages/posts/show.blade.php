@@ -51,7 +51,7 @@
 
 <x-layouts.layout-main>
   <div x-data="showPostPage">
-    <div class="relative animate-fade-in">
+    <div class="relative">
       <x-scroll-to-top-button x-ref="scrollToTopBtn" />
 
       <div class="container mx-auto">
@@ -64,8 +64,7 @@
             ></div>
           </div>
 
-          <div class="flex w-full max-w-3xl flex-col items-center justify-start p-2 xl:p-0">
-
+          <div class="flex w-full max-w-3xl flex-col items-center justify-start px-2 xl:px-0">
             <x-card
               class="w-full"
               x-ref="postCard"

@@ -5,11 +5,12 @@
     Alpine.data('ckeditor', () => ({
       csrf_token: @js(csrf_token()),
       maxCharacters: 20000,
-      editorDebounceTimer: null,
-      debounce(callback, time) {
-        // https://webdesign.tutsplus.com/tutorials/javascript-debounce-and-throttle--cms-36783
-        clearTimeout(this.editorDebounceTimer);
-        this.editorDebounceTimer = setTimeout(callback, time);
+      debounce(callback, delay) {
+        let timeoutId;
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          callback.apply(this, arguments)
+        }, delay);
       },
       imageUploadUrl: @js(route('images.store')),
       body: @entangle($model).live,
@@ -56,7 +57,7 @@
             editor.model.document.on('change:data', () => {
               this.debounce(() => {
                 this.body = editor.getData();
-              }, 500);
+              }, 1000);
             });
 
             let removeCkeditor = () => {

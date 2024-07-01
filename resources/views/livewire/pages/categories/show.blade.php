@@ -1,19 +1,21 @@
 {{-- 文章列表 --}}
 <x-layouts.layout-main>
   <div class="container mx-auto">
-    <div
-      class="flex flex-col items-center justify-start space-y-6 px-4 xl:flex-row xl:items-start xl:justify-center xl:space-y-0 xl:px-0"
-    >
-      {{-- 文章列表 --}}
-      <livewire:shared.posts.posts
-        :currentUrl="url()->current()"
-        :categoryId="$category->id"
-        :categoryName="$category->name"
-        :categoryDescription="$category->description"
-      />
+    <div class="mx-auto grid max-w-3xl grid-cols-3 gap-6 px-2 lg:px-0 xl:max-w-5xl">
+      <div class="col-span-3 xl:col-span-2">
+        {{-- 文章列表 --}}
+        <livewire:shared.posts.posts
+          :currentUrl="url()->current()"
+          :categoryId="$category->id"
+          :categoryName="$category->name"
+          :categoryDescription="$category->description"
+        />
+      </div>
 
-      {{-- 文章列表側邊欄 --}}
-      <livewire:shared.posts.home-sidemenu />
+      <div class="hidden xl:col-span-1 xl:block">
+        {{-- 文章列表側邊欄 --}}
+        <livewire:shared.posts.home-side-menu />
+      </div>
     </div>
   </div>
 </x-layouts.layout-main>

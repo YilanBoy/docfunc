@@ -30,7 +30,7 @@
 <div x-data="search">
   {{-- 搜尋按鈕 --}}
   <button
-    class="group hidden items-center justify-center rounded-lg bg-gray-200 p-2 text-xl text-gray-500 transition duration-150 dark:bg-gray-600 dark:text-gray-400 xl:flex"
+    class="group hidden items-center justify-center rounded-lg bg-gray-200 p-2 text-xl text-gray-500 dark:bg-gray-600 dark:text-gray-400 xl:flex"
     type="button"
     aria-label="Search"
     x-on:click="openSearchBar"
@@ -38,10 +38,10 @@
     x-on:keydown.window.prevent.ctrl.k="openSearchBar"
     x-on:keydown.window.escape="closeSearchBar"
   >
-    <x-icon.search class="w-5 group-hover:text-gray-900 dark:group-hover:text-gray-50" />
+    <x-icon.search class="w-5 transition duration-300 group-hover:text-gray-900 dark:group-hover:text-gray-50" />
 
     <div class="ml-2 flex space-x-2 text-base">
-      <span class="group-hover:text-gray-900 dark:group-hover:text-gray-50">搜尋</span>
+      <span class="transition duration-300 group-hover:text-gray-900 dark:group-hover:text-gray-50">搜尋</span>
 
       <div class="shortcut">
         <kbd

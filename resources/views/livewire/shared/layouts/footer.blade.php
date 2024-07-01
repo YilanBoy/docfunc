@@ -13,7 +13,7 @@
       {{-- Links --}}
       <a
         class="my-3 block font-medium text-gray-400 duration-300 hover:text-gray-50"
-        href="https://github.com/YilanBoy/docfunc"
+        href="https://github.com/YilanBoy/docfunc/"
         target="_blank"
         rel="nofollow noopener noreferrer"
       >
@@ -21,7 +21,7 @@
       </a>
       <a
         class="my-3 block font-medium text-gray-400 duration-300 hover:text-gray-50"
-        href="https://github.com/YilanBoy"
+        href="https://portfolio.docfunc.com/"
         target="_blank"
         rel="nofollow noopener noreferrer"
       >
@@ -74,7 +74,7 @@
       </a>
       <a
         class="my-3 block font-medium text-gray-400 duration-300 hover:text-gray-50"
-        href="https://learnku.com/laravel"
+        href="https://learnku.com/laravel/"
         target="_blank"
         rel="nofollow noopener noreferrer"
       >
@@ -82,7 +82,7 @@
       </a>
       <a
         class="my-3 block font-medium text-gray-400 duration-300 hover:text-gray-50"
-        href="https://www.facebook.com/groups/498481680220886"
+        href="https://www.facebook.com/groups/498481680220886/"
         target="_blank"
         rel="nofollow noopener noreferrer"
       >
@@ -133,7 +133,7 @@
       <div class="flex flex-row items-center justify-center space-x-4 md:flex-auto md:justify-end">
         <a
           class="text-2xl text-gray-400 duration-300 hover:text-gray-50"
-          href="https://github.com/YilanBoy"
+          href="https://github.com/YilanBoy/"
           aria-label="GitHub"
           target="_blank"
           rel="nofollow noopener noreferrer"
@@ -142,7 +142,7 @@
         </a>
         <a
           class="text-2xl text-gray-400 duration-300 hover:text-gray-50"
-          href="https://twitter.com/bVK1uFaMvQkDyPR"
+          href="https://x.com/bVK1uFaMvQkDyPR/"
           aria-label="Twitter"
           target="_blank"
           rel="nofollow noopener noreferrer"

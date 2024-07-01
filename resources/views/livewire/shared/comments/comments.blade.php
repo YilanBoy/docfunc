@@ -15,7 +15,13 @@
           component
         }) => {
           if (component.name === 'shared.comments.comments') {
-            window.scrollTo(0, this.currentScrollY);
+            // make sure scroll position will update after dom updated
+            queueMicrotask(() => {
+              window.scrollTo({
+                top: this.currentScrollY,
+                behavior: 'instant'
+              });
+            });
           }
         });
 

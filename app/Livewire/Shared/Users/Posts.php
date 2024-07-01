@@ -8,7 +8,7 @@ use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 /**
- * @property-read array<string, array<Post>> $postsGroupByYear
+ * @property-read array<int, array<int, Post>> $postsGroupByYear
  */
 class Posts extends Component
 {
@@ -17,9 +17,9 @@ class Posts extends Component
     /**
      * Get the post list of the user. this list will be grouped by year.
      * The first year will be the latest year
-     * format: ['2021' => [Post, Post, ...], '2020' => [Post, Post, ...], ...]
+     * format: [2021 => [Post, Post, ...], 2020 => [Post, Post, ...], ...]
      *
-     * @return array<string, array<Post>> $postsGroupByYear
+     * @return array<int, array<int, Post>> $postsGroupByYear
      */
     #[Computed]
     public function postsGroupByYear(): array
@@ -37,7 +37,7 @@ class Posts extends Component
         $postsGroupByYear = [];
 
         foreach ($posts as $post) {
-            $year = $post->created_at->format('Y');
+            $year = intval($post->created_at->format('Y'));
 
             if (! isset($postsGroupByYear[$year])) {
                 $postsGroupByYear[$year] = [];

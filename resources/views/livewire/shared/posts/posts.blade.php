@@ -1,4 +1,4 @@
-<div class="mr-0 w-full space-y-6 md:w-[700px] xl:mr-6">
+<div class="space-y-6">
 
   {{-- 文章排序 --}}
   <div class="flex w-full flex-col-reverse text-sm md:flex-row md:justify-between">

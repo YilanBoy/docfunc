@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use Livewire\Component;
 
-class HomeSidemenu extends Component
+class HomeSideMenu extends Component
 {
     public function render(): View
     {
@@ -24,6 +24,6 @@ class HomeSidemenu extends Component
             return Link::all();
         });
 
-        return view('livewire.shared.posts.home-sidemenu', compact('popularTags', 'links'));
+        return view('livewire.shared.posts.home-side-menu', compact('popularTags', 'links'));
     }
 }

@@ -14,7 +14,7 @@
 @endscript
 
 <div
-  class="hidden space-y-6 xl:block xl:w-[320px]"
+  class="space-y-6"
   x-data="homeSideMenu"
 >
   {{-- 介紹 --}}

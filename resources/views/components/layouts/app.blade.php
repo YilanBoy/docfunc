@@ -5,6 +5,19 @@
 >
 
 <head>
+  {{-- Set theme --}}
+  <script>
+    if (
+      localStorage.mode === 'light' ||
+      (!('mode' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: light)').matches)
+    ) {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+
   {{-- prettier-ignore-start --}}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,9 +31,6 @@
   <meta name="title" content="{{ $title ?? config('app.name') }}">
   <meta name="description" content="@yield('description', config('app.name'))">
   <x-sharing-meta-tags :title="$title ?? config('app.name')" />
-
-  {{-- Set theme --}}
-  @vite('resources/ts/set-theme.ts')
 
   {{-- Ｗeb Feed --}}
   @include('feed::links')

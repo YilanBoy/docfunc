@@ -23,7 +23,6 @@ export default defineConfig({
                 'resources/ts/oembed/embed-youtube-oembed.ts',
                 'resources/ts/oembed/embed-twitter-oembed.ts',
                 'resources/ts/progress-bar.ts',
-                'resources/ts/set-theme.ts',
                 'resources/ts/scroll-to-anchor.ts',
                 'resources/ts/post-outline.ts',
                 // css

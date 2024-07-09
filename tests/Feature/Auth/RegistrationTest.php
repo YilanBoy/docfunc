@@ -1,7 +1,7 @@
 <?php
 
 use App\Livewire\Pages\Auth\Register;
-use App\Livewire\Shared\Layouts\Header;
+use App\Livewire\Shared\Header;
 use App\Models\Setting;
 use App\Models\User;
 

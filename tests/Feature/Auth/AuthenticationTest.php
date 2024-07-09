@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Pages\Auth\Login;
+use App\Livewire\Shared\Header;
 use App\Models\User;
 
 use function Pest\Laravel\get;
@@ -84,6 +85,15 @@ test('users can not authenticate with invalid password', function () {
         ->set('password', 'wrongPassword101')
         ->set('captchaToken', 'fake-captcha-response')
         ->call('store');
+
+    $this->assertGuest();
+});
+
+test('login user can logout', function () {
+    loginAsUser();
+
+    livewire(Header::class)
+        ->call('logout');
 
     $this->assertGuest();
 });

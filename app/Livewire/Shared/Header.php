@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Livewire\Shared\Layouts;
+namespace App\Livewire\Shared;
 
 use App\Livewire\Actions\Logout;
 use App\Models\Category;
 use App\Services\SettingService;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\View\View;
 use Livewire\Component;
 
 class Header extends Component
@@ -20,19 +19,16 @@ class Header extends Component
         $this->redirect(route('login'), navigate: true);
     }
 
-    public function render(): View
+    public function render()
     {
-        // Because categories are not frequently adjusted,
-        // use cache to reduce database reads, cache expiration time is set to 1 day
         $categories = Cache::remember('categories', now()->addDay(), function () {
             return Category::all(['id', 'name', 'icon']);
         });
 
-        // Whether to display the registration button
         $showRegisterButton = SettingService::isRegisterAllowed();
 
         return view(
-            'livewire.shared.layouts.header',
+            'livewire.shared.header',
             compact('categories', 'showRegisterButton')
         );
     }

@@ -55,7 +55,7 @@
       <x-scroll-to-top-button x-ref="scrollToTopBtn" />
 
       <div class="container mx-auto">
-        <div class="flex items-stretch justify-center lg:space-x-4">
+        <div class="flex animate-fade-in items-stretch justify-center lg:space-x-4">
           <div class="hidden xl:block xl:w-1/5">
             {{-- content menu --}}
             <div

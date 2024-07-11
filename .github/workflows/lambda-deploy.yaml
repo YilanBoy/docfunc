@@ -52,5 +52,5 @@ jobs:
 
       - name: Deploy to AWS Lambda
         run: |
-          npm install serverless serverless-lift serverless-api-gateway-throttling
+          npm install serverless serverless-lift
           node_modules/.bin/serverless deploy --stage production

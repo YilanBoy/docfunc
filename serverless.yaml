@@ -135,9 +135,3 @@ constructs:
 plugins:
   - ./vendor/bref/bref
   - serverless-lift
-  - serverless-api-gateway-throttling
-
-custom:
-  apiGatewayThrottling:
-    maxRequestsPerSecond: 500
-    maxConcurrentRequests: 500

@@ -1,0 +1,55 @@
+name: Toggle Maintenance Mode in Lambda
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: Who to greet
+        default: Allen
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  toggle-maintenance-mode:
+    name: Toggle maintenance mode
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::154471991214:role/github_action
+          aws-region: us-west-2
+
+      - name: Toggle maintenance mode
+        run: |
+          MAINTENANCE_MODE=$(aws lambda get-function-configuration \
+          --function-name docfunc-production-web \
+          --region us-west-2 | jq -r '.Environment.Variables.MAINTENANCE_MODE')
+
+          ENVIRONMENT=$(aws lambda get-function-configuration \
+          --function-name docfunc-production-web \
+          --region us-west-2 | jq -r '.Environment')
+
+          if [[ ${MAINTENANCE_MODE} == 0 ]]; then
+            NEW_ENVIRONMENT=$(echo $ENVIRONMENT | jq -r '.Variables.MAINTENANCE_MODE="1"|tostring')
+            STATUS="ENABLE"
+          elif [[ ${MAINTENANCE_MODE} == 1 ]]; then
+            NEW_ENVIRONMENT=$(echo $ENVIRONMENT | jq -r '.Variables.MAINTENANCE_MODE="0"|tostring')
+            STATUS="DISABLE"
+          else
+            echo 'MAINTENANCE_MODE must be 1 or 0'
+            exit 1
+          fi
+
+          # https://github.com/aws/aws-cli/issues/2638
+          aws lambda update-function-configuration \
+          --function-name docfunc-production-web \
+          --region us-west-2 \
+          --environment $NEW_ENVIRONMENT | jq -r '.Environment.Variables.MAINTENANCE_MODE'
+
+          echo "Maintenance mode is $STATUS"

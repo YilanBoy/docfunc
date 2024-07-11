@@ -85,7 +85,7 @@
       </div>
 
       {{-- 文章大綱 --}}
-      <div class="z-10 text-base text-gray-500">
+      <div class="z-10 text-base leading-relaxed text-gray-500">
         {{ $post->excerpt }}
       </div>
 

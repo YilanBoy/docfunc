@@ -26,7 +26,7 @@
 
     <hr class="my-4 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
 
-    <span class="group-gradient-underline-grow">
+    <span class="group-gradient-underline-grow leading-relaxed">
       嘗試用部落格來紀錄自己學習的過程，與生活上的大小事。此部落格使用 TALL Stack 所開發🚀
     </span>
 

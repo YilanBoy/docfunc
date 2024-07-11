@@ -64,7 +64,7 @@
 
   {{-- 文章列表 --}}
   @forelse($posts as $post)
-    <x-card class="group relative z-0 flex cursor-pointer flex-col justify-between overflow-hidden">
+    <x-card class="group relative z-0 grid cursor-pointer grid-cols-1 gap-4 overflow-hidden">
       <div class="absolute -bottom-16 -right-3 size-56 rotate-12 text-green-200 dark:text-lividus-800">
         {!! $post->category->icon !!}
       </div>
@@ -78,18 +78,20 @@
       ></a>
 
       {{-- 文章標題 --}}
-      <h1 class="group-gradient-underline-grow z-10 mt-2 w-fit text-xl dark:text-gray-50 md:mt-0">
-        {{ $post->title }}
-      </h1>
+      <div class="z-10">
+        <h1 class="group-gradient-underline-grow inline text-xl dark:text-gray-50">
+          {{ $post->title }}
+        </h1>
+      </div>
 
       {{-- 文章大綱 --}}
-      <div class="z-10 mt-2 text-base text-gray-500">
+      <div class="z-10 text-base text-gray-500">
         {{ $post->excerpt }}
       </div>
 
       {{-- 文章標籤 --}}
       @if ($post->tags_count > 0)
-        <div class="z-20 mt-2 flex w-fit flex-wrap items-center text-base">
+        <div class="z-20 flex w-fit flex-wrap items-center text-base">
           <x-icon.tags class="mr-1 w-4 text-green-300 dark:text-lividus-600" />
 
           @foreach ($post->tags as $tag)
@@ -101,7 +103,7 @@
       @endif
 
       {{-- 文章相關資訊 --}}
-      <div class="mt-2 hidden space-x-2 text-base text-neutral-500 md:flex md:items-center">
+      <div class="z-10 hidden space-x-2 text-base text-neutral-500 md:flex md:items-center">
         {{-- 文章分類資訊 --}}
         <div class="flex items-center">
           <div class="w-4">{!! $post->category->icon !!}</div>

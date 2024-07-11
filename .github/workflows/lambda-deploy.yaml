@@ -14,23 +14,22 @@ jobs:
   deploy-lambda:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     environment: production
-    name: Deploy to AWS Lambda
+    name: Deploy to aws lambda
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configure PHP 8.3
+      - name: Configure php 8.3
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.3
-          extensions: redis
           coverage: none
 
       - name: Install php packages
         run: composer install --prefer-dist --optimize-autoloader --no-dev
 
-      - name: Set up Node.js
+      - name: Set up node.js
         uses: actions/setup-node@v2
         with:
           node-version: '21'
@@ -40,17 +39,17 @@ jobs:
           npm install
           npm run build
 
-      - name: Configure AWS credentials
+      - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::154471991214:role/github_action
           aws-region: ap-northeast-1
 
-      - name: Copy files to the S3 with the AWS CLI
+      - name: Copy files to the s3 with the aws cli
         run: |
           aws s3 sync public s3://assets.docfunc.com
 
-      - name: Deploy to AWS Lambda
+      - name: Deploy to aws lambda
         run: |
           npm install serverless serverless-lift
           node_modules/.bin/serverless deploy --stage production

@@ -1,4 +1,4 @@
-name: Run tests
+name: Run Tests
 
 on:
   workflow_dispatch:
@@ -54,13 +54,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate Vite manifest
+      - name: Generate vite manifest
         run: |
           npm install
           npm run build
 
       # Docs: https://github.com/shivammathur/setup-php
-      - name: Setup PHP
+      - name: Setup php
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
@@ -68,7 +68,7 @@ jobs:
           extensions: redis
           coverage: xdebug
 
-      - name: Get Composer Cache Directory
+      - name: Get composer cache directory
         id: composer-cache
         run: |
           echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
@@ -96,7 +96,7 @@ jobs:
         env:
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
 
-      - name: Upload to Codecov
+      - name: Upload to codecov
         uses: codecov/codecov-action@v2
         with:
           files: ./coverage.xml

@@ -31,6 +31,7 @@ provider:
   logRetentionInDays: 1
 
   environment:
+    MAINTENANCE_MODE: ${param:maintenance, 0}
     # App settings
     APP_NAME: DocFunc
     APP_ENV: production # Or use ${sls:stage} if you want the environment to match the stage

@@ -1,23 +1,17 @@
-import { ClassicEditor as ClassicEditorBase } from '@ckeditor/ckeditor5-editor-classic';
-
-import './custom.css';
-
-import { Essentials } from '@ckeditor/ckeditor5-essentials';
-import { Autoformat } from '@ckeditor/ckeditor5-autoformat';
 import {
+    Alignment,
+    Autoformat,
+    BlockQuote,
     Bold,
+    ClassicEditor as ClassicEditorBase,
     Code,
-    Italic,
-    Strikethrough,
-    Underline,
-} from '@ckeditor/ckeditor5-basic-styles';
-import { BlockQuote } from '@ckeditor/ckeditor5-block-quote';
-import {
+    CodeBlock,
+    Essentials,
+    FindAndReplace,
+    Font,
     Heading,
     HeadingButtonsUI,
     HeadingOption,
-} from '@ckeditor/ckeditor5-heading';
-import {
     Image,
     ImageCaption,
     ImageInsert,
@@ -25,22 +19,30 @@ import {
     ImageStyle,
     ImageToolbar,
     ImageUpload,
+    Indent,
+    IndentBlock,
+    Italic,
+    Link,
+    List,
+    MediaEmbed,
+    Paragraph,
+    ParagraphButtonUI,
+    PasteFromOffice,
     PictureEditing,
-} from '@ckeditor/ckeditor5-image';
-import { Indent, IndentBlock } from '@ckeditor/ckeditor5-indent';
-import { Link } from '@ckeditor/ckeditor5-link';
-import { List } from '@ckeditor/ckeditor5-list';
-import { MediaEmbed } from '@ckeditor/ckeditor5-media-embed';
-import { Paragraph, ParagraphButtonUI } from '@ckeditor/ckeditor5-paragraph';
-import { PasteFromOffice } from '@ckeditor/ckeditor5-paste-from-office';
-import { Table, TableToolbar } from '@ckeditor/ckeditor5-table';
-import { TextTransformation } from '@ckeditor/ckeditor5-typing';
-import { Alignment } from '@ckeditor/ckeditor5-alignment';
-import { CodeBlock } from '@ckeditor/ckeditor5-code-block';
-import { WordCount } from '@ckeditor/ckeditor5-word-count';
-import { Font } from '@ckeditor/ckeditor5-font';
-import { FindAndReplace } from '@ckeditor/ckeditor5-find-and-replace';
-import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload';
+    SimpleUploadAdapter,
+    Strikethrough,
+    Table,
+    TableToolbar,
+    TextTransformation,
+    Underline,
+    WordCount,
+} from 'ckeditor5';
+
+// There is an import css issue here
+// https://github.com/ckeditor/ckeditor5/issues/16638
+import './../../../node_modules/ckeditor5/dist/ckeditor5.css';
+// Override the default styles.
+import './custom.css';
 
 class ClassicEditor extends ClassicEditorBase {}
 

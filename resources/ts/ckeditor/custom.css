@@ -7,12 +7,6 @@
 }
 
 :root.dark {
-    /* Overrides the border radius setting in the theme. */
-    /* --ck-border-radius: 4px; */
-
-    /* Overrides the default font size in the theme. */
-    /* --ck-font-size-base: 14px; */
-
     /* Helper variables to avoid duplication in the colors. */
     --ck-custom-background: hsl(270, 1%, 29%);
     --ck-custom-foreground: hsl(255, 3%, 18%);
@@ -55,6 +49,11 @@
 
     --ck-color-dropdown-panel-background: var(--ck-custom-background);
     --ck-color-dropdown-panel-border: var(--ck-custom-foreground);
+
+    /* -- Overrides the default .ck-dialog class colors. ----------------------------------- */
+
+    --ck-color-dialog-background: var(--ck-custom-background);
+    --ck-color-dialog-form-header-border: var(--ck-custom-border);
 
     /* -- Overrides the default .ck-splitbutton class colors. ----------------------------------- */
 

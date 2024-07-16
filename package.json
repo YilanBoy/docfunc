@@ -5,23 +5,24 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@shufo/prettier-plugin-blade": "^1.11.1",
-        "@tailwindcss/forms": "^0.5.2",
-        "@tailwindcss/typography": "^0.5.2",
-        "@types/yaireo__tagify": "^4.12.0",
-        "@yaireo/tagify": "^4.18.3",
-        "autoprefixer": "^10.4.7",
-        "axios": "^1.6.2",
+        "@shufo/prettier-plugin-blade": "^1.14.1",
+        "@tailwindcss/forms": "^0.5.7",
+        "@tailwindcss/typography": "^0.5.13",
+        "@types/yaireo__tagify": "^4.24.0",
+        "@yaireo/tagify": "^4.27.0",
+        "autoprefixer": "^10.4.19",
+        "axios": "^1.7.2",
         "ckeditor5": "^42.0.1",
-        "highlight.js": "^11.5.1",
-        "laravel-vite-plugin": "^0.3.0",
-        "postcss": "^8.4.14",
-        "postcss-import": "^14.1.0",
-        "prettier": "^3.0.3",
+        "highlight.js": "^11.10.0",
+        "laravel-vite-plugin": "^1.0.5",
+        "postcss": "^8.4.39",
+        "postcss-import": "^16.1.0",
+        "prettier": "^3.3.3",
         "resolve-url-loader": "^5.0.0",
-        "tailwindcss": "^3.1.2",
-        "ts-loader": "^9.3.0",
-        "typescript": "^4.7.3",
-        "vite": "^2.9.14"
-    }
+        "tailwindcss": "^3.4.5",
+        "ts-loader": "^9.5.1",
+        "typescript": "^5.5.3",
+        "vite": "^5.3.3"
+    },
+    "type": "module"
 }

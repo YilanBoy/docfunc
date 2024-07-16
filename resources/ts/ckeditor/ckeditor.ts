@@ -38,9 +38,7 @@ import {
     WordCount,
 } from 'ckeditor5';
 
-// There is an import css issue here
-// https://github.com/ckeditor/ckeditor5/issues/16638
-import './../../../node_modules/ckeditor5/dist/ckeditor5.css';
+import 'ckeditor5/ckeditor5.css';
 // Override the default styles.
 import './custom.css';
 

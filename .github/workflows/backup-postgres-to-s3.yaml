@@ -2,7 +2,7 @@ name: Database Backup and Upload
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # Run at 8:33am UTC every day (Will be the middle of the night in the US)
+    - cron: '0 16 * * *'  # Run at 8:33am UTC every day (Will be the middle of the night in the US)
   workflow_dispatch:
     inputs:
       name:

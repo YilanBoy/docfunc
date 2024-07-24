@@ -58,7 +58,7 @@
   id="header"
 >
   <div
-    class="relative hidden h-20 w-full items-center justify-center bg-gray-50 transition-all duration-300 dark:bg-gray-800 lg:flex"
+    class="relative hidden h-20 w-full items-center justify-center bg-gray-50 transition-all duration-300 lg:flex dark:bg-gray-800"
     id="desktop-header-menu"
     x-data="desktopHeaderMenu"
   >
@@ -76,26 +76,25 @@
       <span class="ml-3 font-mono text-2xl font-bold dark:text-gray-50">{{ config('app.name') }}</span>
     </a>
 
-    <ul class="flex space-x-6">
-
-      <x-floating-underline-button
+    <div class="flex space-x-6">
+      <x-skew-underline-link
         :link="route('posts.index')"
         {{-- Make sure both url are decode in AWS Lambda --}}
         :selected="urldecode(request()->url()) === urldecode(route('posts.index'))"
       >
         全部文章
-      </x-floating-underline-button>
+      </x-skew-underline-link>
 
       @foreach ($categories as $category)
-        <x-floating-underline-button
+        <x-skew-underline-link
           :link="$category->link_with_name"
           :selected="urldecode(request()->url()) === urldecode($category->link_with_name)"
           :icon="$category->icon"
         >
           {{ $category->name }}
-        </x-floating-underline-button>
+        </x-skew-underline-link>
       @endforeach
-    </ul>
+    </div>
 
     <div class="absolute inset-y-1/2 right-6 flex items-center space-x-5">
 
@@ -120,7 +119,7 @@
         {{-- 電腦版-未登入 --}}
         @if ($showRegisterButton)
           <a
-            class="flex h-10 items-center justify-center rounded-lg border-2 border-lividus-600 bg-transparent px-3 text-lividus-600 transition duration-150 hover:border-transparent hover:bg-lividus-600 hover:text-gray-50"
+            class="border-lividus-600 text-lividus-600 hover:bg-lividus-600 flex h-10 items-center justify-center rounded-lg border-2 bg-transparent px-3 transition duration-150 hover:border-transparent hover:text-gray-50"
             href="{{ route('register') }}"
             wire:navigate
           >
@@ -243,7 +242,7 @@
   </div>
 
   <div
-    class="bg-gray-50 dark:bg-gray-800 lg:hidden"
+    class="bg-gray-50 lg:hidden dark:bg-gray-800"
     id="mobile-header-menu"
     x-data="mobileHeaderMenu"
   >
@@ -284,7 +283,7 @@
             src="{{ asset('images/icon/icon.png') }}"
             alt="logo"
           >
-          <span class="ml-3 hidden font-mono text-xl font-bold dark:text-gray-50 md:block">
+          <span class="ml-3 hidden font-mono text-xl font-bold md:block dark:text-gray-50">
             {{ config('app.name') }}
           </span>
         </div>
@@ -305,7 +304,7 @@
             {{-- 手機版-未登入 --}}
             @if ($showRegisterButton)
               <a
-                class="rounded-md border-2 border-lividus-400 bg-transparent px-4 py-2 text-lividus-400 hover:border-transparent hover:bg-lividus-400 hover:text-gray-50"
+                class="border-lividus-400 text-lividus-400 hover:bg-lividus-400 rounded-md border-2 bg-transparent px-4 py-2 hover:border-transparent hover:text-gray-50"
                 href="{{ route('register') }}"
                 wire:navigate
               >

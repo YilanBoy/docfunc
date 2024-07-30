@@ -1,13 +1,13 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
-module.exports = {
+/** @type {import('tailwindcss').Config} */
+export default {
     darkMode: 'class',
     content: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
-        './resources/js/*.js',
-        './resources/ts/*.ts',
+        './vendor/livewire/livewire/src/Features/SupportPagination/views/*.blade.php',
+        './resources/**/*.blade.php',
+        './resources/**/*.js',
+        './resources/**/*.ts',
     ],
     theme: {
         extend: {

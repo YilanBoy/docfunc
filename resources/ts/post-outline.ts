@@ -73,8 +73,7 @@ function createSectionInPostBody(postBody: HTMLElement): void {
     });
 }
 
-function showWhichSectionIAmIn(postOutline: HTMLElement): void {
-    // Get all section links, must be after createPostSectionLink
+function addClickEventOnPostLinks(postOutline: HTMLElement) {
     let outlineLinks: NodeListOf<HTMLAnchorElement> =
         postOutline.querySelectorAll('a');
 
@@ -93,6 +92,22 @@ function showWhichSectionIAmIn(postOutline: HTMLElement): void {
                 behavior: 'smooth',
             });
         });
+    });
+}
+
+function showWhichSectionIAmIn(postOutline: HTMLElement): void {
+    // Get all section links, must be after createPostSectionLink
+    let outlineLinks: NodeListOf<HTMLAnchorElement> =
+        postOutline.querySelectorAll('a');
+
+    outlineLinks.forEach((outlineLink: HTMLAnchorElement, index: number) => {
+        let section: Element | null = document.getElementById(
+            `heading-${index}-section`,
+        );
+
+        if (section === null) {
+            return;
+        }
 
         let sectionObserver = new IntersectionObserver(
             function (entries) {
@@ -120,6 +135,7 @@ window.setupPostOutline = function (
     postBody: HTMLElement,
 ): void {
     createPostOutlineLinks(postOutline, postBody);
+    addClickEventOnPostLinks(postOutline);
     createSectionInPostBody(postBody);
     // Must be after createSectionInPostBdy
     showWhichSectionIAmIn(postOutline);

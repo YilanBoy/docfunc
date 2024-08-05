@@ -1,6 +1,4 @@
-interface Window {
-    setupPostOutline: any;
-}
+import debounce from './debounce';
 
 function createPostOutlineLinks(
     postOutline: HTMLElement,
@@ -38,41 +36,6 @@ function createPostOutlineLinks(
     postOutline.innerHTML = postOutlineInnerHtml;
 }
 
-function createSectionInPostBody(postBody: HTMLElement): void {
-    let childNodes: NodeListOf<ChildNode> = postBody.childNodes;
-
-    let newSection: HTMLDivElement | null = null;
-    let newPostBody: HTMLElement[] = [];
-
-    childNodes.forEach((childNode: ChildNode) => {
-        if (newSection === null && childNode.nodeName !== 'H2') {
-            newPostBody.push(childNode.cloneNode(true) as HTMLElement);
-        } else if (childNode.nodeName === 'H2') {
-            let heading = childNode as HTMLHeadingElement;
-
-            // call by reference
-            newSection = document.createElement('div');
-
-            // id example: heading-0-section
-            newSection.id = `${heading.id}-section`;
-
-            newSection.appendChild(childNode.cloneNode(true) as HTMLElement);
-
-            newPostBody.push(newSection);
-        } else if (newSection && childNode.nodeName !== 'H2') {
-            newSection.appendChild(childNode.cloneNode(true));
-        }
-    });
-
-    // Remove all child nodes from postBody
-    postBody.innerHTML = '';
-
-    // Append all sectionGroups to postBody
-    newPostBody.forEach((section: HTMLElement) => {
-        postBody.appendChild(section);
-    });
-}
-
 function addClickEventOnPostLinks(postOutline: HTMLElement) {
     let outlineLinks: NodeListOf<HTMLAnchorElement> =
         postOutline.querySelectorAll('a');
@@ -95,39 +58,67 @@ function addClickEventOnPostLinks(postOutline: HTMLElement) {
     });
 }
 
-function showWhichSectionIAmIn(postOutline: HTMLElement): void {
-    // Get all section links, must be after createPostSectionLink
-    let outlineLinks: NodeListOf<HTMLAnchorElement> =
+function showWhichSectionIAmIn(
+    postOutline: HTMLElement,
+    postBody: HTMLElement,
+): void {
+    const outlineLinks: NodeListOf<HTMLAnchorElement> =
         postOutline.querySelectorAll('a');
+    let headingScrollYs: Record<string, number> = {};
 
-    outlineLinks.forEach((outlineLink: HTMLAnchorElement, index: number) => {
-        let section: Element | null = document.getElementById(
-            `heading-${index}-section`,
-        );
+    const updateHeadingScrollYs = () => {
+        const headings = postBody.querySelectorAll('h2');
+        headings.forEach((heading) => {
+            headingScrollYs[heading.id] = heading.offsetTop;
+        });
+    };
 
-        if (section === null) {
-            return;
-        }
-
-        let sectionObserver = new IntersectionObserver(
-            function (entries) {
-                if (entries[0].isIntersecting) {
-                    outlineLink.classList.add(
-                        'bg-gray-300',
-                        'dark:bg-gray-600',
-                    );
-                } else {
-                    outlineLink.classList.remove(
-                        'bg-gray-300',
-                        'dark:bg-gray-600',
-                    );
-                }
-            },
-            { threshold: [0] },
-        );
-
-        sectionObserver.observe(section);
+    const resizeObserver = new ResizeObserver(() => {
+        updateHeadingScrollYs();
     });
+
+    resizeObserver.observe(postBody);
+    updateHeadingScrollYs(); // Initial update
+
+    const clearHighlighting = () => {
+        outlineLinks.forEach((link) => {
+            link.classList.remove('bg-gray-300', 'dark:bg-gray-600');
+        });
+    };
+
+    const highlightCurrentSection = () => {
+        const currentScrollY = window.scrollY;
+        const headingKeys = Object.keys(headingScrollYs).sort(
+            (a, b) => headingScrollYs[a] - headingScrollYs[b],
+        );
+
+        for (let i = 0; i < headingKeys.length; i++) {
+            const currentKey = headingKeys[i];
+            const nextKey = headingKeys[i + 1];
+
+            if (
+                currentScrollY >= headingScrollYs[currentKey] &&
+                (!nextKey || currentScrollY < headingScrollYs[nextKey])
+            ) {
+                const outlineLink = document.getElementById(
+                    `${currentKey}-link`,
+                );
+                outlineLink?.classList.add('bg-gray-300', 'dark:bg-gray-600');
+                break;
+            }
+        }
+    };
+
+    window.onscroll = debounce(() => {
+        clearHighlighting();
+        highlightCurrentSection();
+    }, 100); // Adjust the debounce delay as necessary
+}
+
+declare global {
+    interface Window {
+        setupPostOutline: any;
+    }
 }
 
 window.setupPostOutline = function (
@@ -136,7 +127,6 @@ window.setupPostOutline = function (
 ): void {
     createPostOutlineLinks(postOutline, postBody);
     addClickEventOnPostLinks(postOutline);
-    createSectionInPostBody(postBody);
     // Must be after createSectionInPostBdy
-    showWhichSectionIAmIn(postOutline);
+    showWhichSectionIAmIn(postOutline, postBody);
 };

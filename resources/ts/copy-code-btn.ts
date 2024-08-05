@@ -1,5 +1,7 @@
-interface Window {
-    codeBlockCopyButton: any;
+declare global {
+    interface Window {
+        codeBlockCopyButton: any;
+    }
 }
 
 // use Tailwind CSS class names

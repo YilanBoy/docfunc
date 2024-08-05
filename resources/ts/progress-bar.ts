@@ -1,5 +1,7 @@
-interface Window {
-    setupProgressBar: any;
+declare global {
+    interface Window {
+        setupProgressBar: any;
+    }
 }
 
 function animateProgressBar(

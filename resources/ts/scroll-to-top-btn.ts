@@ -1,5 +1,7 @@
-interface Window {
-    setupScrollToTopButton: any;
+declare global {
+    interface Window {
+        setupScrollToTopButton: any;
+    }
 }
 
 // 滾動至網頁最頂部

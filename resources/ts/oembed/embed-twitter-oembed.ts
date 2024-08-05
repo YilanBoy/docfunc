@@ -1,6 +1,8 @@
-interface Window {
-    processTwitterOEmbeds: any;
-    twttr: any;
+declare global {
+    interface Window {
+        processTwitterOEmbeds: any;
+        twttr: any;
+    }
 }
 
 // 定義一個函式來處理 Twitter oembed 轉換

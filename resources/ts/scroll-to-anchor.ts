@@ -1,5 +1,7 @@
-interface Window {
-    scrollToAnchor: any;
+declare global {
+    interface Window {
+        scrollToAnchor: any;
+    }
 }
 
 let scrollToAnchor = function (): void {

@@ -1,5 +1,7 @@
-interface Window {
-    processYoutubeOEmbeds: any;
+declare global {
+    interface Window {
+        processYoutubeOEmbeds: any;
+    }
 }
 
 // 定義一個函式來處理 oembed 轉換

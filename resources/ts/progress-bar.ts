@@ -1,6 +1,6 @@
 declare global {
     interface Window {
-        setupProgressBar: any;
+        setupProgressBar: Function;
     }
 }
 

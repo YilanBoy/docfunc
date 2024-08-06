@@ -4,7 +4,7 @@
  */
 declare global {
     interface Window {
-        setupSharer: any;
+        setupSharer: Function;
     }
 }
 
@@ -125,15 +125,11 @@ class Sharer {
             let popHeight = sharer.height || 480;
             let left = window.innerWidth / 2 - popWidth / 2 + window.screenX;
             let top = window.innerHeight / 2 - popHeight / 2 + window.screenY;
-            let popParams =
-                'scrollbars=no, width=' +
-                popWidth +
-                ', height=' +
-                popHeight +
-                ', top=' +
-                top +
-                ', left=' +
-                left;
+            let popParams: string =
+                `scrollbars=no, width=${popWidth}` +
+                `, height=${popHeight}` +
+                `, top=${top}` +
+                `, left=${left}`;
             let newWindow = window.open(sharer.shareUrl, '', popParams);
 
             newWindow?.focus();
@@ -149,12 +145,12 @@ function init(): void {
     let clipboardElems: NodeListOf<HTMLButtonElement> =
         document.querySelectorAll('[data-clipboard]');
 
-    for (let i = 0, l = elems.length; i < l; i++) {
-        elems[i].addEventListener('click', addShareFeature);
+    for (const elem of elems) {
+        elem.addEventListener('click', addShareFeature);
     }
 
-    for (let i = 0, l = clipboardElems.length; i < l; i++) {
-        clipboardElems[i].addEventListener('click', copyToClipboard);
+    for (const clipboardElem of clipboardElems) {
+        clipboardElem.addEventListener('click', copyToClipboard);
     }
 }
 

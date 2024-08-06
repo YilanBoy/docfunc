@@ -1,6 +1,6 @@
 declare global {
     interface Window {
-        setupScrollToTopButton: any;
+        setupScrollToTopButton: Function;
     }
 }
 

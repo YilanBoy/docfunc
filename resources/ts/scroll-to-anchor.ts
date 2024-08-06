@@ -1,10 +1,10 @@
 declare global {
     interface Window {
-        scrollToAnchor: any;
+        scrollToAnchor: Function;
     }
 }
 
-let scrollToAnchor = function (): void {
+window.scrollToAnchor = function (): void {
     if (window.location.hash !== '') {
         let target: Element | null = document.querySelector(
             window.location.hash,
@@ -17,5 +17,3 @@ let scrollToAnchor = function (): void {
         }
     }
 };
-
-window.scrollToAnchor = scrollToAnchor;

@@ -1,5 +1,11 @@
 import debounce from './debounce';
 
+declare global {
+    interface Window {
+        setupPostOutline: Function;
+    }
+}
+
 function createPostOutlineLinks(
     postOutline: HTMLElement,
     postBody: HTMLElement,
@@ -113,12 +119,6 @@ function showWhichSectionIAmIn(
         clearHighlighting();
         highlightCurrentSection();
     }, 100); // Adjust the debounce delay as necessary
-}
-
-declare global {
-    interface Window {
-        setupPostOutline: any;
-    }
 }
 
 window.setupPostOutline = function (

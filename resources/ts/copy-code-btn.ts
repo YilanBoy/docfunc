@@ -1,6 +1,6 @@
 declare global {
     interface Window {
-        codeBlockCopyButton: any;
+        codeBlockCopyButton: Function;
     }
 }
 
@@ -41,7 +41,7 @@ const clipboardIcon: string = `
 </svg>
 `;
 
-window.codeBlockCopyButton = function (element: HTMLElement) {
+window.codeBlockCopyButton = function (element: HTMLElement): void {
     let preTags: HTMLCollectionOf<HTMLPreElement> =
         element.getElementsByTagName('pre');
 

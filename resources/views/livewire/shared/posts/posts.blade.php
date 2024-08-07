@@ -41,23 +41,18 @@
       @endforeach
     </nav>
 
-    {{-- 文章分類訊息-桌面裝置 --}}
-    @if ($categoryId)
-      <div
-        class="hidden items-center justify-center rounded-lg bg-green-200 px-4 py-2 text-green-800 dark:bg-lividus-700 dark:text-gray-50 md:flex"
-      >
+    {{-- 文章類別訊息 --}}
+    <div
+      class="hidden items-center justify-center rounded-lg bg-green-200 px-4 py-2 text-green-800 dark:bg-lividus-700 dark:text-gray-50 md:flex"
+    >
+      @if ($categoryId)
         {{ $categoryName }}：{{ $categoryDescription }}
-      </div>
-    @endif
-
-    {{-- 文章標籤訊息-桌面裝置 --}}
-    @if ($tagId)
-      <div
-        class="hidden items-center justify-center rounded-lg bg-green-200 px-4 py-2 text-green-800 dark:bg-lividus-700 dark:text-gray-50 md:flex"
-      >
+      @elseif($tagId)
         標籤：{{ $tagName }}
-      </div>
-    @endif
+      @else
+        全部文章
+      @endif
+    </div>
   </div>
 
   {{-- 文章列表 --}}

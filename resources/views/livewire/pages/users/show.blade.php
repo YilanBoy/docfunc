@@ -80,35 +80,19 @@
           </div>
         </div>
 
-        {{-- user information content --}}
-        <div
-          id="information-content"
-          x-cloak
-          x-show="tabContentActive($el)"
-          x-transition:enter.duration.300ms
-        >
-          <livewire:shared.users.info-cards :user-id="$user->id" />
-        </div>
-
-        {{-- user posts content --}}
-        <div
-          id="posts-content"
-          x-cloak
-          x-show="tabContentActive($el)"
-          x-transition:enter.duration.300ms
-        >
-          <livewire:shared.users.posts :user-id="$user->id" />
-        </div>
-
-        {{-- user comments content --}}
-        <div
-          id="comments-content"
-          x-cloak
-          x-show="tabContentActive($el)"
-          x-transition:enter.duration.300ms
-        >
-          <livewire:shared.users.comments :user-id="$user->id" />
-        </div>
+        @foreach ($tabs as $tab)
+          <div
+            id="{{ $tab['value'] }}-content"
+            x-cloak
+            x-show="tabContentActive($el)"
+            x-transition:enter.duration.300ms
+          >
+            <livewire:dynamic-component
+              :is="$tab['component']"
+              :user-id="$user->id"
+            />
+          </div>
+        @endforeach
       </div>
     </div>
   </div>

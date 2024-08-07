@@ -5,7 +5,6 @@
       <div class="col-span-3 xl:col-span-2">
         {{-- 文章列表 --}}
         <livewire:shared.posts.posts
-          :currentUrl="url()->current()"
           :tagId="$tag->id"
           :tagName="$tag->name"
         />

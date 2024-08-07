@@ -44,7 +44,6 @@ test('category can filter posts', function () {
     $categoryOnePost->save();
 
     livewire(Posts::class, [
-        'currentUrl' => '/',
         'categoryId' => 1,
         'tagId' => 0,
     ])->assertViewHas('posts', function ($posts) {
@@ -52,7 +51,6 @@ test('category can filter posts', function () {
     });
 
     livewire(Posts::class, [
-        'currentUrl' => '/',
         'categoryId' => 2,
         'tagId' => 0,
     ])->assertViewHas('posts', function ($posts) {
@@ -87,10 +85,45 @@ test('order query string filters correctly', function (string $queryString, stri
 
     Livewire::withQueryParams(['order' => $queryString])
         ->test(Posts::class, [
-            'currentUrl' => '/',
             'categoryId' => 0,
             'tagId' => 0,
         ])
+        ->assertViewHas('posts', function ($posts) use ($title) {
+            return $posts->first()->title === $title;
+        });
+})->with([
+    ['latest', 'this post is the latest'],
+    ['recent', 'this post is updated recently'],
+    ['comment', 'this post has the most comments'],
+]);
+
+test('user can change order', function (string $order, string $title) {
+    $user = User::factory()->create();
+
+    Post::factory()->create([
+        'title' => 'this post is updated recently',
+        'user_id' => $user->id,
+        'created_at' => now()->subDays(20),
+        'updated_at' => now(),
+    ]);
+
+    Post::factory()->create([
+        'title' => 'this post is the latest',
+        'user_id' => $user->id,
+        'created_at' => now()->subDays(10),
+        'updated_at' => now()->subDays(5),
+    ]);
+
+    Post::factory()->create([
+        'title' => 'this post has the most comments',
+        'user_id' => $user->id,
+        'comment_counts' => 10,
+        'created_at' => now()->subDays(15),
+        'updated_at' => now()->subDays(15),
+    ]);
+
+    Livewire::test(Posts::class, ['categoryId' => 0, 'tagId' => 0])
+        ->call('changeOrder', $order)
         ->assertViewHas('posts', function ($posts) use ($title) {
             return $posts->first()->title === $title;
         });

@@ -12,8 +12,6 @@ class Posts extends Component
 {
     use WithPagination;
 
-    public string $currentUrl;
-
     public int $categoryId = 0;
 
     public string $categoryName = '';
@@ -27,7 +25,7 @@ class Posts extends Component
     #[Url]
     public string $order = 'latest';
 
-    public function orderChange($newOrder): void
+    public function changeOrder(string $newOrder): void
     {
         // 回到第一頁
         $this->resetPage();

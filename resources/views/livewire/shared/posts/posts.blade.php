@@ -1,9 +1,7 @@
 <div class="space-y-6">
-
   {{-- 文章排序 --}}
   <div class="flex w-full flex-col-reverse text-sm md:flex-row md:justify-between">
-
-    <nav class="flex w-full space-x-1 rounded-xl p-1 dark:text-gray-50 md:w-auto">
+    <nav class="flex w-full space-x-1 rounded-xl dark:text-gray-50 md:w-auto">
 
       {{-- prettier-ignore-start --}}
       @php
@@ -18,7 +16,7 @@
       @foreach ($tabs as $tab)
         <button
           type="button"
-          wire:click.prevent="orderChange('{{ $tab['value'] }}')"
+          wire:click.prevent="changeOrder('{{ $tab['value'] }}')"
           @class([
               'flex w-1/3 md:w-auto items-center px-4 py-2 transition duration-300 rounded-lg ',
               'bg-gray-50 dark:bg-gray-800' => $order === $tab['value'],
@@ -46,18 +44,18 @@
     {{-- 文章分類訊息-桌面裝置 --}}
     @if ($categoryId)
       <div
-        class="mb-0 hidden items-center justify-end border-b-2 border-gray-900 pb-2 pl-6 dark:border-gray-50 dark:text-gray-50 md:flex"
+        class="hidden items-center justify-center rounded-lg bg-green-200 px-4 py-2 text-green-800 dark:bg-lividus-700 dark:text-gray-50 md:flex"
       >
-        <span>{{ $categoryName }}：{{ $categoryDescription }}</span>
+        {{ $categoryName }}：{{ $categoryDescription }}
       </div>
     @endif
 
     {{-- 文章標籤訊息-桌面裝置 --}}
     @if ($tagId)
       <div
-        class="mb-0 hidden items-center justify-end border-b-2 border-gray-900 pb-2 pl-6 dark:border-gray-50 dark:text-gray-50 md:flex"
+        class="hidden items-center justify-center rounded-lg bg-green-200 px-4 py-2 text-green-800 dark:bg-lividus-700 dark:text-gray-50 md:flex"
       >
-        <span>標籤：{{ $tagName }}</span>
+        標籤：{{ $tagName }}
       </div>
     @endif
   </div>
@@ -92,7 +90,7 @@
       {{-- 文章標籤 --}}
       @if ($post->tags_count > 0)
         <div class="z-20 flex w-fit flex-wrap items-center text-base">
-          <x-icon.tags class="mr-1 w-4 text-green-300 dark:text-lividus-600" />
+          <x-icon.tags class="mr-1 w-4 text-green-300 dark:text-lividus-700" />
 
           @foreach ($post->tags as $tag)
             <x-tag :href="route('tags.show', ['tag' => $tag->id])">

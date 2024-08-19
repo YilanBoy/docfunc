@@ -38,7 +38,7 @@ runs:
         password: ${{ inputs.registry_password }}
 
     - name: Build and push image to Docker Hub
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@v6
       with:
         file: ${{ inputs.file }}
         platforms: ${{ inputs.platforms }}

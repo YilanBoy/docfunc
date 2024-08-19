@@ -57,8 +57,8 @@ RUN add-apt-repository ppa:ondrej/php -y \
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install php8.3 php8.3-{cli,common,curl,xml,mbstring,redis,swoole} -y
 
-ARG WWWUSER=1000
-ARG WWWGROUP=1000
+ARG WWWUSER=1001
+ARG WWWGROUP=1001
 
 # create group and user "octane"
 RUN groupadd --force -g $WWWGROUP octane \

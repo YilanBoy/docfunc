@@ -22,8 +22,8 @@ RUN if [ "$(uname -m)" = "x86_64" ]; then \
         echo "Unsupported platform" && exit 1; \
     fi
 
-ARG WWWUSER=1000
-ARG WWWGROUP=1000
+ARG WWWUSER=1001
+ARG WWWGROUP=1001
 
 # create group and user "scheduler"
 RUN groupadd -g $WWWGROUP scheduler || true \

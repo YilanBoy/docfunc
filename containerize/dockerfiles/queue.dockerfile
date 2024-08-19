@@ -3,7 +3,6 @@ ARG PHP_VERSION=8.3
 ###########################################
 # Laravel Dependencies
 ###########################################
-
 FROM composer:latest AS vendor
 
 WORKDIR /var/www/html
@@ -24,7 +23,6 @@ RUN composer install \
 ###########################################
 # Front-End Assets
 ###########################################
-
 FROM node:21 AS assets
 
 WORKDIR /var/www/html
@@ -36,7 +34,6 @@ RUN npm install \
 ###########################################
 # Laravel Queue
 ###########################################
-
 FROM php:${PHP_VERSION}-alpine3.20
 
 LABEL maintainer="Allen"
@@ -61,8 +58,8 @@ RUN docker-php-ext-install pdo_mysql \
     && pecl install redis \
     && docker-php-ext-enable redis
 
-ARG WWWUSER=1000
-ARG WWWGROUP=1000
+ARG WWWUSER=1001
+ARG WWWGROUP=1001
 
 # create group and user "queue"
 RUN addgroup -g $WWWGROUP -S queue || true \

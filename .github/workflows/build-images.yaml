@@ -61,7 +61,7 @@ jobs:
         with:
           registry_username: ${{ secrets.DOCKERHUB_USERNAME }}
           registry_password: ${{ secrets.DOCKERHUB_TOKEN }}
-          file: containerize/dockerfiles/Dockerfile.app
+          file: containerize/dockerfiles/app.dockerfile
           platforms: linux/amd64, linux/arm64
           image_name: nella0128/docfunc-app
           image_tag: ${{ env.APP_VERSION }}
@@ -81,7 +81,7 @@ jobs:
         with:
           registry_username: ${{ secrets.DOCKERHUB_USERNAME }}
           registry_password: ${{ secrets.DOCKERHUB_TOKEN }}
-          file: containerize/dockerfiles/Dockerfile.queue
+          file: containerize/dockerfiles/queue.dockerfile
           platforms: linux/amd64, linux/arm64
           image_name: nella0128/docfunc-queue
           image_tag: ${{ env.APP_VERSION }}
@@ -101,7 +101,7 @@ jobs:
         with:
           registry_username: ${{ secrets.DOCKERHUB_USERNAME }}
           registry_password: ${{ secrets.DOCKERHUB_TOKEN }}
-          file: containerize/dockerfiles/Dockerfile.scheduler
+          file: containerize/dockerfiles/scheduler.dockerfile
           platforms: linux/amd64, linux/arm64
           image_name: nella0128/docfunc-scheduler
           image_tag: ${{ env.APP_VERSION }}
@@ -121,7 +121,7 @@ jobs:
         with:
           registry_username: ${{ secrets.DOCKERHUB_USERNAME }}
           registry_password: ${{ secrets.DOCKERHUB_TOKEN }}
-          file: containerize/dockerfiles/Dockerfile.aws-mysql-client
+          file: containerize/dockerfiles/aws-mysql-client.dockerfile
           platforms: linux/amd64, linux/arm64
           image_name: nella0128/aws-mysql-client
           image_tag: ${{ env.APP_VERSION }}

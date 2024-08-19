@@ -1,4 +1,5 @@
 ARG PHP_VERSION=8.3
+ARG SUPERCRONIC_VERSION=0.2.30
 
 ###########################################
 # PHP Dependencies
@@ -25,7 +26,7 @@ RUN composer install \
 # Scheduler
 ###########################################
 
-FROM php:${PHP_VERSION}-alpine3.18
+FROM php:${PHP_VERSION}-alpine3.20
 
 LABEL maintainer="Allen"
 
@@ -36,8 +37,6 @@ WORKDIR $ROOT
 # -e: exit immediately if a command exits with a non-zero status
 # -c: execute the following command when the shell starts
 SHELL ["/bin/ash", "-e", "-c"]
-
-
 
 # install necessary package to install php extension
 RUN apk update \
@@ -65,10 +64,10 @@ COPY containerize/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 # set supercronic for schedules
 # download the corresponding files according to the different architectures.
 RUN if [ "$(uname -m)" = "x86_64" ]; then \
-        wget -q "https://github.com/aptible/supercronic/releases/download/v0.2.27/supercronic-linux-amd64" \
+        wget -q "https://github.com/aptible/supercronic/releases/download/v${SUPERCRONIC_VERSION}/supercronic-linux-amd64" \
             -O /usr/bin/supercronic; \
     elif [ "$(uname -m)" = "aarch64" ]; then \
-        wget -q "https://github.com/aptible/supercronic/releases/download/v0.2.27/supercronic-linux-arm64" \
+        wget -q "https://github.com/aptible/supercronic/releases/download/v${SUPERCRONIC_VERSION}/supercronic-linux-arm64" \
             -O /usr/bin/supercronic; \
     else \
         echo "Unsupported platform" && exit 1; \

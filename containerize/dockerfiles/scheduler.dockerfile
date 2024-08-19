@@ -1,4 +1,5 @@
 ARG PHP_VERSION=8.3
+ARG SUPERCRONIC_VERSION=0.2.30
 
 ###########################################
 # PHP Dependencies
@@ -24,10 +25,10 @@ RUN composer install \
 # Scheduler
 ###########################################
 FROM php:${PHP_VERSION}-alpine3.20
+ARG SUPERCRONIC_VERSION
 
 LABEL maintainer="Allen"
 
-ENV SUPERCRONIC_VERSION=0.2.30
 ENV ROOT=/var/www/html
 WORKDIR $ROOT
 

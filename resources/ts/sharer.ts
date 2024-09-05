@@ -19,7 +19,7 @@ type facebookParams = {
     height: number;
 };
 
-type twitterParams = {
+type xParams = {
     shareUrl: string;
     params: {
         hashtags: string;
@@ -66,8 +66,8 @@ class Sharer {
                 width: 0,
                 height: 0,
             },
-            twitter: {
-                shareUrl: 'https://twitter.com/intent/tweet/',
+            x: {
+                shareUrl: 'https://x.com/intent/tweet/',
                 params: {
                     text: this.getValue('title'),
                     url: this.getValue('url'),
@@ -90,7 +90,7 @@ class Sharer {
         return s !== undefined ? this.urlSharer(s) : false;
     }
 
-    private urlSharer(sharer: facebookParams | twitterParams): void {
+    private urlSharer(sharer: facebookParams | xParams): void {
         let params = sharer.params || {};
         let keys = Object.keys(params);
         let str = keys.length > 0 ? '?' : '';

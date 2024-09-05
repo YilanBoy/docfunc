@@ -20,10 +20,10 @@
     <x-icon.facebook class="w-6 text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125" />
   </button>
 
-  <!-- Twitter share button -->
+  <!-- x share button -->
   <button
     class="group flex h-14 w-14 items-center justify-center text-gray-500 dark:text-gray-400"
-    data-sharer="twitter"
+    data-sharer="x"
     data-title="{{ $postTitle }}"
     data-hashtags="{{ config('app.name') }}"
     data-url="{{ request()->fullUrl() }}"

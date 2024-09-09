@@ -13,7 +13,8 @@
 
 use App\Models\User;
 
-uses(Tests\TestCase::class)->in('Feature');
+pest()->extend(Tests\TestCase::class)
+    ->in('Feature');
 
 /*
 |--------------------------------------------------------------------------

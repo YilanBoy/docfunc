@@ -16,7 +16,7 @@ class Create extends Component
 
     public PostForm $form;
 
-    public string $autoSaveKey = '';
+    public string $autoSaveKey;
 
     public Collection $categories;
 

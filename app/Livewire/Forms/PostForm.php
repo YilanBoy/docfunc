@@ -88,7 +88,7 @@ class PostForm extends Form
         if (Cache::has($key)) {
             $autoSavePostData = json_decode(Cache::get($key), true);
 
-            $this->category_id = (int) $autoSavePostData['category_id'];
+            $this->category_id = $autoSavePostData['category_id'];
             $this->is_private = $autoSavePostData['is_private'];
             $this->title = $autoSavePostData['title'];
             $this->tags = $autoSavePostData['tags'];

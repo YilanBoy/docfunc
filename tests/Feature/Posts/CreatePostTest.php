@@ -7,9 +7,12 @@ use App\Models\Tag;
 use App\Models\User;
 use App\Services\ContentService;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Cache;
 
 use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
+
+covers(Create::class);
 
 beforeEach(function () {
     // Because livewire will use the 'tmp-for-tests' disk in testing
@@ -48,6 +51,8 @@ test('authenticated user can create post', function ($categoryId) {
         ->map(fn ($item) => ['id' => $item->id, 'name' => $item->name])
         ->toJson();
 
+    $contentService = app(ContentService::class);
+
     livewire(Create::class, [
         'categories' => Category::all(['id', 'name']),
     ])
@@ -57,9 +62,12 @@ test('authenticated user can create post', function ($categoryId) {
         ->set('form.body', $body)
         ->set('form.is_private', $privateStatus)
         ->call('store')
-        ->assertHasNoErrors();
-
-    $contentService = app(ContentService::class);
+        ->assertHasNoErrors()
+        ->assertRedirect(route('posts.show', [
+            'post' => 1,
+            'slug' => $contentService->makeSlug($title),
+        ]))
+        ->assertDispatched('info-badge', status: 'success', message: '成功新增文章！');
 
     $post = Post::latest()->first();
 
@@ -67,7 +75,8 @@ test('authenticated user can create post', function ($categoryId) {
         ->map(fn ($item) => $item->id)
         ->all();
 
-    expect($post)
+    expect(Cache::has('auto_save_user_'.$user->id.'_create_post'))->toBeFalse()
+        ->and($post)
         ->title->toBe($title)
         ->body->toBe($body)
         ->category_id->toBe($categoryId)
@@ -173,7 +182,10 @@ it('can upload image', function () {
         ->assertHasNoErrors()
         ->assertSeeHtml('id="upload-image"');
 
-    expect(Storage::disk()->allFiles())->not->toBeEmpty();
+    $post = Post::latest()->first();
+
+    expect($post->preview_url)->not->toBeEmpty()
+        ->and(Storage::disk()->allFiles())->not->toBeEmpty();
 });
 
 it('can\'t upload non image', function () {
@@ -218,8 +230,6 @@ it('can auto save the post to cache', function () {
 
     expect(Cache::has($autoSaveKey))->toBeFalse();
 
-    $this->actingAs($user);
-
     $title = str()->random(4);
     $categoryId = Category::pluck('id')->random();
     $tags = Tag::inRandomOrder()
@@ -248,4 +258,48 @@ it('can auto save the post to cache', function () {
             'tags' => $tags,
             'body' => $body,
         ]);
+});
+
+it('can get data from cache', function () {
+    $user = loginAsUser();
+
+    $autoSaveKey = 'auto_save_user_'.$user->id.'_create_post';
+
+    // clean the redis data, like refresh database
+    if (Cache::has($autoSaveKey)) {
+        Cache::pull($autoSaveKey);
+    }
+
+    expect(Cache::has($autoSaveKey))->toBeFalse();
+
+    $title = str()->random(4);
+    $isPrivate = '';
+    $categoryId = Category::pluck('id')->random();
+    $tags = Tag::inRandomOrder()
+        ->limit(5)
+        ->get()
+        ->map(fn ($tag) => ['id' => $tag->id, 'value' => $tag->name])
+        ->toJson(JSON_UNESCAPED_UNICODE);
+    $body = str()->random(500);
+
+    Cache::put(
+        $autoSaveKey,
+        json_encode([
+            'category_id' => $categoryId,
+            'is_private' => $isPrivate,
+            'title' => $title,
+            'tags' => $tags,
+            'body' => $body,
+        ], JSON_UNESCAPED_UNICODE),
+        now()->addDays(7)
+    );
+
+    livewire(Create::class, [
+        'categories' => Category::all(['id', 'name']),
+    ])
+        ->assertSet('form.title', $title)
+        ->assertSet('form.is_private', $isPrivate)
+        ->assertSet('form.category_id', $categoryId)
+        ->assertSet('form.tags', $tags)
+        ->assertSet('form.body', $body);
 });

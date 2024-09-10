@@ -273,7 +273,6 @@ it('can get data from cache', function () {
     expect(Cache::has($autoSaveKey))->toBeFalse();
 
     $title = str()->random(4);
-    $isPrivate = '';
     $categoryId = Category::pluck('id')->random();
     $tags = Tag::inRandomOrder()
         ->limit(5)
@@ -286,7 +285,7 @@ it('can get data from cache', function () {
         $autoSaveKey,
         json_encode([
             'category_id' => $categoryId,
-            'is_private' => $isPrivate,
+            'is_private' => false,
             'title' => $title,
             'tags' => $tags,
             'body' => $body,
@@ -298,7 +297,7 @@ it('can get data from cache', function () {
         'categories' => Category::all(['id', 'name']),
     ])
         ->assertSet('form.title', $title)
-        ->assertSet('form.is_private', $isPrivate)
+        ->assertSet('form.is_private', false)
         ->assertSet('form.category_id', $categoryId)
         ->assertSet('form.tags', $tags)
         ->assertSet('form.body', $body);

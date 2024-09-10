@@ -11,3 +11,5 @@ arch('All controllers should be suffixed with `Controller`.')
 arch('No env function used in app folder')
     ->expect('env')
     ->not->toBeUsed();
+
+arch()->preset()->security()->ignoring('md5');

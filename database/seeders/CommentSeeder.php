@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use Generator;
 use Illuminate\Database\Seeder;
+use Random\RandomException;
 
 class CommentSeeder extends Seeder
 {
@@ -14,12 +15,15 @@ class CommentSeeder extends Seeder
 
     const CHUNK = 1_000;
 
+    /**
+     * @throws RandomException
+     */
     protected function commentGenerator(int $userCount, int $postCount): Generator
     {
         for ($i = 1; $i <= self::COMMENT_COUNT; $i++) {
             $data[] = [
-                'user_id' => rand(1, $userCount),
-                'post_id' => rand(1, $postCount),
+                'user_id' => random_int(1, $userCount),
+                'post_id' => random_int(1, $postCount),
                 'body' => fake()->sentence,
                 'created_at' => now(),
                 'updated_at' => now(),

@@ -8,6 +8,7 @@ use App\Services\ContentService;
 use Generator;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Seeder;
+use Random\RandomException;
 
 class PostSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class PostSeeder extends Seeder
 
     /**
      * @throws BindingResolutionException
+     * @throws RandomException
      */
     protected function postGenerator(int $userCount): Generator
     {
@@ -35,7 +37,7 @@ class PostSeeder extends Seeder
                 'excerpt' => $excerpt,
                 'category_id' => fake()->numberBetween(1, 3),
                 'comment_counts' => 0,
-                'user_id' => rand(1, $userCount),
+                'user_id' => random_int(1, $userCount),
                 'created_at' => fake()->dateTimeBetween(startDate: '-3 years'),
                 'updated_at' => now(),
             ];

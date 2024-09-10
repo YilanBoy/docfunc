@@ -5,15 +5,17 @@ namespace Database\Seeders;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Database\Seeder;
+use Random\RandomException;
 
 class TagSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      *
-     * @return void
+     *
+     * @throws RandomException
      */
-    public function run()
+    public function run(): void
     {
         $tags = Tag::all();
 
@@ -21,7 +23,7 @@ class TagSeeder extends Seeder
         Post::all()->each(function ($post) use ($tags) {
             $post->tags()->attach(
                 // 隨機取 0 ~ 5  Tag 的 ID
-                $tags->random(rand(0, 5))->pluck('id')->toArray()
+                $tags->random(random_int(0, 5))->pluck('id')->toArray()
             );
         });
     }

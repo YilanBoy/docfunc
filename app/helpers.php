@@ -26,7 +26,7 @@ if (! function_exists('get_gravatar')) {
     ): string {
         // Prepare parameters.
         $params = [
-            's' => htmlentities($size),
+            's' => htmlentities((string) $size),
             'd' => htmlentities($default_image_type),
             'r' => htmlentities($rating),
         ];

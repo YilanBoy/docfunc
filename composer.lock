@@ -136,16 +136,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.321.6",
+            "version": "3.321.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "3dc53a79677dd1f0e682dfc05f9815901ec7bf58"
+                "reference": "df456658bdc2ad84a00cf35a7b5af874fdcc7a53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3dc53a79677dd1f0e682dfc05f9815901ec7bf58",
-                "reference": "3dc53a79677dd1f0e682dfc05f9815901ec7bf58",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/df456658bdc2ad84a00cf35a7b5af874fdcc7a53",
+                "reference": "df456658bdc2ad84a00cf35a7b5af874fdcc7a53",
                 "shasum": ""
             },
             "require": {
@@ -228,9 +228,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.321.6"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.321.8"
             },
-            "time": "2024-09-06T18:06:38+00:00"
+            "time": "2024-09-10T18:18:03+00:00"
         },
         {
             "name": "bref/bref",
@@ -9935,16 +9935,16 @@
         },
         {
             "name": "pestphp/pest",
-            "version": "v3.0.1",
+            "version": "v3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "8de30cc8b7632a7be14a6ba473c6d071e4812f43"
+                "reference": "47ce45de56aa18ef4a4f5e70fa384733d388ab2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/8de30cc8b7632a7be14a6ba473c6d071e4812f43",
-                "reference": "8de30cc8b7632a7be14a6ba473c6d071e4812f43",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/47ce45de56aa18ef4a4f5e70fa384733d388ab2a",
+                "reference": "47ce45de56aa18ef4a4f5e70fa384733d388ab2a",
                 "shasum": ""
             },
             "require": {
@@ -9953,7 +9953,7 @@
                 "nunomaduro/termwind": "^2.1.0",
                 "pestphp/pest-plugin": "^3.0.0",
                 "pestphp/pest-plugin-arch": "^3.0.0",
-                "pestphp/pest-plugin-mutate": "^3.0.2",
+                "pestphp/pest-plugin-mutate": "^3.0.3",
                 "php": "^8.2.0",
                 "phpunit/phpunit": "^11.3.4"
             },
@@ -10030,7 +10030,7 @@
             ],
             "support": {
                 "issues": "https://github.com/pestphp/pest/issues",
-                "source": "https://github.com/pestphp/pest/tree/v3.0.1"
+                "source": "https://github.com/pestphp/pest/tree/v3.0.4"
             },
             "funding": [
                 {
@@ -10042,7 +10042,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-09T14:29:44+00:00"
+            "time": "2024-09-10T23:48:29+00:00"
         },
         {
             "name": "pestphp/pest-plugin",
@@ -10391,16 +10391,16 @@
         },
         {
             "name": "pestphp/pest-plugin-mutate",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest-plugin-mutate.git",
-                "reference": "dbd2cc850925c25c6964b3bba4c9b044a4ebc904"
+                "reference": "d83a5e106c92ea0ebf928eefbe4a57f028adf468"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-mutate/zipball/dbd2cc850925c25c6964b3bba4c9b044a4ebc904",
-                "reference": "dbd2cc850925c25c6964b3bba4c9b044a4ebc904",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin-mutate/zipball/d83a5e106c92ea0ebf928eefbe4a57f028adf468",
+                "reference": "d83a5e106c92ea0ebf928eefbe4a57f028adf468",
                 "shasum": ""
             },
             "require": {
@@ -10410,7 +10410,7 @@
                 "psr/simple-cache": "^3.0.0"
             },
             "require-dev": {
-                "pestphp/pest": "^3.0.0",
+                "pestphp/pest": "^3.0.1",
                 "pestphp/pest-dev-tools": "^3.0.0",
                 "pestphp/pest-plugin-type-coverage": "^3.0.0"
             },
@@ -10443,7 +10443,7 @@
                 "unit"
             ],
             "support": {
-                "source": "https://github.com/pestphp/pest-plugin-mutate/tree/v3.0.2"
+                "source": "https://github.com/pestphp/pest-plugin-mutate/tree/v3.0.3"
             },
             "funding": [
                 {
@@ -10459,7 +10459,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-09T14:24:40+00:00"
+            "time": "2024-09-10T15:59:08+00:00"
         },
         {
             "name": "phar-io/manifest",

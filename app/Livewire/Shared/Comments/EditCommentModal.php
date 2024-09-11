@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Shared\Comments;
 
-use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use App\Traits\MarkdownConverter;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -29,12 +28,18 @@ class EditCommentModal extends Component
 
     protected function rules(): array
     {
-        return (new CommentRequest())->rules();
+        return [
+            'body' => ['required', 'min:5', 'max:2000'],
+        ];
     }
 
     protected function messages(): array
     {
-        return (new CommentRequest())->messages();
+        return [
+            'body.required' => '請填寫留言內容',
+            'body.min' => '留言內容至少 5 個字元',
+            'body.max' => '留言內容至多 2000 個字元',
+        ];
     }
 
     /**

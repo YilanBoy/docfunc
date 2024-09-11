@@ -7,7 +7,7 @@ use App\Services\ContentService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
-class ClearUnusedImage extends Command
+class ClearUnusedImageCommand extends Command
 {
     /**
      * The name and signature of the console command.

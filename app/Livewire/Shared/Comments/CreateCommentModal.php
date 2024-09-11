@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Shared\Comments;
 
-use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Notifications\NewComment;
@@ -34,18 +33,20 @@ class CreateCommentModal extends Component
 
     protected function rules(): array
     {
-        $rules = (new CommentRequest())->rules();
-        $rules['captchaToken'] = ['required', new Captcha()];
-
-        return $rules;
+        return [
+            'body' => ['required', 'min:5', 'max:2000'],
+            'captchaToken' => ['required', new Captcha],
+        ];
     }
 
     protected function messages(): array
     {
-        $messages = (new CommentRequest())->messages();
-        $messages['captchaToken.required'] = '未完成驗證';
-
-        return $messages;
+        return [
+            'body.required' => '請填寫留言內容',
+            'body.min' => '留言內容至少 5 個字元',
+            'body.max' => '留言內容至多 2000 個字元',
+            'captchaToken.required' => '未完成驗證',
+        ];
     }
 
     /**

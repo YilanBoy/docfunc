@@ -85,7 +85,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function gravatarUrl(): Attribute
     {
-        $hash = md5(strtolower(trim($this->email)));
+        $hash = hash('sha256', strtolower(trim($this->email)));
 
         return new Attribute(
             get: fn ($value) => 'https://www.gravatar.com/avatar/'.$hash.'?s=400&d=mp'

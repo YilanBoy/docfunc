@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Shared\Posts;
 
+use App\Enums\PostOrder;
 use App\Models\Post;
 use Illuminate\View\View;
 use Livewire\Attributes\Url;
@@ -12,24 +13,24 @@ class Posts extends Component
 {
     use WithPagination;
 
-    public int $categoryId = 0;
+    public ?int $categoryId = null;
 
-    public string $categoryName = '';
+    public ?string $categoryName = null;
 
-    public string $categoryDescription = '';
+    public ?string $categoryDescription = null;
 
-    public int $tagId = 0;
+    public ?int $tagId = null;
 
-    public string $tagName = '';
+    public ?string $tagName = null;
 
     #[Url]
-    public string $order = 'latest';
+    public string $order = PostOrder::LATEST->value;
 
-    public function changeOrder(string $newOrder): void
+    public function changeOrder(PostOrder $newOrder): void
     {
-        // 回到第一頁
+        $this->order = $newOrder->value;
+
         $this->resetPage();
-        $this->order = $newOrder;
     }
 
     public function render(): View

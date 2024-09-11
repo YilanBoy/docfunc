@@ -1,42 +1,28 @@
+@php
+  use App\Enums\PostOrder;
+@endphp
+
 <div class="space-y-6">
   {{-- 文章排序 --}}
   <div class="flex w-full flex-col-reverse text-sm md:flex-row md:justify-between">
     <nav class="flex w-full space-x-1 rounded-xl dark:text-gray-50 md:w-auto">
 
-      {{-- prettier-ignore-start --}}
-      @php
-        $tabs = [
-          ['value' => 'latest', 'text' => '最新文章'],
-          ['value' => 'recent', 'text' => '最近更新'],
-          ['value' => 'comment', 'text' => '最多留言'],
-        ];
-      @endphp
-      {{-- prettier-ignore-end --}}
-
-      @foreach ($tabs as $tab)
+      @foreach (PostOrder::cases() as $postOrder)
         <button
           type="button"
-          wire:click.prevent="changeOrder('{{ $tab['value'] }}')"
+          wire:click.prevent="changeOrder('{{ $postOrder }}')"
           @class([
               'flex w-1/3 md:w-auto items-center px-4 py-2 transition duration-300 rounded-lg ',
-              'bg-gray-50 dark:bg-gray-800' => $order === $tab['value'],
-              'hover:bg-gray-50 dark:hover:bg-gray-800' => $order !== $tab['value'],
+              'bg-gray-50 dark:bg-gray-800' => $order === $postOrder->value,
+              'hover:bg-gray-50 dark:hover:bg-gray-800' => $order !== $postOrder->value,
           ])
         >
-          @switch($tab['value'])
-            @case('recent')
-              <x-icon.wrencn class="w-4" />
-            @break
+          <x-dynamic-component
+            class="w-4"
+            :component="$postOrder->iconComponentName()"
+          />
 
-            @case('comment')
-              <x-icon.chat-square-text class="w-4" />
-            @break
-
-            @default
-              <x-icon.stars class="w-4" />
-          @endswitch
-
-          <span class="ml-2">{{ $tab['text'] }}</span>
+          <span class="ml-2">{{ $postOrder->tabText() }}</span>
         </button>
       @endforeach
     </nav>

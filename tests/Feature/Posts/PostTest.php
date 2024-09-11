@@ -1,13 +1,18 @@
 <?php
 
+use App\Enums\PostOrder;
 use App\Livewire\Shared\Posts\Posts;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
+use App\Services\FormatTransferService;
 use Livewire\Livewire;
 
 use function Pest\Faker\fake;
 use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
+
+covers(Posts::class);
 
 test('user can access the home page ', function () {
     get('/')->assertStatus(200);
@@ -36,23 +41,45 @@ it('will be redirect if slug is not in the url', function () {
 });
 
 test('category can filter posts', function () {
-    $categoryOnePost = Post::factory()->make([
+    Post::factory()->create([
         'title' => 'this post belongs to category one',
         'category_id' => 1,
     ]);
 
-    $categoryOnePost->save();
-
     livewire(Posts::class, [
         'categoryId' => 1,
-        'tagId' => 0,
     ])->assertViewHas('posts', function ($posts) {
         return $posts->count() === 1;
     });
 
     livewire(Posts::class, [
         'categoryId' => 2,
-        'tagId' => 0,
+    ])->assertViewHas('posts', function ($posts) {
+        return $posts->count() === 0;
+    });
+});
+
+test('tag can filter posts', function () {
+    $tagOnePost = Post::factory()->create();
+
+    $tagOneJsonString = Tag::query()
+        ->where('id', 1)
+        ->get()
+        ->map(fn ($tag) => ['id' => $tag->id, 'value' => $tag->name])
+        ->toJson(JSON_UNESCAPED_UNICODE);
+
+    $tagOnePost->tags()->attach(
+        app(FormatTransferService::class)->tagsJsonToTagIdsArray($tagOneJsonString)
+    );
+
+    livewire(Posts::class, [
+        'tagId' => 1,
+    ])->assertViewHas('posts', function ($posts) {
+        return $posts->count() === 1;
+    });
+
+    livewire(Posts::class, [
+        'tagId' => 2,
     ])->assertViewHas('posts', function ($posts) {
         return $posts->count() === 0;
     });
@@ -84,10 +111,7 @@ test('order query string filters correctly', function (string $queryString, stri
     ]);
 
     Livewire::withQueryParams(['order' => $queryString])
-        ->test(Posts::class, [
-            'categoryId' => 0,
-            'tagId' => 0,
-        ])
+        ->test(Posts::class)
         ->assertViewHas('posts', function ($posts) use ($title) {
             return $posts->first()->title === $title;
         });
@@ -244,4 +268,30 @@ it('displays the thumbnail on top of the post', function () {
         ->assertOk()
         ->assertSee('post-thumbnail')
         ->assertSee($post->preview_url);
+});
+
+it('reset the page if order is changed', function (
+) {
+    Post::factory()->count(18)->create([
+        'created_at' => now()->subDays(20),
+        'updated_at' => now()->subDays(20),
+    ]);
+
+    $latestPost = Post::factory()->create([
+        'created_at' => now(),
+        'updated_at' => now()->subDays(30),
+    ]);
+
+    $latestUpdatedPost = Post::factory()->create([
+        'created_at' => now()->subDays(30),
+        'updated_at' => now(),
+    ]);
+
+    livewire(Posts::class)
+        ->set('order', PostOrder::LATEST->value)
+        ->assertSee($latestPost->title)
+        ->assertDontSee($latestUpdatedPost->title)
+        ->call('changeOrder', PostOrder::RECENT->value)
+        ->assertSee($latestUpdatedPost->title)
+        ->assertDontSee($latestPost->title);
 });

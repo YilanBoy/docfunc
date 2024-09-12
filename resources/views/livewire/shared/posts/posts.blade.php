@@ -6,7 +6,6 @@
   {{-- 文章排序 --}}
   <div class="flex w-full flex-col-reverse text-sm md:flex-row md:justify-between">
     <nav class="flex w-full space-x-1 rounded-xl dark:text-gray-50 md:w-auto">
-
       @foreach (PostOrder::cases() as $postOrder)
         <button
           type="button"

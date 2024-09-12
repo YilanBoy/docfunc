@@ -1,3 +1,7 @@
+@php
+  use App\Enums\UserInfoTab;
+@endphp
+
 @assets
   {{-- highlight code block style --}}
   @vite('node_modules/highlight.js/styles/atom-one-dark.css')
@@ -48,26 +52,18 @@
         <div
           class="relative z-0 mb-6 inline-grid h-10 w-full select-none grid-cols-3 items-center justify-center rounded-lg border border-gray-100 bg-white p-1 text-gray-500 dark:border-gray-800 dark:bg-gray-700 dark:text-gray-50"
         >
-          @foreach ($tabs as $tab)
+          @foreach (UserInfoTab::cases() as $userInfoTab)
             <button
               class="relative z-20 inline-flex h-8 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded-md px-3 text-sm font-medium transition-all"
-              id="{{ $tab['value'] }}-tab-button"
+              id="{{ $userInfoTab->value }}-tab-button"
               type="button"
               x-on:click="tabButtonClicked($el)"
             >
-              @switch($tab['value'])
-                @case('posts')
-                  <x-icon.file-earmark-richtext class="w-4" />
-                @break
-
-                @case('comments')
-                  <x-icon.chat-square-text class="w-4" />
-                @break
-
-                @default
-                  <x-icon.info-circle class="w-4" />
-              @endswitch
-              <span class="ml-2">{{ $tab['text'] }}</span>
+              <x-dynamic-component
+                class="w-4"
+                :component="$userInfoTab->iconComponentName()"
+              />
+              <span class="ml-2">{{ $userInfoTab->tabText() }}</span>
             </button>
           @endforeach
 
@@ -80,15 +76,15 @@
           </div>
         </div>
 
-        @foreach ($tabs as $tab)
+        @foreach (UserInfoTab::cases() as $userInfoTab)
           <div
-            id="{{ $tab['value'] }}-content"
+            id="{{ $userInfoTab->value }}-content"
             x-cloak
             x-show="tabContentActive($el)"
             x-transition:enter.duration.300ms
           >
             <livewire:dynamic-component
-              :is="$tab['component']"
+              :is="$userInfoTab->livewireComponentName()"
               :user-id="$user->id"
             />
           </div>

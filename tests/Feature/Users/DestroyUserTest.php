@@ -9,6 +9,12 @@ use App\Models\User;
 use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
 
+covers(DestroyUserPage::class);
+
+beforeEach(function () {
+    $this->destroyUserConfirmationRouteName = 'users.destroy-confirmation';
+});
+
 test('non-logged-in users cannot access the destroy user page', function () {
     $user = User::factory()->create();
 
@@ -26,6 +32,23 @@ test('users can access the destroy user page', function () {
         ->assertSuccessful();
 });
 
+test('Users cannot access other users\' destroy user pages', function () {
+    $user = User::factory()->create();
+    $anotherUser = User::factory()->create();
+
+    $this->actingAs($user);
+
+    get(route('users.destroy', $anotherUser->id))
+        ->assertForbidden();
+});
+
+test('destroy user route name must be users.destroy-confirmation', function () {
+    $user = loginAsUser();
+
+    livewire(DestroyUserPage::class, ['user' => $user])
+        ->assertSet('destroyUserConfirmationRouteName', $this->destroyUserConfirmationRouteName);
+});
+
 test('schedule the task of sending the \'destroy user\' email in the queue', function () {
     Mail::fake();
 
@@ -34,7 +57,8 @@ test('schedule the task of sending the \'destroy user\' email in the queue', fun
     $this->actingAs($user);
 
     livewire(DestroyUserPage::class, ['user' => $user])
-        ->call('sendDestroyEmail');
+        ->call('sendDestroyEmail')
+        ->assertDispatched('info-badge', status: 'success', message: '已寄出信件！');
 
     Mail::assertQueued(DestroyUser::class);
 });
@@ -47,7 +71,7 @@ test('users can destroy their accounts', function () {
     $this->actingAs($user);
 
     $destroyUserLink = URL::temporarySignedRoute(
-        'users.destroy-confirmation',
+        $this->destroyUserConfirmationRouteName,
         now()->addMinutes(5),
         ['user' => $user->id]
     );
@@ -65,7 +89,7 @@ test('if the link is no longer available, users cannot destroy their account', f
     $this->actingAs($user);
 
     $destroyUserLink = URL::temporarySignedRoute(
-        'users.destroy-confirmation',
+        $this->destroyUserConfirmationRouteName,
         now()->addMinutes(5),
         ['user' => $user->id]
     );

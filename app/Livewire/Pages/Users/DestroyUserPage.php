@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\View\View;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -16,6 +17,9 @@ class DestroyUserPage extends Component
     use AuthorizesRequests;
 
     public User $user;
+
+    #[Locked]
+    public string $destroyUserConfirmationRouteName = 'users.destroy-confirmation';
 
     public function mount(User $user): void
     {
@@ -28,7 +32,7 @@ class DestroyUserPage extends Component
 
         // 生成一次性連結，並設定 5 分鐘後失效
         $destroyUserLink = URL::temporarySignedRoute(
-            'users.destroy-confirmation',
+            $this->destroyUserConfirmationRouteName,
             now()->addMinutes(5),
             ['user' => $this->user->id]
         );

@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Pages\Auth\Login;
+use App\Livewire\Pages\Auth\LoginPage;
 use App\Livewire\Shared\Header;
 use App\Models\User;
 
@@ -22,7 +22,7 @@ test('users can authenticate using the login screen', function () {
 
     // use request() will cause livewire tests fail
     // https://github.com/livewire/livewire/issues/936
-    livewire(Login::class)
+    livewire(LoginPage::class)
         ->set('email', $user->email)
         ->set('password', $password)
         ->set('captchaToken', 'fake-captcha-response')
@@ -36,7 +36,7 @@ test('users can authenticate using the login screen', function () {
 test('email is required', function () {
     User::factory()->create();
 
-    livewire(Login::class)
+    livewire(LoginPage::class)
         ->set('email', '')
         ->set('password', 'Password101')
         ->set('captchaToken', 'fake-captcha-response')
@@ -47,7 +47,7 @@ test('email is required', function () {
 test('password is required', function () {
     User::factory()->create();
 
-    livewire(Login::class)
+    livewire(LoginPage::class)
         ->set('email', 'email@examle.com')
         ->set('password', '')
         ->set('captchaToken', 'fake-captcha-response')
@@ -58,7 +58,7 @@ test('password is required', function () {
 test('captcha token is required', function () {
     User::factory()->create();
 
-    livewire(Login::class)
+    livewire(LoginPage::class)
         ->set('email', 'allen@example.com')
         ->set('password', 'Password101')
         ->set('captchaToken', '')
@@ -67,7 +67,7 @@ test('captcha token is required', function () {
 });
 
 test('email must be a valid email address', function () {
-    livewire(Login::class)
+    livewire(LoginPage::class)
         ->set('email', 'wrongEmail')
         ->set('password', 'Password101')
         ->set('captchaToken', 'fake-captcha-response')
@@ -80,7 +80,7 @@ test('users can not authenticate with invalid password', function () {
         'password' => bcrypt('correctPassword101'),
     ]);
 
-    livewire(Login::class)
+    livewire(LoginPage::class)
         ->set('email', $user->email)
         ->set('password', 'wrongPassword101')
         ->set('captchaToken', 'fake-captcha-response')

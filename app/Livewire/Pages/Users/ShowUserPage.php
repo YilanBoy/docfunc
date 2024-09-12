@@ -7,7 +7,7 @@ use Illuminate\View\View;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 
-class Show extends Component
+class ShowUserPage extends Component
 {
     #[Locked]
     public User $user;
@@ -19,7 +19,7 @@ class Show extends Component
 
     public function render(): View
     {
-        return view('livewire.pages.users.show')
+        return view('livewire.pages.users.show-user-page')
             ->title($this->user->name.' 的個人資訊');
     }
 }

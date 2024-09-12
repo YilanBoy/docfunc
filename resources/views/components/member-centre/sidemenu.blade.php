@@ -43,15 +43,15 @@
     </a>
 
     @php
-      $deleteUserUrl = urldecode(route('users.delete', ['user' => auth()->id()]));
-      $inDeleteUserPage = urldecode(request()->url()) === $deleteUserUrl;
+      $destroyUserUrl = urldecode(route('users.destroy', ['user' => auth()->id()]));
+      $inDestroyUserPage = urldecode(request()->url()) === $destroyUserUrl;
     @endphp
     <a
-      href="{{ $deleteUserUrl }}"
+      href="{{ $destroyUserUrl }}"
       @class([
           'flex items-center rounded-md p-2 dark:text-gray-50',
-          'bg-gray-200 dark:bg-gray-700' => $inDeleteUserPage,
-          'hover:bg-gray-200 dark:hover:bg-gray-700' => !$inDeleteUserPage,
+          'bg-gray-200 dark:bg-gray-700' => $inDestroyUserPage,
+          'hover:bg-gray-200 dark:hover:bg-gray-700' => !$inDestroyUserPage,
       ])
       wire:navigate
     >

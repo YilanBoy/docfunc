@@ -11,7 +11,7 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 
-class ResetPassword extends Component
+class ResetPasswordPage extends Component
 {
     // token will be passed in the URL
     // and auto binding will take care of it
@@ -81,6 +81,6 @@ class ResetPassword extends Component
     #[Title('重設密碼')]
     public function render(): View
     {
-        return view('livewire.pages.auth.reset-password');
+        return view('livewire.pages.auth.reset-password-page');
     }
 }

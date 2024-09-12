@@ -1,10 +1,9 @@
 <?php
 
-use App\Livewire\Pages\Posts\Edit;
+use App\Livewire\Pages\Posts\EditPostPage;
 use App\Livewire\Shared\Users\PostsGroupByYear;
 use App\Models\Post;
 use App\Models\Tag;
-use App\Models\User;
 use App\Services\ContentService;
 
 use function Pest\Laravel\get;
@@ -50,7 +49,7 @@ test('authors can update their posts', function ($categoryId) {
         ->map(fn ($item) => ['id' => $item->id, 'name' => $item->name])
         ->toJson();
 
-    livewire(Edit::class, ['post' => $post])
+    livewire(EditPostPage::class, ['post' => $post])
         ->set('form.title', $newTitle)
         ->set('form.category_id', $categoryId)
         ->set('form.tags', $newTagsJson)

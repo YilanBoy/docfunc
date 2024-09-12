@@ -6,7 +6,7 @@ use App\Models\Category;
 use Illuminate\View\View;
 use Livewire\Component;
 
-class Show extends Component
+class ShowCategoryPage extends Component
 {
     public Category $category;
 
@@ -23,6 +23,6 @@ class Show extends Component
         }
 
         // 傳參變量文章和分類到模板中
-        return view('livewire.pages.categories.show')->title($this->category->name);
+        return view('livewire.pages.categories.show-category-page')->title($this->category->name);
     }
 }

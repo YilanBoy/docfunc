@@ -8,7 +8,7 @@ use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-class Edit extends Component
+class EditUserPage extends Component
 {
     use AuthorizesRequests;
 
@@ -72,6 +72,6 @@ class Edit extends Component
         // 會員只能進入自己的頁面，規則寫在 UserPolicy
         $this->authorize('update', $this->user);
 
-        return view('livewire.pages.users.edit');
+        return view('livewire.pages.users.edit-user-page');
     }
 }

@@ -12,7 +12,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Edit extends Component
+class EditPostPage extends Component
 {
     use AuthorizesRequests;
     use WithFileUploads;
@@ -55,6 +55,6 @@ class Edit extends Component
     #[Title('編輯文章')]
     public function render(): View
     {
-        return view('livewire.pages.posts.edit');
+        return view('livewire.pages.posts.edit-post-page');
     }
 }

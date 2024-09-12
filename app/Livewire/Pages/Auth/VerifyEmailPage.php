@@ -8,7 +8,7 @@ use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-class VerifyEmail extends Component
+class VerifyEmailPage extends Component
 {
     /**
      * @return RedirectResponse|void
@@ -33,7 +33,7 @@ class VerifyEmail extends Component
         if (request()->user()->hasVerifiedEmail()) {
             $this->redirect('/', navigate: true);
         } else {
-            return view('livewire.pages.auth.verify-email');
+            return view('livewire.pages.auth.verify-email-page');
         }
     }
 }

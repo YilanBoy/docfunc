@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Pages\Users\Delete;
+use App\Livewire\Pages\Users\DestroyUserPage;
 use App\Mail\DestroyUser;
 use App\Models\Comment;
 use App\Models\Post;
@@ -9,37 +9,37 @@ use App\Models\User;
 use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
 
-test('non-logged-in users cannot access the delete user page', function () {
+test('non-logged-in users cannot access the destroy user page', function () {
     $user = User::factory()->create();
 
-    get(route('users.delete', $user->id))
+    get(route('users.destroy', $user->id))
         ->assertStatus(302)
         ->assertRedirect(route('login'));
 });
 
-test('users can access the delete user page', function () {
+test('users can access the destroy user page', function () {
     $user = User::factory()->create();
 
     $this->actingAs($user);
 
-    get(route('users.delete', $user->id))
+    get(route('users.destroy', $user->id))
         ->assertSuccessful();
 });
 
-test('schedule the task of sending the \'delete user\' email in the queue', function () {
+test('schedule the task of sending the \'destroy user\' email in the queue', function () {
     Mail::fake();
 
     $user = User::factory()->create();
 
     $this->actingAs($user);
 
-    livewire(Delete::class, ['user' => $user])
+    livewire(DestroyUserPage::class, ['user' => $user])
         ->call('sendDestroyEmail');
 
     Mail::assertQueued(DestroyUser::class);
 });
 
-test('users can delete their accounts', function () {
+test('users can destroy their accounts', function () {
     $user = User::factory()->create();
 
     $this->assertDatabaseHas('users', ['id' => $user->id]);
@@ -47,7 +47,7 @@ test('users can delete their accounts', function () {
     $this->actingAs($user);
 
     $destroyUserLink = URL::temporarySignedRoute(
-        'users.destroy',
+        'users.destroy-confirmation',
         now()->addMinutes(5),
         ['user' => $user->id]
     );
@@ -57,7 +57,7 @@ test('users can delete their accounts', function () {
     $this->assertDatabaseMissing('users', ['id' => $user->id]);
 });
 
-test('if the link is no longer available, users cannot delete their account', function () {
+test('if the link is no longer available, users cannot destroy their account', function () {
     $user = User::factory()->create();
 
     $this->assertDatabaseHas('users', ['id' => $user->id]);
@@ -65,7 +65,7 @@ test('if the link is no longer available, users cannot delete their account', fu
     $this->actingAs($user);
 
     $destroyUserLink = URL::temporarySignedRoute(
-        'users.destroy',
+        'users.destroy-confirmation',
         now()->addMinutes(5),
         ['user' => $user->id]
     );
@@ -78,9 +78,9 @@ test('if the link is no longer available, users cannot delete their account', fu
     $this->assertDatabaseHas('users', ['id' => $user->id]);
 });
 
-// if the user has been deleted, the user's posts should also be deleted
+// if the user has been destroyed, the user's posts should also be destroyed
 // and user id of comments should be set to null
-test('if the user has been deleted, the user\'s posts and comments should also be deleted', function () {
+test('if the user has been destroyed, the user\'s posts and comments should also be destroyed', function () {
     $user = User::factory()->create();
 
     $post = Post::factory()->create(['user_id' => $user->id]);
@@ -93,7 +93,7 @@ test('if the user has been deleted, the user\'s posts and comments should also b
 
     $user->delete();
 
-    // the posts should be deleted in the database by constraint
+    // the posts should be destroyed in the database by constraint
     // the user id of comments should be updated in the database by constraint
     $this->assertDatabaseMissing('users', ['id' => $user->id]);
     $this->assertDatabaseMissing('posts', ['id' => $post->id]);

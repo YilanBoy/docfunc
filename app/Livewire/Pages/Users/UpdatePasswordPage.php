@@ -10,7 +10,7 @@ use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-class UpdatePassword extends Component
+class UpdatePasswordPage extends Component
 {
     use AuthorizesRequests;
 
@@ -27,7 +27,7 @@ class UpdatePassword extends Component
         $passwordRule = Password::min(8)->letters()->mixedCase()->numbers();
 
         return [
-            'current_password' => ['required', new MatchOldPassword()],
+            'current_password' => ['required', new MatchOldPassword],
             'new_password' => ['required', 'confirmed', $passwordRule],
         ];
     }
@@ -63,6 +63,6 @@ class UpdatePassword extends Component
     #[Title('會員中心 - 更改密碼')]
     public function render(): View
     {
-        return view('livewire.pages.users.update-password');
+        return view('livewire.pages.users.update-password-page');
     }
 }

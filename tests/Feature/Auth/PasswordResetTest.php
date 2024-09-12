@@ -1,7 +1,7 @@
 <?php
 
-use App\Livewire\Pages\Auth\ForgotPassword;
-use App\Livewire\Pages\Auth\ResetPassword as ResetPasswordComponent;
+use App\Livewire\Pages\Auth\ForgotPasswordPage;
+use App\Livewire\Pages\Auth\ResetPasswordPage as ResetPasswordComponent;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -12,7 +12,7 @@ use function Pest\Livewire\livewire;
 
 test('reset password link screen can be rendered', function () {
     get('/forgot-password')
-        ->assertSeeLivewire(ForgotPassword::class)
+        ->assertSeeLivewire(ForgotPasswordPage::class)
         ->assertStatus(200);
 });
 
@@ -21,7 +21,7 @@ test('reset password link can be requested', function () {
 
     $user = User::factory()->create();
 
-    livewire(ForgotPassword::class)
+    livewire(ForgotPasswordPage::class)
         ->set('email', $user->email)
         ->call('store')
         ->assertHasNoErrors();

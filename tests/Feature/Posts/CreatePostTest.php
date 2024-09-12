@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Pages\Posts\Create;
+use App\Livewire\Pages\Posts\CreatePostPage;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Cache;
 use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
 
-covers(Create::class);
+covers(CreatePostPage::class);
 
 beforeEach(function () {
     // Because livewire will use the 'tmp-for-tests' disk in testing
@@ -53,7 +53,7 @@ test('authenticated user can create post', function ($categoryId) {
 
     $contentService = app(ContentService::class);
 
-    livewire(Create::class, [
+    livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.title', $title)
@@ -90,7 +90,7 @@ test('authenticated user can create post', function ($categoryId) {
 test('title at least 4 characters', function () {
     loginAsUser();
 
-    livewire(Create::class, [
+    livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.title', str()->random(3))
@@ -103,7 +103,7 @@ test('title at least 4 characters', function () {
 test('title at most 50 characters', function () {
     loginAsUser();
 
-    livewire(Create::class, [
+    livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.title', str()->random(51))
@@ -116,7 +116,7 @@ test('title at most 50 characters', function () {
 test('body at least 500 characters', function () {
     loginAsUser();
 
-    livewire(Create::class, [
+    livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.title', str()->random(4))
@@ -129,7 +129,7 @@ test('body at least 500 characters', function () {
 test('body at most 20000 characters', function () {
     loginAsUser();
 
-    livewire(Create::class, [
+    livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.title', str()->random(4))
@@ -144,7 +144,7 @@ it('can check image type', function () {
 
     $file = UploadedFile::fake()->create('document.pdf', 512);
 
-    livewire(Create::class, [
+    livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.image', $file)
@@ -156,7 +156,7 @@ it('can check image size', function () {
 
     $file = UploadedFile::fake()->image('image.jpg')->size(1025);
 
-    livewire(Create::class, [
+    livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.image', $file)
@@ -170,7 +170,7 @@ it('can upload image', function () {
 
     $image = UploadedFile::fake()->image('fake_image.jpg');
 
-    livewire(Create::class, [
+    livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.title', str()->random(4))
@@ -195,7 +195,7 @@ it('can\'t upload non image', function () {
 
     $file = UploadedFile::fake()->create('document.pdf', 512);
 
-    livewire(Create::class, [
+    livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.title', str()->random(4))
@@ -213,7 +213,7 @@ it('can get auto save key property', function () {
 
     $this->actingAs($user);
 
-    livewire(Create::class, [
+    livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])->assertSet('autoSaveKey', 'auto_save_user_'.$user->id.'_create_post');
 });
@@ -239,7 +239,7 @@ it('can auto save the post to cache', function () {
         ->toJson(JSON_UNESCAPED_UNICODE);
     $body = str()->random(500);
 
-    livewire(Create::class, [
+    livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->set('form.title', $title)
@@ -293,7 +293,7 @@ it('can get data from cache', function () {
         now()->addDays(7)
     );
 
-    livewire(Create::class, [
+    livewire(CreatePostPage::class, [
         'categories' => Category::all(['id', 'name']),
     ])
         ->assertSet('form.title', $title)

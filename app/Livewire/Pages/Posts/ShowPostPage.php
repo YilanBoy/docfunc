@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
 use Livewire\Component;
 
-class Show extends Component
+class ShowPostPage extends Component
 {
     use AuthorizesRequests;
 
@@ -30,6 +30,6 @@ class Show extends Component
             redirect()->to($this->post->link_with_slug);
         }
 
-        return view('livewire.pages.posts.show')->title($this->post->title);
+        return view('livewire.pages.posts.show-post-page')->title($this->post->title);
     }
 }

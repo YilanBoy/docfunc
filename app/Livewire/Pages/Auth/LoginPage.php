@@ -12,7 +12,7 @@ use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-class Login extends Component
+class LoginPage extends Component
 {
     public string $email = '';
 
@@ -27,7 +27,7 @@ class Login extends Component
         return [
             'email' => 'required|string|email',
             'password' => 'required|string',
-            'captchaToken' => ['required', new Captcha()],
+            'captchaToken' => ['required', new Captcha],
         ];
     }
 
@@ -97,6 +97,6 @@ class Login extends Component
     #[Title('登入')]
     public function render(): View
     {
-        return view('livewire.pages.auth.login');
+        return view('livewire.pages.auth.login-page');
     }
 }

@@ -1,7 +1,17 @@
 <?php
 
 use App\Http\Controllers\User\DestroyUserController;
-use App\Livewire\Pages;
+use App\Livewire\Pages\Categories\ShowCategoryPage;
+use App\Livewire\Pages\Notifications\NotificationIndexPage;
+use App\Livewire\Pages\Posts\CreatePostPage;
+use App\Livewire\Pages\Posts\EditPostPage;
+use App\Livewire\Pages\Posts\PostIndexPage;
+use App\Livewire\Pages\Posts\ShowPostPage;
+use App\Livewire\Pages\Tags\ShowTagPage;
+use App\Livewire\Pages\Users\DestroyUserPage;
+use App\Livewire\Pages\Users\EditUserPage;
+use App\Livewire\Pages\Users\ShowUserPage;
+use App\Livewire\Pages\Users\UpdatePasswordPage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,46 +26,46 @@ use Illuminate\Support\Facades\Route;
  */
 
 // 首頁
-Route::get('/', Pages\Posts\Index::class)->name('root');
+Route::get('/', PostIndexPage::class)->name('root');
 
 require __DIR__.'/auth.php';
 
 // 會員相關頁面
 Route::middleware('auth')->prefix('users')->group(function () {
-    Route::get('/{user}', Pages\Users\Show::class)
+    Route::get('/{user}', ShowUserPage::class)
         ->name('users.show')
         ->withoutMiddleware('auth');
 
-    Route::get('/{user}/edit', Pages\Users\Edit::class)->name('users.edit');
-    Route::get('/{user}/change-password', Pages\Users\UpdatePassword::class)->name('users.updatePassword');
-    Route::get('/{user}/delete', Pages\Users\Delete::class)->name('users.delete');
+    Route::get('/{user}/edit', EditUserPage::class)->name('users.edit');
+    Route::get('/{user}/change-password', UpdatePasswordPage::class)->name('users.updatePassword');
+    Route::get('/{user}/destroy', DestroyUserPage::class)->name('users.destroy');
 
-    Route::get('/{user}/destroy', DestroyUserController::class)
-        ->name('users.destroy')
+    Route::get('/{user}/destroy-confirmation', DestroyUserController::class)
+        ->name('users.destroy-confirmation')
         ->withoutMiddleware('auth');
 });
 
 // 文章列表與內容
 Route::prefix('posts')->group(function () {
-    Route::get('/', Pages\Posts\Index::class)->name('posts.index');
+    Route::get('/', PostIndexPage::class)->name('posts.index');
 
     Route::middleware(['auth', 'verified'])->group(function () {
-        Route::get('/create', Pages\Posts\Create::class)->name('posts.create');
-        Route::get('/{post}/edit', Pages\Posts\Edit::class)->name('posts.edit');
+        Route::get('/create', CreatePostPage::class)->name('posts.create');
+        Route::get('/{post}/edit', EditPostPage::class)->name('posts.edit');
     });
 
     // {slug?} 當中的問號代表參數為選擇性
-    Route::get('/{post}/{slug?}', Pages\Posts\Show::class)->name('posts.show');
+    Route::get('/{post}/{slug?}', ShowPostPage::class)->name('posts.show');
 });
 
 // 文章分類
-Route::get('categories/{category}/{name?}', Pages\Categories\Show::class)->name('categories.show');
+Route::get('categories/{category}/{name?}', ShowCategoryPage::class)->name('categories.show');
 
 // 文章標籤
-Route::get('tags/{tag}', Pages\Tags\Show::class)->name('tags.show');
+Route::get('tags/{tag}', ShowTagPage::class)->name('tags.show');
 
 // 通知列表
-Route::get('notifications', Pages\Notifications\Index::class)->name('notifications.index');
+Route::get('notifications', NotificationIndexPage::class)->name('notifications.index');
 
 // Web Feed
 Route::feeds();

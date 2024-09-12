@@ -11,7 +11,7 @@ use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-class Delete extends Component
+class DestroyUserPage extends Component
 {
     use AuthorizesRequests;
 
@@ -28,7 +28,7 @@ class Delete extends Component
 
         // 生成一次性連結，並設定 5 分鐘後失效
         $destroyUserLink = URL::temporarySignedRoute(
-            'users.destroy',
+            'users.destroy-confirmation',
             now()->addMinutes(5),
             ['user' => $this->user->id]
         );
@@ -43,6 +43,6 @@ class Delete extends Component
     {
         $this->authorize('update', $this->user);
 
-        return view('livewire.pages.users.delete');
+        return view('livewire.pages.users.destroy-user-page');
     }
 }

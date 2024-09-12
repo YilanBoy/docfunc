@@ -12,7 +12,7 @@ use Illuminate\View\View;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-class Register extends Component
+class RegisterPage extends Component
 {
     public string $name = '';
 
@@ -30,7 +30,7 @@ class Register extends Component
             'name' => ['required', 'string', 'regex:/^[A-Za-z0-9\-\_\s]+$/u', 'between:3,25', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Password::min(8)->letters()->mixedCase()->numbers()],
-            'captchaToken' => ['required', new Captcha()],
+            'captchaToken' => ['required', new Captcha],
         ];
     }
 
@@ -59,6 +59,6 @@ class Register extends Component
     #[Title('註冊')]
     public function render(): View
     {
-        return view('livewire.pages.auth.register');
+        return view('livewire.pages.auth.register-page');
     }
 }

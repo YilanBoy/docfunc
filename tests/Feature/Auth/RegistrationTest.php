@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Pages\Auth\Register;
+use App\Livewire\Pages\Auth\RegisterPage;
 use App\Livewire\Shared\Header;
 use App\Models\Setting;
 use App\Models\User;
@@ -26,7 +26,7 @@ test('registration screen can be rendered', function () {
 });
 
 test('guest can register', function () {
-    livewire(Register::class)
+    livewire(RegisterPage::class)
         ->set('name', 'Test User')
         ->set('email', 'test@example.com')
         ->set('password', 'Password101')
@@ -44,7 +44,7 @@ test('guest can register', function () {
 });
 
 test('name is required', function () {
-    livewire(Register::class)
+    livewire(RegisterPage::class)
         ->set('name', '')
         ->set('email', 'test@example.com')
         ->set('password', 'Password101')
@@ -60,7 +60,7 @@ test('name must be unique', function () {
         'name' => 'Test User',
     ]);
 
-    livewire(Register::class)
+    livewire(RegisterPage::class)
         ->set('name', $user->name)
         ->set('email', 'test@example.com')
         ->set('password', 'Password101')
@@ -71,7 +71,7 @@ test('name must be unique', function () {
 });
 
 test('the number of characters in the name must be between 3 and 25.', function (string $name) {
-    livewire(Register::class)
+    livewire(RegisterPage::class)
         ->set('name', $name)
         ->set('email', 'test@example.com')
         ->set('password', 'Password101')
@@ -86,7 +86,7 @@ test('the number of characters in the name must be between 3 and 25.', function 
 
 // name must be alphanumeric, '-' and '_'
 test('name must be alphanumeric, \'-\' and \'_\'', function (string $name) {
-    livewire(Register::class)
+    livewire(RegisterPage::class)
         ->set('name', $name)
         ->set('email', 'test@example.com')
         ->set('password', 'Password101')
@@ -105,7 +105,7 @@ test('name must be alphanumeric, \'-\' and \'_\'', function (string $name) {
 
 // name input will be trimmed
 test('name input will be trimmed', function () {
-    livewire(Register::class)
+    livewire(RegisterPage::class)
         ->set('name', ' Test User ')
         ->set('email', 'test@example.com')
         ->set('password', 'Password101')
@@ -119,7 +119,7 @@ test('name input will be trimmed', function () {
 });
 
 test('email is required', function () {
-    livewire(Register::class)
+    livewire(RegisterPage::class)
         ->set('name', 'Test User')
         ->set('email', '')
         ->set('password', 'Password101')
@@ -130,7 +130,7 @@ test('email is required', function () {
 });
 
 test('email must be valid', function () {
-    livewire(Register::class)
+    livewire(RegisterPage::class)
         ->set('name', 'Test User')
         ->set('email', 'wrongEmail')
         ->set('password', 'Password101')
@@ -146,7 +146,7 @@ test('email must be unique', function () {
         'email' => 'test@example.com',
     ]);
 
-    livewire(Register::class)
+    livewire(RegisterPage::class)
         ->set('name', 'Test User 2')
         ->set('email', $user->email)
         ->set('password', 'Password101')
@@ -157,7 +157,7 @@ test('email must be unique', function () {
 });
 
 test('password is required', function () {
-    livewire(Register::class)
+    livewire(RegisterPage::class)
         ->set('name', 'Test User')
         ->set('email', 'test@example.com')
         ->set('password', '')
@@ -168,7 +168,7 @@ test('password is required', function () {
 });
 
 test('password must be confirmed', function () {
-    livewire(Register::class)
+    livewire(RegisterPage::class)
         ->set('name', 'Allen')
         ->set('email', 'test@example.com')
         ->set('password', 'Password101')
@@ -179,7 +179,7 @@ test('password must be confirmed', function () {
 });
 
 test('password must be at least 8 characters, mixed case, numbers and letters', function (string $password) {
-    livewire(Register::class)
+    livewire(RegisterPage::class)
         ->set('name', 'Allen')
         ->set('email', 'test@example.com')
         ->set('password', $password)

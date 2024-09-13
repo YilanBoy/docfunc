@@ -21,7 +21,7 @@ class SideMenu extends Component
     {
         $this->authorize('destroy', $post);
 
-        $post->delete();
+        Post::withoutTimestamps(fn () => $post->delete());
 
         $this->dispatch('info-badge', status: 'success', message: '成功刪除文章！');
 

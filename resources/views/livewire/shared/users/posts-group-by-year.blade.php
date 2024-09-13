@@ -54,7 +54,7 @@
                 title="公開文章"
                 wire:loading.attr="disabled"
                 wire:confirm="你確定要將該文章設為公開？"
-                wire:click="postPrivateToggle({{ $post->id }})"
+                wire:click="privateStatusToggle({{ $post->id }})"
               >
                 <x-icon.lock class="w-5" />
               </button>
@@ -65,7 +65,7 @@
                 title="關閉文章"
                 wire:loading.attr="disabled"
                 wire:confirm="你確定要將該文章設為不公開？"
-                wire:click="postPrivateToggle({{ $post->id }})"
+                wire:click="privateStatusToggle({{ $post->id }})"
               >
 
                 <x-icon.unlock class="w-5" />
@@ -83,14 +83,14 @@
               <x-icon.pencil-square class="w-5" />
             </a>
 
-            {{-- delete --}}
+            {{-- destroy --}}
             <button
               class="text-red-400 duration-200 ease-out hover:text-red-700 dark:hover:text-red-200"
               type="button"
               title="刪除文章"
               wire:loading.attr="disabled"
               wire:confirm="你確定要刪除文章嗎？（7 天之內可以還原）"
-              wire:click.stop="deletePost({{ $post->id }})"
+              wire:click.stop="destroy({{ $post->id }})"
             >
               <x-icon.x class="w-5" />
             </button>

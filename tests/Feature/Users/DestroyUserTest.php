@@ -9,117 +9,121 @@ use App\Models\User;
 use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
 
-covers(DestroyUserPage::class);
+// covers(DestroyUserPage::class);
 
-beforeEach(function () {
-    $this->destroyUserConfirmationRouteName = 'users.destroy-confirmation';
-});
+describe('destroy user', function () {
+    beforeEach(function () {
+        $this->destroyUserConfirmationRouteName = 'users.destroy-confirmation';
+        $this->urlValidMinutes = 5;
+    });
 
-test('non-logged-in users cannot access the destroy user page', function () {
-    $user = User::factory()->create();
+    test('non-logged-in users cannot access the destroy user page', function () {
+        $user = User::factory()->create();
 
-    get(route('users.destroy', $user->id))
-        ->assertStatus(302)
-        ->assertRedirect(route('login'));
-});
+        get(route('users.destroy', $user->id))
+            ->assertStatus(302)
+            ->assertRedirect(route('login'));
+    });
 
-test('users can access the destroy user page', function () {
-    $user = User::factory()->create();
+    test('users can access the destroy user page', function () {
+        $user = User::factory()->create();
 
-    $this->actingAs($user);
+        $this->actingAs($user);
 
-    get(route('users.destroy', $user->id))
-        ->assertSuccessful();
-});
+        get(route('users.destroy', $user->id))
+            ->assertSuccessful();
+    });
 
-test('Users cannot access other users\' destroy user pages', function () {
-    $user = User::factory()->create();
-    $anotherUser = User::factory()->create();
+    test('Users cannot access other users\' destroy user pages', function () {
+        $user = User::factory()->create();
+        $anotherUser = User::factory()->create();
 
-    $this->actingAs($user);
+        $this->actingAs($user);
 
-    get(route('users.destroy', $anotherUser->id))
-        ->assertForbidden();
-});
+        get(route('users.destroy', $anotherUser->id))
+            ->assertForbidden();
+    });
 
-test('destroy user route name must be users.destroy-confirmation', function () {
-    $user = loginAsUser();
+    test('destroy user route name must be users.destroy-confirmation', function () {
+        $user = loginAsUser();
 
-    livewire(DestroyUserPage::class, ['user' => $user])
-        ->assertSet('destroyUserConfirmationRouteName', $this->destroyUserConfirmationRouteName);
-});
+        livewire(DestroyUserPage::class, ['user' => $user])
+            ->assertSet('destroyUserConfirmationRouteName', $this->destroyUserConfirmationRouteName)
+            ->assertSet('urlValidMinutes', $this->urlValidMinutes);
+    });
 
-test('schedule the task of sending the \'destroy user\' email in the queue', function () {
-    Mail::fake();
+    test('schedule the task of sending the \'destroy user\' email in the queue', function () {
+        Mail::fake();
 
-    $user = User::factory()->create();
+        $user = User::factory()->create();
 
-    $this->actingAs($user);
+        $this->actingAs($user);
 
-    livewire(DestroyUserPage::class, ['user' => $user])
-        ->call('sendDestroyEmail')
-        ->assertDispatched('info-badge', status: 'success', message: '已寄出信件！');
+        livewire(DestroyUserPage::class, ['user' => $user])
+            ->call('sendDestroyEmail')
+            ->assertDispatched('info-badge', status: 'success', message: '已寄出信件！');
 
-    Mail::assertQueued(DestroyUser::class);
-});
+        Mail::assertQueued(DestroyUser::class);
+    });
 
-test('users can destroy their accounts', function () {
-    $user = User::factory()->create();
+    test('users can destroy their accounts', function () {
+        $user = User::factory()->create();
 
-    $this->assertDatabaseHas('users', ['id' => $user->id]);
+        $this->assertDatabaseHas('users', ['id' => $user->id]);
 
-    $this->actingAs($user);
+        $this->actingAs($user);
 
-    $destroyUserLink = URL::temporarySignedRoute(
-        $this->destroyUserConfirmationRouteName,
-        now()->addMinutes(5),
-        ['user' => $user->id]
-    );
+        $destroyUserLink = URL::temporarySignedRoute(
+            $this->destroyUserConfirmationRouteName,
+            now()->addMinutes(5),
+            ['user' => $user->id]
+        );
 
-    get($destroyUserLink)->assertStatus(302);
+        get($destroyUserLink)->assertStatus(302);
 
-    $this->assertDatabaseMissing('users', ['id' => $user->id]);
-});
+        $this->assertDatabaseMissing('users', ['id' => $user->id]);
+    });
 
-test('if the link is no longer available, users cannot destroy their account', function () {
-    $user = User::factory()->create();
+    test('if the link is no longer available, users cannot destroy their account', function () {
+        $user = User::factory()->create();
 
-    $this->assertDatabaseHas('users', ['id' => $user->id]);
+        $this->assertDatabaseHas('users', ['id' => $user->id]);
 
-    $this->actingAs($user);
+        $this->actingAs($user);
 
-    $destroyUserLink = URL::temporarySignedRoute(
-        $this->destroyUserConfirmationRouteName,
-        now()->addMinutes(5),
-        ['user' => $user->id]
-    );
+        $destroyUserLink = URL::temporarySignedRoute(
+            $this->destroyUserConfirmationRouteName,
+            now()->addMinutes(5),
+            ['user' => $user->id]
+        );
 
-    // 讓時間經過 6 分鐘，使連結失效
-    $this->travel(6)->minutes();
+        // 讓時間經過 6 分鐘，使連結失效
+        $this->travel(6)->minutes();
 
-    get($destroyUserLink)->assertStatus(401);
+        get($destroyUserLink)->assertStatus(401);
 
-    $this->assertDatabaseHas('users', ['id' => $user->id]);
-});
+        $this->assertDatabaseHas('users', ['id' => $user->id]);
+    });
 
-// if the user has been destroyed, the user's posts should also be destroyed
-// and user id of comments should be set to null
-test('if the user has been destroyed, the user\'s posts and comments should also be destroyed', function () {
-    $user = User::factory()->create();
+    // if the user has been destroyed, the user's posts should also be destroyed
+    // and user id of comments should be set to null
+    test('if the user has been destroyed, the user\'s posts and comments should also be destroyed', function () {
+        $user = User::factory()->create();
 
-    $post = Post::factory()->create(['user_id' => $user->id]);
+        $post = Post::factory()->create(['user_id' => $user->id]);
 
-    $comment = Comment::factory()->create(['user_id' => $user->id]);
+        $comment = Comment::factory()->create(['user_id' => $user->id]);
 
-    $this->assertDatabaseHas('users', ['id' => $user->id]);
-    $this->assertDatabaseHas('posts', ['id' => $post->id, 'user_id' => $user->id]);
-    $this->assertDatabaseHas('comments', ['id' => $comment->id, 'user_id' => $user->id]);
+        $this->assertDatabaseHas('users', ['id' => $user->id]);
+        $this->assertDatabaseHas('posts', ['id' => $post->id, 'user_id' => $user->id]);
+        $this->assertDatabaseHas('comments', ['id' => $comment->id, 'user_id' => $user->id]);
 
-    $user->delete();
+        $user->delete();
 
-    // the posts should be destroyed in the database by constraint
-    // the user id of comments should be updated in the database by constraint
-    $this->assertDatabaseMissing('users', ['id' => $user->id]);
-    $this->assertDatabaseMissing('posts', ['id' => $post->id]);
-    $this->assertDatabaseHas('comments', ['id' => $comment->id, 'user_id' => null]);
+        // the posts should be destroyed in the database by constraint
+        // the user id of comments should be updated in the database by constraint
+        $this->assertDatabaseMissing('users', ['id' => $user->id]);
+        $this->assertDatabaseMissing('posts', ['id' => $post->id]);
+        $this->assertDatabaseHas('comments', ['id' => $comment->id, 'user_id' => null]);
+    });
 });

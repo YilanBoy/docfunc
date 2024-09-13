@@ -21,7 +21,7 @@ class PostsGroupByYear extends Component
 
     public string $year;
 
-    public function postPrivateToggle(int $postId): void
+    public function privateStatusToggle(int $postId): void
     {
         $post = Post::withTrashed()->find($postId);
 
@@ -53,7 +53,7 @@ class PostsGroupByYear extends Component
         $this->dispatch('info-badge', status: 'success', message: '文章已恢復');
     }
 
-    public function deletePost(Post $post): void
+    public function destroy(Post $post): void
     {
         $this->authorize('destroy', $post);
 

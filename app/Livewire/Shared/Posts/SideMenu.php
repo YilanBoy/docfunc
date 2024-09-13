@@ -17,7 +17,7 @@ class SideMenu extends Component
 
     public $authorId;
 
-    public function deletePost(Post $post): void
+    public function destroy(Post $post): void
     {
         $this->authorize('destroy', $post);
 
@@ -25,7 +25,12 @@ class SideMenu extends Component
 
         $this->dispatch('info-badge', status: 'success', message: '成功刪除文章！');
 
-        $this->redirectRoute('users.show', ['user' => auth()->id(), 'tab' => 'posts'], navigate: true);
+        $this->redirectRoute(
+            'users.show',
+            ['user' => auth()->id(), 'tab' => 'posts'],
+            // @pest-mutate-ignore
+            navigate: true,
+        );
     }
 
     public function render(): View

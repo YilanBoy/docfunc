@@ -67,7 +67,7 @@
       type="button"
       title="刪除文章"
       wire:confirm="你確定要刪除文章嗎？（7 天之內可以還原）"
-      wire:click="deletePost({{ $postId }})"
+      wire:click="destroy({{ $postId }})"
     >
       <x-icon.trash class="w-6 text-2xl transition duration-150 ease-in group-hover:rotate-12 group-hover:scale-125" />
     </button>

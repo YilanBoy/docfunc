@@ -21,6 +21,9 @@ class DestroyUserPage extends Component
     #[Locked]
     public string $destroyUserConfirmationRouteName = 'users.destroy-confirmation';
 
+    #[Locked]
+    public int $urlValidMinutes = 5;
+
     public function mount(User $user): void
     {
         $this->user = $user;
@@ -33,7 +36,7 @@ class DestroyUserPage extends Component
         // 生成一次性連結，並設定 5 分鐘後失效
         $destroyUserLink = URL::temporarySignedRoute(
             $this->destroyUserConfirmationRouteName,
-            now()->addMinutes(5),
+            now()->addMinutes($this->urlValidMinutes),
             ['user' => $this->user->id]
         );
 

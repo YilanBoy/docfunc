@@ -23,7 +23,13 @@ class MobileMenu extends Component
 
         $this->dispatch('info-badge', status: 'success', message: '成功刪除文章！');
 
-        $this->redirect(route('users.show', ['user' => auth()->id(), 'tab' => 'posts']));
+        $this->redirect(
+            route('users.show', [
+                'user' => auth()->id(),
+                'tab' => 'posts',
+                'current-posts-year' => $post->created_at->format('Y'),
+            ])
+        );
     }
 
     public function render(): View

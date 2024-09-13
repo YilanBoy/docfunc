@@ -24,7 +24,11 @@ describe('destroy post', function () {
         ])
             ->call('destroy', $post->id)
             ->assertDispatched('info-badge', status: 'success', message: '成功刪除文章！')
-            ->assertRedirect(route('users.show', ['user' => $post->user_id, 'tab' => 'posts']));
+            ->assertRedirect(route('users.show', [
+                'user' => $post->user_id,
+                'tab' => 'posts',
+                'current-posts-year' => $post->created_at->format('Y'),
+            ]));
 
         $this->assertSoftDeleted('posts', ['id' => $post->id]);
     });
@@ -68,7 +72,11 @@ describe('destroy post', function () {
         livewire(MobileMenu::class, ['postId' => $post->id])
             ->call('destroy', $post->id)
             ->assertDispatched('info-badge', status: 'success', message: '成功刪除文章！')
-            ->assertRedirect(route('users.show', ['user' => $post->user_id, 'tab' => 'posts']));
+            ->assertRedirect(route('users.show', [
+                'user' => $post->user_id,
+                'tab' => 'posts',
+                'current-posts-year' => $post->created_at->format('Y'),
+            ]));
 
         $this->assertSoftDeleted('posts', ['id' => $post->id]);
     });

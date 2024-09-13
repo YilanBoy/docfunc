@@ -1,11 +1,7 @@
-@php
-  $latestYear = array_key_first($this->postsGroupByYear);
-@endphp
-
 @script
   <script>
     Alpine.data('userPosts', () => ({
-      currentYear: @js($latestYear),
+      currentYear: @entangle('currentPostsYear').live,
       dropdownIsOpen: false,
       toggleDropdown() {
         this.dropdownIsOpen = !this.dropdownIsOpen;
@@ -17,11 +13,11 @@
         this.dropdownIsOpen = false;
       },
       switchPostsByYear() {
-        this.currentYear = Number(this.$el.getAttribute('data-year'));
+        this.currentYear = this.$el.getAttribute('data-year');
         this.dropdownIsOpen = false;
       },
       showPostsByYear() {
-        return this.currentYear === Number(this.$el.getAttribute('data-year'));
+        return this.currentYear === this.$el.getAttribute('data-year');
       }
     }));
   </script>

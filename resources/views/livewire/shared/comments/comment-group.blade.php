@@ -12,7 +12,7 @@
       :is-edited="$comment->created_at->ne($comment->updated_at)"
       {{-- when the parent component is updated, the child component is updated together --}}
       {{-- reference: https://github.com/livewire/livewire/discussions/1895 --}}
-      :wire:key="'comment-'.$comment->id"
+      :key="'comment-' . $comment->id"
     />
   @endforeach
 </div>

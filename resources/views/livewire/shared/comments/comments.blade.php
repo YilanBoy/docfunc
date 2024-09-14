@@ -61,7 +61,7 @@
   <livewire:shared.comments.comment-group
     :$postId
     :$postAuthorId
-    :wire:key="'group-new'"
+    :key="'group-new'"
   />
 
   @foreach ($IdsByFirstId as $groupId => $ids)
@@ -70,7 +70,7 @@
       :$postAuthorId
       :$ids
       :$groupId
-      :wire:key="'group-'.$groupId"
+      :key="'group-' . $groupId"
     />
   @endforeach
 

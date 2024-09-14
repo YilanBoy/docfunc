@@ -46,7 +46,7 @@ class PostsGroupByYear extends Component
 
         $this->authorize('update', $post);
 
-        Post::withoutTimestamps(fn () => $post->restore());
+        $post->withoutTimestamps(fn () => $post->restore());
 
         $this->refreshPostsByYear();
 
@@ -57,7 +57,7 @@ class PostsGroupByYear extends Component
     {
         $this->authorize('destroy', $post);
 
-        Post::withoutTimestamps(fn () => $post->delete());
+        $post->withoutTimestamps(fn () => $post->delete());
 
         $this->refreshPostsByYear();
 

@@ -19,7 +19,7 @@ class MobileMenu extends Component
     {
         $this->authorize('destroy', $post);
 
-        Post::withoutTimestamps(fn () => $post->delete());
+        $post->withoutTimestamps(fn () => $post->delete());
 
         $this->dispatch('info-badge', status: 'success', message: '成功刪除文章！');
 

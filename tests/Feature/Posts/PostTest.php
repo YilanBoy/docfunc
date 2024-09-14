@@ -37,7 +37,7 @@ describe('home page', function () {
             'slug' => fake()->word(),
         ]);
 
-        get(route('posts.show', ['post' => $post->id]))
+        get(route('posts.show', ['postId' => $post->id]))
             ->assertRedirect();
     });
 

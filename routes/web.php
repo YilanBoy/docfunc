@@ -55,7 +55,7 @@ Route::prefix('posts')->group(function () {
     });
 
     // {slug?} 當中的問號代表參數為選擇性
-    Route::get('/{post}/{slug?}', ShowPostPage::class)->name('posts.show');
+    Route::get('/{postId}/{slug?}', ShowPostPage::class)->name('posts.show');
 });
 
 // 文章分類

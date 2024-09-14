@@ -11,25 +11,33 @@ class ShowPostPage extends Component
 {
     use AuthorizesRequests;
 
-    public Post $post;
+    /**
+     * @var int get the post id from url path
+     *
+     * why not using implicit model binding?
+     *
+     * user can delete post in side menu, but there is a problem if you use implicit binding.
+     * although the page will redirect after deleting the post,
+     * but livewire will still try to hydrate the component before jumping.
+     * at this time, post model 404 not found errors will occasionally occur.
+     */
+    public int $postId;
 
-    public function mount(Post $post): void
+    public function render(): View
     {
+        $post = Post::findOrFail($this->postId);
+
         // private post, only the author can see
         if ($post->is_private) {
             $this->authorize('update', $post)->asNotFound();
         }
 
-        $this->post = $post;
-    }
-
-    public function render(): View
-    {
         // URL 修正，使用帶 slug 的網址
-        if ($this->post->slug && $this->post->slug !== request()->slug) {
-            redirect()->to($this->post->link_with_slug);
+        if ($post->slug && $post->slug !== request()->slug) {
+            redirect()->to($post->link_with_slug);
         }
 
-        return view('livewire.pages.posts.show-post-page')->title($this->post->title);
+        return view('livewire.pages.posts.show-post-page', compact('post'))
+            ->title($post->title);
     }
 }

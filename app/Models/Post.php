@@ -95,7 +95,7 @@ class Post extends Model implements Feedable
     {
         return new Attribute(
             get: fn ($value) => route('posts.show', [
-                'post' => $this->id,
+                'postId' => $this->id,
                 'slug' => $this->slug,
             ])
         );

@@ -1,6 +1,7 @@
 @script
   <script>
     Alpine.data('userComments', () => ({
+      observers: [],
       init() {
         hljs.highlightAll();
 
@@ -19,12 +20,12 @@
           characterData: false
         });
 
-        let disconnectUserCommentsObserver = () => {
-          userCommentsObserver.disconnect();
-          document.removeEventListener('livewire:navigating', disconnectUserCommentsObserver);
-        };
-
-        document.addEventListener('livewire:navigating', disconnectUserCommentsObserver);
+        this.observers.push(userCommentsObserver)
+      },
+      destroy() {
+        this.observers.forEach((observer) => {
+          observer.disconnect();
+        })
       }
     }));
   </script>

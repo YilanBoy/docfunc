@@ -1,6 +1,7 @@
 @script
   <script>
     Alpine.data('createCommentModal', () => ({
+      observers: [],
       modalIsOpen: false,
       submitIsEnabled: false,
       body: @entangle('body'),
@@ -50,12 +51,12 @@
           characterData: false
         });
 
-        let disconnectPreviewObserver = () => {
-          previewObserver.disconnect();
-          document.removeEventListener('livewire:navigating', disconnectPreviewObserver);
-        };
-
-        document.addEventListener('livewire:navigating', disconnectPreviewObserver);
+        this.observers.push(previewObserver);
+      },
+      destroy() {
+        this.observers.forEach((observer) => {
+          observer.disconnect();
+        })
       }
     }));
   </script>

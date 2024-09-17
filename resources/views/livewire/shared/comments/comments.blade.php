@@ -1,29 +1,32 @@
 @script
   <script>
     Alpine.data('comments', () => ({
+      listeners: [],
+      observers: [],
       currentScrollY: 0,
       init() {
-        Livewire.hook('commit.prepare', ({
-          component
-        }) => {
-          if (component.name === 'shared.comments.comments') {
-            this.currentScrollY = window.scrollY;
-          }
-        });
-
-        Livewire.hook('morph.updated', ({
-          component
-        }) => {
-          if (component.name === 'shared.comments.comments') {
-            // make sure scroll position will update after dom updated
-            queueMicrotask(() => {
-              window.scrollTo({
-                top: this.currentScrollY,
-                behavior: 'instant'
+        this.listeners.push(
+          Livewire.hook('commit.prepare', ({
+            component
+          }) => {
+            if (component.name === 'shared.comments.comments') {
+              this.currentScrollY = window.scrollY;
+            }
+          }),
+          Livewire.hook('morph.updated', ({
+            component
+          }) => {
+            if (component.name === 'shared.comments.comments') {
+              // make sure scroll position will update after dom updated
+              queueMicrotask(() => {
+                window.scrollTo({
+                  top: this.currentScrollY,
+                  behavior: 'instant'
+                });
               });
-            });
-          }
-        });
+            }
+          })
+        );
 
         let commentsObserver = new MutationObserver(() => {
           this.$refs.comments
@@ -39,12 +42,16 @@
           attributes: true,
         });
 
-        let disconnectCommentsObserver = () => {
-          commentsObserver.disconnect();
-          document.removeEventListener('livewire:navigating', disconnectCommentsObserver);
-        };
+        this.observers.push(commentsObserver);
+      },
+      destroy() {
+        this.listeners.forEach((listener) => {
+          listener();
+        });
 
-        document.addEventListener('livewire:navigating', disconnectCommentsObserver);
+        this.observers.forEach((observer) => {
+          observer.disconnect();
+        })
       }
     }));
   </script>

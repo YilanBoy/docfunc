@@ -8,7 +8,7 @@ import terraform from './highlight-terraform';
 
 declare global {
     interface Window {
-        hljs: any;
+        hljs: typeof hljs;
     }
 }
 

@@ -135,7 +135,7 @@
               {{-- post thumbnail --}}
               @if (!empty($post->preview_url))
                 <div
-                  class="-mx-5 mt-4"
+                  class="-mx-4 mt-4"
                   id="post-thumbnail"
                 >
                   <img

@@ -5,6 +5,7 @@ namespace App\Livewire\Pages\Users;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -12,6 +13,7 @@ class EditUserPage extends Component
 {
     use AuthorizesRequests;
 
+    #[Locked]
     public User $user;
 
     public string $name;

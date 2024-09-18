@@ -17,11 +17,6 @@ class ShowUserPage extends Component
     #[Url(as: 'tab')]
     public string $tabSelected = UserInfoTab::INFORMATION->value;
 
-    public function mount(User $user): void
-    {
-        $this->user = $user;
-    }
-
     public function render(): View
     {
         return view('livewire.pages.users.show-user-page')

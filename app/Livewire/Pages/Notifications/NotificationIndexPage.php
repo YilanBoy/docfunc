@@ -18,6 +18,9 @@ class NotificationIndexPage extends Component
 
         auth()->user()->unreadNotifications->markAsRead();
 
-        return view('livewire.pages.notifications.notification-index-page', compact('notifications'));
+        return view(
+            'livewire.pages.notifications.notification-index-page',
+            compact('notifications'),
+        );
     }
 }

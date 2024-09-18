@@ -133,6 +133,17 @@ class PostForm extends Form
         }
     }
 
+    public function setPost(Post $post): void
+    {
+        $this->user_id = $post->user_id;
+        $this->category_id = $post->category_id;
+        $this->is_private = $post->is_private;
+        $this->preview_url = $post->preview_url;
+        $this->title = $post->title;
+        $this->body = $post->body;
+        $this->tags = $post->tags_json;
+    }
+
     public function createPost(): Post
     {
         $this->setSlug();

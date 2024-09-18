@@ -16,6 +16,7 @@ class DestroyUserPage extends Component
 {
     use AuthorizesRequests;
 
+    #[Locked]
     public User $user;
 
     #[Locked]
@@ -23,11 +24,6 @@ class DestroyUserPage extends Component
 
     #[Locked]
     public int $urlValidMinutes = 5;
-
-    public function mount(User $user): void
-    {
-        $this->user = $user;
-    }
 
     public function sendDestroyEmail(): void
     {

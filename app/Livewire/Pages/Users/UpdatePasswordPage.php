@@ -7,6 +7,7 @@ use App\Rules\MatchOldPassword;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -14,6 +15,7 @@ class UpdatePasswordPage extends Component
 {
     use AuthorizesRequests;
 
+    #[Locked]
     public User $user;
 
     public string $current_password = '';
@@ -39,11 +41,6 @@ class UpdatePasswordPage extends Component
             'new_password.required' => '請輸入新密碼',
             'new_password.confirmed' => '新密碼與確認新密碼不符合',
         ];
-    }
-
-    public function mount(User $user): void
-    {
-        $this->user = $user;
     }
 
     public function update(): void

@@ -81,19 +81,6 @@
                   <span class="ml-2">{{ $post->category->name }}</span>
                 </div>
 
-                <div>&bull;</div>
-
-                {{-- author --}}
-                <a
-                  class="flex items-center hover:text-neutral-500 dark:hover:text-neutral-300"
-                  href="{{ route('users.show', ['userId' => $post->user_id]) }}"
-                  title="{{ $post->user->name }}"
-                  wire:navigate
-                >
-                  <x-icon.person class="w-4" />
-                  <span class="ml-2">{{ $post->user->name }}</span>
-                </a>
-
                 <div class="hidden md:block">&bull;</div>
 
                 {{-- post created time --}}

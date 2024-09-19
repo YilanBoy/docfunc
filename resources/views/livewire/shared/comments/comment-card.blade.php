@@ -4,7 +4,7 @@
     <div class="flex items-center space-x-4 text-base">
       @if ($userId !== 0)
         <a
-          href="{{ route('users.show', ['user' => $userId]) }}"
+          href="{{ route('users.show', ['userId' => $userId]) }}"
           wire:navigate
         >
           <img

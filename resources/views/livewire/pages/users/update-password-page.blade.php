@@ -22,7 +22,7 @@
 
         <form
           class="w-full"
-          wire:submit="update"
+          wire:submit="update({{ $userId }})"
         >
           {{-- 舊密碼 --}}
           <div>

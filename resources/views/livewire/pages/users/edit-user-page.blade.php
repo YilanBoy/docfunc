@@ -44,7 +44,7 @@
 
         <form
           class="w-full"
-          wire:submit="update"
+          wire:submit="update({{ $userId }})"
         >
           {{-- 信箱 --}}
           <div>

@@ -86,7 +86,7 @@
                 {{-- author --}}
                 <a
                   class="flex items-center hover:text-neutral-500 dark:hover:text-neutral-300"
-                  href="{{ route('users.show', ['user' => $post->user_id]) }}"
+                  href="{{ route('users.show', ['userId' => $post->user_id]) }}"
                   title="{{ $post->user->name }}"
                   wire:navigate
                 >
@@ -125,7 +125,7 @@
                   <x-icon.tags class="mr-1 w-4 text-green-300 dark:text-lividus-700" />
 
                   @foreach ($post->tags as $tag)
-                    <x-tag :href="route('tags.show', ['tag' => $tag->id])">
+                    <x-tag :href="route('tags.show', ['tagId' => $tag->id])">
                       {{ $tag->name }}
                     </x-tag>
                   @endforeach
@@ -174,7 +174,7 @@
                 <div class="uppercase text-gray-400">written by</div>
                 <a
                   class="gradient-underline-grow inline-block text-2xl dark:text-gray-50"
-                  href="{{ route('users.show', ['user' => $post->user->id]) }}"
+                  href="{{ route('users.show', ['userId' => $post->user->id]) }}"
                   wire:navigate
                 >
                   {{ $post->user->name }}

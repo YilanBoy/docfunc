@@ -4,6 +4,10 @@ arch()->preset()->laravel();
 
 arch()->preset()->security();
 
-arch('app')
+arch()
+    ->expect('App\Enums')
+    ->toBeEnums();
+
+arch('livewire full-page component must have a  \'Page\' suffix')
     ->expect('App\Livewire\Pages')
     ->toHaveSuffix('Page');

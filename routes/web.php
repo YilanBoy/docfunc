@@ -32,13 +32,13 @@ require __DIR__.'/auth.php';
 
 // 會員相關頁面
 Route::middleware('auth')->prefix('users')->group(function () {
-    Route::get('/{user}', ShowUserPage::class)
+    Route::get('/{userId}', ShowUserPage::class)
         ->name('users.show')
         ->withoutMiddleware('auth');
 
-    Route::get('/{user}/edit', EditUserPage::class)->name('users.edit');
-    Route::get('/{user}/change-password', UpdatePasswordPage::class)->name('users.updatePassword');
-    Route::get('/{user}/destroy', DestroyUserPage::class)->name('users.destroy');
+    Route::get('/{userId}/edit', EditUserPage::class)->name('users.edit');
+    Route::get('/{userId}/change-password', UpdatePasswordPage::class)->name('users.updatePassword');
+    Route::get('/{userId}/destroy', DestroyUserPage::class)->name('users.destroy');
 
     Route::get('/{user}/destroy-confirmation', DestroyUserController::class)
         ->name('users.destroy-confirmation')
@@ -51,7 +51,7 @@ Route::prefix('posts')->group(function () {
 
     Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/create', CreatePostPage::class)->name('posts.create');
-        Route::get('/{post}/edit', EditPostPage::class)->name('posts.edit');
+        Route::get('/{postId}/edit', EditPostPage::class)->name('posts.edit');
     });
 
     // {slug?} 當中的問號代表參數為選擇性
@@ -59,10 +59,10 @@ Route::prefix('posts')->group(function () {
 });
 
 // 文章分類
-Route::get('categories/{category}/{name?}', ShowCategoryPage::class)->name('categories.show');
+Route::get('categories/{categoryId}/{name?}', ShowCategoryPage::class)->name('categories.show');
 
 // 文章標籤
-Route::get('tags/{tag}', ShowTagPage::class)->name('tags.show');
+Route::get('tags/{tagId}', ShowTagPage::class)->name('tags.show');
 
 // 通知列表
 Route::get('notifications', NotificationIndexPage::class)->name('notifications.index');

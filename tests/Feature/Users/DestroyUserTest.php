@@ -20,7 +20,7 @@ describe('destroy user', function () {
     test('non-logged-in users cannot access the destroy user page', function () {
         $user = User::factory()->create();
 
-        get(route('users.destroy', $user->id))
+        get(route('users.destroy', ['userId' => $user->id]))
             ->assertStatus(302)
             ->assertRedirect(route('login'));
     });
@@ -30,7 +30,7 @@ describe('destroy user', function () {
 
         $this->actingAs($user);
 
-        get(route('users.destroy', $user->id))
+        get(route('users.destroy', ['userId' => $user->id]))
             ->assertSuccessful();
     });
 
@@ -40,14 +40,14 @@ describe('destroy user', function () {
 
         $this->actingAs($user);
 
-        get(route('users.destroy', $anotherUser->id))
+        get(route('users.destroy', ['userId' => $anotherUser->id]))
             ->assertForbidden();
     });
 
     test('destroy user route name must be users.destroy-confirmation', function () {
         $user = loginAsUser();
 
-        livewire(DestroyUserPage::class, ['user' => $user])
+        livewire(DestroyUserPage::class, ['userId' => $user->id])
             ->assertSet('destroyUserConfirmationRouteName', $this->destroyUserConfirmationRouteName)
             ->assertSet('urlValidMinutes', $this->urlValidMinutes);
     });
@@ -59,8 +59,8 @@ describe('destroy user', function () {
 
         $this->actingAs($user);
 
-        livewire(DestroyUserPage::class, ['user' => $user])
-            ->call('sendDestroyEmail')
+        livewire(DestroyUserPage::class, ['userId' => $user->id])
+            ->call('sendDestroyEmail', user: $user)
             ->assertDispatched('info-badge', status: 'success', message: '已寄出信件！');
 
         Mail::assertQueued(DestroyUser::class);

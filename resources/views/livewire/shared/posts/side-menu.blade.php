@@ -52,7 +52,7 @@
 
     <a
       class="group flex h-14 w-14 items-center justify-center text-gray-500 dark:text-gray-400"
-      href="{{ route('posts.edit', ['post' => $postId]) }}"
+      href="{{ route('posts.edit', ['postId' => $postId]) }}"
       role="button"
       wire:navigate
     >

@@ -19,7 +19,7 @@ class EditPostPage extends Component
     use WithFileUploads;
 
     #[Locked]
-    public Post $post;
+    public int $postId;
 
     public PostForm $form;
 
@@ -27,20 +27,22 @@ class EditPostPage extends Component
 
     public function mount(): void
     {
-        $this->authorize('update', $this->post);
+        $post = Post::findOrFail($this->postId);
+
+        $this->authorize('update', $post);
 
         $this->categories = Category::all(['id', 'name']);
 
-        $this->form->setPost($this->post);
+        $this->form->setPost($post);
     }
 
-    public function update(): void
+    public function update(Post $post): void
     {
         $this->form->validatePost();
 
         $this->form->uploadPreviewImage();
 
-        $post = $this->form->updatePost($this->post);
+        $post = $this->form->updatePost($post);
 
         $this->dispatch('info-badge', status: 'success', message: '成功更新文章！');
 

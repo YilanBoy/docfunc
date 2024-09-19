@@ -14,7 +14,7 @@ class EditUserPage extends Component
     use AuthorizesRequests;
 
     #[Locked]
-    public User $user;
+    public int $userId;
 
     public string $name;
 
@@ -28,7 +28,7 @@ class EditUserPage extends Component
                 'string',
                 'regex:/^[A-Za-z0-9\-\_]+$/u',
                 'between:3,25',
-                'unique:users,name,'.auth()->id(),
+                'unique:users,name,'.$this->userId,
             ],
             'introduction' => ['max:120'],
         ];
@@ -46,21 +46,21 @@ class EditUserPage extends Component
         ];
     }
 
-    public function mount(User $user): void
+    public function mount(): void
     {
-        $this->user = $user;
+        $user = User::findOrFail($this->userId);
         $this->name = $user->name;
         $this->introduction = $user->introduction;
     }
 
-    public function update(): void
+    public function update(User $user): void
     {
-        $this->authorize('update', $this->user);
+        $this->authorize('update', $user);
 
         $this->validate();
 
         // 更新會員資料
-        $this->user->update([
+        $user->update([
             'name' => $this->name,
             'introduction' => $this->introduction,
         ]);
@@ -71,9 +71,11 @@ class EditUserPage extends Component
     #[Title('會員中心 - 編輯個人資料')]
     public function render(): View
     {
-        // 會員只能進入自己的頁面，規則寫在 UserPolicy
-        $this->authorize('update', $this->user);
+        $user = User::findOrFail($this->userId);
 
-        return view('livewire.pages.users.edit-user-page');
+        // 會員只能進入自己的頁面，規則寫在 UserPolicy
+        $this->authorize('update', $user);
+
+        return view('livewire.pages.users.edit-user-page', compact('user'));
     }
 }

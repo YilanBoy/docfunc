@@ -10,11 +10,15 @@ use Livewire\Component;
 class ShowTagPage extends Component
 {
     #[Locked]
-    public Tag $tag;
+    public int $tagId;
 
     public function render(): View
     {
-        return view('livewire.pages.tags.show-tag-page')
-            ->title($this->tag->name);
+        $tag = Tag::findOrFail($this->tagId);
+
+        return view(
+            'livewire.pages.tags.show-tag-page',
+            compact('tag')
+        )->title($tag->name);
     }
 }

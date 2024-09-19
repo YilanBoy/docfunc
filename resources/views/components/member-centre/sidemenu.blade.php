@@ -9,7 +9,7 @@
 
   <div class="flex w-full flex-col space-y-1">
     @php
-      $editUserUrl = urldecode(route('users.edit', ['user' => auth()->id()]));
+      $editUserUrl = urldecode(route('users.edit', ['userId' => auth()->id()]));
       $inEditUserPage = urldecode(request()->url()) === $editUserUrl;
     @endphp
     <a
@@ -26,7 +26,7 @@
     </a>
 
     @php
-      $changePasswordUrl = urldecode(route('users.updatePassword', ['user' => auth()->id()]));
+      $changePasswordUrl = urldecode(route('users.updatePassword', ['userId' => auth()->id()]));
       $inChangePasswordPage = urldecode(request()->url()) === $changePasswordUrl;
     @endphp
     <a
@@ -43,7 +43,7 @@
     </a>
 
     @php
-      $destroyUserUrl = urldecode(route('users.destroy', ['user' => auth()->id()]));
+      $destroyUserUrl = urldecode(route('users.destroy', ['userId' => auth()->id()]));
       $inDestroyUserPage = urldecode(request()->url()) === $destroyUserUrl;
     @endphp
     <a

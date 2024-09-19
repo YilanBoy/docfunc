@@ -17,7 +17,7 @@ class DestroyUserPage extends Component
     use AuthorizesRequests;
 
     #[Locked]
-    public User $user;
+    public int $userId;
 
     #[Locked]
     public string $destroyUserConfirmationRouteName = 'users.destroy-confirmation';
@@ -25,18 +25,18 @@ class DestroyUserPage extends Component
     #[Locked]
     public int $urlValidMinutes = 5;
 
-    public function sendDestroyEmail(): void
+    public function sendDestroyEmail(User $user): void
     {
-        $this->authorize('update', $this->user);
+        $this->authorize('update', $user);
 
         // 生成一次性連結，並設定 5 分鐘後失效
         $destroyUserLink = URL::temporarySignedRoute(
             $this->destroyUserConfirmationRouteName,
             now()->addMinutes($this->urlValidMinutes),
-            ['user' => $this->user->id]
+            ['user' => $user->id]
         );
 
-        Mail::to($this->user)->queue(new DestroyUser($destroyUserLink));
+        Mail::to($user)->queue(new DestroyUser($destroyUserLink));
 
         $this->dispatch('info-badge', status: 'success', message: '已寄出信件！');
     }
@@ -44,7 +44,9 @@ class DestroyUserPage extends Component
     #[Title('會員中心 - 刪除帳號')]
     public function render(): View
     {
-        $this->authorize('update', $this->user);
+        $user = User::findorFail($this->userId);
+
+        $this->authorize('update', $user);
 
         return view('livewire.pages.users.destroy-user-page');
     }

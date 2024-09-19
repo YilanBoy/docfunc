@@ -7,77 +7,79 @@ use function Pest\Faker\fake;
 use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
 
-test('non-logged-in users cannot access the user edit page', function () {
-    $user = User::factory()->create();
+describe('edit user', function () {
+    test('non-logged-in users cannot access the user edit page', function () {
+        $user = User::factory()->create();
 
-    get(route('users.edit', $user->id))
-        ->assertStatus(302)
-        ->assertRedirect(route('login'));
-});
+        get(route('users.edit', ['userId' => $user->id]))
+            ->assertStatus(302)
+            ->assertRedirect(route('login'));
+    });
 
-test('users can access their own user edit page', function () {
-    $user = User::factory()->create();
+    test('users can access their own user edit page', function () {
+        $user = User::factory()->create();
 
-    $this->actingAs($user);
+        $this->actingAs($user);
 
-    get(route('users.edit', $user->id))
-        ->assertSuccessful();
-});
+        get(route('users.edit', ['userId' => $user->id]))
+            ->assertSuccessful();
+    });
 
-test('users cannot access other people\'s user edit pages', function () {
-    $user = User::factory()->create();
+    test('users cannot access other people\'s user edit pages', function () {
+        $user = User::factory()->create();
 
-    $otherUser = User::factory()->create();
+        $otherUser = User::factory()->create();
 
-    $this->actingAs($user)
-        ->get(route('users.edit', $otherUser->id))
-        ->assertStatus(403);
-});
+        $this->actingAs($user)
+            ->get(route('users.edit', ['userId' => $otherUser->id]))
+            ->assertStatus(403);
+    });
 
-test('users can update their own information', function () {
-    $user = User::factory()->create();
+    test('users can update their own information', function () {
+        $user = User::factory()->create();
 
-    $this->actingAs($user);
+        $this->actingAs($user);
 
-    livewire(EditUserPage::class, [
-        'user' => $user,
-        'name' => $user->name,
-        'introduction' => $user->introduction,
-    ])
-        ->set('name', 'New_legal_name')
-        ->set('introduction', fake()->realText(120))
-        ->call('update')
-        ->assertDispatched('info-badge', status: 'success', message: '個人資料更新成功');
-});
+        livewire(EditUserPage::class, [
+            'userId' => $user->id,
+            'name' => $user->name,
+            'introduction' => $user->introduction,
+        ])
+            ->set('name', 'New_legal_name')
+            ->set('introduction', fake()->realText(120))
+            ->call('update', user: $user)
+            ->assertDispatched('info-badge', status: 'success', message: '個人資料更新成功');
+    });
 
-test('if the name format is not correct, the name cannot be updated', function () {
-    $user = User::factory()->create();
+    test('if the name format is not correct, the name cannot be updated', function () {
+        $user = User::factory()->create();
 
-    $this->actingAs($user);
+        $this->actingAs($user);
 
-    livewire(EditUserPage::class, [
-        'user' => $user,
-        'name' => $user->name,
-        'introduction' => $user->introduction,
-    ])
-        ->set('name', 'Wrong Format Name')
-        ->set('introduction', fake()->realText(120))
-        ->call('update')
-        ->assertHasErrors('name');
-});
+        livewire(EditUserPage::class, [
+            'userId' => $user->id,
+            'name' => $user->name,
+            'introduction' => $user->introduction,
+        ])
+            ->set('name', 'Wrong Format Name')
+            ->set('introduction', fake()->realText(120))
+            ->call('update', user: $user)
+            ->assertHasErrors('name');
+    });
 
-test('if the number of words in the introduction exceeds the limit, the introduction cannot be updated', function () {
-    $user = User::factory()->create();
+    test('if the number of words in the introduction exceeds the limit, the introduction cannot be updated', function () {
+        $user = User::factory()->create();
 
-    $this->actingAs($user);
+        $this->actingAs($user);
 
-    livewire(EditUserPage::class, [
-        'user' => $user,
-        'name' => $user->name,
-        'introduction' => $user->introduction,
-    ])
-        ->set('name', 'New_legal_name')
-        ->set('introduction', fake()->words(500, true))
-        ->call('update')
-        ->assertHasErrors('introduction');
+        livewire(EditUserPage::class, [
+            'userId' => $user->id,
+            'name' => $user->name,
+            'introduction' => $user->introduction,
+        ])
+            ->set('name', 'New_legal_name')
+            ->set('introduction', fake()->words(500, true))
+            ->call('update', user: $user)
+            ->assertHasErrors('introduction');
+    });
 });

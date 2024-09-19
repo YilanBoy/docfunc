@@ -25,7 +25,7 @@ describe('destroy post', function () {
             ->call('destroy', $post->id)
             ->assertDispatched('info-badge', status: 'success', message: '成功刪除文章！')
             ->assertRedirect(route('users.show', [
-                'user' => $post->user_id,
+                'userId' => $post->user_id,
                 'tab' => 'posts',
                 'current-posts-year' => $post->created_at->format('Y'),
             ]));
@@ -73,7 +73,7 @@ describe('destroy post', function () {
             ->call('destroy', $post->id)
             ->assertDispatched('info-badge', status: 'success', message: '成功刪除文章！')
             ->assertRedirect(route('users.show', [
-                'user' => $post->user_id,
+                'userId' => $post->user_id,
                 'tab' => 'posts',
                 'current-posts-year' => $post->created_at->format('Y'),
             ]));

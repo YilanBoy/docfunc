@@ -22,6 +22,9 @@ class InfoCards extends Component
             $query->where('user_id', $user->id);
         }])->get();
 
-        return view('livewire.shared.users.info-cards', compact('user', 'categories'));
+        return view(
+            'livewire.shared.users.info-cards',
+            compact('user', 'categories'),
+        );
     }
 }

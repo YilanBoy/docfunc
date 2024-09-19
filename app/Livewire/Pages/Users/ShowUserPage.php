@@ -12,14 +12,16 @@ use Livewire\Component;
 class ShowUserPage extends Component
 {
     #[Locked]
-    public User $user;
+    public int $userId;
 
     #[Url(as: 'tab')]
     public string $tabSelected = UserInfoTab::INFORMATION->value;
 
     public function render(): View
     {
+        $user = User::findOrFail($this->userId);
+
         return view('livewire.pages.users.show-user-page')
-            ->title($this->user->name.' 的個人資訊');
+            ->title($user->name.' 的個人資訊');
     }
 }

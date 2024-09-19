@@ -89,7 +89,7 @@
             <livewire:dynamic-component
               :key="$userInfoTab->value . '-content'"
               :is="$userInfoTab->livewireComponentName()"
-              :user-id="$user->id"
+              :user-id="$userId"
             />
           </div>
         @endforeach

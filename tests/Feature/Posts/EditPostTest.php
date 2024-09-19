@@ -13,7 +13,7 @@ describe('edit post', function () {
     test('visitors cannot access the edit pages of other people\'s post', function () {
         $post = Post::factory()->create();
 
-        get(route('posts.edit', ['post' => $post->id]))
+        get(route('posts.edit', ['postId' => $post->id]))
             ->assertRedirect(route('login'));
     });
 
@@ -22,7 +22,7 @@ describe('edit post', function () {
 
         loginAsUser($post->user);
 
-        get(route('posts.edit', ['post' => $post->id]))
+        get(route('posts.edit', ['postId' => $post->id]))
             ->assertSuccessful();
     });
 
@@ -31,7 +31,7 @@ describe('edit post', function () {
 
         loginAsUser();
 
-        get(route('posts.edit', ['post' => $post->id]))
+        get(route('posts.edit', ['postId' => $post->id]))
             ->assertForbidden();
     });
 
@@ -50,13 +50,13 @@ describe('edit post', function () {
             ->map(fn ($item) => ['id' => $item->id, 'name' => $item->name])
             ->toJson();
 
-        livewire(EditPostPage::class, ['post' => $post])
+        livewire(EditPostPage::class, ['postId' => $post->id])
             ->set('form.title', $newTitle)
             ->set('form.category_id', $categoryId)
             ->set('form.tags', $newTagsJson)
             ->set('form.body', $newBody)
             ->set('form.is_private', $newPrivateStatus)
-            ->call('update')
+            ->call('update', post: $post)
             ->assertHasNoErrors();
 
         $post->refresh();

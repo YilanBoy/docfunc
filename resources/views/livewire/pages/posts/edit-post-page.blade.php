@@ -38,7 +38,7 @@
 
             <form
               id="edit-post"
-              wire:submit="update"
+              wire:submit="update({{ $postId }})"
             >
               <div class="grid grid-cols-2 gap-5">
                 {{-- post preview image --}}

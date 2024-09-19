@@ -58,7 +58,7 @@
   id="header"
 >
   <div
-    class="relative hidden h-20 w-full items-center justify-center bg-gray-50 transition-all duration-300 lg:flex dark:bg-gray-800"
+    class="relative hidden h-20 w-full items-center justify-center bg-gray-50 transition-all duration-300 dark:bg-gray-800 lg:flex"
     id="desktop-header-menu"
     x-data="desktopHeaderMenu"
   >
@@ -119,7 +119,7 @@
         {{-- 電腦版-未登入 --}}
         @if ($showRegisterButton)
           <a
-            class="border-lividus-600 text-lividus-600 hover:bg-lividus-600 flex h-10 items-center justify-center rounded-lg border-2 bg-transparent px-3 transition duration-150 hover:border-transparent hover:text-gray-50"
+            class="flex h-10 items-center justify-center rounded-lg border-2 border-lividus-600 bg-transparent px-3 text-lividus-600 transition duration-150 hover:border-transparent hover:bg-lividus-600 hover:text-gray-50"
             href="{{ route('register') }}"
             wire:navigate
           >
@@ -204,7 +204,7 @@
 
             <a
               class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
-              href="{{ route('users.show', ['user' => auth()->id()]) }}"
+              href="{{ route('users.show', ['userId' => auth()->id()]) }}"
               role="menuitem"
               tabindex="-1"
               wire:navigate
@@ -215,7 +215,7 @@
 
             <a
               class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
-              href="{{ route('users.edit', ['user' => auth()->id()]) }}"
+              href="{{ route('users.edit', ['userId' => auth()->id()]) }}"
               role="menuitem"
               tabindex="-1"
               wire:navigate
@@ -242,7 +242,7 @@
   </div>
 
   <div
-    class="bg-gray-50 lg:hidden dark:bg-gray-800"
+    class="bg-gray-50 dark:bg-gray-800 lg:hidden"
     id="mobile-header-menu"
     x-data="mobileHeaderMenu"
   >
@@ -283,7 +283,7 @@
             src="{{ asset('images/icon/icon.png') }}"
             alt="logo"
           >
-          <span class="ml-3 hidden font-mono text-xl font-bold md:block dark:text-gray-50">
+          <span class="ml-3 hidden font-mono text-xl font-bold dark:text-gray-50 md:block">
             {{ config('app.name') }}
           </span>
         </div>
@@ -304,7 +304,7 @@
             {{-- 手機版-未登入 --}}
             @if ($showRegisterButton)
               <a
-                class="border-lividus-400 text-lividus-400 hover:bg-lividus-400 rounded-md border-2 bg-transparent px-4 py-2 hover:border-transparent hover:text-gray-50"
+                class="rounded-md border-2 border-lividus-400 bg-transparent px-4 py-2 text-lividus-400 hover:border-transparent hover:bg-lividus-400 hover:text-gray-50"
                 href="{{ route('register') }}"
                 wire:navigate
               >
@@ -388,7 +388,7 @@
 
                 <a
                   class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
-                  href="{{ route('users.show', ['user' => auth()->id()]) }}"
+                  href="{{ route('users.show', ['userId' => auth()->id()]) }}"
                   role="menuitem"
                   tabindex="-1"
                   wire:navigate
@@ -399,7 +399,7 @@
 
                 <a
                   class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
-                  href="{{ route('users.edit', ['user' => auth()->id()]) }}"
+                  href="{{ route('users.edit', ['userId' => auth()->id()]) }}"
                   role="menuitem"
                   tabindex="-1"
                   wire:navigate

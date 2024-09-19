@@ -16,7 +16,7 @@ class UpdatePasswordPage extends Component
     use AuthorizesRequests;
 
     #[Locked]
-    public User $user;
+    public int $userId;
 
     public string $current_password = '';
 
@@ -43,14 +43,13 @@ class UpdatePasswordPage extends Component
         ];
     }
 
-    public function update(): void
+    public function update(User $user): void
     {
-        $this->authorize('update', $this->user);
+        $this->authorize('update', $user);
 
         $this->validate();
 
-        User::find(auth()->id())
-            ->update(['password' => $this->new_password]);
+        $user->update(['password' => $this->new_password]);
 
         $this->dispatch('info-badge', status: 'success', message: '密碼更新成功！');
 

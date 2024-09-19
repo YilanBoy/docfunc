@@ -43,7 +43,10 @@
   {{-- 文章列表 --}}
   @forelse($posts as $post)
     <x-card class="group relative z-0 grid cursor-pointer grid-cols-1 gap-4 overflow-hidden">
-      <div class="absolute -bottom-16 -right-3 size-56 rotate-12 text-green-200 dark:text-lividus-800">
+      {{-- category icon --}}
+      <div
+        class="absolute -bottom-16 -right-3 size-56 rotate-12 text-green-200 transition-all duration-300 group-hover:-bottom-12 group-hover:-right-1 dark:text-lividus-800"
+      >
         {!! $post->category->icon !!}
       </div>
 

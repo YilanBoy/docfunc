@@ -59,7 +59,7 @@
               type="button"
               x-on:click="tabButtonClicked($el)"
               {{-- update url query parameter in livewire --}}
-              wire:click="changeTab('{{ $userInfoTab->value }}')"
+              wire:click="changeTab('{{ $userInfoTab }}')"
               wire:key="{{ $userInfoTab->value . '-tab-button' }}"
             >
               <x-dynamic-component

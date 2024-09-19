@@ -46,8 +46,6 @@
 
   @vite('resources/css/app.css')
 
-  @vite('resources/js/app.js')
-
   {{-- Cloudflare Turnstile --}}
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
   {{-- prettier-ignore-end --}}

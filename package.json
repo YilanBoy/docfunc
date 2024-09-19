@@ -11,7 +11,6 @@
         "@types/yaireo__tagify": "^4.24.0",
         "@yaireo/tagify": "^4.27.0",
         "autoprefixer": "^10.4.19",
-        "axios": "^1.7.2",
         "ckeditor5": "^42.0.1",
         "highlight.js": "^11.10.0",
         "laravel-vite-plugin": "^1.0.5",

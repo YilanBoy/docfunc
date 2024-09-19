@@ -5,9 +5,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/app.css',
-                'resources/js/app.js',
-                // js
+                // typescript
                 'resources/ts/ckeditor/ckeditor.ts',
                 'resources/ts/sharer.ts',
                 'resources/ts/highlight.ts',
@@ -20,6 +18,7 @@ export default defineConfig({
                 'resources/ts/scroll-to-anchor.ts',
                 'resources/ts/post-outline.ts',
                 // css
+                'resources/css/app.css',
                 'node_modules/@yaireo/tagify/dist/tagify.css',
                 'resources/css/editor.css',
                 'resources/css/missing-content-style.css',

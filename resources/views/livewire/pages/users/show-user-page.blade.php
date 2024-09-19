@@ -19,7 +19,7 @@
   <script>
     // tab can only be 'information', 'posts', 'comments'
     Alpine.data('userShowTabs', () => ({
-      tabSelected: @entangle('tabSelected').live,
+      tabSelected: @js($tabSelected),
       tabButtonClicked(tabButton) {
         this.tabSelected = tabButton.id.replace('-tab-button', '');
         this.tabRepositionMarker(tabButton);
@@ -51,7 +51,6 @@
       >
         <div
           class="relative z-0 mb-6 inline-grid h-10 w-full select-none grid-cols-3 items-center justify-center rounded-lg border border-gray-100 bg-white p-1 text-gray-500 dark:border-gray-800 dark:bg-gray-700 dark:text-gray-50"
-          wire:ignore
         >
           @foreach (UserInfoTab::cases() as $userInfoTab)
             <button
@@ -59,6 +58,8 @@
               id="{{ $userInfoTab->value }}-tab-button"
               type="button"
               x-on:click="tabButtonClicked($el)"
+              {{-- update url query parameter in livewire --}}
+              wire:click="changeTab('{{ $userInfoTab->value }}')"
               wire:key="{{ $userInfoTab->value . '-tab-button' }}"
             >
               <x-dynamic-component

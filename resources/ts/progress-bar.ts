@@ -4,7 +4,7 @@ declare global {
     }
 }
 
-function animateProgressBar(
+function progressBarAnimation(
     section: HTMLElement,
     progressBar: HTMLElement,
 ): void {
@@ -37,7 +37,17 @@ window.setupProgressBar = function (
         return;
     }
 
-    window.addEventListener('scroll', () =>
-        animateProgressBar(section, progressBar),
-    );
+    const updateProgressBar = () => progressBarAnimation(section, progressBar);
+
+    window.addEventListener('scroll', updateProgressBar);
+
+    function clearProgressBarEvent() {
+        window.removeEventListener('scroll', updateProgressBar);
+        window.removeEventListener(
+            'livewire:navigating',
+            clearProgressBarEvent,
+        );
+    }
+
+    window.addEventListener('livewire:navigating', clearProgressBarEvent);
 };

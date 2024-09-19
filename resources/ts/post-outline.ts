@@ -115,10 +115,26 @@ function showWhichSectionIAmIn(
         }
     };
 
-    window.onscroll = debounce(() => {
+    const updateSection = debounce(() => {
         clearHighlighting();
         highlightCurrentSection();
-    }, 100); // Adjust the debounce delay as necessary
+    }, 100);
+
+    window.addEventListener('scroll', updateSection);
+
+    function clearPostOutlineObserverAndEvent() {
+        resizeObserver.disconnect();
+        window.removeEventListener('scroll', updateSection);
+        window.removeEventListener(
+            'livewire:navigating',
+            clearPostOutlineObserverAndEvent,
+        );
+    }
+
+    window.addEventListener(
+        'livewire:navigating',
+        clearPostOutlineObserverAndEvent,
+    );
 }
 
 window.setupPostOutline = function (

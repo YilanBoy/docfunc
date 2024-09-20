@@ -112,7 +112,10 @@
                 <x-post-form.tagify :model="'form.tags'" />
 
                 {{-- post body --}}
-                <x-post-form.ckedtior :model="'form.body'" />
+                <x-post-form.ckedtior
+                  :model="'form.body'"
+                  :max-characters="$this->form->bodyMaxCharacter"
+                />
               </div>
 
               {{-- show in mobile device --}}

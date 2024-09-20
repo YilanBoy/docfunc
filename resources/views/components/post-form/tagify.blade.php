@@ -5,46 +5,44 @@
     Alpine.data('tagify', () => ({
       tagsListUrl: @js(route('api.tags')),
       tags: @entangle($model).live,
-      init() {
-        fetch(this.tagsListUrl)
-          .then((response) => response.json())
-          .then((tagsJson) => {
-            return new Tagify(this.$refs.tags, {
-              whitelist: tagsJson.data,
-              enforceWhitelist: true,
-              maxTags: 5,
-              dropdown: {
-                // show the dropdown immediately on focus
-                enabled: 0,
-                maxItems: 5,
-                // place the dropdown near the typed text
-                position: 'text',
-                // keep the dropdown open after selecting a suggestion
-                closeOnSelect: false,
-                highlightFirst: true
-              },
-              callbacks: {
-                // binding the value of the tag input to the livewire attribute 'tags'
-                'change': (event) => {
-                  this.tags = event.detail.value
-                }
-              }
-            });
-          })
-          .then((tagify) => {
-            try {
-              tagify.addTags(JSON.parse(this.tags));
-            } catch (e) {
-              // forget about it :)
+      async init() {
+        let response = await fetch(this.tagsListUrl);
+        let tagsJson = await response.json();
+
+        let tagify = new Tagify(this.$refs.tags, {
+          whitelist: tagsJson.data,
+          enforceWhitelist: true,
+          maxTags: 5,
+          dropdown: {
+            // show the dropdown immediately on focus
+            enabled: 0,
+            maxItems: 5,
+            // place the dropdown near the typed text
+            position: 'text',
+            // keep the dropdown open after selecting a suggestion
+            closeOnSelect: false,
+            highlightFirst: true
+          },
+          callbacks: {
+            // binding the value of the tag input to the livewire attribute 'tags'
+            'change': (event) => {
+              this.tags = event.detail.value
             }
+          }
+        });
 
-            let removeTagify = () => {
-              tagify.destroy();
-              document.removeEventListener('livewire:navigating', removeTagify);
-            };
+        try {
+          tagify.addTags(JSON.parse(this.tags));
+        } catch (error) {
+          console.log('There is an error to init the tags:', error)
+        }
 
-            document.addEventListener('livewire:navigating', removeTagify);
-          });
+        const removeTagify = () => {
+          tagify.destroy();
+          document.removeEventListener('livewire:navigating', removeTagify);
+        };
+
+        document.addEventListener('livewire:navigating', removeTagify);
       }
     }));
   </script>

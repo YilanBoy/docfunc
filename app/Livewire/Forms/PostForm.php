@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Random\RandomException;
 
 class PostForm extends Form
 {
@@ -34,6 +35,9 @@ class PostForm extends Form
 
     public string $tags = '';
 
+    #[Locked]
+    public int $bodyMaxCharacter = 20_000;
+
     public string $body = '';
 
     public string $slug = '';
@@ -52,7 +56,7 @@ class PostForm extends Form
             [
                 'title' => ['required', 'min:4', 'max:50'],
                 'category_id' => ['required', 'numeric', 'exists:categories,id'],
-                'body' => ['required', 'min:500', 'max:20000'],
+                'body' => ['required', 'min:500', 'max:'.$this->bodyMaxCharacter],
             ],
             [
                 'title.required' => '請填寫標題',
@@ -63,7 +67,7 @@ class PostForm extends Form
                 'category_id.exists' => '分類不存在',
                 'body.required' => '請填寫文章內容',
                 'body.min' => '文章內容至少 500 個字元',
-                'body.max' => '文章內容字數已超過 20,000 個字元',
+                'body.max' => '文章內容字數已超過 '.$this->bodyMaxCharacter.' 個字元',
             ]
         )->validate();
     }
@@ -120,6 +124,9 @@ class PostForm extends Form
         $this->excerpt = ContentService::makeExcerpt($this->body);
     }
 
+    /**
+     * @throws RandomException
+     */
     public function uploadPreviewImage(): void
     {
         if ($this->image) {

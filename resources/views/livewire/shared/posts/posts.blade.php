@@ -45,7 +45,7 @@
     <x-card class="group relative z-0 grid cursor-pointer grid-cols-1 gap-4 overflow-hidden">
       {{-- category icon --}}
       <div
-        class="absolute -bottom-16 -right-3 size-56 rotate-12 text-green-200 transition-all duration-300 group-hover:-bottom-12 group-hover:-right-1 dark:text-lividus-800"
+        class="absolute -bottom-16 -right-4 size-56 rotate-12 text-green-200 transition-all duration-300 group-hover:-bottom-4 group-hover:-right-0 dark:text-lividus-800"
       >
         {!! $post->category->icon !!}
       </div>

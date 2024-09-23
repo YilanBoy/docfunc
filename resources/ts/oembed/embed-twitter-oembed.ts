@@ -1,12 +1,14 @@
 declare global {
     interface Window {
-        processTwitterOEmbeds: any;
+        processTwitterOembeds: Function;
         twttr: any;
     }
 }
 
-// 定義一個函式來處理 Twitter oembed 轉換
-async function convertTwitterOEmbedToIframe(oembedElement: HTMLElement) {
+// 定義一個函式來處理 X (舊稱 Twitter) oembed 轉換
+async function convertTwitterOembedToIframe(
+    oembedElement: HTMLElement,
+): Promise<void> {
     const csrfMeta: HTMLMetaElement | null = document.querySelector(
         'meta[name="csrf-token"]',
     );
@@ -40,12 +42,34 @@ async function convertTwitterOEmbedToIframe(oembedElement: HTMLElement) {
 }
 
 // 定義一個函式來檢查是否為 Twitter 連結
-function isTwitterUrl(url: string) {
+// 目前 ckeditor 還是只支援 twitter.com 的連結，尚未支援 x.com
+function isTwitterUrl(url: string): boolean {
     return /^https?:\/\/(www\.)?twitter\.com\/[^/]+\/status\/\d+/.test(url);
 }
 
-// 主要處理函式
-window.processTwitterOEmbeds = function (postBody: HTMLElement) {
+// source code :
+// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/set-up-twitter-for-websites
+window.twttr = (function (d, s, id) {
+    let js;
+    let fjs = d.getElementsByTagName(s)[0];
+    let t = window.twttr || {};
+
+    if (d.getElementById(id)) return t;
+
+    js = <HTMLScriptElement>d.createElement(s);
+    js.id = id;
+    js.src = 'https://platform.twitter.com/widgets.js';
+
+    if (fjs.parentNode !== null) fjs.parentNode.insertBefore(js, fjs);
+
+    t._e = [];
+    t.ready = function (f: any) {
+        t._e.push(f);
+    };
+    return t;
+})(document, 'script', 'twitter-wjs');
+
+window.processTwitterOembeds = function (postBody: HTMLElement): void {
     const oembedElements: NodeListOf<HTMLElement> = document.querySelectorAll(
         'oembed:not(.oembed-processed)',
     );
@@ -54,31 +78,14 @@ window.processTwitterOEmbeds = function (postBody: HTMLElement) {
         const figureElement = oembedElement.closest('figure.media');
 
         if (figureElement) {
-            convertTwitterOEmbedToIframe(oembedElement);
+            convertTwitterOembedToIframe(oembedElement).catch((error) => {
+                console.log(
+                    'Error on convert X (The old name was Twitter.) oembed:',
+                    error,
+                );
+            });
         }
     });
-
-    // source code :
-    // https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/set-up-twitter-for-websites
-    window.twttr = (function (d, s, id) {
-        let js;
-        let fjs = d.getElementsByTagName(s)[0];
-        let t = window.twttr || {};
-
-        if (d.getElementById(id)) return t;
-
-        js = <HTMLScriptElement>d.createElement(s);
-        js.id = id;
-        js.src = 'https://platform.twitter.com/widgets.js';
-
-        if (fjs.parentNode !== null) fjs.parentNode.insertBefore(js, fjs);
-
-        t._e = [];
-        t.ready = function (f: any) {
-            t._e.push(f);
-        };
-        return t;
-    })(document, 'script', 'twitter-wjs');
 
     setTimeout(() => {
         window.twttr.widgets?.load(postBody);

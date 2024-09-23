@@ -1,5 +1,22 @@
 @props(['model'])
 
+@assets
+  {{-- custom tagify style --}}
+  <style>
+    .tagify {
+      align-items: center;
+    }
+
+    .tagify__tag {
+      height: 2rem;
+    }
+
+    .dark .tagify__tag {
+      --tag-text-color--edit: #f9fafb;
+    }
+  </style>
+@endassets
+
 @script
   <script>
     Alpine.data('tagify', () => ({
@@ -53,21 +70,6 @@
   wire:ignore
   x-data="tagify"
 >
-  {{-- custom tagify style --}}
-  <style>
-    .tagify {
-      align-items: center;
-    }
-
-    .tagify__tag {
-      height: 2rem;
-    }
-
-    .dark .tagify__tag {
-      --tag-text-color--edit: #f9fafb;
-    }
-  </style>
-
   <label
     class="hidden"
     for="tags"

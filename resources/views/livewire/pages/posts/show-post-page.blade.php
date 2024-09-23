@@ -38,8 +38,8 @@
         setupPostOutline(this.$refs.postOutline, this.$refs.postBody);
         hljs.highlightAll();
         codeBlockCopyButton(this.$refs.postBody);
-        processYoutubeOEmbeds();
-        processTwitterOEmbeds(this.$refs.postBody);
+        processYoutubeOembeds();
+        processTwitterOembeds(this.$refs.postBody);
         setupProgressBar(this.$refs.postCard, this.$refs.progressBar);
         setupScrollToTopButton(this.$refs.scrollToTopBtn);
         setupSharer();

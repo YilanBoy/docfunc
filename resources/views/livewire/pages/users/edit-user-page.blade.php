@@ -1,18 +1,5 @@
-@script
-  <script>
-    Alpine.data('focusOnNameInput', () => ({
-      init() {
-        this.$refs.name.focus()
-      }
-    }))
-  </script>
-@endscript
-
 <x-layouts.layout-main>
-  <div
-    class="container mx-auto flex-1"
-    x-data="focusOnNameInput"
-  >
+  <div class="container mx-auto flex-1">
     <div class="flex flex-col items-start justify-center px-4 md:flex-row xl:px-0">
       <x-member-centre.sidemenu />
 
@@ -86,7 +73,6 @@
               wire:model.blur="name"
               placeholder="給自己取個有趣的暱稱吧！"
               required
-              x-ref="name"
             >
           </div>
 

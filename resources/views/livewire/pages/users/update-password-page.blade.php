@@ -1,18 +1,5 @@
-@script
-  <script>
-    Alpine.data('focusOnCurrentPasswordInput', () => ({
-      init() {
-        this.$refs.currentPassword.focus()
-      }
-    }))
-  </script>
-@endscript
-
 <x-layouts.layout-main>
-  <div
-    class="container mx-auto flex-1"
-    x-data="focusOnCurrentPasswordInput"
-  >
+  <div class="container mx-auto flex-1">
     <div class="flex flex-col items-start justify-center px-4 md:flex-row xl:px-0">
       <x-member-centre.sidemenu />
 
@@ -33,7 +20,6 @@
               :placeholder="'舊密碼'"
               wire:model="current_password"
               required
-              x-ref="currentPassword"
             ></x-floating-label-input>
           </div>
 

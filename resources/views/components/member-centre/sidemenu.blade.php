@@ -9,11 +9,10 @@
 
   <div class="flex w-full flex-col space-y-1">
     @php
-      $editUserUrl = urldecode(route('users.edit', ['userId' => auth()->id()]));
-      $inEditUserPage = urldecode(request()->url()) === $editUserUrl;
+      $inEditUserPage = request()->routeIs('users.edit');
     @endphp
     <a
-      href="{{ $editUserUrl }}"
+      href="{{ route('users.edit', ['userId' => auth()->id()]) }}"
       @class([
           'flex items-center rounded-md p-2 dark:text-gray-50',
           'bg-gray-200 dark:bg-gray-700' => $inEditUserPage,
@@ -26,11 +25,10 @@
     </a>
 
     @php
-      $changePasswordUrl = urldecode(route('users.updatePassword', ['userId' => auth()->id()]));
-      $inChangePasswordPage = urldecode(request()->url()) === $changePasswordUrl;
+      $inChangePasswordPage = request()->routeIs('users.updatePassword');
     @endphp
     <a
-      href="{{ $changePasswordUrl }}"
+      href="{{ route('users.updatePassword', ['userId' => auth()->id()]) }}"
       @class([
           'flex items-center rounded-md p-2 dark:text-gray-50',
           'bg-gray-200 dark:bg-gray-700' => $inChangePasswordPage,
@@ -43,11 +41,10 @@
     </a>
 
     @php
-      $destroyUserUrl = urldecode(route('users.destroy', ['userId' => auth()->id()]));
-      $inDestroyUserPage = urldecode(request()->url()) === $destroyUserUrl;
+      $inDestroyUserPage = request()->routeIs('users.destroy');
     @endphp
     <a
-      href="{{ $destroyUserUrl }}"
+      href="{{ route('users.destroy', ['userId' => auth()->id()]) }}"
       @class([
           'flex items-center rounded-md p-2 dark:text-gray-50',
           'bg-gray-200 dark:bg-gray-700' => $inDestroyUserPage,

@@ -13,7 +13,7 @@
         "ext-libxml": "*",
         "algolia/algoliasearch-client-php": "^3.3",
         "aws/aws-sdk-php": "^3.247",
-        "bref/bref": "^2.1",
+        "bref/bref": "^2.3",
         "bref/laravel-bridge": "^2.2",
         "ezyang/htmlpurifier": "^4.13",
         "guzzlehttp/guzzle": "^7.2",

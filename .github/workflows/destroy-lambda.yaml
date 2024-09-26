@@ -46,5 +46,5 @@ jobs:
 
       - name: Destroy aws lambda
         run: |
-          npm install serverless serverless-lift
+          npm install serverless@3 serverless-lift
           node_modules/.bin/serverless remove --stage production

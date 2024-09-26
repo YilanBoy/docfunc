@@ -50,8 +50,6 @@ jobs:
           aws s3 sync public s3://assets.docfunc.com
 
       - name: Deploy to aws lambda
-        env:
-          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
         run: |
-          npm install serverless serverless-lift
+          npm install serverless@3 serverless-lift
           node_modules/.bin/serverless deploy --stage production

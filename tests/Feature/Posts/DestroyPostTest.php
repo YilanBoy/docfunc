@@ -172,6 +172,32 @@ describe('destroy post', function () {
         $this->assertNotSoftDeleted('posts', ['id' => $post->id]);
     });
 
+    test('soft delete and restore won\'t touch timestamp', function () {
+        $user = loginAsUser();
+
+        $post = Post::factory()->create([
+            'title' => 'This is a test post title',
+            'user_id' => $user->id,
+            'category_id' => 1,
+            'deleted_at' => now(),
+        ]);
+
+        $oldUpdatedAt = $post->updated_at;
+
+        livewire(PostsGroupByYear::class, [
+            'posts' => [$post],
+            'userId' => $post->user_id,
+            'year' => $post->created_at->format('Y'),
+        ])
+            ->call('restore', $post->id);
+
+        $post->refresh();
+
+        $newUpdatedAt = $post->updated_at;
+
+        expect($oldUpdatedAt)->toEqual($newUpdatedAt);
+    });
+
     test('users cannot restore other users\' post', function () {
         $user = loginAsUser();
 

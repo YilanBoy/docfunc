@@ -104,4 +104,28 @@ describe('edit post', function () {
 
         expect($post->is_private)->toBe(! $privateStatus);
     })->with([true, false]);
+
+    test('toggle private status won\'t touch timestamp', function ($privateStatus) {
+        $post = Post::factory()->create([
+            'is_private' => $privateStatus,
+            'created_at' => now(),
+        ]);
+
+        $oldUpdatedAt = $post->updated_at;
+
+        loginAsUser($post->user);
+
+        livewire(PostsGroupByYear::class, [
+            'year' => now()->year,
+            'userId' => $post->user_id,
+            'posts' => $post->all(),
+        ])
+            ->call('privateStatusToggle', $post->id);
+
+        $post->refresh();
+
+        $newUpdatedAt = $post->updated_at;
+
+        expect($oldUpdatedAt)->toEqual($newUpdatedAt);
+    })->with([true, false]);
 });

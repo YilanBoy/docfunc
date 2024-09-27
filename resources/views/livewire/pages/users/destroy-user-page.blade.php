@@ -10,7 +10,9 @@
           <span class="dark:text-gray-50">如果您確定要刪除帳號，請點選下方的按鈕並收取信件</span>
         </div>
 
-        <div class="mt-4 flex items-center border-l-4 border-red-400 bg-red-200 px-4 py-2 text-gray-700">
+        <div
+          class="mt-4 flex items-center rounded-md border-l-4 border-red-400 bg-red-300/20 px-4 py-2 text-red-700 dark:text-red-400"
+        >
           <x-icon.exclamation-triangle class="w-5" />
           <span class="ml-2">請注意！您撰寫的文章與留言都會一起刪除，而且無法恢復！</span>
         </div>

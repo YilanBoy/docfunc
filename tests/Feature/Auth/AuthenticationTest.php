@@ -66,6 +66,21 @@ test('captcha token is required', function () {
         ->assertHasErrors(['captchaToken' => 'required']);
 });
 
+test('captcha challenge failed', function () {
+    Http::fake([
+        'https://challenges.cloudflare.com/turnstile/v0/siteverify' => Http::response(['response' => false]),
+    ]);
+
+    User::factory()->create();
+
+    livewire(LoginPage::class)
+        ->set('email', 'allen@example.com')
+        ->set('password', 'Password101')
+        ->set('captchaToken', 'fake-captcha-response')
+        ->call('store')
+        ->assertHasErrors(['captchaToken']);
+});
+
 test('email must be a valid email address', function () {
     livewire(LoginPage::class)
         ->set('email', 'wrongEmail')

@@ -78,11 +78,6 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->notify($instance);
     }
 
-    public function markAsRead(): void
-    {
-        $this->unreadNotifications->markAsRead();
-    }
-
     public function gravatarUrl(): Attribute
     {
         $hash = hash('sha256', strtolower(trim($this->email)));

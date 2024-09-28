@@ -4,6 +4,7 @@ namespace App\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Translation\PotentiallyTranslatedString;
 
@@ -13,6 +14,8 @@ class Captcha implements ValidationRule
      * Run the validation rule.
      *
      * @param  Closure(string): PotentiallyTranslatedString  $fail
+     *
+     * @throws ConnectionException
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
@@ -22,7 +25,7 @@ class Captcha implements ValidationRule
         ]);
 
         if (! ($response->successful() && $response->json('success'))) {
-            $fail('人機驗證失敗');
+            $fail('驗證失敗');
         }
     }
 }

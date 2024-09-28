@@ -8,7 +8,7 @@ class FormatTransferService
      * 將 tag 的 JSON 資料轉成 array
      * ex. [{"id":1,"name":"PHP"},{"id":2,"name":"Laravel"}]
      */
-    public function tagsJsonToTagIdsArray(?string $tagsJson): array
+    public function tagsJsonToTagIdsArray(?string $tagsJson = null): array
     {
         // 沒有設定標籤
         if (is_null($tagsJson)) {

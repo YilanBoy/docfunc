@@ -8,7 +8,9 @@ use Tests\TestCase;
 uses(TestCase::class);
 uses(RefreshDatabase::class);
 
-beforeEach(fn () => $this->contentService = $this->app->make(ContentService::class));
+beforeEach(function () {
+    $this->contentService = $this->app->make(ContentService::class);
+});
 
 it('can filter the dangerous HTML element', function () {
     $body = <<<'HTML'

@@ -32,7 +32,7 @@ jobs:
 
       - name: Dump database
         run: |
-          /usr/lib/postgresql/16/bin/pg_dump -d ${{ secrets.DB_CONNECTION_STRING }} --column-inserts --no-owner -f "${TIMESTAMP}.sql"
+          /usr/lib/postgresql/17/bin/pg_dump -d ${{ secrets.DB_CONNECTION_STRING }} --column-inserts --no-owner -f "${TIMESTAMP}.sql"
 
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4

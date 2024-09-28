@@ -25,7 +25,7 @@ jobs:
         run: |
           sudo apt install -y postgresql-common
           yes '' | sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
-          sudo apt install -y postgresql-client-16
+          sudo apt install -y postgresql-client-17
 
       - name: Set timestamp
         run: echo "TIMESTAMP=$(date -u +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV

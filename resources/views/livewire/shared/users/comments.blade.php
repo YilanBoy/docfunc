@@ -61,7 +61,10 @@
         class="absolute bottom-3 right-3 z-10 flex items-center rounded-lg bg-emerald-600 px-2 py-1 text-sm text-gray-50 dark:bg-lividus-600"
       >
         <x-icon.clock class="w-4" />
-        <span class="ml-2">{{ $comment->created_at->diffForHumans() }}</span>
+        <time
+          class="ml-2"
+          datetime="{{ $comment->created_at->toDateString() }}"
+        >{{ $comment->created_at->diffForHumans() }}</time>
       </div>
     </x-dashed-card>
   @empty

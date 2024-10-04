@@ -105,7 +105,10 @@
         {{-- 文章發布時間 --}}
         <div class="flex items-center">
           <x-icon.clock class="w-4" />
-          <span class="ml-2">{{ $post->created_at->diffForHumans() }}</span>
+          <time
+            class="ml-2"
+            datetime="{{ $post->created_at->toDateString() }}"
+          >{{ $post->created_at->diffForHumans() }}</time>
         </div>
 
         <div>&bull;</div>

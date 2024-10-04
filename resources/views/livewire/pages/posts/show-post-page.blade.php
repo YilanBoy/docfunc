@@ -69,78 +69,85 @@
               class="w-full"
               x-ref="postCard"
             >
-              {{-- post title --}}
-              <h1 class="text-4xl leading-relaxed text-green-600 dark:text-lividus-500">{{ $post->title }}</h1>
+              <article>
+                {{-- post title --}}
+                <h1 class="text-4xl leading-relaxed text-green-600 dark:text-lividus-500">{{ $post->title }}</h1>
 
-              {{-- post information --}}
-              <div class="mt-4 flex items-center space-x-2 text-base text-neutral-400">
-                {{-- classfication --}}
-                <div class="flex items-center">
-                  <div class="size-4">{!! $post->category->icon !!}</div>
+                {{-- post information --}}
+                <div class="mt-4 flex items-center space-x-2 text-base text-neutral-400">
+                  {{-- classfication --}}
+                  <div class="flex items-center">
+                    <div class="size-4">{!! $post->category->icon !!}</div>
 
-                  <span class="ml-2">{{ $post->category->name }}</span>
-                </div>
+                    <span class="ml-2">{{ $post->category->name }}</span>
+                  </div>
 
-                <div class="hidden md:block">&bull;</div>
+                  <div class="hidden md:block">&bull;</div>
 
-                {{-- post created time --}}
-                <div class="hidden items-center md:flex">
-                  <x-icon.clock class="w-4" />
-                  <span class="ml-2">{{ $post->created_at->toDateString() }}</span>
+                  {{-- post created time --}}
+                  <div class="hidden items-center md:flex">
+                    <x-icon.clock class="w-4" />
+                    <time
+                      class="ml-2"
+                      datetime="{{ $post->created_at->toDateString() }}"
+                    >{{ $post->created_at->toDateString() }}</time>
 
-                  @if ($post->created_at->toDateString() !== $post->updated_at->toDateString())
-                    <span>{{ '(最後更新於 ' . $post->updated_at->toDateString() . ')' }}</span>
-                  @endif
-                </div>
+                    @if ($post->created_at->toDateString() !== $post->updated_at->toDateString())
+                      <time datetime="{{ $post->updated_at->toDateString() }}">
+                        {{ '(最後更新於 ' . $post->updated_at->toDateString() . ')' }}
+                      </time>
+                    @endif
+                  </div>
 
-                <div class="hidden md:block">&bull;</div>
+                  <div class="hidden md:block">&bull;</div>
 
-                {{-- comments count --}}
-                <a
-                  class="hidden hover:text-neutral-500 dark:hover:text-neutral-300 md:flex md:items-center"
-                  href="{{ $post->link_with_slug }}#comments"
-                >
-                  <x-icon.chat-square-text class="w-4" />
-                  <span class="ml-2">{{ $post->comment_counts }}</span>
-                </a>
-
-              </div>
-
-              {{-- post tags --}}
-              @if ($post->tags()->exists())
-                <div class="mt-4 flex flex-wrap items-center text-base">
-                  <x-icon.tags class="mr-1 w-4 text-green-300 dark:text-lividus-700" />
-
-                  @foreach ($post->tags as $tag)
-                    <x-tag :href="route('tags.show', ['tagId' => $tag->id])">
-                      {{ $tag->name }}
-                    </x-tag>
-                  @endforeach
-                </div>
-              @endif
-
-              {{-- post thumbnail --}}
-              @if (!empty($post->preview_url))
-                <div
-                  class="-mx-4 mt-4"
-                  id="post-thumbnail"
-                >
-                  <img
-                    class="w-full"
-                    src="{{ $post->preview_url }}"
-                    alt="{{ $post->title }}"
+                  {{-- comments count --}}
+                  <a
+                    class="hidden hover:text-neutral-500 dark:hover:text-neutral-300 md:flex md:items-center"
+                    href="{{ $post->link_with_slug }}#comments"
                   >
-                </div>
-              @endif
+                    <x-icon.chat-square-text class="w-4" />
+                    <span class="ml-2">{{ $post->comment_counts }}</span>
+                  </a>
 
-              {{-- post body --}}
-              <div
-                class="post-body mt-4"
-                id="post-body"
-                x-ref="postBody"
-              >
-                {!! $post->body !!}
-              </div>
+                </div>
+
+                {{-- post tags --}}
+                @if ($post->tags()->exists())
+                  <div class="mt-4 flex flex-wrap items-center text-base">
+                    <x-icon.tags class="mr-1 w-4 text-green-300 dark:text-lividus-700" />
+
+                    @foreach ($post->tags as $tag)
+                      <x-tag :href="route('tags.show', ['tagId' => $tag->id])">
+                        {{ $tag->name }}
+                      </x-tag>
+                    @endforeach
+                  </div>
+                @endif
+
+                {{-- post thumbnail --}}
+                @if (!empty($post->preview_url))
+                  <div
+                    class="-mx-4 mt-4"
+                    id="post-thumbnail"
+                  >
+                    <img
+                      class="w-full"
+                      src="{{ $post->preview_url }}"
+                      alt="{{ $post->title }}"
+                    >
+                  </div>
+                @endif
+
+                {{-- post body --}}
+                <div
+                  class="post-body mt-4"
+                  id="post-body"
+                  x-ref="postBody"
+                >
+                  {!! $post->body !!}
+                </div>
+              </article>
 
               {{-- mobile menu --}}
               @if (auth()->id() === $post->user_id)

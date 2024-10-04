@@ -27,7 +27,7 @@
   </script>
 @endscript
 
-<div x-data="search">
+<search x-data="search">
   {{-- 搜尋按鈕 --}}
   <button
     class="group hidden items-center justify-center rounded-lg bg-gray-200 p-2 text-xl text-gray-500 dark:bg-gray-600 dark:text-gray-400 xl:flex"
@@ -180,4 +180,4 @@
 
     </div>
   </div>
-</div>
+</search>

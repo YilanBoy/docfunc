@@ -19,7 +19,10 @@
         <span class="dark:text-gray-50">訪客</span>
       @endif
 
-      <span class="text-gray-400">{{ $createdAt->format('Y 年 m 月 d 日') }}</span>
+      <time
+        class="text-gray-400"
+        datetime="{{ $createdAt->toDateString() }}"
+      >{{ $createdAt->format('Y 年 m 月 d 日') }}</time>
       @if ($isEdited)
         <span class="text-gray-400">(已編輯)</span>
       @endif

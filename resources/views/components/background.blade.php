@@ -4,7 +4,7 @@
     <x-icon.controller class="size-64 rotate-12 text-gray-300/60 dark:text-gray-800" />
   </div>
 
-  <div class="absolute left-[20%] top-[18rem] hidden lg:block">
+  <div class="absolute left-[24%] top-[18rem] hidden lg:block">
     <x-icon.person-walking class="size-24 -rotate-12 text-gray-300/60 dark:text-gray-800" />
   </div>
 

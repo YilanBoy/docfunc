@@ -67,10 +67,10 @@ provider:
     CAPTCHA_SECRET_KEY: ${ssm:/docfunc/${opt:stage, 'dev'}/captcha-secret-key}
     # Mail
     MAIL_MAILER: smtp
-    MAIL_HOST: smtp.sendgrid.net
+    MAIL_HOST: live.smtp.mailtrap.io
     MAIL_PORT: 587
-    MAIL_USERNAME: apikey
-    MAIL_PASSWORD: ${ssm:/docfunc/${opt:stage, 'dev'}/sendgrid-api-key}
+    MAIL_USERNAME: api
+    MAIL_PASSWORD: ${ssm:/docfunc/${opt:stage, 'dev'}/mail-password}
     MAIL_ENCRYPTION: tls
     MAIL_FROM_ADDRESS: "no-reply@mail.docfunc.com"
     MAIL_FROM_NAME: "DocFunc"

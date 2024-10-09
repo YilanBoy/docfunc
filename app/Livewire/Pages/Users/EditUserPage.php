@@ -18,7 +18,7 @@ class EditUserPage extends Component
 
     public string $name;
 
-    public string $introduction;
+    public ?string $introduction;
 
     protected function rules(): array
     {

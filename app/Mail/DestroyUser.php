@@ -12,14 +12,8 @@ use Illuminate\Queue\SerializesModels;
 
 class DestroyUser extends Mailable implements ShouldQueue
 {
-    use Queueable;
-    use SerializesModels;
+    use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
     public function __construct(
         public string $destroyLink
     ) {}
@@ -34,13 +28,10 @@ class DestroyUser extends Mailable implements ShouldQueue
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
     public function content(): Content
     {
         return new Content(
-            view: 'emails.destroy-user',
+            markdown: 'emails.destroy-user',
         );
     }
 

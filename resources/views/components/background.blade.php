@@ -41,12 +41,16 @@
     <x-icon.music-note-beamed class="size-24 rotate-12 text-gray-300/60 dark:text-gray-950/60" />
   </div>
 
-  <div class="absolute right-[36%] top-[40rem] hidden lg:block">
+  <div class="absolute right-[36%] top-[42rem] hidden lg:block">
     <x-icon.filetype-js class="size-24 -rotate-12 text-gray-300/60 dark:text-gray-950/60" />
   </div>
 
-  <div class="absolute right-[36%] top-[6rem] hidden lg:block">
+  <div class="absolute right-[36%] top-[4rem] hidden lg:block">
     <x-icon.floppy class="size-64 rotate-12 text-gray-300/60 dark:text-gray-950/60" />
+  </div>
+
+  <div class="absolute right-[34%] top-[26rem] hidden lg:block">
+    <x-icon.cup-hot class="size-24 rotate-12 text-gray-300/60 dark:text-gray-950/60" />
   </div>
 
   <div class="absolute right-[46%] top-[32rem] hidden lg:block">
@@ -70,7 +74,7 @@
     <x-icon.cpu class="size-24 -rotate-12 text-gray-300/60 dark:text-gray-950/60" />
   </div>
 
-  <div class="absolute right-[20%] top-[38rem] hidden lg:block">
+  <div class="absolute right-[20%] top-[40rem] hidden lg:block">
     <x-icon.terminal class="size-24 rotate-12 text-gray-300/60 dark:text-gray-950/60" />
   </div>
 

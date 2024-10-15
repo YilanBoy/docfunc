@@ -1,27 +1,8 @@
 @script
   <script>
-    Alpine.data('desktopHeaderMenu', () => ({
+    Alpine.data('header', () => ({
       html: document.documentElement,
-      profileMenuIsOpen: false,
-      switchTheme() {
-        if (this.html.classList.contains('dark')) {
-          this.html.classList.remove('dark')
-          localStorage.setItem('mode', 'light')
-        } else {
-          this.html.classList.add('dark')
-          localStorage.setItem('mode', 'dark')
-        }
-      },
-      toggleProfileMenu() {
-        this.profileMenuIsOpen = !this.profileIsOpen
-      },
-      closeProfileMenu() {
-        this.profileMenuIsOpen = false
-      }
-    }));
-
-    Alpine.data('mobileHeaderMenu', () => ({
-      html: document.documentElement,
+      // dropdown only show in mobile
       dropdownMenuIsOpen: false,
       profileMenuIsOpen: false,
       switchTheme() {
@@ -43,7 +24,7 @@
         this.dropdownMenuIsOpen = false
       },
       toggleProfileMenu() {
-        this.profileMenuIsOpen = !this.profileMenuIsOpen
+        this.profileMenuIsOpen = !this.profileIsOpen
       },
       closeProfileMenu() {
         this.profileMenuIsOpen = false
@@ -52,17 +33,16 @@
   </script>
 @endscript
 
-{{-- Header --}}
 <nav
   class="z-20 mb-6"
   id="header"
+  x-data="header"
 >
   <div
     class="relative hidden h-20 w-full items-center justify-center bg-gray-50 transition-all duration-300 dark:bg-gray-800 lg:flex"
     id="desktop-header-menu"
-    x-data="desktopHeaderMenu"
   >
-    {{-- 電腦版-Logo --}}
+    {{-- logo --}}
     <a
       class="absolute inset-y-1/2 left-4 flex items-center"
       href="{{ route('root') }}"
@@ -79,7 +59,7 @@
     <div class="flex space-x-6">
       <x-skew-underline-link
         :link="route('posts.index')"
-        {{-- Make sure both url are decode in AWS Lambda --}}
+        {{-- make sure both url are decode in aws lambda --}}
         :selected="urldecode(request()->url()) === urldecode(route('posts.index'))"
       >
         全部文章
@@ -98,25 +78,26 @@
 
     <div class="absolute inset-y-1/2 right-6 flex items-center space-x-5">
 
-      {{-- dektop search --}}
+      {{-- search --}}
       <livewire:shared.search />
 
-      {{-- 明亮 / 暗黑模式切換 --}}
+      {{-- light / dark mode toggle --}}
       <button
-        class="group flex size-10 items-center justify-center"
+        class="group relative flex size-10 items-center justify-center overflow-hidden"
         type="button"
         aria-label="Toggle Dark Mode"
         x-on:click="switchTheme"
       >
-        <x-icon.sun class="w-5 text-amber-400 transition duration-150 group-hover:text-amber-500 dark:hidden" />
+        <x-icon.sun
+          class="absolute inset-x-auto top-2.5 size-5 text-amber-400 transition-all duration-300 group-hover:text-amber-500 dark:top-full"
+        />
 
         <x-icon.moon-stars
-          class="hidden w-5 text-[#f6f1d5] transition duration-150 group-hover:text-[#ddd8bf] dark:inline"
+          class="absolute inset-x-auto -top-full size-5 text-[#f6f1d5] transition-all duration-300 group-hover:text-[#ddd8bf] dark:top-2.5"
         />
       </button>
 
       @guest
-        {{-- 電腦版-未登入 --}}
         @if ($showRegisterButton)
           <a
             class="flex h-10 items-center justify-center rounded-lg border-2 border-lividus-600 bg-transparent px-3 text-lividus-600 transition duration-150 hover:border-transparent hover:bg-lividus-600 hover:text-gray-50"
@@ -136,9 +117,7 @@
           <span class="ml-2">登入</span>
         </a>
       @else
-        {{-- 電腦版-已登入 --}}
-
-        {{-- 電腦版-通知 --}}
+        {{-- notification --}}
         <span class="relative inline-flex rounded-md">
           <a
             class="flex size-10 items-center justify-center rounded-lg text-xl text-gray-500 transition duration-150 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-gray-50"
@@ -157,9 +136,8 @@
           @endif
         </span>
 
-        {{-- 電腦版-會員選單 --}}
         <div class="relative flex items-center justify-center">
-          {{-- 電腦版-會員大頭貼 --}}
+          {{-- headshot --}}
           <div>
             <button
               class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-400"
@@ -179,7 +157,7 @@
             </button>
           </div>
 
-          {{-- 電腦版-會員下拉式選單 --}}
+          {{-- profile menu --}}
           <div
             class="absolute right-0 top-16 mt-2 w-48 rounded-md bg-gray-50 p-2 ring-1 ring-black ring-opacity-20 dark:bg-gray-800 dark:text-gray-50 dark:ring-gray-600"
             role="menu"
@@ -244,12 +222,11 @@
   <div
     class="bg-gray-50 dark:bg-gray-800 lg:hidden"
     id="mobile-header-menu"
-    x-data="mobileHeaderMenu"
   >
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-[4.5rem] items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center">
-          {{-- 手機版-開關選單按鈕 --}}
+          {{-- category dropdown menu toggle --}}
           <button
             class="inline-flex items-center justify-center rounded-md p-2 text-gray-700"
             type="button"
@@ -258,7 +235,7 @@
             x-on:click="toggleDropdownMenu"
           >
             <span class="sr-only">Open main menu</span>
-            {{-- 手機版-關閉選單的 icon --}}
+            {{-- close category dropdown menu icon --}}
             <div
               class="text-3xl text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
               x-cloak
@@ -266,7 +243,7 @@
             >
               <x-icon.list class="w-7" />
             </div>
-            {{-- 手機版-開啟選單的 icon --}}
+            {{-- open category dropdown menu icon --}}
             <div
               class="text-xl text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
               x-cloak
@@ -289,7 +266,7 @@
         </div>
 
         <div class="absolute inset-y-0 right-0 flex items-center space-x-8">
-          {{-- 明亮 / 暗黑模式切換 --}}
+          {{-- light / dark mode toggle --}}
           <button
             type="button"
             aria-label="Toggle Dark Mode"
@@ -301,7 +278,6 @@
           </button>
 
           @guest
-            {{-- 手機版-未登入 --}}
             @if ($showRegisterButton)
               <a
                 class="rounded-md border-2 border-lividus-400 bg-transparent px-4 py-2 text-lividus-400 hover:border-transparent hover:bg-lividus-400 hover:text-gray-50"
@@ -320,9 +296,7 @@
               登入
             </a>
           @else
-            {{-- 手機版-已登入 --}}
-
-            {{-- 手機版-通知 --}}
+            {{-- notification --}}
             <div class="relative inline-flex rounded-md">
               <a
                 class="rounded-full text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
@@ -341,9 +315,8 @@
               @endif
             </div>
 
-            {{-- 手機版-會員選單 --}}
             <div class="relative">
-              {{-- 手機版-會員大頭貼 --}}
+              {{-- headshot --}}
               <div>
                 <button
                   class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-400"
@@ -363,7 +336,7 @@
                 </button>
               </div>
 
-              {{-- 手機版-會員選單 --}}
+              {{-- profile menu --}}
               <div
                 class="absolute right-0 mt-2 w-48 rounded-md bg-gray-50 p-2 text-gray-700 ring-1 ring-black ring-opacity-20 dark:bg-gray-800 dark:text-gray-50 dark:ring-gray-600"
                 role="menu"
@@ -426,7 +399,7 @@
       </div>
     </div>
 
-    {{-- 手機版-分類下拉式選單 --}}
+    {{-- category dropdown menu --}}
     <div
       class="lg:hidden"
       x-cloak

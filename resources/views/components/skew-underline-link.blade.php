@@ -9,6 +9,7 @@
 <a
   class="group relative inline-block h-auto w-auto cursor-pointer items-center justify-center rounded px-1 text-lg text-gray-900 text-opacity-80 outline-none transition-all duration-300 hover:-rotate-3 hover:text-opacity-100 active:outline-none dark:text-gray-50"
   href="{{ $link }}"
+  {{ $attributes }}
   wire:navigate
 >
   <span class="relative z-20 flex items-center justify-center">

@@ -70,6 +70,7 @@
           :link="$category->link_with_name"
           :selected="urldecode(request()->url()) === urldecode($category->link_with_name)"
           :icon="$category->icon"
+          wire:key="category-{{ $category->id }}"
         >
           {{ $category->name }}
         </x-skew-underline-link>
@@ -116,7 +117,9 @@
           <x-icon.door-open class="w-5" />
           <span class="ml-2">登入</span>
         </a>
-      @else
+      @endguest
+
+      @auth
         {{-- notification --}}
         <span class="relative inline-flex rounded-md">
           <a
@@ -215,7 +218,7 @@
             </button>
           </div>
         </div>
-      @endguest
+      @endauth
     </div>
   </div>
 
@@ -295,7 +298,9 @@
             >
               登入
             </a>
-          @else
+          @endguest
+
+          @auth
             {{-- notification --}}
             <div class="relative inline-flex rounded-md">
               <a
@@ -394,7 +399,7 @@
                 </button>
               </div>
             </div>
-          @endguest
+          @endauth
         </div>
       </div>
     </div>

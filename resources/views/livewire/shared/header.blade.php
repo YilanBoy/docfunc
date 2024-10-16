@@ -84,17 +84,17 @@
 
       {{-- light / dark mode toggle --}}
       <button
-        class="group relative flex size-10 items-center justify-center overflow-hidden"
+        class="group relative flex size-12 items-center justify-center overflow-hidden"
         type="button"
         aria-label="Toggle Dark Mode"
         x-on:click="switchTheme"
       >
         <x-icon.sun
-          class="absolute inset-x-auto top-2.5 size-5 text-amber-400 transition-all duration-300 group-hover:text-amber-500 dark:top-full"
+          class="absolute inset-x-auto top-3 size-6 text-amber-400 transition-all duration-300 group-hover:text-amber-500 dark:top-full"
         />
 
         <x-icon.moon-stars
-          class="absolute inset-x-auto -top-full size-5 text-[#f6f1d5] transition-all duration-300 group-hover:text-[#ddd8bf] dark:top-2.5"
+          class="absolute inset-x-auto -top-full size-6 text-[#f6f1d5] transition-all duration-300 group-hover:text-[#ddd8bf] dark:top-3"
         />
       </button>
 
@@ -123,12 +123,12 @@
         {{-- notification --}}
         <span class="relative inline-flex rounded-md">
           <a
-            class="flex size-10 items-center justify-center rounded-lg text-xl text-gray-500 transition duration-150 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-gray-50"
+            class="flex size-12 items-center justify-center rounded-lg text-xl text-gray-500 transition duration-150 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
             href="{{ route('notifications.index') }}"
             aria-label="Notifications"
             wire:navigate
           >
-            <x-icon.bell class="w-5" />
+            <x-icon.bell class="size-6" />
           </a>
 
           @if (auth()->user()->unreadNotifications->count() > 0)
@@ -153,7 +153,7 @@
             >
               <span class="sr-only">Open user menu</span>
               <img
-                class="h-12 w-12 rounded-full"
+                class="size-12 rounded-full"
                 src="{{ auth()->user()->gravatar_url }}"
                 alt=""
               >

@@ -47,6 +47,7 @@
         <kbd
           class="rounded bg-gray-300 px-2 py-1 dark:bg-gray-500 dark:text-gray-200"
           x-ref="dynamicShortcut"
+          wire:ignore
         ></kbd>
         <kbd class="rounded bg-gray-300 px-2 py-1 dark:bg-gray-500 dark:text-gray-200">K</kbd>
       </div>

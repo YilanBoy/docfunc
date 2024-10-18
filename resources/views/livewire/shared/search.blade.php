@@ -125,9 +125,9 @@
                 wire:transition
               >
                 @if ($results->count() > 0)
-                  <div class="mb-2 flex items-center justify-center border-b-2 border-gray-400 pb-2">
-                    <span>搜尋結果</span>
-                  </div>
+                  <div class="flex items-center justify-center">搜尋結果</div>
+
+                  <hr class="my-2 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
 
                   <ul>
                     @foreach ($results as $result)
@@ -149,8 +149,10 @@
                   </div>
                 @endif
 
+                <hr class="my-2 h-0.5 border-0 bg-gray-300 dark:bg-gray-700">
+
                 {{-- Algolia Logo --}}
-                <div class="mt-2 flex w-full items-center justify-center border-t-2 border-gray-400 pt-2">
+                <div class="flex w-full items-center justify-center">
                   <a
                     href="https://www.algolia.com"
                     target="_blank"

@@ -11,9 +11,7 @@ class NewComment extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct(protected Comment $comment)
-    {
-    }
+    public function __construct(protected Comment $comment) {}
 
     public function via(object $notifiable): array
     {

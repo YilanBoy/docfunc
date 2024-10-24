@@ -21,7 +21,7 @@
             :component="$postOrder->iconComponentName()"
           />
 
-          <span class="ml-2">{{ $postOrder->tabText() }}</span>
+          <span class="ml-2">{{ $postOrder->label() }}</span>
         </button>
       @endforeach
     </nav>

@@ -8,7 +8,7 @@ enum UserInfoTab: string
     case POSTS = 'posts';
     case COMMENTS = 'comments';
 
-    public function tabText(): string
+    public function label(): string
     {
         return match ($this) {
             self::INFORMATION => '個人資訊',

@@ -8,7 +8,7 @@ enum PostOrder: string
     case RECENT = 'recent';
     case COMMENT = 'comment';
 
-    public function tabText(): string
+    public function label(): string
     {
         return match ($this) {
             self::LATEST => '最新文章',

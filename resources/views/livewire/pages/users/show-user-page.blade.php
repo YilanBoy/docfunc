@@ -66,7 +66,7 @@
                 class="w-4"
                 :component="$userInfoTab->iconComponentName()"
               />
-              <span class="ml-2">{{ $userInfoTab->tabText() }}</span>
+              <span class="ml-2">{{ $userInfoTab->label() }}</span>
             </button>
           @endforeach
 

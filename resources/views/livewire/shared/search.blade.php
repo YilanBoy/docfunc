@@ -15,9 +15,9 @@
         let userAgentInfo = navigator.userAgent.toLowerCase();
 
         if (userAgentInfo.includes('mac')) {
-          this.$refs.dynamicShortcut.textContent = '⌘';
+          this.$refs.searchShortcut.textContent = '⌘ K';
         } else {
-          this.$refs.dynamicShortcut.textContent = 'Ctrl';
+          this.$refs.searchShortcut.textContent = 'Ctrl K';
         }
       },
       init() {
@@ -30,7 +30,7 @@
 <search x-data="search">
   {{-- 搜尋按鈕 --}}
   <button
-    class="group hidden items-center justify-center rounded-lg bg-gray-200 p-2 text-xl text-gray-500 dark:bg-gray-600 dark:text-gray-400 xl:flex"
+    class="group hidden items-center justify-between gap-2 rounded-lg bg-gray-200 p-2 text-sm text-gray-500 dark:bg-gray-600 dark:text-gray-400 xl:flex"
     type="button"
     aria-label="Search"
     x-on:click="openSearchBar"
@@ -38,20 +38,15 @@
     x-on:keydown.window.prevent.ctrl.k="openSearchBar"
     x-on:keydown.window.escape="closeSearchBar"
   >
-    <x-icon.search class="w-5 transition duration-300 group-hover:text-gray-900 dark:group-hover:text-gray-50" />
+    <x-icon.search class="size-4 transition duration-300 group-hover:text-gray-900 dark:group-hover:text-gray-50" />
 
-    <div class="ml-2 flex space-x-2 text-base">
-      <span class="transition duration-300 group-hover:text-gray-900 dark:group-hover:text-gray-50">搜尋</span>
+    <span class="transition duration-300 group-hover:text-gray-900 dark:group-hover:text-gray-50">搜尋</span>
 
-      <div class="shortcut">
-        <kbd
-          class="rounded bg-gray-300 px-2 py-1 dark:bg-gray-500 dark:text-gray-200"
-          x-ref="dynamicShortcut"
-          wire:ignore
-        ></kbd>
-        <kbd class="rounded bg-gray-300 px-2 py-1 dark:bg-gray-500 dark:text-gray-200">K</kbd>
-      </div>
-    </div>
+    <kbd
+      class="inline-flex items-center rounded bg-gray-300 px-2 py-1 font-sans dark:bg-gray-500 dark:text-gray-200"
+      x-ref="searchShortcut"
+      wire:ignore
+    ></kbd>
   </button>
 
   {{-- search moodal --}}

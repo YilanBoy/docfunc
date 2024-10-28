@@ -5,6 +5,7 @@ namespace App\Livewire\Shared\Comments;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
@@ -18,13 +19,31 @@ class CommentGroup extends Component
     use AuthorizesRequests;
 
     #[Locked]
+    public int $maxLayer = 2;
+
+    #[Locked]
+    public int $currentLayer = 1;
+
+    #[Locked]
+    public ?int $parentId = null;
+
+    #[Locked]
     public int $postId;
 
     #[Locked]
     public int $postAuthorId;
 
-    // Default group 'new' is for the new comments which will have its own group
-    public int|string $groupId = 'new';
+    /**
+     * Use this comment group name as a dynamic event name.
+     * Other components can use this name to refresh specific comment group.
+     *
+     * There are three types of comment group names:
+     *
+     * - 'root-new-group' for the new comment with no parent id (top layer).
+     * - '[command id]-new-group' for new comment with parent id (second layer or more).
+     * - '[commend id]-group' for normal comment group.
+     */
+    public string $commentGroupName;
 
     /**
      * Comment ids.
@@ -33,8 +52,8 @@ class CommentGroup extends Component
      */
     public array $ids = [];
 
-    #[On('create-comment-in-group-{groupId}')]
-    public function create(int $id): void
+    #[On('refresh-{commentGroupName}')]
+    public function appendCommentIdInGroup(int $id): void
     {
         $this->ids[] = $id;
     }
@@ -72,9 +91,13 @@ class CommentGroup extends Component
             $comments = Comment::query()
                 ->select(['id', 'body', 'user_id', 'created_at', 'updated_at'])
                 ->where('post_id', $this->postId)
+                ->when(! is_null($this->parentId), function (Builder $query) {
+                    $query->where('parent_id', $this->parentId);
+                })
                 ->whereIn('id', $this->ids)
                 ->with('user:id,name,email')
-                ->latest('id')
+                ->with('children')
+                ->oldest('id')
                 ->get();
         }
 

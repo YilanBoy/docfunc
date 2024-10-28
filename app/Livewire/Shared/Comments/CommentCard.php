@@ -19,6 +19,12 @@ class CommentCard extends Component
     use MarkdownConverter;
 
     #[Locked]
+    public int $maxLayer;
+
+    #[Locked]
+    public int $currentLayer;
+
+    #[Locked]
     public int $postId;
 
     #[Locked]
@@ -39,6 +45,11 @@ class CommentCard extends Component
     public object $createdAt;
 
     public bool $isEdited;
+
+    public bool $hasChildren;
+
+    #[Locked]
+    public int $childrenPerPage = 3;
 
     /**
      * @throws CommonMarkException

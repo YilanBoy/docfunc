@@ -3,13 +3,20 @@
     Alpine.data('editCommentModal', () => ({
       observers: [],
       modalIsOpen: false,
+      commentId: null,
       body: @entangle('body'),
-      openModal() {
+      openModal(event) {
+        this.commentId = event.detail.commentId;
+        this.body = event.detail.body;
+
         this.modalIsOpen = true;
         this.$nextTick(() => this.$refs.editCommentTextarea?.focus());
       },
       closeModal() {
         this.modalIsOpen = false;
+      },
+      submitForm() {
+        $wire.update(this.commentId);
       },
       tabToFourSpaces() {
         this.$el.setRangeText('    ', this.$el.selectionStart, this.$el.selectionStart, 'end');
@@ -53,7 +60,7 @@
   x-data="editCommentModal"
   x-ref="editCommentModal"
   x-show="modalIsOpen"
-  x-on:edit-comment-was-set.window="openModal"
+  x-on:open-edit-comment-modal.window="openModal"
   x-on:close-edit-comment-modal.window="closeModal"
   x-on:keydown.escape.window="closeModal"
 >
@@ -64,12 +71,11 @@
       aria-hidden="true"
       x-show="modalIsOpen"
       x-transition.opacity
-    >
-    </div>
+    ></div>
 
     {{--  modal  --}}
     <div
-      class="max-h-[36rem] transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all dark:bg-gray-800 sm:w-full sm:max-w-2xl"
+      class="mx-2 max-h-[36rem] w-full transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all dark:bg-gray-800 md:max-w-2xl"
       x-show="modalIsOpen"
       x-transition.origin.bottom.duration.300ms
     >
@@ -92,14 +98,10 @@
 
         <form
           class="space-y-4"
-          id="edit-comment"
-          wire:submit="update({{ $commentId }})"
+          x-on:submit.prevent="submitForm"
         >
           @if ($previewIsEnabled)
-            <div
-              class="space-y-2"
-              id="edit-comment-preview"
-            >
+            <div class="space-y-2">
               <div class="space-x-4">
                 <span class="font-semibold dark:text-gray-50">{{ auth()->user()->name }}</span>
                 <span class="text-gray-400">{{ now()->format('Y 年 m 月 d 日') }}</span>
@@ -114,12 +116,11 @@
 
               <textarea
                 class="form-textarea w-full resize-none rounded-md border border-gray-300 font-jetbrains-mono text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
-                id="edit-comment-textarea"
                 name="body"
                 x-ref="editCommentTextarea"
                 {{-- change tab into 4 spaces --}}
                 x-on:keydown.tab.prevent="tabToFourSpaces"
-                wire:model.blur="body"
+                x-model="body"
                 rows="12"
                 placeholder="寫下你的留言吧！**支援 Markdown**"
                 required

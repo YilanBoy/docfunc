@@ -177,17 +177,11 @@
               </div>
             </x-card>
 
-            {{-- comment box --}}
-            <livewire:shared.comments.reply
-              :post-id="$post->id"
-              :comment-counts="$post->comment_counts"
-            />
-
-            {{-- comments list --}}
-            <livewire:shared.comments.comments
+            <x-comments
               :post-id="$post->id"
               :post-author-id="$post->user_id"
               :comment-counts="$post->comment_counts"
+              :max-layer="$maxCommentLayer"
             />
           </div>
 
@@ -202,10 +196,6 @@
         </div>
       </div>
     </div>
-
-    <livewire:shared.comments.create-comment-modal :post-id="$post->id" />
-
-    <livewire:shared.comments.edit-comment-modal />
 
     <x-porgress-bar />
   </div>

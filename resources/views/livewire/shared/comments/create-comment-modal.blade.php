@@ -6,12 +6,18 @@
       submitIsEnabled: false,
       body: @entangle('body'),
       captchaSiteKey: @js(config('services.captcha.site_key')),
-      openModal() {
+      parentId: null,
+      openModal(event) {
+        this.parentId = event.detail.parentId;
+
         this.modalIsOpen = true;
         this.$nextTick(() => this.$refs.createCommentTextarea?.focus());
       },
       closeModal() {
         this.modalIsOpen = false;
+      },
+      submitForm() {
+        $wire.store(this.parentId)
       },
       tabToFourSpaces() {
         this.$el.setRangeText('    ', this.$el.selectionStart, this.$el.selectionStart, 'end');
@@ -86,7 +92,7 @@
 
     {{--  modal  --}}
     <div
-      class="max-h-[36rem] transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all dark:bg-gray-800 sm:w-full sm:max-w-2xl"
+      class="mx-2 max-h-[36rem] w-full transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all dark:bg-gray-800 md:max-w-2xl"
       x-show="modalIsOpen"
       x-transition.origin.bottom.duration.300ms
     >
@@ -109,13 +115,10 @@
 
         <form
           class="space-y-4"
-          wire:submit="store"
+          x-on:submit.prevent="submitForm"
         >
           @if ($previewIsEnabled)
-            <div
-              class="space-y-2"
-              id="create-comment-preview"
-            >
+            <div class="space-y-2">
               <div class="space-x-4">
                 <span class="font-semibold dark:text-gray-50">
                   @if (auth()->check())
@@ -136,12 +139,11 @@
 
               <textarea
                 class="form-textarea w-full resize-none rounded-md border border-gray-300 font-jetbrains-mono text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
-                id="create-comment-textarea"
                 name="body"
                 x-ref="createCommentTextarea"
                 {{-- change tab into 4 spaces --}}
                 x-on:keydown.tab.prevent="tabToFourSpaces"
-                wire:model.blur="body"
+                x-model="body"
                 rows="12"
                 placeholder="寫下你的留言吧！**支援 Markdown**"
                 required

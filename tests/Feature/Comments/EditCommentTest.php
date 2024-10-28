@@ -7,16 +7,6 @@ use App\Models\User;
 
 use function Pest\Livewire\livewire;
 
-test('editing modal can load the data of the comment', function () {
-    $comment = Comment::factory()->create();
-
-    livewire(EditCommentModal::class)
-        ->call('setEditComment', $comment->id)
-        ->assertSet('commentId', $comment->id)
-        ->assertSet('body', $comment->body)
-        ->assertDispatched('edit-comment-was-set');
-});
-
 test('logged-in users can update their comments', function () {
     $oldBody = 'old comment';
 
@@ -29,7 +19,6 @@ test('logged-in users can update their comments', function () {
     $body = 'new comment';
 
     livewire(EditCommentModal::class)
-        ->call('setEditComment', $comment->id)
         ->set('body', $body)
         ->call('update', $comment->id)
         ->assertDispatched('close-edit-comment-modal')
@@ -50,7 +39,6 @@ test('the updated message must be at least 5 characters long', function () {
     $body = str()->random(4);
 
     livewire(EditCommentModal::class)
-        ->call('setEditComment', $comment->id)
         ->set('body', $body)
         ->call('update', $comment->id)
         ->assertHasErrors(['body' => 'min:5'])
@@ -71,7 +59,6 @@ test('the updated message must be less than 2000 characters', function () {
     $body = str()->random(2001);
 
     livewire(EditCommentModal::class)
-        ->call('setEditComment', $comment->id)
         ->set('body', $body)
         ->call('update', $comment->id)
         ->assertHasErrors(['body' => 'max:2000'])
@@ -90,7 +77,6 @@ test('users can\'t update others\' comments', function () {
     $body = 'new comment';
 
     livewire(EditCommentModal::class)
-        ->call('setEditComment', $comment->id, $offset)
         ->set('body', $body)
         ->call('update')
         ->assertForbidden();
@@ -119,7 +105,6 @@ it('can see the comment preview', function () {
     MARKDOWN;
 
     livewire(EditCommentModal::class)
-        ->call('setEditComment', $comment->id, $offset)
         ->set('body', $body)
         ->set('previewIsEnabled', true)
         ->assertSeeHtmlInOrder([
@@ -141,6 +126,8 @@ it('will display the word "edited" on top of it if it has been edited', function
     $comment->touch();
 
     livewire(CommentCard::class, [
+        'maxLayer' => 2,
+        'currentLayer' => 1,
         'postId' => $comment->post_id,
         'postAuthorId' => $comment->post->user_id,
         'commentId' => $comment->id,

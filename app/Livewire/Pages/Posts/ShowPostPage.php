@@ -5,6 +5,7 @@ namespace App\Livewire\Pages\Posts;
 use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 
 class ShowPostPage extends Component
@@ -22,6 +23,9 @@ class ShowPostPage extends Component
      * at this time, post model 404 not found errors will occasionally occur.
      */
     public int $postId;
+
+    #[Locked]
+    public int $maxCommentLayer = 2;
 
     public function render(): View
     {

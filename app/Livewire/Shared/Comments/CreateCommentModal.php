@@ -61,29 +61,32 @@ class CreateCommentModal extends Component
     /**
      * @throws Throwable
      */
-    public function store(): void
+    public function store(?int $parentId = null): void
     {
         $this->validate();
 
-        DB::transaction(function () {
+        DB::transaction(function () use ($parentId) {
             $comment = Comment::create([
                 'post_id' => $this->postId,
                 'user_id' => auth()->check() ? auth()->id() : null,
                 'body' => $this->body,
+                'parent_id' => $parentId,
             ]);
 
             $post = Post::findOrFail($this->postId);
 
-            // update comment count in post table
+            // Update comment count in post table.
             $post->increment('comment_counts');
 
-            // notify the article author of new comments
+            // Notify the article author of new comments.
             $post->user->notifyNewComment(new NewComment($comment));
 
-            $this->dispatch('create-comment-in-group-new', id: $comment->id);
+            $this->dispatch('refresh-'.($parentId ?? 'root').'-new-group', id: $comment->id);
+
+            $this->dispatch('append-new-id-to-'.($parentId ?? 'root'), id: $comment->id);
         });
 
-        // empty the body of the comment form
+        // Empty the body of the comment form.
         $this->reset('body', 'previewIsEnabled');
 
         $this->dispatch('close-create-comment-modal');

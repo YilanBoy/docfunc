@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
 use League\CommonMark\Exception\CommonMarkException;
 use Livewire\Attributes\Computed;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
 /**
@@ -51,24 +50,14 @@ class EditCommentModal extends Component
         return $this->convertToHtml($this->body);
     }
 
-    #[On('set-edit-comment')]
-    public function setEditComment(Comment $comment): void
-    {
-        $this->previewIsEnabled = false;
-        $this->commentId = $comment->id;
-        $this->body = $comment->body;
-
-        $this->dispatch('edit-comment-was-set');
-    }
-
     /**
      * @throws AuthorizationException
      */
     public function update(Comment $comment): void
     {
-        $this->validate();
-
         $this->authorize('update', $comment);
+
+        $this->validate();
 
         $comment->update([
             'body' => $this->body,

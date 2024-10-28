@@ -39,7 +39,7 @@
   x-data="header"
 >
   <div
-    class="relative hidden h-20 w-full items-center justify-center bg-gray-50 transition-all duration-300 dark:bg-gray-800 lg:flex"
+    class="relative hidden h-20 w-full items-center justify-center bg-gray-50 shadow-lg shadow-green-100 transition-all duration-300 dark:bg-gray-800 dark:shadow-lividus-700/50 lg:flex"
     id="desktop-header-menu"
   >
     {{-- logo --}}

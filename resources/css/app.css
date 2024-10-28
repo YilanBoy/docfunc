@@ -4,11 +4,11 @@
 
 @layer components {
     .group-gradient-underline-grow {
-        @apply bg-gradient-to-r from-green-500 via-teal-500 to-sky-500 dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500 bg-[length:0_3px] bg-left-bottom bg-no-repeat transition-all duration-200 ease-in group-hover:bg-[length:100%_3px];
+        @apply bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 dark:from-indigo-500 dark:via-violet-500 dark:to-purple-500 bg-[length:0_3px] bg-left-bottom bg-no-repeat transition-all duration-200 ease-in group-hover:bg-[length:100%_3px];
     }
 
     .gradient-underline-grow {
-        @apply bg-gradient-to-r from-green-500 via-teal-500 to-sky-500 dark:from-pink-500 dark:via-purple-500 dark:to-indigo-500 bg-[length:0_3px] bg-left-bottom bg-no-repeat transition-all duration-200 ease-in hover:bg-[length:100%_3px];
+        @apply bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 dark:from-indigo-500 dark:via-violet-500 dark:to-purple-500 bg-[length:0_3px] bg-left-bottom bg-no-repeat transition-all duration-200 ease-in hover:bg-[length:100%_3px];
     }
 
     .post-body {

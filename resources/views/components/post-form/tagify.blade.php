@@ -76,7 +76,7 @@
   >標籤 (最多 5 個)</label>
 
   <input
-    class="w-full rounded-md bg-white dark:bg-gray-700"
+    class="w-full rounded-md border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-700"
     id="tags"
     type="text"
     placeholder="標籤 (最多 5 個)"

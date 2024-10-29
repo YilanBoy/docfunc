@@ -65,7 +65,7 @@
             >會員名稱 (只能使用英文、數字、_ 或是 -)</label>
 
             <input
-              class="form-input mt-2 w-full rounded-md border border-gray-300 text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
+              class="form-input mt-2 w-full rounded-md border border-gray-300 text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-gray-50"
               id="name"
               name="name"
               type="text"
@@ -84,7 +84,7 @@
             >個人介紹 (最多 80 個字)</label>
 
             <textarea
-              class="form-textarea mt-2 w-full resize-none rounded-md border border-gray-300 text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
+              class="form-textarea mt-2 w-full resize-none rounded-md border border-gray-300 text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-white"
               id="introduction"
               name="introduction"
               wire:model.blur="introduction"

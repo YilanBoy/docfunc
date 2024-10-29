@@ -1,5 +1,17 @@
 @props(['model', 'maxCharacters'])
 
+@assets
+  <style>
+    .dark .ck.ck-sticky-panel__content {
+      border-color: #4b5563 !important;
+    }
+
+    .dark .ck.ck-editor__editable_inline:not(.ck-focused) {
+      border-color: #4b5563 !important;
+    }
+  </style>
+@endassets
+
 @script
   <script>
     Alpine.data('ckeditor', () => ({

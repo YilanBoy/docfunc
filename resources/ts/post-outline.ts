@@ -104,7 +104,9 @@ function showWhichSectionIAmIn(
 
             if (
                 currentScrollY >= headingScrollYs[currentKey] &&
-                (!nextKey || currentScrollY < headingScrollYs[nextKey])
+                (!nextKey || currentScrollY < headingScrollYs[nextKey]) &&
+                currentScrollY <
+                    postBody.getBoundingClientRect().bottom + currentScrollY
             ) {
                 const outlineLink = document.getElementById(
                     `${currentKey}-link`,

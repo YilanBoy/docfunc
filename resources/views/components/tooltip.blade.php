@@ -87,12 +87,12 @@
     x-cloak
   >
     <div
-      class="relative rounded bg-green-600 bg-opacity-90 px-2 py-1 text-white dark:bg-lividus-600"
+      class="relative rounded bg-green-500 bg-opacity-90 px-2 py-1 text-white dark:bg-lividus-600"
       x-show="tooltipVisible"
       x-transition
     >
       <p
-        class="block flex-shrink-0 whitespace-nowrap text-xs"
+        class="block flex-shrink-0 whitespace-nowrap text-sm"
         x-text="tooltipText"
       ></p>
       <div
@@ -102,7 +102,7 @@
         x-bind="tooltipArrowPositionClassListBinging"
       >
         <div
-          class="h-1.5 w-1.5 transform bg-green-600 bg-opacity-90 dark:bg-lividus-600"
+          class="h-1.5 w-1.5 transform bg-green-500 bg-opacity-90 dark:bg-lividus-600"
           x-bind="tooltipArrowAngleClassListBinging"
         ></div>
       </div>

@@ -20,7 +20,7 @@
   {{-- 介紹 --}}
   <x-card class="group dark:text-gray-50">
     <p
-      class="w-full bg-gradient-to-r from-emerald-500 to-sky-500 bg-clip-text text-center font-jetbrains-mono text-xl font-semibold text-transparent dark:border-white dark:from-pink-500 dark:to-violet-500">
+      class="w-full bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 bg-clip-text text-center font-jetbrains-mono text-xl font-semibold text-transparent dark:border-white dark:from-indigo-500 dark:via-violet-500 dark:to-purple-500">
       echo 'Hello World';
     </p>
 

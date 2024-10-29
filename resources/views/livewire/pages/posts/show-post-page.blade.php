@@ -71,7 +71,7 @@
             >
               <article>
                 {{-- post title --}}
-                <h1 class="text-4xl leading-relaxed text-green-600 dark:text-lividus-500">{{ $post->title }}</h1>
+                <h1 class="text-4xl leading-relaxed text-emerald-600 dark:text-lividus-500">{{ $post->title }}</h1>
 
                 {{-- post information --}}
                 <div class="mt-4 flex items-center space-x-2 text-base text-neutral-400">
@@ -115,7 +115,7 @@
                 {{-- post tags --}}
                 @if ($post->tags()->exists())
                   <div class="mt-4 flex flex-wrap items-center text-base">
-                    <x-icon.tags class="mr-1 w-4 text-green-300 dark:text-lividus-700" />
+                    <x-icon.tags class="mr-1 w-4 text-emerald-300 dark:text-lividus-700" />
 
                     @foreach ($post->tags as $tag)
                       <x-tag :href="route('tags.show', ['tagId' => $tag->id])">

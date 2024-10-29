@@ -100,7 +100,7 @@
 
   @if ($currentLayer < $maxLayer)
     <div
-      class="relative pl-8 before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:rounded-full before:bg-green-400/20 before:contain-none dark:before:bg-indigo-500/20"
+      class="relative pl-8 before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:rounded-full before:bg-emerald-400/20 before:contain-none dark:before:bg-indigo-500/20"
       id="children-{{ $commentId }}"
     >
       <livewire:shared.comments.comment-group

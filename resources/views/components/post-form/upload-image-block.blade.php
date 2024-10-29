@@ -25,16 +25,16 @@
       },
 
       changeBlockStyleWhenDragEnter() {
-        this.$refs.uploadBlock.classList.remove('text-green-500', 'dark:text-indigo-400', 'border-green-500',
+        this.$refs.uploadBlock.classList.remove('text-emerald-500', 'dark:text-indigo-400', 'border-emerald-500',
           'dark:border-indigo-400')
-        this.$refs.uploadBlock.classList.add('text-green-600', 'dark:text-indigo-300', 'border-green-600',
+        this.$refs.uploadBlock.classList.add('text-emerald-600', 'dark:text-indigo-300', 'border-emerald-600',
           'dark:border-indigo-300')
       },
 
       changeBlockStyleWhenDragLeaveAndDrop() {
-        this.$refs.uploadBlock.classList.add('text-green-500', 'dark:text-indigo-400', 'border-green-500',
+        this.$refs.uploadBlock.classList.add('text-emerald-500', 'dark:text-indigo-400', 'border-emerald-500',
           'dark:border-indigo-400')
-        this.$refs.uploadBlock.classList.remove('text-green-600', 'dark:text-indigo-300', 'border-green-600',
+        this.$refs.uploadBlock.classList.remove('text-emerald-600', 'dark:text-indigo-300', 'border-emerald-600',
           'dark:border-indigo-300')
       }
     }));
@@ -51,7 +51,7 @@
 >
   {{-- Upload Area --}}
   <div
-    class="relative flex cursor-pointer flex-col items-center rounded-lg border-2 border-dashed border-green-500 bg-transparent px-4 py-6 tracking-wide text-green-500 transition-all duration-300 hover:border-green-600 hover:text-green-600 dark:border-indigo-400 dark:text-indigo-400 dark:hover:border-indigo-300 dark:hover:text-indigo-300"
+    class="relative flex cursor-pointer flex-col items-center rounded-lg border-2 border-dashed border-emerald-500 bg-transparent px-4 py-6 tracking-wide text-emerald-500 transition-all duration-300 hover:border-emerald-600 hover:text-emerald-600 dark:border-indigo-400 dark:text-indigo-400 dark:hover:border-indigo-300 dark:hover:text-indigo-300"
     x-ref="uploadBlock"
   >
     <input
@@ -77,9 +77,9 @@
     x-cloak
     x-show="isUploading"
   >
-    <div class="mb-4 flex h-4 overflow-hidden rounded bg-green-200 text-xs dark:bg-indigo-200">
+    <div class="mb-4 flex h-4 overflow-hidden rounded bg-emerald-200 text-xs dark:bg-indigo-200">
       <div
-        class="flex flex-col justify-center whitespace-nowrap bg-green-500 text-center text-white dark:bg-indigo-500"
+        class="flex flex-col justify-center whitespace-nowrap bg-emerald-500 text-center text-white dark:bg-indigo-500"
         x-bind:style="`width:${progress}%`"
       >
       </div>

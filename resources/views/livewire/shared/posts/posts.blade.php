@@ -28,7 +28,7 @@
 
     {{-- 文章類別訊息 --}}
     <div
-      class="hidden items-center justify-center rounded-lg bg-green-200 px-4 py-2 text-green-800 dark:bg-lividus-700 dark:text-gray-50 md:flex"
+      class="hidden items-center justify-center rounded-lg bg-emerald-200 px-4 py-2 text-emerald-800 dark:bg-lividus-700 dark:text-gray-50 md:flex"
     >
       @if ($categoryId)
         {{ $categoryName }}：{{ $categoryDescription }}
@@ -45,7 +45,7 @@
     <x-card class="group relative z-0 grid cursor-pointer grid-cols-1 gap-4 overflow-hidden">
       {{-- category icon --}}
       <div
-        class="absolute -bottom-16 -right-4 size-56 rotate-12 text-green-200 transition-all duration-300 group-hover:-bottom-4 group-hover:-right-0 dark:text-lividus-800"
+        class="absolute -bottom-16 -right-4 size-56 rotate-12 text-emerald-200 transition-all duration-300 group-hover:-bottom-4 group-hover:-right-0 dark:text-lividus-800"
       >
         {!! $post->category->icon !!}
       </div>
@@ -73,7 +73,7 @@
       {{-- 文章標籤 --}}
       @if ($post->tags_count > 0)
         <div class="z-20 flex w-fit flex-wrap items-center text-base">
-          <x-icon.tags class="mr-1 w-4 text-green-300 dark:text-lividus-700" />
+          <x-icon.tags class="mr-1 w-4 text-emerald-300 dark:text-lividus-700" />
 
           @foreach ($post->tags as $tag)
             <x-tag :href="route('tags.show', ['tagId' => $tag->id])">

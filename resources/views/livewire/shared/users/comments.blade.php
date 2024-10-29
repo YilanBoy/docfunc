@@ -58,7 +58,7 @@
       </div>
 
       <div
-        class="absolute bottom-3 right-3 z-10 flex items-center rounded-lg bg-emerald-600 px-2 py-1 text-sm text-gray-50 dark:bg-lividus-600"
+        class="absolute bottom-3 right-3 z-10 flex items-center rounded-lg bg-emerald-500 px-2 py-1 text-sm text-gray-50 dark:bg-lividus-600"
       >
         <x-icon.clock class="w-4" />
         <time

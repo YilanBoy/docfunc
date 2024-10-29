@@ -32,7 +32,7 @@
 
     <div class="mt-8 flex items-center justify-center">
       <a
-        class="group relative flex w-full items-center justify-center overflow-hidden rounded-lg bg-emerald-600 px-4 py-2 [transform:translateZ(0)] before:absolute before:left-1/2 before:top-1/2 before:h-8 before:w-8 before:-translate-x-1/2 before:-translate-y-1/2 before:scale-[0] before:rounded-full before:bg-lividus-600 before:opacity-0 before:transition before:duration-700 before:ease-in-out hover:before:scale-[10] hover:before:opacity-100 dark:bg-lividus-600 dark:before:bg-emerald-600"
+        class="group relative flex w-full items-center justify-center overflow-hidden rounded-lg bg-emerald-500 px-4 py-2 [transform:translateZ(0)] before:absolute before:left-1/2 before:top-1/2 before:h-8 before:w-8 before:-translate-x-1/2 before:-translate-y-1/2 before:scale-[0] before:rounded-full before:bg-lividus-600 before:opacity-0 before:transition before:duration-700 before:ease-in-out hover:before:scale-[10] hover:before:opacity-100 dark:bg-lividus-600 dark:before:bg-emerald-500"
         href="{{ route('posts.create') }}"
         wire:navigate
       >

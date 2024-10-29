@@ -12,7 +12,7 @@
       showAlert(status, message) {
         switch (status) {
           case 'success':
-            this.alertBackgroundColor = 'bg-green-500';
+            this.alertBackgroundColor = 'bg-emerald-500';
             this.alertMessage = `${this.successIcon} ${message}`;
             break;
           case 'info':

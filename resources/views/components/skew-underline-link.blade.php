@@ -22,7 +22,7 @@
     <span class="ml-2">{{ $slot }}</span>
   </span>
   <span @class([
-      'absolute bottom-0 left-0 z-10 h-2 w-0 skew-x-12 bg-green-400 dark:bg-lividus-600',
+      'absolute bottom-0 left-0 z-10 h-2 w-0 skew-x-12 bg-emerald-400 dark:bg-lividus-600',
       'transition-all duration-300 ease-out group-hover:w-full' => !$selected,
       'w-full' => $selected,
   ])></span>

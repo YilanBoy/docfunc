@@ -14,10 +14,10 @@
     .post-body {
         @apply prose text-lg max-w-none prose-slate dark:prose-invert leading-8
             /* headings */
-        prose-headings:font-medium prose-headings:text-green-600 dark:prose-headings:text-lividus-500
+        prose-headings:font-medium prose-headings:text-emerald-600 dark:prose-headings:text-lividus-500
         prose-h2:border-b-2 prose-h2:border-slate-300 dark:prose-h2:border-slate-500 prose-h2:my-4 prose-h2:py-4 prose-h2:border-solid
             /* links */
-        prose-a:no-underline hover:prose-a:underline prose-a:text-green-600 hover:prose-a:text-green-700
+        prose-a:no-underline hover:prose-a:underline prose-a:text-emerald-600 hover:prose-a:text-emerald-700
         dark:prose-a:text-lividus-400 dark:hover:prose-a:text-lividus-300
             /* lists */
         prose-li:marker:text-gray-500 dark:prose-li:marker:text-gray-400
@@ -36,7 +36,7 @@
             /* pre */
         prose-pre:p-0 prose-pre:rounded-lg prose-pre:text-lg
             /* blockquote */
-        prose-blockquote:border-green-400 prose-blockquote:text-slate-600 prose-blockquote:bg-green-100/50
+        prose-blockquote:border-emerald-400 prose-blockquote:text-slate-600 prose-blockquote:bg-emerald-100/50
         dark:prose-blockquote:border-lividus-600 dark:prose-blockquote:text-slate-400 dark:prose-blockquote:bg-lividus-800/50 prose-blockquote:py-2 prose-blockquote:pr-2;
     }
 
@@ -52,7 +52,7 @@
     .comment-body {
         @apply prose text-lg max-w-none prose-slate dark:prose-invert leading-8
             /* links */
-        prose-a:no-underline hover:prose-a:underline prose-a:text-green-600 hover:prose-a:text-green-700
+        prose-a:no-underline hover:prose-a:underline prose-a:text-emerald-600 hover:prose-a:text-emerald-700
         dark:prose-a:text-lividus-400 dark:hover:prose-a:text-lividus-300
             /* lists */
         prose-li:marker:text-gray-500 dark:prose-li:marker:text-gray-400
@@ -65,7 +65,7 @@
             /* pre */
         prose-pre:p-0 prose-pre:rounded-lg prose-pre:text-lg
             /* blockquote */
-        prose-blockquote:border-green-400 prose-blockquote:text-slate-600 prose-blockquote:bg-green-100/50
+        prose-blockquote:border-emerald-400 prose-blockquote:text-slate-600 prose-blockquote:bg-emerald-100/50
         dark:prose-blockquote:border-lividus-600 dark:prose-blockquote:text-slate-400 dark:prose-blockquote:bg-lividus-800/50 prose-blockquote:py-2 prose-blockquote:pr-2;
     }
 }

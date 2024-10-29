@@ -2,11 +2,16 @@
 
 @assets
   <style>
+    .ck.ck-toolbar {
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+
     .dark .ck.ck-sticky-panel__content {
       border-color: #4b5563 !important;
     }
 
-    .dark .ck.ck-editor__editable_inline:not(.ck-focused) {
+    .dark .ck.ck-content.ck-editor__editable:not(.ck-focused) {
       border-color: #4b5563 !important;
     }
   </style>

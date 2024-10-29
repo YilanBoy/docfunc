@@ -7,7 +7,6 @@
 
 <p align="center">
   <img src="https://github.com/YilanBoy/docfunc/actions/workflows/tests.yaml/badge.svg" alt="Tests">
-  <img src="https://github.com/YilanBoy/docfunc/actions/workflows/build-images.yaml/badge.svg" alt="Build images">
   <a href="https://codecov.io/gh/YilanBoy/docfunc" > 
     <img src="https://codecov.io/gh/YilanBoy/docfunc/graph/badge.svg?token=K2V2ANX2LW" alt="Codecov"/> 
   </a>
@@ -15,8 +14,8 @@
 
 ## Introduction
 
-This is a simple blog project, mainly used to help me learn about Laravel. The entire project uses
-the [TALL stack](https://tallstack.dev/), which is：
+This is a simple blog project, mainly used to help me learn about Laravel.
+The entire project uses the [TALL stack](https://tallstack.dev/), which is:
 
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Alpine.js](https://alpinejs.dev/)
@@ -25,8 +24,8 @@ the [TALL stack](https://tallstack.dev/), which is：
 
 This project contains certain basic functions, such as membership system, writing articles and replies.
 
-Post editor use [CKEditor 5](https://ckeditor.com/), You can upload image to AWS S3 in blog post. You can search post
-by [Algolia](https://www.algolia.com/).
+Post editor use [CKEditor 5](https://ckeditor.com/), You can upload image to AWS S3 in blog post.
+You can search post by [Algolia](https://www.algolia.com/).
 
 ## Requirements
 
@@ -66,7 +65,7 @@ Running laravel mix:
 npm run dev
 ```
 
-Create the `.env` file, and set up the config, such as database connection, reCAPTCHA key, S3 key, mail service etc:
+Create the `.env` file, and set up the config, such as database connection, reCAPTCHA key, S3 key, mail service etc.:
 
 ```sh
 cp .env-example .env
@@ -106,8 +105,8 @@ php artisan ide-helper:models
 
 ### Supervisor
 
-You could deploy this project use [Laravel Octane](https://laravel.com/docs/9.x/octane), supercharges the performance by
-serving application using [Swoole](https://github.com/swoole/swoole-src), [RoadRunner](https://roadrunner.dev/), or [FrankenPHP](https://frankenphp.dev/).
+You could deploy this project use [Laravel Octane](https://laravel.com/docs/9.x/octane),
+supercharges the performance by serving application using [Swoole](https://github.com/swoole/swoole-src), [RoadRunner](https://roadrunner.dev/), or [FrankenPHP](https://frankenphp.dev/).
 
 > [!NOTE]
 >
@@ -126,7 +125,7 @@ serving application using [Swoole](https://github.com/swoole/swoole-src), [RoadR
 > sudo apt-get php8.2-swoole
 > ```
 
-Setting octane in `.env` file
+Setting octane in `.env` file:
 
 ```text
 OCTANE_SERVER=swoole
@@ -139,12 +138,10 @@ Start the service by swoole server:
 php artisan ocatane:start
 ```
 
-In production, you can use [Supervisor](https://github.com/Supervisor/supervisor) to start swoole server and laravel
-queue
-worker.
+In production, you can use [Supervisor](https://github.com/Supervisor/supervisor) to start swoole server and laravel queue worker.
 
-Using supervisor to start swoole server process, we have to create a `docfunc-octane-worker.conf` config file
-in `/etc/supervisor/conf.d/`.
+Using supervisor to start swoole server process,
+we have to create a `docfunc-octane-worker.conf` config file in `/etc/supervisor/conf.d/`.
 
 ```text
 [program:docfunc-octane-worker]
@@ -158,8 +155,8 @@ redirect_stderr=true
 stdout_logfile=/var/log/docfunc-octane-worker.log
 ```
 
-Using supervisor to start laravel queue worker process, we have to create a `docfunc-queue-worker.conf` config file
-in `/etc/supervisor/conf.d/`.
+Using supervisor to start laravel queue worker process, 
+we have to create a `docfunc-queue-worker.conf` config file in `/etc/supervisor/conf.d/`.
 
 ```text
 [program:docfunc-queue-worker]
@@ -188,28 +185,4 @@ Add this line to run the Scheduler.
 
 ```text
 0 * * * * cd /var/www/docfunc && php artisan schedule:run >> /dev/null 2>&1
-```
-
-### Docker
-
-> [!NOTE]
->
-> You must install [Docker](https://www.docker.com/) first.
-
-The container is divided into 3 parts, which are app, queue and scheduler.
-
-Dockerfiles is placed in the folder dockerfiles. The php settings and entrypoint files in the container are placed in
-the folder deployment. You can use Docker and these files to build images.
-
-```sh
-cd docfunc
-
-# build blog app
-docker buildx build -f containerize/dockerfiles/Dockerfile.app --platform linux/amd64,linux/arm64 --push -t docfunc:latest .
-
-# build queue
-docker buildx build -f containerize/dockerfiles/Dockerfile.queue --platform linux/amd64,linux/arm64 --push -t docfunc-queue:latest .
-
-# build scheduler
-docker buildx build -f containerize/dockerfiles/Dockerfile.scheduler --platform linux/amd64,linux/arm64 --push -t docfunc-scheduler:latest .
 ```

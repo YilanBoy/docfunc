@@ -3,16 +3,24 @@
 @assets
   {{-- custom tagify style --}}
   <style>
-    .tagify {
+    .tagify-custom-look {
+      --tag-border-radius: 6px;
       align-items: center;
+      --tag-inset-shadow-size: 3rem;
     }
 
-    .tagify__tag {
-      height: 2rem;
-    }
-
-    .dark .tagify__tag {
+    .dark .tagify-custom-look {
+      --tag-bg: #52525b;
+      --tag-hover: #71717a;
+      --tag-text-color: #f9fafb;
+      --tag-remove-btn-color: #f9fafb;
       --tag-text-color--edit: #f9fafb;
+    }
+
+    :root.dark {
+      --tagify-dd-bg-color: #52525b;
+      --tagify-dd-color-primary: #71717a;
+      --tagify-dd-text-color: #f9fafb;
     }
   </style>
 @endassets
@@ -76,7 +84,7 @@
   >標籤 (最多 5 個)</label>
 
   <input
-    class="w-full rounded-md border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-700"
+    class="tagify-custom-look w-full rounded-md border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-700"
     id="tags"
     type="text"
     placeholder="標籤 (最多 5 個)"

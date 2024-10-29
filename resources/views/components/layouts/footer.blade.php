@@ -17,7 +17,7 @@
         target="_blank"
         rel="nofollow noopener noreferrer"
       >
-        Source Code
+        Website Source Code
       </a>
       <a
         class="my-3 block font-medium text-gray-400 duration-300 hover:text-gray-50"
@@ -37,6 +37,15 @@
       </div>
 
       {{-- Links --}}
+      <a
+        class="my-3 block font-medium text-gray-400 duration-300 hover:text-gray-50"
+        href="https://www.freecodecamp.org/"
+        target="_blank"
+        rel="nofollow noopener noreferrer"
+      >
+        freeCodeCamp
+      </a>
+
       <a
         class="my-3 block font-medium text-gray-400 duration-300 hover:text-gray-50"
         href="https://laracasts.com/"

@@ -1,6 +1,6 @@
 @props([
     'tooltipText' => 'Copy link',
-    'clickText' => 'Copied!',
+    'clickText' => '',
     'tooltipPosition' => 'top',
 ])
 
@@ -8,9 +8,10 @@
   <script>
     Alpine.data('tooltip', () => ({
       tooltipVisible: false,
-      tooltipText: @js($tooltipText),
+      tooltipText: '',
+      clickText: '',
       tooltipArrow: true,
-      tooltipPosition: @js($tooltipPosition),
+      tooltipPosition: '',
 
       mouseEnterTooltip() {
         this.tooltipVisible = true;
@@ -21,8 +22,12 @@
       },
 
       clickTooltip() {
-        this.tooltipText = '{{ $clickText }}';
-        setTimeout(() => this.tooltipText = '{{ $tooltipText }}', 2000);
+        if (typeof this.clickText !== "string" || this.clickText.trim().length === 0) return;
+
+        const originalText = this.tooltipText;
+
+        this.tooltipText = this.clickText
+        setTimeout(() => this.tooltipText = originalText, 2000);
       },
 
       tooltipVisibleClassListBinging: {
@@ -56,12 +61,21 @@
             right: 'origin-top-right -rotate-45',
           } [this.tooltipPosition];
         }
+      },
+
+      init() {
+        this.tooltipText = this.$root.dataset.tooltipText;
+        this.clickText = this.$root.dataset.clickText;
+        this.tooltipPosition = this.$root.dataset.tooltipPosition;
       }
     }));
   </script>
 @endscript
 
 <div
+  data-tooltip-text="{{ $tooltipText }}"
+  data-click-text="{{ $clickText }}"
+  data-tooltip-position="{{ $tooltipPosition }}"
   {{ $attributes->merge(['class' => 'relative w-fit h-fit']) }}
   x-data="tooltip"
 >

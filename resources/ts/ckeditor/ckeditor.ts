@@ -38,6 +38,8 @@ import {
     WordCount,
 } from 'ckeditor5';
 
+import coreTranslations from 'ckeditor5/translations/zh.js';
+
 import 'ckeditor5/ckeditor5.css';
 // Override the default styles.
 import './custom.css';
@@ -181,7 +183,8 @@ ClassicEditor.defaultConfig = {
         ],
         indentSequence: '    ',
     },
-    language: 'en',
+    translations: [coreTranslations],
+    language: 'zh',
 };
 
 declare global {

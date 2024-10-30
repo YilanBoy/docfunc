@@ -6,10 +6,6 @@
     --ck-font-size-base: 16px;
 }
 
-:root .ck.ck-sticky-panel {
-    --ck-border-radius: 6px 6px 0 0;
-}
-
 :root.dark {
     --ck-color-base-border:#4b5563;
 

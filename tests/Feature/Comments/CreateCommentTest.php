@@ -17,7 +17,7 @@ test('non-logged-in users can leave a anonymous comment', function () {
         ->set('body', $body)
         ->set('captchaToken', 'fake-captcha-response')
         ->call('store')
-        ->assertDispatched('refresh-root-new-group')
+        ->assertDispatched('append-new-id-to-root-new-comment-group')
         ->assertDispatched('close-create-comment-modal')
         ->assertDispatched('update-comment-counts')
         ->assertDispatched('info-badge',
@@ -44,7 +44,7 @@ test('logged-in users can leave a comment', function () {
         ->set('body', $body)
         ->set('captchaToken', 'fake-captcha-response')
         ->call('store')
-        ->assertDispatched('refresh-root-new-group')
+        ->assertDispatched('append-new-id-to-root-new-comment-group')
         ->assertDispatched('close-create-comment-modal')
         ->assertDispatched('update-comment-counts')
         ->assertDispatched('info-badge',

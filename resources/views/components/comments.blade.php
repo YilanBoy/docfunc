@@ -16,7 +16,7 @@
     :$postId
     :$postAuthorId
     {{-- if it's root comment, the comment group id is 'root-group' --}}
-    :comment-group-name="'root-new-group'"
+    :comment-group-name="'root-new-comment-group'"
   />
 
   {{-- comments list --}}

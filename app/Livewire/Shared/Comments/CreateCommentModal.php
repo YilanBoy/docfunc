@@ -81,19 +81,19 @@ class CreateCommentModal extends Component
             // Notify the article author of new comments.
             $post->user->notifyNewComment(new NewComment($comment));
 
-            $this->dispatch('refresh-'.($parentId ?? 'root').'-new-group', id: $comment->id);
+            $this->dispatch('append-new-id-to-'.($parentId ?? 'root').'-new-comment-group', id: $comment->id);
 
-            $this->dispatch('append-new-id-to-'.($parentId ?? 'root'), id: $comment->id);
+            $this->dispatch('append-new-id-to-'.($parentId ?? 'root').'-comment-list', id: $comment->id);
         });
-
-        // Empty the body of the comment form.
-        $this->reset('body', 'previewIsEnabled');
 
         $this->dispatch('close-create-comment-modal');
 
         $this->dispatch('update-comment-counts');
 
         $this->dispatch('info-badge', status: 'success', message: '成功新增留言！');
+
+        // Empty the body of the comment form.
+        $this->reset('body', 'previewIsEnabled');
     }
 
     public function render(): View

@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
@@ -39,9 +40,9 @@ class CommentGroup extends Component
      *
      * There are three types of comment group names:
      *
-     * - 'root-new-group' for the new comment with no parent id (top layer).
-     * - '[command id]-new-group' for new comment with parent id (second layer or more).
-     * - '[commend id]-group' for normal comment group.
+     * - 'root-new-comment-group' for the new comment with no parent id (top layer).
+     * - '[command id]-new-comment-group' for new comment with parent id (second layer or more).
+     * - '[commend id]-comment-group' for normal comment group.
      */
     public string $commentGroupName;
 
@@ -50,12 +51,12 @@ class CommentGroup extends Component
      *
      * @var array<int>
      */
-    public array $ids = [];
+    public array $commentIds = [];
 
-    #[On('refresh-{commentGroupName}')]
+    #[On('append-new-id-to-{commentGroupName}')]
     public function appendCommentIdInGroup(int $id): void
     {
-        $this->ids[] = $id;
+        $this->commentIds[] = $id;
     }
 
     /**
@@ -68,7 +69,7 @@ class CommentGroup extends Component
     {
         $this->authorize('destroy', $comment);
 
-        unset($this->ids[array_search($comment->id, $this->ids)]);
+        unset($this->commentIds[array_search($comment->id, $this->commentIds)]);
 
         DB::transaction(function () use ($comment) {
             $comment->delete();
@@ -85,22 +86,24 @@ class CommentGroup extends Component
 
     public function render(): View
     {
-        $comments = collect();
-
-        if (count($this->ids) > 0) {
-            $comments = Comment::query()
-                ->select(['id', 'body', 'user_id', 'created_at', 'updated_at'])
-                ->where('post_id', $this->postId)
-                ->when(! is_null($this->parentId), function (Builder $query) {
-                    $query->where('parent_id', $this->parentId);
-                })
-                ->whereIn('id', $this->ids)
-                ->with('user:id,name,email')
-                ->with('children')
-                ->oldest('id')
-                ->get();
-        }
+        $comments = $this->getComments();
 
         return view('livewire.shared.comments.comment-group', compact('comments'));
+    }
+
+    private function getComments(): Collection
+    {
+        return Comment::query()
+            ->select(['id', 'body', 'user_id', 'created_at', 'updated_at'])
+            ->whereIn('id', $this->commentIds)
+            ->where('post_id', $this->postId)
+            ->when(! is_null($this->parentId), function (Builder $query) {
+                $query->where('parent_id', $this->parentId);
+            })
+            ->whereIn('id', $this->commentIds)
+            ->with('user:id,name,email')
+            ->with('children')
+            ->oldest('id')
+            ->get();
     }
 }

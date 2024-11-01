@@ -108,7 +108,7 @@
         :current-layer="$currentLayer + 1"
         :post-id="$postId"
         :post-author-id="$postAuthorId"
-        :comment-group-name="$commentId . '-new-group'"
+        :comment-group-name="$commentId . '-new-comment-group'"
       />
 
       {{-- If this comment has no sub-messages,
@@ -121,7 +121,7 @@
           :$postId
           :$postAuthorId
           :parent-id="$commentId"
-          :comment-list-name="$commentId"
+          :comment-list-name="$commentId . '-comment-list'"
         />
       @endif
     </div>

@@ -41,16 +41,16 @@
   class="w-full"
   x-data="commentList"
 >
-  @foreach ($IdsByFirstId as $firstId => $ids)
+  @foreach ($commentIdsGroupByFirstId as $firstId => $commentIds)
     <livewire:shared.comments.comment-group
       :$maxLayer
       :$currentLayer
       :$postId
       :$postAuthorId
       :$parentId
-      :$ids
-      :comment-group-name="$firstId . '-group'"
-      :key="$firstId . '-group'"
+      :$commentIds
+      :comment-group-name="$firstId . '-comment-group'"
+      :key="$firstId . '-comment-group'"
     />
   @endforeach
 
@@ -58,7 +58,7 @@
     <button
       class="mt-6 flex w-full items-center justify-center rounded-xl border-2 border-dashed border-gray-500 p-2 text-lg text-gray-500 transition-colors duration-300 ease-in-out hover:bg-gray-500 hover:text-gray-50"
       type="button"
-      wire:click="showMore"
+      wire:click="showMoreComments"
     >
       <x-icon.animate-spin
         class="w-5"

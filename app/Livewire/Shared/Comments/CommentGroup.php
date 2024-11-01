@@ -10,11 +10,15 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Throwable;
 
+/**
+ * @property Collection<Comment> $comments
+ */
 class CommentGroup extends Component
 {
     use AuthorizesRequests;
@@ -84,14 +88,8 @@ class CommentGroup extends Component
         $this->dispatch('info-badge', status: 'success', message: '成功刪除留言！');
     }
 
-    public function render(): View
-    {
-        $comments = $this->getComments();
-
-        return view('livewire.shared.comments.comment-group', compact('comments'));
-    }
-
-    private function getComments(): Collection
+    #[Computed]
+    public function comments(): Collection
     {
         return Comment::query()
             ->select(['id', 'body', 'user_id', 'created_at', 'updated_at'])
@@ -105,5 +103,10 @@ class CommentGroup extends Component
             ->with('children')
             ->oldest('id')
             ->get();
+    }
+
+    public function render(): View
+    {
+        return view('livewire.shared.comments.comment-group');
     }
 }

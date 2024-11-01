@@ -37,7 +37,7 @@
   class="w-full"
   x-data="commentGroup"
 >
-  @foreach ($comments as $comment)
+  @foreach ($this->comments as $comment)
     <livewire:shared.comments.comment-card
       :$maxLayer
       :$currentLayer

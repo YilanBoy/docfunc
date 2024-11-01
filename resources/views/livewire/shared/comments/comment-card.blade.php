@@ -23,7 +23,6 @@
 >
   <x-dashed-card class="mt-6">
     <div class="flex flex-col">
-      {{-- 大頭貼 --}}
       <div class="flex items-center space-x-4 text-base">
         @if ($userId !== 0)
           <a
@@ -39,6 +38,7 @@
 
           <span class="dark:text-gray-50">{{ $userName }}</span>
         @else
+          <x-icon.question-circle-fill class="size-10 text-gray-300 dark:text-gray-500" />
           <span class="dark:text-gray-50">訪客</span>
         @endif
 
@@ -52,7 +52,6 @@
         @endif
       </div>
 
-      {{-- 留言 --}}
       <div class="comment-body">
         {!! $this->convertedBody !!}
       </div>
@@ -100,7 +99,7 @@
 
   @if ($currentLayer < $maxLayer)
     <div
-      class="relative pl-8 before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:rounded-full before:bg-emerald-400/20 before:contain-none dark:before:bg-indigo-500/20"
+      class="relative pl-4 before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:rounded-full before:bg-emerald-400/20 before:contain-none dark:before:bg-indigo-500/20 md:pl-8"
       id="children-{{ $commentId }}"
     >
       <livewire:shared.comments.comment-group

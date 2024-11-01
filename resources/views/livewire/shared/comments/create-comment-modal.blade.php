@@ -29,7 +29,7 @@
         return this.submitIsEnabled === false;
       },
       informationOnSubmitButton() {
-        return this.submitIsEnabled ? '儲存' : '驗證中'
+        return this.submitIsEnabled ? '回覆' : '驗證中'
       },
       init() {
         turnstile.ready(() => {

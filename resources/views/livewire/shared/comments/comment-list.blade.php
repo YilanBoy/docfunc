@@ -55,16 +55,18 @@
   @endforeach
 
   @if ($showMoreButtonIsActive)
-    <button
-      class="mt-6 flex w-full items-center justify-center rounded-xl border-2 border-dashed border-gray-500 p-2 text-lg text-gray-500 transition-colors duration-300 ease-in-out hover:bg-gray-500 hover:text-gray-50"
-      type="button"
-      wire:click="showMoreComments"
-    >
-      <x-icon.animate-spin
-        class="w-5"
-        wire:loading
-      />
-      <span class="ml-2">顯示更多留言</span>
-    </button>
+    <div class="mt-6 flex w-full items-center justify-center">
+      <button
+        class="rounded-lg bg-emerald-50 px-3.5 py-2.5 text-sm text-emerald-600 shadow-sm hover:bg-emerald-100 dark:bg-lividus-500 dark:text-gray-50 dark:hover:bg-lividus-400"
+        type="button"
+        wire:click="showMoreComments"
+      >
+        <x-icon.animate-spin
+          class="mr-2 size-5"
+          wire:loading
+        />
+        <span>顯示更多留言</span>
+      </button>
+    </div>
   @endif
 </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Shared\Comments\CreateCommentModal;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 
@@ -144,4 +145,54 @@ test('when a new comment is added, the post comments will be increased by one', 
         ->call('store');
 
     $this->assertDatabaseHas('posts', ['comment_counts' => 1]);
+});
+
+it('can reply to others comment', function () {
+    $this->actingAs(User::factory()->create());
+
+    $post = Post::factory()->create();
+    $comment = Comment::factory()->create(['post_id' => $post->id]);
+
+    livewire(CreateCommentModal::class, ['postId' => $post->id])
+        ->set('body', 'Hello World!')
+        ->set('captchaToken', 'fake-captcha-response')
+        ->call('store', parentId: $comment->id)
+        ->assertDispatched('append-new-id-to-'.$comment->id.'-new-comment-group')
+        ->assertDispatched('close-create-comment-modal')
+        ->assertDispatched('update-comment-counts')
+        ->assertDispatched('info-badge',
+            status: 'success',
+            message: '成功新增留言！',
+        );
+});
+
+it('will show alert, when user want to reply to deleted post', function () {
+    $this->actingAs(User::factory()->create());
+
+    $post = Post::factory()->create();
+    $postId = $post->id;
+
+    $post->delete();
+
+    livewire(CreateCommentModal::class, ['postId' => $postId])
+        ->set('body', 'Hello World!')
+        ->set('captchaToken', 'fake-captcha-response')
+        ->call('store')
+        ->assertDispatched(event: 'info-badge', status: 'danger', message: '無法回覆！文章已被刪除！');
+});
+
+it('will show alert, when user want to reply to deleted comment', function () {
+    $this->actingAs(User::factory()->create());
+
+    $post = Post::factory()->create();
+    $comment = Comment::factory()->create(['post_id' => $post->id]);
+    $commentId = $comment->id;
+
+    $comment->delete();
+
+    livewire(CreateCommentModal::class, ['postId' => $post->id])
+        ->set('body', 'Hello World!')
+        ->set('captchaToken', 'fake-captcha-response')
+        ->call('store', parentId: $commentId)
+        ->assertDispatched(event: 'info-badge', status: 'danger', message: '無法回覆！留言已被刪除！');
 });

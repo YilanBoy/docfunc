@@ -17,9 +17,10 @@ test('the author can delete his comment', function () {
         'postId' => $comment->post_id,
         'postAuthorId' => $comment->post->user_id,
         'commentGroupName' => 1,
-        'ids' => [$comment->id],
+        'commentIds' => [$comment->id],
     ])
-        ->call('destroy', comment: $comment->id)
+        ->call('destroy', commentId: $comment->id)
+        ->assertSet('commentIds', [])
         ->assertDispatched('update-comment-counts')
         ->assertDispatched('info-badge',
             status: 'success',
@@ -40,9 +41,10 @@ test('post author can delete other users comment', function () {
         'postId' => $comment->post_id,
         'postAuthorId' => $comment->post->user_id,
         'commentGroupName' => 1,
-        'ids' => [$comment->id],
+        'commentIds' => [$comment->id],
     ])
-        ->call('destroy', comment: $comment->id)
+        ->call('destroy', commentId: $comment->id)
+        ->assertSet('commentIds', [])
         ->assertDispatched('update-comment-counts')
         ->assertDispatched('info-badge',
             status: 'success',
@@ -65,9 +67,31 @@ test('when a comment is deleted, the post comments will be reduced by one', func
         'postId' => $comment->post_id,
         'postAuthorId' => $comment->post->user_id,
         'commentGroupName' => 1,
-        'ids' => [$comment->id],
+        'commentIds' => [$comment->id],
     ])
-        ->call('destroy', comment: $comment->id);
+        ->call('destroy', commentId: $comment->id)
+        ->assertSet('commentIds', []);
 
     $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
+});
+
+it('will show alert when user want to delete the deleted comment', function () {
+    $comment = Comment::factory()->create();
+    $commentId = $comment->id;
+    $postId = $comment->post_id;
+    $postAuthorId = $comment->post->user_id;
+
+    $comment->delete();
+
+    livewire(CommentGroup::class, [
+        'maxLayer' => 2,
+        'currentLayer' => 1,
+        'postId' => $postId,
+        'postAuthorId' => $postAuthorId,
+        'commentGroupName' => 1,
+        'commentIds' => [$commentId],
+    ])
+        ->call('destroy', commentId: $commentId)
+        ->assertSet('commentIds', [])
+        ->assertDispatched('info-badge', status: 'danger', message: '該留言已被刪除！');
 });

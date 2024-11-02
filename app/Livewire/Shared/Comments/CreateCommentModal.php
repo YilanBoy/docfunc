@@ -65,15 +65,35 @@ class CreateCommentModal extends Component
     {
         $this->validate();
 
-        DB::transaction(function () use ($parentId) {
+        // If parent post has already been deleted.
+        $post = Post::findOr(id: $this->postId, columns: ['id', 'comment_counts', 'user_id'], callback: function () {
+            $this->dispatch(event: 'info-badge', status: 'danger', message: '無法回覆！文章已被刪除！');
+
+            $this->redirect(url: route('posts.index'), navigate: true);
+        });
+
+        if (is_null($post)) {
+            return;
+        }
+
+        // If parent comment has already been deleted.
+        if (! is_null($parentId)) {
+            $parentComment = Comment::findOr(id: $parentId, columns: ['id'], callback: function () {
+                $this->dispatch(event: 'info-badge', status: 'danger', message: '無法回覆！留言已被刪除！');
+            });
+
+            if (is_null($parentComment)) {
+                return;
+            }
+        }
+
+        DB::transaction(function () use ($post, $parentId) {
             $comment = Comment::create([
                 'post_id' => $this->postId,
                 'user_id' => auth()->check() ? auth()->id() : null,
                 'body' => $this->body,
                 'parent_id' => $parentId,
             ]);
-
-            $post = Post::findOrFail($this->postId);
 
             // Update comment count in post table.
             $post->increment('comment_counts');
@@ -92,7 +112,6 @@ class CreateCommentModal extends Component
 
         $this->dispatch('info-badge', status: 'success', message: '成功新增留言！');
 
-        // Empty the body of the comment form.
         $this->reset('body', 'previewIsEnabled');
     }
 

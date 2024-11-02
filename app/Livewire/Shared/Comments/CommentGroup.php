@@ -69,16 +69,26 @@ class CommentGroup extends Component
      * @throws AuthorizationException
      * @throws Throwable
      */
-    public function destroy(Comment $comment): void
+    public function destroy(int $commentId): void
     {
+        // Remove comment id from comment id list.
+        unset($this->commentIds[array_search($commentId, $this->commentIds)]);
+
+        // Check comment is not deleted
+        $comment = Comment::find(id: $commentId, columns: ['id', 'user_id', 'post_id']);
+
+        if (is_null($comment)) {
+            $this->dispatch(event: 'info-badge', status: 'danger', message: '該留言已被刪除！');
+
+            return;
+        }
+
         $this->authorize('destroy', $comment);
 
-        unset($this->commentIds[array_search($comment->id, $this->commentIds)]);
+        $post = Post::findOrFail($this->postId);
 
-        DB::transaction(function () use ($comment) {
+        DB::transaction(function () use ($comment, $post) {
             $comment->delete();
-
-            $post = Post::findOrFail($this->postId);
 
             $post->decrement('comment_counts');
         });

@@ -82,7 +82,7 @@
       {{-- close modal button --}}
       <div class="absolute right-5 top-5">
         <button
-          class="text-gray-400 hover:text-gray-500"
+          class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
           type="button"
           x-on:click="closeModal"
         >
@@ -90,14 +90,14 @@
         </button>
       </div>
 
-      <div>
-        <div class="mb-5 flex items-center justify-center space-x-2 text-2xl text-gray-900 dark:text-gray-50">
+      <div class="flex flex-col gap-5">
+        <div class="flex items-center justify-center space-x-2 text-2xl text-gray-900 dark:text-gray-50">
           <x-icon.chat-dots class="w-8" />
           <span>編輯留言</span>
         </div>
 
         <form
-          class="space-y-4"
+          class="space-y-5"
           x-on:submit.prevent="submitForm"
         >
           @if ($previewIsEnabled)
@@ -142,8 +142,8 @@
             </x-toggle-switch>
 
             <x-button>
-              <x-icon.save class="w-5" />
-              <span class="ml-2">更新留言</span>
+              <x-icon.reply-fill class="w-5" />
+              <span class="ml-2">更新</span>
             </x-button>
           </div>
         </form>

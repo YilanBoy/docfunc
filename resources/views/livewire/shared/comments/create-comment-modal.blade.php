@@ -7,8 +7,10 @@
       body: @entangle('body'),
       captchaSiteKey: @js(config('services.captcha.site_key')),
       parentId: null,
+      replyTo: null,
       openModal(event) {
         this.parentId = event.detail.parentId;
+        this.replyTo = event.detail.userName;
 
         this.modalIsOpen = true;
         this.$nextTick(() => this.$refs.createCommentTextarea?.focus());
@@ -30,6 +32,12 @@
       },
       informationOnSubmitButton() {
         return this.submitIsEnabled ? '回覆' : '驗證中'
+      },
+      showReplyToLabel() {
+        return this.replyTo !== null;
+      },
+      replyToLabel() {
+        return '回覆 ' + this.replyTo + ' 的留言';
       },
       init() {
         turnstile.ready(() => {
@@ -92,14 +100,14 @@
 
     {{--  modal  --}}
     <div
-      class="mx-2 max-h-[36rem] w-full transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all dark:bg-gray-800 md:max-w-2xl"
+      class="mx-2 w-full transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all dark:bg-gray-800 md:max-w-2xl"
       x-show="modalIsOpen"
       x-transition.origin.bottom.duration.300ms
     >
       {{-- close modal button --}}
       <div class="absolute right-5 top-5">
         <button
-          class="text-gray-400 hover:text-gray-500"
+          class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
           type="button"
           x-on:click="closeModal"
         >
@@ -107,14 +115,21 @@
         </button>
       </div>
 
-      <div>
-        <div class="mb-5 flex items-center justify-center space-x-2 text-2xl text-gray-900 dark:text-gray-50">
+      <div class="flex flex-col gap-5">
+        <div class="flex items-center justify-center space-x-2 text-2xl text-gray-900 dark:text-gray-50">
           <x-icon.chat-dots class="w-8" />
           <span>新增留言</span>
         </div>
 
+        <div
+          class="w-full rounded-lg bg-gray-200/60 px-4 py-2 dark:bg-gray-700/60 dark:text-gray-50"
+          x-cloak
+          x-show="showReplyToLabel"
+          x-text="replyToLabel"
+        ></div>
+
         <form
-          class="space-y-4"
+          class="space-y-5"
           x-on:submit.prevent="submitForm"
         >
           @if ($previewIsEnabled)
@@ -175,7 +190,7 @@
             </x-toggle-switch>
 
             <x-button x-bind:disabled="submitIsDisabled">
-              <x-icon.save
+              <x-icon.reply-fill
                 class="mr-2 w-5"
                 x-cloak
                 x-show="submitIsEnabled"

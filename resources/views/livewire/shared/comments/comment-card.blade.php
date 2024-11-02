@@ -4,12 +4,13 @@
       setEditComment() {
         this.$dispatch('open-edit-comment-modal', {
           commentId: this.$root.dataset.commentId,
-          body: this.$root.dataset.body
+          body: this.$root.dataset.body,
         })
       },
       openCreateCommentModal() {
         this.$dispatch('open-create-comment-modal', {
-          parentId: this.$root.dataset.commentId
+          parentId: this.$root.dataset.commentId,
+          userName: this.$root.dataset.userName
         })
       }
     }));
@@ -19,6 +20,7 @@
 <div
   data-comment-id="{{ $commentId }}"
   data-body="{{ $body }}"
+  data-user-name="{{ $userId !== 0 ? $userName : '訪客' }}"
   x-data="commentCard"
 >
   <x-dashed-card class="mt-6">

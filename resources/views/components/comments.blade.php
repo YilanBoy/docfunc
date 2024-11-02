@@ -4,8 +4,8 @@
   class="w-full"
   id="comments"
 >
-  {{-- comment box --}}
-  <livewire:shared.comments.reply
+  {{-- comment menu --}}
+  <livewire:shared.comments.comment-menu
     :$postId
     :$commentCounts
   />

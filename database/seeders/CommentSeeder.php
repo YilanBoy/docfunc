@@ -11,7 +11,7 @@ use Random\RandomException;
 
 class CommentSeeder extends Seeder
 {
-    const COMMENT_COUNT = 10_000;
+    const COMMENT_COUNT = 100_000;
 
     const CHUNK = 1_000;
 

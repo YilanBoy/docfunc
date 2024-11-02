@@ -109,6 +109,7 @@
         :current-layer="$currentLayer + 1"
         :post-id="$postId"
         :post-author-id="$postAuthorId"
+        :parent-id="$commentId"
         :comment-group-name="$commentId . '-new-comment-group'"
       />
 

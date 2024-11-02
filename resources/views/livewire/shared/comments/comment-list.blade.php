@@ -41,7 +41,7 @@
   class="w-full"
   x-data="commentList"
 >
-  @foreach ($commentIdsGroupByFirstId as $firstId => $commentIds)
+  @foreach ($commentIdsList as $commentIds)
     <livewire:shared.comments.comment-group
       :$maxLayer
       :$currentLayer
@@ -49,8 +49,8 @@
       :$postAuthorId
       :$parentId
       :$commentIds
-      :comment-group-name="$firstId . '-comment-group'"
-      :key="$firstId . '-comment-group'"
+      :comment-group-name="$commentIds[0] . '-comment-group'"
+      :key="$commentIds[0] . '-comment-group'"
     />
   @endforeach
 

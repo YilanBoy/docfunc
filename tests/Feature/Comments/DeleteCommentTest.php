@@ -20,7 +20,6 @@ test('the author can delete his comment', function () {
         'commentIds' => [$comment->id],
     ])
         ->call('destroy', commentId: $comment->id)
-        ->assertSet('commentIds', [])
         ->assertDispatched('update-comment-counts')
         ->assertDispatched('info-badge',
             status: 'success',
@@ -44,7 +43,6 @@ test('post author can delete other users comment', function () {
         'commentIds' => [$comment->id],
     ])
         ->call('destroy', commentId: $comment->id)
-        ->assertSet('commentIds', [])
         ->assertDispatched('update-comment-counts')
         ->assertDispatched('info-badge',
             status: 'success',
@@ -69,8 +67,7 @@ test('when a comment is deleted, the post comments will be reduced by one', func
         'commentGroupName' => 1,
         'commentIds' => [$comment->id],
     ])
-        ->call('destroy', commentId: $comment->id)
-        ->assertSet('commentIds', []);
+        ->call('destroy', commentId: $comment->id);
 
     $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
 });
@@ -92,6 +89,5 @@ it('will show alert when user want to delete the deleted comment', function () {
         'commentIds' => [$commentId],
     ])
         ->call('destroy', commentId: $commentId)
-        ->assertSet('commentIds', [])
         ->assertDispatched('info-badge', status: 'danger', message: '該留言已被刪除！');
 });

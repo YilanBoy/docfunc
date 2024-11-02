@@ -4,11 +4,13 @@ namespace App\Livewire\Shared\Comments;
 
 use App\Models\Post;
 use Illuminate\View\View;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class Reply extends Component
+class CommentMenu extends Component
 {
+    #[Locked]
     public int $postId;
 
     public int $commentCounts;
@@ -22,6 +24,6 @@ class Reply extends Component
 
     public function render(): View
     {
-        return view('livewire.shared.comments.reply');
+        return view('livewire.shared.comments.comment-menu');
     }
 }

@@ -5,7 +5,6 @@ namespace App\Livewire\Shared\Comments;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
@@ -48,6 +47,7 @@ class CommentGroup extends Component
      * - '[command id]-new-comment-group' for new comment with parent id (second layer or more).
      * - '[commend id]-comment-group' for normal comment group.
      */
+    #[Locked]
     public string $commentGroupName;
 
     /**
@@ -71,12 +71,9 @@ class CommentGroup extends Component
      */
     public function destroy(int $commentId): void
     {
-        // Remove comment id from comment id list.
-        unset($this->commentIds[array_search($commentId, $this->commentIds)]);
-
-        // Check comment is not deleted
         $comment = Comment::find(id: $commentId, columns: ['id', 'user_id', 'post_id']);
 
+        // Check comment is not deleted
         if (is_null($comment)) {
             $this->dispatch(event: 'info-badge', status: 'danger', message: '該留言已被刪除！');
 
@@ -98,6 +95,9 @@ class CommentGroup extends Component
         $this->dispatch('info-badge', status: 'success', message: '成功刪除留言！');
     }
 
+    /**
+     * @return Collection<Comment>
+     */
     #[Computed]
     public function comments(): Collection
     {
@@ -105,13 +105,10 @@ class CommentGroup extends Component
             ->select(['id', 'body', 'user_id', 'created_at', 'updated_at'])
             ->whereIn('id', $this->commentIds)
             ->where('post_id', $this->postId)
-            ->when(! is_null($this->parentId), function (Builder $query) {
-                $query->where('parent_id', $this->parentId);
-            })
-            ->whereIn('id', $this->commentIds)
+            ->where('parent_id', $this->parentId)
+            ->oldest('id')
             ->with('user:id,name,email')
             ->with('children')
-            ->oldest('id')
             ->get();
     }
 

@@ -36,8 +36,10 @@ class CommentCard extends Component
     #[Locked]
     public int $userId;
 
+    #[Locked]
     public string $userGravatarUrl;
 
+    #[Locked]
     public string $userName;
 
     public string $body;
@@ -46,6 +48,7 @@ class CommentCard extends Component
 
     public bool $isEdited;
 
+    #[Locked]
     public bool $hasChildren;
 
     #[Locked]

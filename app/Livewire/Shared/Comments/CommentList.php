@@ -3,7 +3,6 @@
 namespace App\Livewire\Shared\Comments;
 
 use App\Models\Comment;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
@@ -38,23 +37,16 @@ class CommentList extends Component
     public string $commentListName = 'root-comment-list';
 
     /**
-     * @var array<int>
-     */
-    public array $commentIds = [];
-
-    /**
-     * Comment ids group. The index is the first id of the comment id group.
-     *
-     * example:
+     * Comment ids list, example:
      * [
-     *     1 => [1, 2, 3, 4, 5],
-     *     6 => [6, 7, 8, 9, 10],
-     *     11 => [11, 12, 13, 14, 15],
+     *     [1, 2, 3, 4, 5],
+     *     [6, 7, 8, 9, 10],
+     *     [11, 12, 13, 14, 15],
      * ]
      *
-     * @var array<int, array<int>>
+     * @var array<array<int>>
      */
-    public array $commentIdsGroupByFirstId = [];
+    public array $commentIdsList = [];
 
     /**
      * Bookmark id is the last id of the previous page,
@@ -85,10 +77,11 @@ class CommentList extends Component
 
     public function showMoreComments(): void
     {
-        $this->updateCommentIds();
-        $this->updateBookmarkId();
-        $this->updateCommentIdsGroup();
-        $this->updateShowMoreButtonStatus();
+        $commentIds = $this->getCommentIds();
+
+        $this->updateBookmarkId($commentIds);
+        $this->updateCommentIdsList($commentIds);
+        $this->updateShowMoreButtonStatus($commentIds);
     }
 
     public function render(): View
@@ -96,52 +89,46 @@ class CommentList extends Component
         return view('livewire.shared.comments.comment-list');
     }
 
-    private function updateCommentIds(): void
+    private function getCommentIds(): array
     {
-        $this->commentIds = Comment::query()
-            // Use bookmark to get the next comment group.
+        return Comment::query()
+            // Use bookmark to get the next comment ids.
             ->where('id', '>=', $this->bookmarkId)
-            ->where('post_id', $this->postId)
             // Don't show new comments, avoid showing duplicate comments,
             // New comments have already showed in new comment group.
             ->whereNotIn('id', $this->newCommentIds)
-            // When comments is children of another comment
-            ->when(! is_null($this->parentId), function (Builder $query) {
-                // When comments is not children
-                $query->where('parent_id', $this->parentId);
-            }, function (Builder $query) {
-                // Only show parent comments
-                $query->whereNull('parent_id');
-            })
-            ->oldest('id')
+            ->where('post_id', $this->postId)
+            // When parent id is not null,
+            // it means this comment list is children of another comment.
+            ->where('parent_id', $this->parentId)
             // Plus one is needed here because we need to determine whether there is a next page.
-            // If comment ids is less than per page, it means there is no next page.
+            // If the counts of comment ids is less or equal than per page,
+            // it means there is no next page.
             ->limit($this->perPage + 1)
+            ->oldest('id')
             ->pluck('id')
             ->toArray();
     }
 
-    private function updateBookmarkId(): void
+    private function updateBookmarkId(array $commentIds): void
     {
-        if (count($this->commentIds) > 0) {
+        if (count($commentIds) > 0) {
             // Use the last comment id as the bookmark id.
             // Bookmark id will be the next comment group first id.
-            $this->bookmarkId = $this->commentIds[array_key_last($this->commentIds)];
+            $this->bookmarkId = $commentIds[array_key_last($commentIds)];
         }
     }
 
-    private function updateCommentIdsGroup(): void
+    private function updateCommentIdsList(array $commentIds): void
     {
-        if (count($this->commentIds) > 0) {
-            // Use the first comment id as the key of the group.
-            $this->commentIdsGroupByFirstId[$this->commentIds[array_key_first($this->commentIds)]]
-               = array_slice($this->commentIds, 0, $this->perPage);
+        if (count($commentIds) > 0) {
+            $this->commentIdsList[] = array_slice($commentIds, 0, $this->perPage);
         }
     }
 
-    private function updateShowMoreButtonStatus(): void
+    private function updateShowMoreButtonStatus(array $commentIds): void
     {
-        if (count($this->commentIds) <= $this->perPage) {
+        if (count($commentIds) <= $this->perPage) {
             $this->showMoreButtonIsActive = false;
         }
     }

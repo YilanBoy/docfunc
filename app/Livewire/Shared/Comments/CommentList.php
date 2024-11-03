@@ -39,7 +39,7 @@ class CommentList extends Component
     public string $commentListName = 'root-comment-list';
 
     #[Locked]
-    public CommentOrder $commentOrder = CommentOrder::LATEST;
+    public CommentOrder $order = CommentOrder::LATEST;
 
     /**
      * Comment ids list, example:
@@ -94,13 +94,13 @@ class CommentList extends Component
     {
         return Comment::query()
             ->when(
-                $this->commentOrder === CommentOrder::OLDEST,
+                $this->order === CommentOrder::OLDEST,
                 function (Builder $query) {
                     $query->oldest('id');
                 }
             )
             ->when(
-                $this->commentOrder === CommentOrder::LATEST,
+                $this->order === CommentOrder::LATEST,
                 function (Builder $query) {
                     $query->latest('id');
                 }

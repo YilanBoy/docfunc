@@ -50,7 +50,7 @@
       :$parentId
       :$commentIds
       :comment-group-name="$commentIds[0] . '-comment-group'"
-      :$commentOrder
+      :$order
       :key="$commentIds[0] . '-comment-group'"
     />
   @endforeach

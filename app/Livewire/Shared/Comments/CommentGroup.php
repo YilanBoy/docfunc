@@ -53,7 +53,7 @@ class CommentGroup extends Component
     public string $commentGroupName;
 
     #[Locked]
-    public CommentOrder $commentOrder = CommentOrder::LATEST;
+    public CommentOrder $order = CommentOrder::LATEST;
 
     /**
      * Comment ids.
@@ -107,10 +107,10 @@ class CommentGroup extends Component
     public function comments(): Collection
     {
         return Comment::query()
-            ->when($this->commentOrder === CommentOrder::OLDEST, function (Builder $query) {
+            ->when($this->order === CommentOrder::OLDEST, function (Builder $query) {
                 $query->oldest('id');
             })
-            ->when($this->commentOrder === CommentOrder::LATEST, function (Builder $query) {
+            ->when($this->order === CommentOrder::LATEST, function (Builder $query) {
                 $query->latest('id');
             })
             ->select(['id', 'body', 'user_id', 'created_at', 'updated_at'])

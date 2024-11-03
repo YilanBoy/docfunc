@@ -124,7 +124,7 @@
           :$postAuthorId
           :parent-id="$commentId"
           :comment-list-name="$commentId . '-comment-list'"
-          :comment-order="App\Enums\CommentOrder::OLDEST"
+          :order="App\Enums\CommentOrder::OLDEST"
         />
       @endif
     </div>

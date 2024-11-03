@@ -146,8 +146,6 @@
               class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-400"
               id="desktop-user-menu-button"
               type="button"
-              aria-expanded="false"
-              aria-haspopup="true"
               x-on:click="toggleProfileMenu"
               x-on:keydown.escape.window="closeProfileMenu"
             >
@@ -163,10 +161,6 @@
           {{-- profile menu --}}
           <div
             class="absolute right-0 top-16 mt-2 w-48 rounded-md bg-gray-50 p-2 ring-1 ring-black ring-opacity-20 dark:bg-gray-800 dark:text-gray-50 dark:ring-gray-600"
-            role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="user-menu-button"
-            tabindex="-1"
             x-cloak
             x-show="profileMenuIsOpen"
             x-on:click.outside="closeProfileMenu"
@@ -175,8 +169,6 @@
             <a
               class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
               href="{{ route('posts.create') }}"
-              role="menuitem"
-              tabindex="-1"
               wire:navigate
             >
               <x-icon.pencil class="w-4" />
@@ -186,8 +178,6 @@
             <a
               class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
               href="{{ route('users.show', ['userId' => auth()->id()]) }}"
-              role="menuitem"
-              tabindex="-1"
               wire:navigate
             >
               <x-icon.info-circle class="w-4" />
@@ -197,8 +187,6 @@
             <a
               class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
               href="{{ route('users.edit', ['userId' => auth()->id()]) }}"
-              role="menuitem"
-              tabindex="-1"
               wire:navigate
             >
               <x-icon.person-circle class="w-4" />
@@ -208,8 +196,6 @@
             <button
               class="flex w-full items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
               type="button"
-              role="menuitem"
-              tabindex="-1"
               wire:confirm="你確定要登出嗎？"
               wire:click="logout"
             >

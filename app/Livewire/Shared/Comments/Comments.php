@@ -22,7 +22,7 @@ class Comments extends Component
 
     public int $commentCounts;
 
-    public CommentOrder $order = CommentOrder::LATEST;
+    public CommentOrder $order = CommentOrder::POPULAR;
 
     // update comment count in post show page
     #[On('update-comment-counts')]

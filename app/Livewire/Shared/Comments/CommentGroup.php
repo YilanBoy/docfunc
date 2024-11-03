@@ -107,13 +107,16 @@ class CommentGroup extends Component
     public function comments(): Collection
     {
         return Comment::query()
-            ->when($this->order === CommentOrder::OLDEST, function (Builder $query) {
-                $query->oldest('id');
-            })
+            ->withCount('children')
             ->when($this->order === CommentOrder::LATEST, function (Builder $query) {
                 $query->latest('id');
             })
-            ->select(['id', 'body', 'user_id', 'created_at', 'updated_at'])
+            ->when($this->order === CommentOrder::OLDEST, function (Builder $query) {
+                $query->oldest('id');
+            })
+            ->when($this->order === CommentOrder::POPULAR, function (Builder $query) {
+                $query->orderByDesc('children_count');
+            })
             ->whereIn('id', $this->commentIds)
             ->where('post_id', $this->postId)
             ->where('parent_id', $this->parentId)

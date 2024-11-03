@@ -70,6 +70,18 @@
           >
             <div class="w-full py-1">
               <button
+                data-order="popular"
+                type="button"
+                @class([
+                    'flex w-full justify-start px-4 py-2',
+                    'bg-gray-200 text-gray-900 outline-none dark:bg-gray-600 dark:text-gray-50' =>
+                        $order === App\Enums\CommentOrder::POPULAR,
+                    'text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700' =>
+                        $order !== App\Enums\CommentOrder::POPULAR,
+                ])
+                x-on:click="changeOrder"
+              >熱門留言</button>
+              <button
                 data-order="latest"
                 type="button"
                 @class([
@@ -80,7 +92,7 @@
                         $order !== App\Enums\CommentOrder::LATEST,
                 ])
                 x-on:click="changeOrder"
-              >最新</button>
+              >由新到舊</button>
               <button
                 data-order="oldest"
                 type="button"
@@ -92,7 +104,7 @@
                         $order !== App\Enums\CommentOrder::OLDEST,
                 ])
                 x-on:click="changeOrder"
-              >最舊</button>
+              >由舊到新</button>
             </div>
           </div>
         </div>
@@ -134,6 +146,23 @@
       :$postAuthorId
       :order="App\Enums\CommentOrder::LATEST"
     />
+  @elseif ($order === App\Enums\CommentOrder::OLDEST)
+    {{-- new comment will show here --}}
+    <livewire:shared.comments.comment-group
+      :$maxLayer
+      :$postId
+      :$postAuthorId
+      {{-- if it's root comment, the comment group id is 'root-group' --}}
+      :comment-group-name="'root-new-comment-group'"
+    />
+
+    {{-- comments list --}}
+    <livewire:shared.comments.comment-list
+      :$maxLayer
+      :$postId
+      :$postAuthorId
+      :order="App\Enums\CommentOrder::OLDEST"
+    />
   @else
     <livewire:shared.comments.comment-group
       :$maxLayer
@@ -146,7 +175,7 @@
       :$maxLayer
       :$postId
       :$postAuthorId
-      :order="App\Enums\CommentOrder::OLDEST"
+      :order="App\Enums\CommentOrder::POPULAR"
     />
   @endif
 

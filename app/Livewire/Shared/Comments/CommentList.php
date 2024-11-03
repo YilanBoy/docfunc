@@ -93,18 +93,16 @@ class CommentList extends Component
     private function getCommentIds(): array
     {
         return Comment::query()
-            ->when(
-                $this->order === CommentOrder::OLDEST,
-                function (Builder $query) {
-                    $query->oldest('id');
-                }
-            )
-            ->when(
-                $this->order === CommentOrder::LATEST,
-                function (Builder $query) {
-                    $query->latest('id');
-                }
-            )
+            ->withCount('children')
+            ->when($this->order === CommentOrder::LATEST, function (Builder $query) {
+                $query->latest('id');
+            })
+            ->when($this->order === CommentOrder::OLDEST, function (Builder $query) {
+                $query->oldest('id');
+            })
+            ->when($this->order === CommentOrder::POPULAR, function (Builder $query) {
+                $query->orderByDesc('children_count');
+            })
             // Don't show new comments, avoid showing duplicate comments,
             // New comments have already showed in new comment group.
             ->whereNotIn('id', $this->newCommentIds)

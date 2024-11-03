@@ -42,17 +42,17 @@ class CommentCard extends Component
     #[Locked]
     public string $userName;
 
-    public string $body;
-
-    public object $createdAt;
-
-    public bool $isEdited;
-
     #[Locked]
     public bool $hasChildren;
 
     #[Locked]
     public int $childrenPerPage = 3;
+
+    public string $body;
+
+    public object $createdAt;
+
+    public bool $isEdited;
 
     /**
      * @throws CommonMarkException

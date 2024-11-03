@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Shared\Comments;
 
+use App\Enums\CommentOrder;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
@@ -49,6 +51,9 @@ class CommentGroup extends Component
      */
     #[Locked]
     public string $commentGroupName;
+
+    #[Locked]
+    public CommentOrder $commentOrder = CommentOrder::LATEST;
 
     /**
      * Comment ids.
@@ -102,11 +107,16 @@ class CommentGroup extends Component
     public function comments(): Collection
     {
         return Comment::query()
+            ->when($this->commentOrder === CommentOrder::OLDEST, function (Builder $query) {
+                $query->oldest('id');
+            })
+            ->when($this->commentOrder === CommentOrder::LATEST, function (Builder $query) {
+                $query->latest('id');
+            })
             ->select(['id', 'body', 'user_id', 'created_at', 'updated_at'])
             ->whereIn('id', $this->commentIds)
             ->where('post_id', $this->postId)
             ->where('parent_id', $this->parentId)
-            ->oldest('id')
             ->with('user:id,name,email')
             ->with('children')
             ->get();

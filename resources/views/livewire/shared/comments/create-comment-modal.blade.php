@@ -10,7 +10,7 @@
       replyTo: null,
       openModal(event) {
         this.parentId = event.detail.parentId;
-        this.replyTo = event.detail.userName;
+        this.replyTo = event.detail.replyTo;
 
         this.modalIsOpen = true;
         this.$nextTick(() => this.$refs.createCommentTextarea?.focus());

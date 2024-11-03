@@ -1,7 +1,7 @@
 @script
   <script>
     Alpine.data('commentCard', () => ({
-      setEditComment() {
+      openEditCommentModal() {
         this.$dispatch('open-edit-comment-modal', {
           commentId: this.$root.dataset.commentId,
           body: this.$root.dataset.body,
@@ -10,7 +10,7 @@
       openCreateCommentModal() {
         this.$dispatch('open-create-comment-modal', {
           parentId: this.$root.dataset.commentId,
-          userName: this.$root.dataset.userName
+          replyTo: this.$root.dataset.userName
         })
       }
     }));
@@ -64,7 +64,7 @@
             <button
               class="flex items-center hover:text-gray-500 dark:hover:text-gray-300"
               type="button"
-              x-on:click="setEditComment"
+              x-on:click="openEditCommentModal"
             >
               <x-icon.pencil class="w-4" />
               <span class="ml-2">編輯</span>
@@ -124,6 +124,7 @@
           :$postAuthorId
           :parent-id="$commentId"
           :comment-list-name="$commentId . '-comment-list'"
+          :comment-order="App\Enums\CommentOrder::OLDEST"
         />
       @endif
     </div>

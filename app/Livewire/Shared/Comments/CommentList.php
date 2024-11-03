@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Shared\Comments;
 
+use App\Enums\CommentOrder;
 use App\Models\Comment;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
@@ -36,6 +38,9 @@ class CommentList extends Component
     #[Locked]
     public string $commentListName = 'root-comment-list';
 
+    #[Locked]
+    public CommentOrder $commentOrder = CommentOrder::LATEST;
+
     /**
      * Comment ids list, example:
      * [
@@ -52,7 +57,7 @@ class CommentList extends Component
      * Bookmark id is the last id of the previous page,
      * it will be used to get next comment ids.
      */
-    public int $bookmarkId = 0;
+    public ?int $bookmarkId = null;
 
     public bool $showMoreButtonIsActive = true;
 
@@ -92,8 +97,31 @@ class CommentList extends Component
     private function getCommentIds(): array
     {
         return Comment::query()
-            // Use bookmark to get the next comment ids.
-            ->where('id', '>=', $this->bookmarkId)
+            ->when(
+                $this->commentOrder === CommentOrder::OLDEST,
+                function (Builder $query) {
+                    $query->oldest('id');
+                }
+            )
+            ->when(
+                $this->commentOrder === CommentOrder::OLDEST && ! is_null($this->bookmarkId),
+                function (Builder $query) {
+                    // Use bookmark to get the next comment ids.
+                    $query->where('id', '>=', $this->bookmarkId);
+                }
+            )
+            ->when(
+                $this->commentOrder === CommentOrder::LATEST,
+                function (Builder $query) {
+                    $query->latest('id');
+                }
+            )
+            ->when(
+                $this->commentOrder === CommentOrder::LATEST && ! is_null($this->bookmarkId),
+                function (Builder $query) {
+                    $query->where('id', '<=', $this->bookmarkId);
+                }
+            )
             // Don't show new comments, avoid showing duplicate comments,
             // New comments have already showed in new comment group.
             ->whereNotIn('id', $this->newCommentIds)
@@ -105,7 +133,6 @@ class CommentList extends Component
             // If the counts of comment ids is less or equal than per page,
             // it means there is no next page.
             ->limit($this->perPage + 1)
-            ->oldest('id')
             ->pluck('id')
             ->toArray();
     }

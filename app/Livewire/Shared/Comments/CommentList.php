@@ -93,6 +93,8 @@ class CommentList extends Component
     private function getCommentIds(): array
     {
         return Comment::query()
+            ->select('id')
+            // use a sub query to generate children_count column
             ->withCount('children')
             ->when($this->order === CommentOrder::LATEST, function (Builder $query) {
                 $query->latest('id');

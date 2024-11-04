@@ -107,6 +107,7 @@ class CommentGroup extends Component
     public function comments(): Collection
     {
         return Comment::query()
+            ->select(['id', 'body', 'user_id', 'created_at', 'updated_at'])
             ->withCount('children')
             ->when($this->order === CommentOrder::LATEST, function (Builder $query) {
                 $query->latest('id');

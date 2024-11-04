@@ -42,16 +42,19 @@ class CommentList extends Component
     public CommentOrder $order = CommentOrder::LATEST;
 
     /**
-     * Comment ids list, example:
+     * Comments list array, the format is like:
      * [
-     *     [1, 2, 3, 4, 5],
-     *     [6, 7, 8, 9, 10],
-     *     [11, 12, 13, 14, 15],
+     *     [
+     *         1 => ["id" => 1, "body" => "hello" ...],
+     *         2 => ["id" => 2, "body" => "world" ...],
+     *     ],
+     *     [
+     *         3 => ["id" => 3, "body" => "foo" ...],
+     *         4 => ["id" => 4, "body" => "bar" ...],
+     *     ],
      * ]
-     *
-     * @var array<array<int>>
      */
-    public array $commentIdsList = [];
+    public array $commentsList = [];
 
     public int $skipCounts = 0;
 
@@ -78,11 +81,11 @@ class CommentList extends Component
 
     public function showMoreComments(): void
     {
-        $commentIds = $this->getCommentIds();
+        $comments = $this->getComments();
 
         $this->updateSkipCounts();
-        $this->updateCommentIdsList($commentIds);
-        $this->updateShowMoreButtonStatus($commentIds);
+        $this->updateCommentsList($comments);
+        $this->updateShowMoreButtonStatus($comments);
     }
 
     public function render(): View
@@ -90,10 +93,10 @@ class CommentList extends Component
         return view('livewire.shared.comments.comment-list');
     }
 
-    private function getCommentIds(): array
+    private function getComments(): array
     {
         return Comment::query()
-            ->select('id')
+            ->select(['id', 'user_id', 'body', 'created_at', 'updated_at'])
             // use a sub query to generate children_count column
             ->withCount('children')
             ->when($this->order === CommentOrder::LATEST, function (Builder $query) {
@@ -115,7 +118,10 @@ class CommentList extends Component
             ->skip($this->skipCounts)
             // Plus one is needed here because we need to determine whether there is a next page.
             ->take($this->perPage + 1)
-            ->pluck('id')
+            ->with('user:id,name,email')
+            ->with('children')
+            ->get()
+            ->keyBy('id')
             ->toArray();
     }
 
@@ -124,16 +130,16 @@ class CommentList extends Component
         $this->skipCounts += $this->perPage;
     }
 
-    private function updateCommentIdsList(array $commentIds): void
+    private function updateCommentsList(array $comments): void
     {
-        if (count($commentIds) > 0) {
-            $this->commentIdsList[] = array_slice($commentIds, 0, $this->perPage);
+        if (count($comments) > 0) {
+            $this->commentsList[] = array_slice($comments, 0, $this->perPage, true);
         }
     }
 
-    private function updateShowMoreButtonStatus(array $commentIds): void
+    private function updateShowMoreButtonStatus(array $comments): void
     {
-        if (count($commentIds) <= $this->perPage) {
+        if (count($comments) <= $this->perPage) {
             $this->showMoreButtonIsActive = false;
         }
     }

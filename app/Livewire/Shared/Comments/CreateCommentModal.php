@@ -4,6 +4,7 @@ namespace App\Livewire\Shared\Comments;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\User;
 use App\Notifications\NewComment;
 use App\Rules\Captcha;
 use App\Traits\MarkdownConverter;
@@ -87,30 +88,35 @@ class CreateCommentModal extends Component
             }
         }
 
-        DB::transaction(function () use ($post, $parentId) {
+        $comment = null;
+
+        DB::transaction(function () use (&$comment, $post, $parentId) {
             $comment = Comment::create([
                 'post_id' => $this->postId,
-                'user_id' => auth()->check() ? auth()->id() : null,
+                // auth()->id() will be null if user is not logged in
+                'user_id' => auth()->id(),
                 'body' => $this->body,
                 'parent_id' => $parentId,
             ]);
 
-            // Update comment count in post table.
             $post->increment('comment_counts');
-
-            // Notify the article author of new comments.
-            $post->user->notifyNewComment(new NewComment($comment));
-
-            $this->dispatch('append-new-id-to-'.($parentId ?? 'root').'-new-comment-group', id: $comment->id);
-
-            $this->dispatch('append-new-id-to-'.($parentId ?? 'root').'-comment-list', id: $comment->id);
         });
 
-        $this->dispatch('close-create-comment-modal');
+        // Notify the article author of new comments.
+        $post->user->notifyNewComment(new NewComment($comment));
 
-        $this->dispatch('update-comment-counts');
+        $this->dispatch(
+            event: 'insert-new-comment-to-'.($parentId ?? 'root').'-new-comment-group',
+            comment: $this->prepareCommentCardArray($comment, auth()->user())
+        );
 
-        $this->dispatch('info-badge', status: 'success', message: '成功新增留言！');
+        $this->dispatch(event: 'append-new-id-to-'.($parentId ?? 'root').'-comment-list', id: $comment->id);
+
+        $this->dispatch(event: 'close-create-comment-modal');
+
+        $this->dispatch(event: 'update-comment-counts');
+
+        $this->dispatch(event: 'info-badge', status: 'success', message: '成功新增留言！');
 
         $this->reset('body', 'previewIsEnabled');
     }
@@ -118,5 +124,26 @@ class CreateCommentModal extends Component
     public function render(): View
     {
         return view('livewire.shared.comments.create-comment-modal');
+    }
+
+    private function prepareCommentCardArray(Comment $comment, ?User $user): array
+    {
+        $comment = $comment->toArray();
+
+        $comment['children_count'] = 0;
+
+        if (is_null($user)) {
+            $comment['user'] = null;
+
+            return $comment;
+        }
+
+        $comment['user'] = [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+        ];
+
+        return $comment;
     }
 }

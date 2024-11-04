@@ -46,8 +46,8 @@
 
         <time
           class="hidden text-gray-400 md:block"
-          datetime="{{ $createdAt->toDateString() }}"
-        >{{ $createdAt->format('Y 年 m 月 d 日') }}</time>
+          datetime="{{ date('d-m-Y', strtotime($createdAt)) }}"
+        >{{ date('Y 年 m 月 d 日', strtotime($createdAt)) }}</time>
 
         @if ($isEdited)
           <span class="text-gray-400">(已編輯)</span>

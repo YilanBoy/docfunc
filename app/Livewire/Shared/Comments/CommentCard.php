@@ -50,7 +50,7 @@ class CommentCard extends Component
 
     public string $body;
 
-    public object $createdAt;
+    public string $createdAt;
 
     public bool $isEdited;
 

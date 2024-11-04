@@ -2,24 +2,17 @@
 
 namespace App\Livewire\Shared\Comments;
 
-use App\Enums\CommentOrder;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Throwable;
 
-/**
- * @property Collection<Comment> $comments
- */
 class CommentGroup extends Component
 {
     use AuthorizesRequests;
@@ -52,20 +45,19 @@ class CommentGroup extends Component
     #[Locked]
     public string $commentGroupName;
 
-    #[Locked]
-    public CommentOrder $order = CommentOrder::LATEST;
-
     /**
-     * Comment ids.
-     *
-     * @var array<int>
+     * Comments array, the format is like:
+     * [
+     *     1 => ["id" => 1, "body" => "hello" ...],
+     *     2 => ["id" => 2, "body" => "world" ...],
+     * ],
      */
-    public array $commentIds = [];
+    public array $comments = [];
 
-    #[On('append-new-id-to-{commentGroupName}')]
-    public function appendCommentIdInGroup(int $id): void
+    #[On('insert-new-comment-to-{commentGroupName}')]
+    public function insertComment(array $comment): void
     {
-        $this->commentIds[] = $id;
+        $this->comments = [$comment['id'] => $comment] + $this->comments;
     }
 
     /**
@@ -95,35 +87,11 @@ class CommentGroup extends Component
             $post->decrement('comment_counts');
         });
 
+        unset($this->comments[$commentId]);
+
         $this->dispatch('update-comment-counts');
 
         $this->dispatch('info-badge', status: 'success', message: '成功刪除留言！');
-    }
-
-    /**
-     * @return Collection<Comment>
-     */
-    #[Computed]
-    public function comments(): Collection
-    {
-        return Comment::query()
-            ->select(['id', 'body', 'user_id', 'created_at', 'updated_at'])
-            ->withCount('children')
-            ->when($this->order === CommentOrder::LATEST, function (Builder $query) {
-                $query->latest('id');
-            })
-            ->when($this->order === CommentOrder::OLDEST, function (Builder $query) {
-                $query->oldest('id');
-            })
-            ->when($this->order === CommentOrder::POPULAR, function (Builder $query) {
-                $query->orderByDesc('children_count');
-            })
-            ->whereIn('id', $this->commentIds)
-            ->where('post_id', $this->postId)
-            ->where('parent_id', $this->parentId)
-            ->with('user:id,name,email')
-            ->with('children')
-            ->get();
     }
 
     public function render(): View

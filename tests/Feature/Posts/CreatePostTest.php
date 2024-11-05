@@ -55,7 +55,7 @@ describe('create post', function () {
             ->call('store')
             ->assertHasNoErrors()
             ->assertRedirect(route('posts.show', [
-                'postId' => 1,
+                'id' => 1,
                 'slug' => $contentService->makeSlug($title),
             ]))
             ->assertDispatched('info-badge', status: 'success', message: '成功新增文章！');

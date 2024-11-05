@@ -53,7 +53,7 @@
       :has-children="$comment['children_count'] > 0"
       {{-- when the parent component is updated, the child component is updated together --}}
       {{-- reference: https://github.com/livewire/livewire/discussions/1895 --}}
-      :key="'comment-' . $comment['id'] . '-has-' . $comment['children_count'] . '-children'"
+      :key="'comment-card-' . $comment['id']"
     />
   @endforeach
 </div>

@@ -10,9 +10,18 @@ describe('user password', function () {
     test('non-logged-in users cannot access the update password page', function () {
         $user = User::factory()->create();
 
-        get(route('users.updatePassword', ['userId' => $user->id]))
+        get(route('users.updatePassword', ['id' => $user->id]))
             ->assertStatus(302)
             ->assertRedirect(route('login'));
+    });
+
+    test('users cannot access the others update password page', function () {
+        $user = User::factory()->create();
+
+        loginAsUser();
+
+        get(route('users.updatePassword', ['id' => $user->id]))
+            ->assertStatus(403);
     });
 
     test('users can access the update password page', function () {
@@ -20,7 +29,7 @@ describe('user password', function () {
 
         $this->actingAs($user);
 
-        get(route('users.updatePassword', ['userId' => $user->id]))
+        get(route('users.updatePassword', ['id' => $user->id]))
             ->assertSuccessful();
     });
 
@@ -32,7 +41,7 @@ describe('user password', function () {
 
         $this->actingAs($user);
 
-        livewire(UpdatePasswordPage::class, ['userId' => $user->id])
+        livewire(UpdatePasswordPage::class, ['id' => $user->id])
             ->set('current_password', $oldPassword)
             ->set('new_password', $newPassword)
             ->set('new_password_confirmation', $newPassword)
@@ -53,7 +62,7 @@ describe('user password', function () {
 
         $this->actingAs($user);
 
-        livewire(UpdatePasswordPage::class, ['userId' => $user->id])
+        livewire(UpdatePasswordPage::class, ['id' => $user->id])
             ->set('current_password', $wrongPassword)
             ->set('new_password', $newPassword)
             ->set('new_password_confirmation', $newPassword)
@@ -74,7 +83,7 @@ describe('user password', function () {
 
         $this->actingAs($user);
 
-        livewire(UpdatePasswordPage::class, ['userId' => $user->id])
+        livewire(UpdatePasswordPage::class, ['id' => $user->id])
             ->set('current_password', $oldPassword)
             ->set('new_password', $newPassword)
             ->set('new_password_confirmation', $wrongNewPasswordConfirmation)

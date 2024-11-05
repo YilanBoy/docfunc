@@ -31,7 +31,7 @@ class SideMenu extends Component
         $this->redirectRoute(
             name: 'users.show',
             parameters: [
-                'userId' => auth()->id(),
+                'id' => auth()->id(),
                 'tab' => 'posts',
                 'current-posts-year' => $post->created_at->format('Y'),
             ],

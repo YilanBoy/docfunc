@@ -30,7 +30,7 @@ class Category extends Model
     {
         return new Attribute(
             get: fn ($value) => route('categories.show', [
-                'categoryId' => $this->id,
+                'id' => $this->id,
                 'name' => $this->name,
             ])
         );

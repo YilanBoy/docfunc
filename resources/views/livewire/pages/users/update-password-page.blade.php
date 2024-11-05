@@ -9,7 +9,7 @@
 
         <form
           class="w-full"
-          wire:submit="update({{ $userId }})"
+          wire:submit="update({{ $user->id }})"
         >
           {{-- 舊密碼 --}}
           <div>

@@ -23,7 +23,7 @@
             class="inline-flex items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 uppercase tracking-widest text-gray-50 ring-red-300 transition duration-150 ease-in-out hover:bg-red-700 focus:border-red-900 focus:outline-none focus:ring active:bg-red-900 disabled:opacity-25"
             type="button"
             wire:confirm="您確定要寄出刪除帳號信件嗎？"
-            wire:click="sendDestroyEmail({{ $userId }})"
+            wire:click="sendDestroyEmail({{ $user->id }})"
           >
             寄出刪除帳號信件
           </button>

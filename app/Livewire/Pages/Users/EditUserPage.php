@@ -5,7 +5,6 @@ namespace App\Livewire\Pages\Users;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
-use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -13,12 +12,22 @@ class EditUserPage extends Component
 {
     use AuthorizesRequests;
 
-    #[Locked]
-    public int $userId;
-
     public string $name;
 
     public ?string $introduction;
+
+    public User $user;
+
+    public function mount(int $id): void
+    {
+        $this->user = User::findOrFail($id);
+
+        // 會員只能進入自己的頁面，規則寫在 UserPolicy
+        $this->authorize('update', $this->user);
+
+        $this->name = $this->user->name;
+        $this->introduction = $this->user->introduction;
+    }
 
     protected function rules(): array
     {
@@ -28,7 +37,7 @@ class EditUserPage extends Component
                 'string',
                 'regex:/^[A-Za-z0-9\-\_]+$/u',
                 'between:3,25',
-                'unique:users,name,'.$this->userId,
+                'unique:users,name,'.$this->user->id,
             ],
             'introduction' => ['max:120'],
         ];
@@ -44,13 +53,6 @@ class EditUserPage extends Component
             'name.unique' => '會員名稱已被使用，請重新填寫',
             'introduction.max' => '個人簡介至多 120 個字元',
         ];
-    }
-
-    public function mount(): void
-    {
-        $user = User::findOrFail($this->userId);
-        $this->name = $user->name;
-        $this->introduction = $user->introduction;
     }
 
     public function update(User $user): void
@@ -71,11 +73,6 @@ class EditUserPage extends Component
     #[Title('會員中心 - 編輯個人資料')]
     public function render(): View
     {
-        $user = User::findOrFail($this->userId);
-
-        // 會員只能進入自己的頁面，規則寫在 UserPolicy
-        $this->authorize('update', $user);
-
-        return view('livewire.pages.users.edit-user-page', compact('user'));
+        return view('livewire.pages.users.edit-user-page');
     }
 }

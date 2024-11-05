@@ -1,7 +1,7 @@
 <div class="mt-4 flex items-center space-x-6 text-base text-gray-400 xl:hidden">
   <a
     class="flex items-center hover:text-gray-500 dark:hover:text-gray-300"
-    href="{{ route('posts.edit', ['postId' => $postId]) }}"
+    href="{{ route('posts.edit', ['id' => $postId]) }}"
   >
     <x-icon.pencil class="w-4" />
     <span class="ml-2">編輯</span>

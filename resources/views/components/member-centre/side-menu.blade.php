@@ -12,7 +12,7 @@
       $inEditUserPage = request()->routeIs('users.edit');
     @endphp
     <a
-      href="{{ route('users.edit', ['userId' => auth()->id()]) }}"
+      href="{{ route('users.edit', ['id' => auth()->id()]) }}"
       @class([
           'flex items-center rounded-md p-2 dark:text-gray-50',
           'bg-gray-200 dark:bg-gray-700' => $inEditUserPage,
@@ -28,7 +28,7 @@
       $inChangePasswordPage = request()->routeIs('users.updatePassword');
     @endphp
     <a
-      href="{{ route('users.updatePassword', ['userId' => auth()->id()]) }}"
+      href="{{ route('users.updatePassword', ['id' => auth()->id()]) }}"
       @class([
           'flex items-center rounded-md p-2 dark:text-gray-50',
           'bg-gray-200 dark:bg-gray-700' => $inChangePasswordPage,
@@ -44,7 +44,7 @@
       $inDestroyUserPage = request()->routeIs('users.destroy');
     @endphp
     <a
-      href="{{ route('users.destroy', ['userId' => auth()->id()]) }}"
+      href="{{ route('users.destroy', ['id' => auth()->id()]) }}"
       @class([
           'flex items-center rounded-md p-2 dark:text-gray-50',
           'bg-gray-200 dark:bg-gray-700' => $inDestroyUserPage,

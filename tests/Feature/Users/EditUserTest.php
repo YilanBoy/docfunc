@@ -11,7 +11,7 @@ describe('edit user', function () {
     test('non-logged-in users cannot access the user edit page', function () {
         $user = User::factory()->create();
 
-        get(route('users.edit', ['userId' => $user->id]))
+        get(route('users.edit', ['id' => $user->id]))
             ->assertStatus(302)
             ->assertRedirect(route('login'));
     });
@@ -21,7 +21,7 @@ describe('edit user', function () {
 
         $this->actingAs($user);
 
-        get(route('users.edit', ['userId' => $user->id]))
+        get(route('users.edit', ['id' => $user->id]))
             ->assertSuccessful();
     });
 
@@ -31,7 +31,7 @@ describe('edit user', function () {
         $otherUser = User::factory()->create();
 
         $this->actingAs($user)
-            ->get(route('users.edit', ['userId' => $otherUser->id]))
+            ->get(route('users.edit', ['id' => $otherUser->id]))
             ->assertStatus(403);
     });
 
@@ -41,7 +41,7 @@ describe('edit user', function () {
         $this->actingAs($user);
 
         livewire(EditUserPage::class, [
-            'userId' => $user->id,
+            'id' => $user->id,
             'name' => $user->name,
             'introduction' => $user->introduction,
         ])
@@ -57,7 +57,7 @@ describe('edit user', function () {
         $this->actingAs($user);
 
         livewire(EditUserPage::class, [
-            'userId' => $user->id,
+            'id' => $user->id,
             'name' => $user->name,
             'introduction' => $user->introduction,
         ])
@@ -73,7 +73,7 @@ describe('edit user', function () {
         $this->actingAs($user);
 
         livewire(EditUserPage::class, [
-            'userId' => $user->id,
+            'id' => $user->id,
             'name' => $user->name,
             'introduction' => $user->introduction,
         ])

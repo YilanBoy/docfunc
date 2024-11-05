@@ -12,7 +12,7 @@ describe('user', function () {
     test('guest can view user profile', function ($tabQueryString) {
         $user = User::factory()->create();
 
-        get(route('users.show', ['userId' => $user->id, 'tab' => $tabQueryString]))
+        get(route('users.show', ['id' => $user->id, 'tab' => $tabQueryString]))
             ->assertStatus(200)
             ->assertSeeLivewire(Posts::class);
     })->with([
@@ -26,7 +26,7 @@ describe('user', function () {
 
         $this->actingAs($user);
 
-        get(route('users.show', ['userId' => $user->id, 'tab' => $tabQueryString]))
+        get(route('users.show', ['id' => $user->id, 'tab' => $tabQueryString]))
             ->assertStatus(200)
             ->assertSeeLivewire(Posts::class);
     })->with([
@@ -48,7 +48,7 @@ describe('user', function () {
 
         $this->actingAs($user);
 
-        get(route('users.show', ['userId' => $user->id, 'tab' => 'posts']))
+        get(route('users.show', ['id' => $user->id, 'tab' => 'posts']))
             ->assertOk()
             ->assertSeeText([
                 'post 1',
@@ -64,7 +64,7 @@ describe('user', function () {
 
         $post->delete();
 
-        get(route('users.show', ['userId' => $post->user->id, 'tab' => 'posts']))
+        get(route('users.show', ['id' => $post->user->id, 'tab' => 'posts']))
             ->assertSuccessful()
             ->assertSeeText('已刪除');
     });
@@ -74,7 +74,7 @@ describe('user', function () {
 
         $post->delete();
 
-        get(route('users.show', ['userId' => $post->user->id, 'tab' => 'posts']))
+        get(route('users.show', ['id' => $post->user->id, 'tab' => 'posts']))
             ->assertSuccessful()
             ->assertDontSeeText('文章將於6天後刪除');
     });
@@ -92,7 +92,7 @@ describe('user', function () {
 
         $this->actingAs($user);
 
-        get(route('users.show', ['userId' => $user->id, 'tab' => 'comments']))
+        get(route('users.show', ['id' => $user->id, 'tab' => 'comments']))
             ->assertOk()
             ->assertSeeText([
                 'comment 1',

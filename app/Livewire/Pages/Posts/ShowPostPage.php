@@ -5,7 +5,6 @@ namespace App\Livewire\Pages\Posts;
 use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
-use Livewire\Attributes\Locked;
 use Livewire\Component;
 
 class ShowPostPage extends Component
@@ -13,35 +12,35 @@ class ShowPostPage extends Component
     use AuthorizesRequests;
 
     /**
-     * @var int get the post id from url path
+     * @var Post get the post id from url path
      *
-     * why not using implicit model binding?
+     * Why not using implicit model binding?
      *
-     * user can delete post in side menu, but there is a problem if you use implicit binding.
-     * although the page will redirect after deleting the post,
+     * User can delete post in side menu, but there is a problem if you use implicit binding.
+     * Although the page will redirect after deleting the post,
      * but livewire will still try to hydrate the component before jumping.
-     * at this time, post model 404 not found errors will occasionally occur.
+     * At this time, post model 404 not found errors will occasionally occur.
      */
-    public int $postId;
+    public Post $post;
 
-    #[Locked]
-    public int $maxCommentLayer = 2;
+    public function mount(int $id): void
+    {
+        $this->post = Post::findOrFail($id);
+
+        // private post, only the author can see
+        if ($this->post->is_private) {
+            $this->authorize('update', $this->post)->asNotFound();
+        }
+
+        // redirect to url with slug if the url has no slug
+        if ($this->post->slug && $this->post->slug !== request()->slug) {
+            redirect()->to($this->post->link_with_slug);
+        }
+    }
 
     public function render(): View
     {
-        $post = Post::findOrFail($this->postId);
-
-        // private post, only the author can see
-        if ($post->is_private) {
-            $this->authorize('update', $post)->asNotFound();
-        }
-
-        // URL 修正，使用帶 slug 的網址
-        if ($post->slug && $post->slug !== request()->slug) {
-            redirect()->to($post->link_with_slug);
-        }
-
-        return view('livewire.pages.posts.show-post-page', compact('post'))
-            ->title($post->title);
+        return view('livewire.pages.posts.show-post-page')
+            ->title($this->post->title);
     }
 }

@@ -7,7 +7,7 @@ use function Pest\Laravel\get;
 test('guest can visit tag show page', function () {
     $tag = Tag::all()->random();
 
-    get(route('tags.show', ['tagId' => $tag->id]))
+    get(route('tags.show', ['id' => $tag->id]))
         ->assertSuccessful()
         ->assertSee($tag->name);
 });

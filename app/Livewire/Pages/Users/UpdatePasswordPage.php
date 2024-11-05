@@ -7,7 +7,6 @@ use App\Rules\MatchOldPassword;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
-use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -15,14 +14,20 @@ class UpdatePasswordPage extends Component
 {
     use AuthorizesRequests;
 
-    #[Locked]
-    public int $userId;
+    public User $user;
 
     public string $current_password = '';
 
     public string $new_password = '';
 
     public string $new_password_confirmation = '';
+
+    public function mount(int $id): void
+    {
+        $this->user = User::findOrFail($id);
+
+        $this->authorize('update', $this->user);
+    }
 
     protected function rules(): array
     {

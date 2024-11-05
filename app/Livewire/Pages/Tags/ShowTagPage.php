@@ -4,21 +4,20 @@ namespace App\Livewire\Pages\Tags;
 
 use App\Models\Tag;
 use Illuminate\View\View;
-use Livewire\Attributes\Locked;
 use Livewire\Component;
 
 class ShowTagPage extends Component
 {
-    #[Locked]
-    public int $tagId;
+    public Tag $tag;
+
+    public function mount(int $id): void
+    {
+        $this->tag = Tag::findOrFail($id);
+    }
 
     public function render(): View
     {
-        $tag = Tag::findOrFail($this->tagId);
-
-        return view(
-            'livewire.pages.tags.show-tag-page',
-            compact('tag')
-        )->title($tag->name);
+        return view('livewire.pages.tags.show-tag-page')
+            ->title($this->tag->name);
     }
 }

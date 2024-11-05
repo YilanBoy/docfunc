@@ -8,34 +8,36 @@ use App\Models\Post;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
-use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Random\RandomException;
 
 class EditPostPage extends Component
 {
     use AuthorizesRequests;
     use WithFileUploads;
 
-    #[Locked]
-    public int $postId;
-
     public PostForm $form;
 
     public Collection $categories;
 
-    public function mount(): void
-    {
-        $post = Post::findOrFail($this->postId);
+    public Post $post;
 
-        $this->authorize('update', $post);
+    public function mount(int $id): void
+    {
+        $this->post = Post::findOrFail($id);
+
+        $this->authorize('update', $this->post);
 
         $this->categories = Category::all(['id', 'name']);
 
-        $this->form->setPost($post);
+        $this->form->setPost($this->post);
     }
 
+    /**
+     * @throws RandomException
+     */
     public function update(Post $post): void
     {
         $this->form->validatePost();

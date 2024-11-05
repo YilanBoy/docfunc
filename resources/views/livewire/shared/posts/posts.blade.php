@@ -76,7 +76,7 @@
           <x-icon.tags class="mr-1 w-4 text-emerald-300 dark:text-lividus-700" />
 
           @foreach ($post->tags as $tag)
-            <x-tag :href="route('tags.show', ['tagId' => $tag->id])">
+            <x-tag :href="route('tags.show', ['id' => $tag->id])">
               {{ $tag->name }}
             </x-tag>
           @endforeach

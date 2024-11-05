@@ -56,7 +56,7 @@
 
       <div class="flex flex-wrap">
         @foreach ($popularTags as $popularTag)
-          <x-tag :href="route('tags.show', ['tagId' => $popularTag->id])">
+          <x-tag :href="route('tags.show', ['id' => $popularTag->id])">
             {{ $popularTag->name }}
           </x-tag>
         @endforeach

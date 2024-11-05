@@ -177,7 +177,7 @@
 
             <a
               class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
-              href="{{ route('users.show', ['userId' => auth()->id()]) }}"
+              href="{{ route('users.show', ['id' => auth()->id()]) }}"
               wire:navigate
             >
               <x-icon.info-circle class="w-4" />
@@ -186,7 +186,7 @@
 
             <a
               class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
-              href="{{ route('users.edit', ['userId' => auth()->id()]) }}"
+              href="{{ route('users.edit', ['id' => auth()->id()]) }}"
               wire:navigate
             >
               <x-icon.person-circle class="w-4" />
@@ -352,7 +352,7 @@
 
                 <a
                   class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
-                  href="{{ route('users.show', ['userId' => auth()->id()]) }}"
+                  href="{{ route('users.show', ['id' => auth()->id()]) }}"
                   role="menuitem"
                   tabindex="-1"
                   wire:navigate
@@ -363,7 +363,7 @@
 
                 <a
                   class="flex items-center rounded-md px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
-                  href="{{ route('users.edit', ['userId' => auth()->id()]) }}"
+                  href="{{ route('users.edit', ['id' => auth()->id()]) }}"
                   role="menuitem"
                   tabindex="-1"
                   wire:navigate

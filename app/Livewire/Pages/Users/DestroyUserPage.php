@@ -16,14 +16,20 @@ class DestroyUserPage extends Component
 {
     use AuthorizesRequests;
 
-    #[Locked]
-    public int $userId;
+    public User $user;
 
     #[Locked]
     public string $destroyUserConfirmationRouteName = 'users.destroy-confirmation';
 
     #[Locked]
     public int $urlValidMinutes = 5;
+
+    public function mount(int $id): void
+    {
+        $this->user = User::findorFail($id);
+
+        $this->authorize('update', $this->user);
+    }
 
     public function sendDestroyEmail(User $user): void
     {
@@ -44,10 +50,6 @@ class DestroyUserPage extends Component
     #[Title('會員中心 - 刪除帳號')]
     public function render(): View
     {
-        $user = User::findorFail($this->userId);
-
-        $this->authorize('update', $user);
-
         return view('livewire.pages.users.destroy-user-page');
     }
 }

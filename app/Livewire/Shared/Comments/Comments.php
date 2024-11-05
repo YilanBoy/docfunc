@@ -18,7 +18,7 @@ class Comments extends Component
     public int $postAuthorId;
 
     #[Locked]
-    public int $maxLayer;
+    public int $maxLayer = 2;
 
     public int $commentCounts;
 

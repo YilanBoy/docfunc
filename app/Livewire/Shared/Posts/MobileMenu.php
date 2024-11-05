@@ -25,7 +25,7 @@ class MobileMenu extends Component
 
         $this->redirect(
             route('users.show', [
-                'userId' => auth()->id(),
+                'id' => auth()->id(),
                 'tab' => 'posts',
                 'current-posts-year' => $post->created_at->format('Y'),
             ])

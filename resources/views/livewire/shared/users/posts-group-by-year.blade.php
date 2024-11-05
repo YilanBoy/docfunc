@@ -75,7 +75,7 @@
             {{-- edit --}}
             <a
               class="text-gray-500 duration-200 ease-out hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-              href="{{ route('posts.edit', ['postId' => $post->id]) }}"
+              href="{{ route('posts.edit', ['id' => $post->id]) }}"
               title="編輯文章"
               role="button"
               wire:navigate

@@ -18,7 +18,7 @@ it('has link with name', function () {
 
     expect($category->link_with_name)
         ->toBe(route('categories.show', [
-            'categoryId' => $category->id,
+            'id' => $category->id,
             'name' => $category->name,
         ]));
 })->group('has link with name');

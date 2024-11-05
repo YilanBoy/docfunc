@@ -34,7 +34,7 @@
             /* code */
         prose-code:before:content-none prose-code:after:content-none prose-code:font-jetbrains-mono prose-code:font-medium
             /* pre */
-        prose-pre:p-0 prose-pre:rounded-lg prose-pre:text-lg
+        prose-pre:p-0 prose-pre:rounded-lg prose-pre:text-lg dark:prose-pre:text-slate-50
             /* blockquote */
         prose-blockquote:border-emerald-400 prose-blockquote:text-slate-600 prose-blockquote:bg-emerald-100/50
         dark:prose-blockquote:border-lividus-600 dark:prose-blockquote:text-slate-400 dark:prose-blockquote:bg-lividus-800/50 prose-blockquote:py-2 prose-blockquote:pr-2;
@@ -63,7 +63,7 @@
             /* code */
         prose-code:before:content-none prose-code:after:content-none prose-code:font-jetbrains-mono prose-code:font-medium
             /* pre */
-        prose-pre:p-0 prose-pre:rounded-lg prose-pre:text-lg
+        prose-pre:p-0 prose-pre:rounded-lg prose-pre:text-lg dark:prose-pre:text-slate-50
             /* blockquote */
         prose-blockquote:border-emerald-400 prose-blockquote:text-slate-600 prose-blockquote:bg-emerald-100/50
         dark:prose-blockquote:border-lividus-600 dark:prose-blockquote:text-slate-400 dark:prose-blockquote:bg-lividus-800/50 prose-blockquote:py-2 prose-blockquote:pr-2;

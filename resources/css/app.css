@@ -34,10 +34,10 @@
             /* code */
         prose-code:before:content-none prose-code:after:content-none prose-code:font-jetbrains-mono prose-code:font-medium
             /* pre */
-        prose-pre:p-0 prose-pre:rounded-lg prose-pre:text-lg dark:prose-pre:text-slate-50
+        prose-pre:p-4 prose-pre:bg-neutral-800 prose-pre:rounded-lg prose-pre:text-lg dark:prose-pre:bg-neutral-900 prose-pre:border-none
             /* blockquote */
         prose-blockquote:border-emerald-400 prose-blockquote:text-slate-600 prose-blockquote:bg-emerald-100/50
-        dark:prose-blockquote:border-lividus-600 dark:prose-blockquote:text-slate-400 dark:prose-blockquote:bg-lividus-800/50 prose-blockquote:py-2 prose-blockquote:pr-2;
+        dark:prose-blockquote:border-lividus-600 dark:prose-blockquote:text-slate-400 dark:prose-blockquote:bg-lividus-800/50 prose-blockquote:py-2 prose-blockquote:pr-2 !important;
     }
 
     /* ckeditor5-font/theme/fontsize.css */
@@ -63,10 +63,10 @@
             /* code */
         prose-code:before:content-none prose-code:after:content-none prose-code:font-jetbrains-mono prose-code:font-medium
             /* pre */
-        prose-pre:p-0 prose-pre:rounded-lg prose-pre:text-lg dark:prose-pre:text-slate-50
+        prose-pre:p-4 prose-pre:bg-neutral-800 prose-pre:rounded-lg prose-pre:text-lg dark:prose-pre:bg-neutral-900 prose-pre:border-none
             /* blockquote */
         prose-blockquote:border-emerald-400 prose-blockquote:text-slate-600 prose-blockquote:bg-emerald-100/50
-        dark:prose-blockquote:border-lividus-600 dark:prose-blockquote:text-slate-400 dark:prose-blockquote:bg-lividus-800/50 prose-blockquote:py-2 prose-blockquote:pr-2;
+        dark:prose-blockquote:border-lividus-600 dark:prose-blockquote:text-slate-400 dark:prose-blockquote:bg-lividus-800/50 prose-blockquote:py-2 prose-blockquote:pr-2 !important;
     }
 }
 

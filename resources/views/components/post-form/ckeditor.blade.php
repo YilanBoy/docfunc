@@ -62,6 +62,7 @@
           }
         });
 
+
         // set the default value of the editor
         editor.setData(this.body);
 
@@ -71,6 +72,9 @@
             this.body = editor.getData();
           }, 1000);
         });
+
+        // override editable block style
+        editor.ui.view.editable.element.parentElement.classList.add('post-body');
 
         let removeCkeditor = () => {
           editor.destroy().catch((error) => {
@@ -86,7 +90,7 @@
 @endscript
 
 <div
-  class="post-body col-span-2 max-w-none"
+  class="col-span-2 max-w-none"
   x-data="ckeditor"
   wire:ignore
 >

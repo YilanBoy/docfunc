@@ -20,8 +20,6 @@ export default defineConfig({
                 // css
                 'resources/css/app.css',
                 'node_modules/@yaireo/tagify/dist/tagify.css',
-                'resources/css/editor.css',
-                'resources/css/missing-content-style.css',
                 'node_modules/highlight.js/styles/atom-one-dark.css',
             ],
             refresh: true,

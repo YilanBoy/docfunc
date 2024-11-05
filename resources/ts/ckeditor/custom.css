@@ -7,7 +7,10 @@
 }
 
 :root.dark {
-    --ck-color-base-border:#4b5563;
+    --ck-color-base-background: #374151;
+    --ck-color-engine-placeholder-text: #a1a1aa;
+
+    --ck-color-base-border: #4b5563;
 
     /* Helper variables to avoid duplication in the colors. */
     --ck-custom-background: hsl(270, 1%, 29%);

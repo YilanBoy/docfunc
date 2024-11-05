@@ -1,6 +1,8 @@
 @props(['model'])
 
 @assets
+  @vite(['resources/ts/tagify.ts', 'node_modules/@yaireo/tagify/dist/tagify.css'])
+
   {{-- custom tagify style --}}
   <style>
     .tagify-custom-look {
@@ -15,6 +17,9 @@
       --tag-text-color: #f9fafb;
       --tag-remove-btn-color: #f9fafb;
       --tag-text-color--edit: #f9fafb;
+      --input-color: #f9fafb;
+      --placeholder-color: #f9fafb;
+      --placeholder-color-focus: #f9fafb;
     }
 
     :root.dark {

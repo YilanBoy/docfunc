@@ -1,19 +1,3 @@
-@assets
-  {{-- Ckeditor --}}
-  @vite('resources/ts/ckeditor/ckeditor.ts')
-  {{-- Tagify --}}
-  @vite('resources/ts/tagify.ts')
-
-  {{-- prettier-ignore-start --}}
-  {{-- editor style --}}
-  @vite([
-    'resources/css/editor.css',
-    'node_modules/@yaireo/tagify/dist/tagify.css',
-    'resources/css/missing-content-style.css'
-  ])
-  {{-- prettier-ignore-end --}}
-@endassets
-
 {{-- create new post --}}
 <x-layouts.layout-main>
   <div class="container mx-auto">
@@ -112,7 +96,7 @@
                 <x-post-form.tagify :model="'form.tags'" />
 
                 {{-- post body --}}
-                <x-post-form.ckedtior
+                <x-post-form.ckeditor
                   :model="'form.body'"
                   :max-characters="$this->form->bodyMaxCharacter"
                 />
@@ -151,7 +135,7 @@
         </div>
       </div>
 
-      <x-post-form.desktop-side-menu :form-id="'create-post'" />
+      <x-post-form.desktop-editor-side-menu :form-id="'create-post'" />
     </div>
   </div>
 </x-layouts.layout-main>

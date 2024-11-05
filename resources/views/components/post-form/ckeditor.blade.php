@@ -1,5 +1,17 @@
 @props(['model', 'maxCharacters'])
 
+@assets
+  {{-- Ckeditor --}}
+  @vite('resources/ts/ckeditor/ckeditor.ts')
+
+  <style>
+    .ck-editor__editable_inline {
+      /* editing area */
+      min-height: 500px;
+    }
+  </style>
+@endassets
+
 @script
   <script>
     Alpine.data('ckeditor', () => ({
@@ -74,7 +86,7 @@
 @endscript
 
 <div
-  class="col-span-2 max-w-none"
+  class="post-body col-span-2 max-w-none"
   x-data="ckeditor"
   wire:ignore
 >

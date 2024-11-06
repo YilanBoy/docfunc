@@ -141,8 +141,7 @@
 
                 {{-- post body --}}
                 <div
-                  class="post-body mt-4"
-                  id="post-body"
+                  class="rich-text mt-4"
                   x-ref="postBody"
                 >
                   {!! $post->body !!}

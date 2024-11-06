@@ -1,4 +1,4 @@
-@props(['model', 'maxCharacters'])
+@props(['model', 'maxCharacters', 'ClassNameToAddOnEditorContent' => ['rich-text']])
 
 @assets
   {{-- Ckeditor --}}
@@ -19,6 +19,7 @@
       maxCharacters: @js($maxCharacters),
       imageUploadUrl: @js(route('images.store')),
       body: @entangle($model).live,
+      ClassNameToAddOnEditorContent: @js($ClassNameToAddOnEditorContent),
       debounce(callback, delay) {
         let timeoutId;
         clearTimeout(timeoutId);
@@ -62,7 +63,6 @@
           }
         });
 
-
         // set the default value of the editor
         editor.setData(this.body);
 
@@ -74,7 +74,8 @@
         });
 
         // override editable block style
-        editor.ui.view.editable.element.parentElement.classList.add('post-body');
+        editor.ui.view.editable.element
+          .parentElement.classList.add(...this.ClassNameToAddOnEditorContent);
 
         let removeCkeditor = () => {
           editor.destroy().catch((error) => {

@@ -54,7 +54,7 @@
         @endif
       </div>
 
-      <div class="comment-body">
+      <div class="rich-text">
         {!! $this->convertedBody !!}
       </div>
 

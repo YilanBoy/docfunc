@@ -97,7 +97,8 @@ class CommentList extends Component
     {
         return Comment::query()
             ->select(['id', 'user_id', 'body', 'created_at', 'updated_at'])
-            // use a sub query to generate children_count column
+            // Use a sub query to generate children_count column,
+            // this line must be after select method
             ->withCount('children')
             ->when($this->order === CommentOrder::LATEST, function (Builder $query) {
                 $query->latest('id');

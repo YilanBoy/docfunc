@@ -53,7 +53,7 @@
       </span>
 
       {{-- 留言 --}}
-      <div class="comment-body">
+      <div class="rich-text">
         {!! $comment->body !!}
       </div>
 

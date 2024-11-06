@@ -6,18 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->text('body');
             $table->timestamps();
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('post_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->index()->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('post_id')->index()->constrained()->onDelete('cascade');
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('comments', function (Blueprint $table) {
             $table->dropForeign(['user_id']);

@@ -5,12 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
         $tags = [
             // 語言
@@ -138,17 +133,11 @@ return new class extends Migration
             ['name' => '環保', 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')],
         ];
 
-        // 插入到資料庫中
         DB::table('tags')->insert($tags);
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
-        //
+        DB::table('tags')->truncate();
     }
 };

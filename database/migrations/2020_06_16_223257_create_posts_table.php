@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
@@ -18,17 +18,17 @@ return new class extends Migration
             $table->string('slug')->nullable();
             $table->timestamps();
 
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            // 上面這句等於以下兩句
+            $table->foreignId('user_id')->index()->constrained()->onDelete('cascade');
+            // This line is equivalent to the following two line in MySQL.
             // $table->bigInteger('user_id')->unsigned()->index();
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // In Postgresql, foreign key won't create index by default.
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            // 移除外鍵約束
             $table->dropForeign(['user_id']);
         });
 

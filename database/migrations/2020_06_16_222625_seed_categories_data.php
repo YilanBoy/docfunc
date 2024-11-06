@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $categories = [
             [
@@ -27,7 +28,7 @@ return new class extends Migration
         DB::table('categories')->insert($categories);
     }
 
-    public function down()
+    public function down(): void
     {
         DB::table('categories')->truncate();
     }

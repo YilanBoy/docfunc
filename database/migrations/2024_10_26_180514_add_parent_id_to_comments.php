@@ -6,22 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::table('comments', function (Blueprint $table) {
             $table->foreignId('parent_id')
+                ->index()
                 ->nullable()
                 ->constrained('comments')
                 ->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::table('comments', function (Blueprint $table) {

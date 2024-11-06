@@ -32,6 +32,8 @@ class EditPostPage extends Component
 
         $this->categories = Category::all(['id', 'name']);
 
+        $this->form->user_id = auth()->id();
+
         $this->form->setPost($this->post);
     }
 

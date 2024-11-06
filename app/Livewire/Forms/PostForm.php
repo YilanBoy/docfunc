@@ -16,8 +16,8 @@ use Random\RandomException;
 
 class PostForm extends Form
 {
-    #[Locked]
-    public ?int $user_id = null;
+    #[Validate('required')]
+    public int $user_id;
 
     public int $category_id = 1;
 
@@ -79,6 +79,7 @@ class PostForm extends Form
             json_encode([
                 'category_id' => $this->category_id,
                 'is_private' => $this->is_private,
+                'preview_url' => $this->preview_url,
                 'title' => $this->title,
                 'tags' => $this->tags,
                 'body' => $this->body,
@@ -94,6 +95,7 @@ class PostForm extends Form
 
             $this->category_id = $autoSavePostData['category_id'];
             $this->is_private = $autoSavePostData['is_private'];
+            $this->preview_url = $autoSavePostData['preview_url'];
             $this->title = $autoSavePostData['title'];
             $this->tags = $autoSavePostData['tags'];
             $this->body = $autoSavePostData['body'];
@@ -142,13 +144,12 @@ class PostForm extends Form
 
     public function setPost(Post $post): void
     {
-        $this->user_id = $post->user_id;
         $this->category_id = $post->category_id;
         $this->is_private = $post->is_private;
         $this->preview_url = $post->preview_url;
         $this->title = $post->title;
-        $this->body = $post->body;
         $this->tags = $post->tags_json;
+        $this->body = $post->body;
     }
 
     public function createPost(): Post

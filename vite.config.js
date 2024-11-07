@@ -11,7 +11,7 @@ export default defineConfig({
                 'resources/ts/highlight.ts',
                 'resources/ts/tagify.ts',
                 'resources/ts/scroll-to-top-btn.ts',
-                'resources/ts/copy-code-btn.ts',
+                'resources/ts/code-block-helper.ts',
                 'resources/ts/oembed/embed-youtube-oembed.ts',
                 'resources/ts/oembed/embed-twitter-oembed.ts',
                 'resources/ts/progress-bar.ts',

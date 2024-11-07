@@ -16,7 +16,7 @@
   {{-- highlight code block --}}
   @vite('resources/ts/highlight.ts')
   {{-- code block copy button --}}
-  @vite('resources/ts/copy-code-btn.ts')
+  @vite('resources/ts/code-block-helper.ts')
   {{-- post read pregress bar --}}
   @vite('resources/ts/progress-bar.ts')
   {{-- scroll --}}
@@ -35,15 +35,15 @@
   <script>
     Alpine.data('showPostPage', () => ({
       init() {
-        setupPostOutline(this.$refs.postOutline, this.$refs.postBody);
-        hljs.highlightAll();
-        codeBlockCopyButton(this.$refs.postBody);
-        processYoutubeOembeds();
-        processTwitterOembeds(this.$refs.postBody);
-        setupProgressBar(this.$refs.postCard, this.$refs.progressBar);
-        setupScrollToTopButton(this.$refs.scrollToTopBtn);
-        setupSharer();
-        scrollToAnchor();
+        window.setupPostOutline(this.$refs.postOutline, this.$refs.postBody);
+        window.hljs.highlightAll();
+        window.codeBlockHelper(this.$refs.postBody);
+        window.processYoutubeOembeds();
+        window.processTwitterOembeds(this.$refs.postBody);
+        window.setupProgressBar(this.$refs.postCard, this.$refs.progressBar);
+        window.setupScrollToTopButton(this.$refs.scrollToTopBtn);
+        window.setupSharer();
+        window.scrollToAnchor();
       }
     }));
   </script>

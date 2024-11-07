@@ -1,4 +1,6 @@
-<div class="mt-4 flex items-center space-x-6 text-base text-gray-400 xl:hidden">
+<div
+  class="mb-4 flex items-center justify-end gap-6 rounded-md bg-gray-200/60 px-4 py-2 text-base text-gray-400 dark:bg-gray-700/60 xl:hidden"
+>
   <a
     class="flex items-center hover:text-gray-500 dark:hover:text-gray-300"
     href="{{ route('posts.edit', ['id' => $postId]) }}"

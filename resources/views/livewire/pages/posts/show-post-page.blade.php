@@ -69,6 +69,11 @@
               class="w-full"
               x-ref="postCard"
             >
+              {{-- mobile menu --}}
+              @if (auth()->id() === $post->user_id)
+                <livewire:shared.posts.mobile-menu :post-id="$post->id" />
+              @endif
+
               <article>
                 {{-- post title --}}
                 <h1 class="text-4xl leading-relaxed text-emerald-600 dark:text-lividus-500">{{ $post->title }}</h1>
@@ -147,11 +152,6 @@
                   {!! $post->body !!}
                 </div>
               </article>
-
-              {{-- mobile menu --}}
-              @if (auth()->id() === $post->user_id)
-                <livewire:shared.posts.mobile-menu :post-id="$post->id" />
-              @endif
             </x-card>
 
             {{-- about author --}}

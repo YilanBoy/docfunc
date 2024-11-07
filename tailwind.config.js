@@ -15,6 +15,7 @@ export default {
         extend: {
             colors: {
                 lividus: {
+                    50: '#e4ecf5',
                     100: '#cddeee',
                     200: '#abc7e3',
                     300: '#88b0d7',

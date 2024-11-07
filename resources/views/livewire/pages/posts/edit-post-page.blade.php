@@ -134,10 +134,10 @@
               <div class="grid grid-cols-2 gap-5">
                 {{-- post preview image --}}
                 <x-post-form.upload-image-block
-                  :image-model="'form.image'"
+                  :image-model-name="'form.image'"
                   :image="$form->image"
                   :show-uploaded-image="!$errors->has('form.image') && !is_null($form->image)"
-                  :preview-url-model="'form.preview_url'"
+                  :preview-url-model-name="'form.preview_url'"
                   :preview-url="$form->preview_url"
                 />
 

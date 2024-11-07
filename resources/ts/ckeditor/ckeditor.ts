@@ -189,8 +189,54 @@ ClassicEditor.defaultConfig = {
 
 declare global {
     interface Window {
-        ClassicEditor: typeof ClassicEditor;
+        createClassicEditor: (
+            element: HTMLElement,
+            maxCharacters: number,
+            imageUploadUrl: string,
+            csrfToken: string,
+        ) => Promise<ClassicEditor>;
     }
 }
 
-window.ClassicEditor = ClassicEditor;
+window.createClassicEditor = async function (
+    element: HTMLElement,
+    maxCharacters: number,
+    imageUploadUrl: string,
+    csrfToken: string,
+) {
+    return ClassicEditor.create(element, {
+        placeholder: '分享使自己成長～',
+        // Editor configuration.
+        wordCount: {
+            onUpdate: (stats) => {
+                let characterCounter =
+                    document.querySelectorAll('.character-counter');
+                // The character count has exceeded the maximum limit
+                let isLimitExceeded = stats.characters > maxCharacters;
+                // The character count is approaching the maximum limit
+                let isCloseToLimit =
+                    !isLimitExceeded && stats.characters > maxCharacters * 0.8;
+
+                // update character count in HTML element
+                characterCounter.forEach((element) => {
+                    element.textContent = `${stats.characters} / ${maxCharacters}`;
+                    // If the character count is approaching the limit
+                    // add the class 'text-yellow-500' to the 'wordsBox' element to turn the text yellow
+                    element.classList.toggle('text-yellow-500', isCloseToLimit);
+                    // If the character count exceeds the limit
+                    // add the class 'text-red-400' to the 'wordsBox' element to turn the text red
+                    element.classList.toggle('text-red-400', isLimitExceeded);
+                });
+            },
+        },
+        simpleUpload: {
+            // The URL that the images are uploaded to.
+            uploadUrl: imageUploadUrl,
+
+            // laravel sanctum need csrf token to authenticate
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+            },
+        },
+    });
+};

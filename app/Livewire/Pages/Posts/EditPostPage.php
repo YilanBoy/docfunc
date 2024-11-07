@@ -8,6 +8,7 @@ use App\Models\Post;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -23,6 +24,9 @@ class EditPostPage extends Component
     public Collection $categories;
 
     public Post $post;
+
+    #[Locked]
+    public int $bodyMaxCharacter = 20_000;
 
     public function mount(int $id): void
     {
@@ -42,7 +46,7 @@ class EditPostPage extends Component
      */
     public function update(Post $post): void
     {
-        $this->form->validatePost();
+        $this->form->validatePost($this->bodyMaxCharacter);
 
         $this->form->uploadPreviewImage();
 

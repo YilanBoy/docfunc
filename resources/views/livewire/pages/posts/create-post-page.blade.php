@@ -1,6 +1,115 @@
+@assets
+  {{-- CKEditor --}}
+  @vite('resources/ts/ckeditor/ckeditor.ts')
+  {{-- Tagify --}}
+  @vite(['resources/ts/tagify.ts', 'node_modules/@yaireo/tagify/dist/tagify.css'])
+
+  <style>
+    /* CKEditor */
+    .ck-editor__editable_inline {
+      min-height: 500px;
+    }
+
+    /* Tagify */
+    .tagify-custom-look {
+      --tag-border-radius: 6px;
+      align-items: center;
+      --tag-inset-shadow-size: 3rem;
+    }
+
+    .dark .tagify-custom-look {
+      --tag-bg: #52525b;
+      --tag-hover: #71717a;
+      --tag-text-color: #f9fafb;
+      --tag-remove-btn-color: #f9fafb;
+      --tag-text-color--edit: #f9fafb;
+      --input-color: #f9fafb;
+      --placeholder-color: #f9fafb;
+      --placeholder-color-focus: #f9fafb;
+    }
+
+    :root.dark {
+      --tagify-dd-bg-color: #52525b;
+      --tagify-dd-color-primary: #71717a;
+      --tagify-dd-text-color: #f9fafb;
+    }
+  </style>
+@endassets
+
+@script
+  <script>
+    Alpine.data('createPostPage', () => ({
+      csrfToken: @js(csrf_token()),
+      imageUploadUrl: @js(route('images.store')),
+      tagsListUrl: @js(route('api.tags')),
+      bodyMaxCharacters: @js($bodyMaxCharacter),
+      ClassNameToAddOnEditorContent: @js(['rich-text']),
+      tags: @entangle('form.tags').live,
+      body: @entangle('form.body').live,
+      debounce(callback, delay) {
+        let timeoutId;
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          callback.apply(this, arguments)
+        }, delay);
+      },
+      async init() {
+        // init the create post page
+        const ckeditor = await window.createClassicEditor(
+          this.$refs.editor,
+          this.bodyMaxCharacters,
+          this.imageUploadUrl,
+          this.csrfToken
+        );
+
+        // set the default value of the editor
+        ckeditor.setData(this.body);
+
+        // binding the value of the ckeditor to the livewire attribute 'body'
+        ckeditor.model.document.on('change:data', () => {
+          this.debounce(() => {
+            this.body = ckeditor.getData();
+          }, 1000);
+        });
+
+        // override editable block style
+        ckeditor.ui.view.editable.element
+          .parentElement.classList.add(...this.ClassNameToAddOnEditorContent);
+
+        const response = await fetch(this.tagsListUrl);
+        const tagsJson = await response.json();
+
+        console.log(tagsJson.data);
+
+        const tagify = window.createTagify(
+          this.$refs.tags,
+          tagsJson.data,
+          (event) => {
+            this.tags = event.detail.value
+          }
+        )
+
+        if (this.tags.length !== 0) {
+          tagify.addTags(JSON.parse(this.tags));
+        }
+
+        document.addEventListener('livewire:navigating', () => {
+          ckeditor.destroy();
+          tagify.destroy();
+        }, {
+          once: true
+        });
+      }
+    }));
+  </script>
+@endscript
+
 {{-- create new post --}}
 <x-layouts.layout-main>
-  <div class="container mx-auto">
+  <div
+    class="container mx-auto"
+    x-data="createPostPage"
+  >
     <div class="flex items-stretch justify-center space-x-4">
       <div class="hidden xl:block xl:w-1/5"></div>
 
@@ -93,13 +202,31 @@
                 </div>
 
                 {{-- post tags --}}
-                <x-post-form.tagify :model="'form.tags'" />
+                <div
+                  class="col-span-2"
+                  wire:ignore
+                >
+                  <label
+                    class="hidden"
+                    for="tags"
+                  >標籤 (最多 5 個)</label>
+
+                  <input
+                    class="tagify-custom-look w-full rounded-md border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-700"
+                    id="tags"
+                    type="text"
+                    placeholder="標籤 (最多 5 個)"
+                    x-ref="tags"
+                  >
+                </div>
 
                 {{-- post body --}}
-                <x-post-form.ckeditor
-                  :model="'form.body'"
-                  :max-characters="$this->form->bodyMaxCharacter"
-                />
+                <div
+                  class="col-span-2 max-w-none"
+                  wire:ignore
+                >
+                  <div x-ref="editor"></div>
+                </div>
               </div>
 
               {{-- show in mobile device --}}

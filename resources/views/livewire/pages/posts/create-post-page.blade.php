@@ -79,8 +79,6 @@
         const response = await fetch(this.tagsListUrl);
         const tagsJson = await response.json();
 
-        console.log(tagsJson.data);
-
         const tagify = window.createTagify(
           this.$refs.tags,
           tagsJson.data,

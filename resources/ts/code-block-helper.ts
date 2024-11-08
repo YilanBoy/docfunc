@@ -38,19 +38,11 @@ const clipboardIcon: string = `
 </svg>
 `;
 
-function createWrapper(element: HTMLElement): HTMLDivElement {
-    // to make the copy button fixed in the container, we wrap it in the container
-    const wrapper: HTMLDivElement = document.createElement('div');
-    // add 'translate-x-0' to make wrapper be a container
-    // make sure the copy button won't be fixed in viewport but container
-    wrapper.classList.add('group', 'translate-x-0');
-    // set the wrapper as sibling of the pre tag
-    element.parentNode?.insertBefore(wrapper, element);
-    // set element as child of wrapper
-    wrapper.appendChild(element);
-
-    return wrapper;
-}
+const arrowsAngleExpandIcon: string = `
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707m4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707"/>
+</svg>
+`;
 
 function createCopyCodeButton(code: string): HTMLButtonElement {
     // create copy button
@@ -81,9 +73,72 @@ function createCopyCodeButton(code: string): HTMLButtonElement {
     return copyButton;
 }
 
+function modalTemplate(html: string, closeModalButtonId: string): string {
+    return `
+        <div class="relative z-30">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity backdrop-blur-md"></div>
+
+            <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                <div class="flex min-h-full justify-center p-4 text-center items-center">
+                    <div class="relative transform overflow-hidden rounded-lg text-left transition-all sm:w-full sm:max-w-6xl">
+                        ${html}
+                    </div>
+                </div>
+            </div>
+
+            <div class="fixed z-10 right-10 top-10">
+                <button
+                    id="${closeModalButtonId}"
+                    type="button"
+                    class="text-gray-200 hover:text-gray-50"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="size-10" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function createExpandCodeButton(
+    preOuterHtml: string,
+    closeExpandButtonId: string,
+    modalSiblingNode: HTMLElement,
+): { expandButton: HTMLButtonElement; modal: HTMLDivElement } {
+    const expandButton: HTMLButtonElement = document.createElement('button');
+    expandButton.classList.add(...baseButtonClassName);
+    expandButton.classList.add('top-2', 'right-12');
+    expandButton.innerHTML = arrowsAngleExpandIcon;
+
+    const modalInnerHtml = modalTemplate(preOuterHtml, closeExpandButtonId);
+
+    const modal: HTMLDivElement = document.createElement('div');
+    modal.classList.add('hidden');
+    modal.innerHTML = modalInnerHtml;
+
+    modalSiblingNode.parentNode?.insertBefore(modal, modalSiblingNode);
+
+    expandButton.addEventListener('click', function (this: HTMLButtonElement) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    });
+
+    const closeExpandButton = document.getElementById(closeExpandButtonId);
+
+    closeExpandButton?.addEventListener('click', function () {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+    });
+
+    return { expandButton: expandButton, modal: modal };
+}
+
 window.codeBlockHelper = function (element: HTMLElement): void {
     const preTags: HTMLCollectionOf<HTMLPreElement> =
         element.getElementsByTagName('pre');
+
+    let index = 0;
 
     // add copy button to all pre tags
     for (const preTag of preTags) {
@@ -91,18 +146,52 @@ window.codeBlockHelper = function (element: HTMLElement): void {
             return;
         }
 
-        preTag.classList.add('code-block-helper-added');
-
-        // to make the copy button fixed in the container, we wrap it in the container
-        const wrapper: HTMLDivElement = createWrapper(preTag);
+        preTag.classList.add(
+            'code-block-helper-added',
+            'group',
+            // add 'translate-x-0' to make pre tag be a container
+            // make sure the copy button won't be fixed in viewport but container
+            'translate-x-0',
+        );
 
         const code = preTag.getElementsByTagName('code')[0];
 
-        // create copy button
+        // start to create copy button...
         const copyButton: HTMLButtonElement = createCopyCodeButton(
             code.innerText,
         );
 
-        wrapper.appendChild(copyButton);
+        // start to create expand code button and modal...
+        const closeExpandButtonId =
+            'expand-code-block-close-button-' + index.toString();
+
+        const { expandButton, modal } = createExpandCodeButton(
+            preTag.outerHTML,
+            closeExpandButtonId,
+            element,
+        );
+
+        // append these button in pre tag
+        preTag.appendChild(copyButton);
+        preTag.appendChild(expandButton);
+
+        // remove these new element that create in this script,
+        // when user want to navigate to next page...
+        document.addEventListener(
+            'livewire:navigating',
+            () => {
+                modal.remove();
+                copyButton.remove();
+                expandButton.remove();
+                preTag.classList.remove(
+                    'code-block-helper-added',
+                    'group',
+                    'translate-x-0',
+                );
+            },
+            { once: true },
+        );
+
+        index += 1;
     }
 };

@@ -1,3 +1,5 @@
+import { Modal } from './modal';
+
 declare global {
     interface Window {
         codeBlockHelper: (element: HTMLElement) => void;
@@ -44,22 +46,11 @@ const ARROWS_ANGLE_EXPAND_ICON_SVG: string = `
 </svg>
 `;
 
-const X_CIRCLE_FILL_ICON_SVG: string = `
-<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="size-10" viewBox="0 0 16 16">
-  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
-</svg>
-`;
-
-const BACKGROUND_BACKDROP_ID: string = 'expand-code-block-background-backdrop';
-const MODAL_PANEL_ID: string = 'expand-code-block-modal-panel';
-const CLOSE_MODAL_BUTTON_ID: string = 'expand-code-block-close-modal-button';
-
 function createCopyCodeButton(code: string): HTMLButtonElement {
     // create copy button
     const copyButton: HTMLButtonElement = document.createElement('button');
-    copyButton.classList.add(...BASE_BUTTON_CLASS_NAME);
     // set button position
-    copyButton.classList.add('top-2', 'right-2');
+    copyButton.classList.add('top-2', 'right-2', ...BASE_BUTTON_CLASS_NAME);
     copyButton.innerHTML = CLIPBOARD_ICON_SVG;
 
     // when copy button is clicked, copy code to clipboard
@@ -83,142 +74,26 @@ function createCopyCodeButton(code: string): HTMLButtonElement {
     return copyButton;
 }
 
-function modalTemplate(html: string): string {
-    return `
-        <div class="relative z-30">
-            <!-- Background backdrop, show/hide based on modal state -->
-            <div
-                id="${BACKGROUND_BACKDROP_ID}"
-                class="fixed inset-0 bg-gray-500/75 transition-opacity backdrop-blur-md ease-in duration-200 opacity-0"
-            ></div>
+function createExpandCodeButton(preOuterHtml: string): HTMLButtonElement {
+    const expandCodeButton: HTMLButtonElement =
+        document.createElement('button');
+    expandCodeButton.classList.add(
+        'top-2',
+        'right-12',
+        ...BASE_BUTTON_CLASS_NAME,
+    );
+    expandCodeButton.innerHTML = ARROWS_ANGLE_EXPAND_ICON_SVG;
 
-            <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-                <div class="flex min-h-full justify-center p-4 text-center items-center">
-                    <!-- Modal panel, show/hide based on modal state. -->
-                    <div
-                        id="${MODAL_PANEL_ID}"
-                        class="relative transform overflow-hidden rounded-lg text-left transition-all sm:w-full sm:max-w-6xl ease-in duration-200 opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                    >
-                        ${html}
-                    </div>
-                </div>
-            </div>
+    const modal = new Modal(preOuterHtml, ['font-jetbrains-mono', 'text-xl']);
 
-            <div class="fixed z-10 right-10 top-10">
-                <button
-                    id="${CLOSE_MODAL_BUTTON_ID}"
-                    type="button"
-                    class="text-gray-200 hover:text-gray-50"
-                >
-                   ${X_CIRCLE_FILL_ICON_SVG}
-                </button>
-            </div>
-        </div>
-    `;
-}
+    expandCodeButton.addEventListener(
+        'click',
+        function (this: HTMLButtonElement) {
+            modal.openModal();
+        },
+    );
 
-function createExpandCodeButton(preOuterHtml: string): {
-    expandButton: HTMLButtonElement;
-    modal: HTMLDivElement;
-} {
-    const expandButton: HTMLButtonElement = document.createElement('button');
-    expandButton.classList.add(...BASE_BUTTON_CLASS_NAME);
-    expandButton.classList.add('top-2', 'right-12');
-    expandButton.innerHTML = ARROWS_ANGLE_EXPAND_ICON_SVG;
-
-    const modalInnerHtml = modalTemplate(preOuterHtml);
-
-    const modal: HTMLDivElement = document.createElement('div');
-    modal.innerHTML = modalInnerHtml;
-
-    // transport modal to another part of the DOM on the page entirely
-    expandButton.addEventListener('click', function (this: HTMLButtonElement) {
-        document.body.appendChild(modal);
-        document.body.style.overflow = 'hidden';
-
-        const backgroundBackdrop = document.getElementById(
-            BACKGROUND_BACKDROP_ID,
-        );
-
-        const modalPanel = document.getElementById(MODAL_PANEL_ID);
-
-        setTimeout(() => {
-            backgroundBackdrop?.classList.remove(
-                'ease-in',
-                'duration-200',
-                'opacity-0',
-            );
-
-            backgroundBackdrop?.classList.add(
-                'ease-out',
-                'duration-300',
-                'opacity-100',
-            );
-
-            modalPanel?.classList.remove(
-                'ease-in',
-                'duration-200',
-                'opacity-0',
-                'translate-y-4',
-                'sm:translate-y-0',
-                'sm:scale-95',
-            );
-
-            modalPanel?.classList.add(
-                'ease-out',
-                'duration-300',
-                'opacity-100',
-                'translate-y-0',
-                'sm:scale-100',
-            );
-        }, 100);
-
-        const closeExpandButton = document.getElementById(
-            CLOSE_MODAL_BUTTON_ID,
-        );
-
-        closeExpandButton?.addEventListener(
-            'click',
-            () => {
-                backgroundBackdrop?.classList.remove(
-                    'ease-out',
-                    'duration-300',
-                    'opacity-100',
-                );
-
-                backgroundBackdrop?.classList.add(
-                    'ease-in',
-                    'duration-200',
-                    'opacity-0',
-                );
-
-                modalPanel?.classList.remove(
-                    'ease-out',
-                    'duration-300',
-                    'opacity-100',
-                    'translate-y-0',
-                    'sm:scale-100',
-                );
-
-                modalPanel?.classList.add(
-                    'ease-in',
-                    'duration-20',
-                    'opacity-0',
-                    'translate-y-4',
-                    'sm:translate-y-0',
-                    'sm:scale-95',
-                );
-
-                setTimeout(() => {
-                    document.body.removeChild(modal);
-                    document.body.style.overflow = '';
-                }, 300);
-            },
-            { once: true },
-        );
-    });
-
-    return { expandButton: expandButton, modal: modal };
+    return expandCodeButton;
 }
 
 window.codeBlockHelper = function (element: HTMLElement): void {
@@ -246,22 +121,19 @@ window.codeBlockHelper = function (element: HTMLElement): void {
             code.innerText,
         );
 
-        const { expandButton, modal } = createExpandCodeButton(
-            preTag.outerHTML,
-        );
+        const expandCodeButton = createExpandCodeButton(preTag.outerHTML);
 
         // append these button in pre tag
         preTag.appendChild(copyButton);
-        preTag.appendChild(expandButton);
+        preTag.appendChild(expandCodeButton);
 
         // remove these new element that create in this script,
         // when user want to navigate to next page...
         document.addEventListener(
             'livewire:navigating',
             () => {
-                modal.remove();
                 copyButton.remove();
-                expandButton.remove();
+                expandCodeButton.remove();
                 preTag.classList.remove(
                     'code-block-helper-added',
                     'group',

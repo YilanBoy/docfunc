@@ -29,12 +29,14 @@ export default {
             },
             fontFamily: {
                 sans: [
-                    "'Noto Sans TC', sans-serif",
+                    'Noto Sans TC',
+                    'Roboto',
                     ...defaultTheme.fontFamily.sans,
                 ],
                 'jetbrains-mono': [
-                    "'JetBrains Mono', monospace",
-                    "'Noto Sans TC', sans-serif",
+                    'JetBrains Mono',
+                    'Noto Sans TC',
+                    ...defaultTheme.fontFamily.sans,
                 ],
             },
             keyframes: {

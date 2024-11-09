@@ -58,7 +58,7 @@
         {!! $this->convertedBody !!}
       </div>
 
-      <div class="flex items-center space-x-6 text-base text-gray-400">
+      <div class="flex items-center justify-end gap-6 text-base text-gray-400">
         @auth
           @if (auth()->id() === $userId)
             <button

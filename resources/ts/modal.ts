@@ -33,7 +33,8 @@ const HIDE_MODAL_PANEL_CLASS_NAME: string[] = [
 ];
 
 export class Modal {
-    element: HTMLDivElement;
+    public element: HTMLDivElement;
+    private abortController: AbortController;
 
     public constructor(innerHtml: string, customClassName: string[] = []) {
         this.element = document.createElement('div');
@@ -42,6 +43,8 @@ export class Modal {
             innerHtml,
             customClassName,
         );
+
+        this.abortController = new AbortController();
     }
 
     public modalInnerHtmlTemplate(
@@ -92,51 +95,75 @@ export class Modal {
 
         const modalPanel = document.getElementById(MODAL_PANEL_ID);
 
+        if (!backgroundBackdrop || !modalPanel) {
+            return;
+        }
+
         setTimeout(() => {
-            backgroundBackdrop?.classList.remove(
+            backgroundBackdrop.classList.remove(
                 ...HIDE_BACKGROUND_BACKDROP_CLASS_NAME,
             );
-            backgroundBackdrop?.classList.add(
+            backgroundBackdrop.classList.add(
                 ...SHOW_BACKGROUND_BACKDROP_CLASS_NAME,
             );
 
-            modalPanel?.classList.remove(...HIDE_MODAL_PANEL_CLASS_NAME);
-            modalPanel?.classList.add(...SHOW_MODAL_PANEL_CLASS_NAME);
+            modalPanel.classList.remove(...HIDE_MODAL_PANEL_CLASS_NAME);
+            modalPanel.classList.add(...SHOW_MODAL_PANEL_CLASS_NAME);
         }, 100);
 
-        this.closeModal();
+        // Add event listeners for closing if needed
+        this.setupCloseHandlers();
+    }
+
+    private setupCloseHandlers() {
+        // Add close button handler
+        const closeButton = document.getElementById(CLOSE_MODAL_BUTTON_ID);
+
+        closeButton?.addEventListener('click', () => this.closeModal(), {
+            signal: this.abortController.signal,
+        });
+
+        // Optional: Close on escape key
+        document.addEventListener(
+            'keydown',
+            (event) => {
+                if (event.key === 'Escape') {
+                    this.closeModal();
+                }
+            },
+            { signal: this.abortController.signal },
+        );
     }
 
     private closeModal() {
+        // Abort all event listeners
+        this.abortController.abort();
+        // Create new controller for next time
+        this.abortController = new AbortController();
+
         const backgroundBackdrop = document.getElementById(
             BACKGROUND_BACKDROP_ID,
         );
 
         const modalPanel = document.getElementById(MODAL_PANEL_ID);
 
-        const closeExpandButton = document.getElementById(
-            CLOSE_MODAL_BUTTON_ID,
+        if (!backgroundBackdrop || !modalPanel) {
+            return;
+        }
+
+        backgroundBackdrop.classList.remove(
+            ...SHOW_BACKGROUND_BACKDROP_CLASS_NAME,
+        );
+        backgroundBackdrop.classList.add(
+            ...HIDE_BACKGROUND_BACKDROP_CLASS_NAME,
         );
 
-        closeExpandButton?.addEventListener(
-            'click',
-            () => {
-                backgroundBackdrop?.classList.remove(
-                    ...SHOW_BACKGROUND_BACKDROP_CLASS_NAME,
-                );
-                backgroundBackdrop?.classList.add(
-                    ...HIDE_BACKGROUND_BACKDROP_CLASS_NAME,
-                );
+        modalPanel.classList.remove(...SHOW_MODAL_PANEL_CLASS_NAME);
+        modalPanel.classList.add(...HIDE_MODAL_PANEL_CLASS_NAME);
 
-                modalPanel?.classList.remove(...SHOW_MODAL_PANEL_CLASS_NAME);
-                modalPanel?.classList.add(...HIDE_MODAL_PANEL_CLASS_NAME);
-
-                setTimeout(() => {
-                    document.body.removeChild(this.element);
-                    document.body.style.overflow = '';
-                }, 300);
-            },
-            { once: true },
-        );
+        setTimeout(() => {
+            document.body.removeChild(this.element);
+            document.body.style.overflow = '';
+        }, 300);
     }
 }

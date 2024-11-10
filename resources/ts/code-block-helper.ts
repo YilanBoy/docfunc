@@ -84,12 +84,15 @@ function createExpandCodeButton(preOuterHtml: string): HTMLButtonElement {
     );
     expandCodeButton.innerHTML = ARROWS_ANGLE_EXPAND_ICON_SVG;
 
-    const modal = new Modal(preOuterHtml, ['font-jetbrains-mono', 'text-xl']);
+    const modal = new Modal({
+        innerHtml: preOuterHtml,
+        customClassName: ['font-jetbrains-mono', 'text-xl'],
+    });
 
     expandCodeButton.addEventListener(
         'click',
         function (this: HTMLButtonElement) {
-            modal.openModal();
+            modal.open();
         },
     );
 

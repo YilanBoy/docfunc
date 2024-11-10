@@ -36,10 +36,16 @@ export class Modal {
     public element: HTMLDivElement;
     private abortController: AbortController;
 
-    public constructor(innerHtml: string, customClassName: string[] = []) {
+    public constructor({
+        innerHtml,
+        customClassName = [],
+    }: {
+        innerHtml: string;
+        customClassName?: string[];
+    }) {
         this.element = document.createElement('div');
         this.element.id = 'dynamic-content-modal';
-        this.element.innerHTML = this.modalInnerHtmlTemplate(
+        this.element.innerHTML = this.innerHtmlTemplate(
             innerHtml,
             customClassName,
         );
@@ -47,44 +53,42 @@ export class Modal {
         this.abortController = new AbortController();
     }
 
-    public modalInnerHtmlTemplate(
+    public innerHtmlTemplate(
         innerHtml: string,
         customClassName: string[],
     ): string {
-        return `
-        <div class="relative z-30 ${customClassName.join(' ')}">
+        return `<div class="relative z-30 ${customClassName.join(' ')}">
             <!-- Background backdrop, show/hide based on modal state -->
             <div
                 id="${BACKGROUND_BACKDROP_ID}"
-                class="fixed inset-0 bg-gray-500/75 transition-opacity backdrop-blur-md ${HIDE_BACKGROUND_BACKDROP_CLASS_NAME.join(' ')}"
+                class="fixed inset-0 bg-gray-500/75 backdrop-blur-md transition-opacity ${HIDE_BACKGROUND_BACKDROP_CLASS_NAME.join(' ')}"
             ></div>
 
             <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-                <div class="flex min-h-full justify-center p-4 text-center items-center">
+                <div class="flex min-h-full items-center justify-center p-4 text-center">
                     <!-- Modal panel, show/hide based on modal state. -->
                     <div
                         id="${MODAL_PANEL_ID}"
-                        class="relative transform overflow-hidden rounded-lg text-left transition-all sm:w-full sm:max-w-6xl ${HIDE_MODAL_PANEL_CLASS_NAME.join(' ')}"
+                        class="relative transform overflow-hidden rounded-xl text-left transition-all sm:w-fit sm:max-w-6xl ${HIDE_MODAL_PANEL_CLASS_NAME.join(' ')}"
                     >
                         ${innerHtml}
                     </div>
                 </div>
             </div>
 
-            <div class="fixed z-10 right-10 top-10">
+            <div class="fixed right-10 top-10 z-10">
                 <button
                     id="${CLOSE_MODAL_BUTTON_ID}"
                     type="button"
-                    class="text-gray-200 hover:text-gray-50 transition duration-300"
+                    class="text-gray-200 transition duration-300 hover:text-gray-50"
                 >
                    ${X_CIRCLE_FILL_ICON_SVG}
                 </button>
             </div>
-        </div>
-    `;
+        </div>`;
     }
 
-    public openModal() {
+    public open() {
         // transport modal to another part of the DOM on the page entirely
         document.body.appendChild(this.element);
         document.body.style.overflow = 'hidden';
@@ -119,7 +123,7 @@ export class Modal {
         // Add close button handler
         const closeButton = document.getElementById(CLOSE_MODAL_BUTTON_ID);
 
-        closeButton?.addEventListener('click', () => this.closeModal(), {
+        closeButton?.addEventListener('click', () => this.close(), {
             signal: this.abortController.signal,
         });
 
@@ -128,14 +132,14 @@ export class Modal {
             'keydown',
             (event) => {
                 if (event.key === 'Escape') {
-                    this.closeModal();
+                    this.close();
                 }
             },
             { signal: this.abortController.signal },
         );
     }
 
-    private closeModal() {
+    private close() {
         // Abort all event listeners
         this.abortController.abort();
         // Create new controller for next time

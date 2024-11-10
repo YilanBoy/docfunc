@@ -24,22 +24,23 @@
             /* figure */
         prose-figure:table prose-figure:mx-auto
             /* image */
-        prose-img:w-full prose-img:rounded-md
+        prose-img:w-full prose-img:rounded-xl
             /* figure */
         prose-figure:w-full
             /* figcaption */
         prose-figcaption:table-caption prose-figcaption:[caption-side:bottom] prose-figcaption:break-words
-        prose-figcaption:rounded-md prose-figcaption:p-1.5 prose-figcaption:text-center prose-figcaption:bg-slate-200
+        prose-figcaption:rounded-lg prose-figcaption:p-1.5 prose-figcaption:text-center prose-figcaption:bg-slate-200
         dark:prose-figcaption:bg-slate-700 dark:prose-figcaption:text-slate-100
             /* horizontal line */
         prose-hr:my-3 prose-hr:h-1 prose-hr:border-none prose-hr:bg-slate-300 dark:prose-hr:bg-slate-500
             /* code */
         prose-code:before:content-none prose-code:after:content-none prose-code:font-jetbrains-mono prose-code:font-medium
             /* pre */
-        prose-pre:p-4 prose-pre:bg-neutral-800 prose-pre:rounded-lg prose-pre:text-lg dark:prose-pre:bg-neutral-900 prose-pre:border-none
+        prose-pre:p-4 prose-pre:bg-neutral-800 prose-pre:rounded-xl prose-pre:text-lg dark:prose-pre:bg-neutral-900 prose-pre:border-none
+            /* blockquote border */
+        prose-blockquote:relative prose-blockquote:before:absolute prose-blockquote:before:w-1.5 prose-blockquote:before:h-full prose-blockquote:before:rounded prose-blockquote:before:top-0 prose-blockquote:before:-left-4 prose-blockquote:before:bg-emerald-300 dark:prose-blockquote:before:bg-lividus-700 prose-blockquote:before:contain-none prose-blockquote:ml-4
             /* blockquote */
-        prose-blockquote:border-emerald-400 prose-blockquote:text-slate-600 prose-blockquote:bg-emerald-100/50
-        dark:prose-blockquote:border-lividus-600 dark:prose-blockquote:text-slate-400 dark:prose-blockquote:bg-lividus-800/50 prose-blockquote:py-2 prose-blockquote:pr-2 !important;
+         prose-blockquote:border-none prose-blockquote:rounded-xl prose-blockquote:text-slate-600 prose-blockquote:bg-emerald-100/80 dark:prose-blockquote:text-slate-400 dark:prose-blockquote:bg-lividus-800/50 prose-blockquote:py-2 prose-blockquote:pr-2 !important;
     }
 
     /* ckeditor5-font/theme/fontsize.css */

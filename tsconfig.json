@@ -9,19 +9,19 @@
         "moduleDetection": "force",
         "isolatedModules": true,
         // "verbatimModuleSyntax": true,
-        "module": "commonjs",
 
         /* Strictness */
         "strict": true,
         // "noUncheckedIndexedAccess": true,
         "noImplicitOverride": true,
-        // https://www.typescriptlang.org/tsconfig/#moduleResolution
-        "moduleResolution": "bundler",
+
+        /* If transpiling with TypeScript: */
+        "module": "NodeNext",
+        "outDir": "dist",
+        "sourceMap": true,
 
         /* If your code runs in the DOM: */
-        "compilerOptions": {
-            "lib": ["es2022", "dom", "dom.iterable"]
-        }
+        "lib": ["es2022", "dom", "dom.iterable"]
     },
     "include": ["resources/ts/**/*"]
 }

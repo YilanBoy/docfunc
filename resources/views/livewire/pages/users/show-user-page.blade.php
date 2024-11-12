@@ -54,7 +54,7 @@
               x-on:click="tabButtonClicked($el)"
               {{-- update url query parameter in livewire --}}
               wire:click="changeTab('{{ $userInfoTab }}')"
-              wire:key="{{ $userInfoTab->value . '-tab-button' }}"
+              wire:key="{{ $userInfoTab->value }}-tab-button"
             >
               <x-dynamic-component
                 class="w-4"
@@ -79,12 +79,12 @@
             x-cloak
             x-show="tabContentActive($el)"
             x-transition:enter.duration.300ms
-            wire:key="{{ $userInfoTab->value . '-content' }}"
+            wire:key="{{ $userInfoTab->value }}-content"
           >
             <livewire:dynamic-component
-              :key="$userInfoTab->value . '-content'"
               :is="$userInfoTab->livewireComponentName()"
               :user-id="$user->id"
+              :key="$userInfoTab->value . '-content'"
             />
           </div>
         @endforeach

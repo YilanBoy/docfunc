@@ -73,42 +73,21 @@
             x-on:click.outside="closeOrderDropdown"
           >
             <div class="w-full py-1">
-              <button
-                data-order="popular"
-                type="button"
-                @class([
-                    'flex w-full justify-start px-4 py-2',
-                    'bg-gray-200 text-gray-900 outline-none dark:bg-gray-600 dark:text-gray-50' =>
-                        $order === CommentOrder::POPULAR,
-                    'text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700' =>
-                        $order !== CommentOrder::POPULAR,
-                ])
-                x-on:click="changeOrder"
-              >熱門留言</button>
-              <button
-                data-order="latest"
-                type="button"
-                @class([
-                    'flex w-full justify-start px-4 py-2',
-                    'bg-gray-200 text-gray-900 outline-none dark:bg-gray-600 dark:text-gray-50' =>
-                        $order === CommentOrder::LATEST,
-                    'text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700' =>
-                        $order !== CommentOrder::LATEST,
-                ])
-                x-on:click="changeOrder"
-              >由新到舊</button>
-              <button
-                data-order="oldest"
-                type="button"
-                @class([
-                    'flex w-full justify-start px-4 py-2',
-                    'bg-gray-200 text-gray-900 outline-none dark:bg-gray-600 dark:text-gray-50' =>
-                        $order === CommentOrder::OLDEST,
-                    'text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700' =>
-                        $order !== CommentOrder::OLDEST,
-                ])
-                x-on:click="changeOrder"
-              >由舊到新</button>
+              @foreach (CommentOrder::cases() as $commentOrder)
+                <button
+                  data-order="{{ $commentOrder->value }}"
+                  type="button"
+                  @class([
+                      'flex w-full justify-start px-4 py-2',
+                      'bg-gray-200 text-gray-900 outline-none dark:bg-gray-600 dark:text-gray-50' =>
+                          $order === $commentOrder,
+                      'text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700' =>
+                          $order !== $commentOrder,
+                  ])
+                  x-on:click="changeOrder"
+                  wire:key="{{ $commentOrder->value }}-comment-order"
+                >{{ $commentOrder->label() }}</button>
+              @endforeach
             </div>
           </div>
         </div>

@@ -26,7 +26,7 @@
   <x-dashed-card class="mt-6">
     <div class="flex flex-col">
       <div class="flex items-center space-x-4 text-base">
-        @if ($userId !== 0)
+        @if (!is_null($userId))
           <a
             href="{{ route('users.show', ['id' => $userId]) }}"
             wire:navigate
@@ -37,12 +37,11 @@
               alt="{{ $userName }}"
             >
           </a>
-
-          <span class="dark:text-gray-50">{{ $userName }}</span>
         @else
           <x-icon.question-circle-fill class="size-10 text-gray-300 dark:text-gray-500" />
-          <span class="dark:text-gray-50">訪客</span>
         @endif
+
+        <span class="dark:text-gray-50">{{ $userName }}</span>
 
         <time
           class="hidden text-gray-400 md:block"

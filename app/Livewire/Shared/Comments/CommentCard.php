@@ -34,7 +34,7 @@ class CommentCard extends Component
     public int $commentId;
 
     #[Locked]
-    public int $userId;
+    public ?int $userId;
 
     #[Locked]
     public string $userGravatarUrl;

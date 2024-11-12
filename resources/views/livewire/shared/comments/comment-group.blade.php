@@ -44,9 +44,9 @@
       :$postId
       :$postAuthorId
       :comment-id="$comment['id']"
-      :user-id="$comment['user_id'] ?? 0"
-      :user-gravatar-url="is_null($comment['user']) ? '' : get_gravatar($comment['user']['email'])"
-      :user-name="is_null($comment['user']) ? '' : $comment['user']['name']"
+      :user-id="$comment['user_id']"
+      :user-gravatar-url="is_null($comment['user']) ? '' : $comment['user']['gravatar_url']"
+      :user-name="is_null($comment['user']) ? '訪客' : $comment['user']['name']"
       :body="$comment['body']"
       :created-at="$comment['created_at']"
       :is-edited="$comment['created_at'] !== $comment['updated_at']"

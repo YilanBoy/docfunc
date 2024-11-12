@@ -95,7 +95,7 @@ class CommentList extends Component
 
     private function getComments(): array
     {
-        return Comment::query()
+        $comments = Comment::query()
             ->select(['id', 'user_id', 'body', 'created_at', 'updated_at'])
             // Use a sub query to generate children_count column,
             // this line must be after select method
@@ -124,6 +124,18 @@ class CommentList extends Component
             ->get()
             ->keyBy('id')
             ->toArray();
+
+        foreach ($comments as &$comment) {
+            if (is_null($comment['user'])) {
+                continue;
+            }
+
+            $comment['user']['gravatar_url'] = get_gravatar($comment['user']['email']);
+
+            unset($comment['user']['email']);
+        }
+
+        return $comments;
     }
 
     private function updateSkipCounts(): void

@@ -270,6 +270,7 @@ return [
         'title'                    => '標題',
         'type'                     => '類型',
         'updated_at'               => '更新於',
+        'upload'                   => '文章中的圖片',
         'user'                     => '使用者',
         'username'                 => '使用者名稱',
         'value'                    => '價值',

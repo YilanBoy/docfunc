@@ -34,7 +34,7 @@ test('the size of the uploaded image must be less than 1024 kb', function () {
 
     post(route('images.store'), [
         'upload' => UploadedFile::fake()->image('photo.jpg')->size(1025),
-    ])->assertStatus(302);
+    ])->assertStatus(413);
 
     Storage::disk()->assertDirectoryEmpty('images');
 });

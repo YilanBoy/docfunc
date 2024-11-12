@@ -7,6 +7,7 @@ use App\Services\FileService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\File;
 use Random\RandomException;
 
@@ -25,9 +26,18 @@ class UploadImageController extends Controller
      */
     public function __invoke(Request $request): JsonResponse
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'upload' => ['required', File::image()->max(1024)],
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(
+                data: [
+                    'error' => ['message' => $validator->errors()->first()],
+                ],
+                status: 413
+            );
+        }
 
         $file = $request->file('upload');
         $imageName = $this->fileService->generateFileName($file->getClientOriginalExtension());

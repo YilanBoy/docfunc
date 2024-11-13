@@ -9,7 +9,7 @@
         this.orderDropdownIsOpen = false;
       },
       changeOrder() {
-        $wire.changeOrder(this.$el.dataset.order);
+        this.$wire.changeOrder(this.$el.dataset.order);
         this.orderDropdownIsOpen = false;
       },
       openCreateCommentModal() {
@@ -116,26 +116,26 @@
     @if ($case === $order)
       {{-- new root comment will show here --}}
       <livewire:shared.comments.comment-group
-        :$maxLayer
-        :$postId
-        :$postAuthorId
+        :post-id="$postId"
+        :post-user-id="$postUserId"
+        :max-layer="$maxLayer"
         :comment-group-name="'root-new-comment-group'"
         :key="'root-new-comment-group-order-by-' . $order->value"
       />
 
       {{-- root comment list --}}
       <livewire:shared.comments.comment-list
-        :$maxLayer
-        :$postId
-        :$postAuthorId
-        :$order
+        :post-id="$postId"
+        :post-user-id="$postUserId"
+        :max-layer="$maxLayer"
+        :order="$order"
         :key="'root-comment-list-order-by-' . $order->value"
       />
     @endif
   @endforeach
 
   {{-- create comment modal --}}
-  <livewire:shared.comments.create-comment-modal :$postId />
+  <livewire:shared.comments.create-comment-modal :post-id="$postId" />
 
   {{-- edit comment modal --}}
   <livewire:shared.comments.edit-comment-modal />

@@ -21,8 +21,6 @@ class EditCommentModal extends Component
 
     public bool $previewIsEnabled = false;
 
-    public int $commentId;
-
     public string $body = '';
 
     protected function rules(): array
@@ -65,7 +63,7 @@ class EditCommentModal extends Component
 
         $this->dispatch('close-edit-comment-modal');
 
-        $this->dispatch('comment-updated.'.$comment->id);
+        $this->dispatch('update-comment-'.$comment->id);
     }
 
     public function render(): View

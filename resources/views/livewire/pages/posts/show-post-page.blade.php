@@ -178,7 +178,7 @@
 
             <livewire:shared.comments.comments
               :post-id="$post->id"
-              :post-author-id="$post->user_id"
+              :post-user-id="$post->user_id"
               :comment-counts="$post->comment_counts"
             />
           </div>

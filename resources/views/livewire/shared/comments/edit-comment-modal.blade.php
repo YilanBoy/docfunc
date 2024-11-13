@@ -3,10 +3,10 @@
     Alpine.data('editCommentModal', () => ({
       observers: [],
       modalIsOpen: false,
-      commentId: null,
+      id: null,
       body: @entangle('body'),
       openModal(event) {
-        this.commentId = event.detail.commentId;
+        this.id = event.detail.id;
         this.body = event.detail.body;
 
         this.modalIsOpen = true;
@@ -16,7 +16,7 @@
         this.modalIsOpen = false;
       },
       submitForm() {
-        $wire.update(this.commentId);
+        this.$wire.update(this.id);
       },
       tabToFourSpaces() {
         this.$el.setRangeText('    ', this.$el.selectionStart, this.$el.selectionStart, 'end');

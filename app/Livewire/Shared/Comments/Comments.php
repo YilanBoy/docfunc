@@ -15,13 +15,15 @@ class Comments extends Component
     public int $postId;
 
     #[Locked]
-    public int $postAuthorId;
+    public int $postUserId;
 
     #[Locked]
     public int $maxLayer = 2;
 
+    #[Locked]
     public int $commentCounts;
 
+    #[Locked]
     public CommentOrder $order = CommentOrder::POPULAR;
 
     // update comment count in post show page

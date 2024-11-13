@@ -14,22 +14,22 @@ use Livewire\Component;
 class CommentList extends Component
 {
     #[Locked]
+    public int $postId;
+
+    #[Locked]
+    public int $postUserId;
+
+    #[Locked]
     public int $maxLayer = 2;
 
     #[Locked]
     public int $currentLayer = 1;
 
     #[Locked]
-    public int $perPage = 10;
-
-    #[Locked]
-    public int $postId;
-
-    #[Locked]
-    public int $postAuthorId;
-
-    #[Locked]
     public ?int $parentId = null;
+
+    #[Locked]
+    public int $perPage = 10;
 
     /**
      * This value will be either the root-comment-list or [comment id]-comment-list,
@@ -56,8 +56,6 @@ class CommentList extends Component
      */
     public array $commentsList = [];
 
-    public int $skipCounts = 0;
-
     public bool $showMoreButtonIsActive = true;
 
     /**
@@ -79,21 +77,7 @@ class CommentList extends Component
         $this->newCommentIds[] = $id;
     }
 
-    public function showMoreComments(): void
-    {
-        $comments = $this->getComments();
-
-        $this->updateSkipCounts();
-        $this->updateCommentsList($comments);
-        $this->updateShowMoreButtonStatus($comments);
-    }
-
-    public function render(): View
-    {
-        return view('livewire.shared.comments.comment-list');
-    }
-
-    private function getComments(): array
+    private function getComments(int $skip): array
     {
         $comments = Comment::query()
             ->select(['id', 'user_id', 'body', 'created_at', 'updated_at'])
@@ -116,7 +100,7 @@ class CommentList extends Component
             // When parent id is not null,
             // it means this comment list is children of another comment.
             ->where('parent_id', $this->parentId)
-            ->skip($this->skipCounts)
+            ->skip($skip)
             // Plus one is needed here because we need to determine whether there is a next page.
             ->take($this->perPage + 1)
             ->with('user:id,name,email')
@@ -138,11 +122,6 @@ class CommentList extends Component
         return $comments;
     }
 
-    private function updateSkipCounts(): void
-    {
-        $this->skipCounts += $this->perPage;
-    }
-
     private function updateCommentsList(array $comments): void
     {
         if (count($comments) > 0) {
@@ -155,5 +134,18 @@ class CommentList extends Component
         if (count($comments) <= $this->perPage) {
             $this->showMoreButtonIsActive = false;
         }
+    }
+
+    public function showMoreComments(int $skip = 0): void
+    {
+        $comments = $this->getComments($skip);
+
+        $this->updateCommentsList($comments);
+        $this->updateShowMoreButtonStatus($comments);
+    }
+
+    public function render(): View
+    {
+        return view('livewire.shared.comments.comment-list');
     }
 }

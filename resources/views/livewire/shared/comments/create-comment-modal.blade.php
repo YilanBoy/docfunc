@@ -19,7 +19,7 @@
         this.modalIsOpen = false;
       },
       submitForm() {
-        $wire.store(this.parentId)
+        this.$wire.store(this.parentId)
       },
       tabToFourSpaces() {
         this.$el.setRangeText('    ', this.$el.selectionStart, this.$el.selectionStart, 'end');

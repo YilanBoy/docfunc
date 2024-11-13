@@ -141,7 +141,7 @@ class CreateCommentModal extends Component
         $comment['user'] = [
             'id' => $user->id,
             'name' => $user->name,
-            'email' => $user->email,
+            'gravatar_url' => get_gravatar($user->email),
         ];
 
         return $comment;

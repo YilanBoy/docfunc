@@ -3,6 +3,14 @@
     Alpine.data('commentList', () => ({
       listeners: [],
       currentScrollY: 0,
+      showMoreComments() {
+        // Calculate how many comment cards are at the bottom of this comment list.
+        const skip = this.$root.querySelectorAll(
+          '& > [x-data="commentGroup"] > [x-data="commentCard"]'
+        ).length;
+
+        this.$wire.showMoreComments(skip);
+      },
       init() {
         this.listeners.push(
           Livewire.hook('commit.prepare', ({
@@ -43,12 +51,12 @@
 >
   @foreach ($commentsList as $comments)
     <livewire:shared.comments.comment-group
-      :$maxLayer
-      :$currentLayer
-      :$postId
-      :$postAuthorId
-      :$parentId
-      :$comments
+      :post-id="$postId"
+      :post-user-id="$postUserId"
+      :max-layer="$maxLayer"
+      :current-layer="$currentLayer"
+      :parent-id="$parentId"
+      :comments="$comments"
       :comment-group-name="array_key_first($comments) . '-comment-group'"
       :key="array_key_first($comments) . '-comment-group'"
     />
@@ -59,7 +67,7 @@
       <button
         class="rounded-lg bg-emerald-50 px-3.5 py-2.5 text-sm text-emerald-600 shadow-sm hover:bg-emerald-100 dark:bg-lividus-500 dark:text-gray-50 dark:hover:bg-lividus-400"
         type="button"
-        wire:click="showMoreComments"
+        x-on:click="showMoreComments"
       >
         <x-icon.animate-spin
           class="mr-2 size-5"

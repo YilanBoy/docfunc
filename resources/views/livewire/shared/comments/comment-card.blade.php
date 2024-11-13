@@ -3,14 +3,14 @@
     Alpine.data('commentCard', () => ({
       openEditCommentModal() {
         this.$dispatch('open-edit-comment-modal', {
-          commentId: this.$root.dataset.commentId,
-          body: this.$root.dataset.body,
+          id: this.$root.dataset.commentId,
+          body: this.$root.dataset.commentBody,
         })
       },
       openCreateCommentModal() {
         this.$dispatch('open-create-comment-modal', {
           parentId: this.$root.dataset.commentId,
-          replyTo: this.$root.dataset.userName
+          replyTo: this.$root.dataset.commentUserName
         })
       }
     }));
@@ -19,36 +19,36 @@
 
 <div
   data-comment-id="{{ $commentId }}"
-  data-body="{{ $body }}"
-  data-user-name="{{ $userId !== 0 ? $userName : '訪客' }}"
+  data-comment-body="{{ $commentBody }}"
+  data-comment-user-name="{{ $commentUserName }}"
   x-data="commentCard"
 >
   <x-dashed-card class="mt-6">
     <div class="flex flex-col">
       <div class="flex items-center space-x-4 text-base">
-        @if (!is_null($userId))
+        @if (!is_null($commentUserId))
           <a
-            href="{{ route('users.show', ['id' => $userId]) }}"
+            href="{{ route('users.show', ['id' => $commentUserId]) }}"
             wire:navigate
           >
             <img
               class="size-10 rounded-full hover:ring-2 hover:ring-blue-400"
-              src="{{ $userGravatarUrl }}"
-              alt="{{ $userName }}"
+              src="{{ $commentUserGravatarUrl }}"
+              alt="{{ $commentUserName }}"
             >
           </a>
         @else
           <x-icon.question-circle-fill class="size-10 text-gray-300 dark:text-gray-500" />
         @endif
 
-        <span class="dark:text-gray-50">{{ $userName }}</span>
+        <span class="dark:text-gray-50">{{ $commentUserName }}</span>
 
         <time
           class="hidden text-gray-400 md:block"
-          datetime="{{ date('d-m-Y', strtotime($createdAt)) }}"
-        >{{ date('Y 年 m 月 d 日', strtotime($createdAt)) }}</time>
+          datetime="{{ date('d-m-Y', strtotime($commentCreatedAt)) }}"
+        >{{ date('Y 年 m 月 d 日', strtotime($commentCreatedAt)) }}</time>
 
-        @if ($isEdited)
+        @if ($commentIsEdited)
           <span class="text-gray-400">(已編輯)</span>
         @endif
       </div>
@@ -59,7 +59,7 @@
 
       <div class="flex items-center justify-end gap-6 text-base text-gray-400">
         @auth
-          @if (auth()->id() === $userId)
+          @if (auth()->id() === $commentUserId)
             <button
               class="flex items-center hover:text-gray-500 dark:hover:text-gray-300"
               type="button"
@@ -70,7 +70,7 @@
             </button>
           @endif
 
-          @if (in_array(auth()->id(), [$userId, $postAuthorId]))
+          @if (in_array(auth()->id(), [$commentUserId, $postUserId]))
             <button
               class="flex items-center hover:text-gray-500 dark:hover:text-gray-300"
               type="button"
@@ -104,24 +104,24 @@
       id="children-{{ $commentId }}"
     >
       <livewire:shared.comments.comment-group
-        :$maxLayer
-        :current-layer="$currentLayer + 1"
         :post-id="$postId"
-        :post-author-id="$postAuthorId"
+        :post-user-id="$postUserId"
+        :max-layer="$maxLayer"
+        :current-layer="$currentLayer + 1"
         :parent-id="$commentId"
         :comment-group-name="$commentId . '-new-comment-group'"
       />
 
       {{-- If this comment has no sub-messages,
       do not render the next level of sub-comment list to avoid redundant SQL queries. --}}
-      @if ($hasChildren)
+      @if ($commentHasChildren)
         <livewire:shared.comments.comment-list
-          :$maxLayer
+          :post-id="$postId"
+          :post-user-id="$postUserId"
+          :max-layer="$maxLayer"
           :current-layer="$currentLayer + 1"
-          :per-page="$childrenPerPage"
-          :$postId
-          :$postAuthorId
           :parent-id="$commentId"
+          :per-page="$childrenPerPage"
           :comment-list-name="$commentId . '-comment-list'"
           :order="App\Enums\CommentOrder::OLDEST"
         />

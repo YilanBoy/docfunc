@@ -19,40 +19,43 @@ class CommentCard extends Component
     use MarkdownConverter;
 
     #[Locked]
+    public int $postId;
+
+    #[Locked]
+    public int $postUserId;
+
+    #[Locked]
     public int $maxLayer;
 
     #[Locked]
     public int $currentLayer;
 
     #[Locked]
-    public int $postId;
-
-    #[Locked]
-    public int $postAuthorId;
+    public int $childrenPerPage = 3;
 
     #[Locked]
     public int $commentId;
 
     #[Locked]
-    public ?int $userId;
+    public ?int $commentUserId;
 
     #[Locked]
-    public string $userGravatarUrl;
+    public ?string $commentUserGravatarUrl;
 
     #[Locked]
-    public string $userName;
+    public string $commentUserName;
 
     #[Locked]
-    public bool $hasChildren;
+    public string $commentBody;
 
     #[Locked]
-    public int $childrenPerPage = 3;
+    public string $commentCreatedAt;
 
-    public string $body;
+    #[Locked]
+    public bool $commentIsEdited;
 
-    public string $createdAt;
-
-    public bool $isEdited;
+    #[Locked]
+    public bool $commentHasChildren;
 
     /**
      * @throws CommonMarkException
@@ -60,17 +63,17 @@ class CommentCard extends Component
     #[Computed]
     public function convertedBody(): string
     {
-        return $this->convertToHtml($this->body);
+        return $this->convertToHtml($this->commentBody);
     }
 
-    #[On('comment-updated.{commentId}')]
+    #[On('update-comment-{commentId}')]
     public function refreshComment(): void
     {
         $comment = Comment::findOrFail($this->commentId);
 
-        $this->body = $comment->body;
-        $this->createdAt = $comment->created_at;
-        $this->isEdited = true;
+        $this->commentBody = $comment->body;
+        $this->commentCreatedAt = $comment->created_at;
+        $this->commentIsEdited = true;
     }
 
     public function render(): View

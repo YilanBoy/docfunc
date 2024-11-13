@@ -22,7 +22,7 @@ test('logged-in users can update their comments', function () {
         ->set('body', $body)
         ->call('update', $comment->id)
         ->assertDispatched('close-edit-comment-modal')
-        ->assertDispatched('comment-updated.'.$comment->id);
+        ->assertDispatched('update-comment-'.$comment->id);
 
     $this->assertDatabaseHas('comments', ['body' => $body]);
 });
@@ -126,18 +126,17 @@ it('will display the word "edited" on top of it if it has been edited', function
     $comment->touch();
 
     livewire(CommentCard::class, [
+        'postId' => $comment->post_id,
+        'postUserId' => $comment->post->user_id,
         'maxLayer' => 2,
         'currentLayer' => 1,
-        'postId' => $comment->post_id,
-        'postAuthorId' => $comment->post->user_id,
         'commentId' => $comment->id,
-        'userId' => $comment->user_id,
-        'userGravatarUrl' => get_gravatar($comment->user->email),
-        'userName' => $comment->user->name,
-        'body' => $comment->body,
-        'createdAt' => $comment->created_at,
-        'isEdited' => $comment->created_at->ne($comment->updated_at),
-        'bookmark' => 'id',
+        'commentUserId' => $comment->user_id,
+        'commentUserName' => $comment->user->name,
+        'commentUserGravatarUrl' => get_gravatar($comment->user->email),
+        'commentBody' => $comment->body,
+        'commentCreatedAt' => $comment->created_at,
+        'commentIsEdited' => $comment->created_at->ne($comment->updated_at),
     ])->assertSee(<<<'HTML'
         <span class="text-gray-400">(已編輯)</span>
     HTML, false);

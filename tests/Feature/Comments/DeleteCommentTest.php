@@ -12,10 +12,10 @@ test('the author can delete his comment', function () {
     Livewire::actingAs(User::find($comment->user_id));
 
     livewire(CommentGroup::class, [
+        'postId' => $comment->post_id,
+        'postUserId' => $comment->post->user_id,
         'maxLayer' => 2,
         'currentLayer' => 1,
-        'postId' => $comment->post_id,
-        'postAuthorId' => $comment->post->user_id,
         'commentGroupName' => 1,
         'commentIds' => [$comment->id],
     ])
@@ -35,10 +35,10 @@ test('post author can delete other users comment', function () {
     Livewire::actingAs(User::find($comment->post->user_id));
 
     livewire(CommentGroup::class, [
+        'postId' => $comment->post_id,
+        'postUserId' => $comment->post->user_id,
         'maxLayer' => 2,
         'currentLayer' => 1,
-        'postId' => $comment->post_id,
-        'postAuthorId' => $comment->post->user_id,
         'commentGroupName' => 1,
         'commentIds' => [$comment->id],
     ])
@@ -60,10 +60,10 @@ test('when a comment is deleted, the post comments will be reduced by one', func
     Livewire::actingAs(User::find($comment->post->user_id));
 
     livewire(CommentGroup::class, [
+        'postId' => $comment->post_id,
+        'postUserId' => $comment->post->user_id,
         'maxLayer' => 2,
         'currentLayer' => 1,
-        'postId' => $comment->post_id,
-        'postAuthorId' => $comment->post->user_id,
         'commentGroupName' => 1,
         'commentIds' => [$comment->id],
     ])
@@ -81,10 +81,10 @@ it('will show alert when user want to delete the deleted comment', function () {
     $comment->delete();
 
     livewire(CommentGroup::class, [
+        'postId' => $postId,
+        'postUserId' => $postAuthorId,
         'maxLayer' => 2,
         'currentLayer' => 1,
-        'postId' => $postId,
-        'postAuthorId' => $postAuthorId,
         'commentGroupName' => 1,
         'commentIds' => [$commentId],
     ])

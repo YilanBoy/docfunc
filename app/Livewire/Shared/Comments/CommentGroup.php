@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
@@ -18,6 +19,12 @@ class CommentGroup extends Component
     use AuthorizesRequests;
 
     #[Locked]
+    public int $postId;
+
+    #[Locked]
+    public int $postUserId;
+
+    #[Locked]
     public int $maxLayer = 2;
 
     #[Locked]
@@ -25,12 +32,6 @@ class CommentGroup extends Component
 
     #[Locked]
     public ?int $parentId = null;
-
-    #[Locked]
-    public int $postId;
-
-    #[Locked]
-    public int $postAuthorId;
 
     /**
      * Use this comment group name as a dynamic event name.
@@ -52,6 +53,7 @@ class CommentGroup extends Component
      *     2 => ["id" => 2, "body" => "world" ...],
      * ],
      */
+    #[Locked]
     public array $comments = [];
 
     #[On('insert-new-comment-to-{commentGroupName}')]
@@ -68,6 +70,9 @@ class CommentGroup extends Component
      */
     public function destroy(int $commentId): void
     {
+        $test = implode(',', array_keys($this->comments));
+        Log::info("Show comments: {$test}");
+
         $comment = Comment::find(id: $commentId, columns: ['id', 'user_id', 'post_id']);
 
         // Check comment is not deleted

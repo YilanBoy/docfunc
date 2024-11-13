@@ -39,20 +39,18 @@
 >
   @foreach ($comments as $comment)
     <livewire:shared.comments.comment-card
-      :$maxLayer
-      :$currentLayer
-      :$postId
-      :$postAuthorId
+      :post-id="$postId"
+      :post-user-id="$postUserId"
+      :max-layer="$maxLayer"
+      :current-layer="$currentLayer"
       :comment-id="$comment['id']"
-      :user-id="$comment['user_id']"
-      :user-gravatar-url="is_null($comment['user']) ? '' : $comment['user']['gravatar_url']"
-      :user-name="is_null($comment['user']) ? '訪客' : $comment['user']['name']"
-      :body="$comment['body']"
-      :created-at="$comment['created_at']"
-      :is-edited="$comment['created_at'] !== $comment['updated_at']"
-      :has-children="$comment['children_count'] > 0"
-      {{-- when the parent component is updated, the child component is updated together --}}
-      {{-- reference: https://github.com/livewire/livewire/discussions/1895 --}}
+      :comment-user-id="is_null($comment['user']) ? null : $comment['user']['id']"
+      :comment-user-gravatar-url="is_null($comment['user']) ? null : $comment['user']['gravatar_url']"
+      :comment-user-name="is_null($comment['user']) ? '訪客' : $comment['user']['name']"
+      :comment-body="$comment['body']"
+      :comment-created-at="$comment['created_at']"
+      :comment-is-edited="$comment['created_at'] !== $comment['updated_at']"
+      :comment-has-children="$comment['children_count'] > 0"
       :key="'comment-card-' . $comment['id']"
     />
   @endforeach

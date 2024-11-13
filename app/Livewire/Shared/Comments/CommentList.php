@@ -120,18 +120,16 @@ class CommentList extends Component
             ->keyBy('id')
             ->toArray();
 
-        foreach ($comments as &$comment) {
-            if (is_null($comment['user'])) {
-                continue;
-            }
-
+        return array_map(function ($comment): array {
             $comment['converted_body'] = $this->convertToHtml($comment['body']);
 
-            $comment['user']['gravatar_url'] = get_gravatar($comment['user']['email']);
-            unset($comment['user']['email']);
-        }
+            if (! is_null($comment['user'])) {
+                $comment['user']['gravatar_url'] = get_gravatar($comment['user']['email']);
+                unset($comment['user']['email']);
+            }
 
-        return $comments;
+            return $comment;
+        }, $comments);
     }
 
     private function updateCommentsList(array $comments): void

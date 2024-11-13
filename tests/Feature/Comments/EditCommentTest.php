@@ -1,6 +1,5 @@
 <?php
 
-use App\Livewire\Shared\Comments\CommentCard;
 use App\Livewire\Shared\Comments\EditCommentModal;
 use App\Models\Comment;
 use App\Models\User;
@@ -9,6 +8,7 @@ use function Pest\Livewire\livewire;
 
 test('logged-in users can update their comments', function () {
     $oldBody = 'old comment';
+    $commentGroupName = '1-comment-group';
 
     $comment = Comment::factory()->create(['body' => $oldBody]);
 
@@ -20,15 +20,16 @@ test('logged-in users can update their comments', function () {
 
     livewire(EditCommentModal::class)
         ->set('body', $body)
-        ->call('update', $comment->id)
+        ->call('update', $comment->id, $commentGroupName)
         ->assertDispatched('close-edit-comment-modal')
-        ->assertDispatched('update-comment-'.$comment->id);
+        ->assertDispatched('update-comment-in-'.$commentGroupName);
 
     $this->assertDatabaseHas('comments', ['body' => $body]);
 });
 
 test('the updated message must be at least 5 characters long', function () {
     $oldBody = 'old comment';
+    $commentGroupName = '1-comment-group';
 
     $comment = Comment::factory()->create(['body' => $oldBody]);
 
@@ -40,7 +41,7 @@ test('the updated message must be at least 5 characters long', function () {
 
     livewire(EditCommentModal::class)
         ->set('body', $body)
-        ->call('update', $comment->id)
+        ->call('update', $comment->id, $commentGroupName)
         ->assertHasErrors(['body' => 'min:5'])
         ->assertSeeHtml('<p class="mt-1 text-sm text-red-400">留言內容至少 5 個字元</p>');
 
@@ -49,6 +50,7 @@ test('the updated message must be at least 5 characters long', function () {
 
 test('the updated message must be less than 2000 characters', function () {
     $oldBody = 'old comment';
+    $commentGroupName = '1-comment-group';
 
     $comment = Comment::factory()->create(['body' => $oldBody]);
 
@@ -60,7 +62,7 @@ test('the updated message must be less than 2000 characters', function () {
 
     livewire(EditCommentModal::class)
         ->set('body', $body)
-        ->call('update', $comment->id)
+        ->call('update', $comment->id, $commentGroupName)
         ->assertHasErrors(['body' => 'max:2000'])
         ->assertSeeHtml('<p class="mt-1 text-sm text-red-400">留言內容至多 2000 個字元</p>');
 
@@ -69,8 +71,7 @@ test('the updated message must be less than 2000 characters', function () {
 
 test('users can\'t update others\' comments', function () {
     $comment = Comment::factory()->create();
-
-    $offset = 0;
+    $commentGroupName = '1-comment-group';
 
     loginAsUser();
 
@@ -78,7 +79,7 @@ test('users can\'t update others\' comments', function () {
 
     livewire(EditCommentModal::class)
         ->set('body', $body)
-        ->call('update')
+        ->call('update', $comment->id, $commentGroupName)
         ->assertForbidden();
 
     expect(Comment::find($comment->id, ['body']))
@@ -87,8 +88,6 @@ test('users can\'t update others\' comments', function () {
 
 it('can see the comment preview', function () {
     $comment = Comment::factory()->create();
-
-    $offset = 0;
 
     Livewire::actingAs(User::find($comment->user_id));
 
@@ -117,27 +116,4 @@ it('can see the comment preview', function () {
             '<li>item 3</li>',
             '</ul>',
         ]);
-});
-
-it('will display the word "edited" on top of it if it has been edited', function () {
-    $comment = Comment::factory()->create();
-
-    // update the updated_at comment
-    $comment->touch();
-
-    livewire(CommentCard::class, [
-        'postId' => $comment->post_id,
-        'postUserId' => $comment->post->user_id,
-        'maxLayer' => 2,
-        'currentLayer' => 1,
-        'commentId' => $comment->id,
-        'commentUserId' => $comment->user_id,
-        'commentUserName' => $comment->user->name,
-        'commentUserGravatarUrl' => get_gravatar($comment->user->email),
-        'commentBody' => $comment->body,
-        'commentCreatedAt' => $comment->created_at,
-        'commentIsEdited' => $comment->created_at->ne($comment->updated_at),
-    ])->assertSee(<<<'HTML'
-        <span class="text-gray-400">(已編輯)</span>
-    HTML, false);
 });

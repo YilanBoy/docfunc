@@ -51,7 +51,7 @@ class EditCommentModal extends Component
     /**
      * @throws AuthorizationException
      */
-    public function update(Comment $comment): void
+    public function update(Comment $comment, string $groupName): void
     {
         $this->authorize('update', $comment);
 
@@ -61,9 +61,14 @@ class EditCommentModal extends Component
             'body' => $this->body,
         ]);
 
-        $this->dispatch('close-edit-comment-modal');
+        $this->dispatch(event: 'close-edit-comment-modal');
 
-        $this->dispatch('update-comment-'.$comment->id);
+        $this->dispatch(
+            event: 'update-comment-in-'.$groupName,
+            id: $comment->id,
+            body: $comment->body,
+            updatedAt: $comment->updated_at,
+        );
     }
 
     public function render(): View

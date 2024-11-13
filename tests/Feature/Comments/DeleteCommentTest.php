@@ -17,9 +17,8 @@ test('the author can delete his comment', function () {
         'maxLayer' => 2,
         'currentLayer' => 1,
         'commentGroupName' => 1,
-        'commentIds' => [$comment->id],
     ])
-        ->call('destroy', commentId: $comment->id)
+        ->call('destroyComment', id: $comment->id)
         ->assertDispatched('update-comment-counts')
         ->assertDispatched('info-badge',
             status: 'success',
@@ -40,9 +39,8 @@ test('post author can delete other users comment', function () {
         'maxLayer' => 2,
         'currentLayer' => 1,
         'commentGroupName' => 1,
-        'commentIds' => [$comment->id],
     ])
-        ->call('destroy', commentId: $comment->id)
+        ->call('destroyComment', id: $comment->id)
         ->assertDispatched('update-comment-counts')
         ->assertDispatched('info-badge',
             status: 'success',
@@ -65,9 +63,8 @@ test('when a comment is deleted, the post comments will be reduced by one', func
         'maxLayer' => 2,
         'currentLayer' => 1,
         'commentGroupName' => 1,
-        'commentIds' => [$comment->id],
     ])
-        ->call('destroy', commentId: $comment->id);
+        ->call('destroyComment', id: $comment->id);
 
     $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
 });
@@ -86,8 +83,7 @@ it('will show alert when user want to delete the deleted comment', function () {
         'maxLayer' => 2,
         'currentLayer' => 1,
         'commentGroupName' => 1,
-        'commentIds' => [$commentId],
     ])
-        ->call('destroy', commentId: $commentId)
+        ->call('destroyComment', id: $commentId)
         ->assertDispatched('info-badge', status: 'danger', message: '該留言已被刪除！');
 });

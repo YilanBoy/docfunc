@@ -29,8 +29,8 @@ trait MarkdownConverter
         ];
 
         $environment = new Environment($config);
-        $environment->addExtension(new CommonMarkCoreExtension());
-        $environment->addExtension(new ExternalLinkExtension());
+        $environment->addExtension(new CommonMarkCoreExtension);
+        $environment->addExtension(new ExternalLinkExtension);
 
         $converter = new CommonMarkdownConverter($environment);
 

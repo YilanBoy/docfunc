@@ -5,9 +5,11 @@
       modalIsOpen: false,
       id: null,
       body: @entangle('body'),
+      groupName: null,
       openModal(event) {
         this.id = event.detail.id;
         this.body = event.detail.body;
+        this.groupName = event.detail.groupName;
 
         this.modalIsOpen = true;
         this.$nextTick(() => this.$refs.editCommentTextarea?.focus());
@@ -16,7 +18,7 @@
         this.modalIsOpen = false;
       },
       submitForm() {
-        this.$wire.update(this.id);
+        this.$wire.update(this.id, this.groupName);
       },
       tabToFourSpaces() {
         this.$el.setRangeText('    ', this.$el.selectionStart, this.$el.selectionStart, 'end');
@@ -147,5 +149,5 @@
         </div>
       </form>
     </div>
-  </div> <!-- end modal -->
+  </div>
 </div>

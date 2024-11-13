@@ -18,7 +18,7 @@ test('non-logged-in users can leave a anonymous comment', function () {
         ->set('body', $body)
         ->set('captchaToken', 'fake-captcha-response')
         ->call('store')
-        ->assertDispatched('insert-new-comment-to-root-new-comment-group')
+        ->assertDispatched('create-new-comment-to-root-new-comment-group')
         ->assertDispatched('close-create-comment-modal')
         ->assertDispatched('update-comment-counts')
         ->assertDispatched('info-badge',
@@ -45,7 +45,7 @@ test('logged-in users can leave a comment', function () {
         ->set('body', $body)
         ->set('captchaToken', 'fake-captcha-response')
         ->call('store')
-        ->assertDispatched('insert-new-comment-to-root-new-comment-group')
+        ->assertDispatched('create-new-comment-to-root-new-comment-group')
         ->assertDispatched('close-create-comment-modal')
         ->assertDispatched('update-comment-counts')
         ->assertDispatched('info-badge',
@@ -157,7 +157,7 @@ it('can reply to others comment', function () {
         ->set('body', 'Hello World!')
         ->set('captchaToken', 'fake-captcha-response')
         ->call('store', parentId: $comment->id)
-        ->assertDispatched('insert-new-comment-to-'.$comment->id.'-new-comment-group')
+        ->assertDispatched('create-new-comment-to-'.$comment->id.'-new-comment-group')
         ->assertDispatched('close-create-comment-modal')
         ->assertDispatched('update-comment-counts')
         ->assertDispatched('info-badge',

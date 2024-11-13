@@ -106,7 +106,7 @@ class CreateCommentModal extends Component
         $post->user->notifyNewComment(new NewComment($comment));
 
         $this->dispatch(
-            event: 'insert-new-comment-to-'.($parentId ?? 'root').'-new-comment-group',
+            event: 'create-new-comment-to-'.($parentId ?? 'root').'-new-comment-group',
             comment: $this->prepareCommentCardArray($comment, auth()->user())
         );
 
@@ -126,10 +126,14 @@ class CreateCommentModal extends Component
         return view('livewire.shared.comments.create-comment-modal');
     }
 
+    /**
+     * @throws CommonMarkException
+     */
     private function prepareCommentCardArray(Comment $comment, ?User $user): array
     {
         $comment = $comment->toArray();
 
+        $comment['converted_body'] = $this->convertToHtml($comment['body']);
         $comment['children_count'] = 0;
 
         if (is_null($user)) {

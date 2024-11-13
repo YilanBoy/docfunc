@@ -6,7 +6,7 @@
       showMoreComments() {
         // Calculate how many comment cards are at the bottom of this comment list.
         const skip = this.$root.querySelectorAll(
-          '& > [x-data="commentGroup"] > [x-data="commentCard"]'
+          '& > div.comment-group > div.comment-card'
         ).length;
 
         this.$wire.showMoreComments(skip);

@@ -9,6 +9,24 @@
             hljs.highlightElement(element);
           });
       },
+      openEditCommentModal() {
+        this.$dispatch('open-edit-comment-modal', {
+          groupName: this.$el.dataset.commentGroupName,
+          id: this.$el.dataset.commentId,
+          body: this.$el.dataset.commentBody,
+        });
+      },
+      openCreateCommentModal() {
+        this.$dispatch('open-create-comment-modal', {
+          parentId: this.$el.dataset.commentId,
+          replyTo: this.$el.dataset.commentUserName
+        });
+      },
+      destroyComment() {
+        if (confirm('你確定要刪除該留言？')) {
+          this.$wire.destroyComment(this.$el.dataset.commentId);
+        }
+      },
       init() {
         let commentsObserver = new MutationObserver(() => {
           this.highlightCodeInCommentCard();
@@ -33,25 +51,130 @@
   </script>
 @endscript
 
+@php
+  use App\Enums\CommentOrder;
+@endphp
+
 <div
-  class="w-full"
+  class="comment-group w-full"
   x-data="commentGroup"
 >
   @foreach ($comments as $comment)
-    <livewire:shared.comments.comment-card
-      :post-id="$postId"
-      :post-user-id="$postUserId"
-      :max-layer="$maxLayer"
-      :current-layer="$currentLayer"
-      :comment-id="$comment['id']"
-      :comment-user-id="is_null($comment['user']) ? null : $comment['user']['id']"
-      :comment-user-gravatar-url="is_null($comment['user']) ? null : $comment['user']['gravatar_url']"
-      :comment-user-name="is_null($comment['user']) ? '訪客' : $comment['user']['name']"
-      :comment-body="$comment['body']"
-      :comment-created-at="$comment['created_at']"
-      :comment-is-edited="$comment['created_at'] !== $comment['updated_at']"
-      :comment-has-children="$comment['children_count'] > 0"
-      :key="'comment-card-' . $comment['id']"
-    />
+    <x-dashed-card
+      class="comment-card mt-6"
+      wire:key="{{ $comment['id'] }}-comment-card-{{ $comment['updated_at'] }}"
+    >
+      <div class="flex flex-col">
+        <div class="flex items-center space-x-4 text-base">
+          @if (!is_null($comment['user']))
+            <a
+              href="{{ route('users.show', ['id' => $comment['user']['id']]) }}"
+              wire:navigate
+            >
+              <img
+                class="size-10 rounded-full hover:ring-2 hover:ring-blue-400"
+                src="{{ $comment['user']['gravatar_url'] }}"
+                alt="{{ $comment['user']['name'] }}"
+              >
+            </a>
+
+            <span class="dark:text-gray-50">{{ $comment['user']['name'] }}</span>
+          @else
+            <x-icon.question-circle-fill class="size-10 text-gray-300 dark:text-gray-500" />
+
+            <span class="dark:text-gray-50">訪客</span>
+          @endif
+
+          <time
+            class="hidden text-gray-400 md:block"
+            datetime="{{ date('d-m-Y', strtotime($comment['created_at'])) }}"
+          >{{ date('Y 年 m 月 d 日', strtotime($comment['created_at'])) }}</time>
+
+          @if ($comment['created_at'] !== $comment['updated_at'])
+            <span class="text-gray-400">(已編輯)</span>
+          @endif
+        </div>
+
+        <div class="rich-text">
+          {!! $comment['converted_body'] !!}
+        </div>
+
+        <div class="flex items-center justify-end gap-6 text-base text-gray-400">
+          @auth
+            @if (auth()->id() === $comment['user_id'])
+              <button
+                class="flex items-center hover:text-gray-500 dark:hover:text-gray-300"
+                data-comment-group-name="{{ $commentGroupName }}"
+                data-comment-id="{{ $comment['id'] }}"
+                data-comment-body="{{ $comment['body'] }}"
+                type="button"
+                x-on:click="openEditCommentModal"
+              >
+                <x-icon.pencil class="w-4" />
+                <span class="ml-2">編輯</span>
+              </button>
+            @endif
+
+            @if (in_array(auth()->id(), [$comment['user_id'], $postUserId]))
+              <button
+                class="flex items-center hover:text-gray-500 dark:hover:text-gray-300"
+                data-comment-id="{{ $comment['id'] }}"
+                type="button"
+                x-on:click="destroyComment"
+              >
+                <x-icon.trash class="w-4" />
+                <span class="ml-2">刪除</span>
+              </button>
+            @endif
+          @endauth
+
+          @if ($currentLayer < $maxLayer)
+            <button
+              class="flex items-center hover:text-gray-500 dark:hover:text-gray-300"
+              data-comment-id="{{ $comment['id'] }}"
+              data-comment-user-name="{{ is_null($comment['user']) ? '訪客' : $comment['user']['name'] }}"
+              type="button"
+              x-on:click="openCreateCommentModal"
+            >
+              <x-icon.reply-fill class="w-4" />
+              <span class="ml-2">回覆</span>
+            </button>
+          @endif
+        </div>
+      </div>
+    </x-dashed-card>
+
+    @if ($currentLayer < $maxLayer)
+      <div
+        class="relative pl-4 before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:rounded-full before:bg-emerald-400/20 before:contain-none dark:before:bg-indigo-500/20 md:pl-8"
+        wire:key="{{ $comment['id'] }}-children"
+      >
+        <livewire:shared.comments.comment-group
+          :post-id="$postId"
+          :post-user-id="$postUserId"
+          :max-layer="$maxLayer"
+          :current-layer="$currentLayer + 1"
+          :parent-id="$comment['id']"
+          :comment-group-name="$comment['id'] . '-new-comment-group'"
+          :key="$comment['id'] . '-new-comment-group'"
+        />
+
+        {{-- If this comment has no sub-messages,
+          do not render the next level of sub-comment list to avoid redundant SQL queries. --}}
+        @if ($comment['children_count'] > 0)
+          <livewire:shared.comments.comment-list
+            :post-id="$postId"
+            :post-user-id="$postUserId"
+            :max-layer="$maxLayer"
+            :current-layer="$currentLayer + 1"
+            :parent-id="$comment['id']"
+            :per-page="3"
+            :comment-list-name="$comment['id'] . '-comment-list'"
+            :order="CommentOrder::OLDEST"
+            :key="$comment['id'] . '-comment-list'"
+          />
+        @endif
+      </div>
+    @endif
   @endforeach
 </div>

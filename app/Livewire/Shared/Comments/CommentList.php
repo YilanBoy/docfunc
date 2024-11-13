@@ -4,8 +4,10 @@ namespace App\Livewire\Shared\Comments;
 
 use App\Enums\CommentOrder;
 use App\Models\Comment;
+use App\Traits\MarkdownConverter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
+use League\CommonMark\Exception\CommonMarkException;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Renderless;
@@ -13,6 +15,8 @@ use Livewire\Component;
 
 class CommentList extends Component
 {
+    use MarkdownConverter;
+
     #[Locked]
     public int $postId;
 
@@ -43,16 +47,18 @@ class CommentList extends Component
 
     /**
      * Comments list array, the format is like:
-     * [
-     *     [
-     *         1 => ["id" => 1, "body" => "hello" ...],
-     *         2 => ["id" => 2, "body" => "world" ...],
-     *     ],
-     *     [
-     *         3 => ["id" => 3, "body" => "foo" ...],
-     *         4 => ["id" => 4, "body" => "bar" ...],
-     *     ],
-     * ]
+     *
+     * @var array<int, array<int, array{
+     *     'id': int,
+     *     'user_id': int,
+     *     'body': string,
+     *     'created_at': string,
+     *     'updated_at': string,
+     *     'children_count': int,
+     *     'user': array{'id': int, 'name': string, 'gravatar_url': string}|null,
+     *     'converted_body': string
+     * }>>
+     * >
      */
     public array $commentsList = [];
 
@@ -65,6 +71,9 @@ class CommentList extends Component
      */
     public array $newCommentIds = [];
 
+    /**
+     * @throws CommonMarkException
+     */
     public function mount(): void
     {
         $this->showMoreComments();
@@ -77,6 +86,9 @@ class CommentList extends Component
         $this->newCommentIds[] = $id;
     }
 
+    /**
+     * @throws CommonMarkException
+     */
     private function getComments(int $skip): array
     {
         $comments = Comment::query()
@@ -104,7 +116,6 @@ class CommentList extends Component
             // Plus one is needed here because we need to determine whether there is a next page.
             ->take($this->perPage + 1)
             ->with('user:id,name,email')
-            ->with('children')
             ->get()
             ->keyBy('id')
             ->toArray();
@@ -114,8 +125,9 @@ class CommentList extends Component
                 continue;
             }
 
-            $comment['user']['gravatar_url'] = get_gravatar($comment['user']['email']);
+            $comment['converted_body'] = $this->convertToHtml($comment['body']);
 
+            $comment['user']['gravatar_url'] = get_gravatar($comment['user']['email']);
             unset($comment['user']['email']);
         }
 
@@ -136,6 +148,9 @@ class CommentList extends Component
         }
     }
 
+    /**
+     * @throws CommonMarkException
+     */
     public function showMoreComments(int $skip = 0): void
     {
         $comments = $this->getComments($skip);

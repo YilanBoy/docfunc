@@ -66,24 +66,24 @@ class CreateCommentModal extends Component
     {
         $this->validate();
 
-        // If parent post has already been deleted.
-        $post = Post::findOr(id: $this->postId, columns: ['id', 'comment_counts', 'user_id'], callback: function () {
+        // If post has already been deleted.
+        $post = Post::find(id: $this->postId, columns: ['id', 'comment_counts', 'user_id']);
+
+        if (is_null($post)) {
             $this->dispatch(event: 'info-badge', status: 'danger', message: '無法回覆！文章已被刪除！');
 
             $this->redirect(url: route('posts.index'), navigate: true);
-        });
 
-        if (is_null($post)) {
             return;
         }
 
         // If parent comment has already been deleted.
         if (! is_null($parentId)) {
-            $parentComment = Comment::findOr(id: $parentId, columns: ['id'], callback: function () {
-                $this->dispatch(event: 'info-badge', status: 'danger', message: '無法回覆！留言已被刪除！');
-            });
+            $parentComment = Comment::find(id: $parentId, columns: ['id']);
 
             if (is_null($parentComment)) {
+                $this->dispatch(event: 'info-badge', status: 'danger', message: '無法回覆！留言已被刪除！');
+
                 return;
             }
         }

@@ -8,7 +8,9 @@ use App\Models\User;
 use App\Notifications\NewComment;
 use App\Rules\Captcha;
 use App\Traits\MarkdownConverter;
+use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use League\CommonMark\Exception\CommonMarkException;
 use Livewire\Attributes\Computed;
@@ -88,9 +90,9 @@ class CreateCommentModal extends Component
             }
         }
 
-        $comment = null;
+        DB::beginTransaction();
 
-        DB::transaction(function () use (&$comment, $post, $parentId) {
+        try {
             $comment = Comment::create([
                 'post_id' => $this->postId,
                 // auth()->id() will be null if user is not logged in
@@ -100,7 +102,17 @@ class CreateCommentModal extends Component
             ]);
 
             $post->increment('comment_counts');
-        });
+
+            DB::commit();
+        } catch (Exception $exception) {
+            $this->dispatch(event: 'info-badge', status: 'danger', message: '發生錯誤！');
+
+            Log::error('An error occurred while adding a new message: '.$exception->getMessage());
+
+            DB::rollBack();
+
+            return;
+        }
 
         // Notify the article author of new comments.
         $post->user->notifyNewComment(new NewComment($comment));

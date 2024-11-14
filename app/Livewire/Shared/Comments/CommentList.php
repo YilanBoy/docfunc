@@ -50,7 +50,7 @@ class CommentList extends Component
      *
      * @var array<int, array<int, array{
      *     'id': int,
-     *     'user_id': int,
+     *     'user_id': int|null,
      *     'body': string,
      *     'created_at': string,
      *     'updated_at': string,

@@ -6,6 +6,7 @@
       submitIsEnabled: false,
       body: @entangle('body'),
       captchaSiteKey: @js(config('services.captcha.site_key')),
+      captchaToken: @entangle('captchaToken'),
       parentId: null,
       replyTo: null,
       openModal(event) {
@@ -44,7 +45,7 @@
           turnstile.render(this.$refs.turnstileBlock, {
             sitekey: this.captchaSiteKey,
             callback: (token) => {
-              this.$wire.set('captchaToken', token);
+              this.captchaToken = token;
               this.submitIsEnabled = true;
             }
           });
@@ -205,5 +206,4 @@
       </form>
     </div>
   </div>
-  {{-- end modal --}}
 </div>

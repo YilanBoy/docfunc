@@ -79,9 +79,6 @@
 
 <div
   class="fixed inset-0 z-30 flex min-h-screen items-end justify-center"
-  role="dialog"
-  aria-labelledby="modal-title"
-  aria-modal="true"
   x-cloak
   x-data="createCommentModal"
   x-ref="createCommentModal"
@@ -93,7 +90,6 @@
   {{-- gray background --}}
   <div
     class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
-    aria-hidden="true"
     x-show="modalIsOpen"
     x-transition.opacity
   ></div>
@@ -136,11 +132,7 @@
           <div class="space-y-2">
             <div class="space-x-4">
               <span class="font-semibold dark:text-gray-50">
-                @if (auth()->check())
-                  {{ auth()->user()->name }}
-                @else
-                  訪客
-                @endif
+                {{ auth()->check() ? auth()->user()->name : '訪客' }}
               </span>
               <span class="text-gray-400">{{ now()->format('Y 年 m 月 d 日') }}</span>
             </div>

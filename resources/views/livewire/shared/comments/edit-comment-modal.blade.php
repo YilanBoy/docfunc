@@ -55,9 +55,6 @@
 
 <div
   class="fixed inset-0 z-30 flex min-h-screen items-end justify-center"
-  role="dialog"
-  aria-labelledby="modal-title"
-  aria-modal="true"
   x-cloak
   x-data="editCommentModal"
   x-ref="editCommentModal"
@@ -69,7 +66,6 @@
   {{-- gray background --}}
   <div
     class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
-    aria-hidden="true"
     x-show="modalIsOpen"
     x-transition.opacity
   ></div>

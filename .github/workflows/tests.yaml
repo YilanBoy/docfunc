@@ -20,8 +20,7 @@ jobs:
     strategy:
       matrix:
         php:
-          - 8.2
-          - 8.3
+          - 8.4
     env:
       DB_CONNECTION: sqlite
       DB_DATABASE: ":memory:"

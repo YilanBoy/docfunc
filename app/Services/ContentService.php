@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use DOMDocument;
+use Dom\HTMLDocument;
 use HTMLPurifier;
 use HTMLPurifier_Config;
 
@@ -85,8 +85,7 @@ class ContentService
      */
     public static function imagesInContent(string $body): array
     {
-        $dom = new DOMDocument();
-        $dom->loadHTML($body, LIBXML_NOERROR);
+        $dom = HTMLDocument::createFromString($body, LIBXML_NOERROR);
 
         $imageList = [];
 

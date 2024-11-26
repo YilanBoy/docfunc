@@ -4,11 +4,9 @@ namespace App\Livewire\Shared\Comments;
 
 use App\Models\Comment;
 use App\Models\Post;
-use App\Traits\MarkdownConverter;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-use League\CommonMark\Exception\CommonMarkException;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -16,7 +14,6 @@ use Livewire\Component;
 class CommentGroup extends Component
 {
     use AuthorizesRequests;
-    use MarkdownConverter;
 
     #[Locked]
     public int $postId;
@@ -69,14 +66,11 @@ class CommentGroup extends Component
         $this->comments = [$comment['id'] => $comment] + $this->comments;
     }
 
-    /**
-     * @throws CommonMarkException
-     */
     #[On('update-comment-in-{commentGroupName}')]
-    public function updateComment(int $id, string $body, string $updatedAt): void
+    public function updateComment(int $id, string $body, string $convertedBody, string $updatedAt): void
     {
         $this->comments[$id]['body'] = $body;
-        $this->comments[$id]['converted_body'] = $this->convertToHtml($body);
+        $this->comments[$id]['converted_body'] = $convertedBody;
         $this->comments[$id]['updated_at'] = $updatedAt;
     }
 

@@ -7,7 +7,6 @@ use App\Traits\MarkdownConverter;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
-use League\CommonMark\Exception\CommonMarkException;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -39,9 +38,6 @@ class EditCommentModal extends Component
         ];
     }
 
-    /**
-     * @throws CommonMarkException
-     */
     #[Computed]
     public function convertedBody(): string
     {
@@ -67,6 +63,7 @@ class EditCommentModal extends Component
             event: 'update-comment-in-'.$groupName,
             id: $comment->id,
             body: $comment->body,
+            convertedBody: $this->convertToHtml($comment->body),
             updatedAt: $comment->updated_at,
         );
     }

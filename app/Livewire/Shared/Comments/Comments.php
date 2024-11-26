@@ -26,7 +26,6 @@ class Comments extends Component
     #[Locked]
     public CommentOrder $order = CommentOrder::POPULAR;
 
-    // update comment count in post show page
     #[On('update-comment-counts')]
     public function updateCommentCounts(): void
     {

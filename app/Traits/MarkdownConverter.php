@@ -3,16 +3,12 @@
 namespace App\Traits;
 
 use League\CommonMark\Environment\Environment;
-use League\CommonMark\Exception\CommonMarkException;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\ExternalLink\ExternalLinkExtension;
 use League\CommonMark\MarkdownConverter as CommonMarkdownConverter;
 
 trait MarkdownConverter
 {
-    /**
-     * @throws CommonMarkException
-     */
     public function convertToHtml(string $body): string
     {
         $config = [

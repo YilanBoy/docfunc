@@ -7,7 +7,6 @@ use App\Models\Comment;
 use App\Traits\MarkdownConverter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
-use League\CommonMark\Exception\CommonMarkException;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Renderless;
@@ -71,9 +70,6 @@ class CommentList extends Component
      */
     public array $newCommentIds = [];
 
-    /**
-     * @throws CommonMarkException
-     */
     public function mount(): void
     {
         $this->showMoreComments();
@@ -86,9 +82,6 @@ class CommentList extends Component
         $this->newCommentIds[] = $id;
     }
 
-    /**
-     * @throws CommonMarkException
-     */
     private function getComments(int $skip): array
     {
         $comments = Comment::query()
@@ -120,7 +113,7 @@ class CommentList extends Component
             ->keyBy('id')
             ->toArray();
 
-        return array_map(function ($comment): array {
+        $callback = function (array $comment): array {
             $comment['converted_body'] = $this->convertToHtml($comment['body']);
 
             if (! is_null($comment['user'])) {
@@ -129,7 +122,9 @@ class CommentList extends Component
             }
 
             return $comment;
-        }, $comments);
+        };
+
+        return array_map($callback, $comments);
     }
 
     private function updateCommentsList(array $comments): void
@@ -146,9 +141,6 @@ class CommentList extends Component
         }
     }
 
-    /**
-     * @throws CommonMarkException
-     */
     public function showMoreComments(int $skip = 0): void
     {
         $comments = $this->getComments($skip);

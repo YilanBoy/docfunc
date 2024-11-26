@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Shared\Comments;
 
+use App\DataTransferObjects\CommentCardData;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
@@ -12,7 +13,6 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
-use League\CommonMark\Exception\CommonMarkException;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
@@ -52,9 +52,6 @@ class CreateCommentModal extends Component
         ];
     }
 
-    /**
-     * @throws CommonMarkException
-     */
     #[Computed]
     public function convertedBody(): string
     {
@@ -117,9 +114,23 @@ class CreateCommentModal extends Component
         // Notify the article author of new comments.
         $post->user->notifyNewComment(new NewComment($comment));
 
+        $commentCard = new CommentCardData(
+            id: $comment->id,
+            userId: auth()->id(),
+            body: $comment->body,
+            convertedBody: $this->convertToHtml($comment->body),
+            createdAt: $comment->created_at->toDateTimeString(),
+            updatedAt: $comment->updated_at->toDateTimeString(),
+            user: auth()->check() ? [
+                'id' => auth()->id(),
+                'name' => auth()->user()->name,
+                'gravatar_url' => get_gravatar(auth()->user()->email),
+            ] : null,
+        );
+
         $this->dispatch(
             event: 'create-new-comment-to-'.($parentId ?? 'root').'-new-comment-group',
-            comment: $this->prepareCommentCardArray($comment, auth()->user())
+            comment: $commentCard->toArray(),
         );
 
         $this->dispatch(event: 'append-new-id-to-'.($parentId ?? 'root').'-comment-list', id: $comment->id);
@@ -136,30 +147,5 @@ class CreateCommentModal extends Component
     public function render(): View
     {
         return view('livewire.shared.comments.create-comment-modal');
-    }
-
-    /**
-     * @throws CommonMarkException
-     */
-    private function prepareCommentCardArray(Comment $comment, ?User $user): array
-    {
-        $comment = $comment->toArray();
-
-        $comment['converted_body'] = $this->convertToHtml($comment['body']);
-        $comment['children_count'] = 0;
-
-        if (is_null($user)) {
-            $comment['user'] = null;
-
-            return $comment;
-        }
-
-        $comment['user'] = [
-            'id' => $user->id,
-            'name' => $user->name,
-            'gravatar_url' => get_gravatar($user->email),
-        ];
-
-        return $comment;
     }
 }

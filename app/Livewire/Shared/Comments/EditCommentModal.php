@@ -63,7 +63,7 @@ class EditCommentModal extends Component
             event: 'update-comment-in-'.$groupName,
             id: $comment->id,
             body: $comment->body,
-            convertedBody: $this->convertToHtml($comment->body),
+            convertedBody: $this->convertedBody(),
             updatedAt: $comment->updated_at,
         );
     }

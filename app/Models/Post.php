@@ -71,13 +71,14 @@ class Post extends Model implements Feedable
      */
     public function scopeWithOrder(Builder $query, ?string $order): void
     {
-        $query->when($order, function ($query, $order) {
-            return match ($order) {
-                PostOrder::RECENT->value => $query->orderBy('updated_at', 'desc'),
-                PostOrder::COMMENT->value => $query->orderBy('comment_counts', 'desc'),
-                default => $query->latest(),
-            };
-        });
+        $query->withCount('comments')
+            ->when($order, function ($query, $order) {
+                return match ($order) {
+                    PostOrder::RECENT->value => $query->orderBy('updated_at', 'desc'),
+                    PostOrder::COMMENT->value => $query->orderBy('comments_count', 'desc'),
+                    default => $query->latest(),
+                };
+            });
     }
 
     /**
@@ -94,7 +95,7 @@ class Post extends Model implements Feedable
     public function linkWithSlug(): Attribute
     {
         return new Attribute(
-            get: fn ($value) => route('posts.show', [
+            get: fn($value) => route('posts.show', [
                 'id' => $this->id,
                 'slug' => $this->slug,
             ])
@@ -106,8 +107,8 @@ class Post extends Model implements Feedable
         // 生成包含 tag ID 與 tag name 的 json 字串
         // [{"id":"2","value":"C#"},{"id":"5","value":"Dart"}]
         return new Attribute(
-            get: fn ($value) => $this->tags
-                ->map(fn ($tag) => ['id' => $tag->id, 'value' => $tag->name])
+            get: fn($value) => $this->tags
+                ->map(fn($tag) => ['id' => $tag->id, 'value' => $tag->name])
                 ->toJson()
         );
     }

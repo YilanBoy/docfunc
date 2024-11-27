@@ -3,9 +3,7 @@
 namespace App\Livewire\Shared\Comments;
 
 use App\Models\Comment;
-use App\Models\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
@@ -87,17 +85,11 @@ class CommentGroup extends Component
 
         $this->authorize('destroy', $comment);
 
-        $post = Post::findOrFail($this->postId);
-
-        DB::transaction(function () use ($comment, $post) {
-            $comment->delete();
-
-            $post->decrement('comment_counts');
-        });
+        $comment->delete();
 
         unset($this->comments[$id]);
 
-        $this->dispatch(event: 'update-comment-counts');
+        $this->dispatch(event: 'update-comments-count');
 
         $this->dispatch(event: 'info-badge', status: 'success', message: '成功刪除留言！');
     }

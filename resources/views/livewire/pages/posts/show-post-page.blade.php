@@ -112,7 +112,7 @@
                     href="{{ $post->link_with_slug }}#comments"
                   >
                     <x-icon.chat-square-text class="w-4" />
-                    <span class="ml-2">{{ $post->comment_counts }}</span>
+                    <span class="ml-2">{{ $post->comments_count }}</span>
                   </a>
 
                 </div>
@@ -179,7 +179,7 @@
             <livewire:shared.comments.comments
               :post-id="$post->id"
               :post-user-id="$post->user_id"
-              :comment-counts="$post->comment_counts"
+              :comment-counts="$post->comments_count"
             />
           </div>
 

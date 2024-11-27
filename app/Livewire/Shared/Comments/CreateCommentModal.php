@@ -5,13 +5,9 @@ namespace App\Livewire\Shared\Comments;
 use App\DataTransferObjects\CommentCardData;
 use App\Models\Comment;
 use App\Models\Post;
-use App\Models\User;
 use App\Notifications\NewComment;
 use App\Rules\Captcha;
 use App\Traits\MarkdownConverter;
-use Exception;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;
@@ -66,7 +62,7 @@ class CreateCommentModal extends Component
         $this->validate();
 
         // If post has already been deleted.
-        $post = Post::find(id: $this->postId, columns: ['id', 'comment_counts', 'user_id']);
+        $post = Post::find(id: $this->postId, columns: ['id', 'user_id']);
 
         if (is_null($post)) {
             $this->dispatch(event: 'info-badge', status: 'danger', message: '無法回覆！文章已被刪除！');
@@ -87,29 +83,13 @@ class CreateCommentModal extends Component
             }
         }
 
-        DB::beginTransaction();
-
-        try {
-            $comment = Comment::create([
-                'post_id' => $this->postId,
-                // auth()->id() will be null if user is not logged in
-                'user_id' => auth()->id(),
-                'body' => $this->body,
-                'parent_id' => $parentId,
-            ]);
-
-            $post->increment('comment_counts');
-
-            DB::commit();
-        } catch (Exception $exception) {
-            $this->dispatch(event: 'info-badge', status: 'danger', message: '發生錯誤！');
-
-            Log::error('An error occurred while adding a new message: '.$exception->getMessage());
-
-            DB::rollBack();
-
-            return;
-        }
+        $comment = Comment::create([
+            'post_id' => $this->postId,
+            // auth()->id() will be null if user is not logged in
+            'user_id' => auth()->id(),
+            'body' => $this->body,
+            'parent_id' => $parentId,
+        ]);
 
         // Notify the article author of new comments.
         $post->user->notifyNewComment(new NewComment($comment));
@@ -118,7 +98,7 @@ class CreateCommentModal extends Component
             id: $comment->id,
             userId: auth()->id(),
             body: $comment->body,
-            convertedBody: $this->convertToHtml($comment->body),
+            convertedBody: $this->convertedBody(),
             createdAt: $comment->created_at->toDateTimeString(),
             updatedAt: $comment->updated_at->toDateTimeString(),
             user: auth()->check() ? [
@@ -137,7 +117,7 @@ class CreateCommentModal extends Component
 
         $this->dispatch(event: 'close-create-comment-modal');
 
-        $this->dispatch(event: 'update-comment-counts');
+        $this->dispatch(event: 'update-comments-count');
 
         $this->dispatch(event: 'info-badge', status: 'success', message: '成功新增留言！');
 

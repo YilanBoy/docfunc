@@ -21,8 +21,7 @@ class PostFactory extends Factory
             'slug' => fake()->word(),
             'excerpt' => fake()->sentence,
             'category_id' => fake()->numberBetween(1, 3),
-            'comment_counts' => 0,
-            'user_id' => User::factory()->create()->id,
+            'user_id' => User::factory(),
             // 隨機取一個月以內，但早於現在的時間
             'created_at' => fake()->dateTimeThisMonth(now()),
             'updated_at' => now(),

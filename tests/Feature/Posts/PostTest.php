@@ -2,6 +2,7 @@
 
 use App\Enums\PostOrder;
 use App\Livewire\Shared\Posts\Posts;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
@@ -66,7 +67,7 @@ describe('home page', function () {
         $tagOneJsonString = Tag::query()
             ->where('id', 1)
             ->get()
-            ->map(fn ($tag) => ['id' => $tag->id, 'value' => $tag->name])
+            ->map(fn($tag) => ['id' => $tag->id, 'value' => $tag->name])
             ->toJson(JSON_UNESCAPED_UNICODE);
 
         $tagOnePost->tags()->attach(
@@ -103,13 +104,14 @@ describe('home page', function () {
             'updated_at' => now()->subDays(5),
         ]);
 
-        Post::factory()->create([
-            'title' => 'this post has the most comments',
-            'user_id' => $user->id,
-            'comment_counts' => 10,
-            'created_at' => now()->subDays(15),
-            'updated_at' => now()->subDays(15),
-        ]);
+        Post::factory()
+            ->has(Comment::factory()->count(5))
+            ->create([
+                'title' => 'this post has the most comments',
+                'user_id' => $user->id,
+                'created_at' => now()->subDays(15),
+                'updated_at' => now()->subDays(15),
+            ]);
 
         Livewire::withQueryParams(['order' => $queryString])
             ->test(Posts::class)
@@ -139,13 +141,14 @@ describe('home page', function () {
             'updated_at' => now()->subDays(5),
         ]);
 
-        Post::factory()->create([
-            'title' => 'this post has the most comments',
-            'user_id' => $user->id,
-            'comment_counts' => 10,
-            'created_at' => now()->subDays(15),
-            'updated_at' => now()->subDays(15),
-        ]);
+        Post::factory()
+            ->has(Comment::factory()->count(5))
+            ->create([
+                'title' => 'this post has the most comments',
+                'user_id' => $user->id,
+                'created_at' => now()->subDays(15),
+                'updated_at' => now()->subDays(15),
+            ]);
 
         Livewire::test(Posts::class, ['categoryId' => 0, 'tagId' => 0])
             ->call('changeOrder', $order)
@@ -271,8 +274,7 @@ describe('home page', function () {
             ->assertSee($post->preview_url);
     });
 
-    it('reset the page if order is changed', function (
-    ) {
+    it('reset the page if order is changed', function () {
         Post::factory()->count(18)->create([
             'created_at' => now()->subDays(20),
             'updated_at' => now()->subDays(20),

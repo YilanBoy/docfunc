@@ -117,7 +117,7 @@
         {{-- 文章留言數 --}}
         <div class="flex items-center">
           <x-icon.chat-square-text class="w-4" />
-          <span class="ml-2">{{ $post->comment_counts }}</span>
+          <span class="ml-2">{{ $post->comments_count }}</span>
         </div>
       </div>
     </x-card>

@@ -19,7 +19,7 @@ test('the author can delete his comment', function () {
         'commentGroupName' => 1,
     ])
         ->call('destroyComment', id: $comment->id)
-        ->assertDispatched('update-comment-counts')
+        ->assertDispatched('update-comments-count')
         ->assertDispatched('info-badge',
             status: 'success',
             message: '成功刪除留言！',
@@ -41,30 +41,11 @@ test('post author can delete other users comment', function () {
         'commentGroupName' => 1,
     ])
         ->call('destroyComment', id: $comment->id)
-        ->assertDispatched('update-comment-counts')
+        ->assertDispatched('update-comments-count')
         ->assertDispatched('info-badge',
             status: 'success',
             message: '成功刪除留言！',
         );
-
-    $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
-});
-
-test('when a comment is deleted, the post comments will be reduced by one', function () {
-    $comment = Comment::factory()->create();
-
-    $this->assertDatabaseHas('posts', ['comment_counts' => 1]);
-
-    Livewire::actingAs(User::find($comment->post->user_id));
-
-    livewire(CommentGroup::class, [
-        'postId' => $comment->post_id,
-        'postUserId' => $comment->post->user_id,
-        'maxLayer' => 2,
-        'currentLayer' => 1,
-        'commentGroupName' => 1,
-    ])
-        ->call('destroyComment', id: $comment->id);
 
     $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
 });

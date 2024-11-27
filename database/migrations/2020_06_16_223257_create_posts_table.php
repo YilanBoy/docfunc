@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
@@ -13,7 +12,6 @@ return new class extends Migration
             $table->string('title')->index();
             $table->mediumText('body');
             $table->integer('category_id')->unsigned()->index();
-            $table->integer('comment_counts')->unsigned()->default(0);
             $table->text('excerpt')->nullable();
             $table->string('slug')->nullable();
             $table->timestamps();

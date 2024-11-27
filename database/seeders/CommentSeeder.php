@@ -37,27 +37,6 @@ class CommentSeeder extends Seeder
         }
     }
 
-    protected function updateCommentCount(): void
-    {
-        // update comment_counts of post table
-        $postCommentCountsData = Comment::query()->selectRaw('
-            post_id,
-            count(id) AS post_comment_counts
-        ')
-            ->groupBy('post_id')
-            ->orderBy('post_id')
-            ->get()
-            ->toArray();
-
-        foreach ($postCommentCountsData as $data) {
-            Post::query()
-                ->where('id', $data['post_id'])
-                ->update([
-                    'comment_counts' => $data['post_comment_counts'],
-                ]);
-        }
-    }
-
     public function run(): void
     {
         $userCount = User::query()->count();
@@ -66,7 +45,5 @@ class CommentSeeder extends Seeder
         foreach ($this->commentGenerator($userCount, $postCount) as $data) {
             Comment::query()->insert($data);
         }
-
-        $this->updateCommentCount();
     }
 }

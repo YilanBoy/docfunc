@@ -36,6 +36,7 @@ class Posts extends Component
     public function render(): View
     {
         $posts = Post::query()
+            ->withCount('tags') // 計算標籤數目
             ->when($this->categoryId, function ($query) {
                 return $query->where('category_id', $this->categoryId);
             })
@@ -47,7 +48,6 @@ class Posts extends Component
             ->where('is_private', false)
             ->withOrder($this->order)
             ->with('user', 'category', 'tags') // 預加載防止 N+1 問題
-            ->withCount('tags') // 計算標籤數目
             ->paginate(10)
             ->withQueryString();
 

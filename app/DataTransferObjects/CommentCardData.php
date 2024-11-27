@@ -9,8 +9,8 @@ class CommentCardData
     /**
      * @var array{'id': int, 'name': string, 'gravatar_url': string}|null
      */
-    public ?array $user {
-        set (array|null $user) {
+    public ?array $user = null {
+        set (?array $user) {
             if ($user !== null) {
                 if (! isset($user['id'], $user['name'], $user['gravatar_url'])) {
                     throw new InvalidArgumentException('user must have id, name and gravatar_url');

@@ -12,9 +12,9 @@ use Random\RandomException;
 
 class PostSeeder extends Seeder
 {
-    const POST_COUNT = 1_000;
+    const int POST_COUNT = 1_000;
 
-    const CHUNK = 100;
+    const int CHUNK = 100;
 
     /**
      * @throws BindingResolutionException
@@ -36,7 +36,6 @@ class PostSeeder extends Seeder
                 'slug' => $slug,
                 'excerpt' => $excerpt,
                 'category_id' => fake()->numberBetween(1, 3),
-                'comment_counts' => 0,
                 'user_id' => random_int(1, $userCount),
                 'created_at' => fake()->dateTimeBetween(startDate: '-3 years'),
                 'updated_at' => now(),

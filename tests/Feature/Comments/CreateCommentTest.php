@@ -21,7 +21,7 @@ test('non-logged-in users can leave a anonymous comment', function () {
         ->assertDispatched('create-new-comment-to-root-new-comment-group')
         ->assertDispatched('append-new-id-to-root-comment-list')
         ->assertDispatched('close-create-comment-modal')
-        ->assertDispatched('update-comment-counts')
+        ->assertDispatched('update-comments-count')
         ->assertDispatched('info-badge',
             status: 'success',
             message: '成功新增留言！',
@@ -49,7 +49,7 @@ test('logged-in users can leave a comment', function () {
         ->assertDispatched('create-new-comment-to-root-new-comment-group')
         ->assertDispatched('append-new-id-to-root-comment-list')
         ->assertDispatched('close-create-comment-modal')
-        ->assertDispatched('update-comment-counts')
+        ->assertDispatched('update-comments-count')
         ->assertDispatched('info-badge',
             status: 'success',
             message: '成功新增留言！',
@@ -134,21 +134,6 @@ it('can see the comment preview', function () {
         ]);
 });
 
-test('when a new comment is added, the post comments will be increased by one', function () {
-    $this->actingAs(User::factory()->create());
-
-    $post = Post::factory()->create();
-
-    $this->assertDatabaseHas('posts', ['comment_counts' => 0]);
-
-    livewire(CreateCommentModal::class, ['postId' => $post->id])
-        ->set('body', 'Hello World!')
-        ->set('captchaToken', 'fake-captcha-response')
-        ->call('store');
-
-    $this->assertDatabaseHas('posts', ['comment_counts' => 1]);
-});
-
 it('can reply to others comment', function () {
     $this->actingAs(User::factory()->create());
 
@@ -162,7 +147,7 @@ it('can reply to others comment', function () {
         ->assertDispatched('create-new-comment-to-'.$comment->id.'-new-comment-group')
         ->assertDispatched('append-new-id-to-'.$comment->id.'-comment-list')
         ->assertDispatched('close-create-comment-modal')
-        ->assertDispatched('update-comment-counts')
+        ->assertDispatched('update-comments-count')
         ->assertDispatched('info-badge',
             status: 'success',
             message: '成功新增留言！',

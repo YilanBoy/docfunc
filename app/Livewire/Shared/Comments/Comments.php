@@ -3,7 +3,7 @@
 namespace App\Livewire\Shared\Comments;
 
 use App\Enums\CommentOrder;
-use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\View\View;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
@@ -26,10 +26,12 @@ class Comments extends Component
     #[Locked]
     public CommentOrder $order = CommentOrder::POPULAR;
 
-    #[On('update-comment-counts')]
-    public function updateCommentCounts(): void
+    #[On('update-comments-count')]
+    public function updateCommentsCount(): void
     {
-        $this->commentCounts = Post::findOrFail($this->postId, ['comment_counts'])->comment_counts;
+        $this->commentCounts = Comment::query()
+            ->where('post_id', $this->postId)
+            ->count();
     }
 
     public function changeOrder(CommentOrder $order): void

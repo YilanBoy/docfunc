@@ -25,7 +25,7 @@ class ShowPostPage extends Component
 
     public function mount(int $id): void
     {
-        $this->post = Post::findOrFail($id);
+        $this->post = Post::query()->withCount('comments')->find($id);;
 
         // private post, only the author can see
         if ($this->post->is_private) {

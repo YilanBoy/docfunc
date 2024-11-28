@@ -29,7 +29,7 @@ You can search post by [Algolia](https://www.algolia.com/).
 
 ## Requirements
 
-- [php](https://www.php.net/) ^8.2
+- [php](https://www.php.net/) ^8.4
 - [composer](https://getcomposer.org/)
 - [npm](https://www.npmjs.com/)
 
@@ -106,7 +106,9 @@ php artisan ide-helper:models
 ### Supervisor
 
 You could deploy this project use [Laravel Octane](https://laravel.com/docs/9.x/octane),
-supercharges the performance by serving application using [Swoole](https://github.com/swoole/swoole-src), [RoadRunner](https://roadrunner.dev/), or [FrankenPHP](https://frankenphp.dev/).
+supercharges the performance by serving application
+using [Swoole](https://github.com/swoole/swoole-src), [RoadRunner](https://roadrunner.dev/),
+or [FrankenPHP](https://frankenphp.dev/).
 
 > [!NOTE]
 >
@@ -138,7 +140,8 @@ Start the service by swoole server:
 php artisan ocatane:start
 ```
 
-In production, you can use [Supervisor](https://github.com/Supervisor/supervisor) to start swoole server and laravel queue worker.
+In production, you can use [Supervisor](https://github.com/Supervisor/supervisor) to start swoole server and laravel
+queue worker.
 
 Using supervisor to start swoole server process,
 we have to create a `docfunc-octane-worker.conf` config file in `/etc/supervisor/conf.d/`.
@@ -155,7 +158,7 @@ redirect_stderr=true
 stdout_logfile=/var/log/docfunc-octane-worker.log
 ```
 
-Using supervisor to start laravel queue worker process, 
+Using supervisor to start laravel queue worker process,
 we have to create a `docfunc-queue-worker.conf` config file in `/etc/supervisor/conf.d/`.
 
 ```text

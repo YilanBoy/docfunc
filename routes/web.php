@@ -31,7 +31,7 @@ Route::get('/', PostIndexPage::class)->name('root');
 require __DIR__.'/auth.php';
 
 // 會員相關頁面
-Route::middleware('auth')->prefix('users')->group(function () {
+Route::middleware('auth')->prefix('/users')->group(function () {
     Route::get('/{id}', ShowUserPage::class)
         ->name('users.show')
         ->withoutMiddleware('auth');
@@ -46,7 +46,7 @@ Route::middleware('auth')->prefix('users')->group(function () {
 });
 
 // 文章列表與內容
-Route::prefix('posts')->group(function () {
+Route::prefix('/posts')->group(function () {
     Route::get('/', PostIndexPage::class)->name('posts.index');
 
     Route::middleware(['auth', 'verified'])->group(function () {
@@ -59,13 +59,13 @@ Route::prefix('posts')->group(function () {
 });
 
 // 文章分類
-Route::get('categories/{id}/{name?}', ShowCategoryPage::class)->name('categories.show');
+Route::get('/categories/{id}/{name?}', ShowCategoryPage::class)->name('categories.show');
 
 // 文章標籤
-Route::get('tags/{id}', ShowTagPage::class)->name('tags.show');
+Route::get('/tags/{id}', ShowTagPage::class)->name('tags.show');
 
 // 通知列表
-Route::get('notifications', NotificationIndexPage::class)->name('notifications.index');
+Route::get('/notifications', NotificationIndexPage::class)->name('notifications.index');
 
 // Web Feed
 Route::feeds();

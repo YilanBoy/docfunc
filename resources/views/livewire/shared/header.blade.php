@@ -7,27 +7,27 @@
       profileMenuIsOpen: false,
       switchTheme() {
         if (this.html.classList.contains('dark')) {
-          this.html.classList.remove('dark')
-          localStorage.setItem('mode', 'light')
+          this.html.classList.remove('dark');
+          localStorage.setItem('mode', 'light');
         } else {
-          this.html.classList.add('dark')
-          localStorage.setItem('mode', 'dark')
+          this.html.classList.add('dark');
+          localStorage.setItem('mode', 'dark');
         }
       },
       toggleDropdownMenu() {
-        this.dropdownMenuIsOpen = !this.dropdownMenuIsOpen
+        this.dropdownMenuIsOpen = !this.dropdownMenuIsOpen;
       },
       dropdownMenuIsClose() {
-        return this.dropdownMenuIsOpen !== true
+        return this.dropdownMenuIsOpen !== true;
       },
       closeDropdownMenu() {
-        this.dropdownMenuIsOpen = false
+        this.dropdownMenuIsOpen = false;
       },
       toggleProfileMenu() {
-        this.profileMenuIsOpen = !this.profileIsOpen
+        this.profileMenuIsOpen = !this.profileMenuIsOpen;
       },
       closeProfileMenu() {
-        this.profileMenuIsOpen = false
+        this.profileMenuIsOpen = false;
       }
     }));
   </script>
@@ -39,8 +39,8 @@
   x-data="header"
 >
   <div
-    class="relative hidden h-20 w-full items-center justify-center bg-gray-50 shadow-lg shadow-emerald-100 transition-all duration-300 dark:bg-gray-800 dark:shadow-lividus-700/50 lg:flex"
-    id="desktop-header-menu"
+    class="dark:shadow-lividus-700/50 relative hidden h-20 w-full items-center justify-center bg-gray-50 shadow-lg shadow-emerald-100 transition-all duration-300 lg:flex dark:bg-gray-800"
+    id="desktop-header"
   >
     {{-- logo --}}
     <a
@@ -101,7 +101,7 @@
       @guest
         @if ($showRegisterButton)
           <a
-            class="flex h-10 items-center justify-center rounded-lg border-2 border-lividus-600 bg-transparent px-3 text-lividus-600 transition duration-150 hover:border-transparent hover:bg-lividus-600 hover:text-gray-50"
+            class="border-lividus-600 text-lividus-600 hover:bg-lividus-600 flex h-10 items-center justify-center rounded-lg border-2 bg-transparent px-3 transition duration-150 hover:border-transparent hover:text-gray-50"
             href="{{ route('register') }}"
             wire:navigate
           >
@@ -209,8 +209,8 @@
   </div>
 
   <div
-    class="bg-gray-50 dark:bg-gray-800 lg:hidden"
-    id="mobile-header-menu"
+    class="bg-gray-50 lg:hidden dark:bg-gray-800"
+    id="mobile-header"
   >
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-[4.5rem] items-center justify-between">
@@ -249,7 +249,7 @@
             src="{{ asset('images/icon/icon.png') }}"
             alt="logo"
           >
-          <span class="ml-3 hidden font-mono text-xl font-bold dark:text-gray-50 md:block">
+          <span class="ml-3 hidden font-mono text-xl font-bold md:block dark:text-gray-50">
             {{ config('app.name') }}
           </span>
         </div>
@@ -269,7 +269,7 @@
           @guest
             @if ($showRegisterButton)
               <a
-                class="rounded-md border-2 border-lividus-400 bg-transparent px-4 py-2 text-lividus-400 hover:border-transparent hover:bg-lividus-400 hover:text-gray-50"
+                class="border-lividus-400 text-lividus-400 hover:bg-lividus-400 rounded-md border-2 bg-transparent px-4 py-2 hover:border-transparent hover:text-gray-50"
                 href="{{ route('register') }}"
                 wire:navigate
               >

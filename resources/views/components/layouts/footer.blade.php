@@ -142,7 +142,7 @@
       <div class="flex flex-row items-center justify-center space-x-4 md:flex-auto md:justify-end">
         <a
           class="text-2xl text-gray-400 duration-300 hover:text-gray-50"
-          href="https://github.com/YilanBoy/"
+          href="https://github.com/yilanboy/"
           aria-label="GitHub"
           target="_blank"
           rel="nofollow noopener noreferrer"

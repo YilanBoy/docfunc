@@ -205,6 +205,7 @@ window.createClassicEditor = async function (
     csrfToken: string,
 ) {
     return ClassicEditor.create(element, {
+        licenseKey: 'GPL',
         placeholder: '分享使自己成長～',
         // Editor configuration.
         wordCount: {

@@ -6,21 +6,21 @@
     },
     "devDependencies": {
         "@shufo/prettier-plugin-blade": "^1.14.1",
-        "@tailwindcss/forms": "^0.5.7",
-        "@tailwindcss/typography": "^0.5.13",
-        "@types/yaireo__tagify": "^4.24.0",
-        "@yaireo/tagify": "^4.27.0",
-        "autoprefixer": "^10.4.19",
-        "ckeditor5": "^43.0.0",
+        "@tailwindcss/forms": "^0.5.9",
+        "@tailwindcss/typography": "^0.5.15",
+        "@types/yaireo__tagify": "^4.27.0",
+        "@yaireo/tagify": "^4.32.1",
+        "autoprefixer": "^10.4.20",
+        "ckeditor5": "^44.0.0",
         "highlight.js": "^11.10.0",
-        "laravel-vite-plugin": "^1.0.5",
-        "postcss": "^8.4.39",
+        "laravel-vite-plugin": "^1.1.0",
+        "postcss": "^8.4.49",
         "postcss-import": "^16.1.0",
-        "prettier": "^3.3.3",
+        "prettier": "^3.4.1",
         "resolve-url-loader": "^5.0.0",
-        "tailwindcss": "^3.4.5",
-        "typescript": "^5.5.3",
-        "vite": "^5.3.3"
+        "tailwindcss": "^3.4.15",
+        "typescript": "^5.7.2",
+        "vite": "^6.0.2"
     },
     "type": "module"
 }

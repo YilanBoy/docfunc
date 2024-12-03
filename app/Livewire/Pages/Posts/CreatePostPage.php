@@ -10,7 +10,6 @@ use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Random\RandomException;
 
 class CreatePostPage extends Component
 {
@@ -42,14 +41,9 @@ class CreatePostPage extends Component
         $this->form->autoSave($this->autoSaveKey);
     }
 
-    /**
-     * @throws RandomException
-     */
     public function store(): void
     {
         $this->form->validatePost($this->bodyMaxCharacter);
-
-        $this->form->uploadPreviewImage();
 
         $post = $this->form->createPost();
 

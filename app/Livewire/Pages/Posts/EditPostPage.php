@@ -12,7 +12,6 @@ use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Random\RandomException;
 
 class EditPostPage extends Component
 {
@@ -41,14 +40,9 @@ class EditPostPage extends Component
         $this->form->setPost($this->post);
     }
 
-    /**
-     * @throws RandomException
-     */
     public function update(Post $post): void
     {
         $this->form->validatePost($this->bodyMaxCharacter);
-
-        $this->form->uploadPreviewImage();
 
         $post = $this->form->updatePost($post);
 

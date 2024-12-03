@@ -4,14 +4,11 @@ namespace App\Livewire\Forms;
 
 use App\Models\Post;
 use App\Services\ContentService;
-use App\Services\FileService;
 use App\Services\FormatTransferService;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
-use Random\RandomException;
 
 class PostForm extends Form
 {
@@ -19,12 +16,6 @@ class PostForm extends Form
     public int $user_id;
 
     public int $category_id = 1;
-
-    #[Validate('nullable')]
-    #[Validate('image', message: '圖片格式有誤')]
-    #[Validate('mimes:jpeg,png,jpg', message: '圖片格式必須是 jpeg, png, jpg')]
-    #[Validate('max:1024', message: '圖片大小不能超過 1024 KB')]
-    public $image;
 
     public string $preview_url = '';
 
@@ -120,22 +111,6 @@ class PostForm extends Form
     public function setExcerpt(): void
     {
         $this->excerpt = ContentService::makeExcerpt($this->body);
-    }
-
-    /**
-     * @throws RandomException
-     */
-    public function uploadPreviewImage(): void
-    {
-        if ($this->image) {
-            $imageName = app(FileService::class)
-                ->generateFileName($this->image->getClientOriginalExtension());
-
-            $path = $this->image
-                ->storeAs('images', $imageName, config('filesystems.default'));
-
-            $this->preview_url = Storage::disk()->url($path);
-        }
     }
 
     public function setPost(Post $post): void

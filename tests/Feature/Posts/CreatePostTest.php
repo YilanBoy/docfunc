@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Pages\Posts\CreatePostPage;
+use App\Livewire\Shared\UploadImage;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
@@ -39,7 +40,7 @@ describe('create post', function () {
         $tagCollection = Tag::factory()->count(3)->create();
 
         $tagsJson = $tagCollection
-            ->map(fn ($item) => ['id' => $item->id, 'name' => $item->name])
+            ->map(fn($item) => ['id' => $item->id, 'name' => $item->name])
             ->toJson();
 
         $contentService = app(ContentService::class);
@@ -63,7 +64,7 @@ describe('create post', function () {
         $post = Post::latest()->first();
 
         $tagIdsArray = $tagCollection
-            ->map(fn ($item) => $item->id)
+            ->map(fn($item) => $item->id)
             ->all();
 
         expect(Cache::has('auto_save_user_'.$user->id.'_create_post'))->toBeFalse()
@@ -131,71 +132,42 @@ describe('create post', function () {
     });
 
     it('can check image type', function () {
-        loginAsUser();
-
         $file = UploadedFile::fake()->create('document.pdf', 512);
 
-        livewire(CreatePostPage::class, [
-            'categories' => Category::all(['id', 'name']),
-        ])
-            ->set('form.image', $file)
-            ->assertHasErrors('form.image');
+        livewire(UploadImage::class)
+            ->set('image', $file)
+            ->assertHasErrors('image');
     });
 
     it('can check image size', function () {
-        loginAsUser();
-
         $file = UploadedFile::fake()->image('image.jpg')->size(1025);
 
-        livewire(CreatePostPage::class, [
-            'categories' => Category::all(['id', 'name']),
-        ])
-            ->set('form.image', $file)
-            ->assertHasErrors('form.image');
+        livewire(UploadImage::class)
+            ->set('image', $file)
+            ->assertHasErrors('image');
     });
 
     it('can upload image', function () {
-        loginAsUser();
-
         Storage::fake();
 
         $image = UploadedFile::fake()->image('fake_image.jpg');
 
-        livewire(CreatePostPage::class, [
-            'categories' => Category::all(['id', 'name']),
-        ])
-            ->set('form.title', str()->random(4))
-            ->set('form.category_id', Category::pluck('id')->random())
-            // filename will be converted before store to s3
-            ->set('form.image', $image)
-            ->set('form.body', str()->random(500))
-            ->call('store')
+        livewire(UploadImage::class)
+            ->set('image', $image)
             ->assertHasNoErrors()
             ->assertSeeHtml('id="upload-image"');
 
-        $post = Post::latest()->first();
-
-        expect($post->preview_url)->not->toBeEmpty()
-            ->and(Storage::disk()->allFiles())->not->toBeEmpty();
+        expect(Storage::disk()->allFiles())->not->toBeEmpty();
     });
 
     it('can\'t upload non image', function () {
-        loginAsUser();
-
         Storage::fake();
 
         $file = UploadedFile::fake()->create('document.pdf', 512);
 
-        livewire(CreatePostPage::class, [
-            'categories' => Category::all(['id', 'name']),
-        ])
-            ->set('form.title', str()->random(4))
-            ->set('form.category_id', Category::pluck('id')->random())
-            // filename will be converted before store to s3
-            ->set('form.image', $file)
-            ->set('form.body', str()->random(500))
-            ->call('store')
-            ->assertHasErrors(['form.image'])
+        livewire(UploadImage::class)
+            ->set('image', $file)
+            ->assertHasErrors('image')
             ->assertDontSeeHtml('id="upload-image"');
     });
 
@@ -226,7 +198,7 @@ describe('create post', function () {
         $tags = Tag::inRandomOrder()
             ->limit(5)
             ->get()
-            ->map(fn ($tag) => ['id' => $tag->id, 'value' => $tag->name])
+            ->map(fn($tag) => ['id' => $tag->id, 'value' => $tag->name])
             ->toJson(JSON_UNESCAPED_UNICODE);
         $body = str()->random(500);
 
@@ -269,7 +241,7 @@ describe('create post', function () {
         $tags = Tag::inRandomOrder()
             ->limit(5)
             ->get()
-            ->map(fn ($tag) => ['id' => $tag->id, 'value' => $tag->name])
+            ->map(fn($tag) => ['id' => $tag->id, 'value' => $tag->name])
             ->toJson(JSON_UNESCAPED_UNICODE);
         $body = str()->random(500);
 

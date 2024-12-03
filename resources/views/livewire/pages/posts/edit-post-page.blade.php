@@ -1,105 +1,105 @@
 @assets
-  {{-- CKEditor --}}
-  @vite('resources/ts/ckeditor/ckeditor.ts')
-  {{-- Tagify --}}
-  @vite(['resources/ts/tagify.ts', 'node_modules/@yaireo/tagify/dist/tagify.css'])
+{{-- CKEditor --}}
+@vite('resources/ts/ckeditor/ckeditor.ts')
+{{-- Tagify --}}
+@vite(['resources/ts/tagify.ts', 'node_modules/@yaireo/tagify/dist/tagify.css'])
 
-  <style>
-    /* CKEditor */
-    .ck-editor__editable_inline {
-      min-height: 500px;
-    }
+<style>
+  /* CKEditor */
+  .ck-editor__editable_inline {
+    min-height: 500px;
+  }
 
-    /* Tagify */
-    .tagify-custom-look {
-      --tag-border-radius: 6px;
-      align-items: center;
-      --tag-inset-shadow-size: 3rem;
-    }
+  /* Tagify */
+  .tagify-custom-look {
+    --tag-border-radius: 6px;
+    align-items: center;
+    --tag-inset-shadow-size: 3rem;
+  }
 
-    .dark .tagify-custom-look {
-      --tag-bg: #52525b;
-      --tag-hover: #71717a;
-      --tag-text-color: #f9fafb;
-      --tag-remove-btn-color: #f9fafb;
-      --tag-text-color--edit: #f9fafb;
-      --input-color: #f9fafb;
-      --placeholder-color: #f9fafb;
-      --placeholder-color-focus: #f9fafb;
-    }
+  .dark .tagify-custom-look {
+    --tag-bg: #52525b;
+    --tag-hover: #71717a;
+    --tag-text-color: #f9fafb;
+    --tag-remove-btn-color: #f9fafb;
+    --tag-text-color--edit: #f9fafb;
+    --input-color: #f9fafb;
+    --placeholder-color: #f9fafb;
+    --placeholder-color-focus: #f9fafb;
+  }
 
-    :root.dark {
-      --tagify-dd-bg-color: #52525b;
-      --tagify-dd-color-primary: #71717a;
-      --tagify-dd-text-color: #f9fafb;
-    }
-  </style>
+  :root.dark {
+    --tagify-dd-bg-color: #52525b;
+    --tagify-dd-color-primary: #71717a;
+    --tagify-dd-text-color: #f9fafb;
+  }
+</style>
 @endassets
 
 @script
-  <script>
-    Alpine.data('editPostPage', () => ({
-      csrfToken: @js(csrf_token()),
-      imageUploadUrl: @js(route('images.store')),
-      tagsListUrl: @js(route('api.tags')),
-      bodyMaxCharacters: @js($bodyMaxCharacter),
-      ClassNameToAddOnEditorContent: @js(['rich-text']),
-      tags: @entangle('form.tags'),
-      body: @entangle('form.body'),
-      debounce(callback, delay) {
-        let timeoutId;
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {
-          callback.apply(this, arguments)
-        }, delay);
-      },
-      async init() {
-        // init the create post page
-        const ckeditor = await window.createClassicEditor(
-          this.$refs.editor,
-          this.bodyMaxCharacters,
-          this.imageUploadUrl,
-          this.csrfToken
-        );
+<script>
+  Alpine.data('editPostPage', () => ({
+    csrfToken: @js(csrf_token()),
+    imageUploadUrl: @js(route('images.store')),
+    tagsListUrl: @js(route('api.tags')),
+    bodyMaxCharacters: @js($bodyMaxCharacter),
+    ClassNameToAddOnEditorContent: @js(['rich-text']),
+    tags: @entangle('form.tags'),
+    body: @entangle('form.body'),
+    debounce(callback, delay) {
+      let timeoutId;
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        callback.apply(this, arguments);
+      }, delay);
+    },
+    async init() {
+      // init the create post page
+      const ckeditor = await window.createClassicEditor(
+        this.$refs.editor,
+        this.bodyMaxCharacters,
+        this.imageUploadUrl,
+        this.csrfToken
+      );
 
-        // set the default value of the editor
-        ckeditor.setData(this.body);
+      // set the default value of the editor
+      ckeditor.setData(this.body);
 
-        // binding the value of the ckeditor to the livewire attribute 'body'
-        ckeditor.model.document.on('change:data', () => {
-          this.debounce(() => {
-            this.body = ckeditor.getData();
-          }, 1000);
-        });
+      // binding the value of the ckeditor to the livewire attribute 'body'
+      ckeditor.model.document.on('change:data', () => {
+        this.debounce(() => {
+          this.body = ckeditor.getData();
+        }, 1000);
+      });
 
-        // override editable block style
-        ckeditor.ui.view.editable.element
-          .parentElement.classList.add(...this.ClassNameToAddOnEditorContent);
+      // override editable block style
+      ckeditor.ui.view.editable.element
+        .parentElement.classList.add(...this.ClassNameToAddOnEditorContent);
 
-        const response = await fetch(this.tagsListUrl);
-        const tagsJson = await response.json();
+      const response = await fetch(this.tagsListUrl);
+      const tagsJson = await response.json();
 
-        const tagify = window.createTagify(
-          this.$refs.tags,
-          tagsJson.data,
-          (event) => {
-            this.tags = event.detail.value
-          }
-        )
-
-        if (this.tags.length !== 0) {
-          tagify.addTags(JSON.parse(this.tags));
+      const tagify = window.createTagify(
+        this.$refs.tags,
+        tagsJson.data,
+        (event) => {
+          this.tags = event.detail.value;
         }
+      );
 
-        document.addEventListener('livewire:navigating', () => {
-          ckeditor.destroy();
-          tagify.destroy();
-        }, {
-          once: true
-        });
+      if (this.tags.length !== 0) {
+        tagify.addTags(JSON.parse(this.tags));
       }
-    }));
-  </script>
+
+      document.addEventListener('livewire:navigating', () => {
+        ckeditor.destroy();
+        tagify.destroy();
+      }, {
+        once: true
+      });
+    }
+  }));
+</script>
 @endscript
 
 {{-- edit post --}}
@@ -133,13 +133,7 @@
             >
               <div class="grid grid-cols-2 gap-5">
                 {{-- post preview image --}}
-                <x-post-form.upload-image-block
-                  :image-model-name="'form.image'"
-                  :image="$form->image"
-                  :show-uploaded-image="!$errors->has('form.image') && !is_null($form->image)"
-                  :preview-url-model-name="'form.preview_url'"
-                  :preview-url="$form->preview_url"
-                />
+                <livewire:shared.upload-image wire:model.live="form.preview_url" />
 
                 {{-- post classfication --}}
                 <div class="col-span-2 md:col-span-1">

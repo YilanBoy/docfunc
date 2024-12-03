@@ -50,7 +50,7 @@
         let timeoutId;
         clearTimeout(timeoutId);
         timeoutId = setTimeout(() => {
-          callback.apply(this, arguments)
+          callback.apply(this, arguments);
         }, delay);
       },
       async init() {
@@ -83,9 +83,9 @@
           this.$refs.tags,
           tagsJson.data,
           (event) => {
-            this.tags = event.detail.value
+            this.tags = event.detail.value;
           }
-        )
+        );
 
         if (this.tags.length !== 0) {
           tagify.addTags(JSON.parse(this.tags));
@@ -133,13 +133,7 @@
             >
               <div class="grid grid-cols-2 gap-5">
                 {{-- post preview image --}}
-                <x-post-form.upload-image-block
-                  :image-model-name="'form.image'"
-                  :image="$form->image"
-                  :show-uploaded-image="!$errors->has('form.image') && !is_null($form->image)"
-                  :preview-url-model-name="'form.preview_url'"
-                  :preview-url="$form->preview_url"
-                />
+                <livewire:shared.upload-image wire:model.live="form.preview_url" />
 
                 {{-- post classfication --}}
                 <div class="col-span-2 md:col-span-1">
@@ -170,7 +164,7 @@
                     for="is-private"
                   >
                     <input
-                      class="form-checkbox h-6 w-6 rounded border-gray-300 text-emerald-400 focus:border-emerald-300 focus:ring focus:ring-emerald-200/50 dark:border-gray-600 dark:text-lividus-500 dark:focus:border-lividus-700 dark:focus:ring-lividus-800"
+                      class="form-checkbox dark:text-lividus-500 dark:focus:border-lividus-700 dark:focus:ring-lividus-800 h-6 w-6 rounded border-gray-300 text-emerald-400 focus:border-emerald-300 focus:ring focus:ring-emerald-200/50 dark:border-gray-600"
                       id="is-private"
                       name="is-private"
                       type="checkbox"

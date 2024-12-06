@@ -30,12 +30,10 @@ trait MarkdownConverter
 
         $converter = new CommonMarkdownConverter($environment);
 
-        $html = $converter->convert($body);
-
-        return $this->removeHeadingInHtml($html);
+        return $converter->convert($body);
     }
 
-    protected function removeHeadingInHtml(string $html): string
+    public function removeHeadingInHtml(string $html): string
     {
         $search = [
             '<h1>', '</h1>',

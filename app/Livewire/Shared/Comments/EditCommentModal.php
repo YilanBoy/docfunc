@@ -7,12 +7,8 @@ use App\Traits\MarkdownConverter;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
-use Livewire\Attributes\Computed;
 use Livewire\Component;
 
-/**
- * @property string $convertedBody 將 markdown 的 body 轉換成 html 格式，set by convertedBody()
- */
 class EditCommentModal extends Component
 {
     use AuthorizesRequests;
@@ -38,12 +34,6 @@ class EditCommentModal extends Component
         ];
     }
 
-    #[Computed]
-    public function convertedBody(): string
-    {
-        return $this->convertToHtml($this->body);
-    }
-
     /**
      * @throws AuthorizationException
      */
@@ -63,7 +53,6 @@ class EditCommentModal extends Component
             event: 'update-comment-in-'.$groupName,
             id: $comment->id,
             body: $comment->body,
-            convertedBody: $this->convertedBody(),
             updatedAt: $comment->updated_at,
         );
     }

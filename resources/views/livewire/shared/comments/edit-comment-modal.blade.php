@@ -47,7 +47,7 @@
       destroy() {
         this.observers.forEach((observer) => {
           observer.disconnect();
-        })
+        });
       }
     }));
   </script>
@@ -72,7 +72,7 @@
 
   {{--  modal  --}}
   <div
-    class="mx-2 max-h-[36rem] w-full transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all dark:bg-gray-800 md:max-w-2xl"
+    class="mx-2 max-h-[36rem] w-full transform overflow-auto rounded-tl-xl rounded-tr-xl bg-gray-50 p-5 transition-all md:max-w-2xl dark:bg-gray-800"
     x-show="modalIsOpen"
     x-transition.origin.bottom.duration.300ms
   >
@@ -104,7 +104,7 @@
               <span class="text-gray-400">{{ now()->format('Y 年 m 月 d 日') }}</span>
             </div>
             <div class="rich-text h-80 overflow-auto">
-              {!! $this->convertedBody !!}
+              {!! $this->removeHeadingInHtml($this->convertToHtml($body)) !!}
             </div>
           </div>
         @else
@@ -112,7 +112,7 @@
             <label for="edit-comment-textarea"></label>
 
             <textarea
-              class="form-textarea w-full resize-none rounded-md border border-gray-300 font-jetbrains-mono text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-gray-50"
+              class="form-textarea font-jetbrains-mono w-full resize-none rounded-md border border-gray-300 text-lg focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-50 dark:placeholder-gray-50"
               name="body"
               x-ref="editCommentTextarea"
               {{-- change tab into 4 spaces --}}

@@ -6,8 +6,7 @@ use Tests\TestCase;
 uses(TestCase::class);
 
 it('can block the header tags', function () {
-    $trait = new class
-    {
+    $trait = new class {
         use MarkdownConverter;
     };
 
@@ -20,7 +19,8 @@ it('can block the header tags', function () {
     ###### Header 6
     MARKDOWN;
 
-    $convertedBody = $trait->convertToHtml($body);
+    $convertedBody = $trait->removeHeadingInHtml(
+        $trait->convertToHtml($body));
 
     expect($convertedBody)
         ->toContain('<p>Header 1</p>')
@@ -38,8 +38,7 @@ it('can block the header tags', function () {
 });
 
 it('can convert the markdown content to html', function () {
-    $trait = new class
-    {
+    $trait = new class {
         use MarkdownConverter;
     };
 
@@ -57,7 +56,8 @@ it('can convert the markdown content to html', function () {
     - item 3
     MARKDOWN;
 
-    $convertedBody = $trait->convertToHtml($body);
+    $convertedBody = $trait->removeHeadingInHtml(
+        $trait->convertToHtml($body));
 
     expect($convertedBody)
         ->toContain('<p>Title</p>')

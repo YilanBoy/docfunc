@@ -4,7 +4,6 @@ namespace App\Livewire\Shared\Comments;
 
 use App\Enums\CommentOrder;
 use App\Models\Comment;
-use App\Traits\MarkdownConverter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Livewire\Attributes\Locked;
@@ -14,8 +13,6 @@ use Livewire\Component;
 
 class CommentList extends Component
 {
-    use MarkdownConverter;
-
     #[Locked]
     public int $postId;
 
@@ -55,7 +52,6 @@ class CommentList extends Component
      *     'updated_at': string,
      *     'children_count': int,
      *     'user': array{'id': int, 'name': string, 'gravatar_url': string}|null,
-     *     'converted_body': string
      * }>>
      * >
      */
@@ -114,8 +110,6 @@ class CommentList extends Component
             ->toArray();
 
         $callback = function (array $comment): array {
-            $comment['converted_body'] = $this->convertToHtml($comment['body']);
-
             if (! is_null($comment['user'])) {
                 $comment['user']['gravatar_url'] = get_gravatar($comment['user']['email']);
                 unset($comment['user']['email']);

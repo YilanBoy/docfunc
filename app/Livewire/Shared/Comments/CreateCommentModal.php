@@ -9,14 +9,10 @@ use App\Notifications\NewComment;
 use App\Rules\Captcha;
 use App\Traits\MarkdownConverter;
 use Illuminate\View\View;
-use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 use Throwable;
 
-/**
- * @property string $convertedBody 將 markdown 的 body 轉換成 html 格式，set by convertedBody()
- */
 class CreateCommentModal extends Component
 {
     use MarkdownConverter;
@@ -46,12 +42,6 @@ class CreateCommentModal extends Component
             'body.max' => '留言內容至多 2000 個字元',
             'captchaToken.required' => '未完成驗證',
         ];
-    }
-
-    #[Computed]
-    public function convertedBody(): string
-    {
-        return $this->convertToHtml($this->body);
     }
 
     /**
@@ -98,7 +88,6 @@ class CreateCommentModal extends Component
             id: $comment->id,
             userId: auth()->id(),
             body: $comment->body,
-            convertedBody: $this->convertedBody(),
             createdAt: $comment->created_at->toDateTimeString(),
             updatedAt: $comment->updated_at->toDateTimeString(),
             user: auth()->check() ? [

@@ -3,6 +3,7 @@
 namespace App\Livewire\Shared\Comments;
 
 use App\Models\Comment;
+use App\Traits\MarkdownConverter;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
 use Livewire\Attributes\Locked;
@@ -12,6 +13,7 @@ use Livewire\Component;
 class CommentGroup extends Component
 {
     use AuthorizesRequests;
+    use MarkdownConverter;
 
     #[Locked]
     public int $postId;
@@ -52,7 +54,6 @@ class CommentGroup extends Component
      *     'updated_at': string,
      *     'children_count': int,
      *     'user': array{'id': int, 'name': string, 'gravatar_url': string}|null,
-     *     'converted_body': string
      * }>
      */
     #[Locked]
@@ -65,10 +66,9 @@ class CommentGroup extends Component
     }
 
     #[On('update-comment-in-{commentGroupName}')]
-    public function updateComment(int $id, string $body, string $convertedBody, string $updatedAt): void
+    public function updateComment(int $id, string $body, string $updatedAt): void
     {
         $this->comments[$id]['body'] = $body;
-        $this->comments[$id]['converted_body'] = $convertedBody;
         $this->comments[$id]['updated_at'] = $updatedAt;
     }
 

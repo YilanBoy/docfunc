@@ -13,7 +13,7 @@
         this.$dispatch('open-edit-comment-modal', {
           groupName: this.$el.dataset.commentGroupName,
           id: this.$el.dataset.commentId,
-          body: this.$el.dataset.commentBody,
+          body: this.$el.dataset.commentBody
         });
       },
       openCreateCommentModal() {
@@ -35,7 +35,7 @@
         commentsObserver.observe(this.$root, {
           childList: true,
           subtree: true,
-          attributes: true,
+          attributes: true
         });
 
         this.observers.push(commentsObserver);
@@ -45,7 +45,7 @@
       destroy() {
         this.observers.forEach((observer) => {
           observer.disconnect();
-        })
+        });
       }
     }));
   </script>
@@ -96,7 +96,7 @@
         </div>
 
         <div class="rich-text">
-          {!! $comment['converted_body'] !!}
+          {!! $this->removeHeadingInHtml($this->convertToHtml($comment['body'])) !!}
         </div>
 
         <div class="flex items-center justify-end gap-6 text-base text-gray-400">
@@ -146,7 +146,7 @@
 
     @if ($currentLayer < $maxLayer)
       <div
-        class="relative pl-4 before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:rounded-full before:bg-emerald-400/20 before:contain-none dark:before:bg-indigo-500/20 md:pl-8"
+        class="relative pl-4 before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:rounded-full before:bg-emerald-400/20 before:contain-none md:pl-8 dark:before:bg-indigo-500/20"
         wire:key="{{ $comment['id'] }}-children"
       >
         <livewire:shared.comments.comment-group

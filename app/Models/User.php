@@ -82,6 +82,6 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return new Attribute(
             get: fn($value) => get_gravatar($this->email)
-        );
+        )->shouldCache();
     }
 }

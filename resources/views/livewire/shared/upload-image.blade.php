@@ -29,7 +29,7 @@
       },
       removePreviewUrl() {
         if (confirm('你確定要刪除預覽圖嗎？')) {
-          this.$wire.set('imageUrl', '');
+          this.$wire.set('imageUrl', null);
         }
       }
     }));

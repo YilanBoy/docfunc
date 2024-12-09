@@ -4,7 +4,7 @@
       observers: [],
       modalIsOpen: false,
       id: null,
-      body: @entangle('body'),
+      body: @entangle('form.body'),
       groupName: null,
       openModal(event) {
         this.id = event.detail.id;
@@ -18,7 +18,7 @@
         this.modalIsOpen = false;
       },
       submitForm() {
-        this.$wire.update(this.id, this.groupName);
+        this.$wire.save(this.id, this.groupName);
       },
       tabToFourSpaces() {
         this.$el.setRangeText('    ', this.$el.selectionStart, this.$el.selectionStart, 'end');
@@ -104,7 +104,7 @@
               <span class="text-gray-400">{{ now()->format('Y 年 m 月 d 日') }}</span>
             </div>
             <div class="rich-text h-80 overflow-auto">
-              {!! $this->removeHeadingInHtml($this->convertToHtml($body)) !!}
+              {!! $this->removeHeadingInHtml($this->convertToHtml($this->form->body)) !!}
             </div>
           </div>
         @else
@@ -123,7 +123,7 @@
               required
             ></textarea>
 
-            @error('body')
+            @error('form.body')
               <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
             @enderror
           </div>

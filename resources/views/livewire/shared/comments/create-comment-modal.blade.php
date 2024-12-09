@@ -4,10 +4,10 @@
       observers: [],
       modalIsOpen: false,
       submitIsEnabled: false,
-      body: @entangle('body'),
+      parentId: @entangle('form.parent_id'),
+      body: @entangle('form.body'),
       captchaSiteKey: @js(config('services.captcha.site_key')),
       captchaToken: @entangle('captchaToken'),
-      parentId: null,
       replyTo: null,
       openModal(event) {
         this.parentId = event.detail.parentId;
@@ -20,7 +20,7 @@
         this.modalIsOpen = false;
       },
       submitForm() {
-        this.$wire.store(this.parentId);
+        this.$wire.save();
       },
       tabToFourSpaces() {
         this.$el.setRangeText('    ', this.$el.selectionStart, this.$el.selectionStart, 'end');
@@ -137,7 +137,7 @@
               <span class="text-gray-400">{{ now()->format('Y 年 m 月 d 日') }}</span>
             </div>
             <div class="rich-text h-80 overflow-auto">
-              {!! $this->removeHeadingInHtml($this->convertToHtml($body)) !!}
+              {!! $this->removeHeadingInHtml($this->convertToHtml($this->form->body)) !!}
             </div>
           </div>
         @else
@@ -156,7 +156,7 @@
               required
             ></textarea>
 
-            @error('body')
+            @error('form.body')
               <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
             @enderror
 

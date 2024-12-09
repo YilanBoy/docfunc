@@ -20,12 +20,12 @@ class UploadImage extends Component
     public $image = null;
 
     #[Modelable]
-    public string $imageUrl = '';
+    public ?string $imageUrl = null;
 
     /**
      * @throws RandomException
      */
-    public function save(): void
+    public function store(): void
     {
         $this->validate();
 
@@ -42,11 +42,13 @@ class UploadImage extends Component
     }
 
     /**
+     * When the image is updated, store the image and set the image url
+     *
      * @throws RandomException
      */
     public function updatedImage(): void
     {
-        $this->save();
+        $this->store();
     }
 
     public function render()

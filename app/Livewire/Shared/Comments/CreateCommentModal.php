@@ -3,6 +3,7 @@
 namespace App\Livewire\Shared\Comments;
 
 use App\DataTransferObjects\CommentCardData;
+use App\Livewire\Forms\CommentForm;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Notifications\NewComment;
@@ -17,10 +18,10 @@ class CreateCommentModal extends Component
 {
     use MarkdownConverter;
 
+    public CommentForm $form;
+
     #[Locked]
     public int $postId;
-
-    public string $body = '';
 
     public bool $previewIsEnabled = false;
 
@@ -29,7 +30,6 @@ class CreateCommentModal extends Component
     protected function rules(): array
     {
         return [
-            'body' => ['required', 'min:5', 'max:2000'],
             'captchaToken' => ['required', new Captcha],
         ];
     }
@@ -37,17 +37,20 @@ class CreateCommentModal extends Component
     protected function messages(): array
     {
         return [
-            'body.required' => '請填寫留言內容',
-            'body.min' => '留言內容至少 5 個字元',
-            'body.max' => '留言內容至多 2000 個字元',
             'captchaToken.required' => '未完成驗證',
         ];
+    }
+
+    public function mount(): void
+    {
+        $this->form->post_id = $this->postId;
+        $this->form->user_id = auth()->id();
     }
 
     /**
      * @throws Throwable
      */
-    public function store(?int $parentId = null): void
+    public function save(): void
     {
         $this->validate();
 
@@ -63,8 +66,8 @@ class CreateCommentModal extends Component
         }
 
         // If parent comment has already been deleted.
-        if (! is_null($parentId)) {
-            $parentComment = Comment::find(id: $parentId, columns: ['id']);
+        if (! is_null($this->form->parent_id)) {
+            $parentComment = Comment::find(id: $this->form->parent_id, columns: ['id']);
 
             if (is_null($parentComment)) {
                 $this->dispatch(event: 'info-badge', status: 'danger', message: '無法回覆！留言已被刪除！');
@@ -73,13 +76,7 @@ class CreateCommentModal extends Component
             }
         }
 
-        $comment = Comment::create([
-            'post_id' => $this->postId,
-            // auth()->id() will be null if user is not logged in
-            'user_id' => auth()->id(),
-            'body' => $this->body,
-            'parent_id' => $parentId,
-        ]);
+        $comment = $this->form->store();
 
         // Notify the article author of new comments.
         $post->user->notifyNewComment(new NewComment($comment));
@@ -98,11 +95,14 @@ class CreateCommentModal extends Component
         );
 
         $this->dispatch(
-            event: 'create-new-comment-to-'.($parentId ?? 'root').'-new-comment-group',
+            event: 'create-new-comment-to-'.($this->form->parent_id ?? 'root').'-new-comment-group',
             comment: $commentCard->toArray(),
         );
 
-        $this->dispatch(event: 'append-new-id-to-'.($parentId ?? 'root').'-comment-list', id: $comment->id);
+        $this->dispatch(
+            event: 'append-new-id-to-'.($this->form->parent_id ?? 'root').'-comment-list',
+            id: $comment->id
+        );
 
         $this->dispatch(event: 'close-create-comment-modal');
 
@@ -110,7 +110,7 @@ class CreateCommentModal extends Component
 
         $this->dispatch(event: 'info-badge', status: 'success', message: '成功新增留言！');
 
-        $this->reset('body', 'previewIsEnabled');
+        $this->reset('form.body', 'form.parent_id', 'previewIsEnabled');
     }
 
     public function render(): View

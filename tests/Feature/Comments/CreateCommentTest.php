@@ -15,9 +15,9 @@ test('non-logged-in users can leave a anonymous comment', function () {
     $body = fake()->words(5, true);
 
     livewire(CreateCommentModal::class, ['postId' => $post->id])
-        ->set('body', $body)
+        ->set('form.body', $body)
         ->set('captchaToken', 'fake-captcha-response')
-        ->call('store')
+        ->call('save')
         ->assertDispatched('create-new-comment-to-root-new-comment-group')
         ->assertDispatched('append-new-id-to-root-comment-list')
         ->assertDispatched('close-create-comment-modal')
@@ -43,9 +43,9 @@ test('logged-in users can leave a comment', function () {
     $body = fake()->words(5, true);
 
     livewire(CreateCommentModal::class, ['postId' => $post->id])
-        ->set('body', $body)
+        ->set('form.body', $body)
         ->set('captchaToken', 'fake-captcha-response')
-        ->call('store')
+        ->call('save')
         ->assertDispatched('create-new-comment-to-root-new-comment-group')
         ->assertDispatched('append-new-id-to-root-comment-list')
         ->assertDispatched('close-create-comment-modal')
@@ -69,10 +69,10 @@ test('the message must be at least 5 characters long', function () {
     $body = str()->random(4);
 
     livewire(CreateCommentModal::class, ['postId' => $post->id])
-        ->set('body', $body)
+        ->set('form.body', $body)
         ->set('captchaToken', 'fake-captcha-response')
-        ->call('store')
-        ->assertHasErrors(['body' => 'min:5'])
+        ->call('save')
+        ->assertHasErrors(['form.body' => 'min:5'])
         ->assertSeeHtml('<p class="mt-1 text-sm text-red-400">留言內容至少 5 個字元</p>');
 });
 
@@ -82,11 +82,11 @@ test('the message must be less than 2000 characters', function () {
     $body = str()->random(2001);
 
     livewire(CreateCommentModal::class, ['postId' => $post->id])
-        ->set('body', $body)
+        ->set('form.body', $body)
         ->set('captchaToken', 'fake-captcha-response')
-        ->call('store')
-        ->assertHasErrors(['body' => 'max:2000'])
-        ->assertSeeHtml('<p class="mt-1 text-sm text-red-400">留言內容至多 2000 個字元</p>');
+        ->call('save')
+        ->assertHasErrors(['form.body' => 'max:2000'])
+        ->assertSeeHtml('<p class="mt-1 text-sm text-red-400">留言內容最多 2000 個字元</p>');
 });
 
 test('the message must have the captcha token', function () {
@@ -95,8 +95,8 @@ test('the message must have the captcha token', function () {
     $body = fake()->words(5, true);
 
     livewire(CreateCommentModal::class, ['postId' => $post->id])
-        ->set('body', $body)
-        ->call('store')
+        ->set('form.body', $body)
+        ->call('save')
         ->assertHasErrors()
         ->assertSeeHtml('<p class="mt-1 text-sm text-red-400">未完成驗證</p>');
 });
@@ -119,7 +119,7 @@ it('can see the comment preview', function () {
     MARKDOWN;
 
     livewire(CreateCommentModal::class, ['postId' => $post->id])
-        ->set('body', $body)
+        ->set('form.body', $body)
         ->set('captchaToken', 'fake-captcha-response')
         ->set('previewIsEnabled', true)
         ->assertSeeHtmlInOrder([
@@ -141,9 +141,10 @@ it('can reply to others comment', function () {
     $comment = Comment::factory()->create(['post_id' => $post->id]);
 
     livewire(CreateCommentModal::class, ['postId' => $post->id])
-        ->set('body', 'Hello World!')
+        ->set('form.parent_id', $comment->id)
+        ->set('form.body', 'Hello World!')
         ->set('captchaToken', 'fake-captcha-response')
-        ->call('store', parentId: $comment->id)
+        ->call('save')
         ->assertDispatched('create-new-comment-to-'.$comment->id.'-new-comment-group')
         ->assertDispatched('append-new-id-to-'.$comment->id.'-comment-list')
         ->assertDispatched('close-create-comment-modal')
@@ -163,9 +164,9 @@ it('will show alert, when user want to reply to deleted post', function () {
     $post->delete();
 
     livewire(CreateCommentModal::class, ['postId' => $postId])
-        ->set('body', 'Hello World!')
+        ->set('form.body', 'Hello World!')
         ->set('captchaToken', 'fake-captcha-response')
-        ->call('store')
+        ->call('save')
         ->assertDispatched(event: 'info-badge', status: 'danger', message: '無法回覆！文章已被刪除！');
 });
 
@@ -179,8 +180,9 @@ it('will show alert, when user want to reply to deleted comment', function () {
     $comment->delete();
 
     livewire(CreateCommentModal::class, ['postId' => $post->id])
-        ->set('body', 'Hello World!')
+        ->set('form.parent_id', $comment->id)
+        ->set('form.body', 'Hello World!')
         ->set('captchaToken', 'fake-captcha-response')
-        ->call('store', parentId: $commentId)
+        ->call('save', parentId: $commentId)
         ->assertDispatched(event: 'info-badge', status: 'danger', message: '無法回覆！留言已被刪除！');
 });

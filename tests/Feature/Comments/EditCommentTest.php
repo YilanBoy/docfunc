@@ -19,8 +19,8 @@ test('logged-in users can update their comments', function () {
     $body = 'new comment';
 
     livewire(EditCommentModal::class)
-        ->set('body', $body)
-        ->call('update', $comment->id, $commentGroupName)
+        ->set('form.body', $body)
+        ->call('save', $comment->id, $commentGroupName)
         ->assertDispatched('close-edit-comment-modal')
         ->assertDispatched('update-comment-in-'.$commentGroupName);
 
@@ -40,9 +40,9 @@ test('the updated message must be at least 5 characters long', function () {
     $body = str()->random(4);
 
     livewire(EditCommentModal::class)
-        ->set('body', $body)
-        ->call('update', $comment->id, $commentGroupName)
-        ->assertHasErrors(['body' => 'min:5'])
+        ->set('form.body', $body)
+        ->call('save', $comment->id, $commentGroupName)
+        ->assertHasErrors(['form.body' => 'min:5'])
         ->assertSeeHtml('<p class="mt-1 text-sm text-red-400">留言內容至少 5 個字元</p>');
 
     $this->assertDatabaseHas('comments', ['body' => $oldBody]);
@@ -61,10 +61,10 @@ test('the updated message must be less than 2000 characters', function () {
     $body = str()->random(2001);
 
     livewire(EditCommentModal::class)
-        ->set('body', $body)
-        ->call('update', $comment->id, $commentGroupName)
-        ->assertHasErrors(['body' => 'max:2000'])
-        ->assertSeeHtml('<p class="mt-1 text-sm text-red-400">留言內容至多 2000 個字元</p>');
+        ->set('form.body', $body)
+        ->call('save', $comment->id, $commentGroupName)
+        ->assertHasErrors(['form.body' => 'max:2000'])
+        ->assertSeeHtml('<p class="mt-1 text-sm text-red-400">留言內容最多 2000 個字元</p>');
 
     $this->assertDatabaseHas('comments', ['body' => $oldBody]);
 });
@@ -78,8 +78,8 @@ test('users can\'t update others\' comments', function () {
     $body = 'new comment';
 
     livewire(EditCommentModal::class)
-        ->set('body', $body)
-        ->call('update', $comment->id, $commentGroupName)
+        ->set('form.body', $body)
+        ->call('save', $comment->id, $commentGroupName)
         ->assertForbidden();
 
     expect(Comment::find($comment->id, ['body']))
@@ -104,7 +104,7 @@ it('can see the comment preview', function () {
     MARKDOWN;
 
     livewire(EditCommentModal::class)
-        ->set('body', $body)
+        ->set('form.body', $body)
         ->set('previewIsEnabled', true)
         ->assertSeeHtmlInOrder([
             '<p>Title</p>',

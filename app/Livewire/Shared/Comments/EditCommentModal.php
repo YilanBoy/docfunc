@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Shared\Comments;
 
+use App\Livewire\Forms\CommentForm;
 use App\Models\Comment;
 use App\Traits\MarkdownConverter;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -14,38 +15,18 @@ class EditCommentModal extends Component
     use AuthorizesRequests;
     use MarkdownConverter;
 
+    public CommentForm $form;
+
     public bool $previewIsEnabled = false;
-
-    public string $body = '';
-
-    protected function rules(): array
-    {
-        return [
-            'body' => ['required', 'min:5', 'max:2000'],
-        ];
-    }
-
-    protected function messages(): array
-    {
-        return [
-            'body.required' => '請填寫留言內容',
-            'body.min' => '留言內容至少 5 個字元',
-            'body.max' => '留言內容至多 2000 個字元',
-        ];
-    }
 
     /**
      * @throws AuthorizationException
      */
-    public function update(Comment $comment, string $groupName): void
+    public function save(Comment $comment, string $groupName): void
     {
         $this->authorize('update', $comment);
 
-        $this->validate();
-
-        $comment->update([
-            'body' => $this->body,
-        ]);
+        $this->form->update($comment);
 
         $this->dispatch(event: 'close-edit-comment-modal');
 

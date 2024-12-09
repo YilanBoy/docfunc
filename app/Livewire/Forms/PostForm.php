@@ -17,7 +17,7 @@ class PostForm extends Form
 
     public int $category_id = 1;
 
-    public string $preview_url = '';
+    public ?string $preview_url = null;
 
     public bool $is_private = false;
 

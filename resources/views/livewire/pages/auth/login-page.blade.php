@@ -7,7 +7,7 @@
         return this.submitIsEnabled === false;
       },
       informationOnSubmitButton() {
-        return this.submitIsEnabled ? '登入' : '驗證中'
+        return this.submitIsEnabled ? '登入' : '驗證中';
       },
       init() {
         turnstile.ready(() => {
@@ -88,7 +88,7 @@
               for="remember-me"
             >
               <input
-                class="form-checkbox rounded border-gray-300 text-emerald-400 focus:border-emerald-300 focus:ring focus:ring-emerald-200 focus:ring-opacity-50 dark:text-lividus-500 dark:focus:border-lividus-700 dark:focus:ring-lividus-800"
+                class="form-checkbox dark:text-lividus-500 dark:focus:border-lividus-700 dark:focus:ring-lividus-800/50 rounded border-gray-300 text-emerald-400 focus:border-emerald-300 focus:ring focus:ring-emerald-200/50"
                 id="remember-me"
                 name="remember"
                 type="checkbox"

@@ -37,7 +37,7 @@
         </button>
 
         <div
-          class="absolute right-0 top-1 z-50 mt-12 w-40 rounded-md bg-gray-50 p-1 text-lg ring-1 ring-black ring-opacity-20 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-50 dark:ring-gray-600"
+          class="absolute right-0 top-1 z-50 mt-12 w-40 rounded-md bg-gray-50 p-1 text-lg ring-1 ring-black/20 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-50 dark:ring-gray-600/20"
           x-cloak
           x-show="dropdownIsOpen"
           x-on:click.away="closeDropdown"

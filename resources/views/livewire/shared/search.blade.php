@@ -5,8 +5,8 @@
       openSearchBar() {
         this.searchBarIsOpen = true;
         this.$nextTick(() => {
-          this.$refs.searchBar.focus()
-        })
+          this.$refs.searchBar.focus();
+        });
       },
       closeSearchBar() {
         this.searchBarIsOpen = false;
@@ -30,7 +30,7 @@
 <search x-data="search">
   {{-- 搜尋按鈕 --}}
   <button
-    class="group hidden items-center justify-between gap-2 rounded-lg bg-gray-200 p-2 text-sm text-gray-500 dark:bg-gray-600 dark:text-gray-400 xl:flex"
+    class="group hidden items-center justify-between gap-2 rounded-lg bg-gray-200 p-2 text-sm text-gray-500 xl:flex dark:bg-gray-600 dark:text-gray-400"
     type="button"
     aria-label="Search"
     x-on:click="openSearchBar"
@@ -95,7 +95,7 @@
                 for="searchBox"
               >搜尋</label>
               <input
-                class="w-full rounded-xl border border-gray-400 bg-gray-50 px-10 py-2 text-xl placeholder-gray-400 outline-none focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-800 dark:text-gray-50 dark:placeholder-white"
+                class="w-full rounded-xl border border-gray-400 bg-gray-50 px-10 py-2 text-xl placeholder-gray-400 outline-none focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 dark:bg-gray-800 dark:text-gray-50 dark:placeholder-white"
                 id="searchBox"
                 type="text"
                 x-ref="searchBar"
@@ -117,7 +117,7 @@
             {{-- 搜尋結果列表 --}}
             @if (strlen($search) >= 2)
               <div
-                class="mt-4 w-full rounded-xl bg-gray-50 p-2 ring-1 ring-black ring-opacity-20 dark:bg-gray-800 dark:text-gray-50"
+                class="mt-4 w-full rounded-xl bg-gray-50 p-2 ring-1 ring-black/20 dark:bg-gray-800 dark:text-gray-50"
                 wire:transition
               >
                 @if ($results->count() > 0)

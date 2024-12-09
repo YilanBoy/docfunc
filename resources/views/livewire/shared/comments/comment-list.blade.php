@@ -13,25 +13,17 @@
       },
       init() {
         this.listeners.push(
-          Livewire.hook('commit.prepare', ({
-            component
-          }) => {
-            if (component.name === 'shared.comments.comment-list') {
-              this.currentScrollY = window.scrollY;
-            }
+          this.$wire.$hook('commit.prepare', () => {
+            this.currentScrollY = window.scrollY;
           }),
-          Livewire.hook('morph.updated', ({
-            component
-          }) => {
-            if (component.name === 'shared.comments.comment-list') {
-              // make sure scroll position will update after dom updated
-              queueMicrotask(() => {
-                window.scrollTo({
-                  top: this.currentScrollY,
-                  behavior: 'instant'
-                });
+          this.$wire.$hook('morph.updated', () => {
+            // make sure scroll position will update after dom updated
+            queueMicrotask(() => {
+              window.scrollTo({
+                top: this.currentScrollY,
+                behavior: 'instant'
               });
-            }
+            });
           })
         );
       },
@@ -65,7 +57,7 @@
   @if ($showMoreButtonIsActive)
     <div class="mt-6 flex w-full items-center justify-center">
       <button
-        class="rounded-lg bg-emerald-50 px-3.5 py-2.5 text-sm text-emerald-600 shadow-sm hover:bg-emerald-100 dark:bg-lividus-500 dark:text-gray-50 dark:hover:bg-lividus-400"
+        class="dark:bg-lividus-500 dark:hover:bg-lividus-400 rounded-lg bg-emerald-50 px-3.5 py-2.5 text-sm text-emerald-600 shadow-sm hover:bg-emerald-100 dark:text-gray-50"
         type="button"
         x-on:click="showMoreComments"
       >

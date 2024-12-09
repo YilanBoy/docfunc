@@ -89,7 +89,7 @@
 >
   {{-- gray background --}}
   <div
-    class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+    class="fixed inset-0 bg-gray-500/75 transition-opacity"
     x-show="modalIsOpen"
     x-transition.opacity
   ></div>

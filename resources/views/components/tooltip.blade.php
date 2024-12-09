@@ -22,11 +22,11 @@
       },
 
       clickTooltip() {
-        if (typeof this.clickText !== "string" || this.clickText.trim().length === 0) return;
+        if (typeof this.clickText !== 'string' || this.clickText.trim().length === 0) return;
 
         const originalText = this.tooltipText;
 
-        this.tooltipText = this.clickText
+        this.tooltipText = this.clickText;
         setTimeout(() => this.tooltipText = originalText, 2000);
       },
 
@@ -36,8 +36,8 @@
             top: 'top-0 left-1/2 -translate-x-1/2 -mt-0.5 -translate-y-full',
             left: 'top-1/2 -translate-y-1/2 -ml-0.5 left-0 -translate-x-full',
             bottom: 'bottom-0 left-1/2 -translate-x-1/2 -mb-0.5 translate-y-full',
-            right: 'top-1/2 -translate-y-1/2 -mr-0.5 right-0 translate-x-full',
-          } [this.tooltipPosition]
+            right: 'top-1/2 -translate-y-1/2 -mr-0.5 right-0 translate-x-full'
+          } [this.tooltipPosition];
         }
       },
 
@@ -47,7 +47,7 @@
             top: 'bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full',
             left: 'right-0 -translate-y-1/2 top-1/2 h-2.5 -mt-px translate-x-full',
             bottom: 'top-0 -translate-x-1/2 left-1/2 w-2.5 -translate-y-full',
-            right: 'left-0 -translate-y-1/2 top-1/2 h-2.5 -mt-px -translate-x-full',
+            right: 'left-0 -translate-y-1/2 top-1/2 h-2.5 -mt-px -translate-x-full'
           } [this.tooltipPosition];
         }
       },
@@ -58,7 +58,7 @@
             top: 'origin-top-left -rotate-45',
             left: 'origin-top-left rotate-45',
             bottom: 'origin-bottom-left rotate-45',
-            right: 'origin-top-right -rotate-45',
+            right: 'origin-top-right -rotate-45'
           } [this.tooltipPosition];
         }
       },
@@ -87,7 +87,7 @@
     x-cloak
   >
     <div
-      class="relative rounded bg-emerald-500 bg-opacity-90 px-2 py-1 text-white dark:bg-lividus-600"
+      class="dark:bg-lividus-600/90 relative rounded bg-emerald-500/90 px-2 py-1 text-white"
       x-show="tooltipVisible"
       x-transition
     >
@@ -102,7 +102,7 @@
         x-bind="tooltipArrowPositionClassListBinging"
       >
         <div
-          class="h-1.5 w-1.5 transform bg-emerald-500 bg-opacity-90 dark:bg-lividus-600"
+          class="dark:bg-lividus-600/90 h-1.5 w-1.5 transform bg-emerald-500/90"
           x-bind="tooltipArrowAngleClassListBinging"
         ></div>
       </div>

@@ -7,12 +7,12 @@ use App\Services\ContentService;
 use App\Services\FormatTransferService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
-use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class PostForm extends Form
 {
-    #[Validate('required')]
+    const int BODY_MAX_CHARACTER = 20_000;
+
     public int $user_id;
 
     public int $category_id = 1;
@@ -31,21 +31,25 @@ class PostForm extends Form
 
     public string $excerpt = '';
 
-    public function validatePost(int $bodyMaxCharacter): void
+    public function validatePost(): void
     {
         Validator::make(
             [
+                'user_id' => $this->user_id,
                 'title' => $this->title,
                 'category_id' => $this->category_id,
                 // validate body text character count
                 'body' => preg_replace('/[\r\n]/u', '', strip_tags($this->body)),
             ],
             [
+                'user_id' => ['required', 'numeric'],
                 'title' => ['required', 'min:4', 'max:50'],
                 'category_id' => ['required', 'numeric', 'exists:categories,id'],
-                'body' => ['required', 'min:500', 'max:'.$bodyMaxCharacter],
+                'body' => ['required', 'min:500', 'max:'.self::BODY_MAX_CHARACTER],
             ],
             [
+                'user_id.required' => '請登入後再發布文章',
+                'user_id.numeric' => '使用者資料錯誤',
                 'title.required' => '請填寫標題',
                 'title.min' => '標題至少 4 個字元',
                 'title.max' => '標題至多 50 個字元',
@@ -54,7 +58,7 @@ class PostForm extends Form
                 'category_id.exists' => '分類不存在',
                 'body.required' => '請填寫文章內容',
                 'body.min' => '文章內容至少 500 個字元',
-                'body.max' => '文章內容字數已超過 '.$bodyMaxCharacter.' 個字元',
+                'body.max' => '文章內容字數已超過 '.self::BODY_MAX_CHARACTER.' 個字元',
             ]
         )->validate();
     }
@@ -123,23 +127,16 @@ class PostForm extends Form
         $this->body = $post->body;
     }
 
-    public function createPost(): Post
+    public function store(): Post
     {
+        $this->validatePost();
+
         $this->setSlug();
         $this->setBody();
         $this->setExcerpt();
 
-        $post = Post::query()->create(
-            $this->only([
-                'title',
-                'body',
-                'category_id',
-                'excerpt',
-                'slug',
-                'user_id',
-                'preview_url',
-                'is_private',
-            ])
+        $post = Post::create(
+            $this->except('tags')
         );
 
         // create new tags relation with post in database
@@ -150,30 +147,21 @@ class PostForm extends Form
         return $post;
     }
 
-    public function updatePost(Post $post): Post
+    public function update(Post $post): void
     {
+        $this->validatePost();
+
         $this->setSlug();
         $this->setBody();
         $this->setExcerpt();
 
         $post->update(
-            $this->only([
-                'title',
-                'body',
-                'category_id',
-                'excerpt',
-                'slug',
-                'user_id',
-                'preview_url',
-                'is_private',
-            ])
+            $this->except('tags')
         );
 
         // update tags relation with post in database
         $post->tags()->sync(
             app(FormatTransferService::class)->tagsJsonToTagIdsArray($this->tags)
         );
-
-        return $post;
     }
 }

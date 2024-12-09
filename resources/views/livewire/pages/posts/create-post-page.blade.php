@@ -42,7 +42,7 @@
       csrfToken: @js(csrf_token()),
       imageUploadUrl: @js(route('images.store')),
       tagsListUrl: @js(route('api.tags')),
-      bodyMaxCharacters: @js($bodyMaxCharacter),
+      bodyMaxCharacters: @js($this->form::BODY_MAX_CHARACTER),
       ClassNameToAddOnEditorContent: @js(['rich-text']),
       tags: @entangle('form.tags').live,
       body: @entangle('form.body').live,
@@ -129,7 +129,7 @@
 
             <form
               id="create-post"
-              wire:submit="store"
+              wire:submit="save"
             >
               <div class="grid grid-cols-2 gap-5">
                 {{-- post preview image --}}

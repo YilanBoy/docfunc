@@ -53,7 +53,7 @@ describe('create post', function () {
             ->set('form.tags', $tagsJson)
             ->set('form.body', $body)
             ->set('form.is_private', $privateStatus)
-            ->call('store')
+            ->call('save')
             ->assertHasNoErrors()
             ->assertRedirect(route('posts.show', [
                 'id' => 1,
@@ -88,7 +88,7 @@ describe('create post', function () {
             ->set('form.title', str()->random(3))
             ->set('form.category_id', Category::pluck('id')->random())
             ->set('form.body', str()->random(500))
-            ->call('store')
+            ->call('save')
             ->assertHasErrors(['title' => 'min:4']);
     });
 
@@ -101,7 +101,7 @@ describe('create post', function () {
             ->set('form.title', str()->random(51))
             ->set('form.category_id', Category::pluck('id')->random())
             ->set('form.body', str()->random(500))
-            ->call('store')
+            ->call('save')
             ->assertHasErrors(['title' => 'max:100']);
     });
 
@@ -114,7 +114,7 @@ describe('create post', function () {
             ->set('form.title', str()->random(4))
             ->set('form.category_id', Category::pluck('id')->random())
             ->set('form.body', str()->random(499))
-            ->call('store')
+            ->call('save')
             ->assertHasErrors(['body' => 'min:500']);
     });
 
@@ -127,7 +127,7 @@ describe('create post', function () {
             ->set('form.title', str()->random(4))
             ->set('form.category_id', Category::pluck('id')->random())
             ->set('form.body', str()->random(20001))
-            ->call('store')
+            ->call('save')
             ->assertHasErrors(['body' => 'max:20000']);
     });
 

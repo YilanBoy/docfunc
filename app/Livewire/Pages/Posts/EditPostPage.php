@@ -8,7 +8,6 @@ use App\Models\Post;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
-use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -24,9 +23,6 @@ class EditPostPage extends Component
 
     public Post $post;
 
-    #[Locked]
-    public int $bodyMaxCharacter = 20_000;
-
     public function mount(int $id): void
     {
         $this->post = Post::findOrFail($id);
@@ -40,11 +36,9 @@ class EditPostPage extends Component
         $this->form->setPost($this->post);
     }
 
-    public function update(Post $post): void
+    public function save(Post $post): void
     {
-        $this->form->validatePost($this->bodyMaxCharacter);
-
-        $post = $this->form->updatePost($post);
+        $this->form->update($post);
 
         $this->dispatch('info-badge', status: 'success', message: '成功更新文章！');
 

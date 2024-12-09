@@ -47,7 +47,7 @@ describe('edit post', function () {
         $newTagCollection = Tag::factory()->count(3)->create();
 
         $newTagsJson = $newTagCollection
-            ->map(fn ($item) => ['id' => $item->id, 'name' => $item->name])
+            ->map(fn($item) => ['id' => $item->id, 'name' => $item->name])
             ->toJson();
 
         livewire(EditPostPage::class, ['id' => $post->id])
@@ -56,7 +56,7 @@ describe('edit post', function () {
             ->set('form.tags', $newTagsJson)
             ->set('form.body', $newBody)
             ->set('form.is_private', $newPrivateStatus)
-            ->call('update', post: $post)
+            ->call('save', post: $post)
             ->assertHasNoErrors();
 
         $post->refresh();
@@ -64,7 +64,7 @@ describe('edit post', function () {
         $contentService = app(ContentService::class);
 
         $newTagIdsArray = $newTagCollection
-            ->map(fn ($item) => $item->id)
+            ->map(fn($item) => $item->id)
             ->all();
 
         expect($post)

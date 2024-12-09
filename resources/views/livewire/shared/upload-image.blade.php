@@ -44,7 +44,7 @@
   x-on:livewire-upload-error="makeIsUploadingFalse"
   x-on:livewire-upload-progress="updateProgress"
 >
-  @if ($imageUrl && is_null($image))
+  @if (!is_null($imageUrl) && is_null($image))
     {{-- image preview --}}
     <div class="relative w-full">
       <img

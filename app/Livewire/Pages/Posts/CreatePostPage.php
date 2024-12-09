@@ -6,7 +6,6 @@ use App\Livewire\Forms\PostForm;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\View;
-use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -20,9 +19,6 @@ class CreatePostPage extends Component
     public string $autoSaveKey;
 
     public Collection $categories;
-
-    #[Locked]
-    public int $bodyMaxCharacter = 20_000;
 
     public function mount(): void
     {
@@ -41,11 +37,9 @@ class CreatePostPage extends Component
         $this->form->autoSave($this->autoSaveKey);
     }
 
-    public function store(): void
+    public function save(): void
     {
-        $this->form->validatePost($this->bodyMaxCharacter);
-
-        $post = $this->form->createPost();
+        $post = $this->form->store();
 
         $this->form->clearAutoSave($this->autoSaveKey);
 

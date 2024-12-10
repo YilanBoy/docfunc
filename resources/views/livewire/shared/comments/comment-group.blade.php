@@ -168,6 +168,7 @@
             :max-layer="$maxLayer"
             :current-layer="$currentLayer + 1"
             :parent-id="$comment['id']"
+            :comments="$comment['children']"
             :per-page="5"
             :comment-list-name="$comment['id'] . '-comment-list'"
             :order="CommentOrder::OLDEST"

@@ -4,7 +4,7 @@ namespace App\Livewire\Shared\Comments;
 
 use App\Enums\CommentOrder;
 use App\Models\Comment;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
@@ -29,6 +29,9 @@ class CommentList extends Component
     public ?int $parentId = null;
 
     #[Locked]
+    public ?array $comments = null;
+
+    #[Locked]
     public int $perPage = 10;
 
     /**
@@ -50,8 +53,10 @@ class CommentList extends Component
      *     'body': string,
      *     'created_at': string,
      *     'updated_at': string,
+     *     'parent_id': int|null,
      *     'children_count': int,
      *     'user': array{'id': int, 'name': string, 'gravatar_url': string}|null,
+     *     'children': array
      * }>>
      * >
      */
@@ -68,7 +73,10 @@ class CommentList extends Component
 
     public function mount(): void
     {
-        $this->showMoreComments();
+        $comments = is_null($this->comments) ? $this->getComments() : $this->comments;
+
+        $this->updateCommentsList($comments);
+        $this->updateShowMoreButtonStatus($comments);
     }
 
     #[Renderless]
@@ -78,10 +86,10 @@ class CommentList extends Component
         $this->newCommentIds[] = $id;
     }
 
-    private function getComments(int $skip): array
+    private function getComments(int $skip = 0): array
     {
         $comments = Comment::query()
-            ->select(['id', 'user_id', 'body', 'created_at', 'updated_at'])
+            ->select(['id', 'user_id', 'body', 'created_at', 'updated_at', 'parent_id'])
             // Use a sub query to generate children_count column,
             // this line must be after select method
             ->withCount('children')
@@ -105,21 +113,45 @@ class CommentList extends Component
             // Plus one is needed here because we need to determine whether there is a next page.
             ->take($this->perPage + 1)
             ->with('user:id,name,email')
-            ->get()
-            ->transform(function (Comment $comment) {
-                if (! is_null($comment->user)) {
-                    $comment->user->setAttribute('gravatar_url', get_gravatar($comment->user->email));
-                }
-
-                return $comment;
+            ->when($this->maxLayer > $this->currentLayer, function (Builder $query) {
+                $query->with([
+                    'children' => function (Builder $query) {
+                        $query
+                            ->select(['id', 'user_id', 'body', 'created_at', 'updated_at', 'parent_id'])
+                            ->with('user:id,name,email')
+                            ->oldest('id')
+                            ->limit($this->perPage + 1);
+                    }
+                ]);
             })
+            ->get()
             ->keyBy('id')
             ->toArray();
 
         // Livewire will save data in frontend, so we need to remove sensitive data
-        data_forget($comments, '*.user.email');
+        $callback = function (array $comment) {
+            if (! is_null($comment['user'])) {
+                $comment['user']['gravatar_url'] = get_gravatar($comment['user']['email']);
+                unset($comment['user']['email']);
+            }
 
-        return $comments;
+            if ($this->maxLayer > $this->currentLayer) {
+                // Change children key to their id
+                $ids = array_column($comment['children'], 'id');
+                $comment['children'] = array_combine($ids, $comment['children']);
+
+                foreach ($comment['children'] as &$child) {
+                    if (! is_null($child['user'])) {
+                        $child['user']['gravatar_url'] = get_gravatar($child['user']['email']);
+                        unset($child['user']['email']);
+                    }
+                }
+            }
+
+            return $comment;
+        };
+
+        return array_map($callback, $comments);
     }
 
     private function updateCommentsList(array $comments): void

@@ -106,20 +106,22 @@ class CommentList extends Component
             ->take($this->perPage + 1)
             ->with('user:id,name,email')
             ->get()
-            ->transform(function (Comment $comment) {
-                if (! is_null($comment->user)) {
-                    $comment->user->setAttribute('gravatar_url', get_gravatar($comment->user->email));
-                }
-
-                return $comment;
-            })
             ->keyBy('id')
             ->toArray();
 
         // Livewire will save data in frontend, so we need to remove sensitive data
-        data_forget($comments, '*.user.email');
+        $callback = function (array $comment): array {
+            if (is_null($comment['user'])) {
+                return $comment;
+            }
 
-        return $comments;
+            $comment['user']['gravatar_url'] = get_gravatar($comment['user']['email']);
+            unset($comment['user']['email']);
+
+            return $comment;
+        };
+
+        return array_map($callback, $comments);
     }
 
     private function updateCommentsList(array $comments): void

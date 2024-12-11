@@ -11,6 +11,9 @@ export default function (hljs: HLJSApi) {
         'module',
         'data',
         'terraform|10',
+        'for',
+        'in',
+        'if',
     ];
 
     const LITERAL = ['true', 'false', 'null'];

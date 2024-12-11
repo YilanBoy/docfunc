@@ -1,4 +1,4 @@
-import { Modal } from './modal';
+import { Modal } from './modal.js';
 
 declare global {
     interface Window {
@@ -8,7 +8,7 @@ declare global {
 
 // use Tailwind CSS class names
 const BASE_BUTTON_CLASS_NAME: string[] = [
-    'fixed',
+    'absolute',
     'size-8',
     'flex',
     'justify-center',
@@ -109,13 +109,7 @@ window.codeBlockHelper = function (element: HTMLElement): void {
             return;
         }
 
-        preTag.classList.add(
-            'code-block-helper-added',
-            'group',
-            // add 'translate-x-0' to make pre tag be a container
-            // make sure the copy button won't be fixed in viewport but container
-            'translate-x-0',
-        );
+        preTag.classList.add('code-block-helper-added', 'group', 'relative');
 
         const code = preTag.getElementsByTagName('code')[0];
 
@@ -140,7 +134,7 @@ window.codeBlockHelper = function (element: HTMLElement): void {
                 preTag.classList.remove(
                     'code-block-helper-added',
                     'group',
-                    'translate-x-0',
+                    'relative',
                 );
             },
             { once: true },

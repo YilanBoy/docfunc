@@ -51,7 +51,8 @@ class CommentList extends Component
      *     'created_at': string,
      *     'updated_at': string,
      *     'children_count': int,
-     *     'user': array{'id': int, 'name': string, 'gravatar_url': string}|null,
+     *     'user_name': string|null,
+     *     'user_gravatar_url': string|null,
      * }>>
      * >
      */
@@ -81,42 +82,47 @@ class CommentList extends Component
     private function getComments(int $skip): array
     {
         $comments = Comment::query()
-            ->select(['id', 'user_id', 'body', 'created_at', 'updated_at'])
+            ->select([
+                'comments.id',
+                'comments.user_id',
+                'comments.body',
+                'comments.created_at',
+                'comments.updated_at',
+                'users.name as user_name',
+                'users.email as user_email'
+            ])
             // Use a sub query to generate children_count column,
             // this line must be after select method
             ->withCount('children')
+            ->join('users', 'comments.user_id', '=', 'users.id', 'left')
             ->when($this->order === CommentOrder::LATEST, function (Builder $query) {
-                $query->latest('id');
+                $query->latest('comments.id');
             })
             ->when($this->order === CommentOrder::OLDEST, function (Builder $query) {
-                $query->oldest('id');
+                $query->oldest('comments.id');
             })
             ->when($this->order === CommentOrder::POPULAR, function (Builder $query) {
                 $query->orderByDesc('children_count');
             })
             // Don't show new comments, avoid showing duplicate comments,
             // New comments have already showed in new comment group.
-            ->whereNotIn('id', $this->newCommentIds)
-            ->where('post_id', $this->postId)
+            ->whereNotIn('comments.id', $this->newCommentIds)
+            ->where('comments.post_id', $this->postId)
             // When parent id is not null,
             // it means this comment list is children of another comment.
-            ->where('parent_id', $this->parentId)
+            ->where('comments.parent_id', $this->parentId)
             ->skip($skip)
             // Plus one is needed here because we need to determine whether there is a next page.
             ->take($this->perPage + 1)
-            ->with('user:id,name,email')
             ->get()
             ->keyBy('id')
             ->toArray();
 
+
         // Livewire will save data in frontend, so we need to remove sensitive data
         $callback = function (array $comment): array {
-            if (is_null($comment['user'])) {
-                return $comment;
-            }
-
-            $comment['user']['gravatar_url'] = get_gravatar($comment['user']['email']);
-            unset($comment['user']['email']);
+            $comment['user_gravatar_url'] = is_null($comment['user_email']) ? null : get_gravatar($comment['user_email']);
+            unset($comment['user_email']);
 
             return $comment;
         };

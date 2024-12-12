@@ -22,11 +22,6 @@
           replyTo: this.$el.dataset.commentUserName
         });
       },
-      destroyComment() {
-        if (confirm('你確定要刪除該留言？')) {
-          this.$wire.destroyComment(this.$el.dataset.commentId);
-        }
-      },
       init() {
         let commentsObserver = new MutationObserver(() => {
           this.highlightCodeInCommentCard();
@@ -66,19 +61,19 @@
     >
       <div class="flex flex-col">
         <div class="flex items-center space-x-4 text-base">
-          @if (!is_null($comment['user']))
+          @if (!is_null($comment['user_id']))
             <a
-              href="{{ route('users.show', ['id' => $comment['user']['id']]) }}"
+              href="{{ route('users.show', ['id' => $comment['user_id']]) }}"
               wire:navigate
             >
               <img
                 class="size-10 rounded-full hover:ring-2 hover:ring-blue-400"
-                src="{{ $comment['user']['gravatar_url'] }}"
-                alt="{{ $comment['user']['name'] }}"
+                src="{{ $comment['user_gravatar_url'] }}"
+                alt="{{ $comment['user_name'] }}"
               >
             </a>
 
-            <span class="dark:text-gray-50">{{ $comment['user']['name'] }}</span>
+            <span class="dark:text-gray-50">{{ $comment['user_name'] }}</span>
           @else
             <x-icon.question-circle-fill class="size-10 text-gray-300 dark:text-gray-500" />
 
@@ -118,9 +113,9 @@
             @if (in_array(auth()->id(), [$comment['user_id'], $postUserId]))
               <button
                 class="flex items-center hover:text-gray-500 dark:hover:text-gray-300"
-                data-comment-id="{{ $comment['id'] }}"
                 type="button"
-                x-on:click="destroyComment"
+                wire:click="destroyComment({{ $comment['id'] }})"
+                wire:confirm="你確定要刪除該留言？"
               >
                 <x-icon.trash class="w-4" />
                 <span class="ml-2">刪除</span>
@@ -132,7 +127,7 @@
             <button
               class="flex items-center hover:text-gray-500 dark:hover:text-gray-300"
               data-comment-id="{{ $comment['id'] }}"
-              data-comment-user-name="{{ is_null($comment['user']) ? '訪客' : $comment['user']['name'] }}"
+              data-comment-user-name="{{ is_null($comment['user_name']) ? '訪客' : $comment['user_name'] }}"
               type="button"
               x-on:click="openCreateCommentModal"
             >

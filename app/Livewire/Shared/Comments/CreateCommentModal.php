@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Shared\Comments;
 
-use App\DataTransferObjects\CommentCardData;
 use App\Livewire\Forms\CommentForm;
 use App\Models\Comment;
 use App\Models\Post;
@@ -81,22 +80,18 @@ class CreateCommentModal extends Component
         // Notify the article author of new comments.
         $post->user->notifyNewComment(new NewComment($comment));
 
-        $commentCard = new CommentCardData(
-            id: $comment->id,
-            userId: auth()->id(),
-            body: $comment->body,
-            createdAt: $comment->created_at->toDateTimeString(),
-            updatedAt: $comment->updated_at->toDateTimeString(),
-            user: auth()->check() ? [
-                'id' => auth()->id(),
-                'name' => auth()->user()->name,
-                'gravatar_url' => get_gravatar(auth()->user()->email),
-            ] : null,
-        );
-
         $this->dispatch(
             event: 'create-new-comment-to-'.($this->form->parent_id ?? 'root').'-new-comment-group',
-            comment: $commentCard->toArray(),
+            comment: [
+                'id' => $comment->id,
+                'user_id' => $comment->user_id,
+                'body' => $comment->body,
+                'created_at' => $comment->created_at->toDateTimeString(),
+                'updated_at' => $comment->updated_at->toDateTimeString(),
+                'user_name' => auth()->check() ? auth()->user()->name : null,
+                'user_gravatar_url' => auth()->check() ? get_gravatar(auth()->user()->email) : null,
+                'children_count' => 0,
+            ],
         );
 
         $this->dispatch(

@@ -53,7 +53,8 @@ class CommentGroup extends Component
      *     'created_at': string,
      *     'updated_at': string,
      *     'children_count': int,
-     *     'user': array{'id': int, 'name': string, 'gravatar_url': string}|null,
+     *     'user_name': string|null,
+     *     'user_gravatar_url': string|null,
      * }>
      */
     #[Locked]

@@ -1,25 +1,25 @@
 @script
-  <script>
-    Alpine.data('comments', () => ({
-      orderDropdownIsOpen: false,
-      openOrderDropdown() {
-        this.orderDropdownIsOpen = true;
-      },
-      closeOrderDropdown() {
-        this.orderDropdownIsOpen = false;
-      },
-      changeOrder() {
-        this.$wire.changeOrder(this.$el.dataset.order);
-        this.orderDropdownIsOpen = false;
-      },
-      openCreateCommentModal() {
-        this.$dispatch('open-create-comment-modal', {
-          parentId: null,
-          replyTo: null
-        })
-      }
-    }));
-  </script>
+<script>
+  Alpine.data('comments', () => ({
+    orderDropdownIsOpen: false,
+    openOrderDropdown() {
+      this.orderDropdownIsOpen = true;
+    },
+    closeOrderDropdown() {
+      this.orderDropdownIsOpen = false;
+    },
+    changeOrder() {
+      this.$wire.changeOrder(this.$el.dataset.order);
+      this.orderDropdownIsOpen = false;
+    },
+    openCreateCommentModal() {
+      this.$dispatch('open-create-comment-modal', {
+        parentId: null,
+        replyTo: null
+      });
+    }
+  }));
+</script>
 @endscript
 
 @php
@@ -112,27 +112,23 @@
     </div>
   </div>
 
-  @foreach (CommentOrder::cases() as $case)
-    @if ($case === $order)
-      {{-- new root comment will show here --}}
-      <livewire:shared.comments.comment-group
-        :post-id="$postId"
-        :post-user-id="$postUserId"
-        :max-layer="$maxLayer"
-        :comment-group-name="'root-new-comment-group'"
-        :key="'root-new-comment-group-order-by-' . $order->value"
-      />
+  {{-- new root comment will show here --}}
+  <livewire:shared.comments.comment-group
+    :post-id="$postId"
+    :post-user-id="$postUserId"
+    :max-layer="$maxLayer"
+    :comment-group-name="'root-new-comment-group'"
+    :key="'root-new-comment-group-order-by-' . $order->value"
+  />
 
-      {{-- root comment list --}}
-      <livewire:shared.comments.comment-list
-        :post-id="$postId"
-        :post-user-id="$postUserId"
-        :max-layer="$maxLayer"
-        :order="$order"
-        :key="'root-comment-list-order-by-' . $order->value"
-      />
-    @endif
-  @endforeach
+  {{-- root comment list --}}
+  <livewire:shared.comments.comment-list
+    :post-id="$postId"
+    :post-user-id="$postUserId"
+    :max-layer="$maxLayer"
+    :order="$order"
+    :key="'root-comment-list-order-by-' . $order->value"
+  />
 
   {{-- create comment modal --}}
   <livewire:shared.comments.create-comment-modal :post-id="$postId" />

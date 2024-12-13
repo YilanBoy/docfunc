@@ -2,34 +2,71 @@
   use App\Enums\PostOrder;
 @endphp
 
-<div class="space-y-6">
+@script
+  <script>
+    // tab can only be 'information', 'posts', 'comments'
+    Alpine.data('postsTabs', () => ({
+      tabSelected: @js($order),
+      tabButtonClicked(tabButton) {
+        this.tabSelected = tabButton.id.replace('-tab-button', '');
+        this.tabRepositionMarker(tabButton);
+      },
+      tabRepositionMarker(tabButton) {
+        this.$refs.tabMarker.style.width = tabButton.offsetWidth + 'px';
+        this.$refs.tabMarker.style.height = tabButton.offsetHeight + 'px';
+        this.$refs.tabMarker.style.left = tabButton.offsetLeft + 'px';
+      },
+      tabContentActive(tabContent) {
+        return this.tabSelected === tabContent.id.replace('-content', '');
+      },
+      init() {
+        let tabSelectedButtons = document.getElementById(this.tabSelected + '-tab-button');
+        this.tabRepositionMarker(tabSelectedButtons);
+      }
+    }));
+  </script>
+@endscript
+
+<div
+  class="space-y-6"
+  x-data="postsTabs"
+>
   {{-- 文章排序 --}}
-  <div class="flex w-full flex-col-reverse text-sm md:flex-row md:justify-between">
-    <nav class="flex w-full space-x-1 rounded-xl dark:text-gray-50 md:w-auto">
+  <div class="flex w-full text-sm md:flex-row md:justify-between">
+    <nav
+      class="relative z-0 inline-grid w-full select-none grid-cols-3 items-center justify-center rounded-lg text-gray-500 md:w-fit dark:text-gray-50"
+      wire:ignore
+    >
       @foreach (PostOrder::cases() as $postOrder)
         <button
+          class="relative z-20 inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium"
+          id="{{ $postOrder->value }}-tab-button"
           type="button"
-          wire:click.prevent="changeOrder('{{ $postOrder }}')"
-          wire:key="{{ $postOrder->value }}-post-order"
-          @class([
-              'flex w-1/3 md:w-auto items-center px-4 py-2 transition duration-300 rounded-lg ',
-              'bg-gray-50 dark:bg-gray-800' => $order === $postOrder->value,
-              'hover:bg-gray-50 dark:hover:bg-gray-800' => $order !== $postOrder->value,
-          ])
+          x-on:click="tabButtonClicked($el)"
+          {{-- update url query parameter in livewire --}}
+          wire:click="changeOrder('{{ $postOrder }}')"
+          wire:key="{{ $postOrder->value }}-tab-button"
         >
           <x-dynamic-component
             class="w-4"
             :component="$postOrder->iconComponentName()"
           />
-
-          <span class="ml-2">{{ $postOrder->label() }}</span>
+          <span>{{ $postOrder->label() }}</span>
         </button>
       @endforeach
+
+      <div
+        class="absolute left-0 z-10 h-full w-fit duration-300 ease-out"
+        x-ref="tabMarker"
+        x-cloak
+      >
+        <div class="h-full w-full rounded-md bg-gray-100 dark:bg-gray-800"></div>
+      </div>
     </nav>
 
     {{-- 文章類別訊息 --}}
     <div
-      class="hidden items-center justify-center rounded-lg bg-emerald-200 px-4 py-2 text-emerald-800 dark:bg-lividus-700 dark:text-gray-50 md:flex"
+      class="dark:bg-lividus-700 hidden items-center justify-center rounded-lg bg-emerald-200 px-4 py-2 text-emerald-800 md:flex dark:text-gray-50"
     >
       @if ($categoryId)
         {{ $categoryName }}：{{ $categoryDescription }}
@@ -46,7 +83,7 @@
     <x-card class="group relative z-0 grid cursor-pointer grid-cols-1 gap-4 overflow-hidden">
       {{-- category icon --}}
       <div
-        class="absolute -bottom-16 -right-4 size-56 rotate-12 text-emerald-200 transition-all duration-300 group-hover:-bottom-4 group-hover:-right-0 dark:text-lividus-800"
+        class="dark:text-lividus-800 absolute -bottom-16 -right-4 size-56 rotate-12 text-emerald-200 transition-all duration-300 group-hover:-bottom-4 group-hover:-right-0"
       >
         {!! $post->category->icon !!}
       </div>
@@ -74,7 +111,7 @@
       {{-- 文章標籤 --}}
       @if ($post->tags_count > 0)
         <div class="z-20 flex w-fit flex-wrap items-center text-base">
-          <x-icon.tags class="mr-1 w-4 text-emerald-300 dark:text-lividus-700" />
+          <x-icon.tags class="dark:text-lividus-700 mr-1 w-4 text-emerald-300" />
 
           @foreach ($post->tags as $tag)
             <x-tag :href="route('tags.show', ['id' => $tag->id])">

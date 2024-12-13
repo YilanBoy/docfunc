@@ -37,7 +37,7 @@
 {{-- user information page --}}
 <x-layouts.layout-main>
   <div class="container mx-auto flex-1">
-    <div class="flex animate-fade-in flex-col items-center justify-start px-4">
+    <div class="animate-fade-in flex flex-col items-center justify-start px-4">
       {{-- user information, posts and comments --}}
       <div
         class="w-full max-w-3xl"

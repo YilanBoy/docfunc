@@ -55,7 +55,7 @@
       <x-scroll-to-top-button x-ref="scrollToTopBtn" />
 
       <div class="container mx-auto">
-        <div class="flex animate-fade-in items-stretch justify-center lg:space-x-4">
+        <div class="animate-fade-in flex items-stretch justify-center lg:space-x-4">
           <div class="hidden xl:block xl:w-1/5">
             {{-- content menu --}}
             <div
@@ -76,7 +76,8 @@
 
               <article>
                 {{-- post title --}}
-                <h1 class="text-4xl leading-relaxed text-emerald-600 dark:text-lividus-500">{{ $post->title }}</h1>
+                <h1 class="dark:text-lividus-500 text-4xl font-semibold leading-relaxed text-emerald-600">
+                  {{ $post->title }}</h1>
 
                 {{-- post information --}}
                 <div class="mt-4 flex items-center space-x-2 text-base text-neutral-400">
@@ -108,7 +109,7 @@
 
                   {{-- comments count --}}
                   <a
-                    class="hidden hover:text-neutral-500 dark:hover:text-neutral-300 md:flex md:items-center"
+                    class="hidden hover:text-neutral-500 md:flex md:items-center dark:hover:text-neutral-300"
                     href="{{ $post->link_with_slug }}#comments"
                   >
                     <x-icon.chat-square-text class="w-4" />
@@ -120,7 +121,7 @@
                 {{-- post tags --}}
                 @if ($post->tags()->exists())
                   <div class="mt-4 flex flex-wrap items-center text-base">
-                    <x-icon.tags class="mr-1 w-4 text-emerald-300 dark:text-lividus-700" />
+                    <x-icon.tags class="dark:text-lividus-700 mr-1 w-4 text-emerald-300" />
 
                     @foreach ($post->tags as $tag)
                       <x-tag :href="route('tags.show', ['id' => $tag->id])">

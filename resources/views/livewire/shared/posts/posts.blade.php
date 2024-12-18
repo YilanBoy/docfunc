@@ -4,7 +4,7 @@
 
 @script
   <script>
-    // tab can only be 'information', 'posts', 'comments'
+    // Tab can only be 'information', 'posts', 'comments'
     Alpine.data('postsTabs', () => ({
       tabSelected: @js($order),
       tabButtonClicked(tabButton) {
@@ -31,7 +31,7 @@
   class="space-y-6"
   x-data="postsTabs"
 >
-  {{-- 文章排序 --}}
+  {{-- Sort --}}
   <div class="flex w-full text-sm md:flex-row md:justify-between">
     <nav
       class="relative z-0 inline-grid w-full select-none grid-cols-3 items-center justify-center rounded-lg text-gray-500 md:w-fit dark:text-gray-50"
@@ -43,7 +43,7 @@
           id="{{ $postOrder->value }}-tab-button"
           type="button"
           x-on:click="tabButtonClicked($el)"
-          {{-- update url query parameter in livewire --}}
+          {{-- Update url query parameter in livewire --}}
           wire:click="changeOrder('{{ $postOrder }}')"
           wire:key="{{ $postOrder->value }}-tab-button"
         >
@@ -64,7 +64,7 @@
       </div>
     </nav>
 
-    {{-- 文章類別訊息 --}}
+    {{-- Class --}}
     <div
       class="dark:bg-lividus-700 hidden items-center justify-center rounded-lg bg-emerald-200 px-4 py-2 text-emerald-800 md:flex dark:text-gray-50"
     >
@@ -78,17 +78,17 @@
     </div>
   </div>
 
-  {{-- 文章列表 --}}
+  {{-- Post List --}}
   @forelse($posts as $post)
     <x-card class="group relative z-0 grid cursor-pointer grid-cols-1 gap-4 overflow-hidden">
-      {{-- category icon --}}
+      {{-- Category icon in background --}}
       <div
         class="dark:text-lividus-800 absolute -bottom-16 -right-4 size-56 rotate-12 text-emerald-200 transition-all duration-300 group-hover:-bottom-4 group-hover:-right-0"
       >
         {!! $post->category->icon !!}
       </div>
 
-      {{-- 文章連結 --}}
+      {{-- Post card link --}}
       <a
         class="absolute inset-0 z-20 block"
         href="{{ $post->link_with_slug }}"
@@ -96,19 +96,19 @@
         wire:navigate
       ></a>
 
-      {{-- 文章標題 --}}
+      {{-- Title --}}
       <div class="z-10">
-        <h1 class="group-gradient-underline-grow inline text-xl dark:text-gray-50">
+        <h1 class="group-gradient-underline-grow inline text-xl font-semibold dark:text-gray-50">
           {{ $post->title }}
         </h1>
       </div>
 
-      {{-- 文章大綱 --}}
+      {{-- Excerpt --}}
       <div class="z-10 text-base leading-relaxed text-gray-500">
         {{ $post->excerpt }}
       </div>
 
-      {{-- 文章標籤 --}}
+      {{-- Tags --}}
       @if ($post->tags_count > 0)
         <div class="z-20 flex w-fit flex-wrap items-center text-base">
           <x-icon.tags class="dark:text-lividus-700 mr-1 w-4 text-emerald-300" />
@@ -121,9 +121,8 @@
         </div>
       @endif
 
-      {{-- 文章相關資訊 --}}
       <div class="z-10 hidden space-x-2 text-base text-neutral-500 md:flex md:items-center">
-        {{-- 文章分類資訊 --}}
+        {{-- Category --}}
         <div class="flex items-center">
           <div class="w-4">{!! $post->category->icon !!}</div>
 
@@ -132,7 +131,7 @@
 
         <div>&bull;</div>
 
-        {{-- 文章作者資訊 --}}
+        {{-- Author --}}
         <div class="flex items-center">
           <x-icon.person class="w-4" />
           <span class="ml-2">{{ $post->user->name }}</span>
@@ -140,7 +139,7 @@
 
         <div>&bull;</div>
 
-        {{-- 文章發布時間 --}}
+        {{-- Published time --}}
         <div class="flex items-center">
           <x-icon.clock class="w-4" />
           <time
@@ -151,7 +150,7 @@
 
         <div>&bull;</div>
 
-        {{-- 文章留言數 --}}
+        {{-- Comments --}}
         <div class="flex items-center">
           <x-icon.chat-square-text class="w-4" />
           <span class="ml-2">{{ $post->comments_count }}</span>
